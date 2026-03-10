@@ -10,7 +10,9 @@ import { xmlTools } from './tools/xml.tools.js';
 import { yamlTools } from './tools/yaml.tools.js';
 import { colorTools } from './tools/color.tools.js';
 import { cryptoTools } from './tools/crypto.tools.js';
+import { webTools } from './tools/web.tools.js';
 import type { CategoryInfo, ToolDefinition } from './types.js';
+
 
 const allTools: ToolDefinition[] = [
 	...jsonTools,
@@ -24,8 +26,10 @@ const allTools: ToolDefinition[] = [
 	...textTools,
 	...numberTools,
 	...colorTools,
-	...cryptoTools
+	...cryptoTools,
+	...webTools
 ];
+
 
 export function getAllTools(): ToolDefinition[] {
 	return allTools;

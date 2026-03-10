@@ -93,6 +93,19 @@ Every software developer. The platform is not targeted at a specific stack, lang
 
 ---
 
+## Success Metrics
+
+| Metric | Month 6 | Month 12 | Month 24 |
+|---|---|---|---|
+| Monthly unique visitors | 500K | 2M | 5M+ |
+| Tools available | 60 | 150 | 300+ |
+| Tool categories | 10 | 15 | 20+ |
+| Lighthouse Performance (mobile) | ≥ 95 | ≥ 95 | ≥ 95 |
+| GitHub stars | 1,000 | 5,000 | 15,000+ |
+| Average session duration | > 2:30 | > 3:00 | > 3:30 |
+
+---
+
 ## Project Identity
 
 | | |

@@ -27,6 +27,7 @@
 		"@types/lz-string": "^1.5.0",
 		"@types/papaparse": "^5.5.2",
 		"@types/turndown": "^5.0.6",
+		"@types/ua-parser-js": "^0.7.39",
 		"monaco-editor": "^0.55.1",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",

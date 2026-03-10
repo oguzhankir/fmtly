@@ -23,6 +23,12 @@
 	import CryptoPasswordStrengthPanel from "$components/panels/CryptoPasswordStrengthPanel.svelte";
 	import CryptoUlidPanel from "$components/panels/CryptoUlidPanel.svelte";
 	import CryptoRandomStringPanel from "$components/panels/CryptoRandomStringPanel.svelte";
+	import WebUrlParserPanel from "$components/panels/WebUrlParserPanel.svelte";
+	import WebUserAgentPanel from "$components/panels/WebUserAgentPanel.svelte";
+	import WebCorsPanel from "$components/panels/WebCorsPanel.svelte";
+	import WebMimeTypesPanel from "$components/panels/WebMimeTypesPanel.svelte";
+	import WebIpLookupPanel from "$components/panels/WebIpLookupPanel.svelte";
+	import WebDnsLookupPanel from "$components/panels/WebDnsLookupPanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { generateToolSEO } from "$utils/seo.js";
 	import { registerShortcuts } from "$utils/keyboard.js";
@@ -338,6 +344,18 @@
 				<CryptoUlidPanel />
 			{:else if data.tool.category === "crypto" && data.tool.slug === "random-string"}
 				<CryptoRandomStringPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "url-parser"}
+				<WebUrlParserPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "user-agent"}
+				<WebUserAgentPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "cors"}
+				<WebCorsPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "mime-types"}
+				<WebMimeTypesPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "ip-lookup"}
+				<WebIpLookupPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "dns-lookup"}
+				<WebDnsLookupPanel />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

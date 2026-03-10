@@ -16,7 +16,10 @@ export type EngineType =
 	| 'color'
 	| 'text'
 	| 'number'
-	| 'crypto';
+	| 'crypto'
+	| 'web'
+	| 'network';
+
 
 export type LayoutVariant = 'split' | 'single' | 'triple' | 'generator' | 'dual-input' | 'single-panel' | 'bidirectional';
 

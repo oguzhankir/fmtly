@@ -1,3 +1,8 @@
+# Auto-generated — never commit
+.lighthouseci/
+test-results/
+.wrangler/
+
 # Logs
 logs
 *.log

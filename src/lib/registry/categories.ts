@@ -117,6 +117,13 @@ const categoryMetaList: CategoryMeta[] = [
 		description:
 			'Generate HMAC signatures, analyze password strength, generate secure random strings, and create ULIDs — all 100% client-side using the Web Crypto API.',
 		primaryKeyword: 'crypto security tools'
+	},
+	{
+		slug: 'web',
+		displayName: 'Web & Network',
+		description:
+			'Parse URLs, decode User-Agent strings, explain CORS headers, look up MIME types, geolocate IP addresses, and query DNS records — all in one place.',
+		primaryKeyword: 'web tools online'
 	}
 ];
 
