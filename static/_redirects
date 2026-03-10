@@ -1,0 +1,11 @@
+/json-formatter          /json/formatter     301
+/json-viewer             /json/viewer        301
+/json-validator          /json/validator     301
+/json-minifier           /json/minifier      301
+/yaml-to-json            /yaml/to-json       301
+/json-to-yaml            /json/to-yaml       301
+/json-diff               /diff/json          301
+/xml-formatter           /xml/formatter      301
+/css-beautifier          /css/formatter      301
+/base64                  /encode/base64      301
+/url-encode              /encode/url         301

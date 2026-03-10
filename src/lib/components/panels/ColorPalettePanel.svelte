@@ -1,0 +1,165 @@
+<script lang="ts">
+    import { colorOptions } from "../../stores/color.store";
+    import type { PaletteType } from "../../stores/color.store";
+    import {
+        hexToRgb,
+        rgbToHsl,
+        hslToRgb,
+        rgbToHex,
+        complementary,
+        analogous,
+        triadic,
+        tetradic,
+        splitComplementary,
+        monochromatic,
+    } from "../../engines/color";
+    import { Copy } from "lucide-svelte";
+    import { addToast } from "../../stores/toast.store";
+
+    const PALETTE_TYPES: { id: PaletteType; label: string }[] = [
+        { id: "complementary", label: "Complementary" },
+        { id: "analogous", label: "Analogous" },
+        { id: "triadic", label: "Triadic" },
+        { id: "tetradic", label: "Tetradic" },
+        { id: "split-complementary", label: "Split Complementary" },
+        { id: "monochromatic", label: "Monochromatic" },
+    ];
+
+    let currentSwatches = $derived.by(() => {
+        try {
+            const rgb = hexToRgb($colorOptions.paletteBase);
+            const hsl = rgbToHsl(rgb);
+            let resultHsl: any[];
+
+            switch ($colorOptions.paletteType) {
+                case "complementary":
+                    resultHsl = complementary(hsl);
+                    break;
+                case "analogous":
+                    resultHsl = analogous(hsl, 5);
+                    break;
+                case "triadic":
+                    resultHsl = triadic(hsl);
+                    break;
+                case "tetradic":
+                    resultHsl = tetradic(hsl);
+                    break;
+                case "split-complementary":
+                    resultHsl = splitComplementary(hsl);
+                    break;
+                case "monochromatic":
+                    resultHsl = monochromatic(hsl, 6);
+                    break;
+                default:
+                    resultHsl = [hsl];
+            }
+
+            return resultHsl.map((item) =>
+                rgbToHex(hslToRgb(item)).toUpperCase(),
+            );
+        } catch (e) {
+            return [$colorOptions.paletteBase];
+        }
+    });
+
+    function handleBaseChange(e: Event) {
+        const target = e.target as HTMLInputElement;
+        $colorOptions.paletteBase = target.value;
+    }
+
+    function handleTypeChange(e: Event) {
+        const target = e.target as HTMLSelectElement;
+        $colorOptions.paletteType = target.value as PaletteType;
+    }
+
+    function copyToClipboard(text: string) {
+        navigator.clipboard.writeText(text);
+        addToast("success", `Copied ${text} to clipboard`);
+    }
+</script>
+
+<div
+    class="flex h-full w-full flex-col gap-[var(--space-6)] overflow-y-auto bg-[var(--bg-base)] p-[var(--space-6)] text-[var(--text-primary)]"
+>
+    <div class="flex gap-[var(--space-4)] flex-col md:flex-row">
+        <div class="flex flex-1 flex-col gap-[var(--space-2)]">
+            <label
+                class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
+                >Base Color</label
+            >
+            <div
+                class="flex items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-2)]"
+            >
+                <input
+                    type="color"
+                    value={$colorOptions.paletteBase}
+                    oninput={handleBaseChange}
+                    class="h-8 w-8 cursor-pointer rounded border-0 bg-transparent p-0"
+                />
+                <input
+                    type="text"
+                    value={$colorOptions.paletteBase}
+                    oninput={handleBaseChange}
+                    class="flex-1 bg-transparent text-[length:var(--text-sm)] font-[family-name:var(--font-mono)] outline-none"
+                />
+            </div>
+        </div>
+
+        <div class="flex flex-1 flex-col gap-[var(--space-2)]">
+            <label
+                class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
+                >Harmony Mode</label
+            >
+            <select
+                value={$colorOptions.paletteType}
+                onchange={handleTypeChange}
+                class="h-12 w-full rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-3)] text-[length:var(--text-sm)] text-[var(--text-primary)] outline-none focus:border-[var(--border-focus)]"
+            >
+                {#each PALETTE_TYPES as pt}
+                    <option value={pt.id}>{pt.label}</option>
+                {/each}
+            </select>
+        </div>
+    </div>
+
+    <div
+        class="flex flex-col gap-[var(--space-4)] rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-[var(--space-6)]"
+    >
+        <h2
+            class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] mb-[var(--space-2)]"
+        >
+            Generated Scheme
+        </h2>
+        <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[var(--space-4)]"
+        >
+            {#each currentSwatches as swatchHex}
+                <div class="group relative flex flex-col gap-[var(--space-3)]">
+                    <div
+                        class="relative w-full aspect-square rounded-[var(--radius-md)] border border-[var(--border-subtle)] overflow-hidden transition-transform duration-[80ms] group-hover:-translate-y-1"
+                        style="background-color: {swatchHex};"
+                    >
+                        <button
+                            onclick={() => copyToClipboard(swatchHex)}
+                            class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+                            aria-label="Copy Hex"
+                        >
+                            <span
+                                class="flex items-center gap-2 rounded-full bg-[var(--bg-elevated)] px-3 py-1.5 text-[length:var(--text-xs)] font-medium text-white shadow-lg"
+                            >
+                                <Copy size={14} /> Copy
+                            </span>
+                        </button>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span
+                            class="text-[length:var(--text-sm)] font-[family-name:var(--font-mono)] font-[number:var(--weight-semibold)] uppercase text-[var(--text-primary)]"
+                        >
+                            {swatchHex}
+                        </span>
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </div>
+</div>

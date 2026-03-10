@@ -1,48 +1,75 @@
-# fmtly.dev — Windsurf Rules
+# fmtly — Windsurf Rules
 
-This file defines the rules, conventions, and constraints that govern all development on the fmtly.dev codebase. Read this entire file before writing any code.
+Read this file entirely before writing any code. These rules apply to every contribution.
 
 ---
 
 ## Project Identity
 
-- **Product name:** fmtly.dev
+- **Product:** fmtly — every developer utility in one place
 - **Domain:** fmtly.dev
 - **Stack:** SvelteKit 2 + TypeScript 5 + Tailwind CSS 4
-- **Deployment target:** Cloudflare Pages (static output only — no server-side rendering at request time)
-- **Package manager:** pnpm (never use npm or yarn in this project)
-- **Adapter:** @sveltejs/adapter-cloudflare
+- **Hosting:** Cloudflare Pages (static) + Cloudflare Workers (network proxy only)
+- **Package manager:** pnpm — never npm, never yarn
+- **Adapter:** `@sveltejs/adapter-cloudflare`
+
+---
+
+## The Golden Rule
+
+**Every tool runs entirely in the browser. No user data ever touches a server.**
+
+The only exception: network tools (IP lookup, DNS lookup, HTTP headers, SSL checker) which route through a minimal Cloudflare Worker proxy. That Worker makes a network request and returns the result — it never receives, logs, or stores user-provided data.
+
+If a feature requires sending user input to a server, it is not built.
 
 ---
 
 ## Architecture Rules
 
-### The Tool Registry Is the Source of Truth
+### Tool Registry Is the Source of Truth
 
-Every tool in the platform is defined in the Tool Registry at `src/lib/registry/`. No tool page is written by hand — all tool pages are generated from the `[category]/[tool]/+page.svelte` dynamic route reading from the registry.
+Every tool is a configuration object in `src/lib/registry/tools/[category].tools.ts`. Pages are generated from the `[category]/[tool]/+page.svelte` dynamic route reading the registry.
 
-Never create a new route file for a new tool. Register the tool in the registry. The page generates itself.
+**Never create a route file for a new tool.** Register the tool. The page generates itself.
 
-### Zero Backend
+### All Processing Libraries Are Lazy Loaded
 
-This project has no backend, no API routes, no server-side rendering at request time, and no database. All processing runs in the browser. Never suggest or write server-side data processing code.
+Every engine is loaded via dynamic `import()` on demand. Nothing is ever imported at the top level of a page, layout, or component.
 
-The only allowed server-side code is: `+page.ts` load functions that read from the Tool Registry (which is a static TypeScript module, not a database), and the sitemap generator (`/sitemap.xml/+server.ts`).
+This rule applies to every processing library without exception:
+- Data: `json-source-map`, `jsonrepair`, `ajv`, `js-yaml`, `fast-xml-parser`, `papaparse`, `smol-toml`
+- Text: `marked`, `diff`
+- Formatting: `prettier` (WASM), `sql-formatter`, `svgo`
+- PDF: `pdfjs-dist`, `pdf-lib`
+- Image: `exifr`, Canvas API
+- File: `jszip`, `sheetjs`
+- QR: `qrcode`, `jsqr`, `bwip-js`
+- Math: `mathjs`
+- Generators: `@faker-js/faker`, `quicktype-core`
+- Crypto: `uuid`, `ulid`
+- Web: `cron-parser`, `ua-parser-js`
 
-### Engines Are Lazy Loaded
+Monaco Editor is also lazy loaded — on first editor focus only.
 
-Every processing engine (JSON, XML, YAML, CSS, HTML, code formatter) is lazy loaded on demand. No engine is imported at the top level of any page or component. All engine imports use dynamic `import()`.
+**Rule:** if it processes data, it is a dynamic import.
 
-The rule: if it's a processing library (jsonrepair, js-yaml, fast-xml-parser, prettier, etc.), it is never in the initial page bundle.
+### No Backend for User Data
 
-Monaco Editor is also lazy loaded. It is loaded only when the user first focuses the editor panel. Never import Monaco at the component top level.
+No SvelteKit server routes receive or process user input. The only permitted server-side code:
+- `+page.ts` load functions (read Tool Registry — a static module)
+- `/sitemap.xml/+server.ts` (reads Tool Registry at build time)
+- `workers/proxy/` (makes outbound network requests only — no user data)
+
+### Static Output Only
+
+The build output is a directory of static files. No Node.js process runs at request time. `adapter-cloudflare` in static mode only.
 
 ### Cloudflare Pages Constraints
 
-- The build output must be a directory of static files
-- No Node.js APIs in browser-executed code (`fs`, `path`, `crypto` are not available in the browser)
-- No environment variables in browser code except those prefixed with `PUBLIC_` in SvelteKit
-- The `_headers`, `_redirects`, and `_routes.json` files in `/static` must not be deleted or overridden
+- No Node.js APIs in browser code (`fs`, `path`, `crypto` module — use Web Crypto API instead)
+- No env vars in browser code except those prefixed `PUBLIC_`
+- `static/_headers`, `static/_redirects`, `static/_routes.json` must never be deleted
 
 ---
 
@@ -50,124 +77,167 @@ Monaco Editor is also lazy loaded. It is loaded only when the user first focuses
 
 ### TypeScript
 
-- Strict TypeScript mode is enabled. No `any` types. No `@ts-ignore` comments. No `as unknown as X` casts.
-- Every function has explicit parameter types and return types.
-- Every exported interface and type is defined in a `.ts` file, never inline in a `.svelte` file.
-- Use `type` for object shapes, `interface` for extensible contracts.
-- Null checks are explicit — never assume a value is non-null without a type guard.
+- Strict mode enabled everywhere
+- No `any`. No `@ts-ignore`. No `as unknown as X`.
+- Every function: explicit parameter types and return type
+- Exported interfaces and types: defined in `.ts` files, never inline in `.svelte`
+- Null checks explicit — never assume non-null without a type guard
 
 ### Svelte Components
 
-- Component filenames use PascalCase: `TreeNode.svelte`, `ErrorBanner.svelte`
+- Filenames: PascalCase (`TreeNode.svelte`, `PdfViewer.svelte`)
 - One component per file
-- Props are typed with explicit TypeScript: `export let value: string` — never `export let value`
-- Reactive statements (`$:`) are used sparingly — prefer derived stores for complex reactivity
-- No inline event handlers that contain business logic — extract to named functions
-- Component CSS uses Tailwind utility classes. Component-scoped `<style>` blocks are only used when Tailwind classes are insufficient (e.g., complex animations, pseudo-elements)
+- Props typed explicitly: `export let value: string` — never `export let value`
+- `$:` reactive statements used sparingly — prefer derived stores
+- No business logic in inline event handlers — extract to named functions
+- CSS: Tailwind utilities first. `<style>` blocks only for complex animations or pseudo-elements.
+
+### Engines
+
+- File pattern: `[name].engine.ts` inside `src/lib/engines/[category]/`
+- Engine functions are pure functions — no side effects, no store access, no DOM access
+- All parameters and return values explicitly typed
+- Large input threshold (> 500KB): use Web Worker via `src/lib/workers/[category].worker.ts`
 
 ### Stores
 
-- All application state that is shared between components lives in a Svelte store in `src/lib/stores/`
-- Stores are created with factory functions, not exported directly as primitives
-- Component-local state uses Svelte's built-in `let` declarations
-- LocalStorage reads and writes happen only in store files, never in components
+- Shared state: Svelte stores in `src/lib/stores/`
+- localStorage reads/writes: only in store files, never in components
 
 ### File Naming
 
-- Route files: SvelteKit convention (`+page.svelte`, `+layout.svelte`, `+page.ts`, `+server.ts`)
-- Component files: PascalCase (`TreeView.svelte`)
-- Utility files: camelCase (`jsonParser.ts`, `urlSharing.ts`)
-- Engine files: `[name].engine.ts` inside `src/lib/engines/[category]/`
-- Tool registry files: `[category].tools.ts` inside `src/lib/registry/tools/`
+- Routes: SvelteKit convention
+- Components: PascalCase
+- Utilities and engines: camelCase (`colorConverter.ts`, `pdfEngine.ts`)
+- Registry: `[category].tools.ts`
 
 ### CSS and Tailwind
 
-- Use CSS design tokens (CSS custom properties) for all color, spacing, and typography values. Never hardcode hex colors in component code.
-- Tailwind classes reference design tokens via `var(--token-name)` in arbitrary values: `bg-[var(--bg-surface)]`
-- No magic numbers — all pixel values come from the spacing system or are explicitly justified in a comment
-- Dark mode is implemented via the `[data-theme="dark"]` attribute on `<html>`, not via Tailwind's `dark:` variant (which uses `prefers-color-scheme` media query — the project needs user-overridable themes)
+- No hardcoded hex colors in components — always `var(--token-name)`
+- Tailwind arbitrary values reference tokens: `bg-[var(--bg-surface)]`
+- Dark mode via `[data-theme="dark"]` attribute on `<html>` — not Tailwind's `dark:` variant
+
+---
+
+## Engine Categories
+
+Each category has its own engine module under `src/lib/engines/`:
+
+```
+json/       xml/        yaml/       csv/        toml/
+text/       regex/      markdown/
+number/     timestamp/
+encoder/    jwt/        escaper/
+color/
+crypto/
+web/        network/
+code/       css/        html/       js/
+generator/
+pdf/
+image/
+file/
+qr/
+math/
+```
+
+When adding a tool in a new category, create the engine module first, then register the tool.
 
 ---
 
 ## SEO Rules
 
-Every tool page must have — generated automatically by the SEO utility from the tool's registry entry:
+Every tool page must have — generated by `src/lib/utils/seo.ts`:
 
-- A unique `<title>` tag following the formula: `[Primary Keyword] — fmtly.dev`
-- A unique `<meta name="description">` of 140–155 characters
-- A `<link rel="canonical">` pointing to the page's own URL
-- Schema.org `WebApplication` structured data in a `<script type="application/ld+json">` block
-- `og:title`, `og:description`, `og:url`, `og:image`, `og:type` Open Graph tags
-- `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image` tags
+- Unique `<title>`: `[Primary Function] — fmtly.dev`, max 60 characters
+- Unique `<meta name="description">`: 140–155 characters
+- `<link rel="canonical">` pointing to the page's own URL
+- Schema.org `WebApplication` JSON-LD
+- Full Open Graph and Twitter Card tags
 
-Never write SEO metadata manually in a tool page. It is always generated from the registry entry by `src/lib/utils/seo.ts`.
+Never write SEO metadata manually in a page file.
 
 ---
 
 ## Performance Rules
 
-- Lighthouse Performance score must be ≥ 95 on mobile before any feature is considered complete. This is verified by Lighthouse CI in GitHub Actions.
-- The initial JavaScript bundle (everything loaded before any user interaction) must be under 50KB gzipped. Verify with `pnpm build` and inspect `.svelte-kit/cloudflare` bundle sizes.
-- No synchronous processing of JSON/XML/YAML/CSS on the main thread for inputs larger than 500KB. Large inputs must use the Web Worker at `src/lib/workers/parser.worker.ts`.
-- Images must use WebP or AVIF format. No PNG or JPEG images in the UI (only in downloaded/uploaded content).
-- Fonts are preloaded in `app.html` with `<link rel="preload" as="font" crossorigin>`.
+- Lighthouse Performance ≥ 95 on mobile before any feature is complete. CI enforces this — build fails on regression.
+- Initial JS bundle < 50KB gzipped. Verify with `pnpm build`.
+- No synchronous processing on main thread for inputs > 500KB — use Web Worker.
+- No PNG/JPEG in UI assets — SVG or WebP/AVIF only.
+- Fonts preloaded in `app.html` with `<link rel="preload" as="font" crossorigin>`.
 
 ---
 
 ## Testing Rules
 
-- Every utility function in `src/lib/utils/` and every engine in `src/lib/engines/` must have a corresponding unit test in `tests/unit/`.
-- Tests use Vitest. Test files are named `[filename].test.ts`.
-- Every critical user path has an end-to-end test in `tests/e2e/` using Playwright:
-  - Paste JSON → tree renders
-  - Invalid JSON → error banner with line number
-  - Copy path → clipboard contains correct path
-  - Share URL → page loads JSON from URL hash
-  - Theme toggle → preference persists on refresh
-- No test can depend on network access. All external dependencies are mocked.
-- Tests must pass before any code is merged to `main`. The GitHub Actions CI enforces this.
+- Every engine function has unit tests in `tests/unit/[name].test.ts`
+- Cover: valid input, invalid input, empty string, Unicode, category-specific edge cases
+- Critical user paths have E2E tests in `tests/e2e/` with Playwright
+- No test may depend on network — mock all external calls
+- Tests must pass before any merge to `main`
+
+**Minimum E2E coverage per tool:**
+- Paste input → output renders correctly
+- Invalid input → error state shown correctly
+- Copy output → clipboard contains correct value
+- Share URL → state restored on open
+- Theme toggle → persists after refresh
+- File drop → loads file into input (where applicable)
 
 ---
 
 ## Accessibility Rules
 
-- Every interactive element must be keyboard reachable in logical tab order.
-- Every icon that conveys meaning must have an `aria-label`.
-- Never use color as the sole indicator of state — always pair color with an icon or text label.
-- All modals must trap focus and return focus to the trigger on close.
-- The tree view must support arrow-key navigation when focused.
-- Do not suppress browser focus outlines — the custom focus ring using `--border-focus` must be visible on all interactive elements.
-- Test with keyboard-only navigation before marking any feature complete.
+- All interactive elements keyboard reachable in logical tab order
+- All meaningful icons have `aria-label`
+- Color is never the sole state indicator — pair with icon or text
+- Modals: trap focus, return to trigger on close
+- Tree view: arrow key navigation, Enter/Space to expand, Escape to exit
+- Focus rings: never suppressed — custom ring using `--border-focus` must be visible
+- Test keyboard-only navigation before marking any feature complete
 
 ---
 
 ## What Not to Do
 
-- Do not install a component library with pre-styled components (no MUI, no Chakra, no DaisyUI). All visual design is custom.
-- Do not add any tracking scripts, analytics, or third-party JavaScript beyond Cloudflare Web Analytics.
-- Do not add any cookie banners or consent popups — Cloudflare Web Analytics is cookieless.
-- Do not create any server-side processing routes that receive user data.
-- Do not import processing libraries (js-yaml, fast-xml-parser, prettier, etc.) at the top level of any page. Always use dynamic imports.
-- Do not use `localStorage` directly in components — only in store files.
-- Do not hardcode any tool metadata (title, description, keywords) in page files — it must come from the registry.
-- Do not write CSS that conflicts with the design token system.
-- Do not add dependencies without justification. Every new dependency must serve a clear purpose that existing dependencies cannot cover.
+- Do not use pre-styled component libraries (no MUI, Chakra, DaisyUI, shadcn)
+- Do not add tracking scripts beyond Cloudflare Web Analytics
+- Do not create server routes that receive or process user data
+- Do not import processing libraries at the top level of any file
+- Do not use localStorage directly in components — only in store files
+- Do not hardcode tool metadata in page files — always from the registry
+- Do not hardcode hex colors in components — always design tokens
+- Do not modify `static/_headers` or `static/_redirects` without discussion
 
 ---
 
 ## Adding a New Tool: Checklist
 
-When adding any new tool to the platform, complete all of the following:
+1. Add tool definition to `src/lib/registry/tools/[category].tools.ts`
+2. Confirm URL slug follows `/[category]/[tool-slug]` and is unique
+3. Add or verify engine in `src/lib/engines/[category]/`
+4. Write unit tests for all engine functions
+5. Run `pnpm build` — confirm page appears in build output
+6. Run Lighthouse — confirm ≥ 95 mobile
+7. Confirm URL appears in `/sitemap.xml`
+8. Add tool to at least one other tool's "Related tools" links
+9. Write the content section in the registry entry (description, use cases, FAQ)
+10. Verify full keyboard-only operation
 
-1. Add the tool definition to the appropriate file in `src/lib/registry/tools/[category].tools.ts`
-2. Confirm the URL slug is unique and follows the `/[category]/[tool-slug]` pattern
-3. Add or verify the engine module in `src/lib/engines/[category]/`
-4. Add unit tests for the engine's processing functions
-5. Run `pnpm build` and confirm the new page appears in the build output
-6. Run Lighthouse on the new page and confirm score ≥ 95
-7. Confirm the new page appears in `/sitemap.xml`
-8. Add the new tool to at least one category page's related tools section
-9. Add the new tool to at least one other tool's "Related tools" links
-10. Write the content section for the new page (tool description, use cases, FAQ) in the registry entry
+**A tool is not done until all 10 steps are complete.**
 
-Do not consider a tool "done" until all 10 steps are complete.
+---
+
+## Documentation
+
+Before making decisions in any area, read the relevant document in `/docs`:
+
+| Area | Document |
+|---|---|
+| Vision and goals | `docs/01-VISION.md` |
+| Platform architecture | `docs/02-ARCHITECTURE.md` |
+| Tool catalog | `docs/03-FEATURES.md` |
+| Technology decisions | `docs/04-TECH-STACK.md` |
+| Roadmap and priorities | `docs/05-ROADMAP.md` |
+| SEO and content rules | `docs/06-SEO-GROWTH.md` |
+| Design system | `docs/07-DESIGN-SYSTEM.md` |
