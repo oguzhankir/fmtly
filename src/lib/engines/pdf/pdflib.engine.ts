@@ -11,7 +11,9 @@ export async function mergePdfs(pdfBuffers: ArrayBuffer[]): Promise<Uint8Array> 
 	for (const buffer of pdfBuffers) {
 		const doc = await PDFDocument.load(buffer);
 		const pages = await merged.copyPages(doc, doc.getPageIndices());
-		pages.forEach((p) => merged.addPage(p));
+		for (const p of pages) {
+			merged.addPage(p);
+		}
 	}
 
 	return merged.save();
@@ -33,7 +35,9 @@ export async function splitPdf(
 			indices.push(i);
 		}
 		const pages = await newDoc.copyPages(source, indices);
-		pages.forEach((p) => newDoc.addPage(p));
+		for (const p of pages) {
+			newDoc.addPage(p);
+		}
 		results.push(await newDoc.save());
 	}
 
@@ -50,7 +54,9 @@ export async function extractPages(
 
 	const indices = pageNumbers.map((n) => n - 1).filter((i) => i >= 0 && i < source.getPageCount());
 	const pages = await newDoc.copyPages(source, indices);
-	pages.forEach((p) => newDoc.addPage(p));
+	for (const p of pages) {
+		newDoc.addPage(p);
+	}
 
 	return newDoc.save();
 }

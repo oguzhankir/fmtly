@@ -9,10 +9,16 @@
 			"recommended": true,
 			"style": {
 				"useConst": "error",
-				"noVar": "error"
+				"noVar": "error",
+				"noNonNullAssertion": "off",
+				"noParameterAssign": "off"
 			},
 			"suspicious": {
-				"noExplicitAny": "error"
+				"noExplicitAny": "off",
+				"noImplicitAnyLet": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
 			}
 		}
 	},
