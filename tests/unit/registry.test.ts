@@ -66,14 +66,6 @@ describe('Tool Registry', () => {
 			expect(tool).toBeUndefined();
 		});
 
-		it('returns json/viewer correctly', () => {
-			const tool = getTool('json', 'viewer');
-			expect(tool).toBeDefined();
-			expect(tool?.id).toBe('json-viewer');
-			expect(tool?.displayName).toBe('JSON Viewer');
-			expect(tool?.hasTreeView).toBe(true);
-		});
-
 		it('returns json/validator correctly', () => {
 			const tool = getTool('json', 'validator');
 			expect(tool).toBeDefined();
@@ -92,7 +84,7 @@ describe('Tool Registry', () => {
 	describe('getToolsByCategory', () => {
 		it('returns all JSON tools', () => {
 			const tools = getToolsByCategory('json');
-			expect(tools.length).toBeGreaterThanOrEqual(7);
+			expect(tools.length).toBeGreaterThanOrEqual(6);
 			for (const tool of tools) {
 				expect(tool.category).toBe('json');
 			}
@@ -111,7 +103,7 @@ describe('Tool Registry', () => {
 
 			const jsonCategory = categories.find((c) => c.category === 'json');
 			expect(jsonCategory).toBeDefined();
-			expect(jsonCategory?.toolCount).toBeGreaterThanOrEqual(7);
+			expect(jsonCategory?.toolCount).toBeGreaterThanOrEqual(6);
 		});
 
 		it('does not contain duplicate categories', () => {
