@@ -88,7 +88,6 @@
 	--scrollbar-thumb-hover: #524b43;
 }
 
-
 /* ----------------------------------------
    Light Theme
    ---------------------------------------- */
@@ -271,7 +270,8 @@ body {
 }
 
 html[data-theme] {
-	transition: background-color var(--duration-normal) var(--ease-default), color var(--duration-normal) var(--ease-default);
+	transition: background-color var(--duration-normal) var(--ease-default), color
+		var(--duration-normal) var(--ease-default);
 }
 
 ::selection {

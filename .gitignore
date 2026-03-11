@@ -2,6 +2,7 @@
 .lighthouseci/
 test-results/
 .wrangler/
+.DS_Store
 
 # Logs
 logs

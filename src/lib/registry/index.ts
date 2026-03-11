@@ -11,8 +11,13 @@ import { yamlTools } from './tools/yaml.tools.js';
 import { colorTools } from './tools/color.tools.js';
 import { cryptoTools } from './tools/crypto.tools.js';
 import { webTools } from './tools/web.tools.js';
+import { codeTools } from './tools/code.tools.js';
+import { pdfTools } from './tools/pdf.tools.js';
+import { imageTools } from './tools/image.tools.js';
+import { fileTools } from './tools/file.tools.js';
+import { qrTools } from './tools/qr.tools.js';
+import { generateTools } from './tools/generate.tools.js';
 import type { CategoryInfo, ToolDefinition } from './types.js';
-
 
 const allTools: ToolDefinition[] = [
 	...jsonTools,
@@ -27,9 +32,14 @@ const allTools: ToolDefinition[] = [
 	...numberTools,
 	...colorTools,
 	...cryptoTools,
-	...webTools
+	...webTools,
+	...codeTools,
+	...pdfTools,
+	...imageTools,
+	...fileTools,
+	...qrTools,
+	...generateTools
 ];
-
 
 export function getAllTools(): ToolDefinition[] {
 	return allTools;

@@ -116,9 +116,9 @@
     <!-- Top Controls -->
     <div class="flex flex-col md:flex-row gap-[var(--space-4)] items-stretch">
         <div class="flex flex-col gap-[var(--space-2)]">
-            <label
+            <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Simulation Mode</label
+                >Simulation Mode</div
             >
             <div
                 class="flex rounded-md border border-[var(--border-default)] overflow-hidden h-10 shrink-0"
@@ -146,13 +146,13 @@
         </div>
 
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
-            <label
+            <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
             >
                 {$colorOptions.blindnessInputType === "hex"
                     ? "Base Color"
                     : "Upload Source Image"}
-            </label>
+            </div>
 
             {#if $colorOptions.blindnessInputType === "hex"}
                 <div

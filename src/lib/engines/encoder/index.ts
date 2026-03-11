@@ -91,9 +91,10 @@ export function decodeHtmlEntities(text: string): string {
 		return ta.value;
 	}
 
-	// Fallback for non-browser environments if necessary, 
+	// Fallback for non-browser environments if necessary,
 	// although request states "Use DOMParser or textarea trick".
-	return text.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(Number(dec)))
+	return text
+		.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(Number(dec)))
 		.replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
 		.replace(/&amp;/g, '&')
 		.replace(/&lt;/g, '<')

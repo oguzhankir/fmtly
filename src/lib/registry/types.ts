@@ -18,10 +18,23 @@ export type EngineType =
 	| 'number'
 	| 'crypto'
 	| 'web'
-	| 'network';
+	| 'network'
+	| 'code'
+	| 'pdf'
+	| 'image'
+	| 'file'
+	| 'qr'
+	| 'generate'
+	| 'accessibility';
 
-
-export type LayoutVariant = 'split' | 'single' | 'triple' | 'generator' | 'dual-input' | 'single-panel' | 'bidirectional';
+export type LayoutVariant =
+	| 'split'
+	| 'single'
+	| 'triple'
+	| 'generator'
+	| 'dual-input'
+	| 'single-panel'
+	| 'bidirectional';
 
 export type ToolReference = {
 	category: string;

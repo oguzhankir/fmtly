@@ -29,6 +29,27 @@
 	import WebMimeTypesPanel from "$components/panels/WebMimeTypesPanel.svelte";
 	import WebIpLookupPanel from "$components/panels/WebIpLookupPanel.svelte";
 	import WebDnsLookupPanel from "$components/panels/WebDnsLookupPanel.svelte";
+	import CodeFormatterPanel from "$components/panels/CodeFormatterPanel.svelte";
+	import CurlConverterPanel from "$components/panels/CurlConverterPanel.svelte";
+	import PdfViewerPanel from "$components/panels/PdfViewerPanel.svelte";
+	import PdfToTextPanel from "$components/panels/PdfToTextPanel.svelte";
+	import PdfMergePanel from "$components/panels/PdfMergePanel.svelte";
+	import PdfSplitPanel from "$components/panels/PdfSplitPanel.svelte";
+	import PdfExtractPanel from "$components/panels/PdfExtractPanel.svelte";
+	import ImageToBase64Panel from "$components/panels/ImageToBase64Panel.svelte";
+	import ImageFromBase64Panel from "$components/panels/ImageFromBase64Panel.svelte";
+	import ImageResizePanel from "$components/panels/ImageResizePanel.svelte";
+	import ImageConvertPanel from "$components/panels/ImageConvertPanel.svelte";
+	import ImageCompressPanel from "$components/panels/ImageCompressPanel.svelte";
+	import SvgOptimizerPanel from "$components/panels/SvgOptimizerPanel.svelte";
+	import ZipCreatePanel from "$components/panels/ZipCreatePanel.svelte";
+	import ZipExtractPanel from "$components/panels/ZipExtractPanel.svelte";
+	import FileHashPanel from "$components/panels/FileHashPanel.svelte";
+	import ExcelToJsonPanel from "$components/panels/ExcelToJsonPanel.svelte";
+	import JsonToExcelPanel from "$components/panels/JsonToExcelPanel.svelte";
+	import QrGeneratorPanel from "$components/panels/QrGeneratorPanel.svelte";
+	import QrReaderPanel from "$components/panels/QrReaderPanel.svelte";
+	import FakeDataPanel from "$components/panels/FakeDataPanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { generateToolSEO } from "$utils/seo.js";
 	import { registerShortcuts } from "$utils/keyboard.js";
@@ -48,6 +69,7 @@
 	import { initEscapeStore, escapeOptions } from "$stores/escape.store";
 	import { initColorStore } from "$stores/color.store";
 	import { initCryptoStore } from "$stores/crypto.store";
+	import { initGenerateStore } from "$stores/generate.store";
 	import { initHistory, destroyHistory } from "$stores/history.store";
 	import type { PageData } from "./$types.js";
 
@@ -108,11 +130,22 @@
 			initColorStore(data.tool.slug);
 		} else if (data.tool.engine === "crypto") {
 			initCryptoStore(data.tool.slug);
+		} else if (data.tool.engine === "generate") {
+			initGenerateStore(data.tool.slug);
 		}
 
 		if (browser) {
+			const urlParams = new URLSearchParams(window.location.search);
+			const inputParam = urlParams.get("input");
+			const initialInput = inputParam
+				? LZString.decompressFromEncodedURIComponent(inputParam)
+				: null;
+
 			const shared = extractShareData();
-			if (shared) {
+			if (initialInput) {
+				input.set(initialInput);
+				history.replaceState(null, "", window.location.pathname);
+			} else if (shared) {
 				input.set(shared);
 				history.replaceState(null, "", window.location.pathname);
 			}
@@ -356,6 +389,56 @@
 				<WebIpLookupPanel />
 			{:else if data.tool.category === "web" && data.tool.slug === "dns-lookup"}
 				<WebDnsLookupPanel />
+			{:else if data.tool.category === "code" && (data.tool.slug === "curl-to-fetch" || data.tool.slug === "curl-to-axios")}
+				<CurlConverterPanel
+					mode={data.tool.slug === "curl-to-fetch"
+						? "fetch"
+						: "axios"}
+					sampleInput={data.tool.sampleInput ?? ""}
+				/>
+			{:else if data.tool.category === "code"}
+				<CodeFormatterPanel
+					toolSlug={data.tool.slug}
+					sampleInput={data.tool.sampleInput ?? ""}
+				/>
+			{:else if data.tool.category === "pdf" && data.tool.slug === "viewer"}
+				<PdfViewerPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "to-text"}
+				<PdfToTextPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "merge"}
+				<PdfMergePanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "split"}
+				<PdfSplitPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "extract-pages"}
+				<PdfExtractPanel />
+			{:else if data.tool.category === "image" && data.tool.slug === "to-base64"}
+				<ImageToBase64Panel />
+			{:else if data.tool.category === "image" && data.tool.slug === "from-base64"}
+				<ImageFromBase64Panel />
+			{:else if data.tool.category === "image" && data.tool.slug === "resize"}
+				<ImageResizePanel />
+			{:else if data.tool.category === "image" && data.tool.slug === "convert"}
+				<ImageConvertPanel />
+			{:else if data.tool.category === "image" && data.tool.slug === "compress"}
+				<ImageCompressPanel />
+			{:else if data.tool.category === "image" && data.tool.slug === "svg-optimizer"}
+				<SvgOptimizerPanel />
+			{:else if data.tool.category === "file" && data.tool.slug === "zip"}
+				<ZipCreatePanel />
+			{:else if data.tool.category === "file" && data.tool.slug === "unzip"}
+				<ZipExtractPanel />
+			{:else if data.tool.category === "file" && data.tool.slug === "hash"}
+				<FileHashPanel />
+			{:else if data.tool.category === "file" && data.tool.slug === "excel-to-json"}
+				<ExcelToJsonPanel />
+			{:else if data.tool.category === "file" && data.tool.slug === "json-to-excel"}
+				<JsonToExcelPanel />
+			{:else if data.tool.category === "qr" && data.tool.slug === "generator"}
+				<QrGeneratorPanel />
+			{:else if data.tool.category === "qr" && data.tool.slug === "reader"}
+				<QrReaderPanel />
+			{:else if data.tool.category === "generate" && data.tool.slug === "fake-data"}
+				<FakeDataPanel />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

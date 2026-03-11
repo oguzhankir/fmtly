@@ -70,12 +70,12 @@
     class="flex h-full w-full flex-col gap-[var(--space-4)] overflow-y-auto bg-[var(--bg-base)] p-[var(--space-6)] text-[var(--text-primary)]"
 >
     <div class="flex flex-col gap-[var(--space-2)]">
-        <label>
+        <div>
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
                 >Secret Key</span
             >
-        </label>
+        </div>
         <input
             type="text"
             bind:value={keyInput}
@@ -85,12 +85,12 @@
     </div>
 
     <div class="flex flex-col gap-[var(--space-2)]">
-        <label>
+        <div>
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
                 >Algorithm</span
             >
-        </label>
+        </div>
         <div class="flex gap-2">
             {#each ["SHA-256", "SHA-384", "SHA-512"] as alg}
                 <button
@@ -107,12 +107,12 @@
     </div>
 
     <div class="flex-1 min-h-[160px] flex flex-col gap-[var(--space-2)]">
-        <label>
+        <div>
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
                 >Message</span
             >
-        </label>
+        </div>
         <textarea
             bind:value={$inputStore}
             placeholder="Enter the message to hash..."
@@ -126,9 +126,9 @@
     >
         <div class="flex flex-col gap-[var(--space-2)]">
             <div class="flex items-center justify-between">
-                <label
+                <div
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >HMAC (Hex)</label
+                    >HMAC (Hex)</div
                 >
                 <button
                     onclick={() =>
@@ -159,9 +159,9 @@
 
         <div class="flex flex-col gap-[var(--space-2)]">
             <div class="flex items-center justify-between">
-                <label
+                <div
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >HMAC (Base64)</label
+                    >HMAC (Base64)</div
                 >
                 <button
                     onclick={() =>

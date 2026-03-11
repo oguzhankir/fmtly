@@ -123,9 +123,9 @@
             <!-- Length slider -->
             <div class="flex flex-col gap-[var(--space-4)]">
                 <div class="flex items-center justify-between">
-                    <label
+                    <div
                         class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                        >Length</label
+                        >Length</div
                     >
                     <input
                         type="number"

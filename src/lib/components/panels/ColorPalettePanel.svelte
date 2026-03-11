@@ -83,9 +83,9 @@
 >
     <div class="flex gap-[var(--space-4)] flex-col md:flex-row">
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
-            <label
+            <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Base Color</label
+                >Base Color</div
             >
             <div
                 class="flex items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-2)]"
@@ -106,9 +106,9 @@
         </div>
 
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
-            <label
+            <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Harmony Mode</label
+                >Harmony Mode</div
             >
             <select
                 value={$colorOptions.paletteType}

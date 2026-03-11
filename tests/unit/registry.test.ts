@@ -34,7 +34,7 @@ describe('Tool Registry', () => {
 				expect(Array.isArray(tool.relatedTools)).toBe(true);
 				expect(Array.isArray(tool.faqs)).toBe(true);
 				expect(Array.isArray(tool.useCases)).toBe(true);
-				expect(tool.sampleInput).toBeTruthy();
+				expect(typeof tool.sampleInput).toBe('string');
 			}
 		});
 

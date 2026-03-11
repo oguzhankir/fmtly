@@ -21,16 +21,9 @@
 <body data-sveltekit-preload-data="hover">
 	<div style="display: contents">%sveltekit.body%</div>
 
-	<!-- Cloudflare Web Analytics (production only) -->
-	<script>
-		if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-			var s = document.createElement('script');
-			s.defer = true;
-			s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-			s.setAttribute('data-cf-beacon', '{"token": "YOUR_CF_ANALYTICS_TOKEN"}');
-			document.body.appendChild(s);
-		}
-	</script>
+	<!-- Cloudflare Web Analytics -->
+	<script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+		data-cf-beacon='{"token": "YOUR_TOKEN"}'></script>
 </body>
 
 </html>

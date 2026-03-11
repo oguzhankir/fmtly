@@ -93,8 +93,7 @@ const categoryMetaList: CategoryMeta[] = [
 	{
 		slug: 'toml',
 		displayName: 'TOML',
-		description:
-			'Format, validate, and convert TOML files. Convert TOML to JSON and YAML safely.',
+		description: 'Format, validate, and convert TOML files. Convert TOML to JSON and YAML safely.',
 		primaryKeyword: 'toml tools'
 	},
 	{
@@ -124,6 +123,48 @@ const categoryMetaList: CategoryMeta[] = [
 		description:
 			'Parse URLs, decode User-Agent strings, explain CORS headers, look up MIME types, geolocate IP addresses, and query DNS records — all in one place.',
 		primaryKeyword: 'web tools online'
+	},
+	{
+		slug: 'code',
+		displayName: 'Code Formatters',
+		description:
+			'Format and minify CSS, SCSS, LESS, HTML, JavaScript, TypeScript, GraphQL, and Markdown with Prettier WASM — entirely local, no uploads. Convert cURL to fetch() or Axios.',
+		primaryKeyword: 'code formatter online'
+	},
+	{
+		slug: 'pdf',
+		displayName: 'PDF Tools',
+		description:
+			'View, extract text, merge, split, and extract pages from PDF files — all locally in your browser using PDF.js and pdf-lib. No upload, no server.',
+		primaryKeyword: 'pdf tools online'
+	},
+	{
+		slug: 'image',
+		displayName: 'Image Tools',
+		description:
+			'Resize, convert, compress, and encode images — all locally in your browser. SVG optimizer with SVGO. No upload, no server.',
+		primaryKeyword: 'image tools online'
+	},
+	{
+		slug: 'file',
+		displayName: 'File Tools',
+		description:
+			'Create and extract ZIP archives, calculate file hashes, and convert between Excel and JSON formats — all locally in your browser.',
+		primaryKeyword: 'file tools online'
+	},
+	{
+		slug: 'qr',
+		displayName: 'QR & Barcode',
+		description:
+			'Generate customizable QR codes for text, URLs, contacts, WiFi, and email. Decode QR codes from images — all locally.',
+		primaryKeyword: 'qr code generator'
+	},
+	{
+		slug: 'generate',
+		displayName: 'Generators',
+		description:
+			'Generate type definitions (TypeScript, Python, Go, Rust, Java, C#, Zod), JSON Schema, Markdown tables, and fake test data — all locally.',
+		primaryKeyword: 'code generators'
 	}
 ];
 

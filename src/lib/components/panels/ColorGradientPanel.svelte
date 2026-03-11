@@ -98,9 +98,9 @@
         >
             <!-- Gradient Type -->
             <div class="flex flex-col gap-[var(--space-2)]">
-                <label
+                <div
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >Type</label
+                    >Type</div
                 >
                 <div
                     class="flex rounded-md border border-[var(--border-default)] overflow-hidden"
@@ -129,9 +129,9 @@
             {#if $colorOptions.gradientType === "linear"}
                 <div class="flex flex-col gap-[var(--space-2)]">
                     <div class="flex items-center justify-between">
-                        <label
+                        <div
                             class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                            >Angle (deg)</label
+                            >Angle (deg)</div
                         >
                         <span
                             class="text-[length:var(--text-xs)] font-[family-name:var(--font-mono)]"
@@ -159,9 +159,9 @@
             <!-- Radial Shape -->
             {#if $colorOptions.gradientType === "radial"}
                 <div class="flex flex-col gap-[var(--space-2)]">
-                    <label
+                    <div
                         class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                        >Shape</label
+                        >Shape</div
                     >
                     <select
                         bind:value={$colorOptions.gradientRadialShape}

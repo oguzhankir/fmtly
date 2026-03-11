@@ -20,9 +20,12 @@ export const encodeTools: ToolDefinition[] = [
 		outputLanguage: 'text',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'encode', slug: 'url' },
-			{ category: 'escape', slug: 'html' },
-			{ category: 'escape', slug: 'json' }
+			'{ category: encode',
+			'slug: url }',
+			'{ category: escape',
+			'slug: html }',
+			'{ category: escape',
+			'slug: json }'
 		],
 		faqs: [
 			{
@@ -69,9 +72,12 @@ export const encodeTools: ToolDefinition[] = [
 		outputLanguage: 'text',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'encode', slug: 'base64' },
-			{ category: 'escape', slug: 'html' },
-			{ category: 'escape', slug: 'javascript' }
+			'{ category: encode',
+			'slug: base64 }',
+			'{ category: escape',
+			'slug: html }',
+			'{ category: escape',
+			'slug: javascript }'
 		],
 		faqs: [
 			{
@@ -100,24 +106,24 @@ export const encodeTools: ToolDefinition[] = [
 		slug: 'html-entities',
 		displayName: 'HTML Entities Encoder / Decoder',
 		tagline: 'Convert characters to corresponding HTML entities.',
-		description: 'Securely convert characters to HTML entities like &amp; and &lt; preventing XSS or document flow issues. Supports named, numeric, and hex mappings.',
+		description:
+			'Securely convert characters to HTML entities like &amp; and &lt; preventing XSS or document flow issues. Supports named, numeric, and hex mappings.',
 		primaryKeyword: 'html entities encoder',
 		metaTitle: 'HTML Entities Converter | Named, Numeric, Hex | fmtly',
-		metaDescription: 'Encode or decode HTML entities directly from text strings to cleanly support markup inputs without risking arbitrary code execution.',
+		metaDescription:
+			'Encode or decode HTML entities directly from text strings to cleanly support markup inputs without risking arbitrary code execution.',
 		engine: 'encoder',
 		operation: 'html-entities',
 		layoutVariant: 'bidirectional',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: [
-			{ category: 'encode', slug: 'unicode' },
-			{ category: 'escape', slug: 'html' }
-		],
+		relatedTools: ['{ category: encode', 'slug: unicode }', '{ category: escape', 'slug: html }'],
 		faqs: [
 			{
 				question: 'What is the difference between Named and Hex HTML entities?',
-				answer: 'Named entities use recognizable English phrases (like &amp;amp; for ampersand), while Hex entities reference the raw unicode hex points (like &amp;#x26;).'
+				answer:
+					'Named entities use recognizable English phrases (like &amp;amp; for ampersand), while Hex entities reference the raw unicode hex points (like &amp;#x26;).'
 			}
 		],
 		useCases: [
@@ -132,10 +138,12 @@ export const encodeTools: ToolDefinition[] = [
 		slug: 'unicode',
 		displayName: 'Unicode Analyzer & Converter',
 		tagline: 'Detailed Unicode component breakdown.',
-		description: 'Instantly identify internal characters in given strings by decoding them to Unicode Hex strings, Javascript Escapes, CSS Escapes, and raw UTF-8 Bytes.',
+		description:
+			'Instantly identify internal characters in given strings by decoding them to Unicode Hex strings, Javascript Escapes, CSS Escapes, and raw UTF-8 Bytes.',
 		primaryKeyword: 'unicode analyzer',
 		metaTitle: 'Unicode Analyzer | Hex, CSS, JS, UTF-8 Bytes | fmtly',
-		metaDescription: 'Inspect text explicitly capturing Code points alongside their CSS, Javascript, and UTF-8 Byte conversions safely.',
+		metaDescription:
+			'Inspect text explicitly capturing Code points alongside their CSS, Javascript, and UTF-8 Byte conversions safely.',
 		engine: 'encoder',
 		operation: 'unicode',
 		layoutVariant: 'single-panel',
@@ -143,12 +151,16 @@ export const encodeTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'encode', slug: 'html-entities' }
+			'{ category: encode',
+			'slug: html-entities }',
+			'json/formatter',
+			'text/word-counter'
 		],
 		faqs: [
 			{
 				question: 'Can this inspect Emoji mappings?',
-				answer: 'Yes, passing an emoji will instantly deconstruct it rendering its equivalent Hex and utf-8 bytes securely.'
+				answer:
+					'Yes, passing an emoji will instantly deconstruct it rendering its equivalent Hex and utf-8 bytes securely.'
 			}
 		],
 		useCases: [

@@ -20,9 +20,12 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'html',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'escape', slug: 'javascript' },
-			{ category: 'escape', slug: 'json' },
-			{ category: 'encode', slug: 'url' }
+			'{ category: escape',
+			'slug: javascript }',
+			'{ category: escape',
+			'slug: json }',
+			'{ category: encode',
+			'slug: url }'
 		],
 		faqs: [
 			{
@@ -64,9 +67,12 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'javascript',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'escape', slug: 'json' },
-			{ category: 'escape', slug: 'html' },
-			{ category: 'encode', slug: 'base64' }
+			'{ category: escape',
+			'slug: json }',
+			'{ category: escape',
+			'slug: html }',
+			'{ category: encode',
+			'slug: base64 }'
 		],
 		faqs: [
 			{
@@ -108,9 +114,12 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'escape', slug: 'javascript' },
-			{ category: 'escape', slug: 'html' },
-			{ category: 'json', slug: 'formatter' }
+			'{ category: escape',
+			'slug: javascript }',
+			'{ category: escape',
+			'slug: html }',
+			'{ category: json',
+			'slug: formatter }'
 		],
 		faqs: [
 			{
@@ -139,24 +148,24 @@ export const escapeTools: ToolDefinition[] = [
 		slug: 'xml',
 		displayName: 'XML Escape / Unescape',
 		tagline: 'Safely escape characters for XML structures.',
-		description: 'Converts reserved characters to XML entities and unescapes valid XML text back to plain text. Helps maintain valid document structures.',
+		description:
+			'Converts reserved characters to XML entities and unescapes valid XML text back to plain text. Helps maintain valid document structures.',
 		primaryKeyword: 'xml escape',
 		metaTitle: 'XML Scrubber | Escape, Unescape characters | fmtly',
-		metaDescription: 'Escape reserved characters & < > " \' into raw XML-friendly equivalents directly in the browser.',
+		metaDescription:
+			'Escape reserved characters & < > " \' into raw XML-friendly equivalents directly in the browser.',
 		engine: 'escaper',
 		operation: 'xml',
 		layoutVariant: 'bidirectional',
 		inputLanguage: 'xml',
 		outputLanguage: 'xml',
 		hasTreeView: false,
-		relatedTools: [
-			{ category: 'escape', slug: 'html' },
-			{ category: 'escape', slug: 'json' }
-		],
+		relatedTools: ['{ category: escape', 'slug: html }', '{ category: escape', 'slug: json }'],
 		faqs: [
 			{
 				question: 'How is XML escaping different from HTML?',
-				answer: 'XML has a stricter set of default entities (only 5 built-in: lt, gt, amp, apos, quot). It avoids named entities common in standard HTML forms.'
+				answer:
+					'XML has a stricter set of default entities (only 5 built-in: lt, gt, amp, apos, quot). It avoids named entities common in standard HTML forms.'
 			}
 		],
 		useCases: [
@@ -171,31 +180,31 @@ export const escapeTools: ToolDefinition[] = [
 		slug: 'sql',
 		displayName: 'SQL String Escape',
 		tagline: 'Prevent SQL injection via literal escaping.',
-		description: 'Select your database dialect (MySQL, Postgres, SQLite) to escape single quotes, backslashes, and more. A context-dependent tool outputting safe database strings.',
+		description:
+			'Select your database dialect (MySQL, Postgres, SQLite) to escape single quotes, backslashes, and more. A context-dependent tool outputting safe database strings.',
 		primaryKeyword: 'sql escape',
 		metaTitle: 'SQL Injection Preventer | MySQL, Postgres | fmtly',
-		metaDescription: 'Secure your literal string interpolations via specific MySQL, standard PostgreSQL, or SQLite trailing escapes mitigating manual query building risks.',
+		metaDescription:
+			'Secure your literal string interpolations via specific MySQL, standard PostgreSQL, or SQLite trailing escapes mitigating manual query building risks.',
 		engine: 'escaper',
 		operation: 'sql',
 		layoutVariant: 'bidirectional', // using bidirectional mainly just to keep left-to-right flow though only 'encode' direction is really used.
 		inputLanguage: 'sql',
 		outputLanguage: 'sql',
 		hasTreeView: false,
-		relatedTools: [
-			{ category: 'escape', slug: 'csv' },
-			{ category: 'escape', slug: 'shell' }
-		],
+		relatedTools: ['{ category: escape', 'slug: csv }', '{ category: escape', 'slug: shell }'],
 		faqs: [
 			{
 				question: 'Can this unescape my database dumps?',
-				answer: 'SQL unescaping is highly context-dependent on how the original driver serialized it. We only support one-way escaping generation to secure raw strings.'
+				answer:
+					'SQL unescaping is highly context-dependent on how the original driver serialized it. We only support one-way escaping generation to secure raw strings.'
 			}
 		],
 		useCases: [
 			'Generating safe literals to copy/paste into manual repair scripts',
-			'Testing the correct representation of names like O\'Brian inserted natively'
+			"Testing the correct representation of names like O'Brian inserted natively"
 		],
-		sampleInput: 'SELECT * FROM users WHERE name = \'O\'Connor\''
+		sampleInput: "SELECT * FROM users WHERE name = 'O'Connor'"
 	},
 	{
 		id: 'escape-csv',
@@ -203,23 +212,24 @@ export const escapeTools: ToolDefinition[] = [
 		slug: 'csv',
 		displayName: 'CSV Escape / Unescape',
 		tagline: 'Format strings strictly for comma-separated sheets.',
-		description: 'Double inline quotes and correctly wrap commas or trailing line breaks so tabular output behaves as a single distinct row column uniformly.',
+		description:
+			'Double inline quotes and correctly wrap commas or trailing line breaks so tabular output behaves as a single distinct row column uniformly.',
 		primaryKeyword: 'csv string escaper',
 		metaTitle: 'CSV String Wrapping | Escape Quotes | fmtly',
-		metaDescription: 'Safeguard your dataset exports properly escaping inline commas, double quotes, and line terminators into universal CSV compatibility format.',
+		metaDescription:
+			'Safeguard your dataset exports properly escaping inline commas, double quotes, and line terminators into universal CSV compatibility format.',
 		engine: 'escaper',
 		operation: 'csv',
 		layoutVariant: 'bidirectional',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: [
-			{ category: 'csv', slug: 'formatter' }
-		],
+		relatedTools: ['{ category: csv', 'slug: formatter }', 'json/formatter', 'text/word-counter'],
 		faqs: [
 			{
 				question: 'What triggers a CSV wrap?',
-				answer: 'Any string containing a comma, a newline character, or a double quote defaults to triggering full wrapper quotes per standard CSV spec RFC 4180.'
+				answer:
+					'Any string containing a comma, a newline character, or a double quote defaults to triggering full wrapper quotes per standard CSV spec RFC 4180.'
 			}
 		],
 		useCases: [
@@ -234,10 +244,12 @@ export const escapeTools: ToolDefinition[] = [
 		slug: 'shell',
 		displayName: 'Shell Escape / Unescape',
 		tagline: 'Safely map variables for bash command execution.',
-		description: 'Ensure CLI injections remain as distinct static arguments. Follows simple bash quoting rules securing scripts and remote execution flags securely.',
+		description:
+			'Ensure CLI injections remain as distinct static arguments. Follows simple bash quoting rules securing scripts and remote execution flags securely.',
 		primaryKeyword: 'bash shell escape',
 		metaTitle: 'Bash & Shell Escaper | Secure CLI Args | fmtly',
-		metaDescription: 'Quote your shell parameters to stop accidental bash evaluation, injection vulnerabilities, and trailing pipe executions immediately.',
+		metaDescription:
+			'Quote your shell parameters to stop accidental bash evaluation, injection vulnerabilities, and trailing pipe executions immediately.',
 		engine: 'escaper',
 		operation: 'shell',
 		layoutVariant: 'bidirectional',
@@ -245,12 +257,16 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'bash',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'escape', slug: 'javascript' }
+			'{ category: escape',
+			'slug: javascript }',
+			'json/formatter',
+			'text/word-counter'
 		],
 		faqs: [
 			{
 				question: 'How do you secure it?',
-				answer: 'Following the most portable POSIX standard, the tool wraps the string natively in single quotes and safely resolves internal conflict singles.'
+				answer:
+					'Following the most portable POSIX standard, the tool wraps the string natively in single quotes and safely resolves internal conflict singles.'
 			}
 		],
 		useCases: [

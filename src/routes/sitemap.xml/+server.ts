@@ -1,6 +1,7 @@
 import { getAllCategoryMeta } from '$registry/categories.js';
 import { getAllTools } from '$registry/index.js';
 import { getCategories } from '$registry/index.js';
+import { examples } from '$lib/registry/examples/index.js';
 import type { RequestHandler } from './$types.js';
 
 const BASE_URL = 'https://fmtly.dev';
@@ -44,6 +45,22 @@ export const GET: RequestHandler = () => {
 		<loc>${escapeXml(`${BASE_URL}/${tool.category}/${tool.slug}`)}</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
+	</url>`);
+	}
+
+	urls.push(`
+	<url>
+		<loc>${escapeXml(`${BASE_URL}/examples`)}</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>`);
+
+	for (const example of examples) {
+		urls.push(`
+	<url>
+		<loc>${escapeXml(`${BASE_URL}/examples/${example.slug}`)}</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
 	</url>`);
 	}
 
