@@ -10,9 +10,11 @@ import { input } from './input.store';
 import { output } from './output.store';
 import { addToast } from './toast.store';
 
+import { browser } from '$app/environment';
+
 // Options state
 export const numberOptions = writable({
-	locale: navigator.language || 'en-US',
+	locale: browser ? navigator.language : 'en-US',
 	decimals: 2,
 	useGrouping: true
 });
