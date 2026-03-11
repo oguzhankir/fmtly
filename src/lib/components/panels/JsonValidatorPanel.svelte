@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 	import MonacoEditor from '$components/editor/MonacoEditor.svelte';
 	import { validateJSON } from '$engines/json/index.js';
+	import { validateJsonSchema } from '$engines/json/schemaValidator.js';
+	import type { SchemaValidationResult } from '$engines/json/schemaValidator.js';
 	import { format, jsonError, repair } from '$stores/json.store';
 	import { initInput, input } from '$stores/input.store';
 	import type { ToolDefinition } from '$registry/types.js';
@@ -19,9 +21,68 @@
 	let editorRef: MonacoEditor | undefined = $state(undefined);
 	let result = $derived(validateJSON($input));
 	let initializedToolSlug = $state('');
-	let errorCountLabel = $derived(
-		result.errors.length > 0 ? `${result.errors.length} issue${result.errors.length === 1 ? '' : 's'}` : ''
+	let validationMode = $state<'syntax' | 'schema'>('syntax');
+	let schemaInput = $state(
+		'{\n  "type": "object",\n  "required": ["id"],\n  "properties": {\n    "id": { "type": "number" }\n  }\n}'
 	);
+	let schemaValidationResult = $state<SchemaValidationResult | null>(null);
+	let schemaValidationToken = 0;
+	let schemaErrorMessage = $derived.by(() => {
+		if (!schemaValidationResult || schemaValidationResult.success) return '';
+		if (schemaValidationResult.dataError) {
+			return schemaValidationResult.dataError.plainLanguageExplanation;
+		}
+		if (schemaValidationResult.schemaError instanceof Error) {
+			return schemaValidationResult.schemaError.message;
+		}
+		if (!schemaValidationResult.schemaError) return '';
+		return schemaValidationResult.schemaError.plainLanguageExplanation;
+	});
+	let activeIssues = $derived.by(() => {
+		if (validationMode === 'schema') {
+			if (!schemaValidationResult || !schemaValidationResult.success) return [];
+			return schemaValidationResult.issues.map((issue) => ({
+				line: issue.line,
+				column: issue.column,
+				message: issue.message,
+				code: issue.keyword,
+				plainLanguageExplanation: `${issue.instancePath} must satisfy ${issue.keyword}`,
+				path: issue.instancePath || '/'
+			}));
+		}
+		return result.errors.map((issue) => ({
+			...issue,
+			path: '/'
+		}));
+	});
+	let isValidationSuccessful = $derived.by(() => {
+		if (validationMode === 'schema') {
+			return schemaValidationResult?.success === true && schemaValidationResult.valid;
+		}
+		return result.valid;
+	});
+	let errorCountLabel = $derived(
+		activeIssues.length > 0 ? `${activeIssues.length} issue${activeIssues.length === 1 ? '' : 's'}` : ''
+	);
+	let validationSummary = $derived.by(() => {
+		if (validationMode === 'schema') {
+			if (!$input.trim()) return 'Paste JSON to validate';
+			if (!schemaInput.trim()) return 'Paste a JSON Schema to validate against';
+			if (!schemaValidationResult) return 'Validating schema…';
+			if (!schemaValidationResult.success) {
+				if (schemaValidationResult.dataError) {
+					return `Data error at line ${schemaValidationResult.dataError.line}, column ${schemaValidationResult.dataError.column}`;
+				}
+				return 'Schema is invalid';
+			}
+			if (schemaValidationResult.valid) return 'JSON matches schema';
+			const firstIssue = schemaValidationResult.issues[0];
+			return firstIssue
+				? `Schema error at line ${firstIssue.line}, column ${firstIssue.column}`
+				: 'Schema validation failed';
+		}
+		return result.summary;
+	});
 
 	onMount(() => {
 		initInput(toolSlug);
@@ -35,12 +96,30 @@
 	});
 
 	$effect(() => {
-		const errors = result.errors.map((entry) => ({
+		const errors = activeIssues.map((entry) => ({
 			line: entry.line,
 			column: entry.column,
 			message: entry.message
 		}));
 		editorRef?.setErrorMarkers(errors);
+	});
+
+	$effect(() => {
+		if (validationMode !== 'schema') {
+			schemaValidationResult = null;
+			return;
+		}
+
+		if (!$input.trim() || !schemaInput.trim()) {
+			schemaValidationResult = null;
+			return;
+		}
+
+		const nextToken = ++schemaValidationToken;
+		void validateJsonSchema($input, schemaInput).then((nextResult) => {
+			if (nextToken !== schemaValidationToken) return;
+			schemaValidationResult = nextResult;
+		});
 	});
 
 	async function handleRepair(): Promise<void> {
@@ -56,7 +135,7 @@
 	}
 
 	function focusFirstIssue(): void {
-		const firstIssue = result.errors[0];
+		const firstIssue = activeIssues[0];
 		if (!firstIssue) return;
 		focusIssue(firstIssue.line);
 	}
@@ -73,6 +152,10 @@
 				return 'Minify';
 			case 'to-yaml':
 				return '→ YAML';
+			case 'to-csv':
+				return '→ CSV';
+			case 'to-xml':
+				return '→ XML';
 			case 'to-toml':
 				return '→ TOML';
 			case 'to-markdown':
@@ -115,21 +198,43 @@
 	{/if}
 
 	<div class="validator-header">
+		<div class="validator-modes" role="tablist" aria-label="Validator mode">
+			<button
+				type="button"
+				role="tab"
+				class="validator-mode-btn"
+				class:validator-mode-btn--active={validationMode === 'syntax'}
+				aria-selected={validationMode === 'syntax'}
+				onclick={() => (validationMode = 'syntax')}
+			>
+				Syntax
+			</button>
+			<button
+				type="button"
+				role="tab"
+				class="validator-mode-btn"
+				class:validator-mode-btn--active={validationMode === 'schema'}
+				aria-selected={validationMode === 'schema'}
+				onclick={() => (validationMode = 'schema')}
+			>
+				Schema
+			</button>
+		</div>
 		<div
 			class="validator-status"
-			class:validator-status--invalid={!result.valid}
-			class:validator-status--valid={result.valid}
+			class:validator-status--invalid={!isValidationSuccessful}
+			class:validator-status--valid={isValidationSuccessful}
 		>
-			{#if result.valid}
+			{#if isValidationSuccessful}
 				<CheckCircle2 size={16} />
-				<span>Valid JSON</span>
+				<span>{validationMode === 'schema' ? 'Schema match' : 'Valid JSON'}</span>
 			{:else}
 				<AlertTriangle size={16} />
-				<span>{result.summary}</span>
+				<span>{validationSummary}</span>
 			{/if}
 		</div>
 		<div class="validator-actions">
-			{#if result.errors.length > 0}
+			{#if activeIssues.length > 0}
 				<button type="button" class="validator-btn" onclick={focusFirstIssue}>
 					<AlertTriangle size={13} />
 					First issue
@@ -150,13 +255,28 @@
 		<MonacoEditor bind:this={editorRef} language="json" wordWrap={true} />
 	</div>
 
-	{#if !result.valid}
+	{#if validationMode === 'schema'}
+		<div class="validator-schema">
+			<div class="validator-schema__header">
+				<strong>JSON Schema</strong>
+				<span>Draft-07+ via AJV</span>
+			</div>
+			<textarea
+				bind:value={schemaInput}
+				class="validator-schema__input"
+				placeholder="Paste JSON Schema here…"
+				spellcheck="false"
+			></textarea>
+		</div>
+	{/if}
+
+	{#if !isValidationSuccessful}
 		<div class="validator-errors">
-			{#if result.errors.length > 0}
+			{#if activeIssues.length > 0}
 				<div class="validator-errors__summary">{errorCountLabel}</div>
 			{/if}
-			{#if result.errors.length > 0}
-				{#each result.errors as issue}
+			{#if activeIssues.length > 0}
+				{#each activeIssues as issue}
 					<button
 						type="button"
 						class="validator-error-item"
@@ -168,8 +288,13 @@
 						</div>
 						<p>{issue.message}</p>
 						<p class="validator-error-item__explanation">{issue.plainLanguageExplanation}</p>
+						{#if validationMode === 'schema'}
+							<p class="validator-error-item__path">{issue.path}</p>
+						{/if}
 					</button>
 				{/each}
+			{:else if validationMode === 'schema' && schemaErrorMessage}
+				<div class="validator-empty">{schemaErrorMessage}</div>
 			{:else if $jsonError}
 				<div class="validator-empty">{$jsonError.plainLanguageExplanation}</div>
 			{/if}
@@ -177,7 +302,7 @@
 	{:else}
 		<div class="validator-success">
 			<CheckCircle2 size={15} />
-			<span>No syntax errors found.</span>
+			<span>{validationMode === 'schema' ? 'JSON matches the current schema.' : 'No syntax errors found.'}</span>
 		</div>
 	{/if}
 </div>
@@ -239,6 +364,34 @@
 		background: var(--bg-surface);
 	}
 
+	.validator-modes {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 4px;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-elevated);
+	}
+
+	.validator-mode-btn {
+		height: 28px;
+		padding: 0 var(--space-3);
+		border: none;
+		border-radius: var(--radius-sm);
+		background: transparent;
+		color: var(--text-muted);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.validator-mode-btn--active {
+		background: var(--accent);
+		color: var(--text-on-accent);
+	}
+
 	.validator-status {
 		display: inline-flex;
 		align-items: center;
@@ -294,6 +447,43 @@
 		min-height: 0;
 	}
 
+	.validator-schema {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		padding: var(--space-3);
+		border-top: 1px solid var(--border-subtle);
+		background: var(--bg-base);
+	}
+
+	.validator-schema__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-2);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		color: var(--text-muted);
+	}
+
+	.validator-schema__header strong {
+		color: var(--text-primary);
+	}
+
+	.validator-schema__input {
+		min-height: 140px;
+		width: 100%;
+		resize: vertical;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-surface);
+		color: var(--text-primary);
+		padding: var(--space-3);
+		font-family: var(--font-mono);
+		font-size: 12px;
+		line-height: 1.6;
+	}
+
 	.validator-errors {
 		display: flex;
 		flex-direction: column;
@@ -337,8 +527,12 @@
 	.validator-error-item__head span {
 		color: var(--status-error);
 		text-transform: uppercase;
+	}
+
+	.validator-error-item__path {
+		font-family: var(--font-mono);
 		font-size: 11px;
-		font-weight: 700;
+		color: var(--text-muted);
 	}
 
 	.validator-error-item p {

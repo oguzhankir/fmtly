@@ -1,11 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { initInput, input } from '$stores/input.store';
+	import { validateJSON } from '$engines/json/index.js';
+	import type { ToolDefinition } from '$registry/types.js';
+	import { jsonStats } from '$stores/json.store';
+	import { formatByteSize, initInput, input, inputByteSize } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { jsonSamples } from '$lib/utils/jsonSamples.js';
-	import type { ToolDefinition } from '$registry/types.js';
-	import { Upload, Eraser, Link2, ClipboardPaste } from 'lucide-svelte';
+	import {
+		Upload,
+		Eraser,
+		Link2,
+		ClipboardPaste,
+		Circle,
+		ChevronDown,
+		X
+	} from 'lucide-svelte';
 
 	let {
 		toolSlug,
@@ -27,10 +37,21 @@
 	let selectedSample = $state('');
 	let clipboardJson = $state('');
 	let initializedToolSlug = $state('');
-	let encodingInfo = $derived.by(() => {
-		const chars = $input.length;
+	let showLoadUrl = $state(false);
+	let loadUrlValue = $state('');
+	let loadedFilename = $state('');
+	let validationResult = $derived(validateJSON($input));
+	let statusInfo = $derived.by(() => {
 		const lines = $input.length === 0 ? 0 : $input.split('\n').length;
-		return `UTF-8 · ${chars.toLocaleString()} chars · ${lines.toLocaleString()} lines`;
+		const depth = $jsonStats?.maxDepth ?? 0;
+		return `UTF-8 · ${formatByteSize($inputByteSize)} · ${lines.toLocaleString()} lines · depth: ${depth}`;
+	});
+	let validityLabel = $derived.by(() => {
+		if (!$input.trim()) return 'Empty';
+		if (validationResult.valid) return 'Valid JSON';
+		const firstError = validationResult.errors[0];
+		if (!firstError) return 'Invalid JSON';
+		return `Line ${firstError.line}, Col ${firstError.column}: ${firstError.message}`;
 	});
 	let sampleOptions = $derived.by(() =>
 		jsonSamples.map((sample) =>
@@ -59,6 +80,7 @@
 
 	function handleFileContent(content: string, label: string): void {
 		input.set(content);
+		loadedFilename = label;
 		addToast('success', `File loaded: ${label}`);
 	}
 
@@ -126,6 +148,7 @@
 		selectedSample = value;
 		if (sample.value) {
 			input.set(sample.value);
+			loadedFilename = sample.label;
 			addToast('success', `Loaded ${sample.label}`);
 		}
 	}
@@ -136,11 +159,12 @@
 		}
 		input.set('');
 		clipboardJson = '';
+		loadedFilename = '';
 		addToast('info', 'Input cleared');
 	}
 
 	async function loadUrl(): Promise<void> {
-		const url = window.prompt('Load JSON from URL');
+		const url = loadUrlValue.trim();
 		if (!url) return;
 
 		try {
@@ -151,6 +175,9 @@
 			const text = await response.text();
 			JSON.parse(text);
 			input.set(text);
+			loadedFilename = new URL(url).hostname;
+			showLoadUrl = false;
+			loadUrlValue = '';
 			addToast('success', 'Loaded JSON from URL');
 		} catch {
 			addToast('error', 'Could not fetch — try pasting directly');
@@ -183,6 +210,7 @@
 	function pasteClipboardJson(): void {
 		if (!clipboardJson) return;
 		input.set(clipboardJson);
+		loadedFilename = 'Clipboard JSON';
 		clipboardJson = '';
 		addToast('success', 'Pasted JSON from clipboard');
 	}
@@ -199,6 +227,10 @@
 				return 'Minify';
 			case 'to-yaml':
 				return '→ YAML';
+			case 'to-csv':
+				return '→ CSV';
+			case 'to-xml':
+				return '→ XML';
 			case 'to-toml':
 				return '→ TOML';
 			case 'to-markdown':
@@ -257,13 +289,39 @@
 				class="sr-only"
 				onchange={handleUpload}
 			/>
-			<button type="button" class="json-input-btn" onclick={loadUrl}>
-				<Link2 size={13} />
-				Load URL
-			</button>
+			<div class="json-input-popover-wrap">
+				<button type="button" class="json-input-btn" onclick={() => (showLoadUrl = !showLoadUrl)}>
+					<Link2 size={13} />
+					Load URL
+				</button>
+				{#if showLoadUrl}
+					<div class="json-input-popover">
+						<input
+							bind:value={loadUrlValue}
+							type="url"
+							class="json-input-popover__field"
+							placeholder="https://example.com/data.json"
+						/>
+						<div class="json-input-popover__actions">
+							<button type="button" class="json-input-btn" onclick={() => (showLoadUrl = false)}>
+								<X size={13} />
+								Close
+							</button>
+							<button type="button" class="json-input-btn" onclick={loadUrl}>
+								<Link2 size={13} />
+								Fetch
+							</button>
+						</div>
+					</div>
+				{/if}
+			</div>
 			<label class="json-input-select">
 				<span>Sample</span>
-				<select bind:value={selectedSample} onchange={(event) => loadSample((event.currentTarget as HTMLSelectElement).value)}>
+				<ChevronDown size={12} />
+				<select
+					bind:value={selectedSample}
+					onchange={(event) => loadSample((event.currentTarget as HTMLSelectElement).value)}
+				>
 					<option value="">Choose…</option>
 					{#each sampleOptions as sample}
 						<option value={sample.id}>{sample.label}</option>
@@ -296,7 +354,7 @@
 
 	<div class="relative flex-1 overflow-hidden">
 		{#if MonacoEditor}
-			<MonacoEditor language={inputLanguage} wordWrap={true} />
+			<MonacoEditor language={inputLanguage} wordWrap={false} />
 		{:else}
 			<div class="json-input-loading">
 				Loading editor…
@@ -305,14 +363,31 @@
 	</div>
 
 	<div class="json-input-meta">
-		<span>{encodingInfo}</span>
-		<span class="json-input-meta__hint"><Upload size={12} /> Drop `.json` files</span>
+		<div class="json-input-meta__section json-input-meta__section--left">
+			<span
+				class="json-input-meta__validity"
+				class:json-input-meta__validity--valid={validationResult.valid && $input.trim().length > 0}
+				class:json-input-meta__validity--invalid={!validationResult.valid && $input.trim().length > 0}
+			>
+				<Circle size={8} fill="currentColor" />
+				{validityLabel}
+			</span>
+		</div>
+		<div class="json-input-meta__section json-input-meta__section--center">
+			<span>{statusInfo}</span>
+			{#if loadedFilename}
+				<span class="json-input-meta__file">{loadedFilename}</span>
+			{/if}
+		</div>
+		<div class="json-input-meta__section json-input-meta__section--right">
+			<span class="json-input-meta__hint"><Upload size={12} /> Drop .json files</span>
+		</div>
 	</div>
 
 	{#if isDragOver}
 		<div class="json-input-drop">
 			<div class="json-input-drop__card">
-				<p>Drop your JSON file here</p>
+				<p>Drop to load</p>
 			</div>
 		</div>
 	{/if}
@@ -373,6 +448,44 @@
 		align-items: center;
 		gap: var(--space-2);
 		flex-wrap: wrap;
+	}
+
+	.json-input-popover-wrap {
+		position: relative;
+	}
+
+	.json-input-popover {
+		position: absolute;
+		top: calc(100% + 6px);
+		left: 0;
+		z-index: var(--z-dropdown);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		width: min(320px, 80vw);
+		padding: var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-lg);
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow-md);
+	}
+
+	.json-input-popover__field {
+		height: 32px;
+		padding: 0 var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-base);
+		color: var(--text-primary);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		outline: none;
+	}
+
+	.json-input-popover__actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: var(--space-2);
 	}
 
 	.json-input-btn,
@@ -442,6 +555,41 @@
 		color: var(--text-muted);
 	}
 
+	.json-input-meta__section {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		min-width: 0;
+	}
+
+	.json-input-meta__section--center {
+		flex: 1;
+		justify-content: center;
+	}
+
+	.json-input-meta__section--right {
+		justify-content: flex-end;
+	}
+
+	.json-input-meta__validity {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--text-muted);
+	}
+
+	.json-input-meta__validity--valid {
+		color: var(--success);
+	}
+
+	.json-input-meta__validity--invalid {
+		color: var(--error);
+	}
+
+	.json-input-meta__file {
+		color: var(--text-secondary);
+	}
+
 	.json-input-meta__hint {
 		display: inline-flex;
 		align-items: center;
@@ -461,7 +609,7 @@
 
 	.json-input-drop__card {
 		padding: var(--space-6) var(--space-8);
-		border: 2px dashed var(--accent-border);
+		border: 2px dashed var(--accent);
 		border-radius: var(--radius-xl);
 		background: var(--bg-elevated);
 		color: var(--text-primary);
@@ -482,6 +630,13 @@
 			height: auto;
 			padding-top: 6px;
 			padding-bottom: 6px;
+		}
+
+		.json-input-meta__section,
+		.json-input-meta__section--center,
+		.json-input-meta__section--right {
+			flex: none;
+			justify-content: flex-start;
 		}
 	}
 </style>

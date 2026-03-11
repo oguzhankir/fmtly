@@ -20,10 +20,10 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: true,
 		relatedTools: [
-			{ category: 'json', slug: 'viewer' },
 			{ category: 'json', slug: 'validator' },
 			{ category: 'json', slug: 'minifier' },
-			{ category: 'json', slug: 'to-yaml' }
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'json', slug: 'jsonpath' }
 		],
 		faqs: [
 			{
@@ -67,79 +67,6 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
-		id: 'json-viewer',
-		category: 'json',
-		slug: 'viewer',
-		displayName: 'JSON Viewer',
-		tagline: 'Explore JSON data as an interactive, collapsible tree',
-		description:
-			'Tree-focused view of JSON data with expand/collapse controls, depth filtering, in-tree search, and path copy on node click. Ideal for exploring large or deeply nested structures.',
-		primaryKeyword: 'json viewer',
-		metaTitle: 'JSON Viewer — Interactive Tree Explorer — fmtly.dev',
-		metaDescription:
-			'View JSON as an interactive collapsible tree. Click any node to copy its path. Search, filter by depth, and explore nested data — all in your browser.',
-		engine: 'json',
-		operation: 'view',
-		layoutVariant: 'split',
-		inputLanguage: 'json',
-		outputLanguage: 'json',
-		hasTreeView: true,
-		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'json', slug: 'validator' },
-			{ category: 'json', slug: 'minifier' },
-			{ category: 'diff', slug: 'json' }
-		],
-		faqs: [
-			{
-				question: 'How do I copy the path to a specific JSON node?',
-				answer:
-					'Click on any node in the tree view. The full JSONPath to that node is copied to your clipboard automatically.'
-			},
-			{
-				question: 'Can I view very large JSON files?',
-				answer:
-					'Yes. The tree view uses virtualized rendering and can handle files with tens of thousands of nodes without performance issues.'
-			},
-			{
-				question: 'What does the depth filter do?',
-				answer:
-					'The depth filter expands or collapses the tree to a specific depth level. Press Ctrl+1 through Ctrl+5 to expand to depth 1–5, or Ctrl+] to expand all.'
-			}
-		],
-		useCases: [
-			'Explore deeply nested API responses without scrolling through raw text',
-			'Find specific keys in large JSON payloads by searching the tree',
-			'Copy the exact path to a nested field for use in code',
-			'Quickly understand the structure of an unfamiliar JSON document',
-			'Share a tree view of configuration data with teammates'
-		],
-		sampleInput: `{
-  "users": [
-    {
-      "id": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "roles": ["admin", "editor"],
-      "settings": {
-        "theme": "dark",
-        "notifications": true
-      }
-    },
-    {
-      "id": 2,
-      "name": "Bob",
-      "email": "bob@example.com",
-      "roles": ["viewer"],
-      "settings": {
-        "theme": "light",
-        "notifications": false
-      }
-    }
-  ]
-}`
-	},
-	{
 		id: 'json-validator',
 		category: 'json',
 		slug: 'validator',
@@ -159,9 +86,9 @@ export const jsonTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'json', slug: 'viewer' },
 			{ category: 'json', slug: 'minifier' },
-			{ category: 'json', slug: 'to-yaml' }
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'json', slug: 'jsonpath' }
 		],
 		faqs: [
 			{
@@ -221,7 +148,7 @@ export const jsonTools: ToolDefinition[] = [
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
 			{ category: 'json', slug: 'validator' },
-			{ category: 'json', slug: 'viewer' },
+			{ category: 'json', slug: 'to-yaml' },
 			{ category: 'json', slug: 'to-csv' }
 		],
 		faqs: [
@@ -325,11 +252,13 @@ export const jsonTools: ToolDefinition[] = [
 		category: 'json',
 		slug: 'to-toml',
 		displayName: 'JSON to TOML',
-		tagline: 'Convert JSON to TOML format',
-		description: 'Convert JSON configuration to TOML format cleanly.',
-		primaryKeyword: 'json to toml',
-		metaTitle: 'JSON to TOML Converter',
-		metaDescription: 'Convert JSON to TOML instantly.',
+		tagline: 'Convert JSON to TOML configuration format',
+		description:
+			'Convert JSON objects to TOML format instantly. Useful for generating Rust, Python, and Hugo configuration files from JSON data. All processing happens in your browser.',
+		primaryKeyword: 'json to toml converter',
+		metaTitle: 'JSON to TOML Converter — fmtly.dev',
+		metaDescription:
+			'Convert JSON to TOML configuration format instantly in your browser. No upload required — ideal for Rust, Python, and Hugo config files.',
 		engine: 'json',
 		operation: 'toToml',
 		layoutVariant: 'split',
@@ -338,24 +267,50 @@ export const jsonTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'yaml', slug: 'formatter' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: '{\n  "title": "TOML Example"\n}'
+		faqs: [
+			{
+				question: 'Is the conversion lossless?',
+				answer:
+					'Most JSON types convert cleanly. JSON nulls become empty TOML values where supported. Arrays and nested objects map to TOML arrays and tables respectively.'
+			},
+			{
+				question: 'Which tools use TOML?',
+				answer:
+					'TOML is widely used in Rust (Cargo.toml), Python projects (pyproject.toml), Hugo static sites, and various developer toolchains as a human-readable config format.'
+			}
+		],
+		useCases: [
+			'Generate Cargo.toml or pyproject.toml from JSON configuration',
+			'Convert JSON API settings to TOML for Hugo or other static site generators',
+			'Migrate JSON configs to TOML-based toolchains'
+		],
+		sampleInput: `{
+  "package": {
+    "name": "my-app",
+    "version": "1.0.0",
+    "edition": "2021"
+  },
+  "dependencies": {
+    "serde": "1.0",
+    "tokio": "1.0"
+  }
+}`
 	},
 	{
 		id: 'json-to-markdown',
 		category: 'json',
 		slug: 'to-markdown',
 		displayName: 'JSON to Markdown',
-		tagline: 'Convert JSON array to Markdown table',
-		description: 'Convert JSON arrays or objects into a formatted Markdown table.',
-		primaryKeyword: 'json to markdown',
-		metaTitle: 'JSON to Markdown Table Converter',
-		metaDescription: 'Convert JSON arrays to Markdown tables instantly.',
+		tagline: 'Convert a JSON array into a Markdown table',
+		description:
+			'Turn any JSON array of objects into a formatted Markdown table with aligned columns. Each object key becomes a column header. Paste the output directly into GitHub READMEs, Notion, or any Markdown editor.',
+		primaryKeyword: 'json to markdown table',
+		metaTitle: 'JSON to Markdown Table Converter — fmtly.dev',
+		metaDescription:
+			'Convert a JSON array to a Markdown table instantly. Each key becomes a column — paste the result into GitHub READMEs or Notion. No server, fully private.',
 		engine: 'json',
 		operation: 'toMarkdownTable',
 		layoutVariant: 'split',
@@ -364,24 +319,45 @@ export const jsonTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'text', slug: 'markdown-to-html' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: '[{\n  "name": "fmtly",\n  "type": "tool"\n}]'
+		faqs: [
+			{
+				question: 'What JSON structure does this expect?',
+				answer:
+					'The input must be a JSON array of objects where each object has the same keys. The keys become column headers and each object becomes a row in the Markdown table.'
+			},
+			{
+				question: 'Can I use this for GitHub README tables?',
+				answer:
+					'Yes. The output follows the standard GitHub Flavored Markdown (GFM) table syntax and renders correctly on GitHub, GitLab, Notion, and most Markdown editors.'
+			}
+		],
+		useCases: [
+			'Generate GitHub README comparison tables from JSON data',
+			'Create Markdown documentation tables from API list responses',
+			'Convert JSON datasets to human-readable Markdown for reports',
+			'Turn configuration arrays into formatted tables for wikis'
+		],
+		sampleInput: `[
+  { "name": "Alice", "role": "Admin", "status": "Active" },
+  { "name": "Bob",   "role": "Editor", "status": "Inactive" },
+  { "name": "Carol", "role": "Viewer", "status": "Active" }
+]`
 	},
 	{
 		id: 'json-jsonpath',
 		category: 'json',
 		slug: 'jsonpath',
 		displayName: 'JSONPath Query',
-		tagline: 'Query JSON using JSONPath',
-		description: 'Evaluate JSONPath queries against your JSON data.',
-		primaryKeyword: 'jsonpath tester',
-		metaTitle: 'JSONPath Online Tester & Evaluator',
-		metaDescription: 'Test JSONPath queries online in your browser.',
+		tagline: 'Query and extract data from JSON using JSONPath expressions',
+		description:
+			'Run JSONPath queries against any JSON document and see the results instantly. Supports filters, wildcards, recursive descent, and array slicing. Query history is saved locally for quick re-use.',
+		primaryKeyword: 'jsonpath online tester',
+		metaTitle: 'JSONPath Online Tester & Query Evaluator — fmtly.dev',
+		metaDescription:
+			'Test JSONPath expressions against JSON data in your browser. Supports filters, wildcards, recursive descent. Results shown instantly — no server, fully private.',
 		engine: 'json',
 		operation: 'jsonpathQuery',
 		layoutVariant: 'dual-input',
@@ -389,26 +365,56 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
+			{ category: 'json', slug: 'jmespath' },
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'json', slug: 'validator' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput:
-			'{\n  "store": {\n    "book": [\n      { "title": "Sayings of the Century" }\n    ]\n  }\n}'
+		faqs: [
+			{
+				question: 'What is JSONPath?',
+				answer:
+					'JSONPath is a query language for JSON, similar to XPath for XML. It lets you extract specific values or arrays of values from a JSON document using a path expression like $.store.book[*].title.'
+			},
+			{
+				question: 'What operators does JSONPath support?',
+				answer:
+					'JSONPath supports dot notation ($.a.b), bracket notation ($["a"]["b"]), wildcards ($.*), recursive descent ($..), array slices ($[0:3]), filter expressions ($[?(@.price < 10)]), and union ($[0,1]).'
+			},
+			{
+				question: 'What is the difference between JSONPath and JMESPath?',
+				answer:
+					'Both query JSON data, but with different syntax. JSONPath uses XPath-inspired dot/bracket notation and is common in JavaScript tooling. JMESPath is AWS-originated, uses a pipe-based syntax, and is standard in AWS CLI and Terraform.'
+			}
+		],
+		useCases: [
+			'Extract specific fields from a large API response',
+			'Filter arrays by property values using JSONPath filter expressions',
+			'Test JSONPath expressions before using them in code',
+			'Prototype data extraction logic for JSON processing pipelines'
+		],
+		sampleInput: `{
+  "store": {
+    "book": [
+      { "title": "Sayings of the Century", "price": 8.95, "category": "reference" },
+      { "title": "Sword of Honour", "price": 12.99, "category": "fiction" },
+      { "title": "Moby Dick", "price": 8.99, "category": "fiction" }
+    ],
+    "bicycle": { "color": "red", "price": 19.95 }
+  }
+}`
 	},
 	{
 		id: 'json-jmespath',
 		category: 'json',
 		slug: 'jmespath',
 		displayName: 'JMESPath Query',
-		tagline: 'Query JSON using JMESPath',
-		description: 'Evaluate JMESPath queries against your JSON data.',
-		primaryKeyword: 'jmespath tester',
-		metaTitle: 'JMESPath Online Tester & Evaluator',
-		metaDescription: 'Test JMESPath queries online in your browser.',
+		tagline: 'Query and transform JSON using JMESPath expressions',
+		description:
+			'Evaluate JMESPath expressions against JSON data in real time. JMESPath is the query language used by AWS CLI and Terraform. Supports projections, filters, functions, multi-select, and pipe expressions.',
+		primaryKeyword: 'jmespath online tester',
+		metaTitle: 'JMESPath Online Tester & Query Evaluator — fmtly.dev',
+		metaDescription:
+			'Test JMESPath expressions against JSON data in your browser. Used in AWS CLI, Terraform, and more. Results shown instantly — no server, fully private.',
 		engine: 'json',
 		operation: 'jmespathQuery',
 		layoutVariant: 'dual-input',
@@ -416,13 +422,39 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
+			{ category: 'json', slug: 'jsonpath' },
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'json', slug: 'validator' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: '{\n  "foo": {"bar": "baz"}\n}'
+		faqs: [
+			{
+				question: 'What is JMESPath?',
+				answer:
+					'JMESPath (JSON Matching Expression Paths) is a query language for JSON originally developed for the AWS CLI. It allows you to search, filter, and transform JSON documents. It is also used in Terraform, Ansible, and other DevOps tools.'
+			},
+			{
+				question: 'What can JMESPath do that JSONPath cannot?',
+				answer:
+					'JMESPath has built-in functions (length, sort, join, to_string, etc.), multi-select objects, pipe expressions for chaining transforms, and list projections. Its syntax is simpler and more consistent than JSONPath.'
+			},
+			{
+				question: 'How do I use this with AWS CLI results?',
+				answer:
+					'Paste the JSON output from an AWS CLI command on the left and enter your JMESPath expression on the right. The same expression can then be used with the --query flag in AWS CLI.'
+			}
+		],
+		useCases: [
+			'Test AWS CLI --query expressions before running them in production',
+			'Extract specific fields from Terraform state JSON output',
+			'Filter and transform JSON API responses with pipe expressions',
+			'Learn JMESPath syntax interactively with immediate feedback'
+		],
+		sampleInput: `{
+  "locations": [
+    { "name": "Seattle", "state": "WA", "population": 737255 },
+    { "name": "Portland", "state": "OR", "population": 652503 },
+    { "name": "Denver", "state": "CO", "population": 715522 }
+  ]
+}`
 	}
 ];

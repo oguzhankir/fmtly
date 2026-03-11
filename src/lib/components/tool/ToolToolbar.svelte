@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ToolDefinition } from '$registry/types.js';
-	import { addToast } from '$stores/toast.store';
 	import { Copy, Share2, History, Play, Minimize2, Search, Braces } from 'lucide-svelte';
 
 	let {
@@ -52,19 +51,13 @@
 		{
 			label: 'Copy',
 			icon: Copy,
-			action: () => {
-				oncopy();
-				addToast('success', 'Copied to clipboard');
-			},
+			action: oncopy,
 			primary: false
 		},
 		{
 			label: 'Share',
 			icon: Share2,
-			action: () => {
-				onshare();
-				addToast('info', 'Link copied');
-			},
+			action: onshare,
 			primary: false
 		},
 		{

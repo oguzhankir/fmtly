@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { ChevronRight, Copy, Check } from 'lucide-svelte';
+	import { ChevronRight, Copy, Check, Braces, Expand } from 'lucide-svelte';
 	import { addToast } from '$stores/toast.store';
 	import type { TreeNode } from '$engines/json/types.js';
 	import type { Writable } from 'svelte/store';
-	import TreeNodeComponent from './TreeNode.svelte';
 
 	let {
 		node,
@@ -17,6 +16,7 @@
 	} = $props();
 
 	const expandedNodes = getContext<Writable<Set<string>>>('expandedNodes');
+	const setActivePath = getContext<(path: string) => void>('setActivePath');
 
 	let expanded = $derived($expandedNodes.has(node.id));
 	let hasChildren = $derived(node.children.length > 0);
@@ -38,6 +38,10 @@
 		});
 	}
 
+	function displayPath(): string {
+		return node.path ? `root.${node.path}` : 'root';
+	}
+
 	function dotPath(): string {
 		return node.path || '(root)';
 	}
@@ -55,6 +59,31 @@
 		copyTimer = setTimeout(() => {
 			justCopied = false;
 		}, 1200);
+	}
+
+	async function copyValue(): Promise<void> {
+		const value = typeof node.value === 'string' ? node.value : JSON.stringify(node.value);
+		await navigator.clipboard.writeText(value ?? '');
+		addToast('success', 'Copied value');
+	}
+
+	async function copyJson(): Promise<void> {
+		await navigator.clipboard.writeText(JSON.stringify(node.value, null, 2));
+		addToast('success', 'Copied value as JSON');
+	}
+
+	function expandSubtree(): void {
+		expandedNodes.update((set) => {
+			const next = new Set(set);
+			function expandRecursive(n: TreeNode): void {
+				if (n.children.length > 0) {
+					next.add(n.id);
+					for (const child of n.children) expandRecursive(child);
+				}
+			}
+			expandRecursive(node);
+			return next;
+		});
 	}
 
 	function handleContextMenu(event: MouseEvent): void {
@@ -167,6 +196,8 @@
 		onclick={copyPath}
 		onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyPath(); } }}
 		oncontextmenu={handleContextMenu}
+		onmouseenter={() => setActivePath(displayPath())}
+		onfocus={() => setActivePath(displayPath())}
 		role="treeitem"
 		aria-selected={isCurrentMatch}
 		aria-expanded={hasChildren ? expanded : undefined}
@@ -207,24 +238,48 @@
 			</span>
 		{/if}
 
-		<!-- Copy icon (appears on hover) -->
-		<span class="tree-copy-icon">
-			{#if justCopied}
-				<Check size={12} color="var(--status-valid)" />
-			{:else}
+		<div class="tree-actions">
+			<button
+				type="button"
+				class="tree-action-btn"
+				onclick={(e) => { e.stopPropagation(); void copyValue(); }}
+				aria-label="Copy value"
+			>
 				<Copy size={12} />
+			</button>
+			<button
+				type="button"
+				class="tree-action-btn"
+				onclick={(e) => { e.stopPropagation(); void copyJson(); }}
+				aria-label="Copy JSON"
+			>
+				<Braces size={12} />
+			</button>
+			<button
+				type="button"
+				class="tree-action-btn"
+				onclick={(e) => { e.stopPropagation(); void copyPath(); }}
+				aria-label="Copy path"
+			>
+				{#if justCopied}
+					<Check size={12} color="var(--success)" />
+				{:else}
+					<Copy size={12} />
+				{/if}
+			</button>
+			{#if hasChildren}
+				<button
+					type="button"
+					class="tree-action-btn"
+					onclick={(e) => { e.stopPropagation(); expandSubtree(); }}
+					aria-label="Expand subtree"
+				>
+					<Expand size={12} />
+				</button>
 			{/if}
-		</span>
+		</div>
 	</div>
 
-	<!-- Children (animated) -->
-	{#if hasChildren && expanded}
-		<div class="tree-children">
-			{#each node.children as child (child.id)}
-				<TreeNodeComponent node={child} {searchMatchIds} {currentMatchId} />
-			{/each}
-		</div>
-	{/if}
 </div>
 
 <!-- Context menu -->
@@ -331,34 +386,37 @@
 		white-space: nowrap;
 	}
 
-	.tree-copy-icon {
+	.tree-actions {
 		margin-left: auto;
-		flex-shrink: 0;
-		opacity: 0;
-		transition: opacity 100ms;
-		color: var(--text-tertiary);
 		display: flex;
 		align-items: center;
+		gap: 2px;
+		opacity: 0;
+		transition: opacity 100ms;
 	}
 
-	.tree-row:hover .tree-copy-icon {
+	.tree-row:hover .tree-actions,
+	.tree-row:focus-within .tree-actions {
 		opacity: 1;
 	}
 
-	.tree-children {
-		overflow: hidden;
-		animation: tree-expand 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	.tree-action-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		border: none;
+		border-radius: var(--radius-sm);
+		background: transparent;
+		color: var(--text-muted);
+		cursor: pointer;
+		padding: 0;
 	}
 
-	@keyframes tree-expand {
-		from {
-			opacity: 0;
-			transform: translateY(-4px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+	.tree-action-btn:hover {
+		background: var(--bg-hover);
+		color: var(--text-primary);
 	}
 
 	.tree-context-menu {

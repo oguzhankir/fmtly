@@ -22,7 +22,7 @@ export const diffTools: ToolDefinition[] = [
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
 			{ category: 'json', slug: 'validator' },
-			{ category: 'json', slug: 'viewer' }
+			{ category: 'json', slug: 'minifier' }
 		],
 		faqs: [
 			{

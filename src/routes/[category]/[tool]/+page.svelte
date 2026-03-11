@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from "svelte";
 	import { browser } from "$app/environment";
+	import { goto } from "$app/navigation";
 	import SeoHead from "$components/layout/SeoHead.svelte";
 	import LZString from "lz-string";
 	import ToolLayout from "$components/tool/ToolLayout.svelte";
@@ -94,6 +95,16 @@
 	let diffLeft = $state("");
 	let diffRight = $state("");
 	let treePanelRef: TreePanel | undefined = $state(undefined);
+
+	function navigateToJsonWorkspaceIndex(index: number): void {
+		const target = jsonWorkspaceTools[index];
+		if (!target || target.slug === data.tool.slug) return;
+		void goto(`/json/${target.slug}`, {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true,
+		});
+	}
 
 	let faqStructuredData = $derived(
 		JSON.stringify({
@@ -215,6 +226,18 @@
 					},
 				},
 			);
+
+			for (const [index] of jsonWorkspaceTools.entries()) {
+				if (index > 8) break;
+				shortcuts.push({
+					key: String(index + 1),
+					scope: "tool",
+					label: `Switch to tab ${index + 1}`,
+					handler: () => {
+						navigateToJsonWorkspaceIndex(index);
+					},
+				});
+			}
 		}
 
 		if (data.tool.hasTreeView) {
@@ -331,7 +354,11 @@
 		{/snippet}
 	</ToolLayout>
 {:else}
-	<ToolLayout tool={data.tool}>
+	<ToolLayout
+		tool={data.tool}
+		onprocess={() => { if (data.tool.engine === 'json') { format(); } }}
+		onshare={() => { shareModalOpen = true; }}
+	>
 		{#snippet inputPanel()}
 			{#if data.tool.category === "text" && (data.tool.slug === "word-counter" || data.tool.slug === "readability")}
 				<TextAnalysisPanel toolSlug={data.tool.slug} />
@@ -466,7 +493,7 @@
 			{:else if data.tool.category === "generate" && data.tool.slug === "fake-data"}
 				<FakeDataPanel />
 			{:else if data.tool.category === "json" && data.tool.slug === "validator"}
-				<JsonValidatorPanel toolSlug={data.tool.slug} />
+				<JsonValidatorPanel toolSlug={data.tool.slug} workspaceTools={jsonWorkspaceTools} />
 			{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
 				<JsonInputPanel
 					toolSlug={data.tool.slug}

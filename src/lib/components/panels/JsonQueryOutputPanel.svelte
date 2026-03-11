@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { jsonpathQuery, jmespathQuery } from '$engines/json/json.engine.js';
 	import { input } from '$stores/input.store';
 	import { output } from '$stores/output.store';
 	import { addToast } from '$stores/toast.store';
-	import { Check, Copy, Play, Sparkles, WrapText } from 'lucide-svelte';
+	import { Check, Copy, Play, Sparkles, WrapText, History, CircleHelp } from 'lucide-svelte';
 
 	const props = $props<{
 		toolSlug: 'jsonpath' | 'jmespath';
@@ -18,11 +19,28 @@
 	let resultCount = $state<number | null>(null);
 	let copied = $state(false);
 	let wrapLines = $state(false);
+	let queryHistory = $state<string[]>([]);
+	let selectedHistory = $state('');
+	let showCheatSheet = $state(false);
+	let cheatSheet = $derived(
+		props.toolSlug === 'jsonpath'
+			? [
+					'$.store.book[*].title',
+					'$.users[?(@.age > 18)].name',
+					'$.orders[*].items[*].sku',
+					'$.features[0].geometry.coordinates'
+				]
+			: ['foo.bar', 'users[?age > `18`].name', 'orders[].items[].sku', 'features[0].geometry']
+	);
 	let resultMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lines = $output.length === 0 ? 0 : $output.split('\n').length;
 		return `${$output.length.toLocaleString()} chars · ${lines.toLocaleString()} lines`;
 	});
+
+	function getHistoryKey(): string {
+		return `fmtly-${props.toolSlug}-query-history`;
+	}
 
 	$effect(() => {
 		if (!query) {
@@ -32,6 +50,16 @@
 
 	$effect(() => {
 		void runQuery();
+	});
+
+	$effect(() => {
+		if (!browser) return;
+		try {
+			const raw = localStorage.getItem(getHistoryKey());
+			queryHistory = raw ? (JSON.parse(raw) as string[]) : [];
+		} catch {
+			queryHistory = [];
+		}
 	});
 
 	async function runQuery(): Promise<void> {
@@ -53,6 +81,7 @@
 
 			resultCount = Array.isArray(result) ? result.length : result === null || result === undefined ? 0 : 1;
 			output.set(JSON.stringify(result, null, 2));
+			saveQueryToHistory(query);
 		} catch (error) {
 			resultCount = null;
 			output.set('');
@@ -64,6 +93,26 @@
 
 	function loadSampleQuery(): void {
 		query = defaultQuery;
+	}
+
+	function saveQueryToHistory(value: string): void {
+		if (!browser) return;
+		const normalized = value.trim();
+		if (!normalized) return;
+		const nextHistory = [normalized, ...queryHistory.filter((entry) => entry !== normalized)].slice(0, 10);
+		queryHistory = nextHistory;
+		localStorage.setItem(getHistoryKey(), JSON.stringify(nextHistory));
+	}
+
+	function loadHistoryQuery(value: string): void {
+		if (!value) return;
+		query = value;
+		selectedHistory = value;
+	}
+
+	function applyCheatSheet(value: string): void {
+		query = value;
+		showCheatSheet = false;
 	}
 
 	function fallbackCopy(text: string): boolean {
@@ -113,9 +162,24 @@
 			{/if}
 		</div>
 		<div class="query-toolbar__actions">
+			{#if queryHistory.length > 0}
+				<label class="query-history">
+					<History size={13} />
+					<select bind:value={selectedHistory} onchange={(event) => loadHistoryQuery((event.currentTarget as HTMLSelectElement).value)}>
+						<option value="">History</option>
+						{#each queryHistory as entry}
+							<option value={entry}>{entry}</option>
+						{/each}
+					</select>
+				</label>
+			{/if}
 			<button type="button" class="query-btn" onclick={loadSampleQuery}>
 				<Sparkles size={13} />
 				Sample query
+			</button>
+			<button type="button" class="query-btn" onclick={() => (showCheatSheet = !showCheatSheet)}>
+				<CircleHelp size={13} />
+				Guide
 			</button>
 			<button type="button" class="query-btn" onclick={() => void runQuery()}>
 				<Play size={13} />
@@ -145,6 +209,15 @@
 			placeholder={props.toolSlug === 'jsonpath' ? '$.items[*].id' : 'items[].id'}
 			spellcheck="false"
 		></textarea>
+		{#if showCheatSheet}
+			<div class="query-cheatsheet">
+				{#each cheatSheet as example}
+					<button type="button" class="query-cheatsheet__item" onclick={() => applyCheatSheet(example)}>
+						{example}
+					</button>
+				{/each}
+			</div>
+		{/if}
 	</div>
 
 	{#if resultError}
@@ -185,6 +258,29 @@
 		align-items: center;
 		gap: var(--space-2);
 		flex-wrap: wrap;
+	}
+
+	.query-history {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		height: 30px;
+		padding: 0 var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-elevated);
+		color: var(--text-secondary);
+		font-family: var(--font-ui);
+		font-size: 12px;
+	}
+
+	.query-history select {
+		border: none;
+		background: transparent;
+		color: var(--text-primary);
+		font: inherit;
+		outline: none;
+		max-width: 180px;
 	}
 
 	.query-pill,
@@ -237,6 +333,28 @@
 		padding: var(--space-3);
 		border-bottom: 1px solid var(--border-subtle);
 		background: var(--bg-surface);
+	}
+
+	.query-cheatsheet {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-2);
+		margin-top: var(--space-2);
+	}
+
+	.query-cheatsheet__item {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		padding: var(--space-2) var(--space-3);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-elevated);
+		color: var(--text-primary);
+		font-family: var(--font-mono);
+		font-size: 12px;
+		cursor: pointer;
+		text-align: left;
 	}
 
 	.query-label {

@@ -1,15 +1,25 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { output } from '$stores/output.store';
-	import { input } from '$stores/input.store';
+	import { input as inputStore } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import {
+		jsonError,
 		jsonAdvancedStats,
 		jsonFormatOptions,
 		jsonFormatWarnings,
 		setFormatOptions
 	} from '$stores/json.store';
-	import { Check, Copy, Download, WrapText, ChevronDown, ChevronRight } from 'lucide-svelte';
+	import {
+		AlertTriangle,
+		Check,
+		Copy,
+		Download,
+		WrapText,
+		ChevronDown,
+		ChevronRight,
+		Sparkles
+	} from 'lucide-svelte';
 
 	let {
 		outputLanguage,
@@ -27,8 +37,18 @@
 	let copied = $state(false);
 	let showStats = $state(false);
 	let showCompare = $state(false);
+	let showCleanMenu = $state(false);
 	let isFormatter = $derived(toolSlug === 'formatter');
-	let isConverter = $derived(['to-yaml', 'to-toml', 'to-markdown'].includes(toolSlug));
+	let isMinifier = $derived(toolSlug === 'minifier');
+	let isConverter = $derived(
+		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown'].includes(toolSlug)
+	);
+	let canSwapConverter = $derived(['to-yaml', 'to-csv', 'to-xml', 'to-toml'].includes(toolSlug));
+	let needsValidJson = $derived(
+		['formatter', 'viewer', 'minifier', 'to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown'].includes(
+			toolSlug
+		)
+	);
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
 	let supportsCompare = $derived(toolSlug === 'formatter' || toolSlug === 'minifier');
 	let lines = $derived(highlightedHtml ? highlightedHtml.split('\n') : []);
@@ -40,6 +60,15 @@
 	let statsSummary = $derived.by(() => {
 		if (!$jsonAdvancedStats) return '';
 		return `${$jsonAdvancedStats.keys} keys · ${$jsonAdvancedStats.objects} objects · ${$jsonAdvancedStats.arrays} arrays · ${$jsonAdvancedStats.strings} strings · depth: ${$jsonAdvancedStats.maxDepth}`;
+	});
+	let minifySummary = $derived.by(() => {
+		if (!isMinifier || !$jsonAdvancedStats) return '';
+		const original = $jsonAdvancedStats.sizeOriginal;
+		const minified = $jsonAdvancedStats.sizeFormatted;
+		if (original <= 0) return '';
+		const saved = Math.max(original - minified, 0);
+		const ratio = saved === 0 ? 0 : (saved / original) * 100;
+		return `Original: ${(original / 1024).toFixed(1)} KB → Minified: ${(minified / 1024).toFixed(1)} KB — saved ${ratio.toFixed(1)}% (${(saved / 1024).toFixed(1)} KB)`;
 	});
 
 	onMount(async () => {
@@ -156,7 +185,7 @@
 
 	function deriveDownloadName(): string {
 		try {
-			const parsed = JSON.parse($input) as Record<string, unknown>;
+			const parsed = JSON.parse($inputStore) as Record<string, unknown>;
 			const name = typeof parsed.name === 'string' ? parsed.name : typeof parsed.title === 'string' ? parsed.title : '';
 			if (!name) return downloadFilename;
 			return name.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-').replaceAll(/^-|-$/g, '') || downloadFilename;
@@ -187,6 +216,49 @@
 		URL.revokeObjectURL(url);
 	}
 
+	async function handleSwap(): Promise<void> {
+		if (!$output || !canSwapConverter) return;
+
+		try {
+			let nextJson = '';
+			switch (toolSlug) {
+				case 'to-yaml': {
+					const { yamlToJSON } = await import('$engines/yaml/index.js');
+					const result = yamlToJSON($output);
+					if (!result.success) throw new Error(result.error.message);
+					nextJson = result.output;
+					break;
+				}
+				case 'to-csv': {
+					const { csvToJSON } = await import('$engines/csv/index.js');
+					const result = csvToJSON($output);
+					if (!result.success) throw new Error(result.error.message);
+					nextJson = result.output;
+					break;
+				}
+				case 'to-xml': {
+					const { xmlToJSON } = await import('$engines/xml/index.js');
+					const result = xmlToJSON($output);
+					if (!result.success) throw new Error(result.error.message);
+					nextJson = result.output;
+					break;
+				}
+				case 'to-toml': {
+					const { toJson } = await import('$engines/toml/toml.engine.js');
+					nextJson = await toJson($output);
+					break;
+				}
+				default:
+					return;
+			}
+
+			inputStore.set(nextJson);
+			addToast('success', 'Swapped output into JSON input');
+		} catch (error) {
+			addToast('error', error instanceof Error ? error.message : 'Could not swap converter output');
+		}
+	}
+
 	function compareLines(source: string, formatted: string): Array<{ left: string; right: string; changed: boolean }> {
 		const leftLines = source.split('\n');
 		const rightLines = formatted.split('\n');
@@ -204,6 +276,24 @@
 
 	function toggleSortKeys(): void {
 		setFormatOptions({ sortKeys: !$jsonFormatOptions.sortKeys });
+	}
+
+	function applyCleanOptions(): void {
+		showCleanMenu = false;
+		setFormatOptions({
+			removeNulls: $jsonFormatOptions.removeNulls,
+			removeEmptyStrings: $jsonFormatOptions.removeEmptyStrings,
+			removeEmptyArrays: $jsonFormatOptions.removeEmptyArrays,
+			removeEmptyObjects: $jsonFormatOptions.removeEmptyObjects
+		});
+	}
+
+	function toggleCleanOption(
+		key: 'removeNulls' | 'removeEmptyStrings' | 'removeEmptyArrays' | 'removeEmptyObjects'
+	): void {
+		setFormatOptions({
+			[key]: !$jsonFormatOptions[key]
+		});
 	}
 </script>
 
@@ -242,7 +332,13 @@
 		</div>
 	{/if}
 
-	{#if $output}
+	{#if !$output && needsValidJson && $inputStore.trim() && $jsonError}
+		<div class="json-output-error">
+			<AlertTriangle size={20} />
+			<strong>Invalid JSON</strong>
+			<span>{$jsonError.message}</span>
+		</div>
+	{:else if $output}
 		{#if isConverter}
 			<div class="json-output-meta">
 				<span class="json-output-meta__pill">{outputLanguage.toUpperCase()}</span>
@@ -288,7 +384,64 @@
 					>
 						Sort keys
 					</button>
+					<div class="json-output-menu-wrap">
+						<button
+							type="button"
+							class="json-output-chip"
+							class:json-output-chip--active={showCleanMenu}
+							onclick={() => (showCleanMenu = !showCleanMenu)}
+						>
+							<Sparkles size={12} />
+							Clean
+						</button>
+						{#if showCleanMenu}
+							<div class="json-output-menu">
+								<label class="json-output-menu__row">
+									<input
+										type="checkbox"
+										checked={$jsonFormatOptions.removeNulls ? true : undefined}
+										onchange={() => toggleCleanOption('removeNulls')}
+									/>
+									<span>Remove null values</span>
+								</label>
+								<label class="json-output-menu__row">
+									<input
+										type="checkbox"
+										checked={$jsonFormatOptions.removeEmptyStrings ? true : undefined}
+										onchange={() => toggleCleanOption('removeEmptyStrings')}
+									/>
+									<span>Remove empty strings</span>
+								</label>
+								<label class="json-output-menu__row">
+									<input
+										type="checkbox"
+										checked={$jsonFormatOptions.removeEmptyArrays ? true : undefined}
+										onchange={() => toggleCleanOption('removeEmptyArrays')}
+									/>
+									<span>Remove empty arrays</span>
+								</label>
+								<label class="json-output-menu__row">
+									<input
+										type="checkbox"
+										checked={$jsonFormatOptions.removeEmptyObjects ? true : undefined}
+										onchange={() => toggleCleanOption('removeEmptyObjects')}
+									/>
+									<span>Remove empty objects</span>
+								</label>
+								<button type="button" class="json-output-btn" onclick={applyCleanOptions}>
+									Apply
+								</button>
+							</div>
+						{/if}
+					</div>
 				</div>
+			</div>
+		{/if}
+
+		{#if isMinifier && minifySummary}
+			<div class="json-output-meta">
+				<span class="json-output-meta__pill">MINIFIED</span>
+				<span>{minifySummary}</span>
 			</div>
 		{/if}
 
@@ -297,6 +450,11 @@
 				<WrapText size={13} />
 				Wrap
 			</button>
+			{#if canSwapConverter}
+				<button type="button" class="json-output-btn" onclick={() => void handleSwap()}>
+					Swap ⇄
+				</button>
+			{/if}
 			{#if supportsCompare}
 				<button type="button" class="json-output-btn" onclick={() => (showCompare = !showCompare)}>
 					Compare
@@ -328,7 +486,7 @@
 			<div class="json-compare-grid">
 				<div class="json-compare-column">
 					<div class="json-compare-title">Input</div>
-					{#each compareLines($input, $output) as row, index}
+					{#each compareLines($inputStore, $output) as row, index}
 						<div class="json-compare-line" class:json-compare-line--changed={row.changed}>
 							<span>{index + 1}</span>
 							<code>{row.left || ' '}</code>
@@ -337,7 +495,7 @@
 				</div>
 				<div class="json-compare-column">
 					<div class="json-compare-title">Output</div>
-					{#each compareLines($input, $output) as row, index}
+					{#each compareLines($inputStore, $output) as row, index}
 						<div class="json-compare-line" class:json-compare-line--changed={row.changed}>
 							<span>{index + 1}</span>
 							<code>{row.right || ' '}</code>
@@ -364,6 +522,21 @@
 		flex-direction: column;
 		height: 100%;
 		width: 100%;
+	}
+
+	.json-output-error {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-2);
+		padding: var(--space-6);
+		color: var(--status-error);
+		background: color-mix(in srgb, var(--status-error) 8%, var(--bg-base));
+		font-family: var(--font-ui);
+		font-size: 13px;
+		text-align: center;
 	}
 
 	.json-stats-toggle {
@@ -448,6 +621,35 @@
 		align-items: center;
 		gap: var(--space-2);
 		flex-wrap: wrap;
+	}
+
+	.json-output-menu-wrap {
+		position: relative;
+	}
+
+	.json-output-menu {
+		position: absolute;
+		top: calc(100% + 6px);
+		right: 0;
+		z-index: var(--z-dropdown);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		width: min(260px, 80vw);
+		padding: var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-lg);
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow-md);
+	}
+
+	.json-output-menu__row {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		color: var(--text-primary);
 	}
 
 	.json-output-controls__label {

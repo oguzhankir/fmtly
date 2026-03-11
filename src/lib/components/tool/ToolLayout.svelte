@@ -2,7 +2,9 @@
 	import type { Snippet } from 'svelte';
 	import type { ToolDefinition } from '$registry/types.js';
 	import { browser } from '$app/environment';
-	import StatusBar from '$components/layout/StatusBar.svelte';
+	import { get } from 'svelte/store';
+	import { output } from '$stores/output.store';
+	import { addToast } from '$stores/toast.store';
 	import ToolToolbar from './ToolToolbar.svelte';
 	import HistoryPanel from './HistoryPanel.svelte';
 
@@ -14,14 +16,32 @@
 		inputPanel,
 		outputPanel,
 		treePanel,
-		diffPanel
+		diffPanel,
+		onprocess = undefined,
+		onshare = undefined
 	}: {
 		tool: ToolDefinition;
 		inputPanel?: Snippet;
 		outputPanel?: Snippet;
 		treePanel?: Snippet;
 		diffPanel?: Snippet;
+		onprocess?: () => void;
+		onshare?: () => void;
 	} = $props();
+
+	async function handleCopy(): Promise<void> {
+		const text = get(output);
+		if (!text) {
+			addToast('info', 'Nothing to copy yet');
+			return;
+		}
+		try {
+			await navigator.clipboard.writeText(text);
+			addToast('success', 'Copied to clipboard');
+		} catch {
+			addToast('error', 'Copy failed — check browser permissions');
+		}
+	}
 
 	let DIVIDER_KEY = $derived(`fmtly-divider-${tool.category}`);
 	const MIN_PANEL_PCT = 20;
@@ -78,7 +98,13 @@
 	<!-- Toolbar -->
 	<div class="tool-toolbar-row">
 		<span class="tool-toolbar-name">{tool.displayName}</span>
-		<ToolToolbar {tool} onhistory={() => { historyOpen = !historyOpen; }} />
+		<ToolToolbar
+			{tool}
+			onprocess={onprocess ?? (() => {})}
+			oncopy={handleCopy}
+			onshare={onshare ?? (() => {})}
+			onhistory={() => { historyOpen = !historyOpen; }}
+		/>
 	</div>
 
 	<!-- Panel area -->
@@ -370,13 +396,11 @@
 
 <HistoryPanel bind:open={historyOpen} />
 
-<StatusBar />
-
 <style>
 	.tool-layout {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - var(--header-height) - var(--status-bar-height));
+		height: calc(100vh - var(--header-height));
 	}
 
 	/* Toolbar row */

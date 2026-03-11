@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { createVirtualizer } from '@tanstack/svelte-virtual';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { ChevronsDownUp, ChevronsUpDown } from 'lucide-svelte';
+	import { formatByteSize, inputByteSize } from '$stores/input.store';
+	import { addToast } from '$stores/toast.store';
 	import TreeNodeComponent from './TreeNode.svelte';
 	import SearchBar from '$components/tool/SearchBar.svelte';
 	import type { TreeNode } from '$engines/json/types.js';
@@ -16,13 +19,21 @@
 	let searchMatchIds = $state(new Set<string>());
 	let currentMatchId = $state('');
 	let filterActive = $state(false);
+	let activePath = $state('root');
+	let scrollElement: HTMLDivElement | undefined = $state(undefined);
+	const LARGE_FILE_THRESHOLD = 200 * 1024;
+	let isLargeFile = $derived($inputByteSize > LARGE_FILE_THRESHOLD);
+	let largeFileSummary = $derived(`Large file — parsing ${formatByteSize($inputByteSize)}. Showing top 2 levels; expand nodes to load children.`);
 
 	const expandedNodes = writable<Set<string>>(new Set());
 	setContext('expandedNodes', expandedNodes);
+	setContext('setActivePath', (path: string) => {
+		activePath = path || 'root';
+	});
 
 	$effect(() => {
 		if (nodes.length > 0) {
-			expandToDepth(1);
+			expandToDepth(isLargeFile ? 2 : 1);
 		}
 	});
 
@@ -134,9 +145,53 @@
 	}
 
 	let visibleNodes = $derived(getVisibleNodes());
+	let flattenedNodes = $derived.by(() => {
+		const expanded = $expandedNodes;
+		const flat: TreeNode[] = [];
+		function walk(nodeList: TreeNode[]): void {
+			for (const node of nodeList) {
+				flat.push(node);
+				if (node.children.length > 0 && expanded.has(node.id)) {
+					walk(node.children);
+				}
+			}
+		}
+		walk(visibleNodes);
+		return flat;
+	});
+	let rowVirtualizer = $derived(
+		createVirtualizer<HTMLDivElement, HTMLDivElement>({
+			count: flattenedNodes.length,
+			getScrollElement: () => scrollElement ?? null,
+			estimateSize: () => 28,
+			overscan: 12
+		})
+	);
+
+	async function copyActivePath(): Promise<void> {
+		await navigator.clipboard.writeText(activePath);
+		addToast('success', `Copied — ${activePath}`);
+	}
+
+	$effect(() => {
+		if (!currentMatchId) return;
+		const nextIndex = flattenedNodes.findIndex((node) => node.id === currentMatchId);
+		if (nextIndex >= 0) {
+			$rowVirtualizer.scrollToIndex(nextIndex, { align: 'center' });
+		}
+	});
 </script>
 
 <div class="tree-view" role="tree">
+	<button type="button" class="tree-pathbar" onclick={() => void copyActivePath()}>
+		{#each activePath.split('.').filter(Boolean) as segment, index}
+			{#if index > 0}
+				<span class="tree-pathbar__sep">›</span>
+			{/if}
+			<span class="tree-pathbar__segment">{segment}</span>
+		{/each}
+	</button>
+
 	<!-- Toolbar -->
 	<div class="tree-toolbar">
 		<div class="tree-toolbar-group">
@@ -181,12 +236,34 @@
 		onfilterchange={handleFilterChange}
 	/>
 
+	{#if isLargeFile}
+		<div class="tree-banner">{largeFileSummary}</div>
+	{/if}
+
 	<!-- Tree content -->
-	<div class="tree-content">
-		{#if visibleNodes.length === 0}
-			<div class="tree-empty">
-				<p>No data to display</p>
+	<div class="tree-content" bind:this={scrollElement}>
+		{#if flattenedNodes.length > 0}
+			<div
+				class="tree-content__inner"
+				style={`height: ${$rowVirtualizer.getTotalSize()}px; position: relative; width: 100%;`}
+			>
+				{#each $rowVirtualizer.getVirtualItems() as virtualRow (virtualRow.key)}
+					<div
+						class="tree-virtual-row"
+						style={`position: absolute; top: 0; left: 0; width: 100%; transform: translateY(${virtualRow.start}px);`}
+					>
+						<TreeNodeComponent
+							node={flattenedNodes[virtualRow.index]}
+							{searchMatchIds}
+							{currentMatchId}
+						/>
+					</div>
+				{/each}
 			</div>
+		{:else if filterActive}
+			<div class="tree-content__empty">No matches found.</div>
+		{:else if nodes.length === 0}
+			<div class="tree-content__empty"></div>
 		{:else}
 			{#each visibleNodes as node (node.id)}
 				<TreeNodeComponent {node} {searchMatchIds} {currentMatchId} />
@@ -211,6 +288,31 @@
 		border-bottom: 1px solid var(--border-subtle);
 		background: var(--bg-surface);
 		flex-shrink: 0;
+	}
+
+	.tree-pathbar {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 28px;
+		padding: 0 var(--space-3);
+		border: none;
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		color: var(--text-secondary);
+		font-family: var(--font-mono);
+		font-size: 12px;
+		cursor: pointer;
+		text-align: left;
+		overflow-x: auto;
+	}
+
+	.tree-pathbar__sep {
+		color: var(--text-muted);
+	}
+
+	.tree-pathbar__segment {
+		white-space: nowrap;
 	}
 
 	.tree-toolbar-group {
@@ -273,15 +375,23 @@
 		padding: 4px 0;
 	}
 
-	.tree-empty {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
+	.tree-banner {
+		padding: var(--space-2) var(--space-3);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--accent-dim);
+		color: var(--text-primary);
+		font-family: var(--font-ui);
+		font-size: 12px;
 	}
 
-	.tree-empty p {
-		color: var(--text-tertiary);
-		font-size: var(--text-sm);
+	.tree-content__inner {
+		min-width: 100%;
+	}
+
+	.tree-content__empty {
+		padding: var(--space-4);
+		color: var(--text-muted);
+		font-family: var(--font-ui);
+		font-size: 12px;
 	}
 </style>

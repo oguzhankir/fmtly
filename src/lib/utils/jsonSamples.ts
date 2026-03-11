@@ -48,17 +48,17 @@ export const jsonSamples: JsonSample[] = [
 	},
 	{
 		id: 'openapi',
-		label: 'OpenAPI fragment',
+		label: 'OpenAPI spec (Petstore)',
 		value: `{
   "openapi": "3.1.0",
   "info": {
-    "title": "fmtly API",
+    "title": "Swagger Petstore",
     "version": "1.0.0"
   },
   "paths": {
-    "/tools": {
+    "/pet": {
       "get": {
-        "summary": "List tools",
+        "summary": "Find pet by ID",
         "responses": {
           "200": {
             "description": "OK"
@@ -90,29 +90,78 @@ export const jsonSamples: JsonSample[] = [
 	},
 	{
 		id: 'analytics',
-		label: 'Analytics payload',
+		label: 'Census data (nested arrays)',
 		value: `{
-  "session": {
-    "id": "sess_01JYV5Y0A",
-    "startedAt": "2026-03-10T09:00:00Z",
-    "user": {
-      "id": "usr_42",
-      "name": "Ada Lovelace",
-      "plan": "pro"
-    }
-  },
-  "events": [
+  "regions": [
     {
-      "type": "tool_open",
-      "tool": "json/formatter",
-      "durationMs": 1420
+      "name": "North",
+      "population": [
+        { "year": 2022, "count": 1245000 },
+        { "year": 2023, "count": 1261100 }
+      ]
     },
     {
-      "type": "copy_output",
-      "tool": "json/viewer",
-      "durationMs": 220
+      "name": "South",
+      "population": [
+        { "year": 2022, "count": 980000 },
+        { "year": 2023, "count": 991400 }
+      ]
     }
   ]
+}`
+	},
+	{
+		id: 'stripe-webhook',
+		label: 'Stripe webhook',
+		value: `{
+  "id": "evt_1Q0PS1H8dsf9",
+  "object": "event",
+  "api_version": "2024-06-20",
+  "created": 1725569165,
+  "type": "checkout.session.completed",
+  "data": {
+    "object": {
+      "id": "cs_test_a1b2c3",
+      "object": "checkout.session",
+      "amount_total": 4900,
+      "currency": "usd",
+      "customer_email": "ada@example.com",
+      "payment_status": "paid"
+    }
+  }
+}`
+	},
+	{
+		id: 'jwt-payload',
+		label: 'JWT payload',
+		value: `{
+  "iss": "https://fmtly.dev",
+  "sub": "user_42",
+  "aud": ["web", "mobile"],
+  "iat": 1710000000,
+  "exp": 1710003600,
+  "scope": ["json:read", "json:write"],
+  "profile": {
+    "name": "Ada Lovelace",
+    "role": "admin"
+  }
+}`
+	},
+	{
+		id: 'docker-inspect',
+		label: 'Docker inspect',
+		value: `{
+  "Id": "sha256:2e863c44",
+  "RepoTags": ["fmtly/web:latest"],
+  "Config": {
+    "Env": ["NODE_ENV=production", "PORT=8080"],
+    "Cmd": ["pnpm", "start"]
+  },
+  "NetworkSettings": {
+    "Ports": {
+      "8080/tcp": [{ "HostIp": "0.0.0.0", "HostPort": "8080" }]
+    }
+  }
 }`
 	}
 ];

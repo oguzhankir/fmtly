@@ -44,6 +44,8 @@
 		"@faker-js/faker": "^10.3.0",
 		"@monaco-editor/loader": "^1.7.0",
 		"@tanstack/svelte-virtual": "^3.13.21",
+		"ajv": "^8.18.0",
+		"ajv-formats": "^3.0.1",
 		"bits-ui": "^1.0.0",
 		"browser-image-compression": "^2.0.2",
 		"cron-parser": "^5.5.0",

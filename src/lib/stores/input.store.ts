@@ -8,6 +8,8 @@ const SHARED_JSON_TOOL_SLUGS = new Set([
 	'validator',
 	'minifier',
 	'to-yaml',
+	'to-csv',
+	'to-xml',
 	'to-toml',
 	'to-markdown',
 	'jsonpath',

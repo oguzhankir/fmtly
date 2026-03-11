@@ -1,3 +1,4 @@
+import { jsonToCSV } from '$engines/csv/index.js';
 import {
 	buildJSONTree,
 	computeJSONStats,
@@ -18,6 +19,7 @@ import {
 	toToml,
 	toYaml
 } from '$engines/json/json.engine.js';
+import { jsonToXML } from '$engines/xml/index.js';
 import { input } from '$stores/input.store';
 import { clearOutput, output } from '$stores/output.store';
 import { get, writable } from 'svelte/store';
@@ -116,7 +118,6 @@ async function processInput(value: string): Promise<void> {
 async function applyToolOutput(value: string): Promise<void> {
 	switch (activeJsonToolSlug) {
 		case 'formatter':
-		case 'viewer':
 			applyAdvancedFormatOutput(value);
 			return;
 		case 'minifier':
@@ -124,6 +125,12 @@ async function applyToolOutput(value: string): Promise<void> {
 			return;
 		case 'to-yaml':
 			await applyYamlOutput(value);
+			return;
+		case 'to-csv':
+			applyCsvOutput(value);
+			return;
+		case 'to-xml':
+			applyXmlOutput(value);
 			return;
 		case 'to-toml':
 			await applyTomlOutput(value);
@@ -186,6 +193,32 @@ async function applyTomlOutput(value: string): Promise<void> {
 	output.set(await toToml(value));
 	jsonAdvancedStats.set(null);
 	jsonFormatWarnings.set([]);
+}
+
+function applyCsvOutput(value: string): void {
+	const result = jsonToCSV(value);
+	if (result.success) {
+		output.set(result.output);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+		return;
+	}
+	clearOutput();
+	jsonAdvancedStats.set(null);
+	jsonFormatWarnings.set([result.error.message]);
+}
+
+function applyXmlOutput(value: string): void {
+	const result = jsonToXML(value);
+	if (result.success) {
+		output.set(result.output);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+		return;
+	}
+	clearOutput();
+	jsonAdvancedStats.set(null);
+	jsonFormatWarnings.set([result.error.message]);
 }
 
 async function applyMarkdownOutput(value: string): Promise<void> {
