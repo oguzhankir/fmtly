@@ -407,7 +407,7 @@ export const xmlTools: ToolDefinition[] = [
 		displayName: 'XPath Query',
 		tagline: 'Test XPath 1.0 expressions against XML documents',
 		description:
-			'Run XPath 1.0 queries against any XML document directly in your browser — no dependencies, zero latency. Uses the browser\'s native DOMParser and document.evaluate for full XPath 1.0 support including predicates, axes, and functions. Results show matched nodes, text content, and attribute values.',
+			"Run XPath 1.0 queries against any XML document directly in your browser — no dependencies, zero latency. Uses the browser's native DOMParser and document.evaluate for full XPath 1.0 support including predicates, axes, and functions. Results show matched nodes, text content, and attribute values.",
 		primaryKeyword: 'xpath query tester',
 		metaTitle: 'XPath Query Tester — Test XPath Online — fmtly.dev',
 		metaDescription:

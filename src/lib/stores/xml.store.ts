@@ -1,12 +1,6 @@
-import {
-	computeXMLStats,
-	formatXML,
-	minifyXML,
-	parseXML,
-	xmlToJSON
-} from '$engines/xml/index.js';
+import { computeXMLStats, formatXML, minifyXML, parseXML, xmlToJSON } from '$engines/xml/index.js';
 import type { XMLFormatOptions, XMLParseError, XMLStats } from '$engines/xml/index.js';
-import { toYaml, toCsv } from '$engines/xml/xml.engine.js';
+import { toCsv, toYaml } from '$engines/xml/xml.engine.js';
 import { input } from '$stores/input.store';
 import { clearOutput, output } from '$stores/output.store';
 import { get, writable } from 'svelte/store';

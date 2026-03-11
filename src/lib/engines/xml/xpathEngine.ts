@@ -20,7 +20,10 @@ export function xpathQuery(xml: string, expression: string): XPathQueryResult {
 
 		const parseError = doc.querySelector('parsererror');
 		if (parseError) {
-			return { success: false, error: 'XML is not well-formed. Fix XML errors before running XPath.' };
+			return {
+				success: false,
+				error: 'XML is not well-formed. Fix XML errors before running XPath.'
+			};
 		}
 
 		const nsResolver = buildNamespaceResolver(doc);
@@ -155,7 +158,7 @@ function domNodeToResult(node: Node): XPathResultNode {
 				type: 'text',
 				label: '#text',
 				value: text.nodeValue ?? '',
-				path: getNodePath(text.parentElement) + '/text()'
+				path: `${getNodePath(text.parentElement)}/text()`
 			};
 		}
 		default: {
@@ -181,14 +184,13 @@ function getNodePath(node: Element | null): string {
 			sibling = sibling.previousElementSibling;
 		}
 		const hasMultiple = current.parentElement
-			? Array.from(current.parentElement.children).filter(
-					(c) => c.tagName === current!.tagName
-			  ).length > 1
+			? Array.from(current.parentElement.children).filter((c) => c.tagName === current!.tagName)
+					.length > 1
 			: false;
 		parts.unshift(hasMultiple ? `${current.tagName}[${index}]` : current.tagName);
 		current = current.parentElement;
 	}
-	return '/' + parts.join('/');
+	return `/${parts.join('/')}`;
 }
 
 export const xpathSamples: Array<{ label: string; expression: string }> = [

@@ -15,7 +15,7 @@ const catalogXML = `<?xml version="1.0" encoding="UTF-8"?>
   </book>
 </catalog>`;
 
-const simpleXML = `<root><child>value</child></root>`;
+const simpleXML = '<root><child>value</child></root>';
 
 describe('computeXMLStats', () => {
 	it('returns sizeBytes equal to UTF-8 byte length', () => {
