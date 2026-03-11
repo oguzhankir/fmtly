@@ -1,14 +1,14 @@
-import { writable, get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
+import {
+	formatNumber,
+	fromRoman,
+	fromScientific,
+	toRoman,
+	toScientific
+} from '../engines/number/number.engine';
 import { input } from './input.store';
 import { output } from './output.store';
 import { addToast } from './toast.store';
-import {
-	formatNumber,
-	toRoman,
-	fromRoman,
-	toScientific,
-	fromScientific
-} from '../engines/number/number.engine';
 
 // Options state
 export const numberOptions = writable({
@@ -39,7 +39,7 @@ export const processNumber = async (val: string) => {
 			let result = '';
 
 			switch (currentToolSlug) {
-				case 'formatter':
+				case 'formatter': {
 					const formatted = formatNumber(val, {
 						locale: opts.locale,
 						decimals: opts.decimals,
@@ -47,6 +47,7 @@ export const processNumber = async (val: string) => {
 					});
 					result = formatted.value;
 					break;
+				}
 
 				case 'roman':
 					// Bidirectional tool mapping.

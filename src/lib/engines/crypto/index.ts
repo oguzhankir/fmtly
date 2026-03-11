@@ -91,7 +91,7 @@ export function checkStrength(password: string): PasswordStrength {
 	const entropy = password.length * Math.log2(poolSize);
 
 	// Crack time calculation: offline = 10 Billion guesses/sec, online = 1000/sec
-	const combinations = Math.pow(poolSize, password.length);
+	const combinations = poolSize ** password.length;
 	const offlineGuessesPerSecond = 10_000_000_000;
 	const onlineGuessesPerSecond = 1000;
 

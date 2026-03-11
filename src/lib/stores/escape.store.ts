@@ -1,16 +1,16 @@
-import { writable, get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
+import {
+	escapeCsv,
+	escapeHTML,
+	escapeJSON,
+	escapeJavaScript,
+	escapeShell,
+	escapeSql,
+	escapeXML
+} from '../engines/escaper';
 import { input } from './input.store';
 import { output } from './output.store';
 import { addToast } from './toast.store';
-import {
-	escapeHTML,
-	escapeJavaScript,
-	escapeJSON,
-	escapeXML,
-	escapeSql,
-	escapeCsv,
-	escapeShell
-} from '../engines/escaper';
 
 export const escapeOptions = writable({
 	sqlDialect: 'postgres' as 'mysql' | 'postgres' | 'sqlite'

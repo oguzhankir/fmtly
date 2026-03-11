@@ -17,7 +17,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'text',
 		outputLanguage: 'text',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'This is a sample text to count words. There are two sentences here!'
@@ -38,7 +43,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'text',
 		outputLanguage: 'text',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput:
@@ -61,7 +71,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'text',
 		outputLanguage: 'text',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'Zebra\nApple\nMango\nBanana\nOrange'
@@ -82,7 +97,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'text',
 		outputLanguage: 'text',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'apple\nbanana\napple\norange\nBANANA'
@@ -103,7 +123,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'text',
 		outputLanguage: 'text',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '   This   has   too  many \t spaces.   \n\n\nAnd  blank  lines.  '
@@ -124,7 +149,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'markdown',
 		outputLanguage: 'html',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '# Hello World\n\nThis is **markdown**.'
@@ -145,7 +175,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'html',
 		outputLanguage: 'markdown',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '<h1>Hello World</h1><p>This is <strong>HTML</strong>.</p>'
@@ -166,7 +201,12 @@ export const textTools: ToolDefinition[] = [
 		inputLanguage: 'text',
 		outputLanguage: 'text',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'Reverse this completely'

@@ -783,7 +783,7 @@ function cronToHuman(expr: string): string {
 			return `Daily at ${hour.padStart(2, '0')}:${min.padStart(2, '0')} UTC`;
 		if (min !== '*' && hour !== '*' && dom === '*' && month === '*' && dow !== '*') {
 			const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-			return `Every ${days[parseInt(dow)] ?? dow} at ${hour.padStart(2, '0')}:${min.padStart(2, '0')} UTC`;
+			return `Every ${days[Number.parseInt(dow)] ?? dow} at ${hour.padStart(2, '0')}:${min.padStart(2, '0')} UTC`;
 		}
 		if (min.startsWith('*/')) return `Every ${min.slice(2)} minutes`;
 		if (hour.startsWith('*/')) return `Every ${hour.slice(2)} hours`;

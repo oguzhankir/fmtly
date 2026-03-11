@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	escapeSql,
 	escapeCsv,
-	unescapeCsv,
 	escapeShell,
-	unescapeShell,
+	escapeSql,
 	escapeXML,
+	unescapeCsv,
+	unescapeShell,
 	unescapeXML
 } from '../../src/lib/engines/escaper/index';
 

@@ -19,7 +19,11 @@ export const colorTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: color', 'slug: blindness }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'color', slug: 'blindness' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'What is a good contrast ratio?',
@@ -51,7 +55,11 @@ export const colorTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: color', 'slug: gradient }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'color', slug: 'gradient' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'How are palettes calculated?',
@@ -83,7 +91,11 @@ export const colorTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'css',
 		hasTreeView: false,
-		relatedTools: ['{ category: color', 'slug: palette }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'color', slug: 'palette' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'How do radial gradients map?',
@@ -115,7 +127,11 @@ export const colorTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: color', 'slug: contrast }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Are my images uploaded?',

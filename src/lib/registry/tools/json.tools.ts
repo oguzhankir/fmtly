@@ -20,14 +20,10 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: true,
 		relatedTools: [
-			'{ category: json',
-			'slug: viewer }',
-			'{ category: json',
-			'slug: validator }',
-			'{ category: json',
-			'slug: minifier }',
-			'{ category: json',
-			'slug: to-yaml }'
+			{ category: 'json', slug: 'viewer' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'minifier' },
+			{ category: 'json', slug: 'to-yaml' }
 		],
 		faqs: [
 			{
@@ -89,14 +85,10 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: true,
 		relatedTools: [
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: validator }',
-			'{ category: json',
-			'slug: minifier }',
-			'{ category: diff',
-			'slug: json }'
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'minifier' },
+			{ category: 'diff', slug: 'json' }
 		],
 		faqs: [
 			{
@@ -166,14 +158,10 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: viewer }',
-			'{ category: json',
-			'slug: minifier }',
-			'{ category: json',
-			'slug: to-yaml }'
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'viewer' },
+			{ category: 'json', slug: 'minifier' },
+			{ category: 'json', slug: 'to-yaml' }
 		],
 		faqs: [
 			{
@@ -231,14 +219,10 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: validator }',
-			'{ category: json',
-			'slug: viewer }',
-			'{ category: json',
-			'slug: to-csv }'
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'viewer' },
+			{ category: 'json', slug: 'to-csv' }
 		],
 		faqs: [
 			{
@@ -299,12 +283,9 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'yaml',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: yaml',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: yaml',
-			'slug: formatter }'
+			{ category: 'yaml', slug: 'to-json' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'yaml', slug: 'formatter' }
 		],
 		faqs: [
 			{
@@ -355,7 +336,12 @@ export const jsonTools: ToolDefinition[] = [
 		inputLanguage: 'json',
 		outputLanguage: 'toml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '{\n  "title": "TOML Example"\n}'
@@ -376,7 +362,12 @@ export const jsonTools: ToolDefinition[] = [
 		inputLanguage: 'json',
 		outputLanguage: 'markdown',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '[{\n  "name": "fmtly",\n  "type": "tool"\n}]'
@@ -397,7 +388,12 @@ export const jsonTools: ToolDefinition[] = [
 		inputLanguage: 'json',
 		outputLanguage: 'json',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput:
@@ -419,7 +415,12 @@ export const jsonTools: ToolDefinition[] = [
 		inputLanguage: 'json',
 		outputLanguage: 'json',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '{\n  "foo": {"bar": "baz"}\n}'

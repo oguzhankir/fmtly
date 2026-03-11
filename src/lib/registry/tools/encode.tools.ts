@@ -20,12 +20,9 @@ export const encodeTools: ToolDefinition[] = [
 		outputLanguage: 'text',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: encode',
-			'slug: url }',
-			'{ category: escape',
-			'slug: html }',
-			'{ category: escape',
-			'slug: json }'
+			{ category: 'encode', slug: 'url' },
+			{ category: 'escape', slug: 'html' },
+			{ category: 'escape', slug: 'json' }
 		],
 		faqs: [
 			{
@@ -72,12 +69,9 @@ export const encodeTools: ToolDefinition[] = [
 		outputLanguage: 'text',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: encode',
-			'slug: base64 }',
-			'{ category: escape',
-			'slug: html }',
-			'{ category: escape',
-			'slug: javascript }'
+			{ category: 'encode', slug: 'base64' },
+			{ category: 'escape', slug: 'html' },
+			{ category: 'escape', slug: 'javascript' }
 		],
 		faqs: [
 			{
@@ -118,7 +112,10 @@ export const encodeTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: encode', 'slug: unicode }', '{ category: escape', 'slug: html }'],
+		relatedTools: [
+			{ category: 'encode', slug: 'unicode' },
+			{ category: 'escape', slug: 'html' }
+		],
 		faqs: [
 			{
 				question: 'What is the difference between Named and Hex HTML entities?',
@@ -151,10 +148,9 @@ export const encodeTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: encode',
-			'slug: html-entities }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'encode', slug: 'html-entities' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{

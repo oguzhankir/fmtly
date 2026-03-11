@@ -26,10 +26,8 @@ function langTool(
 		outputLanguage: outputLang,
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: generate',
-			'slug: json-to-typescript }',
-			'{ category: generate',
-			'slug: json-schema }'
+			{ category: 'generate', slug: 'json-to-typescript' },
+			{ category: 'generate', slug: 'json-schema' }
 		],
 		faqs: [
 			{
@@ -77,10 +75,8 @@ export const generateTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: generate',
-			'slug: json-to-typescript }',
-			'{ category: generate',
-			'slug: json-to-zod }'
+			{ category: 'generate', slug: 'json-to-typescript' },
+			{ category: 'generate', slug: 'json-to-zod' }
 		],
 		faqs: [
 			{ question: 'Which JSON Schema version?', answer: 'Draft 2020-12 — the latest version.' }
@@ -107,10 +103,9 @@ export const generateTools: ToolDefinition[] = [
 		outputLanguage: 'markdown',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: generate',
-			'slug: json-schema }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'generate', slug: 'json-schema' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -141,10 +136,8 @@ export const generateTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: generate',
-			'slug: json-to-typescript }',
-			'{ category: file',
-			'slug: json-to-excel }'
+			{ category: 'generate', slug: 'json-to-typescript' },
+			{ category: 'file', slug: 'json-to-excel' }
 		],
 		faqs: [
 			{

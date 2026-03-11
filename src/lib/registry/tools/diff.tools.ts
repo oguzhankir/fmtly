@@ -20,12 +20,9 @@ export const diffTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: validator }',
-			'{ category: json',
-			'slug: viewer }'
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'viewer' }
 		],
 		faqs: [
 			{

@@ -76,7 +76,7 @@ export function parseCurl(curl: string): CurlParsed {
 		} else if (token === '-A' || token === '--user-agent') {
 			headers['User-Agent'] = tokens[++i] ?? '';
 		} else if (token === '-e' || token === '--referer') {
-			headers['Referer'] = tokens[++i] ?? '';
+			headers.Referer = tokens[++i] ?? '';
 		} else if (token === '--url') {
 			url = tokens[++i] ?? '';
 		} else if (!token.startsWith('-') && !url) {
@@ -88,7 +88,7 @@ export function parseCurl(curl: string): CurlParsed {
 	// Inject auth header if -u was used
 	if (username !== null) {
 		const creds = btoa(`${username}:${password ?? ''}`);
-		headers['Authorization'] = `Basic ${creds}`;
+		headers.Authorization = `Basic ${creds}`;
 	}
 
 	return { url, method, headers, body, username, password, compressed };

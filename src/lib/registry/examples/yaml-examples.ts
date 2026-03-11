@@ -25,7 +25,8 @@ export const yamlExamples: ExamplePage[] = [
 		toolUrl: '/yaml/formatter',
 		toolName: 'YAML Formatter',
 		format: 'yaml',
-		content: `apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx-deployment\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n      - name: nginx\n        image: nginx:1.14.2\n        ports:\n        - containerPort: 80`,
+		content:
+			'apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx-deployment\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n      - name: nginx\n        image: nginx:1.14.2\n        ports:\n        - containerPort: 80',
 		explanation:
 			'Kubernetes uses YAML to declaratively manage cluster resources like Deployments, Services, and ConfigMaps.',
 		useCases: [
@@ -42,7 +43,8 @@ export const yamlExamples: ExamplePage[] = [
 		toolUrl: '/yaml/formatter',
 		toolName: 'YAML Formatter',
 		format: 'yaml',
-		content: `name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v3\n    - name: Run tests\n      run: npm test`,
+		content:
+			'name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v3\n    - name: Run tests\n      run: npm test',
 		explanation:
 			'GitHub Actions workflows are written in YAML. They define event triggers and sequential jobs to run.',
 		useCases: ['Continuous integration testing', 'Automated deployments', 'Code quality checks'],
@@ -72,7 +74,8 @@ export const yamlExamples: ExamplePage[] = [
 		toolUrl: '/yaml/validator',
 		toolName: 'YAML Validator',
 		format: 'yaml',
-		content: `- name: Install Nginx\n  hosts: webservers\n  become: yes\n  tasks:\n    - name: Ensure nginx is at the latest version\n      apt:\n        name: nginx\n        state: latest\n    - name: Ensure nginx is running\n      service:\n        name: nginx\n        state: started`,
+		content:
+			'- name: Install Nginx\n  hosts: webservers\n  become: yes\n  tasks:\n    - name: Ensure nginx is at the latest version\n      apt:\n        name: nginx\n        state: latest\n    - name: Ensure nginx is running\n      service:\n        name: nginx\n        state: started',
 		explanation:
 			'Ansible playbooks describe IT automation rules in YAML, mapping hosts to required states and tasks.',
 		useCases: [
@@ -149,7 +152,8 @@ export const yamlExamples: ExamplePage[] = [
 		toolUrl: '/yaml/formatter',
 		toolName: 'YAML Formatter',
 		format: 'yaml',
-		content: `version: 2.1\njobs:\n  build:\n    docker:\n      - image: cimg/node:18.0\n    steps:\n      - checkout\n      - run: npm install\n      - run: npm test`,
+		content:
+			'version: 2.1\njobs:\n  build:\n    docker:\n      - image: cimg/node:18.0\n    steps:\n      - checkout\n      - run: npm install\n      - run: npm test',
 		explanation:
 			'CircleCI requires a `.circleci/config.yml` file to parse and run CI/CD workflows, defining execution environments and steps.',
 		useCases: ['Defining Docker-based CI tasks', 'Dependency caching', 'Parallel job execution'],
@@ -213,7 +217,8 @@ export const yamlExamples: ExamplePage[] = [
 		toolUrl: '/yaml/formatter',
 		toolName: 'YAML Formatter',
 		format: 'yaml',
-		content: `image: node:18\n\npipelines:\n  default:\n    - step:\n        name: Build and Test\n        script:\n          - npm install\n          - npm test`,
+		content:
+			'image: node:18\n\npipelines:\n  default:\n    - step:\n        name: Build and Test\n        script:\n          - npm install\n          - npm test',
 		explanation:
 			'Bitbucket Pipelines uses YAML files to map repository branches to build, test, and deployment scripts.',
 		useCases: [

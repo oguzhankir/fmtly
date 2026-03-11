@@ -109,7 +109,7 @@ function generateField(faker: Faker, type: string): unknown {
 		iban: () => faker.finance.iban(),
 		currency: () => faker.finance.currencyCode(),
 		productName: () => faker.commerce.productName(),
-		price: () => parseFloat(faker.commerce.price())
+		price: () => Number.parseFloat(faker.commerce.price())
 	};
 	return (map[type] ?? (() => null))();
 }
@@ -121,7 +121,7 @@ function toCsv(rows: Record<string, unknown>[]): string {
 	const body = rows
 		.map((r) => keys.map((k) => JSON.stringify(String(r[k] ?? ''))).join(','))
 		.join('\n');
-	return header + '\n' + body;
+	return `${header}\n${body}`;
 }
 
 function toInsertStatements(rows: Record<string, unknown>[], tableName: string): string {

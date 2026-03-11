@@ -10,20 +10,17 @@ export async function toMarkdownTable(json: string): Promise<string> {
 		throw new Error('Input must be a non-empty array of objects for Markdown Table conversion');
 	}
 	const keys = Object.keys(parsed[0]);
-	let md = '| ' + keys.join(' | ') + ' |\n';
-	md += '| ' + keys.map(() => '---').join(' | ') + ' |\n';
+	let md = `| ${keys.join(' | ')} |\n`;
+	md += `| ${keys.map(() => '---').join(' | ')} |\n`;
 	for (const row of parsed) {
-		md +=
-			'| ' +
-			keys
-				.map((k) => {
-					const val = row[k];
-					if (val === null || val === undefined) return '';
-					if (typeof val === 'object') return JSON.stringify(val).replace(/\|/g, '\\|');
-					return String(val).replace(/\|/g, '\\|').replace(/\n/g, '<br>');
-				})
-				.join(' | ') +
-			' |\n';
+		md += `| ${keys
+			.map((k) => {
+				const val = row[k];
+				if (val === null || val === undefined) return '';
+				if (typeof val === 'object') return JSON.stringify(val).replace(/\|/g, '\\|');
+				return String(val).replace(/\|/g, '\\|').replace(/\n/g, '<br>');
+			})
+			.join(' | ')} |\n`;
 	}
 	return md;
 }

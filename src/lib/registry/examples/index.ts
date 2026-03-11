@@ -1,7 +1,7 @@
-import { jsonExamples } from './json-examples.js';
-import { yamlExamples } from './yaml-examples.js';
-import { xmlExamples } from './xml-examples.js';
 import { csvExamples } from './csv-examples.js';
+import { jsonExamples } from './json-examples.js';
+import { xmlExamples } from './xml-examples.js';
+import { yamlExamples } from './yaml-examples.js';
 
 export interface ExamplePage {
 	slug: string;

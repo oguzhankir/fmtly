@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from "svelte";
 	import { browser } from "$app/environment";
 	import SeoHead from "$components/layout/SeoHead.svelte";
+	import LZString from "lz-string";
 	import ToolLayout from "$components/tool/ToolLayout.svelte";
 	import InputPanel from "$components/panels/InputPanel.svelte";
 	import OutputPanel from "$components/panels/OutputPanel.svelte";

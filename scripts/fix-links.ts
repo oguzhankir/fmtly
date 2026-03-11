@@ -1,5 +1,5 @@
-import { readdirSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const toolsDir = join(process.cwd(), 'src/lib/registry/tools');
 const files = readdirSync(toolsDir).filter((f) => f.endsWith('.ts'));

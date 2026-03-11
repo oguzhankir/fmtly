@@ -4,7 +4,7 @@
         Download,
         Trash2,
         GripVertical,
-        File,
+        File as FileIcon,
         Loader,
     } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
@@ -90,7 +90,7 @@
                 <div class="file-row">
                     <span class="grip"><GripVertical size={14} /></span>
                     <span class="file-index">{i + 1}</span>
-                    <File size={14} />
+                    <FileIcon size={14} />
                     <span class="file-name">{file.name}</span>
                     <span class="file-size">{formatSize(file.size)}</span>
                     <div class="row-actions">

@@ -20,10 +20,8 @@ export const accessibilityTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: accessibility',
-			'slug: color-blindness }',
-			'{ category: accessibility',
-			'slug: font-size }'
+			{ category: 'accessibility', slug: 'color-blindness' },
+			{ category: 'accessibility', slug: 'font-size' }
 		],
 		faqs: [
 			{
@@ -54,10 +52,8 @@ export const accessibilityTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: accessibility',
-			'slug: contrast }',
-			'{ category: color',
-			'slug: picker }'
+			{ category: 'accessibility', slug: 'contrast' },
+			{ category: 'color', slug: 'picker' }
 		],
 		faqs: [
 			{
@@ -91,10 +87,9 @@ export const accessibilityTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: accessibility',
-			'slug: contrast }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'accessibility', slug: 'contrast' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{

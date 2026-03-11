@@ -137,19 +137,19 @@ function md5(input: Uint8Array): string {
 	view.setUint32(padded.length - 8, bitLen >>> 0, true);
 	view.setUint32(padded.length - 4, Math.floor(bitLen / 0x100000000), true);
 
-	let a0 = 0x67452301,
-		b0 = 0xefcdab89,
-		c0 = 0x98badcfe,
-		d0 = 0x10325476;
+	let a0 = 0x67452301;
+	let b0 = 0xefcdab89;
+	let c0 = 0x98badcfe;
+	let d0 = 0x10325476;
 
 	for (let i = 0; i < padded.length; i += 64) {
 		const w: number[] = [];
 		for (let j = 0; j < 16; j++) w[j] = view.getUint32(i + j * 4, true);
 
-		let a = a0,
-			b = b0,
-			c = c0,
-			d = d0;
+		let a = a0;
+		let b = b0;
+		let c = c0;
+		let d = d0;
 
 		a = ff(a, b, c, d, w[0], 7, -680876936);
 		d = ff(d, a, b, c, w[1], 12, -389564586);

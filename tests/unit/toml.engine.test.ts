@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { format, validate, toJson, toYaml } from '../../src/lib/engines/toml/toml.engine.js';
+import { format, toJson, toYaml, validate } from '../../src/lib/engines/toml/toml.engine.js';
 
 describe('TOML Engine', () => {
 	const sampleToml = 'title = "TOML Example"\n[owner]\nname = "Tom"';

@@ -19,7 +19,11 @@ export const qrTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: qr', 'slug: reader }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'qr', slug: 'reader' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'What is error correction?',
@@ -57,7 +61,11 @@ export const qrTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: qr', 'slug: generator }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'qr', slug: 'generator' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'What image formats are supported?',

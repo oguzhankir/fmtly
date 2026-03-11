@@ -17,7 +17,8 @@ export async function toCsv(xml: string): Promise<string> {
 		if (Array.isArray(curr)) {
 			arrayData = curr;
 			return true;
-		} else if (typeof curr === 'object' && curr !== null) {
+		}
+		if (typeof curr === 'object' && curr !== null) {
 			for (const key of Object.keys(curr)) {
 				if (findArray(curr[key])) return true;
 			}
@@ -36,7 +37,7 @@ export async function toCsv(xml: string): Promise<string> {
 
 	const flatten = (data: any, prefix = ''): Record<string, any> => {
 		return Object.keys(data).reduce((acc: Record<string, any>, k) => {
-			const pre = prefix.length ? prefix + '.' : '';
+			const pre = prefix.length ? `${prefix}.` : '';
 			if (typeof data[k] === 'object' && data[k] !== null && !Array.isArray(data[k])) {
 				Object.assign(acc, flatten(data[k], pre + k));
 			} else {

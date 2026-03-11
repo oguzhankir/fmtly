@@ -30,7 +30,7 @@ async function loadDocument(pdfData: ArrayBuffer): Promise<PDFDocumentProxy> {
 export async function renderPage(
 	pdfData: ArrayBuffer,
 	pageNum: number,
-	scale: number = 1.5
+	scale = 1.5
 ): Promise<HTMLCanvasElement> {
 	const doc = await loadDocument(pdfData);
 	const page = await doc.getPage(pageNum);
@@ -41,7 +41,7 @@ export async function renderPage(
 	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d')!;
 
-	await page.render({ canvasContext: ctx, viewport }).promise;
+	await page.render({ canvasContext: ctx, viewport, canvas }).promise;
 	return canvas;
 }
 
@@ -49,7 +49,7 @@ export async function renderPageToCanvas(
 	pdfData: ArrayBuffer,
 	pageNum: number,
 	canvas: HTMLCanvasElement,
-	scale: number = 1.5
+	scale = 1.5
 ): Promise<void> {
 	const doc = await loadDocument(pdfData);
 	const page = await doc.getPage(pageNum);
@@ -59,7 +59,7 @@ export async function renderPageToCanvas(
 	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d')!;
 
-	await page.render({ canvasContext: ctx, viewport }).promise;
+	await page.render({ canvasContext: ctx, viewport, canvas }).promise;
 }
 
 export async function extractText(
@@ -107,7 +107,7 @@ export async function getMetadata(pdfData: ArrayBuffer): Promise<PdfMetadata> {
 export async function renderThumbnail(
 	pdfData: ArrayBuffer,
 	pageNum: number,
-	width: number = 120
+	width = 120
 ): Promise<HTMLCanvasElement> {
 	const doc = await loadDocument(pdfData);
 	const page = await doc.getPage(pageNum);
@@ -120,6 +120,6 @@ export async function renderThumbnail(
 	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d')!;
 
-	await page.render({ canvasContext: ctx, viewport }).promise;
+	await page.render({ canvasContext: ctx, viewport, canvas }).promise;
 	return canvas;
 }

@@ -56,7 +56,7 @@ export default {
 			return json({ error: 'Proxy error', detail: String(e) }, 500, corsHeaders);
 		}
 
-		function json(data: unknown, status = 200, headers: Record<string, string>) {
+		function json(data: unknown, status, headers: Record<string, string>) {
 			return new Response(JSON.stringify(data), { status, headers });
 		}
 	}

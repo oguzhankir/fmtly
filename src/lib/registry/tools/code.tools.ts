@@ -19,7 +19,10 @@ export const codeTools: ToolDefinition[] = [
 		inputLanguage: 'css',
 		outputLanguage: 'css',
 		hasTreeView: false,
-		relatedTools: ['{ category: code', 'slug: scss }', '{ category: code', 'slug: html }'],
+		relatedTools: [
+			{ category: 'code', slug: 'scss' },
+			{ category: 'code', slug: 'html' }
+		],
 		faqs: [
 			{
 				question: 'Is my CSS uploaded anywhere?',
@@ -57,7 +60,10 @@ export const codeTools: ToolDefinition[] = [
 		inputLanguage: 'scss',
 		outputLanguage: 'scss',
 		hasTreeView: false,
-		relatedTools: ['{ category: code', 'slug: css }', '{ category: code', 'slug: less }'],
+		relatedTools: [
+			{ category: 'code', slug: 'css' },
+			{ category: 'code', slug: 'less' }
+		],
 		faqs: [
 			{
 				question: 'Does this support nested rules?',
@@ -89,7 +95,10 @@ export const codeTools: ToolDefinition[] = [
 		inputLanguage: 'less',
 		outputLanguage: 'less',
 		hasTreeView: false,
-		relatedTools: ['{ category: code', 'slug: css }', '{ category: code', 'slug: scss }'],
+		relatedTools: [
+			{ category: 'code', slug: 'css' },
+			{ category: 'code', slug: 'scss' }
+		],
 		faqs: [
 			{
 				question: 'Is this different from the CSS formatter?',
@@ -121,7 +130,10 @@ export const codeTools: ToolDefinition[] = [
 		inputLanguage: 'html',
 		outputLanguage: 'html',
 		hasTreeView: false,
-		relatedTools: ['{ category: code', 'slug: css }', '{ category: code', 'slug: javascript }'],
+		relatedTools: [
+			{ category: 'code', slug: 'css' },
+			{ category: 'code', slug: 'javascript' }
+		],
 		faqs: [
 			{
 				question: 'Can it format inline scripts and styles?',
@@ -154,7 +166,10 @@ export const codeTools: ToolDefinition[] = [
 		inputLanguage: 'javascript',
 		outputLanguage: 'javascript',
 		hasTreeView: false,
-		relatedTools: ['{ category: code', 'slug: typescript }', '{ category: code', 'slug: html }'],
+		relatedTools: [
+			{ category: 'code', slug: 'typescript' },
+			{ category: 'code', slug: 'html' }
+		],
 		faqs: [
 			{
 				question: 'Does it support JSX?',
@@ -191,7 +206,10 @@ export const codeTools: ToolDefinition[] = [
 		inputLanguage: 'typescript',
 		outputLanguage: 'typescript',
 		hasTreeView: false,
-		relatedTools: ['{ category: code', 'slug: javascript }', '{ category: code', 'slug: graphql }'],
+		relatedTools: [
+			{ category: 'code', slug: 'javascript' },
+			{ category: 'code', slug: 'graphql' }
+		],
 		faqs: [
 			{
 				question: 'Does this type-check my code?',
@@ -225,10 +243,8 @@ export const codeTools: ToolDefinition[] = [
 		outputLanguage: 'graphql',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: code',
-			'slug: typescript }'
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'code', slug: 'typescript' }
 		],
 		faqs: [
 			{
@@ -263,10 +279,8 @@ export const codeTools: ToolDefinition[] = [
 		outputLanguage: 'markdown',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: text',
-			'slug: markdown-to-html }',
-			'{ category: code',
-			'slug: html }'
+			{ category: 'text', slug: 'markdown-to-html' },
+			{ category: 'code', slug: 'html' }
 		],
 		faqs: [
 			{
@@ -301,10 +315,9 @@ export const codeTools: ToolDefinition[] = [
 		outputLanguage: 'javascript',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: code',
-			'slug: curl-to-axios }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'code', slug: 'curl-to-axios' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -338,10 +351,9 @@ export const codeTools: ToolDefinition[] = [
 		outputLanguage: 'javascript',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: code',
-			'slug: curl-to-fetch }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'code', slug: 'curl-to-fetch' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{

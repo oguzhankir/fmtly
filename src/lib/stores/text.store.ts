@@ -1,16 +1,16 @@
-import { writable, get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
+import {
+	cleanWhitespace,
+	deduplicateLines,
+	htmlToMarkdown,
+	markdownToHtml,
+	reverseLines,
+	reverseText,
+	sortLines,
+	trimLines
+} from '../engines/text/text.engine';
 import { input } from './input.store';
 import { output } from './output.store';
-import {
-	sortLines,
-	deduplicateLines,
-	reverseLines,
-	trimLines,
-	cleanWhitespace,
-	markdownToHtml,
-	htmlToMarkdown,
-	reverseText
-} from '../engines/text/text.engine';
 import { addToast } from './toast.store';
 
 // Options state

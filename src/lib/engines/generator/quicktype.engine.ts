@@ -41,7 +41,7 @@ export async function jsonToType(
 }
 
 // JSON → Zod schema (pure JS, no library needed)
-export function jsonToZod(jsonInput: string, typeName: string = 'Root'): string {
+export function jsonToZod(jsonInput: string, typeName = 'Root'): string {
 	const data = JSON.parse(jsonInput);
 	const lines: string[] = ['import { z } from "zod";', ''];
 	lines.push(`export const ${typeName}Schema = ${inferZod(data, 1)};`);
@@ -75,11 +75,10 @@ export function jsonToMarkdownTable(jsonInput: string): string {
 	const data = JSON.parse(jsonInput);
 	if (!Array.isArray(data) || data.length === 0) return '(Empty or non-array JSON)';
 	const keys = Object.keys(data[0]);
-	const header = '| ' + keys.join(' | ') + ' |';
-	const separator = '| ' + keys.map(() => '---').join(' | ') + ' |';
+	const header = `| ${keys.join(' | ')} |`;
+	const separator = `| ${keys.map(() => '---').join(' | ')} |`;
 	const rows = data.map(
-		(row: Record<string, unknown>) =>
-			'| ' + keys.map((k) => String(row[k] ?? '')).join(' | ') + ' |'
+		(row: Record<string, unknown>) => `| ${keys.map((k) => String(row[k] ?? '')).join(' | ')} |`
 	);
 	return [header, separator, ...rows].join('\n');
 }

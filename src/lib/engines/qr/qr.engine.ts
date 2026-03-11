@@ -72,5 +72,5 @@ export function buildEmail(to: string, subject?: string, body?: string): string 
 	const params: string[] = [];
 	if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
 	if (body) params.push(`body=${encodeURIComponent(body)}`);
-	return `mailto:${to}${params.length ? '?' + params.join('&') : ''}`;
+	return `mailto:${to}${params.length ? `?${params.join('&')}` : ''}`;
 }

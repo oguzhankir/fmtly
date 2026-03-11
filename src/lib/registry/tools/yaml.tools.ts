@@ -20,12 +20,9 @@ export const yamlTools: ToolDefinition[] = [
 		outputLanguage: 'yaml',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: yaml',
-			'slug: validator }',
-			'{ category: yaml',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: to-yaml }'
+			{ category: 'yaml', slug: 'validator' },
+			{ category: 'yaml', slug: 'to-json' },
+			{ category: 'json', slug: 'to-yaml' }
 		],
 		faqs: [
 			{
@@ -74,12 +71,9 @@ scripts:
 		outputLanguage: 'yaml',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: yaml',
-			'slug: formatter }',
-			'{ category: yaml',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: to-yaml }'
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'yaml', slug: 'to-json' },
+			{ category: 'json', slug: 'to-yaml' }
 		],
 		faqs: [
 			{
@@ -130,12 +124,9 @@ spec:
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: to-yaml }',
-			'{ category: yaml',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: formatter }'
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' }
 		],
 		faqs: [
 			{
@@ -184,7 +175,12 @@ logging:
 		inputLanguage: 'yaml',
 		outputLanguage: 'xml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'root:\n  item: "Hello"'
@@ -205,7 +201,12 @@ logging:
 		inputLanguage: 'yaml',
 		outputLanguage: 'csv',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '- id: 1\n  name: "item"'
@@ -226,7 +227,12 @@ logging:
 		inputLanguage: 'yaml',
 		outputLanguage: 'toml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'server:\n  port: 8080'
@@ -247,7 +253,12 @@ logging:
 		inputLanguage: 'yaml',
 		outputLanguage: 'yaml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'a: 1'

@@ -1,7 +1,7 @@
+import { examples } from '$lib/registry/examples/index.js';
 import { getAllCategoryMeta } from '$registry/categories.js';
 import { getAllTools } from '$registry/index.js';
 import { getCategories } from '$registry/index.js';
-import { examples } from '$lib/registry/examples/index.js';
 import type { RequestHandler } from './$types.js';
 
 const BASE_URL = 'https://fmtly.dev';

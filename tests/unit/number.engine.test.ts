@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
 	formatNumber,
-	toRoman,
 	fromRoman,
-	percentOf,
+	fromScientific,
 	percentChange,
 	percentDiff,
-	toScientific,
-	fromScientific
+	percentOf,
+	toRoman,
+	toScientific
 } from '../../src/lib/engines/number/number.engine';
 
 describe('Number Engine', () => {

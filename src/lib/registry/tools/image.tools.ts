@@ -20,10 +20,8 @@ export const imageTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: image',
-			'slug: from-base64 }',
-			'{ category: image',
-			'slug: convert }'
+			{ category: 'image', slug: 'from-base64' },
+			{ category: 'image', slug: 'convert' }
 		],
 		faqs: [
 			{
@@ -56,7 +54,11 @@ export const imageTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: image', 'slug: to-base64 }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'image', slug: 'to-base64' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'What formats are supported?',
@@ -87,7 +89,10 @@ export const imageTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: image', 'slug: compress }', '{ category: image', 'slug: convert }'],
+		relatedTools: [
+			{ category: 'image', slug: 'compress' },
+			{ category: 'image', slug: 'convert' }
+		],
 		faqs: [
 			{
 				question: 'Does resizing reduce file size?',
@@ -119,7 +124,10 @@ export const imageTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: image', 'slug: compress }', '{ category: image', 'slug: resize }'],
+		relatedTools: [
+			{ category: 'image', slug: 'compress' },
+			{ category: 'image', slug: 'resize' }
+		],
 		faqs: [
 			{
 				question: 'Why is WebP recommended?',
@@ -151,7 +159,10 @@ export const imageTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: image', 'slug: resize }', '{ category: image', 'slug: convert }'],
+		relatedTools: [
+			{ category: 'image', slug: 'resize' },
+			{ category: 'image', slug: 'convert' }
+		],
 		faqs: [
 			{
 				question: 'How much compression can I expect?',
@@ -183,7 +194,11 @@ export const imageTools: ToolDefinition[] = [
 		inputLanguage: 'xml',
 		outputLanguage: 'xml',
 		hasTreeView: false,
-		relatedTools: ['{ category: image', 'slug: to-base64 }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'image', slug: 'to-base64' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Is SVGO safe for all SVGs?',

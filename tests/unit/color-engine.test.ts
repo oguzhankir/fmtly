@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	hexToRgb,
-	rgbToHex,
-	hslToRgb,
-	rgbToHsl,
-	contrastRatio,
-	wcagResult,
-	complementary,
 	analogous,
-	triadic,
+	complementary,
+	contrastRatio,
 	cssLinearGradient,
-	simulateProtanopia
+	hexToRgb,
+	hslToRgb,
+	rgbToHex,
+	rgbToHsl,
+	simulateProtanopia,
+	triadic,
+	wcagResult
 } from '../../src/lib/engines/color';
 
 describe('Color Engine Math', () => {

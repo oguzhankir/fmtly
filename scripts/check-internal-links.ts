@@ -1,17 +1,17 @@
-import { jsonTools } from '../src/lib/registry/tools/json.tools.js';
-import { yamlTools } from '../src/lib/registry/tools/yaml.tools.js';
-import { xmlTools } from '../src/lib/registry/tools/xml.tools.js';
-import { csvTools } from '../src/lib/registry/tools/csv.tools.js';
-import { textTools } from '../src/lib/registry/tools/text.tools.js';
-import { colorTools } from '../src/lib/registry/tools/color.tools.js';
 import { codeTools } from '../src/lib/registry/tools/code.tools.js';
+import { colorTools } from '../src/lib/registry/tools/color.tools.js';
 import { cryptoTools } from '../src/lib/registry/tools/crypto.tools.js';
-import { webTools } from '../src/lib/registry/tools/web.tools.js';
-import { pdfTools } from '../src/lib/registry/tools/pdf.tools.js';
-import { imageTools } from '../src/lib/registry/tools/image.tools.js';
+import { csvTools } from '../src/lib/registry/tools/csv.tools.js';
 import { fileTools } from '../src/lib/registry/tools/file.tools.js';
-import { numberTools } from '../src/lib/registry/tools/number.tools.js';
 import { generateTools } from '../src/lib/registry/tools/generate.tools.js';
+import { imageTools } from '../src/lib/registry/tools/image.tools.js';
+import { jsonTools } from '../src/lib/registry/tools/json.tools.js';
+import { numberTools } from '../src/lib/registry/tools/number.tools.js';
+import { pdfTools } from '../src/lib/registry/tools/pdf.tools.js';
+import { textTools } from '../src/lib/registry/tools/text.tools.js';
+import { webTools } from '../src/lib/registry/tools/web.tools.js';
+import { xmlTools } from '../src/lib/registry/tools/xml.tools.js';
+import { yamlTools } from '../src/lib/registry/tools/yaml.tools.js';
 
 const allTools = [
 	...jsonTools,

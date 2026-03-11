@@ -95,7 +95,7 @@ export function decodeHtmlEntities(text: string): string {
 	// although request states "Use DOMParser or textarea trick".
 	return text
 		.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(Number(dec)))
-		.replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+		.replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(Number.parseInt(hex, 16)))
 		.replace(/&amp;/g, '&')
 		.replace(/&lt;/g, '<')
 		.replace(/&gt;/g, '>')
@@ -148,14 +148,14 @@ export function codePointToChar(cp: string): string {
 		const trimmed = cp.trim();
 		// If explicitly hex prefix, force hex
 		if (/^(U\+|0x|\\u|&#x)/i.test(trimmed)) {
-			let clean = trimmed.replace(/^(U\+|0x|\\u|&#x)/i, '').replace(/[{};]/g, '');
-			return String.fromCodePoint(parseInt(clean, 16));
+			const clean = trimmed.replace(/^(U\+|0x|\\u|&#x)/i, '').replace(/[{};]/g, '');
+			return String.fromCodePoint(Number.parseInt(clean, 16));
 		}
 
 		// If explicitly decimal HTML entity
 		if (/^&#[0-9]+;$/.test(trimmed)) {
-			let clean = trimmed.replace(/^&#/, '').replace(/;$/, '');
-			return String.fromCodePoint(parseInt(clean, 10));
+			const clean = trimmed.replace(/^&#/, '').replace(/;$/, '');
+			return String.fromCodePoint(Number.parseInt(clean, 10));
 		}
 
 		// Otherwise, try parsing as numbers
@@ -163,11 +163,11 @@ export function codePointToChar(cp: string): string {
 		// The test says expect(codePointToChar('65')).toBe('A') -> this implies 65 is deemed a DECIMAL input.
 		// So if it's purely digits, treat as decimal. If it has letters, treat as hex.
 		if (/^[0-9]+$/.test(trimmed)) {
-			return String.fromCodePoint(parseInt(trimmed, 10)); // Treat purely digits as decimal unless prefixed
+			return String.fromCodePoint(Number.parseInt(trimmed, 10)); // Treat purely digits as decimal unless prefixed
 		}
 
 		// Fallback assume hex
-		return String.fromCodePoint(parseInt(trimmed, 16));
+		return String.fromCodePoint(Number.parseInt(trimmed, 16));
 	} catch (e) {
 		return '';
 	}

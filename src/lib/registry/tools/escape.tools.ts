@@ -20,12 +20,9 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'html',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: escape',
-			'slug: javascript }',
-			'{ category: escape',
-			'slug: json }',
-			'{ category: encode',
-			'slug: url }'
+			{ category: 'escape', slug: 'javascript' },
+			{ category: 'escape', slug: 'json' },
+			{ category: 'encode', slug: 'url' }
 		],
 		faqs: [
 			{
@@ -67,12 +64,9 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'javascript',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: escape',
-			'slug: json }',
-			'{ category: escape',
-			'slug: html }',
-			'{ category: encode',
-			'slug: base64 }'
+			{ category: 'escape', slug: 'json' },
+			{ category: 'escape', slug: 'html' },
+			{ category: 'encode', slug: 'base64' }
 		],
 		faqs: [
 			{
@@ -114,12 +108,9 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: escape',
-			'slug: javascript }',
-			'{ category: escape',
-			'slug: html }',
-			'{ category: json',
-			'slug: formatter }'
+			{ category: 'escape', slug: 'javascript' },
+			{ category: 'escape', slug: 'html' },
+			{ category: 'json', slug: 'formatter' }
 		],
 		faqs: [
 			{
@@ -160,7 +151,10 @@ export const escapeTools: ToolDefinition[] = [
 		inputLanguage: 'xml',
 		outputLanguage: 'xml',
 		hasTreeView: false,
-		relatedTools: ['{ category: escape', 'slug: html }', '{ category: escape', 'slug: json }'],
+		relatedTools: [
+			{ category: 'escape', slug: 'html' },
+			{ category: 'escape', slug: 'json' }
+		],
 		faqs: [
 			{
 				question: 'How is XML escaping different from HTML?',
@@ -192,7 +186,10 @@ export const escapeTools: ToolDefinition[] = [
 		inputLanguage: 'sql',
 		outputLanguage: 'sql',
 		hasTreeView: false,
-		relatedTools: ['{ category: escape', 'slug: csv }', '{ category: escape', 'slug: shell }'],
+		relatedTools: [
+			{ category: 'escape', slug: 'csv' },
+			{ category: 'escape', slug: 'shell' }
+		],
 		faqs: [
 			{
 				question: 'Can this unescape my database dumps?',
@@ -224,7 +221,11 @@ export const escapeTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: csv', 'slug: formatter }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'What triggers a CSV wrap?',
@@ -257,10 +258,9 @@ export const escapeTools: ToolDefinition[] = [
 		outputLanguage: 'bash',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: escape',
-			'slug: javascript }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'escape', slug: 'javascript' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{

@@ -20,12 +20,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: percentage }',
-			'{ category: number',
-			'slug: scientific }',
-			'{ category: number',
-			'slug: roman }'
+			{ category: 'number', slug: 'percentage' },
+			{ category: 'number', slug: 'scientific' },
+			{ category: 'number', slug: 'roman' }
 		],
 		faqs: [
 			{
@@ -60,10 +57,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: formatter }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'number', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -97,10 +93,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: formatter }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'number', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -135,10 +130,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: formatter }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'number', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -172,10 +166,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: formatter }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'number', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{ question: 'How are values entered?', answer: 'One number per line, or comma-separated.' }
@@ -205,10 +198,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: statistics }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'number', slug: 'statistics' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -239,10 +231,9 @@ export const numberTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: number',
-			'slug: formatter }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'number', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{

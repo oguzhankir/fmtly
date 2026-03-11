@@ -19,7 +19,11 @@ export const fileTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: file', 'slug: unzip }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'file', slug: 'unzip' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Is there a file size limit?',
@@ -50,7 +54,11 @@ export const fileTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: file', 'slug: zip }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'file', slug: 'zip' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Can I preview files inside the ZIP?',
@@ -81,7 +89,11 @@ export const fileTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: crypto', 'slug: hash }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'crypto', slug: 'hash' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Is MD5 secure?',
@@ -111,10 +123,8 @@ export const fileTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: file',
-			'slug: json-to-excel }',
-			'{ category: csv',
-			'slug: to-json }'
+			{ category: 'file', slug: 'json-to-excel' },
+			{ category: 'csv', slug: 'to-json' }
 		],
 		faqs: [
 			{
@@ -144,10 +154,8 @@ export const fileTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: file',
-			'slug: excel-to-json }',
-			'{ category: json',
-			'slug: to-csv }'
+			{ category: 'file', slug: 'excel-to-json' },
+			{ category: 'json', slug: 'to-csv' }
 		],
 		faqs: [
 			{

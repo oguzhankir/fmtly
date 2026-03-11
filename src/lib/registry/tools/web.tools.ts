@@ -19,7 +19,10 @@ export const webTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: web', 'slug: cors }', '{ category: encode', 'slug: url }'],
+		relatedTools: [
+			{ category: 'web', slug: 'cors' },
+			{ category: 'encode', slug: 'url' }
+		],
 		faqs: [
 			{
 				question: 'Does this send my URLs anywhere?',
@@ -58,7 +61,11 @@ export const webTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: web', 'slug: cors }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'web', slug: 'cors' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Is my User-Agent sent to a server?',
@@ -93,10 +100,8 @@ export const webTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: web',
-			'slug: url-parser }',
-			'{ category: web',
-			'slug: dns-lookup }'
+			{ category: 'web', slug: 'url-parser' },
+			{ category: 'web', slug: 'dns-lookup' }
 		],
 		faqs: [
 			{
@@ -135,7 +140,11 @@ export const webTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: web', 'slug: url-parser }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'web', slug: 'url-parser' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Does this make network requests?',
@@ -168,7 +177,11 @@ export const webTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: web', 'slug: dns-lookup }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'web', slug: 'dns-lookup' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Is my IP address stored?',
@@ -201,7 +214,11 @@ export const webTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: web', 'slug: ip-lookup }', 'json/formatter', 'text/word-counter'],
+		relatedTools: [
+			{ category: 'web', slug: 'ip-lookup' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
+		],
 		faqs: [
 			{
 				question: 'Which DNS resolver is used?',

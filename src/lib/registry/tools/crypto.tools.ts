@@ -20,10 +20,9 @@ export const cryptoTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: crypto',
-			'slug: random-string }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'crypto', slug: 'random-string' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -54,10 +53,9 @@ export const cryptoTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: crypto',
-			'slug: random-string }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'crypto', slug: 'random-string' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -91,10 +89,9 @@ export const cryptoTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: crypto',
-			'slug: random-string }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'crypto', slug: 'random-string' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{
@@ -128,10 +125,9 @@ export const cryptoTools: ToolDefinition[] = [
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: crypto',
-			'slug: password-strength }',
-			'json/formatter',
-			'text/word-counter'
+			{ category: 'crypto', slug: 'password-strength' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
 			{

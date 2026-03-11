@@ -1,16 +1,16 @@
 // Accessibility engine — uses existing color engine, pure JS
 
 import {
+	type RgbColor,
+	type WcagResult,
+	contrastRatio,
 	hexToRgb,
 	rgbToHex,
-	contrastRatio,
-	wcagResult,
-	simulateProtanopia,
-	simulateDeuteranopia,
-	simulateTritanopia,
 	simulateAchromatopsia,
-	type RgbColor,
-	type WcagResult
+	simulateDeuteranopia,
+	simulateProtanopia,
+	simulateTritanopia,
+	wcagResult
 } from '../color/index';
 
 export { contrastRatio, hexToRgb, rgbToHex, wcagResult };

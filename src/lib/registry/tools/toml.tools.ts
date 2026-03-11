@@ -17,7 +17,12 @@ export const tomlTools: ToolDefinition[] = [
 		inputLanguage: 'toml',
 		outputLanguage: 'toml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'title = "TOML Example"\n\n[owner]\nname = "Tom Preston-Werner"'
@@ -38,7 +43,12 @@ export const tomlTools: ToolDefinition[] = [
 		inputLanguage: 'toml',
 		outputLanguage: 'toml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'title = "TOML Example"'
@@ -59,7 +69,12 @@ export const tomlTools: ToolDefinition[] = [
 		inputLanguage: 'toml',
 		outputLanguage: 'json',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'title = "TOML Example"'
@@ -80,7 +95,12 @@ export const tomlTools: ToolDefinition[] = [
 		inputLanguage: 'toml',
 		outputLanguage: 'yaml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'title = "TOML Example"'

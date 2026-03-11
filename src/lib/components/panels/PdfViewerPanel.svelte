@@ -6,7 +6,7 @@
         ChevronRight,
         ZoomIn,
         ZoomOut,
-        File,
+        File as FileIcon,
     } from "lucide-svelte";
 
     let pdfData: ArrayBuffer | null = $state(null);
@@ -143,7 +143,7 @@
                 >
             </div>
             <div class="file-info">
-                <File size={13} />
+                <FileIcon size={13} />
                 {fileName} — {formatSize(fileSize)}
             </div>
         </div>

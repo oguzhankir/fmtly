@@ -72,7 +72,7 @@ export async function resizeImage(file: File, options: ResizeOptions): Promise<B
 export async function convertImage(
 	file: File,
 	targetFormat: 'image/png' | 'image/jpeg' | 'image/webp',
-	quality: number = 0.92
+	quality = 0.92
 ): Promise<Blob> {
 	const bitmap = await createImageBitmap(file);
 	const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);

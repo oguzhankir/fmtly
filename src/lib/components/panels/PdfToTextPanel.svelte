@@ -1,6 +1,6 @@
 <script lang="ts">
     import PdfDropZone from "./PdfDropZone.svelte";
-    import { Copy, Check, Download, File, Loader } from "lucide-svelte";
+    import { Copy, Check, Download, File as FileIcon, Loader } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
 
     let pdfData: ArrayBuffer | null = $state(null);
@@ -88,7 +88,7 @@
     {:else}
         <div class="toolbar">
             <div class="file-info">
-                <File size={13} />
+                <FileIcon size={13} />
                 {fileName} — {pageCount} pages — {formatSize(fileSize)} — {wordCount.toLocaleString()}
                 words
             </div>

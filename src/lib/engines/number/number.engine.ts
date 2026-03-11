@@ -147,7 +147,7 @@ export function toScientific(n: string): string {
 	const [base, exp] = sci.split('e');
 	if (!exp) return base;
 
-	const expNum = parseInt(exp, 10);
+	const expNum = Number.parseInt(exp, 10);
 	const superscripts: Record<string, string> = {
 		'0': '⁰',
 		'1': '¹',
@@ -203,7 +203,7 @@ export function fromScientific(s: string): string {
 	}
 
 	if (hasSuper) {
-		str = str.split('×')[0] + 'e' + parsedExp;
+		str = `${str.split('×')[0]}e${parsedExp}`;
 	} else {
 		str = str.replace('×10^', 'e').replace('x10^', 'e');
 	}

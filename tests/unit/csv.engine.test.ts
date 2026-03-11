@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+	format,
+	toHtmlTable,
 	toXml,
 	toYaml,
-	toHtmlTable,
-	format,
 	validate
 } from '../../src/lib/engines/csv/csv.engine.js';
 

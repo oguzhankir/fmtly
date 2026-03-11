@@ -34,7 +34,7 @@ export function hexToRgb(hex: string): RgbColor {
 			.map((c) => c + c)
 			.join('');
 	}
-	const num = parseInt(hex, 16);
+	const num = Number.parseInt(hex, 16);
 	return {
 		r: (num >> 16) & 255,
 		g: (num >> 8) & 255,
@@ -45,7 +45,7 @@ export function hexToRgb(hex: string): RgbColor {
 export function rgbToHex(rgb: RgbColor): string {
 	const toHex = (n: number) => {
 		const hex = Math.max(0, Math.min(255, Math.round(n))).toString(16);
-		return hex.length === 1 ? '0' + hex : hex;
+		return hex.length === 1 ? `0${hex}` : hex;
 	};
 	return `#${toHex(rgb.r)}${toHex(rgb.g)}${toHex(rgb.b)}`;
 }
@@ -54,7 +54,9 @@ export function hslToRgb(hsl: HslColor): RgbColor {
 	const h = hsl.h / 360;
 	const s = hsl.s / 100;
 	const l = hsl.l / 100;
-	let r, g, b;
+	let r;
+	let g;
+	let b;
 
 	if (s === 0) {
 		r = g = b = l;
@@ -77,14 +79,14 @@ export function hslToRgb(hsl: HslColor): RgbColor {
 }
 
 export function rgbToHsl(rgb: RgbColor): HslColor {
-	const r = rgb.r / 255,
-		g = rgb.g / 255,
-		b = rgb.b / 255;
-	const max = Math.max(r, g, b),
-		min = Math.min(r, g, b);
-	let h = 0,
-		s = 0,
-		l = (max + min) / 2;
+	const r = rgb.r / 255;
+	const g = rgb.g / 255;
+	const b = rgb.b / 255;
+	const max = Math.max(r, g, b);
+	const min = Math.min(r, g, b);
+	let h = 0;
+	let s = 0;
+	const l = (max + min) / 2;
 
 	if (max !== min) {
 		const d = max - min;
@@ -110,7 +112,7 @@ export function rgbToHsl(rgb: RgbColor): HslColor {
 function relativeLuminance(rgb: RgbColor): number {
 	const [R, G, B] = [rgb.r, rgb.g, rgb.b].map((channel) => {
 		const c = channel / 255;
-		return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+		return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 	});
 	return 0.2126 * R + 0.7152 * G + 0.0722 * B;
 }
@@ -139,7 +141,7 @@ export function complementary(hsl: HslColor): HslColor[] {
 	return [{ ...hsl }, { ...hsl, h: (hsl.h + 180) % 360 }];
 }
 
-export function analogous(hsl: HslColor, count: number = 5): HslColor[] {
+export function analogous(hsl: HslColor, count = 5): HslColor[] {
 	const step = 30; // 30 degrees for analogous
 	const result: HslColor[] = [];
 	const startHue = hsl.h - Math.floor(count / 2) * step;
@@ -167,7 +169,7 @@ export function splitComplementary(hsl: HslColor): HslColor[] {
 	return [{ ...hsl }, { ...hsl, h: (hsl.h + 150) % 360 }, { ...hsl, h: (hsl.h + 210) % 360 }];
 }
 
-export function monochromatic(hsl: HslColor, count: number = 6): HslColor[] {
+export function monochromatic(hsl: HslColor, count = 6): HslColor[] {
 	const result: HslColor[] = [];
 	const step = 100 / count;
 	for (let i = 0; i < count; i++) {

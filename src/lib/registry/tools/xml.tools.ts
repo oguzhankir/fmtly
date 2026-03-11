@@ -20,12 +20,9 @@ export const xmlTools: ToolDefinition[] = [
 		outputLanguage: 'xml',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: xml',
-			'slug: validator }',
-			'{ category: xml',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: to-xml }'
+			{ category: 'xml', slug: 'validator' },
+			{ category: 'xml', slug: 'to-json' },
+			{ category: 'json', slug: 'to-xml' }
 		],
 		faqs: [
 			{
@@ -66,12 +63,9 @@ export const xmlTools: ToolDefinition[] = [
 		outputLanguage: 'xml',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: xml',
-			'slug: formatter }',
-			'{ category: xml',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: to-xml }'
+			{ category: 'xml', slug: 'formatter' },
+			{ category: 'xml', slug: 'to-json' },
+			{ category: 'json', slug: 'to-xml' }
 		],
 		faqs: [
 			{
@@ -119,12 +113,9 @@ export const xmlTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: to-xml }',
-			'{ category: xml',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: formatter }'
+			{ category: 'json', slug: 'to-xml' },
+			{ category: 'xml', slug: 'formatter' },
+			{ category: 'json', slug: 'formatter' }
 		],
 		faqs: [
 			{
@@ -179,12 +170,9 @@ export const xmlTools: ToolDefinition[] = [
 		outputLanguage: 'xml',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: xml',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: xml',
-			'slug: formatter }'
+			{ category: 'xml', slug: 'to-json' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'xml', slug: 'formatter' }
 		],
 		faqs: [
 			{
@@ -237,7 +225,12 @@ export const xmlTools: ToolDefinition[] = [
 		inputLanguage: 'xml',
 		outputLanguage: 'yaml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '<root><item>Hello</item></root>'
@@ -258,7 +251,12 @@ export const xmlTools: ToolDefinition[] = [
 		inputLanguage: 'xml',
 		outputLanguage: 'csv',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: '<root><row><id>1</id></row></root>'

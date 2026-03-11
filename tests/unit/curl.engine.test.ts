@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { parseCurl, curlToFetch, curlToAxios } from '../../src/lib/engines/code/curl.engine';
+import { describe, expect, it } from 'vitest';
+import { curlToAxios, curlToFetch, parseCurl } from '../../src/lib/engines/code/curl.engine';
 
 describe('parseCurl', () => {
 	it('parses a simple GET request', () => {
@@ -25,14 +25,14 @@ describe('parseCurl', () => {
 		expect(result.username).toBe('user');
 		expect(result.password).toBe('pass');
 		// Should inject Basic auth header
-		expect(result.headers['Authorization']).toMatch(/^Basic /);
+		expect(result.headers.Authorization).toMatch(/^Basic /);
 	});
 
 	it('parses Bearer token header', () => {
 		const result = parseCurl(
 			"curl -H 'Authorization: Bearer mytoken123' https://api.example.com/me"
 		);
-		expect(result.headers['Authorization']).toBe('Bearer mytoken123');
+		expect(result.headers.Authorization).toBe('Bearer mytoken123');
 		expect(result.method).toBe('GET');
 	});
 

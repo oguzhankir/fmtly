@@ -143,18 +143,18 @@ export type SortOptions = {
 };
 
 export function sortLines(text: string, options: SortOptions): string {
-	let lines = text.split('\n');
+	const lines = text.split('\n');
 
 	lines.sort((a, b) => {
-		let valA = options.caseSensitive ? a : a.toLowerCase();
-		let valB = options.caseSensitive ? b : b.toLowerCase();
+		const valA = options.caseSensitive ? a : a.toLowerCase();
+		const valB = options.caseSensitive ? b : b.toLowerCase();
 
 		let cmp = 0;
 		if (options.mode === 'numeric') {
-			const numA = parseFloat(valA);
-			const numB = parseFloat(valB);
-			const isNumA = !isNaN(numA);
-			const isNumB = !isNaN(numB);
+			const numA = Number.parseFloat(valA);
+			const numB = Number.parseFloat(valB);
+			const isNumA = !Number.isNaN(numA);
+			const isNumB = !Number.isNaN(numB);
 			if (isNumA && isNumB) cmp = numA - numB;
 			else if (isNumA) cmp = -1;
 			else if (isNumB) cmp = 1;
@@ -237,7 +237,8 @@ export async function htmlToMarkdown(html: string): Promise<string> {
 export function reverseText(text: string, mode: 'chars' | 'words' | 'lines'): string {
 	if (mode === 'lines') {
 		return text.split('\n').reverse().join('\n');
-	} else if (mode === 'words') {
+	}
+	if (mode === 'words') {
 		const lines = text.split('\n');
 		return lines
 			.map((line) => {
@@ -248,8 +249,7 @@ export function reverseText(text: string, mode: 'chars' | 'words' | 'lines'): st
 				return tokens.map((t) => (/\w/.test(t) ? words[wordIndex++] : t)).join('');
 			})
 			.join('\n');
-	} else {
-		// chars
-		return Array.from(text).reverse().join('');
 	}
+	// chars
+	return Array.from(text).reverse().join('');
 }

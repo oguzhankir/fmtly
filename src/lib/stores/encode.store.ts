@@ -1,15 +1,15 @@
-import { writable, get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
+import {
+	base64Decode,
+	base64Encode,
+	decodeHtmlEntities,
+	encodeHtmlEntities,
+	urlDecode,
+	urlEncode
+} from '../engines/encoder';
 import { input } from './input.store';
 import { output } from './output.store';
 import { addToast } from './toast.store';
-import {
-	base64Encode,
-	base64Decode,
-	urlEncode,
-	urlDecode,
-	encodeHtmlEntities,
-	decodeHtmlEntities
-} from '../engines/encoder';
 
 export const encodeOptions = writable({
 	htmlEntitiesMode: 'named' as 'named' | 'numeric' | 'hex'

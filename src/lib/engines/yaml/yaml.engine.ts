@@ -24,7 +24,7 @@ export async function toCsv(yaml: string): Promise<string> {
 
 	const flatten = (item: any, prefix = ''): Record<string, any> => {
 		return Object.keys(item).reduce((acc: Record<string, any>, k) => {
-			const pre = prefix.length ? prefix + '.' : '';
+			const pre = prefix.length ? `${prefix}.` : '';
 			if (typeof item[k] === 'object' && item[k] !== null && !Array.isArray(item[k])) {
 				Object.assign(acc, flatten(item[k], pre + k));
 			} else {

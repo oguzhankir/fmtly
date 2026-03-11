@@ -20,12 +20,9 @@ export const csvTools: ToolDefinition[] = [
 		outputLanguage: 'json',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: json',
-			'slug: to-csv }',
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: csv',
-			'slug: to-json }'
+			{ category: 'json', slug: 'to-csv' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'csv', slug: 'to-json' }
 		],
 		faqs: [
 			{
@@ -70,12 +67,9 @@ Diana,28,Tokyo,true`
 		outputLanguage: 'csv',
 		hasTreeView: false,
 		relatedTools: [
-			'{ category: csv',
-			'slug: to-json }',
-			'{ category: json',
-			'slug: formatter }',
-			'{ category: json',
-			'slug: minifier }'
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'minifier' }
 		],
 		faqs: [
 			{
@@ -117,7 +111,12 @@ Diana,28,Tokyo,true`
 		inputLanguage: 'csv',
 		outputLanguage: 'xml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'id,name\n1,Alice'
@@ -138,7 +137,12 @@ Diana,28,Tokyo,true`
 		inputLanguage: 'csv',
 		outputLanguage: 'yaml',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'id,value\n1,true'
@@ -159,7 +163,12 @@ Diana,28,Tokyo,true`
 		inputLanguage: 'csv',
 		outputLanguage: 'html',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'header1,header2\ndata1,data2'
@@ -180,7 +189,12 @@ Diana,28,Tokyo,true`
 		inputLanguage: 'csv',
 		outputLanguage: 'csv',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'id,name\n1,john'
@@ -201,7 +215,12 @@ Diana,28,Tokyo,true`
 		inputLanguage: 'csv',
 		outputLanguage: 'csv',
 		hasTreeView: false,
-		relatedTools: ['json/formatter', 'text/word-counter', 'color/contrast', 'crypto/hash'],
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'color', slug: 'contrast' },
+			{ category: 'crypto', slug: 'hash' }
+		],
 		faqs: [],
 		useCases: [],
 		sampleInput: 'col1,col2\nval1,val2'

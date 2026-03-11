@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	encodeHtmlEntities,
-	decodeHtmlEntities,
 	analyzeText,
+	charToAll,
 	codePointToChar,
-	charToAll
+	decodeHtmlEntities,
+	encodeHtmlEntities
 } from '../../src/lib/engines/encoder/index';
 
 describe('Encoder Engine - HTML Entities', () => {

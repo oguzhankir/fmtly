@@ -19,7 +19,10 @@ export const pdfTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: pdf', 'slug: to-text }', '{ category: pdf', 'slug: merge }'],
+		relatedTools: [
+			{ category: 'pdf', slug: 'to-text' },
+			{ category: 'pdf', slug: 'merge' }
+		],
 		faqs: [
 			{
 				question: 'Is my PDF uploaded to a server?',
@@ -55,7 +58,10 @@ export const pdfTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: pdf', 'slug: viewer }', '{ category: pdf', 'slug: merge }'],
+		relatedTools: [
+			{ category: 'pdf', slug: 'viewer' },
+			{ category: 'pdf', slug: 'merge' }
+		],
 		faqs: [
 			{
 				question: 'Why is the extracted text garbled?',
@@ -87,7 +93,10 @@ export const pdfTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: pdf', 'slug: split }', '{ category: pdf', 'slug: extract-pages }'],
+		relatedTools: [
+			{ category: 'pdf', slug: 'split' },
+			{ category: 'pdf', slug: 'extract-pages' }
+		],
 		faqs: [
 			{
 				question: 'Is there a file size limit?',
@@ -119,7 +128,10 @@ export const pdfTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: pdf', 'slug: merge }', '{ category: pdf', 'slug: extract-pages }'],
+		relatedTools: [
+			{ category: 'pdf', slug: 'merge' },
+			{ category: 'pdf', slug: 'extract-pages' }
+		],
 		faqs: [
 			{
 				question: 'How do I specify page ranges?',
@@ -151,7 +163,10 @@ export const pdfTools: ToolDefinition[] = [
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
 		hasTreeView: false,
-		relatedTools: ['{ category: pdf', 'slug: split }', '{ category: pdf', 'slug: merge }'],
+		relatedTools: [
+			{ category: 'pdf', slug: 'split' },
+			{ category: 'pdf', slug: 'merge' }
+		],
 		faqs: [
 			{
 				question: 'Can I rearrange the extracted pages?',
