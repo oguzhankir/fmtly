@@ -16,6 +16,37 @@ export type SeoMetadata = {
 	structuredData: string;
 };
 
+export function buildCategorySeo(
+	displayName: string,
+	description: string,
+	canonical: string
+): SeoMetadata {
+	const title = `${displayName} Tools — fmtly.dev`;
+	const ogImage = `${canonical.split('/').slice(0, 3).join('/')}/og/category.png`;
+
+	return {
+		title,
+		description: description || `${displayName} developer tools — free, instant, browser-only.`,
+		canonical,
+		ogTitle: title,
+		ogDescription: description || `${displayName} developer tools — free, instant, browser-only.`,
+		ogUrl: canonical,
+		ogImage,
+		ogType: 'website',
+		twitterCard: 'summary_large_image',
+		twitterTitle: title,
+		twitterDescription: description || `${displayName} developer tools.`,
+		twitterImage: ogImage,
+		structuredData: JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'CollectionPage',
+			name: title,
+			url: canonical,
+			description
+		})
+	};
+}
+
 export function generateToolSEO(tool: ToolDefinition, baseUrl: string): SeoMetadata {
 	const canonical = `${baseUrl}/${tool.category}/${tool.slug}`;
 	const ogImage = `${baseUrl}/og/${tool.category}-${tool.slug}.png`;

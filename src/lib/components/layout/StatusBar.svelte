@@ -29,10 +29,10 @@
 	}
 
 	const validityConfig: Record<Validity, { color: string; label: string }> = {
-		valid: { color: 'var(--status-valid)', label: 'Valid' },
-		invalid: { color: 'var(--status-invalid)', label: 'Invalid' },
-		empty: { color: 'var(--text-tertiary)', label: 'Empty' },
-		processing: { color: 'var(--status-info)', label: 'Processing' }
+		valid: { color: 'var(--success)', label: 'Valid' },
+		invalid: { color: 'var(--error)', label: 'Invalid' },
+		empty: { color: 'var(--text-muted)', label: 'Empty' },
+		processing: { color: 'var(--accent)', label: 'Processing' }
 	};
 
 	const iconMap = {
@@ -45,14 +45,9 @@
 	let ValidityIcon = $derived(iconMap[validity]);
 </script>
 
-<footer
-	class="fixed bottom-0 left-0 right-0 z-[var(--z-sticky)] flex h-[var(--status-bar-height)] items-center border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-4)]"
->
-	<div
-		class="flex items-center gap-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-secondary)]"
-	>
-		<!-- Validity indicator -->
-		<span class="flex items-center gap-[var(--space-1)]" style="color: {validityConfig[validity].color}">
+<footer class="status-bar">
+	<div class="status-left">
+		<span class="status-validity" style="color: {validityConfig[validity].color}">
 			<ValidityIcon
 				size={12}
 				class={validity === 'processing' ? 'animate-spin' : ''}
@@ -61,33 +56,80 @@
 		</span>
 
 		{#if message}
-			<span class="text-[var(--text-tertiary)]">·</span>
+			<span class="status-sep">&middot;</span>
 			<span>{message}</span>
 		{/if}
 
 		{#if inputSize !== undefined}
-			<span class="text-[var(--text-tertiary)]">·</span>
+			<span class="status-sep">&middot;</span>
 			<span>In: {formatSize(inputSize)}</span>
 		{/if}
 
 		{#if outputSize !== undefined}
-			<span class="text-[var(--text-tertiary)]">·</span>
+			<span class="status-sep">&middot;</span>
 			<span>Out: {formatSize(outputSize)}</span>
 		{/if}
 
 		{#if nodeCount !== undefined}
-			<span class="text-[var(--text-tertiary)]">·</span>
+			<span class="status-sep">&middot;</span>
 			<span>{nodeCount} nodes</span>
 		{/if}
 
 		{#if depth !== undefined}
-			<span class="text-[var(--text-tertiary)]">·</span>
+			<span class="status-sep">&middot;</span>
 			<span>Depth {depth}</span>
 		{/if}
+	</div>
 
+	<div class="status-right">
 		{#if cursorLine !== undefined && cursorColumn !== undefined}
-			<span class="text-[var(--text-tertiary)]">·</span>
 			<span>Ln {cursorLine}, Col {cursorColumn}</span>
 		{/if}
 	</div>
 </footer>
+
+<style>
+	.status-bar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: var(--z-sticky);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: var(--status-bar-height);
+		padding: 0 12px;
+		background: var(--bg-surface);
+		border-top: 1px solid var(--border-faint);
+		font-family: var(--font-ui);
+		font-size: 11px;
+		color: var(--text-secondary);
+	}
+
+	.status-left {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.status-right {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-mono);
+		font-size: 11px;
+		color: var(--text-muted);
+	}
+
+	.status-validity {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		font-weight: 500;
+	}
+
+	.status-sep {
+		color: var(--text-disabled);
+	}
+</style>

@@ -116,7 +116,7 @@
 
 		<!-- Highlighted output -->
 		{#if isHtmlPreview}
-			<div class="h-full w-full overflow-auto p-[var(--space-4)] prose prose-sm dark:prose-invert max-w-none">
+			<div class="output-html-preview">
 				{@html $output}
 			</div>
 		{:else}
@@ -133,3 +133,19 @@
 		</div>
 	{/if}
 </div>
+
+<style>
+	.output-html-preview {
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+		padding: var(--space-4);
+		background: var(--bg-base);
+		color: var(--text-primary);
+		font-family: var(--font-ui);
+	}
+
+	.output-html-preview :global(*) {
+		max-width: 100%;
+	}
+</style>

@@ -11,7 +11,7 @@ import {
 } from '$engines/json/index.js';
 import type { FormatOptions, WorkerRequest, WorkerResponse } from '$engines/json/index.js';
 
-const methods: Record<string, (...args: unknown[]) => unknown> = {
+const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>> = {
 	parseJSON: (input: unknown) => parseJSON(input as string),
 	formatJSON: (input: unknown, options: unknown) =>
 		formatJSON(input as string, options as FormatOptions),
@@ -42,7 +42,7 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 	}
 
 	try {
-		const result = fn(...args);
+		const result = await fn(...args);
 		const response: WorkerResponse = { id, result };
 		self.postMessage(response);
 	} catch (err) {

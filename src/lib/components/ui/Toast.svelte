@@ -11,36 +11,70 @@
 	};
 
 	const colorMap: Record<string, string> = {
-		success: 'var(--status-valid)',
-		error: 'var(--status-invalid)',
-		info: 'var(--status-info)',
-		warning: 'var(--status-warning)'
+		success: 'var(--success)',
+		error: 'var(--error)',
+		info: 'var(--accent)',
+		warning: 'var(--warning)'
 	};
 
 	function getIcon(type: string): typeof CircleCheck {
 		return iconMap[type as keyof typeof iconMap];
 	}
+
+	const MAX_VISIBLE = 3;
+
+	let visibleToasts = $derived($toasts.slice(-MAX_VISIBLE));
 </script>
 
-<div
-	class="fixed bottom-[var(--space-4)] left-[var(--space-4)] z-[var(--z-toast)] flex flex-col gap-[var(--space-2)]"
->
-	{#each $toasts as toast (toast.id)}
+<div class="toast-container">
+	{#each visibleToasts as toast (toast.id)}
 		{@const ToastIcon = getIcon(toast.type)}
 		<div
-			in:fly={{ y: 20, duration: 120 }}
-			out:fade={{ duration: 120 }}
-			class="flex items-center gap-[var(--space-2)] rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-elevated)] px-[var(--space-3)] py-[var(--space-2)] shadow-[var(--shadow-md)]"
+			in:fly={{ x: 24, duration: 150 }}
+			out:fade={{ duration: 100 }}
+			class="toast-card"
 			role="status"
 			aria-live="polite"
 		>
 			<ToastIcon
-				size={16}
+				size={15}
 				style="color: {colorMap[toast.type]}; flex-shrink: 0;"
 			/>
-			<span class="text-[length:var(--text-sm)] text-[var(--text-primary)]">
-				{toast.message}
-			</span>
+			<span class="toast-message">{toast.message}</span>
 		</div>
 	{/each}
 </div>
+
+<style>
+	.toast-container {
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		z-index: var(--z-toast);
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		pointer-events: none;
+	}
+
+	.toast-card {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 14px;
+		background: var(--bg-overlay);
+		border: 1px solid var(--border-default);
+		border-radius: 8px;
+		box-shadow: var(--shadow-md);
+		pointer-events: auto;
+		max-width: 320px;
+	}
+
+	.toast-message {
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--text-primary);
+		line-height: 1.4;
+	}
+</style>

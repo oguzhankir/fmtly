@@ -8,6 +8,10 @@
 	import OutputPanel from "$components/panels/OutputPanel.svelte";
 	import DiffInputPanel from "$components/panels/DiffInputPanel.svelte";
 	import DiffResultsPanel from "$components/tool/DiffResultsPanel.svelte";
+	import JsonInputPanel from "$components/panels/JsonInputPanel.svelte";
+	import JsonOutputPanel from "$components/panels/JsonOutputPanel.svelte";
+	import JsonQueryOutputPanel from "$components/panels/JsonQueryOutputPanel.svelte";
+	import JsonValidatorPanel from "$components/panels/JsonValidatorPanel.svelte";
 	import TreePanel from "$components/panels/TreePanel.svelte";
 	import TextAnalysisPanel from "$components/panels/TextAnalysisPanel.svelte";
 	import TextControlsPanel from "$components/panels/TextControlsPanel.svelte";
@@ -58,6 +62,7 @@
 	import { extractShareData } from "$utils/share.js";
 	import { input } from "$stores/input.store";
 	import {
+		destroyJSONStore,
 		format,
 		minify,
 		repair,
@@ -118,7 +123,7 @@
 		initHistory(data.tool.category, data.tool.slug);
 
 		if (data.tool.engine === "json") {
-			initJSONStore();
+			initJSONStore(data.tool.slug);
 		} else if (data.tool.engine === "text") {
 			initTextStore(data.tool.slug);
 		} else if (data.tool.engine === "number") {
@@ -273,6 +278,7 @@
 
 	onDestroy(() => {
 		unregisterToolShortcuts?.();
+		destroyJSONStore();
 		destroyHistory();
 	});
 </script>
@@ -440,6 +446,14 @@
 				<QrReaderPanel />
 			{:else if data.tool.category === "generate" && data.tool.slug === "fake-data"}
 				<FakeDataPanel />
+			{:else if data.tool.category === "json" && data.tool.slug === "validator"}
+				<JsonValidatorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
+				<JsonInputPanel
+					toolSlug={data.tool.slug}
+					inputLanguage={data.tool.inputLanguage}
+					sampleInput={data.tool.sampleInput ?? ""}
+				/>
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}
@@ -451,12 +465,22 @@
 		{/snippet}
 		{#snippet outputPanel()}
 			{#if data.tool.layoutVariant !== "single-panel"}
-				<OutputPanel
-					outputLanguage={data.tool.outputLanguage}
-					downloadFilename={data.tool.id}
-					isHtmlPreview={data.tool.slug === "markdown-to-html" &&
-						$textOptions.markdownPreview}
-				/>
+				{#if data.tool.category === "json" && ["jsonpath", "jmespath"].includes(data.tool.slug)}
+					<JsonQueryOutputPanel toolSlug={data.tool.slug === "jsonpath" ? "jsonpath" : "jmespath"} />
+				{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
+					<JsonOutputPanel
+						outputLanguage={data.tool.outputLanguage}
+						downloadFilename={data.tool.id}
+						toolSlug={data.tool.slug}
+					/>
+				{:else}
+					<OutputPanel
+						outputLanguage={data.tool.outputLanguage}
+						downloadFilename={data.tool.id}
+						isHtmlPreview={data.tool.slug === "markdown-to-html" &&
+							$textOptions.markdownPreview}
+					/>
+				{/if}
 			{/if}
 		{/snippet}
 		{#snippet treePanel()}

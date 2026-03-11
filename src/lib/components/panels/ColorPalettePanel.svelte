@@ -141,11 +141,11 @@
                     >
                         <button
                             onclick={() => copyToClipboard(swatchHex)}
-                            class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+                            class="absolute inset-0 flex items-center justify-center bg-[var(--scrim)] opacity-0 transition-opacity duration-150 group-hover:opacity-100"
                             aria-label="Copy Hex"
                         >
                             <span
-                                class="flex items-center gap-2 rounded-full bg-[var(--bg-elevated)] px-3 py-1.5 text-[length:var(--text-xs)] font-medium text-white shadow-lg"
+                                class="flex items-center gap-2 rounded-full bg-[var(--bg-elevated)] px-3 py-1.5 text-[length:var(--text-xs)] font-medium text-[var(--text-primary)] shadow-lg"
                             >
                                 <Copy size={14} /> Copy
                             </span>

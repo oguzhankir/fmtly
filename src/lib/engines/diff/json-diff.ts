@@ -17,6 +17,15 @@ export type DiffResult = {
 	error: string | null;
 };
 
+export type DiffSummary = {
+	added: number;
+	removed: number;
+	modified: number;
+	unchanged: number;
+	total: number;
+	touchedPaths: string[];
+};
+
 function sortValue(value: unknown): unknown {
 	if (value === null || typeof value !== 'object') return value;
 	if (Array.isArray(value)) {
@@ -184,4 +193,38 @@ export function toJSONPatch(entries: DiffEntry[]): object[] {
 		}
 	}
 	return patch;
+}
+
+export function summarizeJSONDiff(entries: DiffEntry[]): DiffSummary {
+	const summary: DiffSummary = {
+		added: 0,
+		removed: 0,
+		modified: 0,
+		unchanged: 0,
+		total: entries.length,
+		touchedPaths: []
+	};
+
+	for (const entry of entries) {
+		switch (entry.type) {
+			case 'added':
+				summary.added++;
+				summary.touchedPaths.push(entry.path || '(root)');
+				break;
+			case 'removed':
+				summary.removed++;
+				summary.touchedPaths.push(entry.path || '(root)');
+				break;
+			case 'modified':
+				summary.modified++;
+				summary.touchedPaths.push(entry.path || '(root)');
+				break;
+			case 'unchanged':
+				summary.unchanged++;
+				break;
+		}
+	}
+
+	summary.touchedPaths = Array.from(new Set(summary.touchedPaths));
+	return summary;
 }

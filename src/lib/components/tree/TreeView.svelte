@@ -42,6 +42,10 @@
 		});
 	}
 
+	export function setDepth(depth: number): void {
+		expandToDepth(depth);
+	}
+
 	function expandAll(): void {
 		expandedNodes.update(() => {
 			const next = new Set<string>();
@@ -58,8 +62,16 @@
 		});
 	}
 
+	export function expand(): void {
+		expandAll();
+	}
+
 	function collapseAll(): void {
 		expandedNodes.set(new Set());
+	}
+
+	export function collapse(): void {
+		collapseAll();
 	}
 
 	function handleMatchChange(ids: Set<string>, currentId: string): void {

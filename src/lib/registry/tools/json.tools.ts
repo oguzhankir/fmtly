@@ -153,7 +153,7 @@ export const jsonTools: ToolDefinition[] = [
 			'Validate JSON syntax instantly. Get precise error locations with line and column numbers, plain-language explanations, and auto-repair for common issues.',
 		engine: 'json',
 		operation: 'validate',
-		layoutVariant: 'single',
+		layoutVariant: 'single-panel',
 		inputLanguage: 'json',
 		outputLanguage: 'json',
 		hasTreeView: false,

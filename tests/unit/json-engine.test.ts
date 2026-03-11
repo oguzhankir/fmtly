@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { formatJSON, minifyJSON } from '../../src/lib/engines/json/formatter.js';
+import { toMarkdownTable, toToml, toYaml } from '../../src/lib/engines/json/json.engine.js';
 import { parseJSON } from '../../src/lib/engines/json/parser.js';
 import { repairJSON } from '../../src/lib/engines/json/repairer.js';
 import { sortJSONKeys } from '../../src/lib/engines/json/sorter.js';
@@ -233,6 +234,26 @@ describe('minifyJSON', () => {
 	});
 });
 
+describe('advanced json conversions', () => {
+	it('converts JSON to YAML', async () => {
+		const result = await toYaml('{"name":"fmtly","enabled":true}');
+		expect(result).toContain('name: fmtly');
+		expect(result).toContain('enabled: true');
+	});
+
+	it('converts JSON to TOML', async () => {
+		const result = await toToml('{"title":"TOML Example","owner":{"name":"Tom"}}');
+		expect(result).toContain('title = "TOML Example"');
+		expect(result).toContain('[owner]');
+	});
+
+	it('converts an array of objects to a Markdown table', async () => {
+		const result = await toMarkdownTable('[{"name":"fmtly","type":"tool"}]');
+		expect(result).toContain('| name | type |');
+		expect(result).toContain('| fmtly | tool |');
+	});
+});
+
 // ─── validateJSON ───────────────────────────────────────────────────
 
 describe('validateJSON', () => {
@@ -266,8 +287,8 @@ describe('validateJSON', () => {
 // ─── repairJSON ─────────────────────────────────────────────────────
 
 describe('repairJSON', () => {
-	it('repairs single quotes', () => {
-		const result = repairJSON("{'a': 'b'}");
+	it('repairs single quotes', async () => {
+		const result = await repairJSON("{'a': 'b'}");
 		expect(result.success).toBe(true);
 		if (result.success) {
 			const parsed = JSON.parse(result.output);
@@ -276,29 +297,29 @@ describe('repairJSON', () => {
 		}
 	});
 
-	it('repairs trailing commas', () => {
-		const result = repairJSON('{"a": 1, "b": 2,}');
+	it('repairs trailing commas', async () => {
+		const result = await repairJSON('{"a": 1, "b": 2,}');
 		expect(result.success).toBe(true);
 		if (result.success) {
 			expect(() => JSON.parse(result.output)).not.toThrow();
 		}
 	});
 
-	it('returns valid JSON unchanged', () => {
-		const result = repairJSON('{"a": 1}');
+	it('returns valid JSON unchanged', async () => {
+		const result = await repairJSON('{"a": 1}');
 		expect(result.success).toBe(true);
 		if (result.success) {
 			expect(JSON.parse(result.output)).toEqual({ a: 1 });
 		}
 	});
 
-	it('returns error for empty input', () => {
-		const result = repairJSON('');
+	it('returns error for empty input', async () => {
+		const result = await repairJSON('');
 		expect(result.success).toBe(false);
 	});
 
-	it('repairs unquoted keys', () => {
-		const result = repairJSON('{a: 1, b: 2}');
+	it('repairs unquoted keys', async () => {
+		const result = await repairJSON('{a: 1, b: 2}');
 		expect(result.success).toBe(true);
 		if (result.success) {
 			const parsed = JSON.parse(result.output);

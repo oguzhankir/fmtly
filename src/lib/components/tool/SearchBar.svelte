@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 	import { ChevronUp, ChevronDown, X, Filter } from 'lucide-svelte';
 	import type { TreeNode } from '$engines/json/types.js';
 
@@ -47,7 +48,9 @@
 	});
 
 	onDestroy(() => {
-		document.removeEventListener('keydown', handleKeydown);
+		if (browser) {
+			document.removeEventListener('keydown', handleKeydown);
+		}
 	});
 
 	function resetSearch(): void {

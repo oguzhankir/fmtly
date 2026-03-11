@@ -6,6 +6,7 @@
 	import Header from '$components/layout/Header.svelte';
 	import Toast from '$components/ui/Toast.svelte';
 	import ShortcutsModal from '$components/modals/ShortcutsModal.svelte';
+	import CommandPalette from '$components/modals/CommandPalette.svelte';
 	import {
 		initKeyboardShortcuts,
 		destroyKeyboardShortcuts,
@@ -15,6 +16,7 @@
 	let { children }: { children: Snippet } = $props();
 
 	let shortcutsModalOpen = $state(false);
+	let commandPaletteOpen = $state(false);
 
 	setContext('theme', theme);
 
@@ -25,6 +27,10 @@
 	onDestroy(() => {
 		destroyKeyboardShortcuts();
 	});
+
+	function openCommandPalette(): void {
+		commandPaletteOpen = true;
+	}
 
 	const unregisterGlobal = registerShortcuts([
 		{
@@ -48,7 +54,7 @@
 	});
 </script>
 
-<Header />
+<Header onOpenCommandPalette={openCommandPalette} />
 
 <main class="pt-[var(--header-height)]">
 	{@render children()}
@@ -56,3 +62,4 @@
 
 <Toast />
 <ShortcutsModal bind:open={shortcutsModalOpen} />
+<CommandPalette bind:open={commandPaletteOpen} />

@@ -1,56 +1,69 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import SeoHead from '$components/layout/SeoHead.svelte';
-	import { getAllCategoryMeta } from '$registry/categories.js';
-	import type { SeoMetadata } from '$utils/seo.js';
-	import type { PageData } from './$types.js';
-
-	let { data }: { data: PageData } = $props();
+	import { getToolsByCategory, getCategories } from '$registry/index.js';
+	import { getCategoryMeta, getAllCategoryMeta } from '$registry/categories.js';
+	import { buildCategorySeo } from '$utils/seo.js';
+	import { ArrowRight } from 'lucide-svelte';
 
 	const BASE_URL = 'https://fmtly.dev';
 
-	let seo = $derived<SeoMetadata>({
-		title: `${data.meta.displayName} Tools — fmtly.dev`,
-		description: data.meta.description,
-		canonical: `${BASE_URL}/${data.meta.slug}`,
-		ogTitle: `${data.meta.displayName} Tools — fmtly.dev`,
-		ogDescription: data.meta.description,
-		ogUrl: `${BASE_URL}/${data.meta.slug}`,
-		ogImage: `${BASE_URL}/og/${data.meta.slug}.png`,
-		ogType: 'website',
-		twitterCard: 'summary_large_image',
-		twitterTitle: `${data.meta.displayName} Tools — fmtly.dev`,
-		twitterDescription: data.meta.description,
-		twitterImage: `${BASE_URL}/og/${data.meta.slug}.png`,
-		structuredData: JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': 'CollectionPage',
-			name: `${data.meta.displayName} Tools`,
-			description: data.meta.description,
-			url: `${BASE_URL}/${data.meta.slug}`
-		})
-	});
-
-	const allCategoryMeta = getAllCategoryMeta();
-	let relatedCategories = $derived(
-		allCategoryMeta.filter((c) => c.slug !== data.meta.slug).slice(0, 6)
+	let categorySlug = $derived($page.params.category ?? '');
+	let categoryMeta = $derived(getCategoryMeta(categorySlug));
+	let tools = $derived(getToolsByCategory(categorySlug));
+	let seo = $derived(
+		buildCategorySeo(
+			categoryMeta?.displayName ?? categorySlug,
+			categoryMeta?.description ?? '',
+			`${BASE_URL}/${categorySlug}`
+		)
 	);
+
+	let relatedCategories = $derived.by(() => {
+		const allMeta = getAllCategoryMeta();
+		const allCats = getCategories();
+		const currentIndex = allMeta.findIndex((c) => c.slug === categorySlug);
+		if (currentIndex < 0) return [];
+		const nearby: typeof allMeta = [];
+		for (let i = -2; i <= 2; i++) {
+			if (i === 0) continue;
+			const idx = (currentIndex + i + allMeta.length) % allMeta.length;
+			const cat = allMeta[idx];
+			const catInfo = allCats.find((c) => c.category === cat.slug);
+			if (catInfo && catInfo.toolCount > 0) {
+				nearby.push(cat);
+			}
+		}
+		return nearby.slice(0, 4);
+	});
 </script>
 
 <SeoHead metadata={seo} />
 
 <div class="category-page">
 	<!-- Header -->
-	<section class="category-header">
-		<h1 class="category-title">{data.meta.displayName} Tools</h1>
-		<p class="category-desc">{data.meta.description}</p>
+	<section class="cat-header">
+		<div class="cat-header-top">
+			<a href="/" class="cat-breadcrumb">Home</a>
+			<span class="cat-breadcrumb-sep">/</span>
+			<span class="cat-breadcrumb-current">{categoryMeta?.displayName ?? categorySlug}</span>
+		</div>
+		<h1 class="cat-title">{categoryMeta?.displayName ?? categorySlug}</h1>
+		{#if categoryMeta?.description}
+			<p class="cat-subtitle">{categoryMeta.description}</p>
+		{/if}
+		<span class="cat-count">{tools.length} {tools.length === 1 ? 'tool' : 'tools'}</span>
 	</section>
 
 	<!-- Tools grid -->
-	<section class="category-tools">
+	<section class="tools-section">
 		<div class="tools-grid">
-			{#each data.tools as tool (tool.id)}
+			{#each tools as tool (tool.id)}
 				<a href="/{tool.category}/{tool.slug}" class="tool-card">
-					<span class="tool-card-badge">{tool.category.toUpperCase()}</span>
+					<div class="tool-card-header">
+						<span class="tool-card-op">{tool.operation}</span>
+						<ArrowRight size={14} class="tool-card-arrow" />
+					</div>
 					<h3 class="tool-card-name">{tool.displayName}</h3>
 					<p class="tool-card-tagline">{tool.tagline}</p>
 				</a>
@@ -64,8 +77,10 @@
 			<h2 class="related-title">Related Categories</h2>
 			<div class="related-grid">
 				{#each relatedCategories as cat}
+					{@const count = getCategories().find((c) => c.category === cat.slug)?.toolCount ?? 0}
 					<a href="/{cat.slug}" class="related-card">
-						<span class="related-card-name">{cat.displayName}</span>
+						<h3 class="related-card-name">{cat.displayName}</h3>
+						<span class="related-card-count">{count} tools</span>
 					</a>
 				{/each}
 			</div>
@@ -77,48 +92,197 @@
 	.category-page {
 		max-width: var(--max-content-width);
 		margin: 0 auto;
-		padding: 0 var(--space-6);
-		padding-bottom: var(--space-16);
+		padding: 0 24px 80px;
 	}
 
-	.category-header {
-		padding: var(--space-12) 0 var(--space-8);
+	/* Header */
+	.cat-header {
+		padding: 40px 0 32px;
 	}
 
-	.category-title {
-		font-size: var(--text-2xl);
-		font-weight: var(--weight-semibold);
-		color: var(--text-primary);
-		margin: 0 0 var(--space-2);
+	.cat-header-top {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-bottom: 16px;
 	}
 
-	.category-desc {
-		font-size: var(--text-base);
+	.cat-breadcrumb {
+		font-size: 12px;
+		color: var(--text-muted);
+		text-decoration: none;
+		transition: color 100ms ease;
+	}
+
+	.cat-breadcrumb:hover {
 		color: var(--text-secondary);
-		margin: 0;
-		max-width: 640px;
-		line-height: var(--leading-relaxed);
 	}
 
-	.category-tools {
-		margin-bottom: var(--space-12);
+	.cat-breadcrumb-sep {
+		font-size: 12px;
+		color: var(--text-disabled);
+	}
+
+	.cat-breadcrumb-current {
+		font-size: 12px;
+		color: var(--text-secondary);
+	}
+
+	.cat-title {
+		font-family: var(--font-ui);
+		font-size: 32px;
+		font-weight: 600;
+		color: var(--text-primary);
+		margin: 0 0 8px;
+		line-height: 1.15;
+	}
+
+	.cat-subtitle {
+		font-size: 14px;
+		color: var(--text-secondary);
+		margin: 0 0 12px;
+		max-width: 600px;
+		line-height: 1.5;
+	}
+
+	.cat-count {
+		font-size: 12px;
+		color: var(--text-muted);
+		font-weight: 500;
 	}
 
 	/* Tools grid */
+	.tools-section {
+		margin-top: 8px;
+	}
+
 	.tools-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: var(--space-3);
+		grid-template-columns: repeat(3, 1fr);
+		gap: 12px;
 	}
 
+	/* Tool card */
+	.tool-card {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		padding: 16px;
+		background: var(--bg-elevated);
+		border: 1px solid var(--border-subtle);
+		border-radius: 10px;
+		text-decoration: none;
+		transition: border-color 120ms ease, transform 120ms ease;
+	}
+
+	.tool-card:hover {
+		border-color: var(--border-default);
+		transform: translateY(-1px);
+	}
+
+	.tool-card:hover :global(.tool-card-arrow) {
+		opacity: 1;
+		transform: translateX(2px);
+	}
+
+	.tool-card-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.tool-card-op {
+		font-size: 10px;
+		font-weight: 600;
+		color: var(--accent);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	:global(.tool-card-arrow) {
+		color: var(--text-muted);
+		opacity: 0;
+		transition: opacity 120ms ease, transform 120ms ease;
+	}
+
+	.tool-card-name {
+		font-family: var(--font-ui);
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--text-primary);
+		margin: 0;
+	}
+
+	.tool-card-tagline {
+		font-size: 12px;
+		color: var(--text-muted);
+		margin: 0;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	/* Related section */
+	.related-section {
+		margin-top: 64px;
+		padding-top: 32px;
+		border-top: 1px solid var(--border-subtle);
+	}
+
+	.related-title {
+		font-family: var(--font-ui);
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		margin: 0 0 16px;
+	}
+
+	.related-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 12px;
+	}
+
+	.related-card {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 14px;
+		background: var(--bg-elevated);
+		border: 1px solid var(--border-subtle);
+		border-radius: 10px;
+		text-decoration: none;
+		transition: border-color 120ms ease;
+	}
+
+	.related-card:hover {
+		border-color: var(--border-default);
+	}
+
+	.related-card-name {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--text-primary);
+		margin: 0;
+	}
+
+	.related-card-count {
+		font-size: 12px;
+		color: var(--text-muted);
+	}
+
+	/* Responsive */
 	@media (max-width: 1024px) {
 		.tools-grid {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(2, 1fr);
 		}
-	}
 
-	@media (max-width: 768px) {
-		.tools-grid {
+		.related-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
@@ -127,86 +291,13 @@
 		.tools-grid {
 			grid-template-columns: 1fr;
 		}
-	}
 
-	/* Tool card */
-	.tool-card {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-1);
-		padding: var(--space-4);
-		background: var(--bg-surface);
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-lg);
-		text-decoration: none;
-		transition:
-			border-color var(--duration-fast),
-			box-shadow var(--duration-fast);
-	}
+		.related-grid {
+			grid-template-columns: 1fr;
+		}
 
-	.tool-card:hover {
-		border-color: var(--border-focus);
-		box-shadow: var(--shadow-sm);
-	}
-
-	.tool-card-badge {
-		font-size: 0.625rem;
-		font-weight: var(--weight-semibold);
-		color: var(--text-accent);
-		letter-spacing: 0.05em;
-	}
-
-	.tool-card-name {
-		font-size: var(--text-sm);
-		font-weight: var(--weight-semibold);
-		color: var(--text-primary);
-		margin: 0;
-	}
-
-	.tool-card-tagline {
-		font-size: var(--text-xs);
-		color: var(--text-tertiary);
-		margin: 0;
-		line-height: var(--leading-relaxed);
-	}
-
-	/* Related categories */
-	.related-section {
-		border-top: 1px solid var(--border-subtle);
-		padding-top: var(--space-8);
-	}
-
-	.related-title {
-		font-size: var(--text-lg);
-		font-weight: var(--weight-semibold);
-		color: var(--text-primary);
-		margin: 0 0 var(--space-4);
-	}
-
-	.related-grid {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-2);
-	}
-
-	.related-card {
-		padding: var(--space-2) var(--space-4);
-		background: var(--bg-surface);
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-full);
-		text-decoration: none;
-		transition:
-			border-color var(--duration-fast),
-			box-shadow var(--duration-fast);
-	}
-
-	.related-card:hover {
-		border-color: var(--border-focus);
-	}
-
-	.related-card-name {
-		font-size: var(--text-sm);
-		color: var(--text-secondary);
-		font-weight: var(--weight-medium);
+		.cat-title {
+			font-size: 24px;
+		}
 	}
 </style>

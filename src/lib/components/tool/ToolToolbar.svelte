@@ -76,17 +76,57 @@
 	]);
 </script>
 
-<div class="flex items-center gap-[var(--space-2)]">
+<div class="toolbar">
 	{#each buttons as btn}
 		{@const BtnIcon = btn.icon}
 		<button
 			onclick={btn.action}
-			class="flex items-center gap-[var(--space-1-5)] rounded-[var(--radius-md)] px-[var(--space-3)] py-[var(--space-1-5)] text-[length:var(--text-sm)] font-[number:var(--weight-medium)] transition-colors duration-[var(--duration-fast)] {btn.primary
-				? 'bg-[var(--bg-accent)] text-[var(--text-on-accent)] hover:bg-[var(--bg-accent-hover)]'
-				: 'bg-[var(--bg-surface-hover)] text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]'}"
+			class="toolbar-btn"
+			class:toolbar-btn--primary={btn.primary}
 		>
 			<BtnIcon size={14} />
 			{btn.label}
 		</button>
 	{/each}
 </div>
+
+<style>
+	.toolbar {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.toolbar-btn {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		height: 28px;
+		padding: 0 12px;
+		border: none;
+		border-radius: 6px;
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 500;
+		cursor: pointer;
+		transition: background 100ms ease, color 100ms ease;
+		background: var(--bg-hover);
+		color: var(--text-secondary);
+		white-space: nowrap;
+	}
+
+	.toolbar-btn:hover {
+		background: var(--bg-active);
+		color: var(--text-primary);
+	}
+
+	.toolbar-btn--primary {
+		background: var(--accent);
+		color: var(--text-on-accent);
+	}
+
+	.toolbar-btn--primary:hover {
+		background: var(--accent-hover);
+		color: var(--text-on-accent);
+	}
+</style>

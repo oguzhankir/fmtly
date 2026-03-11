@@ -78,7 +78,7 @@ describe('Tool Registry', () => {
 			const tool = getTool('json', 'validator');
 			expect(tool).toBeDefined();
 			expect(tool?.id).toBe('json-validator');
-			expect(tool?.layoutVariant).toBe('single');
+			expect(tool?.layoutVariant).toBe('single-panel');
 		});
 
 		it('returns json/minifier correctly', () => {

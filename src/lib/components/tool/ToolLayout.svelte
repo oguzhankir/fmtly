@@ -74,99 +74,130 @@
 	}
 </script>
 
-<div class="flex h-[calc(100vh-var(--header-height)-var(--status-bar-height))] flex-col">
+<div class="tool-layout">
 	<!-- Toolbar -->
-	<div
-		class="flex items-center border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-4)] py-[var(--space-2)]"
-	>
-		<span
-			class="mr-[var(--space-4)] text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-primary)]"
-		>
-			{tool.displayName}
-		</span>
+	<div class="tool-toolbar-row">
+		<span class="tool-toolbar-name">{tool.displayName}</span>
 		<ToolToolbar {tool} onhistory={() => { historyOpen = !historyOpen; }} />
 	</div>
 
 	<!-- Panel area -->
-	{#if tool.layoutVariant === 'split' || tool.layoutVariant === 'bidirectional'}
+	{#if tool.layoutVariant === 'split' || tool.layoutVariant === 'bidirectional' || tool.layoutVariant === 'dual-input'}
 		<div
-			class="flex flex-1 overflow-hidden"
+			class="panel-container desktop-panels"
 			role="application"
 			bind:this={containerEl}
 			onpointermove={handlePointerMove}
 			onpointerup={handlePointerUp}
 		>
 			<!-- Input panel -->
-			<div
-				class="flex flex-col overflow-hidden border-r border-[var(--border-subtle)]"
-				style="width: {dividerPosition}%"
-			>
-				<div
-					class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-				>
+			<div class="panel panel-input" style="width: {dividerPosition}%">
+				<div class="panel-content">
 					{#if inputPanel}
 						{@render inputPanel()}
 					{:else}
-						<p>Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
+						<p class="panel-placeholder">Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
 					{/if}
 				</div>
 			</div>
 
 			<!-- Draggable divider -->
 			<div
-				class="flex w-[6px] shrink-0 cursor-col-resize items-center justify-center transition-colors duration-[var(--duration-fast)] hover:bg-[var(--bg-accent-subtle)] {isDragging
-					? 'bg-[var(--bg-accent-subtle)]'
-					: 'bg-[var(--bg-surface)]'}"
+				class="divider"
+				class:divider--active={isDragging}
 				role="separator"
 				aria-orientation="vertical"
 				aria-valuenow={Math.round(dividerPosition)}
 				tabindex="-1"
 				onpointerdown={handlePointerDown}
 			>
-				<div class="h-[24px] w-[2px] rounded-[var(--radius-full)] bg-[var(--border-strong)]"></div>
+				<div class="divider-handle"></div>
 			</div>
 
 			<!-- Output / Tree panel -->
-			<div class="flex flex-1 flex-col overflow-hidden">
+			<div class="panel panel-output">
 				{#if tool.hasTreeView && treePanel}
-					<!-- Tab bar: Output | Tree -->
-					<div class="flex shrink-0 border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]">
+					<div class="output-tabs">
 						<button
+							class="output-tab"
+							class:output-tab--active={activeOutputTab === 'output'}
 							onclick={() => { activeOutputTab = 'output'; }}
-							class="px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] transition-colors duration-[80ms] {activeOutputTab === 'output' ? 'border-b-2 border-[var(--color-accent)] text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}"
-						>
-							Output
-						</button>
+						>Output</button>
 						<button
+							class="output-tab"
+							class:output-tab--active={activeOutputTab === 'tree'}
 							onclick={() => { activeOutputTab = 'tree'; }}
-							class="px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] transition-colors duration-[80ms] {activeOutputTab === 'tree' ? 'border-b-2 border-[var(--color-accent)] text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}"
-						>
-							Tree
-						</button>
+						>Tree</button>
 					</div>
 					{#if activeOutputTab === 'tree'}
-						<div class="flex-1 overflow-hidden">
+						<div class="panel-content panel-content--tree">
 							{@render treePanel()}
 						</div>
 					{:else}
-						<div
-							class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-						>
+						<div class="panel-content">
 							{#if outputPanel}
 								{@render outputPanel()}
 							{:else}
-								<p>Output will appear here</p>
+								<p class="panel-placeholder">Output will appear here</p>
 							{/if}
 						</div>
 					{/if}
 				{:else}
-					<div
-						class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-					>
+					<div class="panel-content">
 						{#if outputPanel}
 							{@render outputPanel()}
 						{:else}
-							<p>Output will appear here</p>
+							<p class="panel-placeholder">Output will appear here</p>
+						{/if}
+					</div>
+				{/if}
+			</div>
+		</div>
+
+		<!-- Mobile panels -->
+		<div class="panel-container mobile-panels">
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if inputPanel}
+						{@render inputPanel()}
+					{:else}
+						<p class="panel-placeholder">Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
+					{/if}
+				</div>
+			</div>
+			<div class="panel panel-full">
+				{#if tool.hasTreeView && treePanel}
+					<div class="output-tabs">
+						<button
+							class="output-tab"
+							class:output-tab--active={activeOutputTab === 'output'}
+							onclick={() => { activeOutputTab = 'output'; }}
+						>Output</button>
+						<button
+							class="output-tab"
+							class:output-tab--active={activeOutputTab === 'tree'}
+							onclick={() => { activeOutputTab = 'tree'; }}
+						>Tree</button>
+					</div>
+					{#if activeOutputTab === 'tree'}
+						<div class="panel-content panel-content--tree">
+							{@render treePanel()}
+						</div>
+					{:else}
+						<div class="panel-content">
+							{#if outputPanel}
+								{@render outputPanel()}
+							{:else}
+								<p class="panel-placeholder">Output will appear here</p>
+							{/if}
+						</div>
+					{/if}
+				{:else}
+					<div class="panel-content">
+						{#if outputPanel}
+							{@render outputPanel()}
+						{:else}
+							<p class="panel-placeholder">Output will appear here</p>
 						{/if}
 					</div>
 				{/if}
@@ -174,172 +205,164 @@
 		</div>
 	{:else if tool.layoutVariant === 'single'}
 		<div
-			class="flex flex-1 overflow-hidden"
+			class="panel-container desktop-panels"
 			role="application"
 			bind:this={containerEl}
 			onpointermove={handlePointerMove}
 			onpointerup={handlePointerUp}
 		>
-			<!-- Input panel -->
-			<div
-				class="flex flex-col overflow-hidden border-r border-[var(--border-subtle)]"
-				style="width: {dividerPosition}%"
-			>
-				<div
-					class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-				>
+			<div class="panel panel-input" style="width: {dividerPosition}%">
+				<div class="panel-content">
 					{#if inputPanel}
 						{@render inputPanel()}
 					{:else}
-						<p>Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
+						<p class="panel-placeholder">Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
 					{/if}
 				</div>
 			</div>
 
-			<!-- Draggable divider -->
 			<div
-				class="flex w-[6px] shrink-0 cursor-col-resize items-center justify-center transition-colors duration-[var(--duration-fast)] hover:bg-[var(--bg-accent-subtle)] {isDragging
-					? 'bg-[var(--bg-accent-subtle)]'
-					: 'bg-[var(--bg-surface)]'}"
+				class="divider"
+				class:divider--active={isDragging}
 				role="separator"
 				aria-orientation="vertical"
 				aria-valuenow={Math.round(dividerPosition)}
 				tabindex="-1"
 				onpointerdown={handlePointerDown}
 			>
-				<div class="h-[24px] w-[2px] rounded-[var(--radius-full)] bg-[var(--border-strong)]"></div>
+				<div class="divider-handle"></div>
 			</div>
 
-			<!-- Output panel -->
-			<div class="flex flex-1 flex-col overflow-hidden">
-				<div
-					class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-				>
+			<div class="panel panel-output">
+				<div class="panel-content">
 					{#if outputPanel}
 						{@render outputPanel()}
 					{:else}
-						<p>Output will appear here</p>
+						<p class="panel-placeholder">Output will appear here</p>
 					{/if}
+				</div>
+			</div>
+		</div>
+
+		<div class="panel-container mobile-panels">
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+				</div>
+			</div>
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
 				</div>
 			</div>
 		</div>
 	{:else if tool.layoutVariant === 'triple' && diffPanel}
-		<!-- Diff layout: left + right inputs on top, results below -->
-		<div class="flex flex-1 flex-col overflow-hidden">
-			<div class="flex flex-1 overflow-hidden" style="min-height: 40%">
-				<!-- Left (Original) input -->
-				<div class="flex flex-1 flex-col overflow-hidden border-r border-[var(--border-subtle)]">
-					<div class="flex items-center border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-3)] py-[var(--space-1)]">
-						<span class="text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] text-[var(--text-tertiary)]">Original</span>
-					</div>
-					<div class="flex-1 overflow-auto bg-[var(--bg-base)]">
-						{#if inputPanel}
-							{@render inputPanel()}
-						{:else}
-							<p class="p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]">Paste original JSON here…</p>
-						{/if}
+		<div class="panel-container desktop-panels" style="flex-direction: column;">
+			<div class="panel-container" style="min-height: 40%; flex: 1;">
+				<div class="panel panel-input" style="width: 50%; border-right: 1px solid var(--border-subtle);">
+					<div class="diff-label">Original</div>
+					<div class="panel-content">
+						{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Paste original here…</p>{/if}
 					</div>
 				</div>
-
-				<!-- Right (Modified) input -->
-				<div class="flex flex-1 flex-col overflow-hidden">
-					<div class="flex items-center border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-3)] py-[var(--space-1)]">
-						<span class="text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] text-[var(--text-tertiary)]">Modified</span>
-					</div>
-					<div class="flex-1 overflow-auto bg-[var(--bg-base)]">
-						{#if outputPanel}
-							{@render outputPanel()}
-						{:else}
-							<p class="p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]">Paste modified JSON here…</p>
-						{/if}
+				<div class="panel panel-output">
+					<div class="diff-label">Modified</div>
+					<div class="panel-content">
+						{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Paste modified here…</p>{/if}
 					</div>
 				</div>
 			</div>
-
-			<!-- Diff results -->
-			<div class="flex flex-col overflow-hidden border-t border-[var(--border-subtle)]" style="min-height: 30%; max-height: 60%">
+			<div class="panel" style="border-top: 1px solid var(--border-subtle); min-height: 30%; max-height: 60%; overflow: hidden; display: flex; flex-direction: column;">
 				{@render diffPanel()}
 			</div>
 		</div>
+
+		<div class="panel-container mobile-panels">
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Original</p>{/if}
+				</div>
+			</div>
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Modified</p>{/if}
+				</div>
+			</div>
+		</div>
 	{:else if tool.layoutVariant === 'triple'}
-		<div class="flex flex-1 overflow-hidden" bind:this={containerEl}>
-			<!-- Input panel -->
-			<div
-				class="flex flex-col overflow-hidden border-r border-[var(--border-subtle)]"
-				style="width: 33.3%"
-			>
-				<div
-					class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-				>
-					{#if inputPanel}
-						{@render inputPanel()}
-					{:else}
-						<p>Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
-					{/if}
+		<div class="panel-container desktop-panels" bind:this={containerEl}>
+			<div class="panel" style="width: 33.3%; border-right: 1px solid var(--border-subtle);">
+				<div class="panel-content">
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
 				</div>
 			</div>
-
-			<!-- Tree panel -->
-			<div
-				class="flex flex-col overflow-hidden border-r border-[var(--border-subtle)]"
-				style="width: 33.3%"
-			>
-				<div
-					class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-				>
-					{#if treePanel}
-						{@render treePanel()}
-					{:else}
-						<p>Tree view</p>
-					{/if}
+			<div class="panel" style="width: 33.3%; border-right: 1px solid var(--border-subtle);">
+				<div class="panel-content">
+					{#if treePanel}{@render treePanel()}{:else}<p class="panel-placeholder">Tree view</p>{/if}
 				</div>
 			</div>
+			<div class="panel panel-output">
+				<div class="panel-content">
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+				</div>
+			</div>
+		</div>
 
-			<!-- Output panel -->
-			<div class="flex flex-1 flex-col overflow-hidden">
-				<div
-					class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-				>
-					{#if outputPanel}
-						{@render outputPanel()}
-					{:else}
-						<p>Output will appear here</p>
-					{/if}
+		<div class="panel-container mobile-panels">
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+				</div>
+			</div>
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
 				</div>
 			</div>
 		</div>
 	{:else if tool.layoutVariant === 'single-panel'}
-		<!-- Single-panel variant: one full-width panel -->
-		<div class="flex flex-1 flex-col overflow-auto bg-[var(--bg-surface)] p-[var(--space-4)] font-sans text-[length:var(--text-sm)] text-[var(--text-primary)]">
-			{#if inputPanel}
-				{@render inputPanel()}
-			{:else}
-				<p>Single panel view</p>
-			{/if}
-			{#if outputPanel}
-				{@render outputPanel()}
-			{/if}
+		<div class="panel-container desktop-panels" style="flex-direction: column;">
+			<div class="panel panel-full">
+				<div class="panel-content panel-content--single">
+					{#if inputPanel}{@render inputPanel()}{/if}
+					{#if outputPanel}{@render outputPanel()}{/if}
+				</div>
+			</div>
+		</div>
+
+		<div class="panel-container mobile-panels">
+			<div class="panel panel-full">
+				<div class="panel-content panel-content--single">
+					{#if inputPanel}{@render inputPanel()}{/if}
+					{#if outputPanel}{@render outputPanel()}{/if}
+				</div>
+			</div>
 		</div>
 	{:else}
-		<!-- Generator variant: single input, output below -->
-		<div class="flex flex-1 flex-col overflow-hidden">
-			<div
-				class="flex-1 overflow-auto border-b border-[var(--border-subtle)] bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-			>
-				{#if inputPanel}
-					{@render inputPanel()}
-				{:else}
-					<p>Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
-				{/if}
+		<!-- Generator variant -->
+		<div class="panel-container desktop-panels" style="flex-direction: column;">
+			<div class="panel" style="border-bottom: 1px solid var(--border-subtle); flex: 1;">
+				<div class="panel-content">
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+				</div>
 			</div>
-			<div
-				class="flex-1 overflow-auto bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-secondary)]"
-			>
-				{#if outputPanel}
-					{@render outputPanel()}
-				{:else}
-					<p>Output will appear here</p>
-				{/if}
+			<div class="panel" style="flex: 1;">
+				<div class="panel-content">
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+				</div>
+			</div>
+		</div>
+
+		<div class="panel-container mobile-panels">
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+				</div>
+			</div>
+			<div class="panel panel-full">
+				<div class="panel-content">
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+				</div>
 			</div>
 		</div>
 	{/if}
@@ -350,8 +373,199 @@
 <StatusBar />
 
 <style>
-	div[role='separator']:focus-visible {
+	.tool-layout {
+		display: flex;
+		flex-direction: column;
+		height: calc(100vh - var(--header-height) - var(--status-bar-height));
+	}
+
+	/* Toolbar row */
+	.tool-toolbar-row {
+		display: flex;
+		align-items: center;
+		height: var(--toolbar-height);
+		padding: 0 12px;
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		flex-shrink: 0;
+	}
+
+	.tool-toolbar-name {
+		font-family: var(--font-ui);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--text-primary);
+		margin-right: 12px;
+		white-space: nowrap;
+	}
+
+	/* Panels */
+	.panel-container {
+		display: flex;
+		flex: 1;
+		overflow: hidden;
+	}
+
+	.panel {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.panel-input {
+		flex-shrink: 0;
+	}
+
+	.panel-output {
+		flex: 1;
+	}
+
+	.panel-full {
+		flex: 1;
+	}
+
+	.panel-content {
+		flex: 1;
+		overflow: auto;
+		background: var(--bg-base);
+		padding: 12px;
+		font-family: var(--font-mono);
+		font-size: 13px;
+		color: var(--text-secondary);
+	}
+
+	.panel-content--tree {
+		overflow: hidden;
+	}
+
+	.panel-content--single {
+		font-family: var(--font-ui);
+		color: var(--text-primary);
+		background: var(--bg-surface);
+	}
+
+	.panel-placeholder {
+		color: var(--text-muted);
+		margin: 0;
+	}
+
+	/* Divider */
+	.divider {
+		display: flex;
+		width: 6px;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		cursor: col-resize;
+		background: var(--bg-surface);
+		transition: background 100ms ease;
+	}
+
+	.divider:hover,
+	.divider--active {
+		background: var(--accent-dim);
+	}
+
+	.divider-handle {
+		width: 2px;
+		height: 24px;
+		border-radius: 9999px;
+		background: var(--border-strong);
+	}
+
+	.divider:focus-visible {
 		outline: 2px solid var(--border-focus);
 		outline-offset: -1px;
+	}
+
+	/* Output tabs */
+	.output-tabs {
+		display: flex;
+		flex-shrink: 0;
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+	}
+
+	.output-tab {
+		padding: 4px 12px;
+		border: none;
+		border-bottom: 2px solid transparent;
+		background: transparent;
+		font-family: var(--font-ui);
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--text-muted);
+		cursor: pointer;
+		transition: color 80ms ease;
+	}
+
+	.output-tab:hover {
+		color: var(--text-secondary);
+	}
+
+	.output-tab--active {
+		color: var(--text-primary);
+		border-bottom-color: var(--accent);
+	}
+
+	/* Diff label */
+	.diff-label {
+		display: flex;
+		align-items: center;
+		height: 28px;
+		padding: 0 12px;
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		font-family: var(--font-ui);
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--text-muted);
+		flex-shrink: 0;
+	}
+
+	.mobile-panels {
+		display: none;
+	}
+
+	/* Responsive */
+	@media (max-width: 767px) {
+		.tool-layout {
+			overflow: hidden;
+		}
+
+		.tool-toolbar-row {
+			padding: 0 8px;
+		}
+
+		.desktop-panels {
+			display: none;
+		}
+
+		.mobile-panels {
+			display: flex;
+			flex-direction: column;
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+
+		.mobile-panels .panel {
+			flex: 0 0 auto;
+			width: 100%;
+			min-height: 200px;
+			max-height: 40vh;
+			border-bottom: 1px solid var(--border-subtle);
+		}
+
+		.mobile-panels .panel:last-child {
+			border-bottom: none;
+		}
+
+		.mobile-panels .panel-content,
+		.mobile-panels .panel-content--tree,
+		.mobile-panels .panel-content--single {
+			min-height: 200px;
+			max-height: 40vh;
+			overflow: auto;
+		}
 	}
 </style>

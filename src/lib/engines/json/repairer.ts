@@ -1,7 +1,16 @@
-import { jsonrepair } from 'jsonrepair';
 import type { RepairResult } from './types.js';
 
-export function repairJSON(input: string): RepairResult {
+let jsonRepairModule: typeof import('jsonrepair') | undefined;
+
+async function getJsonRepair(): Promise<typeof import('jsonrepair')> {
+	if (!jsonRepairModule) {
+		jsonRepairModule = await import('jsonrepair');
+	}
+
+	return jsonRepairModule;
+}
+
+export async function repairJSON(input: string): Promise<RepairResult> {
 	if (!input.trim()) {
 		return {
 			success: false,
@@ -16,6 +25,7 @@ export function repairJSON(input: string): RepairResult {
 	}
 
 	try {
+		const { jsonrepair } = await getJsonRepair();
 		const repaired = jsonrepair(input);
 		const changes = detectChanges(input, repaired);
 
