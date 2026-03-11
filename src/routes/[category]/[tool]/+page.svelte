@@ -13,6 +13,10 @@
 	import JsonOutputPanel from "$components/panels/JsonOutputPanel.svelte";
 	import JsonQueryOutputPanel from "$components/panels/JsonQueryOutputPanel.svelte";
 	import JsonValidatorPanel from "$components/panels/JsonValidatorPanel.svelte";
+	import XmlInputPanel from "$components/panels/XmlInputPanel.svelte";
+	import XmlOutputPanel from "$components/panels/XmlOutputPanel.svelte";
+	import XmlValidatorPanel from "$components/panels/XmlValidatorPanel.svelte";
+	import XmlQueryOutputPanel from "$components/panels/XmlQueryOutputPanel.svelte";
 	import TreePanel from "$components/panels/TreePanel.svelte";
 	import TextAnalysisPanel from "$components/panels/TextAnalysisPanel.svelte";
 	import TextControlsPanel from "$components/panels/TextControlsPanel.svelte";
@@ -71,6 +75,12 @@
 		sortKeys,
 		initJSONStore,
 	} from "$stores/json.store";
+	import {
+		initXMLStore,
+		destroyXMLStore,
+		formatXml,
+		minifyXml,
+	} from "$stores/xml.store";
 	import { initTextStore, textOptions } from "$stores/text.store";
 	import { initNumberStore, numberOptions } from "$stores/number.store";
 	import { initEncodeStore, encodeOptions } from "$stores/encode.store";
@@ -89,6 +99,11 @@
 	let jsonWorkspaceTools = $derived(
 		data.tool.category === "json"
 			? getToolsByCategory("json").filter((tool) => tool.slug !== "diff")
+			: []
+	);
+	let xmlWorkspaceTools = $derived(
+		data.tool.category === "xml"
+			? getToolsByCategory("xml")
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -142,6 +157,8 @@
 
 		if (data.tool.engine === "json") {
 			initJSONStore(data.tool.slug);
+		} else if (data.tool.engine === "xml") {
+			initXMLStore(data.tool.slug);
 		} else if (data.tool.engine === "text") {
 			initTextStore(data.tool.slug);
 		} else if (data.tool.engine === "number") {
@@ -192,6 +209,41 @@
 				},
 			},
 		];
+
+		if (data.tool.engine === "xml") {
+			shortcuts.push(
+				{
+					key: "f",
+					ctrl: true,
+					shift: true,
+					scope: "tool",
+					label: "Format XML",
+					handler: () => { formatXml(); },
+				},
+				{
+					key: "m",
+					ctrl: true,
+					shift: true,
+					scope: "tool",
+					label: "Minify XML",
+					handler: () => { minifyXml(); },
+				},
+			);
+
+			for (const [index] of xmlWorkspaceTools.entries()) {
+				if (index > 8) break;
+				shortcuts.push({
+					key: String(index + 1),
+					scope: "tool",
+					label: `Switch to XML tab ${index + 1}`,
+					handler: () => {
+						const target = xmlWorkspaceTools[index];
+						if (!target || target.slug === data.tool.slug) return;
+						void goto(`/xml/${target.slug}`, { replaceState: true, noScroll: true, keepFocus: true });
+					},
+				});
+			}
+		}
 
 		if (data.tool.engine === "json") {
 			shortcuts.push(
@@ -321,6 +373,7 @@
 	onDestroy(() => {
 		unregisterToolShortcuts?.();
 		destroyJSONStore();
+		destroyXMLStore();
 		destroyHistory();
 	});
 </script>
@@ -356,7 +409,10 @@
 {:else}
 	<ToolLayout
 		tool={data.tool}
-		onprocess={() => { if (data.tool.engine === 'json') { format(); } }}
+		onprocess={() => {
+			if (data.tool.engine === 'json') { format(); }
+			else if (data.tool.engine === 'xml') { formatXml(); }
+		}}
 		onshare={() => { shareModalOpen = true; }}
 	>
 		{#snippet inputPanel()}
@@ -492,6 +548,14 @@
 				<QrReaderPanel />
 			{:else if data.tool.category === "generate" && data.tool.slug === "fake-data"}
 				<FakeDataPanel />
+			{:else if data.tool.category === "xml" && data.tool.slug === "validator"}
+				<XmlValidatorPanel toolSlug={data.tool.slug} workspaceTools={xmlWorkspaceTools} />
+			{:else if data.tool.category === "xml" && data.tool.slug !== "validator"}
+				<XmlInputPanel
+					toolSlug={data.tool.slug}
+					sampleInput={data.tool.sampleInput ?? ""}
+					workspaceTools={xmlWorkspaceTools}
+				/>
 			{:else if data.tool.category === "json" && data.tool.slug === "validator"}
 				<JsonValidatorPanel toolSlug={data.tool.slug} workspaceTools={jsonWorkspaceTools} />
 			{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
@@ -512,7 +576,16 @@
 		{/snippet}
 		{#snippet outputPanel()}
 			{#if data.tool.layoutVariant !== "single-panel"}
-				{#if data.tool.category === "json" && ["jsonpath", "jmespath"].includes(data.tool.slug)}
+				{#if data.tool.category === "xml" && data.tool.slug === "xpath"}
+					<XmlQueryOutputPanel workspaceTools={xmlWorkspaceTools} />
+				{:else if data.tool.category === "xml" && data.tool.slug !== "validator"}
+					<XmlOutputPanel
+						outputLanguage={data.tool.outputLanguage}
+						downloadFilename={data.tool.id}
+						toolSlug={data.tool.slug}
+						workspaceTools={xmlWorkspaceTools}
+					/>
+				{:else if data.tool.category === "json" && ["jsonpath", "jmespath"].includes(data.tool.slug)}
 					<JsonQueryOutputPanel toolSlug={data.tool.slug === "jsonpath" ? "jsonpath" : "jmespath"} />
 				{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
 					<JsonOutputPanel

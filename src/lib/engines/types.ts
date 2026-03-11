@@ -1,5 +1,6 @@
 export type EngineParseError = {
 	message: string;
+	plainLanguageExplanation?: string;
 	line?: number;
 	column?: number;
 };

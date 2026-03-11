@@ -43,7 +43,6 @@
 	let isConverter = $derived(
 		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown'].includes(toolSlug)
 	);
-	let canSwapConverter = $derived(['to-yaml', 'to-csv', 'to-xml', 'to-toml'].includes(toolSlug));
 	let needsValidJson = $derived(
 		['formatter', 'viewer', 'minifier', 'to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown'].includes(
 			toolSlug
@@ -214,49 +213,6 @@
 		a.download = `${deriveDownloadName()}${ext}`;
 		a.click();
 		URL.revokeObjectURL(url);
-	}
-
-	async function handleSwap(): Promise<void> {
-		if (!$output || !canSwapConverter) return;
-
-		try {
-			let nextJson = '';
-			switch (toolSlug) {
-				case 'to-yaml': {
-					const { yamlToJSON } = await import('$engines/yaml/index.js');
-					const result = yamlToJSON($output);
-					if (!result.success) throw new Error(result.error.message);
-					nextJson = result.output;
-					break;
-				}
-				case 'to-csv': {
-					const { csvToJSON } = await import('$engines/csv/index.js');
-					const result = csvToJSON($output);
-					if (!result.success) throw new Error(result.error.message);
-					nextJson = result.output;
-					break;
-				}
-				case 'to-xml': {
-					const { xmlToJSON } = await import('$engines/xml/index.js');
-					const result = xmlToJSON($output);
-					if (!result.success) throw new Error(result.error.message);
-					nextJson = result.output;
-					break;
-				}
-				case 'to-toml': {
-					const { toJson } = await import('$engines/toml/toml.engine.js');
-					nextJson = await toJson($output);
-					break;
-				}
-				default:
-					return;
-			}
-
-			inputStore.set(nextJson);
-			addToast('success', 'Swapped output into JSON input');
-		} catch (error) {
-			addToast('error', error instanceof Error ? error.message : 'Could not swap converter output');
-		}
 	}
 
 	function compareLines(source: string, formatted: string): Array<{ left: string; right: string; changed: boolean }> {
@@ -450,11 +406,6 @@
 				<WrapText size={13} />
 				Wrap
 			</button>
-			{#if canSwapConverter}
-				<button type="button" class="json-output-btn" onclick={() => void handleSwap()}>
-					Swap ⇄
-				</button>
-			{/if}
 			{#if supportsCompare}
 				<button type="button" class="json-output-btn" onclick={() => (showCompare = !showCompare)}>
 					Compare
