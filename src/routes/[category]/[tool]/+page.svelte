@@ -56,6 +56,7 @@
 	import QrReaderPanel from "$components/panels/QrReaderPanel.svelte";
 	import FakeDataPanel from "$components/panels/FakeDataPanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
+	import { getToolsByCategory } from "$registry";
 	import { generateToolSEO } from "$utils/seo.js";
 	import { registerShortcuts } from "$utils/keyboard.js";
 	import type { ShortcutEntry } from "$utils/keyboard.js";
@@ -84,6 +85,11 @@
 	let seo = $derived(generateToolSEO(data.tool, "https://fmtly.dev"));
 	let shareModalOpen = $state(false);
 	let toolPath = $derived(`${data.tool.category}/${data.tool.slug}`);
+	let jsonWorkspaceTools = $derived(
+		data.tool.category === "json"
+			? getToolsByCategory("json").filter((tool) => tool.slug !== "diff")
+			: []
+	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
 	let diffLeft = $state("");
 	let diffRight = $state("");
@@ -118,8 +124,9 @@
 	);
 
 	let unregisterToolShortcuts: (() => void) | undefined;
+	let initializedToolKey = $state("");
 
-	onMount(() => {
+	function initializeToolRuntime(): void {
 		initHistory(data.tool.category, data.tool.slug);
 
 		if (data.tool.engine === "json") {
@@ -139,6 +146,11 @@
 		} else if (data.tool.engine === "generate") {
 			initGenerateStore(data.tool.slug);
 		}
+	}
+
+	onMount(() => {
+		initializeToolRuntime();
+		initializedToolKey = `${data.tool.category}/${data.tool.slug}`;
 
 		if (browser) {
 			const urlParams = new URLSearchParams(window.location.search);
@@ -274,6 +286,13 @@
 		}
 
 		unregisterToolShortcuts = registerShortcuts(shortcuts);
+	});
+
+	$effect(() => {
+		const nextToolKey = `${data.tool.category}/${data.tool.slug}`;
+		if (!browser || initializedToolKey === "" || initializedToolKey === nextToolKey) return;
+		initializeToolRuntime();
+		initializedToolKey = nextToolKey;
 	});
 
 	onDestroy(() => {
@@ -453,6 +472,7 @@
 					toolSlug={data.tool.slug}
 					inputLanguage={data.tool.inputLanguage}
 					sampleInput={data.tool.sampleInput ?? ""}
+					workspaceTools={jsonWorkspaceTools}
 				/>
 			{:else}
 				<InputPanel

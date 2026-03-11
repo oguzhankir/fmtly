@@ -1,22 +1,37 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import MonacoEditor from '$components/editor/MonacoEditor.svelte';
 	import { validateJSON } from '$engines/json/index.js';
 	import { format, jsonError, repair } from '$stores/json.store';
 	import { initInput, input } from '$stores/input.store';
+	import type { ToolDefinition } from '$registry/types.js';
 	import { AlertTriangle, CheckCircle2, Sparkles, Wand2 } from 'lucide-svelte';
 
 	let {
-		toolSlug
+		toolSlug,
+		workspaceTools = []
 	}: {
 		toolSlug: string;
+		workspaceTools?: ToolDefinition[];
 	} = $props();
 
 	let editorRef: MonacoEditor | undefined = $state(undefined);
 	let result = $derived(validateJSON($input));
+	let initializedToolSlug = $state('');
+	let errorCountLabel = $derived(
+		result.errors.length > 0 ? `${result.errors.length} issue${result.errors.length === 1 ? '' : 's'}` : ''
+	);
 
 	onMount(() => {
 		initInput(toolSlug);
+		initializedToolSlug = toolSlug;
+	});
+
+	$effect(() => {
+		if (initializedToolSlug === '' || initializedToolSlug === toolSlug) return;
+		initInput(toolSlug);
+		initializedToolSlug = toolSlug;
 	});
 
 	$effect(() => {
@@ -35,9 +50,70 @@
 	async function handleFormat(): Promise<void> {
 		await format();
 	}
+
+	function focusIssue(line: number): void {
+		editorRef?.revealLine(line);
+	}
+
+	function focusFirstIssue(): void {
+		const firstIssue = result.errors[0];
+		if (!firstIssue) return;
+		focusIssue(firstIssue.line);
+	}
+
+	function getWorkspaceLabel(tool: ToolDefinition): string {
+		switch (tool.slug) {
+			case 'formatter':
+				return 'Format';
+			case 'viewer':
+				return 'View';
+			case 'validator':
+				return 'Validate';
+			case 'minifier':
+				return 'Minify';
+			case 'to-yaml':
+				return '→ YAML';
+			case 'to-toml':
+				return '→ TOML';
+			case 'to-markdown':
+				return '→ MD';
+			case 'jsonpath':
+				return 'JSONPath';
+			case 'jmespath':
+				return 'JMESPath';
+			default:
+				return tool.displayName;
+		}
+	}
+
+	function navigateToWorkspaceTool(slug: string): void {
+		if (slug === toolSlug) return;
+		void goto(`/json/${slug}`, {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
+	}
 </script>
 
 <div class="validator-shell" role="region" aria-label="JSON validator">
+	{#if workspaceTools.length > 0}
+		<div class="json-workspace-tabs" role="tablist" aria-label="JSON workspace tabs">
+			{#each workspaceTools as workspaceTool}
+				<button
+					type="button"
+					role="tab"
+					class="json-workspace-tab"
+					class:json-workspace-tab--active={workspaceTool.slug === toolSlug}
+					aria-selected={workspaceTool.slug === toolSlug}
+					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
+				>
+					{getWorkspaceLabel(workspaceTool)}
+				</button>
+			{/each}
+		</div>
+	{/if}
+
 	<div class="validator-header">
 		<div
 			class="validator-status"
@@ -53,6 +129,12 @@
 			{/if}
 		</div>
 		<div class="validator-actions">
+			{#if result.errors.length > 0}
+				<button type="button" class="validator-btn" onclick={focusFirstIssue}>
+					<AlertTriangle size={13} />
+					First issue
+				</button>
+			{/if}
 			<button type="button" class="validator-btn" onclick={handleFormat}>
 				<Sparkles size={13} />
 				Format
@@ -71,11 +153,14 @@
 	{#if !result.valid}
 		<div class="validator-errors">
 			{#if result.errors.length > 0}
+				<div class="validator-errors__summary">{errorCountLabel}</div>
+			{/if}
+			{#if result.errors.length > 0}
 				{#each result.errors as issue}
 					<button
 						type="button"
 						class="validator-error-item"
-						onclick={() => editorRef?.revealLine(issue.line)}
+						onclick={() => focusIssue(issue.line)}
 					>
 						<div class="validator-error-item__head">
 							<strong>Line {issue.line}, column {issue.column}</strong>
@@ -85,8 +170,6 @@
 						<p class="validator-error-item__explanation">{issue.plainLanguageExplanation}</p>
 					</button>
 				{/each}
-			{:else if !$input.trim()}
-				<div class="validator-empty">Paste JSON to validate syntax and see inline Monaco markers.</div>
 			{:else if $jsonError}
 				<div class="validator-empty">{$jsonError.plainLanguageExplanation}</div>
 			{/if}
@@ -100,6 +183,45 @@
 </div>
 
 <style>
+	.json-workspace-tabs {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+		overflow-x: auto;
+		padding: 0 var(--space-3);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		scrollbar-width: none;
+	}
+
+	.json-workspace-tabs::-webkit-scrollbar {
+		display: none;
+	}
+
+	.json-workspace-tab {
+		flex: 0 0 auto;
+		height: 36px;
+		padding: 0 var(--space-3);
+		border: none;
+		border-bottom: 2px solid transparent;
+		background: transparent;
+		color: var(--text-muted);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 500;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	.json-workspace-tab--active {
+		border-bottom-color: var(--accent);
+		color: var(--text-primary);
+	}
+
+	.json-workspace-tab:hover {
+		color: var(--text-primary);
+	}
+
 	.validator-shell {
 		display: flex;
 		flex-direction: column;
@@ -181,6 +303,13 @@
 		background: var(--bg-surface);
 		max-height: 220px;
 		overflow: auto;
+	}
+
+	.validator-errors__summary {
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--text-muted);
 	}
 
 	.validator-error-item {

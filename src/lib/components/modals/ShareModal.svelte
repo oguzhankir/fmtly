@@ -46,9 +46,17 @@
 
 	async function handleCopy(): Promise<void> {
 		if (!shareResult) return;
+		if (browser && navigator.share) {
+			try {
+				await navigator.share({ url: shareResult.url });
+				open = false;
+				return;
+			} catch {
+			}
+		}
 		await navigator.clipboard.writeText(shareResult.url);
 		justCopied = true;
-		addToast('success', 'Share link copied');
+		addToast('success', 'Share URL copied');
 		if (copyTimer) clearTimeout(copyTimer);
 		copyTimer = setTimeout(() => {
 			justCopied = false;
@@ -118,7 +126,7 @@
 					{/if}
 
 					<p class="share-note">
-						The data is encoded in the URL hash and is never sent to any server.
+						The data is encoded in the URL and is never sent to any server for processing.
 					</p>
 				{:else}
 					<p class="share-empty">Enter some input first to generate a share link.</p>

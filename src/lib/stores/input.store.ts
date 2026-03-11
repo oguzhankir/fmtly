@@ -2,6 +2,17 @@ import { browser } from '$app/environment';
 import { derived, get, writable } from 'svelte/store';
 
 const SESSION_PREFIX = 'fmtly-input-';
+const SHARED_JSON_TOOL_SLUGS = new Set([
+	'formatter',
+	'viewer',
+	'validator',
+	'minifier',
+	'to-yaml',
+	'to-toml',
+	'to-markdown',
+	'jsonpath',
+	'jmespath'
+]);
 
 let currentSlug = '';
 
@@ -41,7 +52,7 @@ export const input = {
 };
 
 export function initInput(toolSlug: string): void {
-	currentSlug = toolSlug;
+	currentSlug = SHARED_JSON_TOOL_SLUGS.has(toolSlug) ? 'json-workspace' : toolSlug;
 	store.set(loadFromSession());
 }
 

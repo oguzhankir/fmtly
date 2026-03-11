@@ -3,7 +3,12 @@
 	import { output } from '$stores/output.store';
 	import { input } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
-	import { jsonAdvancedStats, jsonFormatWarnings } from '$stores/json.store';
+	import {
+		jsonAdvancedStats,
+		jsonFormatOptions,
+		jsonFormatWarnings,
+		setFormatOptions
+	} from '$stores/json.store';
 	import { Check, Copy, Download, WrapText, ChevronDown, ChevronRight } from 'lucide-svelte';
 
 	let {
@@ -22,9 +27,16 @@
 	let copied = $state(false);
 	let showStats = $state(false);
 	let showCompare = $state(false);
+	let isFormatter = $derived(toolSlug === 'formatter');
+	let isConverter = $derived(['to-yaml', 'to-toml', 'to-markdown'].includes(toolSlug));
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
 	let supportsCompare = $derived(toolSlug === 'formatter' || toolSlug === 'minifier');
 	let lines = $derived(highlightedHtml ? highlightedHtml.split('\n') : []);
+	let outputMeta = $derived.by(() => {
+		if (!$output) return '';
+		const lineCount = $output.length === 0 ? 0 : $output.split('\n').length;
+		return `${$output.length.toLocaleString()} chars · ${lineCount.toLocaleString()} lines`;
+	});
 	let statsSummary = $derived.by(() => {
 		if (!$jsonAdvancedStats) return '';
 		return `${$jsonAdvancedStats.keys} keys · ${$jsonAdvancedStats.objects} objects · ${$jsonAdvancedStats.arrays} arrays · ${$jsonAdvancedStats.strings} strings · depth: ${$jsonAdvancedStats.maxDepth}`;
@@ -104,11 +116,39 @@
 		}
 	}
 
+	function fallbackCopy(text: string): boolean {
+		try {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', 'true');
+			textarea.style.position = 'fixed';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.select();
+			const didCopy = document.execCommand('copy');
+			document.body.removeChild(textarea);
+			return didCopy;
+		} catch {
+			return false;
+		}
+	}
+
 	async function handleCopy(mode: 'json' | 'js' | 'python' | 'escaped' = 'json'): Promise<void> {
 		if (!$output) return;
-		await navigator.clipboard.writeText(toCopyFormat(mode));
+		const text = toCopyFormat(mode);
+		let copiedSuccessfully = false;
+		try {
+			await navigator.clipboard.writeText(text);
+			copiedSuccessfully = true;
+		} catch {
+			copiedSuccessfully = fallbackCopy(text);
+		}
+		if (!copiedSuccessfully) {
+			addToast('error', 'Could not copy output');
+			return;
+		}
 		copied = true;
-		addToast('success', 'Output copied');
+		addToast('success', 'Copied to clipboard');
 		setTimeout(() => {
 			copied = false;
 		}, 1500);
@@ -157,6 +197,14 @@
 			changed: (leftLines[index] ?? '') !== (rightLines[index] ?? '')
 		}));
 	}
+
+	function setIndent(indent: 2 | 4 | 'tab'): void {
+		setFormatOptions({ indent });
+	}
+
+	function toggleSortKeys(): void {
+		setFormatOptions({ sortKeys: !$jsonFormatOptions.sortKeys });
+	}
 </script>
 
 <div class="json-output" role="region" aria-label="JSON output panel">
@@ -195,6 +243,55 @@
 	{/if}
 
 	{#if $output}
+		{#if isConverter}
+			<div class="json-output-meta">
+				<span class="json-output-meta__pill">{outputLanguage.toUpperCase()}</span>
+				<span>{outputMeta}</span>
+			</div>
+		{/if}
+
+		{#if isFormatter}
+			<div class="json-output-controls">
+				<div class="json-output-controls__group">
+					<span class="json-output-controls__label">Indent</span>
+					<button
+						type="button"
+						class="json-output-chip"
+						class:json-output-chip--active={$jsonFormatOptions.indent === 2}
+						onclick={() => setIndent(2)}
+					>
+						2
+					</button>
+					<button
+						type="button"
+						class="json-output-chip"
+						class:json-output-chip--active={$jsonFormatOptions.indent === 4}
+						onclick={() => setIndent(4)}
+					>
+						4
+					</button>
+					<button
+						type="button"
+						class="json-output-chip"
+						class:json-output-chip--active={$jsonFormatOptions.indent === 'tab'}
+						onclick={() => setIndent('tab')}
+					>
+						Tab
+					</button>
+				</div>
+				<div class="json-output-controls__group">
+					<button
+						type="button"
+						class="json-output-chip"
+						class:json-output-chip--active={$jsonFormatOptions.sortKeys}
+						onclick={toggleSortKeys}
+					>
+						Sort keys
+					</button>
+				</div>
+			</div>
+		{/if}
+
 		<div class="json-output-actions">
 			<button type="button" class="json-output-btn" onclick={() => (wrapLines = !wrapLines)}>
 				<WrapText size={13} />
@@ -258,8 +355,6 @@
 				{/each}
 			</div>
 		{/if}
-	{:else}
-		<div class="json-output-empty">Output will appear here</div>
 	{/if}
 </div>
 
@@ -315,8 +410,58 @@
 		background: var(--bg-surface);
 	}
 
+	.json-output-meta {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-3);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		color: var(--text-muted);
+	}
+
+	.json-output-meta__pill {
+		display: inline-flex;
+		align-items: center;
+		height: 22px;
+		padding: 0 var(--space-2);
+		border-radius: var(--radius-full);
+		background: var(--bg-elevated);
+		color: var(--text-secondary);
+		font-weight: 600;
+	}
+
+	.json-output-controls {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-3);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+	}
+
+	.json-output-controls__group {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		flex-wrap: wrap;
+	}
+
+	.json-output-controls__label {
+		color: var(--text-muted);
+		font-family: var(--font-ui);
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
 	.json-output-btn,
-	.json-output-select {
+	.json-output-select,
+	.json-output-chip {
 		height: 28px;
 		padding: 0 var(--space-2);
 		border: 1px solid var(--border-default);
@@ -328,11 +473,18 @@
 		font-weight: 500;
 	}
 
-	.json-output-btn {
+	.json-output-btn,
+	.json-output-chip {
 		display: inline-flex;
 		align-items: center;
 		gap: var(--space-1);
 		cursor: pointer;
+	}
+
+	.json-output-chip--active {
+		border-color: var(--accent-border);
+		background: var(--accent-dim);
+		color: var(--text-primary);
 	}
 
 	.json-output-code,
@@ -417,16 +569,6 @@
 
 	.json-compare-line--changed {
 		background: var(--warning-dim, color-mix(in srgb, var(--warning) 12%, transparent));
-	}
-
-	.json-output-empty {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex: 1;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: var(--text-sm);
 	}
 
 	@media (max-width: 767px) {

@@ -51,7 +51,7 @@ describe('compressForURL / decompressFromURL', () => {
 describe('generateShareURL', () => {
 	it('generates a valid share URL', () => {
 		const result = generateShareURL('{"a":1}', 'json/formatter', 'https://fmtly.dev');
-		expect(result.url).toMatch(/^https:\/\/fmtly\.dev\/json\/formatter#share=.+/);
+		expect(result.url).toMatch(/^https:\/\/fmtly\.dev\/json\/formatter\?input=.+/);
 		expect(result.sizeKB).toBeGreaterThan(0);
 	});
 
@@ -70,8 +70,8 @@ describe('generateShareURL', () => {
 	it('URL can be decompressed back to original', () => {
 		const input = '{"hello": "world", "nested": {"arr": [1,2,3]}}';
 		const result = generateShareURL(input, 'json/formatter', 'https://fmtly.dev');
-		const hash = result.url.split('#share=')[1];
-		const decompressed = decompressFromURL(hash);
+		const encoded = new URL(result.url).searchParams.get('input');
+		const decompressed = decompressFromURL(encoded ?? '');
 		expect(decompressed).toBe(input);
 	});
 });

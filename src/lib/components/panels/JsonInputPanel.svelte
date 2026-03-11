@@ -1,30 +1,32 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import EditorModeToggle from '$components/editor/EditorModeToggle.svelte';
-	import type { EditorMode } from '$components/editor/EditorModeToggle.svelte';
+	import { goto } from '$app/navigation';
 	import { initInput, input } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { jsonSamples } from '$lib/utils/jsonSamples.js';
+	import type { ToolDefinition } from '$registry/types.js';
 	import { Upload, Eraser, Link2, ClipboardPaste } from 'lucide-svelte';
 
 	let {
 		toolSlug,
 		inputLanguage,
-		sampleInput = ''
+		sampleInput = '',
+		workspaceTools = []
 	}: {
 		toolSlug: string;
 		inputLanguage: string;
 		sampleInput?: string;
+		workspaceTools?: ToolDefinition[];
 	} = $props();
 
-	let textareaEl: HTMLTextAreaElement | undefined = $state(undefined);
+	let fileInputEl: HTMLInputElement | undefined = $state(undefined);
 	let isDragOver = $state(false);
 	let dragCounter = $state(0);
-	let editorMode = $state<EditorMode>('editor');
 	let MonacoEditor: typeof import('$components/editor/MonacoEditor.svelte').default | undefined =
 		$state(undefined);
 	let selectedSample = $state('');
 	let clipboardJson = $state('');
+	let initializedToolSlug = $state('');
 	let encodingInfo = $derived.by(() => {
 		const chars = $input.length;
 		const lines = $input.length === 0 ? 0 : $input.split('\n').length;
@@ -40,21 +42,24 @@
 
 	onMount(() => {
 		initInput(toolSlug);
-		if (editorMode === 'simple') {
-			textareaEl?.focus();
-		}
+		initializedToolSlug = toolSlug;
+		void loadMonacoComponent();
 	});
 
-	function handleModeChange(mode: EditorMode): void {
-		editorMode = mode;
-		if (mode === 'editor' && !MonacoEditor) {
-			loadMonacoComponent();
-		}
-	}
+	$effect(() => {
+		if (initializedToolSlug === '' || initializedToolSlug === toolSlug) return;
+		initInput(toolSlug);
+		initializedToolSlug = toolSlug;
+	});
 
 	async function loadMonacoComponent(): Promise<void> {
 		const mod = await import('$components/editor/MonacoEditor.svelte');
 		MonacoEditor = mod.default;
+	}
+
+	function handleFileContent(content: string, label: string): void {
+		input.set(content);
+		addToast('success', `File loaded: ${label}`);
 	}
 
 	function handleDragEnter(event: DragEvent): void {
@@ -83,24 +88,22 @@
 
 		const file = event.dataTransfer?.files[0];
 		if (!file) return;
+		if (!file.type.startsWith('text/') && !/\.(json|txt)$/i.test(file.name)) {
+			addToast('error', 'Only .json and .txt files are supported');
+			return;
+		}
 
 		const reader = new FileReader();
 		reader.onload = () => {
 			if (typeof reader.result === 'string') {
-				input.set(reader.result);
-				addToast('success', `Loaded ${file.name}`);
+				handleFileContent(reader.result, file.name);
 			}
 		};
 		reader.readAsText(file);
 	}
 
-	function handleInput(event: Event): void {
-		const target = event.target as HTMLTextAreaElement;
-		input.set(target.value);
-	}
-
 	async function handleFocus(): Promise<void> {
-		if (editorMode === 'editor' && !MonacoEditor) {
+		if (!MonacoEditor) {
 			loadMonacoComponent();
 		}
 
@@ -128,6 +131,9 @@
 	}
 
 	function clearInputValue(): void {
+		if ($input.length > 1000 && !window.confirm('Clear the current JSON input?')) {
+			return;
+		}
 		input.set('');
 		clipboardJson = '';
 		addToast('info', 'Input cleared');
@@ -139,13 +145,39 @@
 
 		try {
 			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error('Request failed');
+			}
 			const text = await response.text();
 			JSON.parse(text);
 			input.set(text);
 			addToast('success', 'Loaded JSON from URL');
 		} catch {
-			addToast('error', 'Could not load valid JSON from that URL');
+			addToast('error', 'Could not fetch — try pasting directly');
 		}
+	}
+
+	function triggerUpload(): void {
+		fileInputEl?.click();
+	}
+
+	function handleUpload(event: Event): void {
+		const target = event.currentTarget as HTMLInputElement;
+		const file = target.files?.[0];
+		if (!file) return;
+		if (!file.type.startsWith('text/') && !/\.(json|txt)$/i.test(file.name)) {
+			addToast('error', 'Only .json and .txt files are supported');
+			target.value = '';
+			return;
+		}
+		const reader = new FileReader();
+		reader.onload = () => {
+			if (typeof reader.result === 'string') {
+				handleFileContent(reader.result, file.name);
+				target.value = '';
+			}
+		};
+		reader.readAsText(file);
 	}
 
 	function pasteClipboardJson(): void {
@@ -153,6 +185,40 @@
 		input.set(clipboardJson);
 		clipboardJson = '';
 		addToast('success', 'Pasted JSON from clipboard');
+	}
+
+	function getWorkspaceLabel(tool: ToolDefinition): string {
+		switch (tool.slug) {
+			case 'formatter':
+				return 'Format';
+			case 'viewer':
+				return 'View';
+			case 'validator':
+				return 'Validate';
+			case 'minifier':
+				return 'Minify';
+			case 'to-yaml':
+				return '→ YAML';
+			case 'to-toml':
+				return '→ TOML';
+			case 'to-markdown':
+				return '→ MD';
+			case 'jsonpath':
+				return 'JSONPath';
+			case 'jmespath':
+				return 'JMESPath';
+			default:
+				return tool.displayName;
+		}
+	}
+
+	function navigateToWorkspaceTool(slug: string): void {
+		if (slug === toolSlug) return;
+		void goto(`/json/${slug}`, {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
 	}
 </script>
 
@@ -165,8 +231,32 @@
 	role="region"
 	aria-label="JSON input panel"
 >
+	{#if workspaceTools.length > 0}
+		<div class="json-workspace-tabs" role="tablist" aria-label="JSON workspace tabs">
+			{#each workspaceTools as workspaceTool}
+				<button
+					type="button"
+					role="tab"
+					class="json-workspace-tab"
+					class:json-workspace-tab--active={workspaceTool.slug === toolSlug}
+					aria-selected={workspaceTool.slug === toolSlug}
+					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
+				>
+					{getWorkspaceLabel(workspaceTool)}
+				</button>
+			{/each}
+		</div>
+	{/if}
+
 	<div class="json-input-toolbar">
 		<div class="json-input-toolbar__group">
+			<input
+				bind:this={fileInputEl}
+				type="file"
+				accept=".json,.txt,text/plain,application/json"
+				class="sr-only"
+				onchange={handleUpload}
+			/>
 			<button type="button" class="json-input-btn" onclick={loadUrl}>
 				<Link2 size={13} />
 				Load URL
@@ -182,7 +272,10 @@
 			</label>
 		</div>
 		<div class="json-input-toolbar__group">
-			<EditorModeToggle bind:mode={editorMode} onchange={handleModeChange} />
+			<button type="button" class="json-input-btn" onclick={triggerUpload}>
+				<Upload size={13} />
+				Upload
+			</button>
 			{#if $input}
 				<button type="button" class="json-input-btn" onclick={clearInputValue}>
 					<Eraser size={13} />
@@ -202,19 +295,12 @@
 	{/if}
 
 	<div class="relative flex-1 overflow-hidden">
-		{#if editorMode === 'editor' && MonacoEditor}
+		{#if MonacoEditor}
 			<MonacoEditor language={inputLanguage} wordWrap={true} />
 		{:else}
-			<textarea
-				bind:this={textareaEl}
-				value={$input}
-				oninput={handleInput}
-				onfocus={handleFocus}
-				placeholder="Paste JSON here, drop a file, or load a sample"
-				class="json-input-textarea"
-				spellcheck="false"
-				autocomplete="off"
-			></textarea>
+			<div class="json-input-loading">
+				Loading editor…
+			</div>
 		{/if}
 	</div>
 
@@ -233,6 +319,45 @@
 </div>
 
 <style>
+	.json-workspace-tabs {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+		overflow-x: auto;
+		padding: 0 var(--space-3);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		scrollbar-width: none;
+	}
+
+	.json-workspace-tabs::-webkit-scrollbar {
+		display: none;
+	}
+
+	.json-workspace-tab {
+		flex: 0 0 auto;
+		height: 36px;
+		padding: 0 var(--space-3);
+		border: none;
+		border-bottom: 2px solid transparent;
+		background: transparent;
+		color: var(--text-muted);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 500;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	.json-workspace-tab--active {
+		border-bottom-color: var(--accent);
+		color: var(--text-primary);
+	}
+
+	.json-workspace-tab:hover {
+		color: var(--text-primary);
+	}
+
 	.json-input-toolbar {
 		display: flex;
 		align-items: center;
@@ -301,24 +426,6 @@
 		font-size: 12px;
 		font-weight: 500;
 		cursor: pointer;
-	}
-
-	.json-input-textarea {
-		height: 100%;
-		width: 100%;
-		resize: none;
-		border: none;
-		background: transparent;
-		padding: var(--space-4);
-		font-family: var(--font-mono);
-		font-size: var(--text-sm);
-		line-height: var(--leading-relaxed);
-		color: var(--text-primary);
-		outline: none;
-	}
-
-	.json-input-textarea::placeholder {
-		color: var(--text-muted);
 	}
 
 	.json-input-meta {

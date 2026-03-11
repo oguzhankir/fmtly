@@ -3,7 +3,7 @@
 	import { input } from '$stores/input.store';
 	import { output } from '$stores/output.store';
 	import { addToast } from '$stores/toast.store';
-	import { Copy, Play, Sparkles } from 'lucide-svelte';
+	import { Check, Copy, Play, Sparkles, WrapText } from 'lucide-svelte';
 
 	const props = $props<{
 		toolSlug: 'jsonpath' | 'jmespath';
@@ -16,6 +16,13 @@
 	let resultError = $state('');
 	let isRunning = $state(false);
 	let resultCount = $state<number | null>(null);
+	let copied = $state(false);
+	let wrapLines = $state(false);
+	let resultMeta = $derived.by(() => {
+		if (!$output) return '';
+		const lines = $output.length === 0 ? 0 : $output.split('\n').length;
+		return `${$output.length.toLocaleString()} chars · ${lines.toLocaleString()} lines`;
+	});
 
 	$effect(() => {
 		if (!query) {
@@ -59,10 +66,41 @@
 		query = defaultQuery;
 	}
 
+	function fallbackCopy(text: string): boolean {
+		try {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', 'true');
+			textarea.style.position = 'fixed';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.select();
+			const didCopy = document.execCommand('copy');
+			document.body.removeChild(textarea);
+			return didCopy;
+		} catch {
+			return false;
+		}
+	}
+
 	async function copyResult(): Promise<void> {
 		if (!$output) return;
-		await navigator.clipboard.writeText($output);
-		addToast('success', 'Query result copied');
+		let copiedSuccessfully = false;
+		try {
+			await navigator.clipboard.writeText($output);
+			copiedSuccessfully = true;
+		} catch {
+			copiedSuccessfully = fallbackCopy($output);
+		}
+		if (!copiedSuccessfully) {
+			addToast('error', 'Could not copy output');
+			return;
+		}
+		copied = true;
+		addToast('success', 'Copied to clipboard');
+		setTimeout(() => {
+			copied = false;
+		}, 1500);
 	}
 </script>
 
@@ -83,8 +121,16 @@
 				<Play size={13} />
 				Run
 			</button>
+			<button type="button" class="query-btn" onclick={() => (wrapLines = !wrapLines)} disabled={!$output}>
+				<WrapText size={13} />
+				Wrap
+			</button>
 			<button type="button" class="query-btn" onclick={copyResult} disabled={!$output}>
-				<Copy size={13} />
+				{#if copied}
+					<Check size={13} />
+				{:else}
+					<Copy size={13} />
+				{/if}
 				Copy
 			</button>
 		</div>
@@ -110,9 +156,8 @@
 	{:else if !query.trim()}
 		<div class="query-empty">Enter a query to see results.</div>
 	{:else if $output}
-		<pre class="query-result"><code>{$output}</code></pre>
-	{:else}
-		<div class="query-empty">No results yet.</div>
+		<div class="query-result-meta">{resultMeta}</div>
+		<pre class="query-result" class:query-result--wrap={wrapLines}><code>{$output}</code></pre>
 	{/if}
 </div>
 
@@ -230,6 +275,24 @@
 	.query-result {
 		color: var(--text-primary);
 		background: var(--bg-base);
+	}
+
+	.query-result-meta {
+		padding: var(--space-2) var(--space-4);
+		border-top: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		color: var(--text-muted);
+	}
+
+	.query-result code {
+		white-space: pre;
+	}
+
+	.query-result--wrap code {
+		white-space: pre-wrap;
+		word-break: break-word;
 	}
 
 	.query-empty {
