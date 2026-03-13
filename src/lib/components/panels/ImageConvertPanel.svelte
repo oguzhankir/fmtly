@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import ImagePreview from "./ImagePreview.svelte";
     import { Loader } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let file: globalThis.File | null = $state(null);
     let origSrc = $state("");
@@ -56,13 +57,13 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept="image/*"
-                label="Drop image here or click to select"
+                label={$t('ui.drop_image_here_select', 'Drop image here or click to select')}
             />
         </div>
     {:else}
         <div class="controls">
             <label class="ctrl">
-                <span class="lbl">Target Format</span>
+                <span class="lbl">{$t('ui.target_format', 'Target Format')}</span>
                 <select bind:value={targetFormat} class="sel">
                     <option value="image/png">PNG</option>
                     <option value="image/jpeg">JPEG</option>
@@ -72,7 +73,7 @@
             {#if targetFormat !== "image/png"}
                 <label class="ctrl">
                     <span class="lbl"
-                        >Quality ({Math.round(quality * 100)}%)</span
+                        >{$t('ui.quality', 'Quality')} ({Math.round(quality * 100)}%)</span
                     >
                     <input
                         type="range"
@@ -85,14 +86,14 @@
                 </label>
             {/if}
             <button onclick={convert} disabled={processing} class="action-btn">
-                {#if processing}<Loader size={14} class="spin" />{/if} Convert
+                {#if processing}<Loader size={14} class="spin" />{/if} {$t('ui.convert', 'Convert')}
             </button>
         </div>
 
         <div class="compare">
             <div class="side">
                 <h4 class="side-label">
-                    Original ({file.type}) — {formatSize(file.size)}
+                    {$t('ui.original', 'Original')} ({file.type}) — {formatSize(file.size)}
                 </h4>
                 <ImagePreview
                     src={origSrc}
@@ -105,7 +106,7 @@
             {#if resultSrc && resultBlob}
                 <div class="side">
                     <h4 class="side-label">
-                        Converted ({targetFormat}) — {formatSize(
+                        {$t('ui.converted', 'Converted')} ({targetFormat}) — {formatSize(
                             resultBlob.size,
                         )}
                     </h4>

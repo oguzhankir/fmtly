@@ -5,16 +5,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-css',
 		category: 'code',
 		slug: 'css',
-		displayName: 'CSS Formatter',
-		tagline: 'Format and beautify CSS code with Prettier.',
-		description:
-			'Instantly format and beautify CSS stylesheets using Prettier WASM — no server, no upload. Configure tab width and print width. Supports all modern CSS features.',
-		primaryKeyword: 'css formatter',
-		metaTitle: 'CSS Formatter & Beautifier | Prettier | fmtly',
-		metaDescription:
-			'Format and beautify CSS code instantly in your browser using Prettier WASM. Supports CSS, nested rules, custom properties, and all modern syntax.',
+		displayName: 'tool.code-css.display_name',
+		tagline: 'tool.code-css.tagline',
+		description: 'tool.code-css.description',
+		primaryKeyword: 'tool.code-css.primary_keyword',
+		metaTitle: 'tool.code-css.meta_title',
+		metaDescription: 'tool.code-css.meta_description',
 		engine: 'code',
-		operation: 'css',
+		operation: 'tool.code-css.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'css',
 		outputLanguage: 'css',
@@ -25,20 +23,15 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Is my CSS uploaded anywhere?',
-				answer:
-					'No. Prettier runs as a WebAssembly module entirely in your browser. Your code never leaves your device.'
+				question: 'tool.code-css.faq.0.question',
+				answer: 'tool.code-css.faq.0.answer'
 			},
 			{
-				question: 'Why is the first format slow?',
-				answer:
-					'The first format downloads the Prettier WASM bundle (~400KB). Subsequent formats on the same page are instant.'
+				question: 'tool.code-css.faq.1.question',
+				answer: 'tool.code-css.faq.1.answer'
 			}
 		],
-		useCases: [
-			'Standardizing CSS code style across a team',
-			'Cleaning up minified CSS for debugging'
-		],
+		useCases: ['tool.code-css.use_case.0', 'tool.code-css.use_case.1'],
 		sampleInput:
 			'.container{display:flex;flex-direction:column;align-items:center;padding:16px;background-color:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}\n.container .title{font-size:24px;font-weight:700;color:#111;margin-bottom:8px}'
 	},
@@ -46,16 +39,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-scss',
 		category: 'code',
 		slug: 'scss',
-		displayName: 'SCSS Formatter',
-		tagline: 'Format SCSS/Sass code with Prettier.',
-		description:
-			'Format SCSS stylesheets using Prettier WASM. Handles nested rules, variables, mixins, functions, and all Sass syntax — entirely locally.',
-		primaryKeyword: 'scss formatter',
-		metaTitle: 'SCSS / Sass Formatter | Prettier | fmtly',
-		metaDescription:
-			'Format and beautify SCSS and Sass code online using Prettier WASM. All processing is local — no server uploads.',
+		displayName: 'tool.code-scss.display_name',
+		tagline: 'tool.code-scss.tagline',
+		description: 'tool.code-scss.description',
+		primaryKeyword: 'tool.code-scss.primary_keyword',
+		metaTitle: 'tool.code-scss.meta_title',
+		metaDescription: 'tool.code-scss.meta_description',
 		engine: 'code',
-		operation: 'scss',
+		operation: 'tool.code-scss.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'scss',
 		outputLanguage: 'scss',
@@ -66,14 +57,11 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Does this support nested rules?',
-				answer: 'Yes. Prettier handles all SCSS syntax including nesting, variables, and mixins.'
+				question: 'tool.code-scss.faq.0.question',
+				answer: 'tool.code-scss.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Formatting SCSS from various developers with different styles',
-			'Standardizing indentation in Sass codebases'
-		],
+		useCases: ['tool.code-scss.use_case.0', 'tool.code-scss.use_case.1'],
 		sampleInput:
 			'$primary:#d97706;.container{display:flex;.title{font-size:24px;font-weight:700;color:$primary;&:hover{color:darken($primary,10%)}}}'
 	},
@@ -81,16 +69,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-less',
 		category: 'code',
 		slug: 'less',
-		displayName: 'LESS Formatter',
-		tagline: 'Format LESS stylesheets with Prettier.',
-		description:
-			'Format LESS (Leaner CSS) stylesheets using Prettier WASM. Supports all LESS features including variables, mixins, and nesting — entirely in your browser.',
-		primaryKeyword: 'less formatter',
-		metaTitle: 'LESS Formatter & Beautifier | fmtly',
-		metaDescription:
-			'Format and beautify LESS stylesheets locally with Prettier WASM. Handles variables, mixins, nesting — no server required.',
+		displayName: 'tool.code-less.display_name',
+		tagline: 'tool.code-less.tagline',
+		description: 'tool.code-less.description',
+		primaryKeyword: 'tool.code-less.primary_keyword',
+		metaTitle: 'tool.code-less.meta_title',
+		metaDescription: 'tool.code-less.meta_description',
 		engine: 'code',
-		operation: 'less',
+		operation: 'tool.code-less.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'less',
 		outputLanguage: 'less',
@@ -101,31 +87,25 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Is this different from the CSS formatter?',
-				answer:
-					'Yes. It uses the Prettier LESS parser which understands LESS-specific syntax like @variables and mixins.'
+				question: 'tool.code-less.faq.0.question',
+				answer: 'tool.code-less.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Formatting LESS files in Bootstrap-based projects',
-			'Cleaning up generated LESS code'
-		],
+		useCases: ['tool.code-less.use_case.0', 'tool.code-less.use_case.1'],
 		sampleInput: '@primary:#d97706;.container{padding:16px;.title{color:@primary;font-size:24px;}}'
 	},
 	{
 		id: 'code-html',
 		category: 'code',
 		slug: 'html',
-		displayName: 'HTML Formatter',
-		tagline: 'Format and indent HTML markup with Prettier.',
-		description:
-			'Beautify HTML markup with proper indentation and consistent attribute formatting using Prettier WASM. Excellent for minified HTML, email templates, and raw markup from CMS exports.',
-		primaryKeyword: 'html formatter',
-		metaTitle: 'HTML Formatter & Beautifier | Prettier | fmtly',
-		metaDescription:
-			'Format and indent HTML markup instantly using Prettier WASM. Works with full pages, fragments, email templates — fully local.',
+		displayName: 'tool.code-html.display_name',
+		tagline: 'tool.code-html.tagline',
+		description: 'tool.code-html.description',
+		primaryKeyword: 'tool.code-html.primary_keyword',
+		metaTitle: 'tool.code-html.meta_title',
+		metaDescription: 'tool.code-html.meta_description',
 		engine: 'code',
-		operation: 'html',
+		operation: 'tool.code-html.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'html',
 		outputLanguage: 'html',
@@ -136,15 +116,11 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Can it format inline scripts and styles?',
-				answer:
-					'Yes. Prettier formats embedded <script> and <style> blocks using the appropriate sub-parser.'
+				question: 'tool.code-html.faq.0.question',
+				answer: 'tool.code-html.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Formatting minified HTML from CMS or build tools',
-			'Cleaning up email template HTML before testing'
-		],
+		useCases: ['tool.code-html.use_case.0', 'tool.code-html.use_case.1'],
 		sampleInput:
 			'<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Hello</title></head><body><div class="container"><h1>Hello World</h1><p>This is a paragraph.</p></div></body></html>'
 	},
@@ -152,16 +128,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-javascript',
 		category: 'code',
 		slug: 'javascript',
-		displayName: 'JavaScript Formatter',
-		tagline: 'Format and minify JavaScript with Prettier.',
-		description:
-			'Format or minify JavaScript code using Prettier WASM. Supports ESNext, JSX, async/await, optional chaining, and all modern JS syntax. Toggle between format and minify modes.',
-		primaryKeyword: 'javascript formatter',
-		metaTitle: 'JavaScript Formatter & Minifier | Prettier | fmtly',
-		metaDescription:
-			'Format and minify JavaScript code locally with Prettier WASM. Supports all modern JS syntax including ES2024, JSX, and async/await.',
+		displayName: 'tool.code-javascript.display_name',
+		tagline: 'tool.code-javascript.tagline',
+		description: 'tool.code-javascript.description',
+		primaryKeyword: 'tool.code-javascript.primary_keyword',
+		metaTitle: 'tool.code-javascript.meta_title',
+		metaDescription: 'tool.code-javascript.meta_description',
 		engine: 'code',
-		operation: 'javascript',
+		operation: 'tool.code-javascript.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'javascript',
 		outputLanguage: 'javascript',
@@ -172,19 +146,15 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Does it support JSX?',
-				answer: 'Yes. The Babel parser used supports JSX syntax natively.'
+				question: 'tool.code-javascript.faq.0.question',
+				answer: 'tool.code-javascript.faq.0.answer'
 			},
 			{
-				question: 'Does minify actually compress the code?',
-				answer:
-					"Prettier's minify mode removes whitespace and newlines but does not rename variables like Terser would. It's useful for quick copy-paste compression, not production builds."
+				question: 'tool.code-javascript.faq.1.question',
+				answer: 'tool.code-javascript.faq.1.answer'
 			}
 		],
-		useCases: [
-			'Formatting pasted code snippets before adding to documentation',
-			'Quick minification for testing purposes'
-		],
+		useCases: ['tool.code-javascript.use_case.0', 'tool.code-javascript.use_case.1'],
 		sampleInput:
 			'const greet = (name) => { const msg = `Hello, ${name}!`; console.log(msg); return msg; }; greet("World");'
 	},
@@ -192,16 +162,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-typescript',
 		category: 'code',
 		slug: 'typescript',
-		displayName: 'TypeScript Formatter',
-		tagline: 'Format TypeScript types, interfaces, and code with Prettier.',
-		description:
-			'Format TypeScript source files using Prettier WASM. Handles type annotations, interfaces, generics, decorators, and all modern TypeScript syntax — entirely offline.',
-		primaryKeyword: 'typescript formatter',
-		metaTitle: 'TypeScript Formatter | Online Prettier | fmtly',
-		metaDescription:
-			'Format TypeScript code locally with Prettier WASM. Supports types, interfaces, generics, decorators — no server required.',
+		displayName: 'tool.code-typescript.display_name',
+		tagline: 'tool.code-typescript.tagline',
+		description: 'tool.code-typescript.description',
+		primaryKeyword: 'tool.code-typescript.primary_keyword',
+		metaTitle: 'tool.code-typescript.meta_title',
+		metaDescription: 'tool.code-typescript.meta_description',
 		engine: 'code',
-		operation: 'typescript',
+		operation: 'tool.code-typescript.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'typescript',
 		outputLanguage: 'typescript',
@@ -212,15 +180,11 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Does this type-check my code?',
-				answer:
-					'No. Prettier only handles formatting. Type checking requires a TypeScript compiler (tsc).'
+				question: 'tool.code-typescript.faq.0.question',
+				answer: 'tool.code-typescript.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Formatting TypeScript snippets from Stack Overflow',
-			'Standardizing code style before committing'
-		],
+		useCases: ['tool.code-typescript.use_case.0', 'tool.code-typescript.use_case.1'],
 		sampleInput:
 			'interface User{id:number;name:string;email:string;role:"admin"|"user"}async function fetchUser(id:number):Promise<User>{const res=await fetch(`/api/users/${id}`);if(!res.ok)throw new Error("Not found");return res.json();}'
 	},
@@ -228,16 +192,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-graphql',
 		category: 'code',
 		slug: 'graphql',
-		displayName: 'GraphQL Formatter',
-		tagline: 'Format GraphQL schemas and queries with Prettier.',
-		description:
-			'Format GraphQL schema definitions, queries, mutations, and subscriptions using Prettier WASM. Works with SDL and query documents alike.',
-		primaryKeyword: 'graphql formatter',
-		metaTitle: 'GraphQL Schema & Query Formatter | fmtly',
-		metaDescription:
-			'Format GraphQL SDL schemas, queries, mutations, and subscriptions with Prettier WASM. Fully local, no server.',
+		displayName: 'tool.code-graphql.display_name',
+		tagline: 'tool.code-graphql.tagline',
+		description: 'tool.code-graphql.description',
+		primaryKeyword: 'tool.code-graphql.primary_keyword',
+		metaTitle: 'tool.code-graphql.meta_title',
+		metaDescription: 'tool.code-graphql.meta_description',
 		engine: 'code',
-		operation: 'graphql',
+		operation: 'tool.code-graphql.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'graphql',
 		outputLanguage: 'graphql',
@@ -248,15 +210,11 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Does this validate the schema?',
-				answer:
-					'Prettier validates syntax during parsing. Invalid GraphQL will produce an error, but full semantic validation requires graphql-js.'
+				question: 'tool.code-graphql.faq.0.question',
+				answer: 'tool.code-graphql.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Formatting SDL schemas copied from documentation',
-			'Standardizing query formatting in GraphQL files'
-		],
+		useCases: ['tool.code-graphql.use_case.0', 'tool.code-graphql.use_case.1'],
 		sampleInput:
 			'type Query{user(id:ID!):User users(limit:Int=10 offset:Int=0):[User!]!}type User{id:ID! name:String! email:String! posts:[Post!]! createdAt:String!}type Post{id:ID! title:String! body:String! author:User!}'
 	},
@@ -264,16 +222,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-markdown',
 		category: 'code',
 		slug: 'markdown',
-		displayName: 'Markdown Formatter',
-		tagline: 'Format Markdown and preview the rendered output.',
-		description:
-			'Format Markdown files with Prettier — normalizes lists, heading spacing, blank lines, and table alignment. Shows a live rendered preview alongside the formatted source.',
-		primaryKeyword: 'markdown formatter',
-		metaTitle: 'Markdown Formatter & Preview | fmtly',
-		metaDescription:
-			'Format Markdown with Prettier and preview the rendered HTML output side-by-side. Live preview updates as you type.',
+		displayName: 'tool.code-markdown.display_name',
+		tagline: 'tool.code-markdown.tagline',
+		description: 'tool.code-markdown.description',
+		primaryKeyword: 'tool.code-markdown.primary_keyword',
+		metaTitle: 'tool.code-markdown.meta_title',
+		metaDescription: 'tool.code-markdown.meta_description',
 		engine: 'code',
-		operation: 'markdown',
+		operation: 'tool.code-markdown.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'markdown',
 		outputLanguage: 'markdown',
@@ -284,15 +240,11 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What does Prettier change in Markdown?',
-				answer:
-					'Prettier normalizes list markers (-/*/+), ensures consistent blank lines between sections, fixes table column alignment, and enforces consistent heading style.'
+				question: 'tool.code-markdown.faq.0.question',
+				answer: 'tool.code-markdown.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Normalizing Markdown files before committing to a repo',
-			'Cleaning up AI-generated Markdown with inconsistent formatting'
-		],
+		useCases: ['tool.code-markdown.use_case.0', 'tool.code-markdown.use_case.1'],
 		sampleInput:
 			'# Hello World\n\nThis is a paragraph with **bold** and *italic* text.\n\n## Features\n\n- Item one\n- Item two\n  - Nested item\n\n## Table\n\n| Name | Age |\n|------|-----|\n| Alice | 30 |\n| Bob | 25 |'
 	},
@@ -300,16 +252,14 @@ export const codeTools: ToolDefinition[] = [
 		id: 'code-curl-to-fetch',
 		category: 'code',
 		slug: 'curl-to-fetch',
-		displayName: 'cURL to Fetch',
-		tagline: 'Convert cURL commands to JavaScript fetch() calls.',
-		description:
-			'Paste any cURL command and instantly get the equivalent JavaScript fetch() call with proper headers, method, body, and authentication. Handles -H, -d, -X, -u, and all common flags.',
-		primaryKeyword: 'curl to fetch converter',
-		metaTitle: 'cURL to JavaScript Fetch Converter | fmtly',
-		metaDescription:
-			'Convert cURL commands to fetch() code instantly. Handles headers, JSON body, auth, HTTP methods — all locally, no server.',
+		displayName: 'tool.code-curl-to-fetch.display_name',
+		tagline: 'tool.code-curl-to-fetch.tagline',
+		description: 'tool.code-curl-to-fetch.description',
+		primaryKeyword: 'tool.code-curl-to-fetch.primary_keyword',
+		metaTitle: 'tool.code-curl-to-fetch.meta_title',
+		metaDescription: 'tool.code-curl-to-fetch.meta_description',
 		engine: 'code',
-		operation: 'curl-to-fetch',
+		operation: 'tool.code-curl-to-fetch.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'javascript',
@@ -321,31 +271,25 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Which cURL options are supported?',
-				answer:
-					'-X (method), -H (headers), -d/--data/--data-raw/--data-binary (body), -u (basic auth), -A (user-agent), -L (follow redirects, noted but not added), --compressed.'
+				question: 'tool.code-curl-to-fetch.faq.0.question',
+				answer: 'tool.code-curl-to-fetch.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Translating API documentation cURL examples to JS',
-			"Converting copy-pasted cURL from DevTools' network panel"
-		],
+		useCases: ['tool.code-curl-to-fetch.use_case.0', 'tool.code-curl-to-fetch.use_case.1'],
 		sampleInput: `curl -X POST 'https://api.example.com/users' \\\n  -H 'Content-Type: application/json' \\\n  -H 'Authorization: Bearer eyJhbGci...' \\\n  -d '{"name":"Alice","email":"alice@example.com"}'`
 	},
 	{
 		id: 'code-curl-to-axios',
 		category: 'code',
 		slug: 'curl-to-axios',
-		displayName: 'cURL to Axios',
-		tagline: 'Convert cURL commands to Axios JavaScript calls.',
-		description:
-			'Convert cURL commands to Axios configuration objects. Handles all common cURL options including headers, body, HTTP method, and basic authentication.',
-		primaryKeyword: 'curl to axios converter',
-		metaTitle: 'cURL to Axios Converter | fmtly',
-		metaDescription:
-			'Convert cURL commands to axios({ method, url, headers, data }) calls. Handles all common flags — no server, fully local.',
+		displayName: 'tool.code-curl-to-axios.display_name',
+		tagline: 'tool.code-curl-to-axios.tagline',
+		description: 'tool.code-curl-to-axios.description',
+		primaryKeyword: 'tool.code-curl-to-axios.primary_keyword',
+		metaTitle: 'tool.code-curl-to-axios.meta_title',
+		metaDescription: 'tool.code-curl-to-axios.meta_description',
 		engine: 'code',
-		operation: 'curl-to-axios',
+		operation: 'tool.code-curl-to-axios.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'javascript',
@@ -357,15 +301,11 @@ export const codeTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: "Why isn't this converting the body properly?",
-				answer:
-					'JSON bodies are automatically parsed and formatted. If the body is not valid JSON, it is treated as a raw string.'
+				question: 'tool.code-curl-to-axios.faq.0.question',
+				answer: 'tool.code-curl-to-axios.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Translating API examples from docs to Axios for React/Vue apps',
-			'Converting DevTools cURL exports to Axios config objects'
-		],
+		useCases: ['tool.code-curl-to-axios.use_case.0', 'tool.code-curl-to-axios.use_case.1'],
 		sampleInput: `curl -X POST 'https://api.example.com/users' \\\n  -H 'Content-Type: application/json' \\\n  -H 'Authorization: Bearer eyJhbGci...' \\\n  -d '{"name":"Alice","email":"alice@example.com"}'`
 	}
 ];

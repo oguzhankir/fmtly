@@ -3,6 +3,7 @@
     import { generateUlidBulk } from "../../engines/crypto";
     import { Copy, RefreshCw, Check } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let generatedUlids = $state<string[]>([]);
     let copied = $state(false);
@@ -15,7 +16,7 @@
 
     function copyToClipboard(text: string) {
         navigator.clipboard.writeText(text);
-        addToast("success", "Copied to clipboard");
+        addToast("success", $t('ui.copied_to_clipboard', 'Copied to clipboard'));
     }
 
     async function handleCopy() {
@@ -44,7 +45,7 @@
         <div class="flex flex-col gap-[var(--space-2)] flex-1 md:flex-none">
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Amount to Generate</span
+                >{$t('ui.amount_to_generate', 'Amount to Generate')}</span
             >
             <input
                 type="number"
@@ -58,7 +59,7 @@
             onclick={generate}
             class="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--bg-selected)] px-4 py-[var(--space-2)] text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors border border-[var(--border-default)]"
         >
-            <RefreshCw size={16} /> Generate New
+            <RefreshCw size={16} /> {$t('ui.generate_new', 'Generate New')}
         </button>
     </div>
 
@@ -68,7 +69,7 @@
             <div class="flex items-center gap-2">
                 <span
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >Generated ULIDs</span
+                    >{$t('ui.generated_ulids', 'Generated ULIDs')}</span
                 >
                 <span
                     class="text-[length:var(--text-xs)] text-[var(--text-muted)] px-2 py-0.5 rounded bg-[var(--bg-surface)]"
@@ -79,14 +80,14 @@
             </div>
             <button
                 onclick={handleCopy}
-                title="Copy all"
+                title={$t('ui.copy_all', 'Copy all')}
                 disabled={generatedUlids.length === 0}
                 class="flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-1.5 text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-muted)] bg-[var(--bg-surface)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors disabled:opacity-50"
             >
                 {#if copied}
-                    <Check size={16} class="text-[var(--color-success)]" /> Copied
+                    <Check size={16} class="text-[var(--color-success)]" /> {$t('ui.copied', 'Copied')}
                 {:else}
-                    <Copy size={16} /> Copy All
+                    <Copy size={16} /> {$t('ui.copy_all', 'Copy All')}
                 {/if}
             </button>
         </div>
@@ -105,12 +106,12 @@
                             <!-- Display with colored components for educational value -->
                             <span
                                 class="text-[var(--color-primary)] opacity-80 group-hover:opacity-100 transition-opacity"
-                                title="Timestamp component (48 bits)"
+                                title={$t('ui.timestamp_component', 'Timestamp component (48 bits)')}
                                 >{id.substring(0, 10)}</span
                             >
                             <span
                                 class="text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors"
-                                title="Randomness component (80 bits)"
+                                title={$t('ui.randomness_component', 'Randomness component (80 bits)')}
                                 >{id.substring(10)}</span
                             >
                         </li>
@@ -120,7 +121,7 @@
                 <div
                     class="flex h-full items-center justify-center text-[var(--text-muted)]"
                 >
-                    No ULIDs generated.
+                    {$t('ui.no_ulids_generated', 'No ULIDs generated.')}
                 </div>
             {/if}
         </div>
@@ -133,12 +134,12 @@
         <h4
             class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] mb-2"
         >
-            ULID Anatomy
+            {$t('ui.ulid_anatomy', 'ULID Anatomy')}
         </h4>
         <p
             class="text-[length:var(--text-sm)] text-[var(--text-secondary)] leading-relaxed"
         >
-            A ULID is a 128-bit identifier represented as a 26-character base32
+            {$t('ui.ulid_description', 'A ULID is a 128-bit identifier represented as a 26-character base32')}
             string. Unlike UUIDs, they are lexicographically sortable.
             <br /><br />
             <span class="font-[family-name:var(--font-mono)]"
@@ -146,10 +147,10 @@
                 ><strong>TSV4RRFFQ69G5FAV</strong></span
             >
             <br />
-            • First 10 chars:
-            <span class="text-[var(--color-primary)]">Timestamp</span>
+            • {$t('ui.first_10_chars', 'First 10 chars:')}
+            <span class="text-[var(--color-primary)]">{$t('ui.timestamp', 'Timestamp')}</span>
             (48 bits, precise to milliseconds, valid until 10889 AD)<br />
-            • Last 16 chars: Randomness (80 bits CSPRNG)
+            • {$t('ui.last_16_chars', 'Last 16 chars:')} {$t('ui.randomness', 'Randomness')} (80 bits CSPRNG)
         </p>
     </div>
 </div>

@@ -8,6 +8,7 @@
         Loader,
     } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     type PdfEntry = { name: string; size: number; data: ArrayBuffer };
 
@@ -43,7 +44,7 @@
 
     async function merge() {
         if (files.length < 2) {
-            error = "Add at least 2 PDFs to merge.";
+            error = $t('ui.pdf_merge.error_min_files', 'Add at least 2 PDFs to merge.');
             return;
         }
         merging = true;
@@ -60,9 +61,9 @@
             a.download = "merged.pdf";
             a.click();
             URL.revokeObjectURL(url);
-            addToast("success", "Merged PDF downloaded");
+            addToast("success", $t('ui.pdf_merge.toast_success', 'Merged PDF downloaded'));
         } catch (e) {
-            error = "Failed to merge PDFs. One or more files may be corrupted.";
+            error = $t('ui.pdf_merge.error_merge_failed', 'Failed to merge PDFs. One or more files may be corrupted.');
         } finally {
             merging = false;
         }
@@ -80,7 +81,7 @@
         <PdfDropZone
             onfiles={handleFiles}
             multiple={true}
-            label="Drop PDFs here or click to add"
+            label={$t('ui.pdf_merge.drop_label', 'Drop PDFs here or click to add')}
         />
     </div>
 
@@ -120,9 +121,9 @@
 
         <div class="actions-bar">
             <span class="summary"
-                >{files.length} files — {formatSize(
+                >{files.length} {$t('ui.pdf_merge.files_label', 'files')} — {formatSize(
                     files.reduce((s, f) => s + f.size, 0),
-                )} total</span
+                )} {$t('ui.pdf_merge.total_label', 'total')}</span
             >
             <button
                 onclick={merge}
@@ -132,7 +133,7 @@
                 {#if merging}<Loader size={14} class="spin" />{:else}<Download
                         size={14}
                     />{/if}
-                {merging ? "Merging…" : "Merge & Download"}
+                {merging ? $t('ui.pdf_merge.merging', 'Merging…') : $t('ui.pdf_merge.merge_button', 'Merge & Download')}
             </button>
         </div>
     {/if}

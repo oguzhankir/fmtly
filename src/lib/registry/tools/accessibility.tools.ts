@@ -5,16 +5,14 @@ export const accessibilityTools: ToolDefinition[] = [
 		id: 'accessibility-contrast',
 		category: 'accessibility',
 		slug: 'contrast',
-		displayName: 'Contrast Checker',
-		tagline: 'Check WCAG contrast ratios for text and background colors.',
-		description:
-			'Enter foreground and background colors to calculate contrast ratio. See WCAG AA/AAA compliance for normal text, large text, and UI elements. Live preview included.',
-		primaryKeyword: 'wcag contrast checker',
-		metaTitle: 'WCAG Contrast Checker | AA & AAA | fmtly',
-		metaDescription:
-			'Check WCAG color contrast ratios. Live preview, AA/AAA compliance — no upload, fully local.',
+		displayName: 'tool.accessibility-contrast.display_name',
+		tagline: 'tool.accessibility-contrast.tagline',
+		description: 'tool.accessibility-contrast.description',
+		primaryKeyword: 'tool.accessibility-contrast.primary_keyword',
+		metaTitle: 'tool.accessibility-contrast.meta_title',
+		metaDescription: 'tool.accessibility-contrast.meta_description',
 		engine: 'accessibility',
-		operation: 'contrast',
+		operation: 'tool.accessibility-contrast.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -25,28 +23,25 @@ export const accessibilityTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What contrast ratio is required?',
-				answer:
-					'WCAG AA requires 4.5:1 for normal text and 3:1 for large text. AAA requires 7:1 and 4.5:1 respectively.'
+				question: 'tool.accessibility-contrast.faq.0.question',
+				answer: 'tool.accessibility-contrast.faq.0.answer'
 			}
 		],
-		useCases: ['Verifying accessibility of website text', 'Choosing accessible color combinations'],
+		useCases: ['tool.accessibility-contrast.use_case.0', 'tool.accessibility-contrast.use_case.1'],
 		sampleInput: ''
 	},
 	{
 		id: 'accessibility-color-blindness',
 		category: 'accessibility',
 		slug: 'color-blindness',
-		displayName: 'Color Blindness Simulator',
-		tagline: 'Simulate how colors appear to people with color vision deficiencies.',
-		description:
-			'Enter a color or upload an image to see how it appears to people with protanopia, deuteranopia, tritanopia, and achromatopsia. Uses color transformation matrices.',
-		primaryKeyword: 'color blindness simulator',
-		metaTitle: 'Color Blindness Simulator | fmtly',
-		metaDescription:
-			'Simulate protanopia, deuteranopia, tritanopia vision. Test colors and images — fully local.',
+		displayName: 'tool.accessibility-color-blindness.display_name',
+		tagline: 'tool.accessibility-color-blindness.tagline',
+		description: 'tool.accessibility-color-blindness.description',
+		primaryKeyword: 'tool.accessibility-color-blindness.primary_keyword',
+		metaTitle: 'tool.accessibility-color-blindness.meta_title',
+		metaDescription: 'tool.accessibility-color-blindness.meta_description',
 		engine: 'accessibility',
-		operation: 'color-blindness',
+		operation: 'tool.accessibility-color-blindness.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -57,14 +52,13 @@ export const accessibilityTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What types of color blindness are simulated?',
-				answer:
-					'Protanopia (no red), deuteranopia (no green), tritanopia (no blue), and achromatopsia (no color).'
+				question: 'tool.accessibility-color-blindness.faq.0.question',
+				answer: 'tool.accessibility-color-blindness.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Testing UI designs for color blindness accessibility',
-			'Checking color palette inclusivity'
+			'tool.accessibility-color-blindness.use_case.0',
+			'tool.accessibility-color-blindness.use_case.1'
 		],
 		sampleInput: ''
 	},
@@ -72,16 +66,14 @@ export const accessibilityTools: ToolDefinition[] = [
 		id: 'accessibility-font-size',
 		category: 'accessibility',
 		slug: 'font-size',
-		displayName: 'Font Size Checker',
-		tagline: 'Check if text meets WCAG size and contrast requirements.',
-		description:
-			'Enter font size, weight, and colors to get a combined WCAG report. See if text qualifies as "large text" and what contrast ratio is required.',
-		primaryKeyword: 'wcag font size checker',
-		metaTitle: 'WCAG Font Size Checker | fmtly',
-		metaDescription:
-			'Check WCAG font size requirements. Large text classification, contrast requirement — fully local.',
+		displayName: 'tool.accessibility-font-size.display_name',
+		tagline: 'tool.accessibility-font-size.tagline',
+		description: 'tool.accessibility-font-size.description',
+		primaryKeyword: 'tool.accessibility-font-size.primary_keyword',
+		metaTitle: 'tool.accessibility-font-size.meta_title',
+		metaDescription: 'tool.accessibility-font-size.meta_description',
 		engine: 'accessibility',
-		operation: 'font-size',
+		operation: 'tool.accessibility-font-size.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -93,14 +85,13 @@ export const accessibilityTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What is large text in WCAG?',
-				answer:
-					'Text ≥18pt (24px) or ≥14pt (18.66px) bold is considered large text, requiring lower contrast ratios.'
+				question: 'tool.accessibility-font-size.faq.0.question',
+				answer: 'tool.accessibility-font-size.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Checking accessibility of text styling',
-			'Determining WCAG requirements for different font sizes'
+			'tool.accessibility-font-size.use_case.0',
+			'tool.accessibility-font-size.use_case.1'
 		],
 		sampleInput: ''
 	}

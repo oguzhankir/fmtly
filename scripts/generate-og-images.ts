@@ -4,7 +4,9 @@ import { GlobalFonts, createCanvas } from '@napi-rs/canvas';
 
 // Import all tools and examples
 
+import registryEn from '../src/lib/i18n/registry/en.js';
 import { examples } from '../src/lib/registry/examples/index.js';
+import { localizeToolDefinitions } from '../src/lib/registry/localized.js';
 import { codeTools } from '../src/lib/registry/tools/code.tools.js';
 import { colorTools } from '../src/lib/registry/tools/color.tools.js';
 import { cryptoTools } from '../src/lib/registry/tools/crypto.tools.js';
@@ -36,6 +38,9 @@ const allTools = [
 	...numberTools,
 	...generateTools
 ];
+
+const translate = (key: string, fallback?: string): string => registryEn[key] ?? fallback ?? key;
+const localizedTools = localizeToolDefinitions(allTools, translate);
 
 // If Geist font doesn't exist locally, we fallback, but better to load it
 // Let's assume there is a font file or we use a system font
@@ -130,8 +135,9 @@ async function run() {
 	console.log('Generating OG Images...');
 
 	for (const tool of allTools) {
+		const localizedTool = localizedTools.find((item) => item.id === tool.id) ?? tool;
 		const filename = `${tool.category}-${tool.slug}.png`;
-		generateImage(tool.displayName, tool.category, filename);
+		generateImage(localizedTool.displayName, tool.category, filename);
 	}
 
 	for (const example of examples) {

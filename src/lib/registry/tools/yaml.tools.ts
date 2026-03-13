@@ -5,16 +5,14 @@ export const yamlTools: ToolDefinition[] = [
 		id: 'yaml-formatter',
 		category: 'yaml',
 		slug: 'formatter',
-		displayName: 'YAML Formatter',
-		tagline: 'Format and beautify YAML with consistent indentation',
-		description:
-			'Parse and display YAML with clean 2-space indentation. Real-time parsing with precise error location. Ideal for cleaning up messy YAML configuration files.',
-		primaryKeyword: 'yaml formatter',
-		metaTitle: 'YAML Formatter & Beautifier — fmtly.dev',
-		metaDescription:
-			'Format and beautify YAML instantly in your browser. Consistent 2-space indentation, real-time error detection, clean output. No data leaves your device.',
+		displayName: 'tool.yaml-formatter.display_name',
+		tagline: 'tool.yaml-formatter.tagline',
+		description: 'tool.yaml-formatter.description',
+		primaryKeyword: 'tool.yaml-formatter.primary_keyword',
+		metaTitle: 'tool.yaml-formatter.meta_title',
+		metaDescription: 'tool.yaml-formatter.meta_description',
 		engine: 'yaml',
-		operation: 'format',
+		operation: 'tool.yaml-formatter.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'yaml',
 		outputLanguage: 'yaml',
@@ -26,21 +24,19 @@ export const yamlTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What is YAML formatting?',
-				answer:
-					'YAML formatting normalizes indentation and spacing in YAML documents, making them easier to read and reducing merge conflicts in version control.'
+				question: 'tool.yaml-formatter.faq.0.question',
+				answer: 'tool.yaml-formatter.faq.0.answer'
 			},
 			{
-				question: 'Is my data sent to a server?',
-				answer:
-					'No. All processing happens entirely in your browser. Your YAML never leaves your device.'
+				question: 'tool.yaml-formatter.faq.1.question',
+				answer: 'tool.yaml-formatter.faq.1.answer'
 			}
 		],
 		useCases: [
-			'Clean up YAML configuration files before committing',
-			'Normalize indentation across team members',
-			'Format Docker Compose or Kubernetes manifests',
-			'Beautify CI/CD pipeline configuration files'
+			'tool.yaml-formatter.use_case.0',
+			'tool.yaml-formatter.use_case.1',
+			'tool.yaml-formatter.use_case.2',
+			'tool.yaml-formatter.use_case.3'
 		],
 		sampleInput: `name: fmtly
 version: "1.0.0"
@@ -56,16 +52,14 @@ scripts:
 		id: 'yaml-validator',
 		category: 'yaml',
 		slug: 'validator',
-		displayName: 'YAML Validator',
-		tagline: 'Validate YAML syntax with precise error location',
-		description:
-			'Validates YAML syntax and reports errors with exact line and column numbers. Catches common issues like incorrect indentation, invalid characters, and duplicate keys.',
-		primaryKeyword: 'yaml validator',
-		metaTitle: 'YAML Validator — Syntax Checker Online — fmtly.dev',
-		metaDescription:
-			'Validate YAML syntax instantly. Get precise error locations with line numbers and plain-language explanations. Runs entirely in your browser.',
+		displayName: 'tool.yaml-validator.display_name',
+		tagline: 'tool.yaml-validator.tagline',
+		description: 'tool.yaml-validator.description',
+		primaryKeyword: 'tool.yaml-validator.primary_keyword',
+		metaTitle: 'tool.yaml-validator.meta_title',
+		metaDescription: 'tool.yaml-validator.meta_description',
 		engine: 'yaml',
-		operation: 'validate',
+		operation: 'tool.yaml-validator.operation',
 		layoutVariant: 'single',
 		inputLanguage: 'yaml',
 		outputLanguage: 'yaml',
@@ -77,21 +71,19 @@ scripts:
 		],
 		faqs: [
 			{
-				question: 'What YAML errors does this tool detect?',
-				answer:
-					'It detects all syntax errors including incorrect indentation, invalid characters, duplicate keys, and malformed multi-line strings.'
+				question: 'tool.yaml-validator.faq.0.question',
+				answer: 'tool.yaml-validator.faq.0.answer'
 			},
 			{
-				question: 'Can I validate YAML against a schema?',
-				answer:
-					'This tool validates syntax only. For schema validation, you would need a dedicated YAML schema validator.'
+				question: 'tool.yaml-validator.faq.1.question',
+				answer: 'tool.yaml-validator.faq.1.answer'
 			}
 		],
 		useCases: [
-			'Quickly check if a YAML file is syntactically valid',
-			'Find the exact location of indentation errors',
-			'Validate Kubernetes manifests before applying',
-			'Debug YAML parsing errors in CI/CD pipelines'
+			'tool.yaml-validator.use_case.0',
+			'tool.yaml-validator.use_case.1',
+			'tool.yaml-validator.use_case.2',
+			'tool.yaml-validator.use_case.3'
 		],
 		sampleInput: `apiVersion: apps/v1
 kind: Deployment
@@ -109,16 +101,14 @@ spec:
 		id: 'yaml-to-json',
 		category: 'yaml',
 		slug: 'to-json',
-		displayName: 'YAML to JSON',
-		tagline: 'Convert YAML to formatted JSON instantly',
-		description:
-			'Convert YAML documents to formatted JSON with 2-space indentation. Handles all YAML features including anchors, aliases, multi-line strings, and complex types.',
-		primaryKeyword: 'yaml to json',
-		metaTitle: 'YAML to JSON Converter — fmtly.dev',
-		metaDescription:
-			'Convert YAML to JSON instantly in your browser. Handles anchors, aliases, multi-line strings, and all complex YAML types. No data leaves your device.',
+		displayName: 'tool.yaml-to-json.display_name',
+		tagline: 'tool.yaml-to-json.tagline',
+		description: 'tool.yaml-to-json.description',
+		primaryKeyword: 'tool.yaml-to-json.primary_keyword',
+		metaTitle: 'tool.yaml-to-json.meta_title',
+		metaDescription: 'tool.yaml-to-json.meta_description',
 		engine: 'yaml',
-		operation: 'to-json',
+		operation: 'tool.yaml-to-json.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'yaml',
 		outputLanguage: 'json',
@@ -130,21 +120,19 @@ spec:
 		],
 		faqs: [
 			{
-				question: 'Does this handle all YAML features?',
-				answer:
-					'Yes. It handles anchors, aliases, multi-line strings, complex keys, and all standard YAML data types.'
+				question: 'tool.yaml-to-json.faq.0.question',
+				answer: 'tool.yaml-to-json.faq.0.answer'
 			},
 			{
-				question: 'Is the conversion lossless?',
-				answer:
-					'YAML supports some types that JSON does not (like dates and binary). These are converted to their closest JSON equivalents (strings).'
+				question: 'tool.yaml-to-json.faq.1.question',
+				answer: 'tool.yaml-to-json.faq.1.answer'
 			}
 		],
 		useCases: [
-			'Convert Kubernetes YAML manifests to JSON for API calls',
-			'Transform YAML configuration to JSON for JavaScript consumption',
-			'Convert Docker Compose files to JSON format',
-			'Prepare YAML data for JSON-only tools and APIs'
+			'tool.yaml-to-json.use_case.0',
+			'tool.yaml-to-json.use_case.1',
+			'tool.yaml-to-json.use_case.2',
+			'tool.yaml-to-json.use_case.3'
 		],
 		sampleInput: `server:
   host: localhost
@@ -163,14 +151,14 @@ logging:
 		id: 'yaml-to-xml',
 		category: 'yaml',
 		slug: 'to-xml',
-		displayName: 'YAML to XML',
-		tagline: 'Convert YAML to XML format',
-		description: 'Convert YAML configuration to XML format seamlessly.',
-		primaryKeyword: 'yaml to xml',
-		metaTitle: 'YAML to XML Converter',
-		metaDescription: 'Convert YAML to XML instantly.',
+		displayName: 'tool.yaml-to-xml.display_name',
+		tagline: 'tool.yaml-to-xml.tagline',
+		description: 'tool.yaml-to-xml.description',
+		primaryKeyword: 'tool.yaml-to-xml.primary_keyword',
+		metaTitle: 'tool.yaml-to-xml.meta_title',
+		metaDescription: 'tool.yaml-to-xml.meta_description',
 		engine: 'yaml',
-		operation: 'toXml',
+		operation: 'tool.yaml-to-xml.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'yaml',
 		outputLanguage: 'xml',
@@ -189,14 +177,14 @@ logging:
 		id: 'yaml-to-csv',
 		category: 'yaml',
 		slug: 'to-csv',
-		displayName: 'YAML to CSV',
-		tagline: 'Convert YAML data to CSV format',
-		description: 'Convert flattened YAML records to CSV format easily.',
-		primaryKeyword: 'yaml to csv',
-		metaTitle: 'YAML to CSV Converter',
-		metaDescription: 'Convert YAML to CSV instantly.',
+		displayName: 'tool.yaml-to-csv.display_name',
+		tagline: 'tool.yaml-to-csv.tagline',
+		description: 'tool.yaml-to-csv.description',
+		primaryKeyword: 'tool.yaml-to-csv.primary_keyword',
+		metaTitle: 'tool.yaml-to-csv.meta_title',
+		metaDescription: 'tool.yaml-to-csv.meta_description',
 		engine: 'yaml',
-		operation: 'toCsv',
+		operation: 'tool.yaml-to-csv.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'yaml',
 		outputLanguage: 'csv',
@@ -215,14 +203,14 @@ logging:
 		id: 'yaml-to-toml',
 		category: 'yaml',
 		slug: 'to-toml',
-		displayName: 'YAML to TOML',
-		tagline: 'Convert YAML config to TOML format',
-		description: 'Convert YAML to perfectly valid TOML strings.',
-		primaryKeyword: 'yaml to toml',
-		metaTitle: 'YAML to TOML Converter',
-		metaDescription: 'Convert YAML to TOML instantly.',
+		displayName: 'tool.yaml-to-toml.display_name',
+		tagline: 'tool.yaml-to-toml.tagline',
+		description: 'tool.yaml-to-toml.description',
+		primaryKeyword: 'tool.yaml-to-toml.primary_keyword',
+		metaTitle: 'tool.yaml-to-toml.meta_title',
+		metaDescription: 'tool.yaml-to-toml.meta_description',
 		engine: 'yaml',
-		operation: 'toToml',
+		operation: 'tool.yaml-to-toml.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'yaml',
 		outputLanguage: 'toml',
@@ -241,14 +229,14 @@ logging:
 		id: 'yaml-diff',
 		category: 'yaml',
 		slug: 'diff',
-		displayName: 'YAML Diff Viewer',
-		tagline: 'Compare two YAML files visually',
-		description: 'Compare two YAML structures side-by-side.',
-		primaryKeyword: 'yaml diff',
-		metaTitle: 'YAML Diff Viewer & Comparer',
-		metaDescription: 'Compare YAML files side-by-side visually.',
+		displayName: 'tool.yaml-diff.display_name',
+		tagline: 'tool.yaml-diff.tagline',
+		description: 'tool.yaml-diff.description',
+		primaryKeyword: 'tool.yaml-diff.primary_keyword',
+		metaTitle: 'tool.yaml-diff.meta_title',
+		metaDescription: 'tool.yaml-diff.meta_description',
 		engine: 'yaml',
-		operation: 'diff',
+		operation: 'tool.yaml-diff.operation',
 		layoutVariant: 'dual-input',
 		inputLanguage: 'yaml',
 		outputLanguage: 'yaml',

@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { jsonStats, jsonTree } from '$stores/json.store';
+	import { t } from '$stores/language';
 	import { ChevronDown, ChevronUp, ChevronsDownUp, ChevronsUpDown } from 'lucide-svelte';
 	import TreeView from '$components/tree/TreeView.svelte';
 
 	let treeViewRef: TreeView | undefined = $state(undefined);
 	let treeSummary = $derived.by(() => {
 		if (!$jsonStats) return '';
-		return `${$jsonStats.keyCount} keys · ${$jsonStats.valueCount} values · depth ${$jsonStats.maxDepth}`;
+		return $t('ui.tree.summary', {
+			keyCount: $jsonStats.keyCount,
+			valueCount: $jsonStats.valueCount,
+			maxDepth: $jsonStats.maxDepth
+		});
 	});
 
 	export function setDepth(depth: number): void {
@@ -25,7 +30,7 @@
 <div class="tree-panel" role="region" aria-label="JSON Tree View">
 	<div class="tree-toolbar">
 		<div class="tree-toolbar__meta">
-			<span class="tree-toolbar__title">Tree</span>
+			<span class="tree-toolbar__title">{$t('ui.tree.root', 'Tree')}</span>
 			{#if treeSummary}
 				<span class="tree-toolbar__summary">{treeSummary}</span>
 			{/if}
@@ -33,11 +38,11 @@
 		<div class="tree-toolbar__actions">
 			<button type="button" class="tree-btn" onclick={expand}>
 				<ChevronsDownUp size={13} />
-				Expand
+				{$t('ui.tree.expand', 'Expand')}
 			</button>
 			<button type="button" class="tree-btn" onclick={collapse}>
 				<ChevronsUpDown size={13} />
-				Collapse
+				{$t('ui.tree.collapse', 'Collapse')}
 			</button>
 			<div class="tree-depth-controls" aria-label="Tree depth controls">
 				<button type="button" class="tree-btn tree-btn--compact" onclick={() => setDepth(1)}>

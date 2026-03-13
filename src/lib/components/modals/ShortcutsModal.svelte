@@ -4,6 +4,7 @@
 	import { X } from 'lucide-svelte';
 	import { getShortcuts, formatShortcutKeys } from '$utils/keyboard.js';
 	import type { ShortcutEntry } from '$utils/keyboard.js';
+	import { t } from '$stores/language';
 
 	let {
 		open = $bindable(false)
@@ -49,14 +50,14 @@
 		onkeydown={handleKeydown}
 		role="dialog"
 		aria-modal="true"
-		aria-label="Keyboard shortcuts"
+		aria-label={$t('ui.shortcuts.title')}
 		tabindex="-1"
 	>
 		<div class="modal-card">
 			<!-- Header -->
 			<div class="modal-header">
-				<h2 class="modal-title">Keyboard Shortcuts</h2>
-				<button class="modal-close" onclick={() => (open = false)} aria-label="Close">
+				<h2 class="modal-title">{$t('ui.shortcuts.title')}</h2>
+				<button class="modal-close" onclick={() => (open = false)} aria-label={$t('ui.shortcuts.close')}>
 					<X size={16} />
 				</button>
 			</div>
@@ -65,10 +66,10 @@
 			<div class="modal-body">
 				{#if globalShortcuts.length > 0}
 					<div class="shortcut-section">
-						<h3 class="shortcut-section-title">Global</h3>
+						<h3 class="shortcut-section-title">{$t('ui.shortcuts.global')}</h3>
 						{#each globalShortcuts as entry}
 							<div class="shortcut-row">
-								<span class="shortcut-label">{entry.label}</span>
+								<span class="shortcut-label">{$t(`ui.shortcuts.label.${entry.label}`)}</span>
 								<span class="shortcut-keys">
 									{#each renderKeys(entry) as key, i}
 										{#if i > 0}<span class="shortcut-plus">+</span>{/if}
@@ -82,10 +83,10 @@
 
 				{#if toolShortcuts.length > 0}
 					<div class="shortcut-section">
-						<h3 class="shortcut-section-title">Tool</h3>
+						<h3 class="shortcut-section-title">{$t('ui.shortcuts.tool')}</h3>
 						{#each toolShortcuts as entry}
 							<div class="shortcut-row">
-								<span class="shortcut-label">{entry.label}</span>
+								<span class="shortcut-label">{$t(`ui.shortcuts.label.${entry.label}`)}</span>
 								<span class="shortcut-keys">
 									{#each renderKeys(entry) as key, i}
 										{#if i > 0}<span class="shortcut-plus">+</span>{/if}

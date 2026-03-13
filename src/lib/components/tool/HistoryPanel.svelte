@@ -1,37 +1,23 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { browser } from '$app/environment';
-	import { X, Trash2, Clock, AlertTriangle } from 'lucide-svelte';
+	import { t } from '$stores/language';
 	import {
-		historyEntries,
+		historyEntries as history,
 		deleteHistoryEntry,
 		renameHistoryEntry,
 		clearHistory,
 		loadHistoryEntry
 	} from '$stores/history.store';
 	import type { HistoryEntry } from '$stores/history.store';
+	import { X, Trash2, Edit2, Check, Clock, ExternalLink } from 'lucide-svelte';
+	import { fade, slide } from 'svelte/transition';
 
-	let {
-		open = $bindable(false)
-	}: {
-		open?: boolean;
-	} = $props();
+	let { open = $bindable(false) } = $props();
 
-	let confirmClear = $state(false);
 	let editingId = $state<string | null>(null);
 	let editingLabel = $state('');
 
-	function handleKeydown(event: KeyboardEvent): void {
-		if (event.key === 'Escape' && open) {
-			event.preventDefault();
-			open = false;
-		}
-	}
-
-	function handleOverlayClick(event: MouseEvent): void {
-		if (event.target === event.currentTarget) {
-			open = false;
-		}
+	function focusInput(el: HTMLInputElement) {
+		el.focus();
 	}
 
 	function handleLoad(entry: HistoryEntry): void {
@@ -39,7 +25,7 @@
 		open = false;
 	}
 
-	function handleDelete(event: MouseEvent, id: string): void {
+	function handleDelete(id: string, event: MouseEvent): void {
 		event.stopPropagation();
 		deleteHistoryEntry(id);
 	}
@@ -47,155 +33,91 @@
 	function startRename(event: MouseEvent, entry: HistoryEntry): void {
 		event.stopPropagation();
 		editingId = entry.id;
-		editingLabel = entry.label || '';
+		editingLabel = entry.label;
 	}
 
-	function commitRename(): void {
-		if (editingId) {
+	function saveRename(event: MouseEvent): void {
+		event.stopPropagation();
+		if (editingId && editingLabel.trim()) {
 			renameHistoryEntry(editingId, editingLabel.trim());
-			editingId = null;
-			editingLabel = '';
 		}
+		editingId = null;
 	}
 
-	function handleRenameKeydown(event: KeyboardEvent): void {
-		if (event.key === 'Enter') {
-			event.preventDefault();
-			commitRename();
-		} else if (event.key === 'Escape') {
-			event.stopPropagation();
-			editingId = null;
-			editingLabel = '';
-		}
-	}
-
-	function handleClearAll(): void {
-		if (confirmClear) {
+	function handleClear(): void {
+		if (window.confirm($t('ui.history.clear_confirm', 'Clear all history?'))) {
 			clearHistory();
-			confirmClear = false;
-		} else {
-			confirmClear = true;
-			setTimeout(() => {
-				confirmClear = false;
-			}, 3000);
 		}
 	}
-
-	function relativeTime(timestamp: number): string {
-		const diff = Date.now() - timestamp;
-		const seconds = Math.floor(diff / 1000);
-		if (seconds < 60) return 'just now';
-		const minutes = Math.floor(seconds / 60);
-		if (minutes < 60) return `${minutes}m ago`;
-		const hours = Math.floor(minutes / 60);
-		if (hours < 24) return `${hours}h ago`;
-		const days = Math.floor(hours / 24);
-		if (days < 30) return `${days}d ago`;
-		return new Date(timestamp).toLocaleDateString();
-	}
-
-	function formatSize(bytes: number): string {
-		if (bytes < 1024) return `${bytes} B`;
-		return `${(bytes / 1024).toFixed(1)} KB`;
-	}
-
-	onMount(() => {
-		document.addEventListener('keydown', handleKeydown);
-	});
-
-	onDestroy(() => {
-		if (browser) document.removeEventListener('keydown', handleKeydown);
-	});
 </script>
 
 {#if open}
-	<div
-		class="panel-overlay"
-		onclick={handleOverlayClick}
-		onkeydown={handleKeydown}
-		role="dialog"
-		aria-modal="true"
-		aria-label="Input history"
-		tabindex="-1"
-	>
-		<div class="panel">
-			<!-- Header -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="history-overlay" onclick={() => (open = false)} transition:fade={{ duration: 150 }}>
+		<div class="history-panel" onclick={(e) => e.stopPropagation()} transition:slide={{ axis: 'x', duration: 250 }}>
 			<div class="panel-header">
-				<div class="panel-header-left">
-					<Clock size={16} />
-					<h2 class="panel-title">History</h2>
+				<div class="header-left">
+					<Clock size={18} />
+					<h2 class="panel-title">{$t('ui.history.title', 'History')}</h2>
 				</div>
-				<button class="panel-close" onclick={() => (open = false)} aria-label="Close">
-					<X size={16} />
+				<button class="close-btn" onclick={() => (open = false)}>
+					<X size={20} />
 				</button>
 			</div>
 
-			<!-- Entries list -->
-			<div class="panel-body">
-				{#if $historyEntries.length === 0}
-					<p class="panel-empty">No history entries yet. Start typing to save entries automatically.</p>
+			<div class="panel-content">
+				{#if $history.length === 0}
+					<div class="empty-state">
+						<Clock size={32} class="empty-icon" />
+						<p>{$t('ui.history.empty', 'No history yet')}</p>
+					</div>
 				{:else}
-					{#each $historyEntries as entry (entry.id)}
-						<div
-							class="entry"
-							onclick={() => handleLoad(entry)}
-							onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleLoad(entry); } }}
-							role="button"
-							tabindex="0"
-						>
-							<div class="entry-top">
-								{#if editingId === entry.id}
-									<input
-										type="text"
-										class="entry-label-input"
-										bind:value={editingLabel}
-										onblur={commitRename}
-										onkeydown={handleRenameKeydown}
-										placeholder="Add a label…"
-										onclick={(e: MouseEvent) => e.stopPropagation()}
-									/>
-								{:else}
-									<span
-										class="entry-label"
-										onclick={(e: MouseEvent) => startRename(e, entry)}
-										onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter') { e.stopPropagation(); startRename(e as unknown as MouseEvent, entry); } }}
-										role="textbox"
-										tabindex="-1"
-									>
-										{entry.label || 'Untitled'}
+					<div class="history-list">
+						{#each $history as entry (entry.id)}
+							<div class="history-item" onclick={() => handleLoad(entry)}>
+								<div class="item-main">
+									{#if editingId === entry.id}
+										<input
+											type="text"
+											bind:value={editingLabel}
+											class="rename-input"
+											use:focusInput
+											onclick={(e) => e.stopPropagation()}
+											onkeydown={(e) => e.key === 'Enter' && saveRename(e as any)}
+										/>
+									{:else}
+										<span class="item-label">{entry.label}</span>
+									{/if}
+									<span class="item-meta">
+										{new Date(entry.timestamp).toLocaleString()}
 									</span>
-								{/if}
-								<span class="entry-time">{relativeTime(entry.timestamp)}</span>
-							</div>
-							<div class="entry-bottom">
-								<span class="entry-preview">{entry.contentPreview}</span>
-								<span class="entry-meta">
-									<span class="entry-size">{formatSize(entry.size)}</span>
-									<button
-										class="entry-delete"
-										onclick={(e: MouseEvent) => handleDelete(e, entry.id)}
-										aria-label="Delete entry"
-									>
-										<Trash2 size={12} />
+								</div>
+								<div class="item-actions">
+									{#if editingId === entry.id}
+										<button class="action-btn save" onclick={saveRename}>
+											<Check size={14} />
+										</button>
+									{:else}
+										<button class="action-btn" onclick={(e) => startRename(e, entry)}>
+											<Edit2 size={14} />
+										</button>
+									{/if}
+									<button class="action-btn delete" onclick={(e) => handleDelete(entry.id, e)}>
+										<Trash2 size={14} />
 									</button>
-								</span>
+								</div>
 							</div>
-						</div>
-					{/each}
+						{/each}
+					</div>
 				{/if}
 			</div>
 
-			<!-- Footer -->
-			{#if $historyEntries.length > 0}
+			{#if $history.length > 0}
 				<div class="panel-footer">
-					<button class="clear-btn" onclick={handleClearAll}>
-						{#if confirmClear}
-							<AlertTriangle size={12} />
-							Confirm clear all
-						{:else}
-							<Trash2 size={12} />
-							Clear all
-						{/if}
+					<button class="clear-all-btn" onclick={handleClear}>
+						<Trash2 size={14} />
+						{$t('ui.history.clear_all', 'Clear History')}
 					</button>
 				</div>
 			{/if}
@@ -204,248 +126,196 @@
 {/if}
 
 <style>
-	.panel-overlay {
+	.history-overlay {
 		position: fixed;
 		inset: 0;
-		z-index: var(--z-modal);
+		z-index: var(--z-overlay);
+		background: rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(2px);
 		display: flex;
 		justify-content: flex-end;
-		background: var(--bg-overlay);
 	}
 
-	.panel {
-		width: 380px;
-		max-width: 100vw;
+	.history-panel {
+		width: 100%;
+		max-width: 360px;
 		height: 100%;
 		background: var(--bg-elevated);
 		border-left: 1px solid var(--border-default);
 		display: flex;
 		flex-direction: column;
-		animation: slide-in 200ms cubic-bezier(0.4, 0, 0.2, 1);
-	}
-
-	@keyframes slide-in {
-		from {
-			transform: translateX(100%);
-		}
-		to {
-			transform: translateX(0);
-		}
+		box-shadow: var(--shadow-xl);
 	}
 
 	.panel-header {
+		padding: 16px 20px;
+		border-bottom: 1px solid var(--border-subtle);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 16px 20px;
-		border-bottom: 1px solid var(--border-subtle);
-		flex-shrink: 0;
 	}
 
-	.panel-header-left {
+	.header-left {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 10px;
 		color: var(--text-primary);
 	}
 
 	.panel-title {
-		font-size: var(--text-base);
-		font-weight: var(--weight-semibold);
-		color: var(--text-primary);
+		font-size: 16px;
+		font-weight: 600;
 		margin: 0;
 	}
 
-	.panel-close {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 28px;
-		height: 28px;
-		border: none;
+	.close-btn {
 		background: none;
-		color: var(--text-tertiary);
-		border-radius: var(--radius-sm);
+		border: none;
+		color: var(--text-muted);
 		cursor: pointer;
+		padding: 4px;
+		border-radius: 6px;
+		transition: all 0.2s;
 	}
 
-	.panel-close:hover {
-		background: var(--bg-surface-hover);
+	.close-btn:hover {
+		background: var(--bg-hover);
 		color: var(--text-primary);
 	}
 
-	.panel-body {
+	.panel-content {
 		flex: 1;
 		overflow-y: auto;
-		padding: 8px;
+		padding: 12px;
 	}
 
-	.panel-empty {
-		color: var(--text-tertiary);
-		font-size: var(--text-sm);
-		text-align: center;
-		padding: 32px 16px;
-		line-height: var(--leading-relaxed);
-	}
-
-	.entry {
+	.empty-state {
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
-		width: 100%;
-		padding: 10px 12px;
-		background: none;
-		border: 1px solid transparent;
-		border-radius: var(--radius-md);
-		cursor: pointer;
-		text-align: left;
-		transition:
-			background-color 100ms,
-			border-color 100ms;
-		font-family: var(--font-sans);
-	}
-
-	.entry:hover {
-		background: var(--bg-surface-hover);
-		border-color: var(--border-default);
-	}
-
-	.entry-top {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-	}
-
-	.entry-label {
-		font-size: var(--text-sm);
-		font-weight: var(--weight-medium);
-		color: var(--text-primary);
-		cursor: text;
-		padding: 1px 4px;
-		border-radius: var(--radius-sm);
-		min-width: 0;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.entry-label:hover {
-		background: var(--bg-inset);
-	}
-
-	.entry-label-input {
-		font-size: var(--text-sm);
-		font-weight: var(--weight-medium);
-		color: var(--text-primary);
-		background: var(--bg-inset);
-		border: 1px solid var(--border-focus);
-		border-radius: var(--radius-sm);
-		padding: 1px 4px;
-		outline: none;
-		flex: 1;
-		min-width: 0;
-		font-family: var(--font-sans);
-	}
-
-	.entry-time {
-		font-size: var(--text-xs);
-		color: var(--text-tertiary);
-		white-space: nowrap;
-		flex-shrink: 0;
-	}
-
-	.entry-bottom {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-	}
-
-	.entry-preview {
-		font-size: var(--text-xs);
-		font-family: var(--font-mono);
-		color: var(--text-tertiary);
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		min-width: 0;
-		flex: 1;
-	}
-
-	.entry-meta {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		flex-shrink: 0;
-	}
-
-	.entry-size {
-		font-size: 0.625rem;
-		color: var(--text-tertiary);
-		background: var(--bg-inset);
-		padding: 1px 6px;
-		border-radius: var(--radius-full);
-		white-space: nowrap;
-	}
-
-	.entry-delete {
-		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 20px;
-		height: 20px;
-		border: none;
-		background: none;
-		color: var(--text-tertiary);
-		border-radius: var(--radius-sm);
-		cursor: pointer;
-		opacity: 0;
-		transition: opacity 100ms;
+		color: var(--text-muted);
+		gap: 12px;
 	}
 
-	.entry:hover .entry-delete {
+
+	.history-list {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.history-item {
+		padding: 12px 16px;
+		border-radius: 10px;
+		border: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		transition: all 0.2s;
+	}
+
+	.history-item:hover {
+		border-color: var(--accent);
+		background: var(--bg-hover);
+	}
+
+	.item-main {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		flex: 1;
+		min-width: 0;
+	}
+
+	.item-label {
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--text-primary);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.item-meta {
+		font-size: 11px;
+		color: var(--text-muted);
+	}
+
+	.rename-input {
+		background: var(--bg-base);
+		border: 1px solid var(--accent);
+		color: var(--text-primary);
+		font-size: 14px;
+		padding: 2px 8px;
+		border-radius: 4px;
+		width: 100%;
+		outline: none;
+	}
+
+	.item-actions {
+		display: flex;
+		gap: 4px;
+		opacity: 0;
+		transition: opacity 0.2s;
+	}
+
+	.history-item:hover .item-actions {
 		opacity: 1;
 	}
 
-	.entry-delete:hover {
-		color: var(--status-error);
-		background: var(--bg-surface-hover);
+	.action-btn {
+		background: none;
+		border: none;
+		color: var(--text-muted);
+		cursor: pointer;
+		padding: 6px;
+		border-radius: 6px;
+		transition: all 0.2s;
+	}
+
+	.action-btn:hover {
+		background: var(--bg-base);
+		color: var(--text-primary);
+	}
+
+	.action-btn.delete:hover {
+		color: var(--error);
+		background: var(--error-dim);
+	}
+
+	.action-btn.save {
+		color: var(--success);
 	}
 
 	.panel-footer {
-		padding: 12px 16px;
+		padding: 16px;
 		border-top: 1px solid var(--border-subtle);
-		flex-shrink: 0;
 	}
 
-	.clear-btn {
+	.clear-all-btn {
+		width: 100%;
 		display: flex;
 		align-items: center;
-		gap: 6px;
-		width: 100%;
 		justify-content: center;
-		padding: 8px;
-		font-size: var(--text-xs);
-		font-family: var(--font-sans);
-		color: var(--text-tertiary);
-		background: none;
-		border: 1px solid var(--border-subtle);
-		border-radius: var(--radius-md);
+		gap: 8px;
+		padding: 10px;
+		background: var(--bg-surface);
+		border: 1px solid var(--border-default);
+		border-radius: 8px;
+		color: var(--text-secondary);
+		font-size: 13px;
+		font-weight: 500;
 		cursor: pointer;
-		transition:
-			color 100ms,
-			border-color 100ms;
+		transition: all 0.2s;
 	}
 
-	.clear-btn:hover {
-		color: var(--status-error);
-		border-color: var(--status-error);
-	}
-
-	@media (max-width: 480px) {
-		.panel {
-			width: 100vw;
-		}
+	.clear-all-btn:hover {
+		background: var(--error-dim);
+		color: var(--error);
+		border-color: var(--error);
 	}
 </style>

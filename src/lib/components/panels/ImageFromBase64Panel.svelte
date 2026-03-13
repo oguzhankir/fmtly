@@ -1,6 +1,7 @@
 <script lang="ts">
     import ImagePreview from "./ImagePreview.svelte";
     import { Download } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let input = $state("");
     let previewSrc = $state("");
@@ -23,7 +24,7 @@
             const engine = await import("../../engines/image/image.engine");
             const b = await engine.base64ToBlob(trimmed);
             blob = b;
-            detectedFormat = b.type || "unknown";
+            detectedFormat = b.type || $t('ui.unknown', 'unknown');
             previewSrc = trimmed;
 
             // Get dimensions
@@ -38,7 +39,7 @@
                 img.onerror = () => reject(new Error("Invalid image"));
             });
         } catch {
-            error = "Invalid Base64 data URL. Must start with data:image/...";
+            error = $t('ui.error.invalid_base64', 'Invalid Base64 data URL. Must start with data:image/...');
             previewSrc = "";
             blob = null;
         }
@@ -51,11 +52,11 @@
 
 <div class="panel">
     <div class="input-section">
-        <label for="b64-input" class="label">Paste Base64 Data URL</label>
+        <label for="b64-input" class="label">{$t('ui.paste_base64_data_url', 'Paste Base64 Data URL')}</label>
         <textarea
             id="b64-input"
             bind:value={input}
-            placeholder="data:image/png;base64,iVBOR..."
+            placeholder={$t('ui.placeholder.base64_example', 'data:image/png;base64,iVBOR...')}
             class="input-area"
             spellcheck="false"
         ></textarea>
@@ -69,15 +70,15 @@
         <div class="output-section">
             <ImagePreview
                 src={previewSrc}
-                filename={`image.${detectedFormat.split("/")[1] || "png"}`}
+                filename={`{$t('ui.image', 'image')}.${detectedFormat.split("/")[1] || $t('ui.png', 'png')}`}
                 width={imgWidth}
                 height={imgHeight}
                 size={blob.size}
                 downloadBlob={blob}
             />
             <div class="info-bar">
-                <span>Format: {detectedFormat}</span>
-                <span>{imgWidth} × {imgHeight} px</span>
+                <span>{$t('ui.format', 'Format')}: {detectedFormat}</span>
+                <span>{imgWidth} × {imgHeight} {$t('ui.pixels', 'px')}</span>
             </div>
         </div>
     {/if}

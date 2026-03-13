@@ -7,6 +7,7 @@
 	import type { SchemaValidationResult } from '$engines/json/schemaValidator.js';
 	import { format, jsonError, repair } from '$stores/json.store';
 	import { initInput, input } from '$stores/input.store';
+	import { t } from '$lib/stores/language.js';
 	import type { ToolDefinition } from '$registry/types.js';
 	import { AlertTriangle, CheckCircle2, Sparkles, Wand2 } from 'lucide-svelte';
 
@@ -46,7 +47,7 @@
 				column: issue.column,
 				message: issue.message,
 				code: issue.keyword,
-				plainLanguageExplanation: `${issue.instancePath} must satisfy ${issue.keyword}`,
+				plainLanguageExplanation: `${issue.instancePath} ${($t as any)('ui.validator.explanation_must_satisfy', 'must satisfy')} ${issue.keyword}`,
 				path: issue.instancePath || '/'
 			}));
 		}
@@ -62,24 +63,24 @@
 		return result.valid;
 	});
 	let errorCountLabel = $derived(
-		activeIssues.length > 0 ? `${activeIssues.length} issue${activeIssues.length === 1 ? '' : 's'}` : ''
+		activeIssues.length > 0 ? `${activeIssues.length} ${activeIssues.length === 1 ? $t('ui.validator.issue', 'issue') : $t('ui.validator.issues', 'issues')}` : ''
 	);
 	let validationSummary = $derived.by(() => {
 		if (validationMode === 'schema') {
-			if (!$input.trim()) return 'Paste JSON to validate';
-			if (!schemaInput.trim()) return 'Paste a JSON Schema to validate against';
-			if (!schemaValidationResult) return 'Validating schema…';
+			if (!$input.trim()) return $t('ui.validator.paste_json', 'Paste JSON to validate');
+			if (!schemaInput.trim()) return $t('ui.validator.paste_schema', 'Paste a JSON Schema to validate against');
+			if (!schemaValidationResult) return $t('ui.validator.validating_schema', 'Validating schema…');
 			if (!schemaValidationResult.success) {
 				if (schemaValidationResult.dataError) {
-					return `Data error at line ${schemaValidationResult.dataError.line}, column ${schemaValidationResult.dataError.column}`;
+					return ($t as any)('ui.validator.data_error_pos', 'Data error at line {{line}}, column {{column}}', { line: schemaValidationResult.dataError.line, column: schemaValidationResult.dataError.column });
 				}
-				return 'Schema is invalid';
+				return $t('ui.validator.schema_invalid', 'Schema is invalid');
 			}
-			if (schemaValidationResult.valid) return 'JSON matches schema';
+			if (schemaValidationResult.valid) return $t('ui.validator.json_matches_schema', 'JSON matches schema');
 			const firstIssue = schemaValidationResult.issues[0];
 			return firstIssue
-				? `Schema error at line ${firstIssue.line}, column ${firstIssue.column}`
-				: 'Schema validation failed';
+				? ($t as any)('ui.validator.schema_error_pos', 'Schema error at line {{line}}, column {{column}}', { line: firstIssue.line, column: firstIssue.column })
+				: $t('ui.validator.schema_validation_failed', 'Schema validation failed');
 		}
 		return result.summary;
 	});
@@ -143,27 +144,27 @@
 	function getWorkspaceLabel(tool: ToolDefinition): string {
 		switch (tool.slug) {
 			case 'formatter':
-				return 'Format';
+				return $t('ui.actions.format', 'Format');
 			case 'viewer':
-				return 'View';
+				return $t('ui.actions.view', 'View');
 			case 'validator':
-				return 'Validate';
+				return $t('ui.actions.validate', 'Validate');
 			case 'minifier':
-				return 'Minify';
+				return $t('ui.actions.minify', 'Minify');
 			case 'to-yaml':
-				return '→ YAML';
+				return $t('ui.convert.to_yaml', '→ YAML');
 			case 'to-csv':
-				return '→ CSV';
+				return $t('ui.convert.to_csv', '→ CSV');
 			case 'to-xml':
-				return '→ XML';
+				return $t('ui.convert.to_xml', '→ XML');
 			case 'to-toml':
-				return '→ TOML';
+				return $t('ui.convert.to_toml', '→ TOML');
 			case 'to-markdown':
-				return '→ MD';
+				return $t('ui.convert.to_markdown', '→ MD');
 			case 'jsonpath':
-				return 'JSONPath';
+				return $t('ui.query.jsonpath', 'JSONPath');
 			case 'jmespath':
-				return 'JMESPath';
+				return $t('ui.query.jmespath', 'JMESPath');
 			default:
 				return tool.displayName;
 		}
@@ -207,7 +208,7 @@
 				aria-selected={validationMode === 'syntax'}
 				onclick={() => (validationMode = 'syntax')}
 			>
-				Syntax
+				{$t('ui.validator.syntax', 'Syntax')}
 			</button>
 			<button
 				type="button"
@@ -217,7 +218,7 @@
 				aria-selected={validationMode === 'schema'}
 				onclick={() => (validationMode = 'schema')}
 			>
-				Schema
+				{$t('ui.validator.schema', 'Schema')}
 			</button>
 		</div>
 		<div
@@ -227,7 +228,7 @@
 		>
 			{#if isValidationSuccessful}
 				<CheckCircle2 size={16} />
-				<span>{validationMode === 'schema' ? 'Schema match' : 'Valid JSON'}</span>
+				<span>{validationMode === 'schema' ? $t('ui.validator.schema_match', 'Schema match') : $t('ui.validator.valid_json', 'Valid JSON')}</span>
 			{:else}
 				<AlertTriangle size={16} />
 				<span>{validationSummary}</span>
@@ -235,18 +236,18 @@
 		</div>
 		<div class="validator-actions">
 			{#if activeIssues.length > 0}
-				<button type="button" class="validator-btn" onclick={focusFirstIssue}>
+				<button type="button" class="validator-btn validator-btn--secondary" onclick={focusFirstIssue}>
 					<AlertTriangle size={13} />
-					First issue
+					{$t('ui.validator.first_issue', 'First issue')}
 				</button>
 			{/if}
 			<button type="button" class="validator-btn" onclick={handleFormat}>
 				<Sparkles size={13} />
-				Format
+				{$t('ui.actions.format', 'Format')}
 			</button>
 			<button type="button" class="validator-btn validator-btn--primary" onclick={handleRepair}>
 				<Wand2 size={13} />
-				Repair JSON
+				{$t('ui.validator.repair_json', 'Repair JSON')}
 			</button>
 		</div>
 	</div>
@@ -258,13 +259,13 @@
 	{#if validationMode === 'schema'}
 		<div class="validator-schema">
 			<div class="validator-schema__header">
-				<strong>JSON Schema</strong>
-				<span>Draft-07+ via AJV</span>
+				<strong>{$t('ui.validator.schema_title', 'JSON Schema')}</strong>
+				<span>{$t('ui.validator.schema_standard', 'Draft-07+ via AJV')}</span>
 			</div>
 			<textarea
 				bind:value={schemaInput}
 				class="validator-schema__input"
-				placeholder="Paste JSON Schema here…"
+				placeholder={$t('ui.validator.paste_schema_placeholder', 'Paste JSON Schema here…')}
 				spellcheck="false"
 			></textarea>
 		</div>
@@ -283,7 +284,7 @@
 						onclick={() => focusIssue(issue.line)}
 					>
 						<div class="validator-error-item__head">
-							<strong>Line {issue.line}, column {issue.column}</strong>
+							<strong>{($t as any)('ui.validator.line_col_label', 'Line {{line}}, column {{column}}', { line: issue.line, column: issue.column })}</strong>
 							<span>{issue.code}</span>
 						</div>
 						<p>{issue.message}</p>
@@ -302,7 +303,7 @@
 	{:else}
 		<div class="validator-success">
 			<CheckCircle2 size={15} />
-			<span>{validationMode === 'schema' ? 'JSON matches the current schema.' : 'No syntax errors found.'}</span>
+			<span>{validationMode === 'schema' ? $t('ui.validator.json_matches_current_schema', 'JSON matches the current schema.') : $t('ui.validator.no_syntax_errors', 'No syntax errors found.')}</span>
 		</div>
 	{/if}
 </div>

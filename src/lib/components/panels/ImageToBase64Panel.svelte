@@ -3,6 +3,7 @@
     import ImagePreview from "./ImagePreview.svelte";
     import { Copy, Check } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let file: globalThis.File | null = $state(null);
     let base64 = $state("");
@@ -26,7 +27,7 @@
     function copyBase64() {
         if (!base64) return;
         navigator.clipboard.writeText(base64);
-        addToast("success", "Base64 copied");
+        addToast("success", $t('ui.base64_copied', 'Base64 copied'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -44,7 +45,7 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept="image/*"
-                label="Drop image here or click to select"
+                label={$t('ui.drop_image_here_select', 'Drop image here or click to select')}
             />
         </div>
     {:else}
@@ -58,19 +59,19 @@
             />
 
             <div class="info-bar">
-                <span>Format: {file.type}</span>
+                <span>{$t('ui.format', 'Format')}: {file.type}</span>
                 <span>{imgWidth} × {imgHeight} px</span>
-                <span>Original: {formatSize(file.size)}</span>
-                <span>Base64: {formatSize(base64.length)}</span>
+                <span>{$t('ui.original', 'Original')}: {formatSize(file.size)}</span>
+                <span>{$t('ui.base64', 'Base64')}: {formatSize(base64.length)}</span>
             </div>
 
             <div class="output-area">
                 <div class="output-header">
-                    <span class="label">Data URL</span>
+                    <span class="label">{$t('ui.data_url', 'Data URL')}</span>
                     <button onclick={copyBase64} class="copy-btn">
                         {#if copied}<Check size={13} />{:else}<Copy
                                 size={13}
-                            />{/if} Copy
+                            />{/if} {$t('ui.copy', 'Copy')}
                     </button>
                 </div>
                 <textarea

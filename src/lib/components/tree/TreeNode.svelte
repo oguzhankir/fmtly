@@ -2,6 +2,7 @@
 	import { getContext } from 'svelte';
 	import { ChevronRight, Copy, Check, Braces, Expand } from 'lucide-svelte';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import type { TreeNode } from '$engines/json/types.js';
 	import type { Writable } from 'svelte/store';
 
@@ -39,11 +40,11 @@
 	}
 
 	function displayPath(): string {
-		return node.path ? `root.${node.path}` : 'root';
+		return node.path ? `${$t('ui.tree.root', 'root')}.${node.path}` : $t('ui.tree.root', 'root');
 	}
 
 	function dotPath(): string {
-		return node.path || '(root)';
+		return node.path || `(${$t('ui.tree.root', 'root')})`;
 	}
 
 	function bracketPath(): string {
@@ -54,7 +55,7 @@
 		const path = dotPath();
 		await navigator.clipboard.writeText(path);
 		justCopied = true;
-		addToast('success', `Copied — ${path}`);
+		addToast('success', ($t as any)('ui.tree.toast.copied_path', 'Copied — {path}', { path }));
 		if (copyTimer) clearTimeout(copyTimer);
 		copyTimer = setTimeout(() => {
 			justCopied = false;
@@ -64,12 +65,12 @@
 	async function copyValue(): Promise<void> {
 		const value = typeof node.value === 'string' ? node.value : JSON.stringify(node.value);
 		await navigator.clipboard.writeText(value ?? '');
-		addToast('success', 'Copied value');
+		addToast('success', $t('ui.tree.toast.copied_value', 'Value copied successfully'));
 	}
 
 	async function copyJson(): Promise<void> {
 		await navigator.clipboard.writeText(JSON.stringify(node.value, null, 2));
-		addToast('success', 'Copied value as JSON');
+		addToast('success', $t('ui.tree.toast.copied_json', 'JSON copied successfully'));
 	}
 
 	function expandSubtree(): void {
@@ -103,26 +104,26 @@
 
 	async function contextCopyDot(): Promise<void> {
 		await navigator.clipboard.writeText(dotPath());
-		addToast('success', `Copied — ${dotPath()}`);
+		addToast('success', ($t as any)('ui.tree.toast.copied_path', 'Copied — {path}', { path: dotPath() }));
 		contextMenu = null;
 	}
 
 	async function contextCopyBracket(): Promise<void> {
 		await navigator.clipboard.writeText(bracketPath());
-		addToast('success', `Copied — ${bracketPath()}`);
+		addToast('success', ($t as any)('ui.tree.toast.copied_path', 'Copied — {path}', { path: bracketPath() }));
 		contextMenu = null;
 	}
 
 	async function contextCopyValue(): Promise<void> {
 		const val = typeof node.value === 'string' ? node.value : JSON.stringify(node.value);
 		await navigator.clipboard.writeText(val);
-		addToast('success', 'Copied value');
+		addToast('success', $t('ui.tree.toast.copied_value', 'Value copied successfully'));
 		contextMenu = null;
 	}
 
 	async function contextCopyJSON(): Promise<void> {
 		await navigator.clipboard.writeText(JSON.stringify(node.value, null, 2));
-		addToast('success', 'Copied value as JSON');
+		addToast('success', $t('ui.tree.toast.copied_json', 'JSON copied successfully'));
 		contextMenu = null;
 	}
 
@@ -180,8 +181,8 @@
 	}
 
 	function badge(): string {
-		if (node.type === 'array') return `[ ${node.childCount} items ]`;
-		if (node.type === 'object') return `{ ${node.childCount} keys }`;
+		if (node.type === 'array') return `[ ${node.childCount} ${$t('ui.tree.items', 'items')} ]`;
+		if (node.type === 'object') return `{ ${node.childCount} ${$t('ui.tree.keys', 'keys')} }`;
 		return '';
 	}
 </script>
@@ -210,7 +211,7 @@
 				class="tree-arrow"
 				class:tree-arrow--expanded={expanded}
 				onclick={(e: MouseEvent) => { e.stopPropagation(); toggle(); }}
-				aria-label={expanded ? 'Collapse' : 'Expand'}
+				aria-label={expanded ? $t('ui.tree.collapse', 'Collapse') : $t('ui.tree.expand', 'Expand')}
 				tabindex="-1"
 			>
 				<ChevronRight size={14} />
@@ -243,7 +244,7 @@
 				type="button"
 				class="tree-action-btn"
 				onclick={(e) => { e.stopPropagation(); void copyValue(); }}
-				aria-label="Copy value"
+				aria-label={$t('ui.tree.aria.copy_value', 'Copy value')}
 			>
 				<Copy size={12} />
 			</button>
@@ -251,7 +252,7 @@
 				type="button"
 				class="tree-action-btn"
 				onclick={(e) => { e.stopPropagation(); void copyJson(); }}
-				aria-label="Copy JSON"
+				aria-label={$t('ui.tree.aria.copy_json', 'Copy JSON')}
 			>
 				<Braces size={12} />
 			</button>
@@ -259,7 +260,7 @@
 				type="button"
 				class="tree-action-btn"
 				onclick={(e) => { e.stopPropagation(); void copyPath(); }}
-				aria-label="Copy path"
+				aria-label={$t('ui.tree.aria.copy_path', 'Copy path')}
 			>
 				{#if justCopied}
 					<Check size={12} color="var(--success)" />
@@ -272,7 +273,7 @@
 					type="button"
 					class="tree-action-btn"
 					onclick={(e) => { e.stopPropagation(); expandSubtree(); }}
-					aria-label="Expand subtree"
+					aria-label="{$t('ui.tree.expand_subtree', 'Expand subtree')}"
 				>
 					<Expand size={12} />
 				</button>
@@ -290,14 +291,14 @@
 		role="menu"
 		tabindex="-1"
 	>
-		<button onclick={contextCopyDot} role="menuitem">Copy path (dot)</button>
-		<button onclick={contextCopyBracket} role="menuitem">Copy path (bracket)</button>
-		<button onclick={contextCopyValue} role="menuitem">Copy value</button>
-		<button onclick={contextCopyJSON} role="menuitem">Copy value as JSON</button>
+		<button onclick={contextCopyDot} role="menuitem">{$t('ui.tree.copy_path_dot', 'Copy path (dot)')}</button>
+		<button onclick={contextCopyBracket} role="menuitem">{$t('ui.tree.copy_path_bracket', 'Copy path (bracket)')}</button>
+		<button onclick={contextCopyValue} role="menuitem">{$t('ui.tree.copy_value', 'Copy value')}</button>
+		<button onclick={contextCopyJSON} role="menuitem">{$t('ui.tree.copy_value_as_json', 'Copy value as JSON')}</button>
 		{#if hasChildren}
 			<hr />
-			<button onclick={contextExpandAll} role="menuitem">Expand all children</button>
-			<button onclick={contextCollapseAll} role="menuitem">Collapse all children</button>
+			<button onclick={contextExpandAll} role="menuitem">{$t('ui.tree.expand_all_children', 'Expand all children')}</button>
+			<button onclick={contextCollapseAll} role="menuitem">{$t('ui.tree.collapse_all_children', 'Collapse all children')}</button>
 		{/if}
 	</div>
 {/if}

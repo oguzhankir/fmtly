@@ -2,6 +2,7 @@
 	import type { TreeNode } from '$engines/json/index.js';
 	import { addToast } from '$stores/toast.store';
 	import { ChevronRight, Copy } from 'lucide-svelte';
+	import { t } from '$lib/stores/language.js';
 	import Self from './TreeNode.svelte';
 
 	let {
@@ -34,7 +35,7 @@
 
 	async function handleCopyPath(): Promise<void> {
 		await navigator.clipboard.writeText(node.path);
-		addToast('success', `Copied — ${node.path}`);
+		addToast('success', ($t as any)('ui.json_viewer.toast_copy_path', 'Copied — {{path}}', { path: node.path }));
 	}
 
 	function getValueDisplay(n: TreeNode): string {
@@ -43,14 +44,14 @@
 			if (str.length > 80) return `"${str.slice(0, 77)}…"`;
 			return `"${str}"`;
 		}
-		if (n.type === 'null') return 'null';
+		if (n.type === 'null') return $t('ui.json_viewer.null', 'null');
 		if (n.type === 'boolean' || n.type === 'number') return String(n.value);
 		return '';
 	}
 
 	function getCountBadge(n: TreeNode): string {
-		if (n.type === 'object') return `{ ${n.childCount} ${n.childCount === 1 ? 'key' : 'keys'} }`;
-		if (n.type === 'array') return `[ ${n.childCount} ${n.childCount === 1 ? 'item' : 'items'} ]`;
+		if (n.type === 'object') return `{ ${n.childCount} ${n.childCount === 1 ? $t('ui.json_viewer.object_key', 'key') : $t('ui.json_viewer.object_keys', 'keys')} }`;
+		if (n.type === 'array') return `[ ${n.childCount} ${n.childCount === 1 ? $t('ui.json_viewer.array_item', 'item') : $t('ui.json_viewer.array_items', 'items')} ]`;
 		return '';
 	}
 
@@ -130,7 +131,7 @@
 			<button
 				class="ml-auto flex shrink-0 items-center rounded-[var(--radius-sm)] p-[2px] text-[var(--text-muted)] transition-colors duration-[80ms] hover:text-[var(--text-primary)]"
 				onclick={(e) => { e.stopPropagation(); handleCopyPath(); }}
-				aria-label="Copy path: {node.path}"
+				aria-label="{($t as any)('ui.json_viewer.aria_copy_path', 'Copy path: {{path}}', { path: node.path })}"
 			>
 				<Copy size={12} />
 			</button>

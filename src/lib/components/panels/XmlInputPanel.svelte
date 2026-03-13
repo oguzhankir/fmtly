@@ -5,9 +5,11 @@
 	import { xmlStats, xmlError } from '$stores/xml.store';
 	import { initInput, input, inputByteSize, formatByteSize } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import { xmlSamples } from '$lib/utils/xmlSamples.js';
 	import {
 		Upload,
+		Trash2,
 		Eraser,
 		Link2,
 		ClipboardPaste,
@@ -233,13 +235,13 @@
 
 	function getWorkspaceLabel(tool: ToolDefinition): string {
 		switch (tool.slug) {
-			case 'formatter': return 'Format';
-			case 'validator': return 'Validate';
-			case 'minifier': return 'Minify';
-			case 'to-json': return '→ JSON';
-			case 'to-yaml': return '→ YAML';
-			case 'to-csv': return '→ CSV';
-			case 'xpath': return 'XPath';
+			case 'formatter': return $t('ui.actions.format', 'Format');
+			case 'validator': return $t('ui.actions.validate', 'Validate');
+			case 'minifier': return $t('ui.actions.minify', 'Minify');
+			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
+			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
+			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
+			case 'xpath': return $t('ui.query.xpath', 'XPath');
 			default: return tool.displayName;
 		}
 	}
@@ -292,7 +294,7 @@
 			<div class="xml-input-popover-wrap">
 				<button type="button" class="xml-input-btn" onclick={() => (showLoadUrl = !showLoadUrl)}>
 					<Link2 size={13} />
-					Load URL
+					{$t('ui.actions.load_url', 'Load URL')}
 				</button>
 				{#if showLoadUrl}
 					<div class="xml-input-popover">
@@ -305,24 +307,24 @@
 						<div class="xml-input-popover__actions">
 							<button type="button" class="xml-input-btn" onclick={() => (showLoadUrl = false)}>
 								<X size={13} />
-								Close
+								{$t('ui.actions.close', 'Close')}
 							</button>
 							<button type="button" class="xml-input-btn" onclick={loadUrl}>
 								<Link2 size={13} />
-								Fetch
+								{$t('ui.actions.fetch', 'Fetch')}
 							</button>
 						</div>
 					</div>
 				{/if}
 			</div>
 			<label class="xml-input-select">
-				<span>Sample</span>
+				<span>{$t('ui.actions.sample', 'Sample')}</span>
 				<ChevronDown size={12} />
 				<select
 					bind:value={selectedSample}
 					onchange={(event) => loadSample((event.currentTarget as HTMLSelectElement).value)}
 				>
-					<option value="">Choose…</option>
+					<option value="">{$t('ui.actions.choose_sample', 'Choose…')}</option>
 					{#each sampleOptions as sample}
 						<option value={sample.id}>{sample.label}</option>
 					{/each}
@@ -332,12 +334,12 @@
 		<div class="xml-input-toolbar__group">
 			<button type="button" class="xml-input-btn" onclick={triggerUpload}>
 				<Upload size={13} />
-				Upload
+				{$t('ui.actions.upload', 'Upload')}
 			</button>
 			{#if $input}
 				<button type="button" class="xml-input-btn" onclick={clearInputValue}>
-					<Eraser size={13} />
-					Clear
+					<Trash2 size={13} />
+					{$t('ui.actions.clear', 'Clear')}
 				</button>
 			{/if}
 		</div>
@@ -347,7 +349,7 @@
 		<div class="xml-input-banner">
 			<button type="button" class="xml-input-banner__action" onclick={pasteClipboardXml}>
 				<ClipboardPaste size={13} />
-				Paste XML from clipboard
+				{$t('ui.paste_xml_from_clipboard', 'Paste XML from clipboard')}
 			</button>
 		</div>
 	{/if}

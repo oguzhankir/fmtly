@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { Code, Type } from 'lucide-svelte';
+	import { t } from '$lib/stores/language.js';
 
 	export type EditorMode = 'simple' | 'editor';
 
@@ -34,7 +35,7 @@
 <div
 	class="flex items-center rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-inset)] p-[1px]"
 	role="radiogroup"
-	aria-label="Editor mode"
+	aria-label={$t('ui.editor.mode', 'Editor mode')}
 >
 	<button
 		onclick={() => setMode('simple')}
@@ -46,7 +47,7 @@
 		aria-checked={mode === 'simple'}
 	>
 		<Type size={12} />
-		Simple
+		{$t('ui.simple', 'Simple')}
 	</button>
 	<button
 		onclick={() => setMode('editor')}
@@ -58,6 +59,6 @@
 		aria-checked={mode === 'editor'}
 	>
 		<Code size={12} />
-		Editor
+		{$t('ui.editor', 'Editor')}
 	</button>
 </div>

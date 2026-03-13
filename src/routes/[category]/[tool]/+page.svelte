@@ -62,6 +62,8 @@
 	import FakeDataPanel from "$components/panels/FakeDataPanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
+	import { localizeToolDefinition, localizeToolDefinitions } from "$lib/registry/localized.js";
+	import { t } from "$stores/language";
 	import { generateToolSEO } from "$utils/seo.js";
 	import { registerShortcuts } from "$utils/keyboard.js";
 	import type { ShortcutEntry } from "$utils/keyboard.js";
@@ -89,21 +91,26 @@
 	import { initCryptoStore } from "$stores/crypto.store";
 	import { initGenerateStore } from "$stores/generate.store";
 	import { initHistory, destroyHistory } from "$stores/history.store";
+	import { page } from "$app/stores";
+	import { localizePath, stripLocalePrefix } from "$lib/utils/locale-routing.js";
 	import type { PageData } from "./$types.js";
 
 	let { data }: { data: PageData } = $props();
 
-	let seo = $derived(generateToolSEO(data.tool, "https://fmtly.dev"));
+	let localizedTool = $derived(localizeToolDefinition(data.tool, $t));
+	let currentLocale = $derived($page.params.lang ?? 'en');
+	let currentPath = $derived(stripLocalePrefix($page.url.pathname));
+	let seo = $derived(generateToolSEO(localizedTool, "https://fmtly.dev", currentPath));
 	let shareModalOpen = $state(false);
 	let toolPath = $derived(`${data.tool.category}/${data.tool.slug}`);
 	let jsonWorkspaceTools = $derived(
 		data.tool.category === "json"
-			? getToolsByCategory("json").filter((tool) => tool.slug !== "diff")
+			? localizeToolDefinitions(getToolsByCategory("json"), $t).filter((tool) => tool.slug !== "diff")
 			: []
 	);
 	let xmlWorkspaceTools = $derived(
 		data.tool.category === "xml"
-			? getToolsByCategory("xml")
+			? localizeToolDefinitions(getToolsByCategory("xml"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -114,7 +121,7 @@
 	function navigateToJsonWorkspaceIndex(index: number): void {
 		const target = jsonWorkspaceTools[index];
 		if (!target || target.slug === data.tool.slug) return;
-		void goto(`/json/${target.slug}`, {
+		void goto(localizePath(`/json/${target.slug}`, currentLocale), {
 			replaceState: true,
 			noScroll: true,
 			keepFocus: true,
@@ -125,7 +132,7 @@
 		JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "FAQPage",
-			mainEntity: data.tool.faqs.map((faq) => ({
+			mainEntity: localizedTool.faqs.map((faq) => ({
 				"@type": "Question",
 				name: faq.question,
 				acceptedAnswer: {
@@ -203,7 +210,7 @@
 				ctrl: true,
 				shift: true,
 				scope: "global",
-				label: "Share URL",
+				label: $t('ui.share_url', 'Share URL'),
 				handler: () => {
 					shareModalOpen = true;
 				},
@@ -217,7 +224,7 @@
 					ctrl: true,
 					shift: true,
 					scope: "tool",
-					label: "Format XML",
+					label: $t('ui.format_xml', 'Format XML'),
 					handler: () => { formatXml(); },
 				},
 				{
@@ -225,7 +232,7 @@
 					ctrl: true,
 					shift: true,
 					scope: "tool",
-					label: "Minify XML",
+					label: $t('ui.minify_xml', 'Minify XML'),
 					handler: () => { minifyXml(); },
 				},
 			);
@@ -235,11 +242,15 @@
 				shortcuts.push({
 					key: String(index + 1),
 					scope: "tool",
-					label: `Switch to XML tab ${index + 1}`,
+					label: ($t as any)('switch_to_xml_tab', 'Switch to XML tab {index}', { index: index + 1 }),
 					handler: () => {
 						const target = xmlWorkspaceTools[index];
 						if (!target || target.slug === data.tool.slug) return;
-						void goto(`/xml/${target.slug}`, { replaceState: true, noScroll: true, keepFocus: true });
+						void goto(localizePath(`/xml/${target.slug}`, currentLocale), {
+							replaceState: true,
+							noScroll: true,
+							keepFocus: true
+						});
 					},
 				});
 			}
@@ -252,7 +263,7 @@
 					ctrl: true,
 					shift: true,
 					scope: "tool",
-					label: "Format / Beautify",
+					label: $t('ui.format_beautify', 'Format / Beautify'),
 					handler: () => {
 						format();
 					},
@@ -262,7 +273,7 @@
 					ctrl: true,
 					shift: true,
 					scope: "tool",
-					label: "Minify",
+					label: $t('ui.minify', 'Minify'),
 					handler: () => {
 						minify();
 					},
@@ -272,7 +283,7 @@
 					ctrl: true,
 					shift: true,
 					scope: "tool",
-					label: "Repair JSON",
+					label: $t('ui.repair_json', 'Repair JSON'),
 					handler: () => {
 						repair();
 					},
@@ -284,7 +295,7 @@
 				shortcuts.push({
 					key: String(index + 1),
 					scope: "tool",
-					label: `Switch to tab ${index + 1}`,
+					label: ($t as any)('switch_to_tab', 'Switch to tab {index}', { index: index + 1 }),
 					handler: () => {
 						navigateToJsonWorkspaceIndex(index);
 					},
@@ -298,7 +309,7 @@
 					key: "]",
 					ctrl: true,
 					scope: "tool",
-					label: "Expand all",
+					label: $t('ui.expand_all', 'Expand all'),
 					handler: () => {
 						treePanelRef?.expand();
 					},
@@ -307,7 +318,7 @@
 					key: "[",
 					ctrl: true,
 					scope: "tool",
-					label: "Collapse all",
+					label: $t('ui.collapse_all', 'Collapse all'),
 					handler: () => {
 						treePanelRef?.collapse();
 					},
@@ -316,7 +327,7 @@
 					key: "1",
 					ctrl: true,
 					scope: "tool",
-					label: "Expand to depth 1",
+					label: ($t as any)('ui.expand_to_depth', 'Expand to depth {depth}', { depth: 1 }),
 					handler: () => {
 						treePanelRef?.setDepth(1);
 					},
@@ -325,7 +336,7 @@
 					key: "2",
 					ctrl: true,
 					scope: "tool",
-					label: "Expand to depth 2",
+					label: ($t as any)('ui.expand_to_depth', 'Expand to depth {depth}', { depth: 2 }),
 					handler: () => {
 						treePanelRef?.setDepth(2);
 					},
@@ -334,7 +345,7 @@
 					key: "3",
 					ctrl: true,
 					scope: "tool",
-					label: "Expand to depth 3",
+					label: ($t as any)('ui.expand_to_depth', 'Expand to depth {depth}', { depth: 3 }),
 					handler: () => {
 						treePanelRef?.setDepth(3);
 					},
@@ -343,7 +354,7 @@
 					key: "4",
 					ctrl: true,
 					scope: "tool",
-					label: "Expand to depth 4",
+					label: ($t as any)('ui.expand_to_depth', 'Expand to depth {depth}', { depth: 4 }),
 					handler: () => {
 						treePanelRef?.setDepth(4);
 					},
@@ -352,7 +363,7 @@
 					key: "5",
 					ctrl: true,
 					scope: "tool",
-					label: "Expand to depth 5",
+					label: ($t as any)('ui.expand_to_depth', 'Expand to depth {depth}', { depth: 5 }),
 					handler: () => {
 						treePanelRef?.setDepth(5);
 					},
@@ -381,7 +392,7 @@
 <SeoHead metadata={seo} />
 
 {#if isDiffTool}
-	<ToolLayout tool={data.tool}>
+	<ToolLayout tool={localizedTool}>
 		{#snippet inputPanel()}
 			<DiffInputPanel
 				value={diffLeft}
@@ -389,7 +400,7 @@
 					diffLeft = v;
 				}}
 				language={data.tool.inputLanguage}
-				placeholder="Paste original JSON here…"
+				placeholder={$t('ui.placeholder.original_json', 'Paste original JSON here…')}
 			/>
 		{/snippet}
 		{#snippet outputPanel()}
@@ -399,7 +410,7 @@
 					diffRight = v;
 				}}
 				language={data.tool.inputLanguage}
-				placeholder="Paste modified JSON here…"
+				placeholder={$t('ui.placeholder.modified_json', 'Paste modified JSON here…')}
 			/>
 		{/snippet}
 		{#snippet diffPanel()}
@@ -408,7 +419,7 @@
 	</ToolLayout>
 {:else}
 	<ToolLayout
-		tool={data.tool}
+		tool={localizedTool}
 		onprocess={() => {
 			if (data.tool.engine === 'json') { format(); }
 			else if (data.tool.engine === 'xml') { formatXml(); }
@@ -620,25 +631,25 @@
 		<h1
 			class="mb-[var(--space-3)] text-[length:var(--text-2xl)] font-[number:var(--weight-semibold)] text-[var(--text-primary)]"
 		>
-			{data.tool.displayName}
+			{localizedTool.displayName}
 		</h1>
 		<p
 			class="max-w-[640px] text-[length:var(--text-base)] leading-[var(--leading-relaxed)] text-[var(--text-secondary)]"
 		>
-			{data.tool.description}
+			{localizedTool.description}
 		</p>
 	</div>
 
 	<!-- Use Cases -->
-	{#if data.tool.useCases.length > 0}
+	{#if localizedTool.useCases.length > 0}
 		<div class="mb-[var(--space-8)]">
 			<h2
 				class="mb-[var(--space-3)] text-[length:var(--text-lg)] font-[number:var(--weight-semibold)] text-[var(--text-primary)]"
 			>
-				Use Cases
+				{localizedTool.displayName} {$t('use_cases', 'Use Cases')}
 			</h2>
 			<ul class="flex flex-col gap-[var(--space-2)] pl-[var(--space-4)]">
-				{#each data.tool.useCases as useCase}
+				{#each localizedTool.useCases as useCase}
 					<li
 						class="list-disc text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-secondary)]"
 					>
@@ -650,15 +661,15 @@
 	{/if}
 
 	<!-- FAQ Section with Schema.org FAQPage markup -->
-	{#if data.tool.faqs.length > 0}
+	{#if localizedTool.faqs.length > 0}
 		<div class="mb-[var(--space-8)]">
 			<h2
 				class="mb-[var(--space-4)] text-[length:var(--text-lg)] font-[number:var(--weight-semibold)] text-[var(--text-primary)]"
 			>
-				Frequently Asked Questions
+				{localizedTool.displayName} {$t('faq', 'FAQ')}
 			</h2>
 			<div class="flex flex-col gap-[var(--space-4)]">
-				{#each data.tool.faqs as faq}
+				{#each localizedTool.faqs as faq}
 					<div
 						class="rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-4)]"
 					>
@@ -683,7 +694,7 @@
 
 <!-- FAQPage structured data -->
 <svelte:head>
-	{#if data.tool.faqs.length > 0}
+	{#if localizedTool.faqs.length > 0}
 		{@html `<script type="application/ld+json">${faqStructuredData}<\/script>`}
 	{/if}
 </svelte:head>

@@ -4,6 +4,7 @@
     import { Loader, Copy, Check, WrapText, Minimize2 } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
     import { marked } from "marked";
+    import { t } from '$lib/stores/language.js';
 
     type Props = {
         toolSlug: string;
@@ -82,7 +83,7 @@
                 fmtFn = mod.formatMarkdown;
             }
         } catch (e) {
-            error = e instanceof Error ? e.message : "Failed to load formatter";
+            error = e instanceof Error ? e.message : $t('ui.error.failed_to_load_formatter', 'Failed to load formatter');
         } finally {
             loadingPrettier = false;
         }
@@ -97,7 +98,7 @@
         loading = true;
         try {
             await loadEngine();
-            if (!fmtFn) throw new Error("Formatter not available");
+            if (!fmtFn) throw new Error($t('ui.error.formatter_not_available', 'Formatter not available'));
             const opts = { tabWidth, printWidth, singleQuote, semi };
             if (mode === "minify" && minFn) {
                 outputValue = await minFn(inputValue);
@@ -105,7 +106,7 @@
                 outputValue = await fmtFn(inputValue, opts);
             }
         } catch (e) {
-            error = e instanceof Error ? e.message : "Formatting failed";
+            error = e instanceof Error ? e.message : $t('ui.error.formatting_failed', 'Formatting failed');
             outputValue = "";
         } finally {
             loading = false;
@@ -131,7 +132,7 @@
     function copyOutput() {
         if (!outputValue) return;
         navigator.clipboard.writeText(outputValue);
-        addToast("success", "Copied formatted code");
+        addToast("success", $t('ui.copied_formatted_code', 'Copied formatted code'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -172,7 +173,7 @@
                         }}
                         class="mode-btn {mode === 'format' ? 'active' : ''}"
                     >
-                        <WrapText size={13} /> Format
+                        <WrapText size={13} /> {$t('ui.format', 'Format')}
                     </button>
                     <button
                         onclick={() => {
@@ -180,7 +181,7 @@
                         }}
                         class="mode-btn {mode === 'minify' ? 'active' : ''}"
                     >
-                        <Minimize2 size={13} /> Minify
+                        <Minimize2 size={13} /> {$t('ui.minify', 'Minify')}
                     </button>
                 </div>
             {/if}
@@ -188,7 +189,7 @@
             {#if hasOptions && mode === "format"}
                 <div class="options">
                     <label class="option">
-                        <span>Tab</span>
+                        <span>{$t('ui.tab', 'Tab')}</span>
                         <select bind:value={tabWidth} class="option-select">
                             <option value={2}>2</option>
                             <option value={4}>4</option>
@@ -196,7 +197,7 @@
                         </select>
                     </label>
                     <label class="option">
-                        <span>Width</span>
+                        <span>{$t('ui.width', 'Width')}</span>
                         <select bind:value={printWidth} class="option-select">
                             <option value={60}>60</option>
                             <option value={80}>80</option>
@@ -207,11 +208,11 @@
                     {#if hasJsOptions}
                         <label class="option toggle-option">
                             <input type="checkbox" bind:checked={singleQuote} />
-                            <span>Single quotes</span>
+                            <span>{$t('ui.single_quotes', 'Single quotes')}</span>
                         </label>
                         <label class="option toggle-option">
                             <input type="checkbox" bind:checked={semi} />
-                            <span>Semicolons</span>
+                            <span>{$t('ui.semicolons', 'Semicolons')}</span>
                         </label>
                     {/if}
                 </div>
@@ -221,7 +222,7 @@
         <div class="toolbar-right">
             {#if loadingPrettier}
                 <span class="loading-badge">
-                    <Loader size={12} class="spin" /> Loading formatter…
+                    <Loader size={12} class="spin" /> {$t('ui.loading_formatter', 'Loading formatter…')}
                 </span>
             {/if}
             {#if outputValue}
@@ -229,7 +230,7 @@
                     {#if copied}<Check size={13} />{:else}<Copy
                             size={13}
                         />{/if}
-                    Copy
+                    {$t('ui.copy', 'Copy')}
                 </button>
             {/if}
         </div>
@@ -243,10 +244,10 @@
     >
         <!-- Input -->
         <div class="pane input-pane">
-            <div class="pane-label">Input</div>
+            <div class="pane-label">{$t('ui.input', 'Input')}</div>
             <textarea
                 bind:value={inputValue}
-                placeholder="Paste your code here…"
+                placeholder={$t('ui.paste_your_code_here', 'Paste your code here…')}
                 spellcheck="false"
                 class="code-textarea"
             ></textarea>
@@ -255,10 +256,10 @@
         <!-- Output / Formatted -->
         <div class="pane output-pane">
             <div class="pane-label">
-                {mode === "minify" ? "Minified" : "Formatted"}
+                {mode === "minify" ? $t('ui.minified', 'Minified') : $t('ui.formatted', 'Formatted')}
                 {#if outputValue}
                     <span class="byte-count"
-                        >{new Blob([outputValue]).size} bytes</span
+                        >{new Blob([outputValue]).size} {$t('ui.bytes', 'bytes')}</span
                     >
                 {/if}
             </div>
@@ -271,7 +272,7 @@
                 </div>
             {:else if error}
                 <div class="error-pane">
-                    <span class="error-label">Error</span>
+                    <span class="error-label">{$t('ui.error', 'Error')}</span>
                     <pre class="error-msg">{error}</pre>
                 </div>
             {:else}
@@ -280,7 +281,7 @@
                     readonly
                     spellcheck="false"
                     class="code-textarea output-textarea"
-                    placeholder="Formatted output will appear here…"
+                    placeholder={$t('ui.formatted_output_will_appear_here', 'Formatted output will appear here…')}
                 ></textarea>
             {/if}
         </div>
@@ -288,7 +289,7 @@
         <!-- Markdown rendered preview -->
         {#if isMarkdown && outputValue}
             <div class="pane preview-pane">
-                <div class="pane-label">Preview</div>
+                <div class="pane-label">{$t('ui.preview', 'Preview')}</div>
                 <div class="markdown-preview">
                     {@html markdownHtml}
                 </div>

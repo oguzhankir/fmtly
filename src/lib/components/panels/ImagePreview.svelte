@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Download } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     type Props = {
         src: string;
@@ -31,7 +32,7 @@
         const url = blob ? URL.createObjectURL(blob) : src;
         const a = document.createElement("a");
         a.href = url;
-        a.download = filename || "image";
+        a.download = filename || $t('ui.image', 'image');
         a.click();
         if (blob) URL.revokeObjectURL(url);
     }
@@ -39,16 +40,16 @@
 
 <div class="img-preview">
     <div class="img-container">
-        <img {src} alt={filename || "Preview"} />
+        <img {src} alt={filename || $t('ui.preview', 'Preview')} />
     </div>
     <div class="img-info">
         <div class="meta">
             {#if filename}<span class="fname">{filename}</span>{/if}
-            {#if width && height}<span>{width} × {height} px</span>{/if}
+            {#if width && height}<span>{width} × {height} {$t('ui.pixels', 'px')}</span>{/if}
             {#if size}<span>{formatSize(size)}</span>{/if}
         </div>
         <button onclick={download} class="dl-btn"
-            ><Download size={13} /> Download</button
+            ><Download size={13} /> {$t('ui.download', 'Download')}</button
         >
     </div>
 </div>

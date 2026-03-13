@@ -2,6 +2,7 @@
     import { lookupDns } from "../../engines/network";
     import type { DnsRecords, DnsAnswer } from "../../engines/network";
     import { Loader, AlertCircle, Search } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let domain = $state("");
     let loading = $state(false);
@@ -38,7 +39,7 @@
             error =
                 e instanceof Error
                     ? e.message
-                    : "DNS lookup failed. The proxy Worker may not be deployed yet.";
+                    : $t('ui.dns_lookup.error.fallback', 'DNS lookup failed. The proxy Worker may not be deployed yet.');
         } finally {
             loading = false;
         }
@@ -89,22 +90,22 @@
         >
             {#if loading}
                 <Loader size={14} class="spin" />
-                Querying…
+                {$t('ui.dns_lookup.querying', 'Querying…')}
             {:else}
-                <Search size={14} /> Lookup
+                <Search size={14} /> {$t('ui.dns_lookup.lookup_button', 'Lookup')}
             {/if}
         </button>
     </div>
 
     <p class="hint">
-        All 7 record types queried simultaneously via Cloudflare DNS-over-HTTPS.
+        {$t('ui.dns_lookup.hint', 'All 7 record types queried simultaneously via Cloudflare DNS-over-HTTPS.')}
     </p>
 
     <!-- Loading -->
     {#if loading}
         <div class="loading-state">
             <Loader size={20} class="spin" />
-            <span>Querying A, AAAA, MX, TXT, CNAME, NS, SOA records…</span>
+            <span>{$t('ui.dns_lookup.loading_detailed', 'Querying A, AAAA, MX, TXT, CNAME, NS, SOA records…')}</span>
         </div>
     {/if}
 
@@ -113,12 +114,10 @@
         <div class="error-card">
             <AlertCircle size={16} />
             <div>
-                <strong>Lookup failed</strong>
+                <strong>{$t('ui.dns_lookup.error.title', 'Lookup failed')}</strong>
                 <p>{error}</p>
                 <p class="hint">
-                    The Cloudflare Worker proxy must be deployed to <code
-                        >workers.fmtly.dev</code
-                    >.
+                    {@html $t('ui.dns_lookup.error.worker_hint', 'The Cloudflare Worker proxy must be deployed to <code>workers.fmtly.dev</code>.')}
                 </p>
             </div>
         </div>
@@ -129,7 +128,7 @@
         <!-- Stats bar -->
         <div class="stats-bar">
             <span class="stats-text"
-                >{totalRecords()} total records found for
+                >{($t as any)('ui.dns_lookup.summary', '{{count}} total records found for {{domain}}', { count: totalRecords(), domain })}
                 <strong>{domain}</strong></span
             >
         </div>
@@ -157,10 +156,9 @@
             {#if getAnswers(activeTab).length === 0}
                 <div class="empty-tab">
                     {#if getStatus(activeTab) === -1}
-                        <span>Query failed or no response from DNS server.</span
-                        >
+                        <span>{$t('ui.dns_lookup.empty.no_response', 'Query failed or no response from DNS server.')}</span>
                     {:else}
-                        <span>No {activeTab} records found for {domain}.</span>
+                        <span>{($t as any)('ui.dns_lookup.empty.no_records', 'No {{tab}} records found for {{domain}}.', { tab: activeTab, domain })}</span>
                     {/if}
                 </div>
             {:else}
@@ -168,9 +166,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>TTL</th>
-                                <th>Data</th>
+                                <th>{$t('ui.dns_lookup.table.name', 'Name')}</th>
+                                <th>{$t('ui.dns_lookup.table.ttl', 'TTL')}</th>
+                                <th>{$t('ui.dns_lookup.table.data', 'Data')}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -206,7 +204,7 @@
                     d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                 />
             </svg>
-            <p>Enter a domain to look up all DNS records simultaneously.</p>
+            <p>{$t('ui.dns_lookup.empty.start', 'Enter a domain to look up all DNS records simultaneously.')}</p>
             <div class="preset-domains">
                 {#each ["example.com", "google.com", "github.com"] as d}
                     <button
@@ -299,7 +297,7 @@
         margin: var(--space-1) 0 0;
         color: var(--text-secondary);
     }
-    .error-card code {
+    .error-card :global(code) {
         font-family: var(--font-mono);
     }
     .stats-bar {

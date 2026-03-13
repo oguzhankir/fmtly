@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import ImagePreview from "./ImagePreview.svelte";
     import { Loader } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let file: globalThis.File | null = $state(null);
     let origSrc = $state("");
@@ -58,13 +59,13 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept="image/jpeg,image/png,image/webp"
-                label="Drop image here (JPG, PNG, WebP)"
+                label={$t('ui.drop_image_here', 'Drop image here (JPG, PNG, WebP)')}
             />
         </div>
     {:else}
         <div class="controls">
             <label class="ctrl">
-                <span class="lbl">Quality ({Math.round(quality * 100)}%)</span>
+                <span class="lbl">{$t('ui.quality', 'Quality')} ({Math.round(quality * 100)}%)</span>
                 <input
                     type="range"
                     bind:value={quality}
@@ -76,11 +77,11 @@
             </label>
             <label class="ctrl check">
                 <input type="checkbox" bind:checked={useMaxDim} />
-                <span class="lbl">Limit max dimension</span>
+                <span class="lbl">{$t('ui.limit_max_dimension', 'Limit max dimension')}</span>
             </label>
             {#if useMaxDim}
                 <label class="ctrl">
-                    <span class="lbl">Max W/H (px)</span>
+                    <span class="lbl">{$t('ui.max_wh_px', 'Max W/H (px)')}</span>
                     <input
                         type="number"
                         bind:value={maxWidthOrHeight}
@@ -90,13 +91,13 @@
                 </label>
             {/if}
             <button onclick={compress} disabled={processing} class="action-btn">
-                {#if processing}<Loader size={14} class="spin" />{/if} Compress
+                {#if processing}<Loader size={14} class="spin" />{/if} {$t('ui.compress', 'Compress')}
             </button>
         </div>
 
         <div class="compare">
             <div class="side">
-                <h4 class="side-label">Original — {formatSize(file.size)}</h4>
+                <h4 class="side-label">{$t('ui.original', 'Original')} — {formatSize(file.size)}</h4>
                 <ImagePreview
                     src={origSrc}
                     filename={file.name}
@@ -108,9 +109,9 @@
             {#if resultSrc && resultBlob}
                 <div class="side">
                     <h4 class="side-label">
-                        Compressed — {formatSize(resultBlob.size)}
+                        {$t('ui.compressed', 'Compressed')} — {formatSize(resultBlob.size)}
                         <span class="savings"
-                            >({savings.toFixed(1)}% saved)</span
+                            >({savings.toFixed(1)}% {$t('ui.saved', 'saved')})</span
                         >
                     </h4>
                     <ImagePreview

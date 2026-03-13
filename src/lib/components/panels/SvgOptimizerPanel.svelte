@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import { Copy, Check, Loader, Download } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let inputSvg = $state("");
     let outputSvg = $state("");
@@ -35,7 +36,7 @@
             savings = result.savings;
         } catch {
             error =
-                "Failed to optimize SVG. Check that the input is valid SVG.";
+                $t('ui.svg_optimizer.error_msg', 'Failed to optimize SVG. Check that the input is valid SVG.');
             outputSvg = "";
         } finally {
             processing = false;
@@ -45,7 +46,7 @@
     function copyOutput() {
         if (!outputSvg) return;
         navigator.clipboard.writeText(outputSvg);
-        addToast("success", "Optimized SVG copied");
+        addToast("success", $t('ui.svg_optimizer.toast_success', 'Optimized SVG copied'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -73,14 +74,14 @@
         <PdfDropZone
             onfiles={handleFiles}
             accept=".svg,image/svg+xml"
-            label="Drop SVG here or paste below"
+            label={$t('ui.svg_optimizer.drop_label', 'Drop SVG here or paste below')}
         />
     </div>
 
     <div class="split-view">
         <div class="col">
             <div class="col-header">
-                <span class="col-title">Input SVG</span>
+                <span class="col-title">{$t('ui.svg_optimizer.input_title', 'Input SVG')}</span>
                 {#if inputSvg}<span class="col-meta"
                         >{formatSize(inputSvg.length)}</span
                     >{/if}
@@ -96,17 +97,17 @@
                 disabled={processing || !inputSvg.trim()}
                 class="action-btn"
             >
-                {#if processing}<Loader size={14} class="spin" />{/if} Optimize
+                {#if processing}<Loader size={14} class="spin" />{/if} {$t('ui.svg_optimizer.optimize_button', 'Optimize')}
             </button>
         </div>
 
         <div class="col">
             <div class="col-header">
-                <span class="col-title">Optimized SVG</span>
+                <span class="col-title">{$t('ui.svg_optimizer.output_title', 'Optimized SVG')}</span>
                 {#if outputSvg}
                     <span class="col-meta"
                         >{formatSize(optimizedSize)} —
-                        <span class="savings">{savings}% saved</span></span
+                        <span class="savings">{savings}% {$t('ui.svg_optimizer.savings_label', 'saved')}</span></span
                     >
                 {/if}
                 <div class="col-actions">
@@ -131,7 +132,7 @@
                 readonly
                 class="code-area"
                 spellcheck="false"
-                placeholder="Optimized SVG will appear here"
+                placeholder={$t('ui.svg_optimizer.output_placeholder', 'Optimized SVG will appear here')}
             ></textarea>
         </div>
     </div>
@@ -142,7 +143,7 @@
 
     {#if outputSvg}
         <div class="preview-section">
-            <span class="preview-label">Preview</span>
+            <span class="preview-label">{$t('ui.svg_optimizer.preview_label', 'Preview')}</span>
             <div class="svg-preview">{@html outputSvg}</div>
         </div>
     {/if}

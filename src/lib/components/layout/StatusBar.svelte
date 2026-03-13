@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { CircleCheck, CircleX, Loader, Minus } from 'lucide-svelte';
+	import { t } from '$lib/stores/language.js';
 
 	type Validity = 'valid' | 'invalid' | 'empty' | 'processing';
 
@@ -24,15 +25,15 @@
 	} = $props();
 
 	function formatSize(bytes: number): string {
-		if (bytes < 1024) return `${bytes} B`;
-		return `${(bytes / 1024).toFixed(1)} KB`;
+		if (bytes < 1024) return `${bytes} ${$t('ui.units.bytes', 'B')}`;
+		return `${(bytes / 1024).toFixed(1)} ${$t('ui.units.kilobytes', 'KB')}`;
 	}
 
 	const validityConfig: Record<Validity, { color: string; label: string }> = {
-		valid: { color: 'var(--success)', label: 'Valid' },
-		invalid: { color: 'var(--error)', label: 'Invalid' },
-		empty: { color: 'var(--text-muted)', label: 'Empty' },
-		processing: { color: 'var(--accent)', label: 'Processing' }
+		valid: { color: 'var(--success)', label: $t('ui.validity.valid', 'Valid') },
+		invalid: { color: 'var(--error)', label: $t('ui.validity.invalid', 'Invalid') },
+		empty: { color: 'var(--text-muted)', label: $t('ui.validity.empty', 'Empty') },
+		processing: { color: 'var(--accent)', label: $t('ui.actions.running', 'Processing') }
 	};
 
 	const iconMap = {
@@ -62,28 +63,28 @@
 
 		{#if inputSize !== undefined}
 			<span class="status-sep">&middot;</span>
-			<span>In: {formatSize(inputSize)}</span>
+			<span>{$t('ui.status.input', 'In')}: {formatSize(inputSize)}</span>
 		{/if}
 
 		{#if outputSize !== undefined}
 			<span class="status-sep">&middot;</span>
-			<span>Out: {formatSize(outputSize)}</span>
+			<span>{$t('ui.status.output', 'Out')}: {formatSize(outputSize)}</span>
 		{/if}
 
 		{#if nodeCount !== undefined}
 			<span class="status-sep">&middot;</span>
-			<span>{nodeCount} nodes</span>
+			<span>{nodeCount} {$t('ui.tree.nodes', 'nodes')}</span>
 		{/if}
 
 		{#if depth !== undefined}
 			<span class="status-sep">&middot;</span>
-			<span>Depth {depth}</span>
+			<span>{$t('ui.tree.depth', 'Depth')} {depth}</span>
 		{/if}
 	</div>
 
 	<div class="status-right">
 		{#if cursorLine !== undefined && cursorColumn !== undefined}
-			<span>Ln {cursorLine}, Col {cursorColumn}</span>
+			<span>{$t('ui.status.line_column', 'Ln')} {cursorLine}, {$t('ui.status.column', 'Col')} {cursorColumn}</span>
 		{/if}
 	</div>
 </footer>

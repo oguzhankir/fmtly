@@ -5,16 +5,14 @@ export const numberTools: ToolDefinition[] = [
 		id: 'number-formatter',
 		category: 'number',
 		slug: 'formatter',
-		displayName: 'Number Formatter',
-		tagline: 'Format numbers with locales, currency, and custom decimal places.',
-		description:
-			'A dedicated tool to format numerical data according to international locale standards. Custom group separators, varying decimal limits, and explicit precision.',
-		primaryKeyword: 'number formatter',
-		metaTitle: 'Number Formatter | Locale, Decimals, Groups | fmtly',
-		metaDescription:
-			'Format raw numbers safely into human readable values based on any locale with precision controls and grouping.',
+		displayName: 'tool.number-formatter.display_name',
+		tagline: 'tool.number-formatter.tagline',
+		description: 'tool.number-formatter.description',
+		primaryKeyword: 'tool.number-formatter.primary_keyword',
+		metaTitle: 'tool.number-formatter.meta_title',
+		metaDescription: 'tool.number-formatter.meta_description',
 		engine: 'number',
-		operation: 'formatNumber',
+		operation: 'tool.number-formatter.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -26,15 +24,14 @@ export const numberTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What is localization formatting?',
-				answer:
-					'It converts a raw value like "1234.5" into "1,234.50" (US) or "1.234,50" (DE) based on regional conventions.'
+				question: 'tool.number-formatter.faq.0.question',
+				answer: 'tool.number-formatter.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Preparing values for financial reports',
-			'Internationalizing a user interface with dynamic digits',
-			'Rounding decimals efficiently'
+			'tool.number-formatter.use_case.0',
+			'tool.number-formatter.use_case.1',
+			'tool.number-formatter.use_case.2'
 		],
 		sampleInput: '1234567.89'
 	},
@@ -42,16 +39,14 @@ export const numberTools: ToolDefinition[] = [
 		id: 'number-roman',
 		category: 'number',
 		slug: 'roman',
-		displayName: 'Roman Numerals',
-		tagline: 'Convert standard integers to Roman numerals and vice versa.',
-		description:
-			'A bidirectional tool converting Arabic numerals (like 1, 4, 1994) to Roman (I, IV, MCMXCIV) up to 3999 securely with strict validation checks.',
-		primaryKeyword: 'roman numerals',
-		metaTitle: 'Roman Numeral Converter | 1 to 3999 | fmtly',
-		metaDescription:
-			'Strictly validate and convert Roman numerals to integers or integers back to Roman representations.',
+		displayName: 'tool.number-roman.display_name',
+		tagline: 'tool.number-roman.tagline',
+		description: 'tool.number-roman.description',
+		primaryKeyword: 'tool.number-roman.primary_keyword',
+		metaTitle: 'tool.number-roman.meta_title',
+		metaDescription: 'tool.number-roman.meta_description',
 		engine: 'number',
-		operation: 'roman',
+		operation: 'tool.number-roman.operation',
 		layoutVariant: 'bidirectional',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -63,14 +58,14 @@ export const numberTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What is the highest Roman numeral?',
-				answer: 'Standard Roman numeral notation maxes out at 3,999 (MMMCMXCIX).'
+				question: 'tool.number-roman.faq.0.question',
+				answer: 'tool.number-roman.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Translating ancient manuscript numbering',
-			'Generating stylized copyright dates (e.g. MMXXI)',
-			'Parsing user-entry from decorative web formats'
+			'tool.number-roman.use_case.0',
+			'tool.number-roman.use_case.1',
+			'tool.number-roman.use_case.2'
 		],
 		sampleInput: '1994'
 	},
@@ -78,16 +73,14 @@ export const numberTools: ToolDefinition[] = [
 		id: 'number-percentage',
 		category: 'number',
 		slug: 'percentage',
-		displayName: 'Percentage Calculator',
-		tagline: 'Calculate percentages, differences, and changes between numbers.',
-		description:
-			'A comprehensive visual tool for percentage extraction (X% of Y), percentage changes (difference mapping with directions), and percentage divergence between two numbers.',
-		primaryKeyword: 'percentage calculator',
-		metaTitle: 'Percentage Tool | Diff, Change, Margin Calc | fmtly',
-		metaDescription:
-			'Effortlessly calculate percent change, percent diffs, and relative shares quickly within a visual interface.',
+		displayName: 'tool.number-percentage.display_name',
+		tagline: 'tool.number-percentage.tagline',
+		description: 'tool.number-percentage.description',
+		primaryKeyword: 'tool.number-percentage.primary_keyword',
+		metaTitle: 'tool.number-percentage.meta_title',
+		metaDescription: 'tool.number-percentage.meta_description',
 		engine: 'number',
-		operation: 'percentage',
+		operation: 'tool.number-percentage.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -99,15 +92,14 @@ export const numberTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What is the difference between Percent Change vs Percent Diff?',
-				answer:
-					'Percent Change is relative to the original value (e.g., from 50 to 100 is +100%). Percent Diff compares the gap to their average (the difference between 50 and 100 relative to 75 is ~66.6%).'
+				question: 'tool.number-percentage.faq.0.question',
+				answer: 'tool.number-percentage.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Calculating margin variations between two price points',
-			'Finding precise discount cuts mathematically',
-			'Drafting statistical discrepancy reports'
+			'tool.number-percentage.use_case.0',
+			'tool.number-percentage.use_case.1',
+			'tool.number-percentage.use_case.2'
 		],
 		sampleInput: '100'
 	},
@@ -115,16 +107,14 @@ export const numberTools: ToolDefinition[] = [
 		id: 'number-scientific',
 		category: 'number',
 		slug: 'scientific',
-		displayName: 'Scientific Notation',
-		tagline: 'Convert large/small numbers to clear scientific expressions.',
-		description:
-			'Switch freely between decimal/raw number formatting and proper scientific exponential notations with correct superscript handling (e.g., 1.2 × 10⁴).',
-		primaryKeyword: 'scientific notation',
-		metaTitle: 'Scientific Notation Converter | e values | fmtly',
-		metaDescription:
-			'Turn big decimal values into tiny e-notation expressions and vice versa seamlessly.',
+		displayName: 'tool.number-scientific.display_name',
+		tagline: 'tool.number-scientific.tagline',
+		description: 'tool.number-scientific.description',
+		primaryKeyword: 'tool.number-scientific.primary_keyword',
+		metaTitle: 'tool.number-scientific.meta_title',
+		metaDescription: 'tool.number-scientific.meta_description',
 		engine: 'number',
-		operation: 'scientific',
+		operation: 'tool.number-scientific.operation',
 		layoutVariant: 'bidirectional',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -136,31 +126,25 @@ export const numberTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What notation does it output?',
-				answer:
-					'It renders standard strings using real unicode superscripts (e.g. 5 × 10³) making it easy to copy-paste into articles vs "5e3".'
+				question: 'tool.number-scientific.faq.0.question',
+				answer: 'tool.number-scientific.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Formatting astronomical values for academic papers',
-			'Standardizing floating point data for readability'
-		],
+		useCases: ['tool.number-scientific.use_case.0', 'tool.number-scientific.use_case.1'],
 		sampleInput: '12340'
 	},
 	{
 		id: 'number-statistics',
 		category: 'number',
 		slug: 'statistics',
-		displayName: 'Statistics Calculator',
-		tagline: 'Calculate mean, median, mode, standard deviation, and more.',
-		description:
-			'Enter numbers (one per line or comma-separated) and get a full statistical summary: mean, median, mode, variance, standard deviation, percentiles, and IQR. Uses mathjs locally.',
-		primaryKeyword: 'statistics calculator',
-		metaTitle: 'Statistics Calculator | Mean Median StdDev | fmtly',
-		metaDescription:
-			'Calculate mean, median, mode, variance, standard deviation, percentiles. No upload — fully local.',
+		displayName: 'tool.number-statistics.display_name',
+		tagline: 'tool.number-statistics.tagline',
+		description: 'tool.number-statistics.description',
+		primaryKeyword: 'tool.number-statistics.primary_keyword',
+		metaTitle: 'tool.number-statistics.meta_title',
+		metaDescription: 'tool.number-statistics.meta_description',
 		engine: 'number',
-		operation: 'statistics',
+		operation: 'tool.number-statistics.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -171,28 +155,26 @@ export const numberTools: ToolDefinition[] = [
 			{ category: 'text', slug: 'word-counter' }
 		],
 		faqs: [
-			{ question: 'How are values entered?', answer: 'One number per line, or comma-separated.' }
+			{
+				question: 'tool.number-statistics.faq.0.question',
+				answer: 'tool.number-statistics.faq.0.answer'
+			}
 		],
-		useCases: [
-			'Calculating statistics for homework or reports',
-			'Quick data analysis without a spreadsheet'
-		],
+		useCases: ['tool.number-statistics.use_case.0', 'tool.number-statistics.use_case.1'],
 		sampleInput: ''
 	},
 	{
 		id: 'number-matrix',
 		category: 'number',
 		slug: 'matrix',
-		displayName: 'Matrix Calculator',
-		tagline: 'Add, subtract, multiply, transpose, and invert matrices.',
-		description:
-			'Perform matrix operations: addition, subtraction, multiplication, determinant, transpose, and inverse. Supports 2x2 to 5x5 matrices. Uses mathjs locally.',
-		primaryKeyword: 'matrix calculator',
-		metaTitle: 'Matrix Calculator | Add Multiply Inverse | fmtly',
-		metaDescription:
-			'Matrix math: add, subtract, multiply, determinant, transpose, inverse. Local — no upload.',
+		displayName: 'tool.number-matrix.display_name',
+		tagline: 'tool.number-matrix.tagline',
+		description: 'tool.number-matrix.description',
+		primaryKeyword: 'tool.number-matrix.primary_keyword',
+		metaTitle: 'tool.number-matrix.meta_title',
+		metaDescription: 'tool.number-matrix.meta_description',
 		engine: 'number',
-		operation: 'matrix',
+		operation: 'tool.number-matrix.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -204,28 +186,25 @@ export const numberTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'What matrix sizes are supported?',
-				answer: '2x2 up to 5x5 — adjust with the size selector.'
+				question: 'tool.number-matrix.faq.0.question',
+				answer: 'tool.number-matrix.faq.0.answer'
 			}
 		],
-		useCases: ['Matrix math for linear algebra homework', 'Quick matrix operations without MATLAB'],
+		useCases: ['tool.number-matrix.use_case.0', 'tool.number-matrix.use_case.1'],
 		sampleInput: ''
 	},
 	{
 		id: 'number-unit-converter',
 		category: 'number',
 		slug: 'unit-converter',
-		displayName: 'Unit Converter',
-		tagline:
-			'Convert between length, weight, temperature, area, volume, speed, and pressure units.',
-		description:
-			'Enter a value and see all conversions in the selected category simultaneously. Supports 7 categories: length, weight, temperature, area, volume, speed, pressure. Pure JS — no library needed.',
-		primaryKeyword: 'unit converter',
-		metaTitle: 'Unit Converter | 7 Categories | fmtly',
-		metaDescription:
-			'Convert units: length, weight, temperature, area, volume, speed, pressure — instant, local.',
+		displayName: 'tool.number-unit-converter.display_name',
+		tagline: 'tool.number-unit-converter.tagline',
+		description: 'tool.number-unit-converter.description',
+		primaryKeyword: 'tool.number-unit-converter.primary_keyword',
+		metaTitle: 'tool.number-unit-converter.meta_title',
+		metaDescription: 'tool.number-unit-converter.meta_description',
 		engine: 'number',
-		operation: 'unit-converter',
+		operation: 'tool.number-unit-converter.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -237,11 +216,11 @@ export const numberTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'How accurate are the conversions?',
-				answer: 'Conversions use standard SI factors and are accurate to floating-point precision.'
+				question: 'tool.number-unit-converter.faq.0.question',
+				answer: 'tool.number-unit-converter.faq.0.answer'
 			}
 		],
-		useCases: ['Quick unit conversions without searching', 'Converting recipe measurements'],
+		useCases: ['tool.number-unit-converter.use_case.0', 'tool.number-unit-converter.use_case.1'],
 		sampleInput: ''
 	}
 ];

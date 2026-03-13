@@ -4,6 +4,7 @@
     import { cssLinearGradient, cssRadialGradient } from "../../engines/color";
     import { Copy, Plus, X } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let generatedCss = $derived.by(() => {
         if ($colorOptions.gradientStops.length === 0) return "none";
@@ -40,7 +41,7 @@
 
     function removeStop(id: string) {
         if ($colorOptions.gradientStops.length <= 2) {
-            addToast("error", "Gradients require at least 2 stops.");
+            addToast("error", $t('ui.error.gradients_require_stops', 'Gradients require at least 2 stops.'));
             return;
         }
         $colorOptions.gradientStops = $colorOptions.gradientStops.filter(
@@ -54,7 +55,7 @@
 
     function copyCss() {
         navigator.clipboard.writeText(safeGeneratedCss);
-        addToast("success", "Copied CSS to clipboard");
+        addToast("success", $t('ui.copied_css_to_clipboard', 'Copied CSS to clipboard'));
     }
 </script>
 
@@ -85,7 +86,7 @@
                 onclick={copyCss}
                 class="flex items-center gap-2 rounded-md bg-[var(--bg-elevated)]/90 backdrop-blur px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] border border-[var(--border-subtle)] shadow-sm hover:bg-[var(--bg-hover)] transition-colors"
             >
-                <Copy size={14} /> Copy CSS
+                <Copy size={14} /> {$t('ui.copy_css', 'Copy CSS')}
             </button>
         </div>
     </div>
@@ -100,7 +101,7 @@
             <div class="flex flex-col gap-[var(--space-2)]">
                 <div
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >Type</div
+                    >{$t('ui.type', 'Type')}</div
                 >
                 <div
                     class="flex rounded-md border border-[var(--border-default)] overflow-hidden"
@@ -111,7 +112,7 @@
                         'linear'
                             ? 'bg-[var(--bg-selected)] text-[var(--text-primary)]'
                             : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:bg-[var(--bg-hover)]'}"
-                        >Linear</button
+                        >{$t('ui.linear', 'Linear')}</button
                     >
                     <div class="w-px bg-[var(--border-default)]"></div>
                     <button
@@ -120,7 +121,7 @@
                         'radial'
                             ? 'bg-[var(--bg-selected)] text-[var(--text-primary)]'
                             : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:bg-[var(--bg-hover)]'}"
-                        >Radial</button
+                        >{$t('ui.radial', 'Radial')}</button
                     >
                 </div>
             </div>
@@ -131,7 +132,7 @@
                     <div class="flex items-center justify-between">
                         <div
                             class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                            >Angle (deg)</div
+                            >{$t('ui.angle_deg', 'Angle (deg)')}</div
                         >
                         <span
                             class="text-[length:var(--text-xs)] font-[family-name:var(--font-mono)]"
@@ -161,14 +162,14 @@
                 <div class="flex flex-col gap-[var(--space-2)]">
                     <div
                         class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                        >Shape</div
+                        >{$t('ui.shape', 'Shape')}</div
                     >
                     <select
                         bind:value={$colorOptions.gradientRadialShape}
                         class="h-10 w-full rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-3)] text-[length:var(--text-sm)] outline-none focus:border-[var(--border-focus)]"
                     >
-                        <option value="circle">Circle</option>
-                        <option value="ellipse">Ellipse</option>
+                        <option value="circle">{$t('ui.circle', 'Circle')}</option>
+                        <option value="ellipse">{$t('ui.ellipse', 'Ellipse')}</option>
                     </select>
                 </div>
             {/if}
@@ -182,13 +183,13 @@
                 <h3
                     class="text-[length:var(--text-base)] font-[number:var(--weight-semibold)] text-[var(--text-primary)]"
                 >
-                    Color Stops
+                    {$t('ui.color_stops', 'Color Stops')}
                 </h3>
                 <button
                     onclick={addStop}
                     class="flex items-center gap-1 rounded bg-[var(--bg-selected)] px-2 py-1 text-[length:var(--text-xs)] font-[number:var(--weight-medium)] text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors"
                 >
-                    <Plus size={14} /> Add Stop
+                    <Plus size={14} /> {$t('ui.add_stop', 'Add Stop')}
                 </button>
             </div>
 
@@ -238,7 +239,7 @@
                         <button
                             onclick={() => removeStop(stop.id)}
                             class="text-[var(--text-muted)] hover:text-[var(--color-error)] transition-colors shrink-0 p-1"
-                            aria-label="Remove Stop"
+                            aria-label={$t('ui.remove_stop', 'Remove Stop')}
                             disabled={$colorOptions.gradientStops.length <= 2}
                         >
                             <X size={16} />

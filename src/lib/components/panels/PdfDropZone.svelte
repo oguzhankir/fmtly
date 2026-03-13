@@ -1,5 +1,6 @@
 <script lang="ts">
     import { FileUp } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     type Props = {
         accept?: string;
@@ -12,7 +13,7 @@
         accept = "application/pdf",
         multiple = false,
         onfiles,
-        label = "Drop PDF here or click to select",
+        label = $t('ui.dropzone.default_label', 'Drop PDF here or click to select'),
     }: Props = $props();
 
     let dragging = $state(false);
@@ -65,7 +66,7 @@
         <FileUp size={40} strokeWidth={1.5} />
         <p class="drop-label">{label}</p>
         <p class="drop-hint">
-            {multiple ? "Select one or more PDF files" : "PDF files only"}
+            {multiple ? $t('ui.dropzone.hint_multiple', 'Select one or more PDF files') : $t('ui.dropzone.hint_single', 'PDF files only')}
         </p>
     </div>
 </div>

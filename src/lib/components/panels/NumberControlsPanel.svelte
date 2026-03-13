@@ -1,5 +1,6 @@
 <script lang="ts">
     import { numberOptions } from '../../stores/number.store';
+    import { t } from '$lib/stores/language.js';
 
     let { toolSlug }: { toolSlug: string } = $props();
 
@@ -22,7 +23,7 @@
     {#if toolSlug === 'formatter'}
         <!-- Locale Selection -->
         <label class="flex flex-col gap-1 whitespace-nowrap">
-            <span class="text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider">Locale</span>
+            <span class="text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider">{$t('ui.locale', 'Locale')}</span>
             <select
                 class="h-8 rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] px-2 text-[length:var(--text-sm)] text-[var(--text-primary)] focus:border-[var(--border-focus)] focus:outline-none"
                 value={$numberOptions.locale}
@@ -36,7 +37,7 @@
 
         <!-- Decimals Selection -->
         <label class="flex flex-col gap-1 whitespace-nowrap">
-            <span class="text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider">Decimals</span>
+            <span class="text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider">{$t('ui.decimals', 'Decimals')}</span>
             <input 
                 type="number"
                 min="0"

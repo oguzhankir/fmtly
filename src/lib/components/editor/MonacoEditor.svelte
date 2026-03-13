@@ -3,6 +3,7 @@
 	import { input } from "$stores/input.store";
 	import { theme } from "$stores/settings.store";
 	import type { Theme } from "$stores/settings.store";
+	import { t } from '$lib/stores/language.js';
 
 	let {
 		language = "json",
@@ -292,7 +293,7 @@
 			value={$input}
 			oninput={handleTextareaInput}
 			onfocus={handleTextareaFocus}
-			placeholder="Paste {language.toUpperCase()} here…"
+			placeholder={($t as any)('ui.paste_language_here', 'Paste here…', { language: language.toUpperCase() })}
 			class="h-full w-full resize-none border-none bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none"
 			spellcheck="false"
 			autocomplete="off"

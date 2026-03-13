@@ -3,6 +3,7 @@
 	import { addToast } from '$stores/toast.store';
 	import { computeJSONDiff, toJSONPatch } from '$lib/engines/diff/json-diff.js';
 	import type { DiffEntry, DiffOptions } from '$lib/engines/diff/json-diff.js';
+	import { t } from '$lib/stores/language.js';
 
 	let {
 		leftInput = '',
@@ -46,7 +47,7 @@
 		const diffs = diffEntries.filter((e) => e.type !== 'unchanged');
 		const patch = toJSONPatch(diffs);
 		await navigator.clipboard.writeText(JSON.stringify(patch, null, 2));
-		addToast('success', 'JSON Patch copied to clipboard');
+		addToast('success', $t('ui.diff.toast.patch_success', 'JSON Patch copied to clipboard'));
 	}
 </script>
 
@@ -56,17 +57,17 @@
 		<div class="diff-controls-left">
 			<label class="diff-toggle">
 				<input type="checkbox" bind:checked={ignoreArrayOrder} />
-				<span>Ignore array order</span>
+				<span>{$t('ui.diff.controls.ignore_order', 'Ignore array order')}</span>
 			</label>
 			<label class="diff-toggle">
 				<input type="checkbox" bind:checked={showOnlyDiffs} />
-				<span>Show only differences</span>
+				<span>{$t('ui.diff.controls.only_diffs', 'Show only differences')}</span>
 			</label>
 		</div>
 		{#if diffCount > 0}
 			<button class="diff-action-btn" onclick={copyJSONPatch}>
 				<ClipboardList size={12} />
-				Copy as JSON Patch
+				{$t('ui.diff.controls.copy_patch', 'Copy as JSON Patch')}
 			</button>
 		{/if}
 	</div>
@@ -76,11 +77,11 @@
 		{#if result?.error}
 			<span class="diff-summary-error">{result.error}</span>
 		{:else if !result}
-			<span class="diff-summary-empty">Enter JSON in both panels to compare</span>
+			<span class="diff-summary-empty">{$t('ui.diff.summary.empty', 'Enter JSON in both panels to compare')}</span>
 		{:else if diffCount === 0}
-			<span class="diff-summary-identical">Documents are identical</span>
+			<span class="diff-summary-identical">{$t('ui.diff.summary.identical', 'Documents are identical')}</span>
 		{:else}
-			<span class="diff-summary-count">{diffCount} difference{diffCount === 1 ? '' : 's'} found</span>
+			<span class="diff-summary-count">{($t as any)('ui.diff.summary.count', '{{count}} difference found', { count: diffCount })}{diffCount === 1 ? '' : ($t('ui.diff.summary.count_plural', 's'))} found</span>
 		{/if}
 	</div>
 
@@ -90,9 +91,9 @@
 			{#each displayEntries as entry (entry.path + entry.type)}
 				<div class="diff-entry diff-entry--{entry.type}">
 					<div class="diff-entry-header">
-						<span class="diff-path">{entry.path || '(root)'}</span>
+						<span class="diff-path">{entry.path || $t('ui.diff.types.root', '(root)')}</span>
 						<span class="diff-type diff-type--{entry.type}">
-							{entry.type === 'added' ? 'Added' : entry.type === 'removed' ? 'Removed' : entry.type === 'modified' ? 'Modified' : 'Unchanged'}
+							{entry.type === 'added' ? $t('ui.diff.types.added', 'Added') : entry.type === 'removed' ? $t('ui.diff.types.removed', 'Removed') : entry.type === 'modified' ? $t('ui.diff.types.modified', 'Modified') : $t('ui.diff.types.unchanged', 'Unchanged')}
 						</span>
 					</div>
 					{#if entry.type === 'modified'}

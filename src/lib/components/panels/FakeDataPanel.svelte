@@ -7,6 +7,7 @@
         type FakeDataSchema,
     } from "../../engines/generator/faker.engine";
     import { browser } from "$app/environment";
+    import { t } from '$lib/stores/language.js';
 
     const STORAGE_KEY = "fmtly-fake-data-schema";
 
@@ -90,7 +91,7 @@
     function copyOutput() {
         if (!generatedOutput) return;
         navigator.clipboard.writeText(generatedOutput);
-        addToast("success", "Data copied");
+        addToast("success", $t('ui.data_copied', 'Data copied'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -118,7 +119,7 @@
 <div class="panel">
     <div class="left">
         <div class="section-header">
-            <span class="title">Schema Builder</span>
+            <span class="title">{$t('ui.fake_data.schema_builder', 'Schema Builder')}</span>
             <div class="presets">
                 {#each Object.keys(PRESETS) as name}
                     <button onclick={() => applyPreset(name)} class="preset-btn"
@@ -140,7 +141,7 @@
                                 "name",
                                 (e.target as HTMLInputElement).value,
                             )}
-                        placeholder="field name"
+                        placeholder={$t('ui.fake_data.field_name_placeholder', 'field name')}
                         class="field-name"
                     />
                     <select
@@ -165,12 +166,12 @@
         </div>
 
         <button onclick={addField} class="add-btn"
-            ><Plus size={12} /> Add Field</button
+            ><Plus size={12} /> {$t('ui.fake_data.add_field', 'Add Field')}</button
         >
 
         <div class="controls">
             <label class="ctrl">
-                <span class="lbl">Count ({count})</span>
+                <span class="lbl">($t as any)('ui.fake_data.count_label', 'Count ({count})', { count })</span>
                 <input
                     type="range"
                     bind:value={count}
@@ -181,7 +182,7 @@
                 />
             </label>
             <div class="format-row">
-                <span class="lbl">Format</span>
+                <span class="lbl">{$t('ui.format', 'Format')}</span>
                 <label class="radio-lbl"
                     ><input
                         type="radio"
@@ -211,7 +212,7 @@
             disabled={generating || fields.every((f) => !f.name.trim())}
             class="generate-btn"
         >
-            {#if generating}<Loader size={14} class="spin" />{/if} Generate {count}
+            {#if generating}<Loader size={14} class="spin" />{/if} {($t as any)('ui.fake_data.generate_button', 'Generate {count} Rows', { count })}
             Rows
         </button>
     </div>
@@ -219,7 +220,7 @@
     <div class="right">
         {#if generatedOutput}
             <div class="output-header">
-                <span class="meta">{outputFormat.toUpperCase()} output</span>
+                <span class="meta">{outputFormat.toUpperCase()} {$t('ui.output', 'output')}</span>
                 <div class="output-actions">
                     <button onclick={copyOutput} class="sm-btn">
                         {#if copied}<Check size={12} />{:else}<Copy
@@ -239,7 +240,7 @@
             ></textarea>
         {:else}
             <div class="empty-right">
-                <p>Configure schema and click Generate</p>
+                <p>{$t('ui.fake_data.empty_state', 'Configure schema and click Generate')}</p>
             </div>
         {/if}
     </div>

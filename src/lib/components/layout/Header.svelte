@@ -1,38 +1,45 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { getToolsByCategory } from '$registry';
+	import { getAllCategoryMeta } from '$registry/categories.js';
+	import { localizeCategoryMetas } from '$lib/registry/localized.js';
+	import { localizePath, replaceLocaleInPathname, stripLocalePrefix } from '$lib/utils/locale-routing.js';
 	import { theme, toggleTheme } from '$stores/settings.store';
+	import { currentLanguageInfo, locale, t } from '$stores/language';
 	import { Moon, Sun, Search, Menu, X, Github } from 'lucide-svelte';
+	import LanguageSelector from '../../../components/LanguageSelector.svelte';
 
 	type NavCategory = {
 		label: string;
 		slug: string;
 	};
 
-	const navCategories: NavCategory[] = [
-		{ label: 'JSON', slug: 'json' },
-		{ label: 'XML', slug: 'xml' },
-		{ label: 'YAML', slug: 'yaml' },
-		{ label: 'Text', slug: 'text' },
-		{ label: 'Crypto', slug: 'crypto' },
-		{ label: 'Web', slug: 'web' },
-		{ label: 'Code', slug: 'code' },
-		{ label: 'CSV', slug: 'csv' },
-		{ label: 'TOML', slug: 'toml' },
-		{ label: 'Numbers', slug: 'number' },
-		{ label: 'Encode', slug: 'encode' },
-		{ label: 'Colors', slug: 'color' },
-		{ label: 'PDF', slug: 'pdf' },
-		{ label: 'Images', slug: 'image' },
-		{ label: 'Files', slug: 'file' },
-		{ label: 'QR', slug: 'qr' },
-		{ label: 'Generate', slug: 'generate' }
+	const navCategoryOrder: string[] = [
+		'json',
+		'xml',
+		'yaml',
+		'text',
+		'crypto',
+		'web',
+		'code',
+		'csv',
+		'toml',
+		'number',
+		'encode',
+		'color',
+		'pdf',
+		'image',
+		'file',
+		'qr',
+		'generate'
 	];
 
 	let mobileMenuOpen = $state(false);
 	let scrolled = $state(false);
 	let searchShortcut = $state('');
+	let showLanguageSelector = $state(false);
 
 	let {
 		onOpenCommandPalette = () => {}
@@ -41,9 +48,32 @@
 	} = $props();
 
 	let currentPath = $derived($page.url.pathname);
+	let currentLocale = $derived($page.params.lang ?? 'en');
+	let navCategories = $derived.by<NavCategory[]>(() => {
+		const categoryMap = new Map(
+			localizeCategoryMetas(getAllCategoryMeta(), $t).map((category) => [category.slug, category.displayName])
+		);
+		return navCategoryOrder.map((slug) => ({
+			slug,
+			label: categoryMap.get(slug) ?? slug
+		}));
+	});
 
 	function isActiveCategory(slug: string): boolean {
-		return currentPath === `/${slug}` || currentPath.startsWith(`/${slug}/`);
+		const normalizedPath = stripLocalePrefix(currentPath);
+		return normalizedPath === `/${slug}` || normalizedPath.startsWith(`/${slug}/`);
+	}
+
+	function handleLanguageSelectorOpen(): void {
+		locale.set(currentLocale);
+		showLanguageSelector = true;
+	}
+
+	async function handleLanguageChange(code: string): Promise<void> {
+		await goto(replaceLocaleInPathname(currentPath, code), {
+			keepFocus: true,
+			noScroll: true
+		});
 	}
 
 	function handleWindowKeydown(event: KeyboardEvent): void {
@@ -75,8 +105,8 @@
 	class:header--scrolled={scrolled}
 >
 	<!-- Left: Logo -->
-	<a href="/" class="header-logo" onclick={() => { mobileMenuOpen = false; }}>
-		<span class="header-logo-braces">{'{ }'}</span>
+	<a href={localizePath('/', currentLocale)} class="header-logo" onclick={() => { mobileMenuOpen = false; }}>
+		<img src="/favicon.svg" alt="" class="header-logo-icon" />
 		<span class="header-logo-name">fmtly</span>
 	</a>
 
@@ -85,7 +115,7 @@
 		<div class="header-nav-scroll">
 			{#each navCategories as navCat}
 				<a
-					href="/{navCat.slug}"
+					href={localizePath(`/${navCat.slug}`, currentLocale)}
 					class="header-pill"
 					class:header-pill--active={isActiveCategory(navCat.slug)}
 				>
@@ -101,7 +131,7 @@
 		<button
 			class="header-action-btn"
 			onclick={onOpenCommandPalette}
-			aria-label="Search tools"
+			aria-label={$t('search_tools_label', 'Search tools')}
 		>
 			<Search size={16} />
 			{#if searchShortcut}
@@ -109,11 +139,25 @@
 			{/if}
 		</button>
 
+		<!-- Language selector -->
+		<button
+			class="header-action-btn"
+			onclick={handleLanguageSelectorOpen}
+			aria-label={$t('select_language', 'Select language')}
+			title={$currentLanguageInfo?.nativeName || $t('select_language', 'Select language')}
+		>
+			{$currentLanguageInfo?.flag || '🌐'}
+		</button>
+
 		<!-- Theme toggle -->
 		<button
 			class="header-action-btn"
 			onclick={handleThemeToggle}
-			aria-label={$theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+			aria-label={
+				$theme === 'dark'
+					? $t('switch_to_light_mode', 'Switch to light mode')
+					: $t('switch_to_dark_mode', 'Switch to dark mode')
+			}
 		>
 			<Sun
 				size={18}
@@ -131,7 +175,7 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			class="header-action-btn"
-			aria-label="GitHub repository"
+			aria-label={$t('github_repository', 'GitHub repository')}
 		>
 			<Github size={18} />
 		</a>
@@ -140,7 +184,7 @@
 		<button
 			class="header-hamburger"
 			onclick={() => { mobileMenuOpen = !mobileMenuOpen; }}
-			aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+			aria-label={mobileMenuOpen ? $t('close_menu', 'Close menu') : $t('open_menu', 'Open menu')}
 		>
 			{#if mobileMenuOpen}
 				<X size={20} />
@@ -151,6 +195,9 @@
 	</div>
 </header>
 
+<!-- Language Selector Modal -->
+<LanguageSelector bind:show={showLanguageSelector} onselect={handleLanguageChange} />
+
 <!-- Mobile overlay menu -->
 {#if mobileMenuOpen}
 	<div class="mobile-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
@@ -158,13 +205,13 @@
 			<div class="mobile-search-row">
 				<button class="mobile-search-btn" onclick={() => { mobileMenuOpen = false; onOpenCommandPalette(); }}>
 					<Search size={16} />
-					<span>Search tools…</span>
+					<span>{$t('search_tools', 'Search tools…')}</span>
 				</button>
 			</div>
 			<nav class="mobile-categories">
 				{#each navCategories as navCat}
 					<a
-						href="/{navCat.slug}"
+						href={localizePath(`/${navCat.slug}`, currentLocale)}
 						class="mobile-category-link"
 						class:mobile-category-link--active={isActiveCategory(navCat.slug)}
 						onclick={() => { mobileMenuOpen = false; }}
@@ -209,16 +256,16 @@
 	.header-logo {
 		display: flex;
 		align-items: center;
-		gap: 0;
+		gap: 8px;
 		text-decoration: none;
 		flex-shrink: 0;
 	}
 
-	.header-logo-braces {
-		color: var(--accent);
-		font-family: var(--font-ui);
-		font-size: 14px;
-		font-weight: 600;
+	.header-logo-icon {
+		width: 22px;
+		height: 22px;
+		display: block;
+		flex-shrink: 0;
 	}
 
 	.header-logo-name {

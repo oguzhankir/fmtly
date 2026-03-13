@@ -2,6 +2,7 @@
     import { curlToFetch, curlToAxios } from "../../engines/code/curl.engine";
     import { Copy, Check } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     type Props = {
         mode: "fetch" | "axios";
@@ -21,7 +22,7 @@
                     ? curlToFetch(input)
                     : curlToAxios(input);
             } catch (e) {
-                return `// Error: ${e instanceof Error ? e.message : String(e)}`;
+                return `// ${$t('ui.error', 'Error')}: ${e instanceof Error ? e.message : String(e)}`;
             }
         })(),
     );
@@ -33,7 +34,7 @@
     function copy() {
         if (!output) return;
         navigator.clipboard.writeText(output);
-        addToast("success", "Copied code");
+        addToast("success", $t('ui.copied_code', 'Copied code'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -50,7 +51,7 @@
                     {#if copied}<Check size={13} />{:else}<Copy
                             size={13}
                         />{/if}
-                    Copy output
+                    {$t('ui.copy_output', 'Copy output')}
                 </button>
             {/if}
         </div>
@@ -58,10 +59,10 @@
 
     <div class="split">
         <div class="pane">
-            <div class="pane-label">cURL Command</div>
+            <div class="pane-label">{$t('ui.curl_command', 'cURL Command')}</div>
             <textarea
                 bind:value={input}
-                placeholder="curl -X POST https://api.example.com/users"
+                placeholder={$t('ui.placeholder.curl_example', 'curl -X POST https://api.example.com/users')}
                 spellcheck="false"
                 class="code-textarea"
             ></textarea>
@@ -69,14 +70,14 @@
 
         <div class="pane">
             <div class="pane-label">
-                {mode === "fetch" ? "JavaScript fetch()" : "JavaScript axios()"}
+                {mode === "fetch" ? $t('ui.javascript_fetch', 'JavaScript fetch()') : $t('ui.javascript_axios', 'JavaScript axios()')}
             </div>
             <textarea
                 value={output}
                 readonly
                 spellcheck="false"
                 class="code-textarea output-textarea"
-                placeholder="Output will appear here…"
+                placeholder={$t('ui.output_will_appear_here', 'Output will appear here…')}
             ></textarea>
         </div>
     </div>

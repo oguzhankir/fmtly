@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Download, Loader } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let input = $state(
         '[{"name":"Alice","email":"alice@example.com","age":30},\n{"name":"Bob","email":"bob@example.com","age":25}]',
@@ -15,7 +16,7 @@
         try {
             const data = JSON.parse(input);
             if (!Array.isArray(data)) {
-                error = "JSON must be an array of objects.";
+                error = $t('ui.json_to_excel.error_not_array', 'JSON must be an array of objects.');
                 parsed = [];
                 columns = [];
                 return;
@@ -23,7 +24,7 @@
             parsed = data;
             columns = data.length > 0 ? Object.keys(data[0]) : [];
         } catch {
-            error = "Invalid JSON.";
+            error = $t('ui.json_to_excel.error_invalid', 'Invalid JSON.');
             parsed = [];
             columns = [];
         }
@@ -45,7 +46,7 @@
             a.download = "data.xlsx";
             a.click();
             URL.revokeObjectURL(url);
-            addToast("success", "Excel file downloaded");
+            addToast("success", $t('ui.json_to_excel.toast_success', 'Excel file downloaded'));
         } finally {
             downloading = false;
         }
@@ -54,7 +55,7 @@
 
 <div class="panel">
     <div class="input-section">
-        <label for="json-input" class="label">JSON Array of Objects</label>
+        <label for="json-input" class="label">{$t('ui.json_to_excel.label', 'JSON Array of Objects')}</label>
         <textarea
             id="json-input"
             bind:value={input}
@@ -71,7 +72,7 @@
         <div class="output-section">
             <div class="output-header">
                 <span class="meta"
-                    >Preview — {Math.min(parsed.length, 20)} of {parsed.length} rows</span
+                    >{($t as any)('ui.json_to_excel.preview_header', 'Preview — {{count}} of {{total}} rows', { count: Math.min(parsed.length, 20), total: parsed.length })}</span
                 >
                 <button
                     onclick={downloadExcel}
@@ -81,7 +82,7 @@
                     {#if downloading}<Loader
                             size={14}
                             class="spin"
-                        />{:else}<Download size={14} />{/if} Download XLSX
+                        />{:else}<Download size={14} />{/if} {$t('ui.json_to_excel.download_button', 'Download XLSX')}
                 </button>
             </div>
 

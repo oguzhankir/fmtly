@@ -1,3 +1,4 @@
+import { type AlternateLink, buildAlternateLinks } from '$lib/utils/locale-routing.js';
 import type { ToolDefinition } from '$registry/types.js';
 
 export type SeoMetadata = {
@@ -14,12 +15,15 @@ export type SeoMetadata = {
 	twitterDescription: string;
 	twitterImage: string;
 	structuredData: string;
+	siteName?: string;
+	alternates?: AlternateLink[];
 };
 
 export function buildCategorySeo(
 	displayName: string,
 	description: string,
-	canonical: string
+	canonical: string,
+	alternates?: AlternateLink[]
 ): SeoMetadata {
 	const title = `${displayName} Tools — fmtly.dev`;
 	const ogImage = `${canonical.split('/').slice(0, 3).join('/')}/og/category.png`;
@@ -37,6 +41,7 @@ export function buildCategorySeo(
 		twitterTitle: title,
 		twitterDescription: description || `${displayName} developer tools.`,
 		twitterImage: ogImage,
+		alternates,
 		structuredData: JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'CollectionPage',
@@ -47,9 +52,15 @@ export function buildCategorySeo(
 	};
 }
 
-export function generateToolSEO(tool: ToolDefinition, baseUrl: string): SeoMetadata {
-	const canonical = `${baseUrl}/${tool.category}/${tool.slug}`;
+export function generateToolSEO(
+	tool: ToolDefinition,
+	baseUrl: string,
+	pathname?: string
+): SeoMetadata {
+	const canonicalPath = pathname ?? `/${tool.category}/${tool.slug}`;
+	const canonical = `${baseUrl}${canonicalPath}`;
 	const ogImage = `${baseUrl}/og/${tool.category}-${tool.slug}.png`;
+	const alternates = buildAlternateLinks(baseUrl, canonicalPath);
 
 	const structuredData = {
 		'@context': 'https://schema.org',
@@ -79,6 +90,7 @@ export function generateToolSEO(tool: ToolDefinition, baseUrl: string): SeoMetad
 		twitterTitle: tool.metaTitle,
 		twitterDescription: tool.metaDescription,
 		twitterImage: ogImage,
+		alternates,
 		structuredData: JSON.stringify(structuredData)
 	};
 }

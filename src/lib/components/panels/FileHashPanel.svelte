@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import { Copy, Check, Loader } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let file: globalThis.File | null = $state(null);
     let fileName = $state("");
@@ -39,7 +40,7 @@
     function copyHash(alg: string) {
         if (!hashes[alg]) return;
         navigator.clipboard.writeText(hashes[alg]);
-        addToast("success", `${alg} hash copied`);
+        addToast("success", ($t as any)('ui.hash_copied', '{alg} hash copied', { alg }));
         copiedKey = alg;
         setTimeout(() => {
             copiedKey = "";
@@ -59,7 +60,7 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept="*/*"
-                label="Drop any file to calculate hash"
+                label={$t('ui.drop_any_file_hash', 'Drop any file to calculate hash')}
             />
         </div>
     {:else}
@@ -84,7 +85,7 @@
 
             {#if hashing}
                 <div class="hashing">
-                    <Loader size={16} class="spin" /> Computing…
+                    <Loader size={16} class="spin" /> {$t('ui.computing', 'Computing…')}
                 </div>
             {/if}
         </div>

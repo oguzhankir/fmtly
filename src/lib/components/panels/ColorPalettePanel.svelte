@@ -15,14 +15,15 @@
     } from "../../engines/color";
     import { Copy } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     const PALETTE_TYPES: { id: PaletteType; label: string }[] = [
-        { id: "complementary", label: "Complementary" },
-        { id: "analogous", label: "Analogous" },
-        { id: "triadic", label: "Triadic" },
-        { id: "tetradic", label: "Tetradic" },
-        { id: "split-complementary", label: "Split Complementary" },
-        { id: "monochromatic", label: "Monochromatic" },
+        { id: "complementary", label: $t('ui.color.complementary', 'Complementary') },
+        { id: "analogous", label: $t('ui.color.analogous', 'Analogous') },
+        { id: "triadic", label: $t('ui.color.triadic', 'Triadic') },
+        { id: "tetradic", label: $t('ui.color.tetradic', 'Tetradic') },
+        { id: "split-complementary", label: $t('ui.color.split_complementary', 'Split Complementary') },
+        { id: "monochromatic", label: $t('ui.color.monochromatic', 'Monochromatic') },
     ];
 
     let currentSwatches = $derived.by(() => {
@@ -74,7 +75,7 @@
 
     function copyToClipboard(text: string) {
         navigator.clipboard.writeText(text);
-        addToast("success", `Copied ${text} to clipboard`);
+        addToast("success", ($t as any)('ui.copied_to_clipboard', 'Copied {text} to clipboard', { text }));
     }
 </script>
 
@@ -85,7 +86,7 @@
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
             <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Base Color</div
+                >{$t('ui.base_color', 'Base Color')}</div
             >
             <div
                 class="flex items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-2)]"
@@ -108,7 +109,7 @@
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
             <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Harmony Mode</div
+                >{$t('ui.harmony_mode', 'Harmony Mode')}</div
             >
             <select
                 value={$colorOptions.paletteType}
@@ -128,7 +129,7 @@
         <h2
             class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] mb-[var(--space-2)]"
         >
-            Generated Scheme
+            {$t('ui.generated_scheme', 'Generated Scheme')}
         </h2>
         <div
             class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[var(--space-4)]"
@@ -142,12 +143,12 @@
                         <button
                             onclick={() => copyToClipboard(swatchHex)}
                             class="absolute inset-0 flex items-center justify-center bg-[var(--scrim)] opacity-0 transition-opacity duration-150 group-hover:opacity-100"
-                            aria-label="Copy Hex"
+                            aria-label={$t('ui.copy_hex', 'Copy Hex')}
                         >
                             <span
                                 class="flex items-center gap-2 rounded-full bg-[var(--bg-elevated)] px-3 py-1.5 text-[length:var(--text-xs)] font-medium text-[var(--text-primary)] shadow-lg"
                             >
-                                <Copy size={14} /> Copy
+                                <Copy size={14} /> {$t('ui.copy', 'Copy')}
                             </span>
                         </button>
                     </div>

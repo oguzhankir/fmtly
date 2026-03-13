@@ -5,6 +5,7 @@
 	import { ChevronsDownUp, ChevronsUpDown } from 'lucide-svelte';
 	import { formatByteSize, inputByteSize } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import TreeNodeComponent from './TreeNode.svelte';
 	import SearchBar from '$components/tool/SearchBar.svelte';
 	import type { TreeNode } from '$engines/json/types.js';
@@ -23,12 +24,12 @@
 	let scrollElement: HTMLDivElement | undefined = $state(undefined);
 	const LARGE_FILE_THRESHOLD = 200 * 1024;
 	let isLargeFile = $derived($inputByteSize > LARGE_FILE_THRESHOLD);
-	let largeFileSummary = $derived(`Large file — parsing ${formatByteSize($inputByteSize)}. Showing top 2 levels; expand nodes to load children.`);
+	let largeFileSummary = $derived(($t as any)('ui.tree.large_file_warning', 'Large file — parsing {{size}}. Showing top 2 levels; expand nodes to load children.', { size: formatByteSize($inputByteSize) }));
 
 	const expandedNodes = writable<Set<string>>(new Set());
 	setContext('expandedNodes', expandedNodes);
 	setContext('setActivePath', (path: string) => {
-		activePath = path || 'root';
+		activePath = path || $t('ui.tree.root', 'root');
 	});
 
 	$effect(() => {
@@ -170,7 +171,7 @@
 
 	async function copyActivePath(): Promise<void> {
 		await navigator.clipboard.writeText(activePath);
-		addToast('success', `Copied — ${activePath}`);
+		addToast('success', ($t as any)('ui.tree.toast_copy_path', 'Copied — {{path}}', { path: activePath }));
 	}
 
 	$effect(() => {
@@ -195,13 +196,13 @@
 	<!-- Toolbar -->
 	<div class="tree-toolbar">
 		<div class="tree-toolbar-group">
-			<button class="tree-toolbar-btn" onclick={expandAll} title="Expand all">
+			<button class="tree-toolbar-btn" onclick={expandAll} title={$t('ui.tree.tooltips.expand_all', 'Expand all')}>
 				<ChevronsUpDown size={14} />
-				<span>Expand</span>
+				<span>{$t('ui.tree.expand', 'Expand')}</span>
 			</button>
-			<button class="tree-toolbar-btn" onclick={collapseAll} title="Collapse all">
+			<button class="tree-toolbar-btn" onclick={collapseAll} title={$t('ui.tree.tooltips.collapse_all', 'Collapse all')}>
 				<ChevronsDownUp size={14} />
-				<span>Collapse</span>
+				<span>{$t('ui.tree.collapse', 'Collapse')}</span>
 			</button>
 		</div>
 
@@ -210,7 +211,7 @@
 				<button
 					class="tree-depth-btn"
 					onclick={() => expandToDepth(depth)}
-					title="Expand to depth {depth}"
+					title={($t as any)('ui.tree.tooltips.expand_depth', 'Expand to depth {{depth}}', { depth })}
 				>
 					{depth}
 				</button>
@@ -221,9 +222,9 @@
 			<button
 				class="tree-toolbar-btn"
 				onclick={() => { searchVisible = !searchVisible; }}
-				title="Search (Ctrl+K)"
+				title={$t('ui.tree.tooltips.search_hint', 'Search (Ctrl+K)')}
 			>
-				<span>Search</span>
+				<span>{$t('ui.tree.search', 'Search')}</span>
 			</button>
 		</div>
 	</div>
@@ -261,7 +262,7 @@
 				{/each}
 			</div>
 		{:else if filterActive}
-			<div class="tree-content__empty">No matches found.</div>
+			<div class="tree-content__empty">{$t('ui.tree.empty', 'No matches found.')}</div>
 		{:else if nodes.length === 0}
 			<div class="tree-content__empty"></div>
 		{:else}

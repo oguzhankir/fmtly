@@ -4,6 +4,7 @@
     import { generateHmac } from "../../engines/crypto";
     import { Copy, Check } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let message = $derived($inputStore);
     let keyInput = $state("");
@@ -16,7 +17,7 @@
 
     function copyToClipboard(text: string) {
         navigator.clipboard.writeText(text);
-        addToast("success", "Copied to clipboard");
+        addToast("success", $t('ui.copied_to_clipboard', 'Copied to clipboard'));
     }
 
     async function handleCopy(text: string, type: "hex" | "base64") {
@@ -57,7 +58,7 @@
                 const binaryString = String.fromCharCode(...uint8Array);
                 $cryptoOptions.hmacOutputBase64 = btoa(binaryString);
             } catch (e) {
-                $cryptoOptions.hmacOutputHex = "Error generating HMAC";
+                $cryptoOptions.hmacOutputHex = $t('ui.error.generating_hmac', 'Error generating HMAC');
                 $cryptoOptions.hmacOutputBase64 = "";
             }
         }
@@ -73,13 +74,13 @@
         <div>
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Secret Key</span
+                >{$t('ui.secret_key', 'Secret Key')}</span
             >
         </div>
         <input
             type="text"
             bind:value={keyInput}
-            placeholder="Enter your secret key here..."
+            placeholder={$t('ui.enter_secret_key_here', 'Enter your secret key here...')}
             class="w-full rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-sm)] font-[family-name:var(--font-mono)] outline-none focus-within:border-[var(--color-primary)] placeholder:text-[var(--text-muted)]"
         />
     </div>
@@ -88,7 +89,7 @@
         <div>
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Algorithm</span
+                >{$t('ui.algorithm', 'Algorithm')}</span
             >
         </div>
         <div class="flex gap-2">
@@ -110,12 +111,12 @@
         <div>
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Message</span
+                >{$t('ui.message', 'Message')}</span
             >
         </div>
         <textarea
             bind:value={$inputStore}
-            placeholder="Enter the message to hash..."
+            placeholder={$t('ui.enter_message_to_hash', 'Enter the message to hash...')}
             class="w-full flex-1 resize-none rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-3)] text-[length:var(--text-sm)] font-[family-name:var(--font-mono)] outline-none focus-within:border-[var(--color-primary)] placeholder:text-[var(--text-muted)]"
         ></textarea>
     </div>
@@ -128,12 +129,12 @@
             <div class="flex items-center justify-between">
                 <div
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >HMAC (Hex)</div
+                    >{$t('ui.hmac_hex', 'HMAC (Hex)')}</div
                 >
                 <button
                     onclick={() =>
                         handleCopy($cryptoOptions.hmacOutputHex, "hex")}
-                    title="Copy hex"
+                    title={$t('ui.copy_hex', 'Copy hex')}
                     disabled={!$cryptoOptions.hmacOutputHex}
                     class="flex items-center justify-center rounded-[var(--radius-sm)] p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors disabled:opacity-50"
                 >
@@ -151,7 +152,7 @@
                     {$cryptoOptions.hmacOutputHex}
                 {:else}
                     <span class="text-[var(--text-muted)] opacity-50"
-                        >Waiting for key and message...</span
+                        >{$t('ui.waiting_key_and_message', 'Waiting for key and message...')}</span
                     >
                 {/if}
             </div>
@@ -161,12 +162,12 @@
             <div class="flex items-center justify-between">
                 <div
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >HMAC (Base64)</div
+                    >{$t('ui.hmac_base64', 'HMAC (Base64)')}</div
                 >
                 <button
                     onclick={() =>
                         handleCopy($cryptoOptions.hmacOutputBase64, "base64")}
-                    title="Copy base64"
+                    title={$t('ui.copy_base64', 'Copy base64')}
                     disabled={!$cryptoOptions.hmacOutputBase64}
                     class="flex items-center justify-center rounded-[var(--radius-sm)] p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors disabled:opacity-50"
                 >
@@ -184,7 +185,7 @@
                     {$cryptoOptions.hmacOutputBase64}
                 {:else}
                     <span class="text-[var(--text-muted)] opacity-50"
-                        >Waiting for key and message...</span
+                        >{$t('ui.waiting_key_and_message', 'Waiting for key and message...')}</span
                     >
                 {/if}
             </div>

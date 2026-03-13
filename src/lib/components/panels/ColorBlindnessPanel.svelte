@@ -9,30 +9,31 @@
         simulateTritanopia,
         simulateAchromatopsia,
     } from "../../engines/color";
+    import { t } from '$lib/stores/language.js';
 
     let fileInput = $state<HTMLInputElement | undefined>();
     let canvasMap = $state<Record<string, HTMLCanvasElement>>({});
 
     let simModes = [
-        { id: "original", label: "Original Vision", fn: (color: any) => color },
+        { id: "original", label: $t('ui.color_blindness.original_vision', 'Original Vision'), fn: (color: any) => color },
         {
             id: "protanopia",
-            label: "Protanopia (Red-Blind)",
+            label: $t('ui.color_blindness.protanopia', 'Protanopia (Red-Blind)'),
             fn: simulateProtanopia,
         },
         {
             id: "deuteranopia",
-            label: "Deuteranopia (Green-Blind)",
+            label: $t('ui.color_blindness.deuteranopia', 'Deuteranopia (Green-Blind)'),
             fn: simulateDeuteranopia,
         },
         {
             id: "tritanopia",
-            label: "Tritanopia (Blue-Blind)",
+            label: $t('ui.color_blindness.tritanopia', 'Tritanopia (Blue-Blind)'),
             fn: simulateTritanopia,
         },
         {
             id: "achromatopsia",
-            label: "Achromatopsia (Monochromacy)",
+            label: $t('ui.color_blindness.achromatopsia', 'Achromatopsia (Monochromacy)'),
             fn: simulateAchromatopsia,
         },
     ];
@@ -118,7 +119,7 @@
         <div class="flex flex-col gap-[var(--space-2)]">
             <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Simulation Mode</div
+                >{$t('ui.simulation_mode', 'Simulation Mode')}</div
             >
             <div
                 class="flex rounded-md border border-[var(--border-default)] overflow-hidden h-10 shrink-0"
@@ -130,7 +131,7 @@
                         ? 'bg-[var(--bg-selected)] text-[var(--text-primary)]'
                         : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:bg-[var(--bg-hover)]'}"
                 >
-                    <Hexagon size={16} /> Hex Color
+                    <Hexagon size={16} /> {$t('ui.hex_color', 'Hex Color')}
                 </button>
                 <div class="w-px bg-[var(--border-default)]"></div>
                 <button
@@ -140,7 +141,7 @@
                         ? 'bg-[var(--bg-selected)] text-[var(--text-primary)]'
                         : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:bg-[var(--bg-hover)]'}"
                 >
-                    <Image size={16} /> Image Canvas
+                    <Image size={16} /> {$t('ui.image_canvas', 'Image Canvas')}
                 </button>
             </div>
         </div>
@@ -150,8 +151,8 @@
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
             >
                 {$colorOptions.blindnessInputType === "hex"
-                    ? "Base Color"
-                    : "Upload Source Image"}
+                    ? $t('ui.base_color', 'Base Color')
+                    : $t('ui.upload_source_image', 'Upload Source Image')}
             </div>
 
             {#if $colorOptions.blindnessInputType === "hex"}
@@ -232,7 +233,7 @@
                             >
                                 <Upload size={24} />
                                 <span class="text-[length:var(--text-xs)]"
-                                    >Upload an image</span
+                                    >{$t('ui.upload_an_image', 'Upload an image')}</span
                                 >
                             </div>
                         {/if}

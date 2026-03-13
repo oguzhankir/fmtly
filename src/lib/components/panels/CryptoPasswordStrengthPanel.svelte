@@ -2,6 +2,7 @@
     import { cryptoOptions } from "../../stores/crypto.store";
     import { checkStrength } from "../../engines/crypto";
     import { Eye, EyeOff, ShieldAlert, ShieldCheck } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let passwordInfo = $derived(checkStrength($cryptoOptions.passwordInput));
 
@@ -48,7 +49,7 @@
         class="flex items-center gap-2 rounded-md bg-[var(--bg-surface)] p-3 text-[length:var(--text-sm)] text-[var(--text-secondary)] border border-[var(--border-default)]"
     >
         <ShieldCheck class="text-[var(--color-success)] shrink-0" size={18} />
-        <span class="font-medium">Privacy Notice:</span> This analysis runs entirely
+        <span class="font-medium">{$t('ui.privacy_notice', 'Privacy Notice')}:</span> {$t('ui.analysis_runs_locally', 'This analysis runs entirely locally in your browser. Nothing is sent to any server.')}
         locally in your browser. Nothing is sent to any server.
     </div>
 
@@ -56,20 +57,20 @@
     <div class="flex flex-col gap-[var(--space-2)]">
         <span
             class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-            >Password to Analyze</span
+            >{$t('ui.password_to_analyze', 'Password to Analyze')}</span
         >
         <div class="relative flex items-center">
             <input
                 type={$cryptoOptions.showPassword ? "text" : "password"}
                 bind:value={$cryptoOptions.passwordInput}
-                placeholder="Enter a password..."
+                placeholder={$t('ui.enter_password', 'Enter a password...')}
                 class="w-full rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-3)] py-[var(--space-3)] text-[length:var(--text-base)] font-[family-name:var(--font-mono)] outline-none focus-within:border-[var(--color-primary)] placeholder:text-[var(--text-muted)]"
             />
             <button
                 class="absolute right-[var(--space-3)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
                 title={$cryptoOptions.showPassword
-                    ? "Hide password"
-                    : "Show password"}
+                    ? $t('ui.hide_password', 'Hide password')
+                    : $t('ui.show_password', 'Show password')}
                 onclick={() =>
                     ($cryptoOptions.showPassword =
                         !$cryptoOptions.showPassword)}
@@ -89,16 +90,16 @@
             class="flex items-center justify-between text-[length:var(--text-sm)] font-[number:var(--weight-semibold)]"
         >
             <span
-                >Strength: <span class={getScoreTextClass(passwordInfo.score)}
+                >{$t('ui.strength', 'Strength')}: <span class={getScoreTextClass(passwordInfo.score)}
                     >{$cryptoOptions.passwordInput
                         ? passwordInfo.label
-                        : "None"}</span
+                        : $t('ui.none', 'None')}</span
                 ></span
             >
             {#if $cryptoOptions.passwordInput}
                 <span
                     class="text-[var(--text-muted)] font-[family-name:var(--font-mono)]"
-                    >{passwordInfo.entropy} bits</span
+                    >{passwordInfo.entropy} {$t('ui.bits', 'bits')}</span
                 >
             {/if}
         </div>
@@ -124,14 +125,14 @@
                 <h3
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-2 mb-1"
                 >
-                    Estimated Crack Time
+                    {$t('ui.estimated_crack_time', 'Estimated Crack Time')}
                 </h3>
                 <div class="flex flex-col gap-3">
                     <div
                         class="flex justify-between items-center text-[length:var(--text-sm)]"
                     >
                         <span class="text-[var(--text-secondary)]"
-                            >Offline (10B/sec)</span
+                            >{$t('ui.offline_10b_sec', 'Offline (10B/sec)')}</span
                         >
                         <span
                             class="font-[family-name:var(--font-mono)] text-[var(--text-primary)]"
@@ -142,7 +143,7 @@
                         class="flex justify-between items-center text-[length:var(--text-sm)]"
                     >
                         <span class="text-[var(--text-secondary)]"
-                            >Online (1k/sec)</span
+                            >{$t('ui.online_1k_sec', 'Online (1k/sec)')}</span
                         >
                         <span
                             class="font-[family-name:var(--font-mono)] text-[var(--text-primary)]"
@@ -159,7 +160,7 @@
                 <h3
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-2 mb-1"
                 >
-                    Characteristics
+                    {$t('ui.characteristics', 'Characteristics')}
                 </h3>
                 <div
                     class="grid grid-cols-2 gap-y-3 gap-x-4 text-[length:var(--text-sm)]"
@@ -176,7 +177,7 @@
                             class={passwordInfo.hasUppercase
                                 ? "text-[var(--text-primary)]"
                                 : "text-[var(--text-secondary)]"}
-                            >Uppercase</span
+                            >{$t('ui.uppercase', 'Uppercase')}</span
                         >
                     </div>
                     <div class="flex items-center gap-2">
@@ -191,7 +192,7 @@
                             class={passwordInfo.hasLowercase
                                 ? "text-[var(--text-primary)]"
                                 : "text-[var(--text-secondary)]"}
-                            >Lowercase</span
+                            >{$t('ui.lowercase', 'Lowercase')}</span
                         >
                     </div>
                     <div class="flex items-center gap-2">
@@ -205,7 +206,7 @@
                         <span
                             class={passwordInfo.hasDigits
                                 ? "text-[var(--text-primary)]"
-                                : "text-[var(--text-secondary)]"}>Numbers</span
+                                : "text-[var(--text-secondary)]"}>{$t('ui.numbers', 'Numbers')}</span
                         >
                     </div>
                     <div class="flex items-center gap-2">
@@ -219,7 +220,7 @@
                         <span
                             class={passwordInfo.hasSymbols
                                 ? "text-[var(--text-primary)]"
-                                : "text-[var(--text-secondary)]"}>Symbols</span
+                                : "text-[var(--text-secondary)]"}>{$t('ui.symbols', 'Symbols')}</span
                         >
                     </div>
                 </div>
@@ -234,7 +235,7 @@
                 <div
                     class="flex items-center gap-2 text-orange-500 font-[number:var(--weight-semibold)] text-[length:var(--text-sm)]"
                 >
-                    <ShieldAlert size={16} /> Suggestions to improve
+                    <ShieldAlert size={16} /> {$t('ui.suggestions_to_improve', 'Suggestions to improve')}
                 </div>
                 <ul
                     class="list-disc pl-5 text-[length:var(--text-sm)] text-[var(--text-secondary)] space-y-1"

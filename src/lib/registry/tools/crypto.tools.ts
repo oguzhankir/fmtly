@@ -5,16 +5,14 @@ export const cryptoTools: ToolDefinition[] = [
 		id: 'crypto-hmac',
 		category: 'crypto',
 		slug: 'hmac',
-		displayName: 'HMAC Generator',
-		tagline: 'Generate HMAC signatures with SHA-256/384/512.',
-		description:
-			'Securely generate Hash-based Message Authentication Codes (HMAC) entirely in your browser using the native Web Crypto API. Supports SHA-256, SHA-384, and SHA-512 algorithms.',
-		primaryKeyword: 'hmac generator online',
-		metaTitle: 'HMAC Generator | SHA-256 | fmtly',
-		metaDescription:
-			'Generate secure HMAC hashes (SHA-256, SHA-384, SHA-512) locally in your browser. No data sent to any server.',
+		displayName: 'tool.crypto-hmac.display_name',
+		tagline: 'tool.crypto-hmac.tagline',
+		description: 'tool.crypto-hmac.description',
+		primaryKeyword: 'tool.crypto-hmac.primary_keyword',
+		metaTitle: 'tool.crypto-hmac.meta_title',
+		metaDescription: 'tool.crypto-hmac.meta_description',
 		engine: 'crypto',
-		operation: 'hmac',
+		operation: 'tool.crypto-hmac.operation',
 		layoutVariant: 'dual-input',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -26,28 +24,25 @@ export const cryptoTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Is my input sent to a server?',
-				answer:
-					'No. All HMAC calculations are performed locally in your browser using the Web Crypto API.'
+				question: 'tool.crypto-hmac.faq.0.question',
+				answer: 'tool.crypto-hmac.faq.0.answer'
 			}
 		],
-		useCases: ['Verifying API webhook signatures', 'Generating secure tokens for authentication'],
+		useCases: ['tool.crypto-hmac.use_case.0', 'tool.crypto-hmac.use_case.1'],
 		sampleInput: 'The quick brown fox jumps over the lazy dog\nkey' // message \n key
 	},
 	{
 		id: 'crypto-password-strength',
 		category: 'crypto',
 		slug: 'password-strength',
-		displayName: 'Password Strength Checker',
-		tagline: 'Analyze password entropy and crack time locally.',
-		description:
-			'Evaluate the strength of your passwords with instant real-time feedback. Calculates entropy, offline and online crack times, and identifies weak patterns—100% locally.',
-		primaryKeyword: 'password strength checker',
-		metaTitle: 'Secure Password Strength Checker | Local Evaluation | fmtly',
-		metaDescription:
-			'Test your password strength, entropy, and estimated crack time entirely offline. No data leaves your browser.',
+		displayName: 'tool.crypto-password-strength.display_name',
+		tagline: 'tool.crypto-password-strength.tagline',
+		description: 'tool.crypto-password-strength.description',
+		primaryKeyword: 'tool.crypto-password-strength.primary_keyword',
+		metaTitle: 'tool.crypto-password-strength.meta_title',
+		metaDescription: 'tool.crypto-password-strength.meta_description',
 		engine: 'crypto',
-		operation: 'password-strength',
+		operation: 'tool.crypto-password-strength.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -59,14 +54,13 @@ export const cryptoTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Are my passwords stored or transmitted?',
-				answer:
-					"Absolutely not. This tool analyzes your password completely within your browser's memory. Disconnect from the internet to test for yourself."
+				question: 'tool.crypto-password-strength.faq.0.question',
+				answer: 'tool.crypto-password-strength.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Auditing personal or administrative passwords for compliance',
-			'Understanding entropy and how crack times are calculated'
+			'tool.crypto-password-strength.use_case.0',
+			'tool.crypto-password-strength.use_case.1'
 		],
 		sampleInput: 'P@ssw0rd!'
 	},
@@ -74,16 +68,14 @@ export const cryptoTools: ToolDefinition[] = [
 		id: 'crypto-ulid',
 		category: 'crypto',
 		slug: 'ulid',
-		displayName: 'ULID Generator',
-		tagline: 'Generate Universally Unique Lexicographically Sortable Identifiers.',
-		description:
-			'Instantly generate sortable ULIDs in bulk. Inspect the internal structure differentiating the timestamp and random components.',
-		primaryKeyword: 'ulid generator',
-		metaTitle: 'ULID Generator | Bulk Sortable IDs | fmtly',
-		metaDescription:
-			'Quickly generate one or multiple Universally Unique Lexicographically Sortable Identifiers (ULID) straight from your browser.',
+		displayName: 'tool.crypto-ulid.display_name',
+		tagline: 'tool.crypto-ulid.tagline',
+		description: 'tool.crypto-ulid.description',
+		primaryKeyword: 'tool.crypto-ulid.primary_keyword',
+		metaTitle: 'tool.crypto-ulid.meta_title',
+		metaDescription: 'tool.crypto-ulid.meta_description',
 		engine: 'crypto',
-		operation: 'ulid',
+		operation: 'tool.crypto-ulid.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -95,31 +87,25 @@ export const cryptoTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Why ULID over UUID?',
-				answer:
-					'ULIDs are lexicographically sortable, meaning they can be sorted chronologically without needing a separate created_at column.'
+				question: 'tool.crypto-ulid.faq.0.question',
+				answer: 'tool.crypto-ulid.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Providing sortable primary keys for distributed databases',
-			'Generating batch testing identifiers'
-		],
+		useCases: ['tool.crypto-ulid.use_case.0', 'tool.crypto-ulid.use_case.1'],
 		sampleInput: ''
 	},
 	{
 		id: 'crypto-random-string',
 		category: 'crypto',
 		slug: 'random-string',
-		displayName: 'Secure Random String Generator',
-		tagline: 'Generate cryptographically secure strings and passwords.',
-		description:
-			'Create highly secure random strings and passwords. Toggle between uppercase, lowercase, numbers, symbols, Custom characters, or exclude ambiguous characters completely client-side.',
-		primaryKeyword: 'random string generator',
-		metaTitle: 'Secure Password & Random String Generator | fmtly',
-		metaDescription:
-			"Generate secure random strings and passwords locally using the browser's strong cryptographic random number generator.",
+		displayName: 'tool.crypto-random-string.display_name',
+		tagline: 'tool.crypto-random-string.tagline',
+		description: 'tool.crypto-random-string.description',
+		primaryKeyword: 'tool.crypto-random-string.primary_keyword',
+		metaTitle: 'tool.crypto-random-string.meta_title',
+		metaDescription: 'tool.crypto-random-string.meta_description',
 		engine: 'crypto',
-		operation: 'random-string',
+		operation: 'tool.crypto-random-string.operation',
 		layoutVariant: 'single-panel',
 		inputLanguage: 'plaintext',
 		outputLanguage: 'plaintext',
@@ -131,15 +117,11 @@ export const cryptoTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'How random is it?',
-				answer:
-					'The tool strictly uses the Web Crypto APIs `crypto.getRandomValues()` method, which uses a cryptographically secure pseudorandom number generator (CSPRNG), never Math.random().'
+				question: 'tool.crypto-random-string.faq.0.question',
+				answer: 'tool.crypto-random-string.faq.0.answer'
 			}
 		],
-		useCases: [
-			'Generating strong database and application passwords',
-			'Creating custom secure temporary API keys'
-		],
+		useCases: ['tool.crypto-random-string.use_case.0', 'tool.crypto-random-string.use_case.1'],
 		sampleInput: ''
 	}
 ];

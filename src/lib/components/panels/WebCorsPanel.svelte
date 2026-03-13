@@ -2,6 +2,7 @@
     import { explainHeader } from "../../engines/web";
     import type { HeaderExplanation } from "../../engines/web";
     import { ShieldCheck, ShieldAlert, Shield, Info } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     const CORS_HEADERS = [
         "Access-Control-Allow-Origin",
@@ -40,7 +41,7 @@
 <div class="cors-panel">
     <!-- Header Picker -->
     <div class="section">
-        <span class="section-label">Common CORS Headers</span>
+        <span class="section-label">{$t('ui.cors_analyzer.title', 'Common CORS Headers')}</span>
         <div class="header-pills">
             {#each CORS_HEADERS as h}
                 <button
@@ -56,7 +57,7 @@
     <!-- Inputs -->
     <div class="input-row">
         <div class="input-group flex-1">
-            <span class="input-label">Header Name</span>
+            <span class="input-label">{$t('ui.cors_analyzer.header_name', 'Header Name')}</span>
             <input
                 type="text"
                 bind:value={headerName}
@@ -66,7 +67,7 @@
             />
         </div>
         <div class="input-group flex-2">
-            <span class="input-label">Header Value</span>
+            <span class="input-label">{$t('ui.cors_analyzer.header_value', 'Header Value')}</span>
             <input
                 type="text"
                 bind:value={headerValue}
@@ -90,7 +91,7 @@
                 <div class="header-display">
                     <code class="header-name">{result.header}</code>
                     <span class="colon">:</span>
-                    <code class="header-value">{result.value || "(empty)"}</code
+                    <code class="header-value">{result.value || $t('ui.cors_analyzer.empty_value', '(empty)')}</code
                     >
                 </div>
                 <div
@@ -101,28 +102,28 @@
                           : 'badge-neutral'}"
                 >
                     {#if result.safe === false}
-                        <ShieldAlert size={14} /> Unsafe
+                        <ShieldAlert size={14} /> {$t('ui.cors_analyzer.safety.unsafe', 'Unsafe')}
                     {:else if result.safe === true}
-                        <ShieldCheck size={14} /> Safe
+                        <ShieldCheck size={14} /> {$t('ui.cors_analyzer.safety.safe', 'Safe')}
                     {:else}
-                        <Shield size={14} /> Neutral
+                        <Shield size={14} /> {$t('ui.cors_analyzer.safety.neutral', 'Neutral')}
                     {/if}
                 </div>
             </div>
 
             <div class="explanation-sections">
                 <div class="exp-section">
-                    <span class="exp-label">What it does</span>
+                    <span class="exp-label">{$t('ui.cors_analyzer.sections.what', 'What it does')}</span>
                     <p class="exp-text">{result.what}</p>
                 </div>
                 <div class="exp-section">
-                    <span class="exp-label">Why it exists</span>
+                    <span class="exp-label">{$t('ui.cors_analyzer.sections.why', 'Why it exists')}</span>
                     <p class="exp-text">{result.why}</p>
                 </div>
                 <div class="exp-section recommendation">
                     <Info size={14} />
                     <div>
-                        <span class="exp-label">Recommendation</span>
+                        <span class="exp-label">{$t('ui.cors_analyzer.sections.recommendation', 'Recommendation')}</span>
                         <p class="exp-text">{result.recommendation}</p>
                     </div>
                 </div>
@@ -130,7 +131,7 @@
         </div>
     {:else}
         <div class="empty-state">
-            Enter a header name to get an explanation.
+            {$t('ui.cors_analyzer.empty_state', 'Enter a header name to get an explanation.')}
         </div>
     {/if}
 </div>

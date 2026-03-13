@@ -12,6 +12,7 @@
 		destroyKeyboardShortcuts,
 		registerShortcuts
 	} from '$utils/keyboard.js';
+	import { t } from '$lib/stores/language';
 
 	let { children }: { children: Snippet } = $props();
 
@@ -36,7 +37,7 @@
 		{
 			key: '?',
 			scope: 'global',
-			label: 'Show keyboard shortcuts',
+			label: $t('ui.shortcuts.show_help', 'Show keyboard shortcuts'),
 			handler: () => { shortcutsModalOpen = !shortcutsModalOpen; }
 		},
 		{
@@ -44,7 +45,7 @@
 			ctrl: true,
 			shift: true,
 			scope: 'global',
-			label: 'Toggle dark/light theme',
+			label: $t('ui.shortcuts.toggle_theme', 'Toggle dark/light theme'),
 			handler: toggleTheme
 		}
 	]);

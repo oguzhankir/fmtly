@@ -4,6 +4,7 @@
 	import { input } from '$stores/input.store';
 	import { output } from '$stores/output.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import { Check, Copy, Play, Sparkles, WrapText, History, CircleHelp } from 'lucide-svelte';
 
 	const props = $props<{
@@ -35,7 +36,7 @@
 	let resultMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lines = $output.length === 0 ? 0 : $output.split('\n').length;
-		return `${$output.length.toLocaleString()} chars · ${lines.toLocaleString()} lines`;
+		return `${$output.length.toLocaleString()} {$t('ui.query.stats.chars', 'chars')} · ${lines.toLocaleString()} {$t('ui.query.stats.lines', 'lines')}`;
 	});
 
 	function getHistoryKey(): string {
@@ -85,7 +86,7 @@
 		} catch (error) {
 			resultCount = null;
 			output.set('');
-			resultError = error instanceof Error ? error.message : 'Query failed';
+			resultError = error instanceof Error ? error.message : $t('ui.query.error_fallback', 'Query failed');
 		} finally {
 			isRunning = false;
 		}
@@ -142,7 +143,7 @@
 			copiedSuccessfully = fallbackCopy($output);
 		}
 		if (!copiedSuccessfully) {
-			addToast('error', 'Could not copy output');
+			addToast('error', $t('ui.query.copy_error', 'Could not copy output'));
 			return;
 		}
 		copied = true;
@@ -158,7 +159,7 @@
 		<div class="query-toolbar__meta">
 			<span class="query-pill">{props.toolSlug === 'jsonpath' ? 'JSONPath' : 'JMESPath'}</span>
 			{#if resultCount !== null}
-				<span class="query-count">{resultCount} result{resultCount === 1 ? '' : 's'}</span>
+				<span class="query-count">{resultCount} {resultCount === 1 ? $t('ui.query.result', 'result') : $t('ui.query.results', 'results')}</span>
 			{/if}
 		</div>
 		<div class="query-toolbar__actions">
@@ -166,7 +167,7 @@
 				<label class="query-history">
 					<History size={13} />
 					<select bind:value={selectedHistory} onchange={(event) => loadHistoryQuery((event.currentTarget as HTMLSelectElement).value)}>
-						<option value="">History</option>
+						<option value="">{$t('ui.query.history', 'History')}</option>
 						{#each queryHistory as entry}
 							<option value={entry}>{entry}</option>
 						{/each}
@@ -175,19 +176,19 @@
 			{/if}
 			<button type="button" class="query-btn" onclick={loadSampleQuery}>
 				<Sparkles size={13} />
-				Sample query
+				{$t('ui.query.sample_query', 'Sample query')}
 			</button>
 			<button type="button" class="query-btn" onclick={() => (showCheatSheet = !showCheatSheet)}>
 				<CircleHelp size={13} />
-				Guide
+				{$t('ui.query.guide', 'Guide')}
 			</button>
-			<button type="button" class="query-btn" onclick={() => void runQuery()}>
+			<button type="button" class="query-btn query-btn--primary" onclick={() => void runQuery()}>
 				<Play size={13} />
-				Run
+				{$t('ui.actions.run', 'Run')}
 			</button>
 			<button type="button" class="query-btn" onclick={() => (wrapLines = !wrapLines)} disabled={!$output}>
 				<WrapText size={13} />
-				Wrap
+				{$t('ui.actions.wrap', 'Wrap')}
 			</button>
 			<button type="button" class="query-btn" onclick={copyResult} disabled={!$output}>
 				{#if copied}
@@ -195,13 +196,13 @@
 				{:else}
 					<Copy size={13} />
 				{/if}
-				Copy
+				{$t('ui.actions.copy', 'Copy')}
 			</button>
 		</div>
 	</div>
 
 	<div class="query-input-wrap">
-		<label class="query-label" for="json-query-input">Query</label>
+		<label class="query-label" for="json-query-input">{$t('ui.query.query', 'Query')}</label>
 		<textarea
 			id="json-query-input"
 			bind:value={query}
@@ -223,11 +224,11 @@
 	{#if resultError}
 		<div class="query-error">{resultError}</div>
 	{:else if isRunning}
-		<div class="query-empty">Running query…</div>
+		<div class="query-empty">{$t('ui.query.running', 'Running query…')}</div>
 	{:else if !$input.trim()}
-		<div class="query-empty">Paste JSON on the left to evaluate your query.</div>
+		<div class="query-empty">{$t('ui.query.empty_input', 'Paste JSON on the left to evaluate your query.')}</div>
 	{:else if !query.trim()}
-		<div class="query-empty">Enter a query to see results.</div>
+		<div class="query-empty">{$t('ui.query.empty_query', 'Enter a query to see results.')}</div>
 	{:else if $output}
 		<div class="query-result-meta">{resultMeta}</div>
 		<pre class="query-result" class:query-result--wrap={wrapLines}><code>{$output}</code></pre>

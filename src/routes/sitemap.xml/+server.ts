@@ -1,4 +1,5 @@
 import { examples } from '$lib/registry/examples/index.js';
+import { SUPPORTED_LOCALES, localizePath } from '$lib/utils/locale-routing.js';
 import { getAllCategoryMeta } from '$registry/categories.js';
 import { getAllTools } from '$registry/index.js';
 import { getCategories } from '$registry/index.js';
@@ -22,46 +23,40 @@ export const GET: RequestHandler = () => {
 
 	const urls: string[] = [];
 
-	urls.push(`
+	function addUrl(path: string, changefreq: string, priority: string): void {
+		urls.push(`
 	<url>
-		<loc>${escapeXml(BASE_URL)}</loc>
-		<changefreq>weekly</changefreq>
-		<priority>1.0</priority>
+		<loc>${escapeXml(`${BASE_URL}${path}`)}</loc>
+		<changefreq>${changefreq}</changefreq>
+		<priority>${priority}</priority>
 	</url>`);
+	}
+
+	for (const locale of SUPPORTED_LOCALES) {
+		addUrl(localizePath('/', locale), 'weekly', '1.0');
+	}
 
 	for (const cat of categoryMeta) {
 		if (!categoriesWithTools.has(cat.slug)) continue;
-		urls.push(`
-	<url>
-		<loc>${escapeXml(`${BASE_URL}/${cat.slug}`)}</loc>
-		<changefreq>weekly</changefreq>
-		<priority>0.8</priority>
-	</url>`);
+		for (const locale of SUPPORTED_LOCALES) {
+			addUrl(localizePath(`/${cat.slug}`, locale), 'weekly', '0.8');
+		}
 	}
 
 	for (const tool of tools) {
-		urls.push(`
-	<url>
-		<loc>${escapeXml(`${BASE_URL}/${tool.category}/${tool.slug}`)}</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.7</priority>
-	</url>`);
+		for (const locale of SUPPORTED_LOCALES) {
+			addUrl(localizePath(`/${tool.category}/${tool.slug}`, locale), 'monthly', '0.7');
+		}
 	}
 
-	urls.push(`
-	<url>
-		<loc>${escapeXml(`${BASE_URL}/examples`)}</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.6</priority>
-	</url>`);
+	for (const locale of SUPPORTED_LOCALES) {
+		addUrl(localizePath('/examples', locale), 'monthly', '0.6');
+	}
 
 	for (const example of examples) {
-		urls.push(`
-	<url>
-		<loc>${escapeXml(`${BASE_URL}/examples/${example.slug}`)}</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>`);
+		for (const locale of SUPPORTED_LOCALES) {
+			addUrl(localizePath(`/examples/${example.slug}`, locale), 'monthly', '0.5');
+		}
 	}
 
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

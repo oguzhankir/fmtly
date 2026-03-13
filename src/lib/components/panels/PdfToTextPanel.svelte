@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import { Copy, Check, Download, File as FileIcon, Loader } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let pdfData: ArrayBuffer | null = $state(null);
     let fileName = $state("");
@@ -20,22 +21,22 @@
         loading = true;
         fileName = file.name;
         fileSize = file.size;
-        progress = "Loading PDF…";
+        progress = $t('ui.pdf_to_text.loading', 'Loading PDF…');
 
         try {
             pdfData = await file.arrayBuffer();
             const engine = await import("../../engines/pdf/pdfjs.engine");
             pageCount = await engine.getPageCount(pdfData!);
-            progress = "Extracting text…";
+            progress = $t('ui.pdf_to_text.extracting', 'Extracting text…');
             extractedText = await engine.extractText(
                 pdfData!,
                 (page, total) => {
-                    progress = `Processing page ${page} of ${total}…`;
+                    progress = ($t as any)('ui.pdf_to_text.processing', 'Processing page {{page}} of {{total}}…', { page, total });
                 },
             );
         } catch (e) {
             error =
-                "Could not read PDF. The file may be corrupted or password-protected.";
+                $t('ui.pdf_to_text.error_read', 'Could not read PDF. The file may be corrupted or password-protected.');
             pdfData = null;
         } finally {
             loading = false;
@@ -46,7 +47,7 @@
     function copyText() {
         if (!extractedText) return;
         navigator.clipboard.writeText(extractedText);
-        addToast("success", "Text copied");
+        addToast("success", $t('ui.pdf_to_text.toast_success', 'Text copied'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -89,17 +90,17 @@
         <div class="toolbar">
             <div class="file-info">
                 <FileIcon size={13} />
-                {fileName} — {pageCount} pages — {formatSize(fileSize)} — {wordCount.toLocaleString()}
-                words
+                {fileName} — {pageCount} {$t('ui.pdf_to_text.pages_label', 'pages')} — {formatSize(fileSize)} — {wordCount.toLocaleString()}
+                {$t('ui.pdf_to_text.words_label', 'words')}
             </div>
             <div class="actions">
                 <button onclick={copyText} class="tb-btn">
                     {#if copied}<Check size={13} />{:else}<Copy
                             size={13}
-                        />{/if} Copy
+                        />{/if} {$t('ui.pdf_to_text.copy_button', 'Copy')}
                 </button>
                 <button onclick={downloadText} class="tb-btn">
-                    <Download size={13} /> Download .txt
+                    <Download size={13} /> {$t('ui.pdf_to_text.download_button', 'Download .txt')}
                 </button>
             </div>
         </div>

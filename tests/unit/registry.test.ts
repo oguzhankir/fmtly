@@ -1,10 +1,17 @@
 import { describe, expect, it } from 'vitest';
+import registryEn from '../../src/lib/i18n/registry/en.js';
 import {
 	getAllTools,
 	getCategories,
 	getTool,
 	getToolsByCategory
 } from '../../src/lib/registry/index.js';
+import {
+	localizeToolDefinition,
+	localizeToolDefinitions
+} from '../../src/lib/registry/localized.js';
+
+const t = (key: string, fallback: string = key): string => registryEn[key] ?? fallback;
 
 describe('Tool Registry', () => {
 	describe('getAllTools', () => {
@@ -48,12 +55,15 @@ describe('Tool Registry', () => {
 
 	describe('getTool', () => {
 		it('returns the correct tool for a valid category and slug', () => {
-			const tool = getTool('json', 'formatter');
-			expect(tool).toBeDefined();
-			expect(tool?.id).toBe('json-formatter');
-			expect(tool?.category).toBe('json');
-			expect(tool?.slug).toBe('formatter');
-			expect(tool?.displayName).toBe('JSON Formatter');
+			const rawTool = getTool('json', 'formatter');
+			expect(rawTool).toBeDefined();
+			expect(rawTool?.id).toBe('json-formatter');
+			expect(rawTool?.category).toBe('json');
+			expect(rawTool?.slug).toBe('formatter');
+			expect(rawTool?.displayName).toBe('tool.json-formatter.display_name');
+
+			const tool = localizeToolDefinition(rawTool!, t);
+			expect(tool.displayName).toBe('JSON Formatter');
 		});
 
 		it('returns undefined for a non-existent tool', () => {
@@ -74,10 +84,13 @@ describe('Tool Registry', () => {
 		});
 
 		it('returns json/minifier correctly', () => {
-			const tool = getTool('json', 'minifier');
-			expect(tool).toBeDefined();
-			expect(tool?.id).toBe('json-minifier');
-			expect(tool?.operation).toBe('minify');
+			const rawTool = getTool('json', 'minifier');
+			expect(rawTool).toBeDefined();
+			expect(rawTool?.id).toBe('json-minifier');
+			expect(rawTool?.operation).toBe('tool.json-minifier.operation');
+
+			const tool = localizeToolDefinition(rawTool!, t);
+			expect(tool.operation).toBe('Minify');
 		});
 	});
 
@@ -116,14 +129,14 @@ describe('Tool Registry', () => {
 
 	describe('SEO metadata constraints', () => {
 		it('metaTitle is at most 60 characters', () => {
-			const tools = getAllTools();
+			const tools = localizeToolDefinitions(getAllTools(), t);
 			for (const tool of tools) {
 				expect(tool.metaTitle.length).toBeLessThanOrEqual(60);
 			}
 		});
 
 		it('metaDescription is between 140 and 155 characters', () => {
-			const tools = getAllTools();
+			const tools = localizeToolDefinitions(getAllTools(), t);
 			for (const tool of tools) {
 				expect(tool.metaDescription.length).toBeGreaterThanOrEqual(20);
 				expect(tool.metaDescription.length).toBeLessThanOrEqual(200);

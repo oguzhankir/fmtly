@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Download, Loader } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     type ContentType = "text" | "contact" | "wifi" | "email";
 
@@ -116,66 +117,70 @@
                 class:active={contentType === "text"}
                 onclick={() => {
                     contentType = "text";
-                }}>Text / URL</button
+                }}
+            >{$t('ui.qr_generator.tabs.text', 'Text / URL')}</button
             >
             <button
                 class="tab"
                 class:active={contentType === "contact"}
                 onclick={() => {
                     contentType = "contact";
-                }}>Contact</button
+                }}
+            >{$t('ui.qr_generator.tabs.contact', 'Contact')}</button
             >
             <button
                 class="tab"
                 class:active={contentType === "wifi"}
                 onclick={() => {
                     contentType = "wifi";
-                }}>WiFi</button
+                }}
+            >{$t('ui.qr_generator.tabs.wifi', 'WiFi')}</button
             >
             <button
                 class="tab"
                 class:active={contentType === "email"}
                 onclick={() => {
                     contentType = "email";
-                }}>Email</button
+                }}
+            >{$t('ui.qr_generator.tabs.email', 'Email')}</button
             >
         </div>
 
         <div class="input-area">
             {#if contentType === "text"}
                 <label class="ctrl"
-                    ><span class="lbl">Text or URL</span>
+                    ><span class="label">{$t('ui.qr_generator.form.text_label', 'Text or URL')}</span>
                     <input
                         type="text"
                         bind:value={textInput}
                         class="text-input"
-                        placeholder="Enter text or URL"
+                        placeholder={$t('ui.qr_generator.form.text_placeholder', 'Enter text or URL')}
                     />
                 </label>
             {:else if contentType === "contact"}
                 <label class="ctrl"
-                    ><span class="lbl">Name *</span><input
+                    ><span class="label">{$t('ui.qr_generator.form.name', 'Name *')}</span><input
                         type="text"
                         bind:value={cName}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Phone</span><input
+                    ><span class="label">{$t('ui.qr_generator.form.phone', 'Phone')}</span><input
                         type="text"
                         bind:value={cPhone}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Email</span><input
+                    ><span class="label">{$t('ui.qr_generator.form.email', 'Email')}</span><input
                         type="email"
                         bind:value={cEmail}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Organization</span><input
+                    ><span class="label">{$t('ui.qr_generator.form.org', 'Organization')}</span><input
                         type="text"
                         bind:value={cOrg}
                         class="text-input"
@@ -183,44 +188,44 @@
                 >
             {:else if contentType === "wifi"}
                 <label class="ctrl"
-                    ><span class="lbl">SSID *</span><input
+                    ><span class="lbl">{$t('ui.qr_generator.form.ssid', 'SSID *')}</span><input
                         type="text"
                         bind:value={wSsid}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Password</span><input
+                    ><span class="lbl">{$t('ui.qr_generator.form.password', 'Password')}</span><input
                         type="text"
                         bind:value={wPass}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Encryption</span>
+                    ><span class="lbl">{$t('ui.qr_generator.form.encryption', 'Encryption')}</span>
                     <select bind:value={wEncryption} class="sel">
                         <option value="WPA">WPA/WPA2</option>
                         <option value="WEP">WEP</option>
-                        <option value="nopass">None</option>
+                        <option value="nopass">{$t('ui.qr_generator.form.encryption_none', 'None')}</option>
                     </select>
                 </label>
             {:else if contentType === "email"}
                 <label class="ctrl"
-                    ><span class="lbl">To *</span><input
+                    ><span class="label">{$t('ui.qr_generator.form.to', 'To *')}</span><input
                         type="email"
                         bind:value={eTo}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Subject</span><input
+                    ><span class="label">{$t('ui.qr_generator.form.subject', 'Subject')}</span><input
                         type="text"
                         bind:value={eSubject}
                         class="text-input"
                     /></label
                 >
                 <label class="ctrl"
-                    ><span class="lbl">Body</span><textarea
+                    ><span class="label">{$t('ui.qr_generator.form.body', 'Body')}</span><textarea
                         bind:value={eBody}
                         class="text-input"
                         rows="3"
@@ -231,7 +236,7 @@
 
         <div class="options">
             <label class="ctrl"
-                ><span class="lbl">Size ({size}px)</span>
+                ><span class="lbl">{($t as any)('ui.qr_generator.settings.size', 'Size ({{size}}px)', { size })}</span>
                 <input
                     type="range"
                     bind:value={size}
@@ -242,7 +247,7 @@
                 />
             </label>
             <label class="ctrl"
-                ><span class="lbl">Margin ({margin})</span>
+                ><span class="lbl">{($t as any)('ui.qr_generator.settings.margin', 'Margin ({{margin}})', { margin })}</span>
                 <input
                     type="range"
                     bind:value={margin}
@@ -253,23 +258,23 @@
                 />
             </label>
             <label class="ctrl"
-                ><span class="lbl">Error Correction</span>
+                ><span class="lbl">{$t('ui.qr_generator.settings.error_correction', 'Error Correction')}</span>
                 <select bind:value={errorCorrection} class="sel">
-                    <option value="L">Low (7%)</option>
-                    <option value="M">Medium (15%)</option>
-                    <option value="Q">Quartile (25%)</option>
-                    <option value="H">High (30%)</option>
+                    <option value="L">{$t('ui.qr_generator.settings.ec_low', 'Low (7%)')}</option>
+                    <option value="M">{$t('ui.qr_generator.settings.ec_medium', 'Medium (15%)')}</option>
+                    <option value="Q">{$t('ui.qr_generator.settings.ec_quartile', 'Quartile (25%)')}</option>
+                    <option value="H">{$t('ui.qr_generator.settings.ec_high', 'High (30%)')}</option>
                 </select>
             </label>
             <label class="ctrl"
-                ><span class="lbl">Dark</span><input
+                ><span class="lbl">{$t('ui.qr_generator.settings.dark_color', 'Dark')}</span><input
                     type="color"
                     bind:value={darkColor}
                     class="color-input"
                 /></label
             >
             <label class="ctrl"
-                ><span class="lbl">Light</span><input
+                ><span class="lbl">{$t('ui.qr_generator.settings.light_color', 'Light')}</span><input
                     type="color"
                     bind:value={lightColor}
                     class="color-input"
@@ -283,14 +288,14 @@
             <div class="qr-placeholder"><Loader size={24} class="spin" /></div>
         {:else if qrDataUrl}
             <div class="qr-display">
-                <img src={qrDataUrl} alt="QR Code" class="qr-img" />
+                <img src={qrDataUrl} alt={$t('ui.qr_generator.actions.qr_code_alt', 'QR Code')} class="qr-img" />
             </div>
             <button onclick={downloadQr} class="action-btn"
-                ><Download size={14} /> Download PNG</button
+                ><Download size={14} /> {$t('ui.qr_generator.actions.download', 'Download PNG')}</button
             >
         {:else}
             <div class="qr-placeholder">
-                <p>Enter content to generate QR</p>
+                <p>{$t('ui.qr_generator.placeholder', 'Enter content to generate QR')}</p>
             </div>
         {/if}
     </div>

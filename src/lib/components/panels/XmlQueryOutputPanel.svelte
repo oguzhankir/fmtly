@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { input as xmlInputStore } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$stores/language';
 	import type { ToolDefinition } from '$registry/types.js';
 	import type { XPathResultNode } from '$engines/xml/xpathEngine.js';
 	import { xpathSamples } from '$engines/xml/xpathEngine.js';
@@ -80,7 +81,7 @@
 			document.body.removeChild(ta);
 		}
 		copied = true;
-		addToast('success', 'Results copied to clipboard');
+		addToast('success', $t('ui.toast.copy_success', 'Results copied to clipboard'));
 		setTimeout(() => (copied = false), 2000);
 	}
 
@@ -92,13 +93,13 @@
 
 	function getWorkspaceLabel(tool: ToolDefinition): string {
 		switch (tool.slug) {
-			case 'formatter': return 'Format';
-			case 'validator': return 'Validate';
-			case 'minifier': return 'Minify';
-			case 'to-json': return '→ JSON';
-			case 'to-yaml': return '→ YAML';
-			case 'to-csv': return '→ CSV';
-			case 'xpath': return 'XPath';
+			case 'formatter': return $t('ui.actions.format', 'Format');
+			case 'validator': return $t('ui.actions.validate', 'Validate');
+			case 'minifier': return $t('ui.actions.minify', 'Minify');
+			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
+			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
+			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
+			case 'xpath': return $t('ui.query.xpath', 'XPath');
 			default: return tool.displayName;
 		}
 	}
@@ -150,7 +151,7 @@
 					bind:value={selectedSample}
 					onchange={(e) => loadSample((e.currentTarget as HTMLSelectElement).value)}
 				>
-					<option value="">Samples…</option>
+					<option value="">{$t('ui.actions.choose_sample', 'Samples…')}</option>
 					{#each xpathSamples as sample}
 						<option value={sample.expression}>{sample.label}</option>
 					{/each}
@@ -162,7 +163,7 @@
 				onclick={runQuery}
 				disabled={isRunning || !$xmlInputStore.trim() || !expression.trim()}
 			>
-				{isRunning ? 'Running…' : 'Run'}
+				{isRunning ? $t('ui.actions.running', 'Running…') : $t('ui.actions.run', 'Run')}
 			</button>
 		</div>
 	</div>
@@ -181,7 +182,7 @@
 			<div class="xpath-results-header">
 				<span class="xpath-results-count">
 					<Hash size={12} />
-					{resultCount} {resultCount === 1 ? 'result' : 'results'}
+					{resultCount === 1 ? $t('ui.xpath.results_count.one') : $t('ui.xpath.results_count.other', { count: resultCount })}
 					{#if resultType && resultType !== 'nodeset'}
 						· {resultType}
 					{/if}
@@ -193,10 +194,10 @@
 				>
 					{#if copied}
 						<Check size={12} />
-						Copied
+						{$t('ui.actions.copied', 'Copied')}
 					{:else}
 						<Copy size={12} />
-						Copy all
+						{$t('ui.actions.copy_all', 'Copy all')}
 					{/if}
 				</button>
 			</div>
@@ -216,11 +217,11 @@
 			</div>
 		{:else if !$xmlInputStore.trim()}
 			<div class="xpath-placeholder">
-				<p>Paste XML in the left panel, then run an XPath expression.</p>
+				<p>{$t('ui.xpath.placeholder', 'Paste XML in the left panel, then run an XPath expression.')}</p>
 			</div>
 		{:else}
 			<div class="xpath-placeholder">
-				<p>No results. Try a different expression or check the XML structure.</p>
+				<p>{$t('ui.xpath.no_results', 'No results. Try a different expression or check the XML structure.')}</p>
 			</div>
 		{/if}
 	</div>

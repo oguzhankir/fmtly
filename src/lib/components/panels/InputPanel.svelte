@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { input, initInput } from '$stores/input.store';
+	import { t } from '$stores/language';
 	import EditorModeToggle from '$components/editor/EditorModeToggle.svelte';
 	import type { EditorMode } from '$components/editor/EditorModeToggle.svelte';
 
@@ -129,7 +130,7 @@
 				value={$input}
 				oninput={handleInput}
 				onfocus={handleTextareaFocus}
-				placeholder="Paste {inputLanguage.toUpperCase()} here, or drop a file"
+				placeholder={$t('ui.paste_here', { language: inputLanguage.toUpperCase() }, `Paste ${inputLanguage.toUpperCase()} here…`)}
 				class="h-full w-full resize-none border-none bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none"
 				spellcheck="false"
 				autocomplete="off"
@@ -142,7 +143,7 @@
 					onclick={loadSample}
 					class="pointer-events-auto rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-4)] py-[var(--space-2)] text-[length:var(--text-sm)] font-[number:var(--weight-medium)] text-[var(--text-secondary)] shadow-[var(--shadow-sm)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--border-focus)] hover:text-[var(--text-primary)]"
 				>
-					Load a sample
+					{$t('ui.load_sample', 'Load a sample')}
 				</button>
 			</div>
 		{/if}
@@ -157,7 +158,7 @@
 				class="rounded-[var(--radius-xl)] border-2 border-dashed border-[var(--bg-accent)] px-[var(--space-8)] py-[var(--space-6)]"
 			>
 				<p class="text-[length:var(--text-lg)] font-[number:var(--weight-medium)] text-[var(--text-primary)]">
-					Drop your file here
+					{$t('ui.drop_to_load', 'Drop your file here')}
 				</p>
 			</div>
 		</div>

@@ -2,6 +2,7 @@
     import { analyzeText, type UnicodeResult } from "../../engines/encoder";
     import { Copy } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let inputVal = $state("");
 
@@ -21,7 +22,7 @@
 
     function copyToClipboard(text: string, label: string) {
         navigator.clipboard.writeText(text);
-        addToast("success", `Copied ${label} to clipboard`);
+        addToast("success", ($t as any)('ui.unicode_inspector.toast.copy_success', 'Copied {{label}} to clipboard', { label }));
     }
 </script>
 
@@ -32,14 +33,14 @@
         <h2
             class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)] text-[var(--text-primary)] mb-[var(--space-4)]"
         >
-            Unicode Inspector
+            {$t('ui.unicode_inspector.title', 'Unicode Inspector')}
         </h2>
 
         <div class="relative w-full mb-[var(--space-6)]">
             <input
                 type="text"
                 bind:value={inputVal}
-                placeholder="Paste a character, emoji, or text string here..."
+                placeholder={$t('ui.unicode_inspector.placeholder', 'Paste a character, emoji, or text string here...')}
                 class="w-full min-h-[48px] p-[var(--space-4)] rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-base)] text-[length:var(--text-base)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--border-focus)] font-mono"
             />
         </div>
@@ -52,7 +53,7 @@
                 >
                     <span
                         class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider mb-2"
-                        >Character</span
+                        >{$t('ui.unicode_inspector.labels.character', 'Character')}</span
                     >
                     <div class="flex items-center justify-between group">
                         <span
@@ -66,7 +67,7 @@
                                     "Character",
                                 )}
                             class="text-[var(--text-muted)] hover:text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Copy Character"
+                            title={($t as any)('ui.unicode_inspector.tooltip.copy', 'Copy {{label}}', { label: $t('ui.unicode_inspector.labels.character', 'Character') })}
                         >
                             <Copy size={16} />
                         </button>
@@ -78,7 +79,7 @@
                 >
                     <span
                         class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider mb-2"
-                        >Code Point</span
+                        >{$t('ui.unicode_inspector.labels.code_point', 'Code Point')}</span
                     >
                     <div class="flex items-center justify-between group">
                         <span
@@ -92,7 +93,7 @@
                                     "Code Point",
                                 )}
                             class="text-[var(--text-muted)] hover:text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Copy Code Point"
+                            title={($t as any)('ui.unicode_inspector.tooltip.copy', 'Copy {{label}}', { label: $t('ui.unicode_inspector.labels.code_point', 'Code Point') })}
                         >
                             <Copy size={16} />
                         </button>
@@ -104,7 +105,7 @@
                 >
                     <span
                         class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider mb-2"
-                        >HTML Entity</span
+                        >{$t('ui.unicode_inspector.labels.html_entity', 'HTML Entity')}</span
                     >
                     <div class="flex items-center justify-between group">
                         <span
@@ -118,7 +119,7 @@
                                     "HTML Entity",
                                 )}
                             class="text-[var(--text-muted)] hover:text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Copy HTML Entity"
+                            title={($t as any)('ui.unicode_inspector.tooltip.copy', 'Copy {{label}}', { label: $t('ui.unicode_inspector.labels.html_entity', 'HTML Entity') })}
                         >
                             <Copy size={16} />
                         </button>
@@ -130,7 +131,7 @@
                 >
                     <span
                         class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider mb-2"
-                        >CSS Escape</span
+                        >{$t('ui.unicode_inspector.labels.css_escape', 'CSS Escape')}</span
                     >
                     <div class="flex items-center justify-between group">
                         <span
@@ -144,7 +145,7 @@
                                     "CSS Escape",
                                 )}
                             class="text-[var(--text-muted)] hover:text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Copy CSS Escape"
+                            title={($t as any)('ui.unicode_inspector.tooltip.copy', 'Copy {{label}}', { label: $t('ui.unicode_inspector.labels.css_escape', 'CSS Escape') })}
                         >
                             <Copy size={16} />
                         </button>
@@ -156,7 +157,7 @@
                 >
                     <span
                         class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider mb-2"
-                        >JS Escape</span
+                        >{$t('ui.unicode_inspector.labels.js_escape', 'JS Escape')}</span
                     >
                     <div class="flex items-center justify-between group">
                         <span
@@ -170,7 +171,7 @@
                                     "JS Escape",
                                 )}
                             class="text-[var(--text-muted)] hover:text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Copy JS Escape"
+                            title={($t as any)('ui.unicode_inspector.tooltip.copy', 'Copy {{label}}', { label: $t('ui.unicode_inspector.labels.js_escape', 'JS Escape') })}
                         >
                             <Copy size={16} />
                         </button>
@@ -182,7 +183,7 @@
                 >
                     <span
                         class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider mb-2"
-                        >UTF-8 Bytes</span
+                        >{$t('ui.unicode_inspector.labels.utf8_bytes', 'UTF-8 Bytes')}</span
                     >
                     <div class="flex items-center justify-between group">
                         <span
@@ -196,7 +197,7 @@
                                     "UTF-8 Bytes",
                                 )}
                             class="text-[var(--text-muted)] hover:text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Copy UTF-8 Bytes"
+                            title={($t as any)('ui.unicode_inspector.tooltip.copy', 'Copy {{label}}', { label: $t('ui.unicode_inspector.labels.utf8_bytes', 'UTF-8 Bytes') })}
                         >
                             <Copy size={16} />
                         </button>
@@ -219,27 +220,27 @@
                         >
                             <th
                                 class="p-[var(--space-3)] text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                                >Char</th
+                                >{$t('ui.unicode_inspector.table.char', 'Char')}</th
                             >
                             <th
                                 class="p-[var(--space-3)] text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                                >Code Point</th
+                                >{$t('ui.unicode_inspector.table.code_point', 'Code Point')}</th
                             >
                             <th
                                 class="p-[var(--space-3)] text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                                >HTML</th
+                                >{$t('ui.unicode_inspector.table.html', 'HTML')}</th
                             >
                             <th
                                 class="p-[var(--space-3)] text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                                >CSS</th
+                                >{$t('ui.unicode_inspector.table.css', 'CSS')}</th
                             >
                             <th
                                 class="p-[var(--space-3)] text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                                >JS</th
+                                >{$t('ui.unicode_inspector.table.js', 'JS')}</th
                             >
                             <th
                                 class="p-[var(--space-3)] text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                                >UTF-8 Bytes</th
+                                >{$t('ui.unicode_inspector.table.utf8', 'UTF-8 Bytes')}</th
                             >
                         </tr>
                     </thead>
@@ -281,7 +282,7 @@
             <div
                 class="h-full flex items-center justify-center text-[var(--text-muted)] text-[length:var(--text-sm)]"
             >
-                Enter text above to see the Unicode breakdown
+                {$t('ui.unicode_inspector.empty_state', 'Enter text above to see the Unicode breakdown')}
             </div>
         {/if}
     </div>

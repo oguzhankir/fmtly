@@ -1,24 +1,22 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
-	import { goto } from '$app/navigation';
+	import { get } from 'svelte/store';
 	import { Search } from 'lucide-svelte';
+	import { goto } from '$app/navigation';
 	import { getAllTools } from '$registry/index.js';
+	import { localizeToolDefinitions } from '$registry/localized.js';
+	import { t } from '$stores/language';
 	import type { ToolDefinition } from '$registry/types.js';
 
-	let {
-		open = $bindable(false)
-	}: {
-		open?: boolean;
-	} = $props();
-
-	const allTools = getAllTools();
-
+	let { open = $bindable(false) }: { open?: boolean } = $props();
 	let query = $state('');
 	let selectedIndex = $state(0);
-	let inputEl: HTMLInputElement | undefined = $state(undefined);
+	let inputEl = $state<HTMLInputElement | null>(null);
 
 	let recentIds = $state<string[]>([]);
+
+	let allTools = $derived(localizeToolDefinitions(getAllTools(), get(t)));
 
 	let filteredTools = $derived.by<ToolDefinition[]>(() => {
 		if (!query.trim()) {
@@ -30,13 +28,10 @@
 			return allTools.slice(0, 12);
 		}
 		const q = query.toLowerCase();
-		return allTools.filter(
-			(t) =>
-				t.displayName.toLowerCase().includes(q) ||
-				t.tagline.toLowerCase().includes(q) ||
-				t.category.toLowerCase().includes(q) ||
-				t.primaryKeyword.toLowerCase().includes(q)
-		);
+		return allTools.filter((tool) => {
+			const searchStr = `${tool.displayName} ${tool.category} ${tool.primaryKeyword}`.toLowerCase();
+			return searchStr.includes(q);
+		});
 	});
 
 	function loadRecent(): void {
@@ -51,7 +46,7 @@
 	function openTool(tool: ToolDefinition): void {
 		open = false;
 		query = '';
-		goto(`/${tool.category}/${tool.slug}`);
+		goto(`/${tool.category}/${tool.id}`);
 	}
 
 	function handleKeydown(event: KeyboardEvent): void {
@@ -122,49 +117,52 @@
 		onkeydown={handleKeydown}
 		role="dialog"
 		aria-modal="true"
-		aria-label="Command palette"
+		aria-label={$t('ui.command_palette.title', 'Command palette')}
 		tabindex="-1"
 	>
 		<div class="palette-modal">
 			<div class="palette-input-row">
-				<Search size={18} style="color: var(--text-muted); flex-shrink: 0;" />
-				<input
-					bind:this={inputEl}
-					bind:value={query}
-					type="text"
-					placeholder="Search tools…"
-					class="palette-input"
-					spellcheck="false"
-				/>
-			</div>
+				<div class="search-input-wrapper">
+					<Search class="search-icon" size={20} />
+					<input
+						bind:this={inputEl}
+						type="text"
+						placeholder={get(t)('ui.command_palette.placeholder')}
+						bind:value={query}
+						onkeydown={handleKeydown}
+					/>
+				</div>
 
-			<div class="palette-results">
-				{#if !query.trim() && recentIds.length > 0}
-					<div class="palette-section-label">Recently used</div>
-				{/if}
+				<div class="palette-results">
+					{#if !query.trim() && recentIds.length > 0}
+						<div class="palette-section-label">{$t('ui.command_palette.recent')}</div>
+					{/if}
 
-				{#each filteredTools as tool, i (tool.id)}
-					<button
-						class="palette-result"
-						class:palette-result--active={i === selectedIndex}
-						onclick={() => openTool(tool)}
-						onmouseenter={() => { selectedIndex = i; }}
-					>
-						<div class="palette-result-left">
-							<span class="palette-result-badge">{tool.category.toUpperCase()}</span>
-							<span class="palette-result-name">{tool.displayName}</span>
+					{#each filteredTools as tool, i (tool.id)}
+						<button
+							class="palette-result"
+							class:palette-result--active={i === selectedIndex}
+							onclick={() => openTool(tool)}
+							onmouseenter={() => { selectedIndex = i; }}
+						>
+							<div class="palette-result-left">
+								<span class="palette-result-badge">{tool.category.toUpperCase()}</span>
+								<span class="palette-result-name">{tool.displayName}</span>
+							</div>
+							<span class="palette-result-category">{tool.tagline}</span>
+						</button>
+					{:else}
+						<div class="no-results">
+							<p>{get(t)('ui.command_palette.no_results')}</p>
 						</div>
-						<span class="palette-result-category">{tool.tagline}</span>
-					</button>
-				{:else}
-					<div class="palette-empty">No tools match "{query}"</div>
-				{/each}
-			</div>
+					{/each}
+				</div>
 
-			<div class="palette-footer">
-				<span class="palette-hint"><kbd>↑↓</kbd> navigate</span>
-				<span class="palette-hint"><kbd>↵</kbd> open</span>
-				<span class="palette-hint"><kbd>esc</kbd> close</span>
+				<div class="palette-footer">
+					<span class="palette-hint"><kbd>↑↓</kbd> {$t('ui.command_palette.hint_navigate')}</span>
+					<span class="palette-hint"><kbd>↵</kbd> {$t('ui.command_palette.hint_open')}</span>
+					<span class="palette-hint"><kbd>esc</kbd> {$t('ui.command_palette.hint_close')}</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -204,19 +202,6 @@
 		border-bottom: 1px solid var(--border-subtle);
 	}
 
-	.palette-input {
-		flex: 1;
-		background: none;
-		border: none;
-		outline: none;
-		font-family: var(--font-ui);
-		font-size: 16px;
-		color: var(--text-primary);
-	}
-
-	.palette-input::placeholder {
-		color: var(--text-muted);
-	}
 
 	.palette-results {
 		flex: 1;
@@ -294,12 +279,6 @@
 		margin-left: 8px;
 	}
 
-	.palette-empty {
-		padding: 20px 12px;
-		font-size: 13px;
-		color: var(--text-muted);
-		text-align: center;
-	}
 
 	.palette-footer {
 		display: flex;

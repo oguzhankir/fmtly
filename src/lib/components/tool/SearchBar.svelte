@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment';
 	import { ChevronUp, ChevronDown, X, Filter } from 'lucide-svelte';
 	import type { TreeNode } from '$engines/json/types.js';
+	import { t } from '$lib/stores/language.js';
 
 	type SearchTab = 'keys' | 'values' | 'path' | 'regex';
 
@@ -151,10 +152,10 @@
 	}
 
 	const tabs: { key: SearchTab; label: string }[] = [
-		{ key: 'keys', label: 'Keys' },
-		{ key: 'values', label: 'Values' },
-		{ key: 'path', label: 'Path' },
-		{ key: 'regex', label: 'Regex' }
+		{ key: 'keys', label: $t('ui.search.tabs.keys', 'Keys') },
+		{ key: 'values', label: $t('ui.search.tabs.values', 'Values') },
+		{ key: 'path', label: $t('ui.search.tabs.path', 'Path') },
+		{ key: 'regex', label: $t('ui.search.tabs.regex', 'Regex') }
 	];
 </script>
 
@@ -179,7 +180,7 @@
 				bind:this={inputEl}
 				bind:value={query}
 				onkeydown={handleInputKeydown}
-				placeholder="Search {activeTab}…"
+				placeholder={($t as any)('ui.search.placeholder', 'Search {{tab}}…', { tab: activeTab })}
 				class="search-input"
 				type="text"
 				spellcheck="false"
@@ -193,10 +194,10 @@
 			{/if}
 
 			<!-- Nav arrows -->
-			<button class="search-nav-btn" onclick={goPrev} aria-label="Previous match" disabled={matchIds.length === 0}>
+			<button class="search-nav-btn" onclick={goPrev} aria-label={$t('ui.search.aria.previous', 'Previous match')} disabled={matchIds.length === 0}>
 				<ChevronUp size={14} />
 			</button>
-			<button class="search-nav-btn" onclick={goNext} aria-label="Next match" disabled={matchIds.length === 0}>
+			<button class="search-nav-btn" onclick={goNext} aria-label={$t('ui.search.aria.next', 'Next match')} disabled={matchIds.length === 0}>
 				<ChevronDown size={14} />
 			</button>
 
@@ -205,14 +206,14 @@
 				class="search-nav-btn"
 				class:search-filter-active={filterMode}
 				onclick={() => (filterMode = !filterMode)}
-				aria-label="Toggle filter mode"
-				title="Filter: hide non-matching branches"
+				aria-label={$t('ui.search.aria.filter', 'Toggle filter mode')}
+				title={$t('ui.search.aria.filter_hint', 'Filter: hide non-matching branches')}
 			>
 				<Filter size={14} />
 			</button>
 
 			<!-- Close -->
-			<button class="search-nav-btn" onclick={() => { visible = false; resetSearch(); }} aria-label="Close search">
+			<button class="search-nav-btn" onclick={() => { visible = false; resetSearch(); }} aria-label={$t('ui.search.aria.close', 'Close search')}>
 				<X size={14} />
 			</button>
 		</div>

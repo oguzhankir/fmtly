@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { output } from '$stores/output.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$stores/language';
 	import { Copy, Download } from 'lucide-svelte';
 
 	let {
@@ -64,7 +65,7 @@
 		const value = $output;
 		if (!value) return;
 		await navigator.clipboard.writeText(value);
-		addToast('success', 'Output copied');
+		addToast('success', $t('ui.toast.copy_success', 'Output copied'));
 	}
 
 	function handleDownload(): void {
@@ -102,15 +103,15 @@
 				aria-label="Copy output"
 			>
 				<Copy size={12} />
-				Copy
+				{$t('ui.actions.copy', 'Copy')}
 			</button>
 			<button
 				onclick={handleDownload}
 				class="flex items-center gap-[var(--space-1)] rounded-[var(--radius-md)] bg-[var(--bg-surface)] px-[var(--space-2)] py-[var(--space-1)] text-[length:var(--text-xs)] text-[var(--text-secondary)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--bg-surface-hover)] hover:text-[var(--text-primary)]"
-				aria-label="Download output"
+				aria-label={$t('ui.actions.download', 'Download output')}
 			>
 				<Download size={12} />
-				Download
+				{$t('ui.actions.download', 'Download')}
 			</button>
 		</div>
 
@@ -128,7 +129,7 @@
 		<!-- Empty state -->
 		<div class="flex h-full w-full items-center justify-center">
 			<p class="text-[length:var(--text-sm)] text-[var(--text-tertiary)]">
-				Output will appear here
+				{$t('tool.output_placeholder', 'Output will appear here')}
 			</p>
 		</div>
 	{/if}

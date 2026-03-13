@@ -8,6 +8,7 @@
         ZoomOut,
         File as FileIcon,
     } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let pdfData: ArrayBuffer | null = $state(null);
     let fileName = $state("");
@@ -37,7 +38,7 @@
             await renderCurrent();
         } catch (e) {
             error =
-                "Could not read PDF. The file may be corrupted or password-protected.";
+                $t('ui.pdf_viewer.error_read', 'Could not read PDF. The file may be corrupted or password-protected.');
             pdfData = null;
         } finally {
             loading = false;
@@ -56,7 +57,7 @@
                 scale,
             );
         } catch {
-            error = "Failed to render page.";
+            error = $t('ui.pdf_viewer.error_render', 'Failed to render page.');
         } finally {
             loading = false;
         }
@@ -122,7 +123,7 @@
                     disabled={currentPage <= 1}
                     class="tb-btn"><ChevronLeft size={16} /></button
                 >
-                <span class="page-info">Page {currentPage} of {pageCount}</span>
+                <span class="page-info">{($t as any)('ui.pdf_viewer.page_info', 'Page {{current}} of {{total}}', { current: currentPage, total: pageCount })}</span>
                 <button
                     onclick={nextPage}
                     disabled={currentPage >= pageCount}
@@ -151,7 +152,7 @@
         <!-- Canvas -->
         <div class="canvas-container">
             {#if loading}
-                <div class="loading-overlay">Rendering…</div>
+                <div class="loading-overlay">{$t('ui.pdf_viewer.rendering', 'Rendering…')}</div>
             {/if}
             {#if error}
                 <div class="error-msg">{error}</div>

@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import { Download, File as FileIcon, Loader, Check } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let pdfData: ArrayBuffer | null = $state(null);
     let fileName = $state("");
@@ -37,7 +38,7 @@
             }
         } catch {
             error =
-                "Could not read PDF. The file may be corrupted or password-protected.";
+                $t('ui.pdf_extract.error_read', 'Could not read PDF. The file may be corrupted or password-protected.');
             pdfData = null;
         } finally {
             loading = false;
@@ -79,10 +80,10 @@
             URL.revokeObjectURL(url);
             addToast(
                 "success",
-                `Extracted ${pages.length} page${pages.length > 1 ? "s" : ""}`,
+                ($t as any)('ui.pdf_extract.toast_success', 'Extracted {{count}} page(s)', { count: pages.length }),
             );
         } catch {
-            error = "Failed to extract pages.";
+            error = $t('ui.pdf_extract.error_extract', 'Failed to extract pages.');
         } finally {
             extracting = false;
         }
@@ -104,8 +105,8 @@
         <div class="loading-center">
             <Loader size={24} class="spin" />
             <p>
-                Loading PDF… {thumbnails.length > 0
-                    ? `(${thumbnails.length}/${pageCount} thumbnails)`
+                {$t('ui.pdf_extract.loading', 'Loading PDF…')} {thumbnails.length > 0
+                    ? ($t as any)('ui.pdf_extract.thumbnails_count', '({{current}}/{{total}} thumbnails)', { current: thumbnails.length, total: pageCount })
                     : ""}
             </p>
         </div>
@@ -113,13 +114,11 @@
         <div class="toolbar">
             <div class="file-info">
                 <FileIcon size={13} />
-                {fileName} — {pageCount} pages — {formatSize(fileSize)}
+                {fileName} — {pageCount} {$t('ui.pdf_extract.pages_label', 'pages')} — {formatSize(fileSize)}
             </div>
             <div class="select-actions">
-                <button onclick={selectAll} class="tb-btn">Select all</button>
-                <button onclick={deselectAll} class="tb-btn"
-                    >Deselect all</button
-                >
+                <button onclick={selectAll} class="tb-btn">{$t('ui.pdf_extract.select_all', 'Select all')}</button>
+                <button onclick={deselectAll} class="tb-btn">{$t('ui.pdf_extract.deselect_all', 'Deselect all')}</button>
             </div>
         </div>
 
@@ -138,7 +137,7 @@
                             <div class="check-badge"><Check size={14} /></div>
                         {/if}
                     </div>
-                    <span class="thumb-label">Page {pageNum}</span>
+                    <span class="thumb-label">{($t as any)('ui.pdf_extract.page_num', 'Page {{num}}', { num: pageNum })}</span>
                 </button>
             {/each}
         </div>
@@ -149,7 +148,7 @@
 
         <div class="actions-bar">
             <span class="summary"
-                >{selectedPages.size} of {pageCount} pages selected</span
+                >{($t as any)('ui.pdf_extract.selection_summary', '{{selected}} of {{total}} pages selected', { selected: selectedPages.size, total: pageCount })}</span
             >
             <button
                 onclick={extract}
@@ -160,7 +159,7 @@
                         size={14}
                         class="spin"
                     />{:else}<Download size={14} />{/if}
-                {extracting ? "Extracting…" : "Extract Selected & Download"}
+                {extracting ? $t('ui.pdf_extract.extracting', 'Extracting…') : $t('ui.pdf_extract.extract_button', 'Extract Selected & Download')}
             </button>
         </div>
     {/if}

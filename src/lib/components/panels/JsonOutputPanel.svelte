@@ -3,6 +3,7 @@
 	import { output } from '$stores/output.store';
 	import { input as inputStore } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import {
 		jsonError,
 		jsonAdvancedStats,
@@ -54,11 +55,11 @@
 	let outputMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lineCount = $output.length === 0 ? 0 : $output.split('\n').length;
-		return `${$output.length.toLocaleString()} chars · ${lineCount.toLocaleString()} lines`;
+		return `${$output.length.toLocaleString()} {$t('ui.output.stats.chars', 'chars')} · ${lineCount.toLocaleString()} {$t('ui.output.stats.lines', 'lines')}`;
 	});
 	let statsSummary = $derived.by(() => {
 		if (!$jsonAdvancedStats) return '';
-		return `${$jsonAdvancedStats.keys} keys · ${$jsonAdvancedStats.objects} objects · ${$jsonAdvancedStats.arrays} arrays · ${$jsonAdvancedStats.strings} strings · depth: ${$jsonAdvancedStats.maxDepth}`;
+		return `${$jsonAdvancedStats.keys} {$t('ui.output.stats.keys', 'keys')} · ${$jsonAdvancedStats.objects} {$t('ui.output.stats.objects', 'objects')} · ${$jsonAdvancedStats.arrays} {$t('ui.output.stats.arrays', 'arrays')} · ${$jsonAdvancedStats.strings} {$t('ui.output.stats.strings', 'strings')} · {$t('ui.output.stats.depth', 'depth')}: ${$jsonAdvancedStats.maxDepth}`;
 	});
 	let minifySummary = $derived.by(() => {
 		if (!isMinifier || !$jsonAdvancedStats) return '';
@@ -67,7 +68,7 @@
 		if (original <= 0) return '';
 		const saved = Math.max(original - minified, 0);
 		const ratio = saved === 0 ? 0 : (saved / original) * 100;
-		return `Original: ${(original / 1024).toFixed(1)} KB → Minified: ${(minified / 1024).toFixed(1)} KB — saved ${ratio.toFixed(1)}% (${(saved / 1024).toFixed(1)} KB)`;
+		return `{$t('ui.output.original', 'Original')}: ${(original / 1024).toFixed(1)} KB → {$t('ui.output.minified', 'Minified')}: ${(minified / 1024).toFixed(1)} KB — {$t('ui.output.saved', 'saved')} ${ratio.toFixed(1)}% (${(saved / 1024).toFixed(1)} KB)`;
 	});
 
 	onMount(async () => {
@@ -172,7 +173,7 @@
 			copiedSuccessfully = fallbackCopy(text);
 		}
 		if (!copiedSuccessfully) {
-			addToast('error', 'Could not copy output');
+			addToast('error', $t('ui.output.error.copy_failed', 'Could not copy output'));
 			return;
 		}
 		copied = true;
@@ -265,17 +266,17 @@
 		</button>
 		{#if showStats}
 			<div class="json-stats-grid">
-				<span><strong>{$jsonAdvancedStats.keys}</strong> keys</span>
-				<span><strong>{$jsonAdvancedStats.values}</strong> values</span>
-				<span><strong>{$jsonAdvancedStats.strings}</strong> strings</span>
-				<span><strong>{$jsonAdvancedStats.numbers}</strong> numbers</span>
-				<span><strong>{$jsonAdvancedStats.booleans}</strong> booleans</span>
-				<span><strong>{$jsonAdvancedStats.nulls}</strong> nulls</span>
-				<span><strong>{$jsonAdvancedStats.arrays}</strong> arrays</span>
-				<span><strong>{$jsonAdvancedStats.objects}</strong> objects</span>
-				<span><strong>{$jsonAdvancedStats.maxDepth}</strong> depth</span>
-				<span><strong>{$jsonAdvancedStats.sizeOriginal}</strong> B in</span>
-				<span><strong>{$jsonAdvancedStats.sizeFormatted}</strong> B out</span>
+				<span><strong>{$jsonAdvancedStats.keys}</strong> {$t('ui.output.stats.keys', 'keys')}</span>
+				<span><strong>{$jsonAdvancedStats.values}</strong> {$t('ui.output.stats.values', 'values')}</span>
+				<span><strong>{$jsonAdvancedStats.strings}</strong> {$t('ui.output.stats.strings', 'strings')}</span>
+				<span><strong>{$jsonAdvancedStats.numbers}</strong> {$t('ui.output.stats.numbers', 'numbers')}</span>
+				<span><strong>{$jsonAdvancedStats.booleans}</strong> {$t('ui.output.stats.booleans', 'booleans')}</span>
+				<span><strong>{$jsonAdvancedStats.nulls}</strong> {$t('ui.output.stats.nulls', 'nulls')}</span>
+				<span><strong>{$jsonAdvancedStats.arrays}</strong> {$t('ui.output.stats.arrays', 'arrays')}</span>
+				<span><strong>{$jsonAdvancedStats.objects}</strong> {$t('ui.output.stats.objects', 'objects')}</span>
+				<span><strong>{$jsonAdvancedStats.maxDepth}</strong> {$t('ui.output.stats.depth', 'depth')}</span>
+				<span><strong>{$jsonAdvancedStats.sizeOriginal}</strong> B {$t('ui.output.stats.size_in', 'in')}</span>
+				<span><strong>{$jsonAdvancedStats.sizeFormatted}</strong> B {$t('ui.output.stats.size_out', 'out')}</span>
 			</div>
 		{/if}
 	{/if}
@@ -291,7 +292,7 @@
 	{#if !$output && needsValidJson && $inputStore.trim() && $jsonError}
 		<div class="json-output-error">
 			<AlertTriangle size={20} />
-			<strong>Invalid JSON</strong>
+			<strong>{$t('ui.output.error.invalid_title', 'Invalid JSON')}</strong>
 			<span>{$jsonError.message}</span>
 		</div>
 	{:else if $output}
@@ -305,7 +306,7 @@
 		{#if isFormatter}
 			<div class="json-output-controls">
 				<div class="json-output-controls__group">
-					<span class="json-output-controls__label">Indent</span>
+					<span class="json-output-controls__label">{$t('ui.output.controls.indent', 'Indent')}</span>
 					<button
 						type="button"
 						class="json-output-chip"
@@ -328,7 +329,7 @@
 						class:json-output-chip--active={$jsonFormatOptions.indent === 'tab'}
 						onclick={() => setIndent('tab')}
 					>
-						Tab
+						{$t('ui.output.controls.tab', 'Tab')}
 					</button>
 				</div>
 				<div class="json-output-controls__group">
@@ -338,7 +339,7 @@
 						class:json-output-chip--active={$jsonFormatOptions.sortKeys}
 						onclick={toggleSortKeys}
 					>
-						Sort keys
+						{$t('ui.output.controls.sort_keys', 'Sort keys')}
 					</button>
 					<div class="json-output-menu-wrap">
 						<button
@@ -348,7 +349,7 @@
 							onclick={() => (showCleanMenu = !showCleanMenu)}
 						>
 							<Sparkles size={12} />
-							Clean
+							{$t('ui.output.controls.clean', 'Clean')}
 						</button>
 						{#if showCleanMenu}
 							<div class="json-output-menu">
@@ -358,7 +359,7 @@
 										checked={$jsonFormatOptions.removeNulls ? true : undefined}
 										onchange={() => toggleCleanOption('removeNulls')}
 									/>
-									<span>Remove null values</span>
+									<span>{$t('ui.output.controls.clean_nulls', 'Remove null values')}</span>
 								</label>
 								<label class="json-output-menu__row">
 									<input
@@ -366,7 +367,7 @@
 										checked={$jsonFormatOptions.removeEmptyStrings ? true : undefined}
 										onchange={() => toggleCleanOption('removeEmptyStrings')}
 									/>
-									<span>Remove empty strings</span>
+									<span>{$t('ui.output.controls.clean_strings', 'Remove empty strings')}</span>
 								</label>
 								<label class="json-output-menu__row">
 									<input
@@ -374,7 +375,7 @@
 										checked={$jsonFormatOptions.removeEmptyArrays ? true : undefined}
 										onchange={() => toggleCleanOption('removeEmptyArrays')}
 									/>
-									<span>Remove empty arrays</span>
+									<span>{$t('ui.output.controls.clean_arrays', 'Remove empty arrays')}</span>
 								</label>
 								<label class="json-output-menu__row">
 									<input
@@ -382,10 +383,10 @@
 										checked={$jsonFormatOptions.removeEmptyObjects ? true : undefined}
 										onchange={() => toggleCleanOption('removeEmptyObjects')}
 									/>
-									<span>Remove empty objects</span>
+									<span>{$t('ui.output.controls.clean_objects', 'Remove empty objects')}</span>
 								</label>
 								<button type="button" class="json-output-btn" onclick={applyCleanOptions}>
-									Apply
+									{$t('ui.output.controls.apply', 'Apply')}
 								</button>
 							</div>
 						{/if}
@@ -404,39 +405,39 @@
 		<div class="json-output-actions">
 			<button type="button" class="json-output-btn" onclick={() => (wrapLines = !wrapLines)}>
 				<WrapText size={13} />
-				Wrap
+				{$t('ui.output.actions.wrap', 'Wrap')}
 			</button>
 			{#if supportsCompare}
 				<button type="button" class="json-output-btn" onclick={() => (showCompare = !showCompare)}>
-					Compare
+					{$t('ui.output.actions.compare', 'Compare')}
 				</button>
 			{/if}
 			{#if supportsStructuredCopy}
 				<select class="json-output-select" onchange={(event) => handleCopy((event.currentTarget as HTMLSelectElement).value as 'json' | 'js' | 'python' | 'escaped')}>
-					<option value="json">Copy as JSON</option>
-					<option value="js">Copy as JS Object</option>
-					<option value="python">Copy as Python Dict</option>
-					<option value="escaped">Copy escaped</option>
+					<option value="json">{$t('ui.output.actions.copy_json', 'Copy as JSON')}</option>
+					<option value="js">{$t('ui.output.actions.copy_js', 'Copy as JS Object')}</option>
+					<option value="python">{$t('ui.output.actions.copy_python', 'Copy as Python Dict')}</option>
+					<option value="escaped">{$t('ui.output.actions.copy_escaped', 'Copy escaped')}</option>
 				</select>
 			{/if}
 			<button type="button" class="json-output-btn" onclick={() => handleCopy()}>
 				{#if copied}
 					<Check size={13} />
 				{:else}
-					<Copy size={13} />
+					{$t('ui.output.actions.copy', 'Copy')} size={13} />
 				{/if}
-				Copy
+				{$t('ui.output.actions.copy', 'Copy')}
 			</button>
 			<button type="button" class="json-output-btn" onclick={handleDownload}>
-				<Download size={13} />
-				Download
+					{$t('ui.output.actions.download', 'Download')} size={13} />
+				{$t('ui.output.actions.download', 'Download')}
 			</button>
 		</div>
 
 		{#if showCompare && supportsCompare}
 			<div class="json-compare-grid">
 				<div class="json-compare-column">
-					<div class="json-compare-title">Input</div>
+						<span class="compare-header">{$t('ui.output.compare.input', 'Input')}</span>
 					{#each compareLines($inputStore, $output) as row, index}
 						<div class="json-compare-line" class:json-compare-line--changed={row.changed}>
 							<span>{index + 1}</span>
@@ -445,7 +446,7 @@
 					{/each}
 				</div>
 				<div class="json-compare-column">
-					<div class="json-compare-title">Output</div>
+						<span class="compare-header">{$t('ui.output.compare.output', 'Output')}</span>
 					{#each compareLines($inputStore, $output) as row, index}
 						<div class="json-compare-line" class:json-compare-line--changed={row.changed}>
 							<span>{index + 1}</span>
@@ -688,18 +689,7 @@
 		border-right: none;
 	}
 
-	.json-compare-title {
-		position: sticky;
-		top: 0;
-		padding: var(--space-2) var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 600;
-		color: var(--text-primary);
-	}
-
+	
 	.json-compare-line {
 		display: grid;
 		grid-template-columns: 52px minmax(0, 1fr);

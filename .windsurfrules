@@ -80,6 +80,13 @@ Never delete `static/_headers`, `static/_redirects`, `static/_routes.json`.
 - Shared state: `src/lib/stores/`
 - localStorage: only in store files, never in components.
 
+### Localization
+
+- Every user-facing string must be localizable. No hardcoded UI copy, category names, tool names, taglines, descriptions, FAQs, use cases, or SEO text in components or registry output.
+- New features are not complete until their visible text is wired into the localization system.
+- Translations must be idiomatic for the target language — never literal word-for-word copies if they sound unnatural.
+- Prefer product-appropriate phrasing for each locale (for example, translate ideas like "No login" naturally, such as "No account required" equivalents where that reads better).
+
 ### CSS
 
 - No hardcoded hex colors — always `var(--token-name)`.

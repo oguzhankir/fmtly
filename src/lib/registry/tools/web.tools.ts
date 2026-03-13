@@ -5,14 +5,12 @@ export const webTools: ToolDefinition[] = [
 		id: 'web-url-parser',
 		category: 'web',
 		slug: 'url-parser',
-		displayName: 'URL Parser',
-		tagline: 'Break any URL into its components and rebuild it.',
-		description:
-			'Instantly parse any URL into protocol, hostname, path, query parameters, and fragment using the browser-native URL API. Then rebuild a URL from individual components.',
-		primaryKeyword: 'url parser',
-		metaTitle: 'URL Parser & Builder | fmtly',
-		metaDescription:
-			'Parse any URL into its components (protocol, hostname, pathname, query params, hash) and build URLs from parts. Runs entirely in your browser.',
+		displayName: 'tool.web-url-parser.display_name',
+		tagline: 'tool.web-url-parser.tagline',
+		description: 'tool.web-url-parser.description',
+		primaryKeyword: 'tool.web-url-parser.primary_keyword',
+		metaTitle: 'tool.web-url-parser.meta_title',
+		metaDescription: 'tool.web-url-parser.meta_description',
 		engine: 'web',
 		operation: 'url-parser',
 		layoutVariant: 'single-panel',
@@ -25,20 +23,18 @@ export const webTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Does this send my URLs anywhere?',
-				answer:
-					'No. Everything uses the browser-native URL class. Your input never leaves your device.'
+				question: 'tool.web-url-parser.faq.0.question',
+				answer: 'tool.web-url-parser.faq.0.answer'
 			},
 			{
-				question: 'Can it parse malformed URLs?',
-				answer:
-					'It will show an error for truly invalid URLs. Relative URLs require a base URL to be valid.'
+				question: 'tool.web-url-parser.faq.1.question',
+				answer: 'tool.web-url-parser.faq.1.answer'
 			}
 		],
 		useCases: [
-			'Debugging OAuth redirect_uri and callback URL issues',
-			'Inspecting API endpoint query string parameters',
-			'Building dynamic URLs programmatically'
+			'tool.web-url-parser.use_case.0',
+			'tool.web-url-parser.use_case.1',
+			'tool.web-url-parser.use_case.2'
 		],
 		sampleInput:
 			'https://user:pass@api.example.com:8080/v1/users?page=2&limit=10&filter=active#results'
@@ -47,14 +43,12 @@ export const webTools: ToolDefinition[] = [
 		id: 'web-user-agent',
 		category: 'web',
 		slug: 'user-agent',
-		displayName: 'User Agent Parser',
-		tagline: 'Decode any User-Agent string into browser, OS, and device info.',
-		description:
-			'Paste any User-Agent string to instantly identify browser name, version, operating system, device type, and rendering engine. Pre-filled with your current browser automatically.',
-		primaryKeyword: 'user agent parser',
-		metaTitle: 'User Agent Parser | Browser, OS & Device Detector | fmtly',
-		metaDescription:
-			'Parse and decode User-Agent strings. Detect browser name, version, OS, device type, and engine. Works offline in your browser.',
+		displayName: 'tool.web-user-agent.display_name',
+		tagline: 'tool.web-user-agent.tagline',
+		description: 'tool.web-user-agent.description',
+		primaryKeyword: 'tool.web-user-agent.primary_keyword',
+		metaTitle: 'tool.web-user-agent.meta_title',
+		metaDescription: 'tool.web-user-agent.meta_description',
 		engine: 'web',
 		operation: 'user-agent',
 		layoutVariant: 'single-panel',
@@ -68,15 +62,14 @@ export const webTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Is my User-Agent sent to a server?',
-				answer:
-					'No. Parsing uses the ua-parser-js library running entirely client-side. No data is transmitted.'
+				question: 'tool.web-user-agent.faq.0.question',
+				answer: 'tool.web-user-agent.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Debugging browser compatibility issues from support tickets',
-			'Verifying bot detection logic',
-			'Understanding what device a specific UA represents'
+			'tool.web-user-agent.use_case.0',
+			'tool.web-user-agent.use_case.1',
+			'tool.web-user-agent.use_case.2'
 		],
 		sampleInput:
 			'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
@@ -85,14 +78,12 @@ export const webTools: ToolDefinition[] = [
 		id: 'web-cors',
 		category: 'web',
 		slug: 'cors',
-		displayName: 'CORS Header Explainer',
-		tagline: 'Understand CORS headers and their security implications.',
-		description:
-			'Enter any CORS-related HTTP header name and value to get a plain-English explanation of what it does, why it exists, whether the current value is safe, and what the recommendation is.',
-		primaryKeyword: 'cors header explainer',
-		metaTitle: 'CORS Header Explainer | Security Reference | fmtly',
-		metaDescription:
-			'Understand any CORS header — Access-Control-Allow-Origin, Allow-Methods, Allow-Credentials, and more. Get security recommendations instantly.',
+		displayName: 'tool.web-cors.display_name',
+		tagline: 'tool.web-cors.tagline',
+		description: 'tool.web-cors.description',
+		primaryKeyword: 'tool.web-cors.primary_keyword',
+		metaTitle: 'tool.web-cors.meta_title',
+		metaDescription: 'tool.web-cors.meta_description',
 		engine: 'web',
 		operation: 'cors',
 		layoutVariant: 'single-panel',
@@ -105,35 +96,27 @@ export const webTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: "Why does Access-Control-Allow-Origin: '*' cause issues?",
-				answer:
-					'Wildcard origin disables the ability to send credentials (cookies, Authorization headers) with cross-origin requests. It also removes one layer of server-side trust validation.'
+				question: 'tool.web-cors.faq.0.question',
+				answer: 'tool.web-cors.faq.0.answer'
 			},
 			{
-				question: 'What is a CORS preflight request?',
-				answer:
-					'For non-simple requests, browsers first send an OPTIONS request to ask if the actual request is allowed. The server must respond with appropriate CORS headers.'
+				question: 'tool.web-cors.faq.1.question',
+				answer: 'tool.web-cors.faq.1.answer'
 			}
 		],
-		useCases: [
-			'Debugging cross-origin fetch errors in web applications',
-			'Auditing API response headers for security vulnerabilities',
-			'Learning CORS concepts from real header values'
-		],
+		useCases: ['tool.web-cors.use_case.0', 'tool.web-cors.use_case.1', 'tool.web-cors.use_case.2'],
 		sampleInput: 'Access-Control-Allow-Origin'
 	},
 	{
 		id: 'web-mime-types',
 		category: 'web',
 		slug: 'mime-types',
-		displayName: 'MIME Type Reference',
-		tagline: 'Search MIME types by extension or type string.',
-		description:
-			'Search our embedded database of 300+ MIME types by file extension (.json, .webp) or MIME type string (application/json, image/webp). Instantly see extensions, descriptions, and whether the format is binary.',
-		primaryKeyword: 'mime types lookup',
-		metaTitle: 'MIME Type Reference | Extension & Type Lookup | fmtly',
-		metaDescription:
-			'Look up any MIME type by file extension or MIME string. 300+ types including images, audio, video, documents, code, and archives.',
+		displayName: 'tool.web-mime-types.display_name',
+		tagline: 'tool.web-mime-types.tagline',
+		description: 'tool.web-mime-types.description',
+		primaryKeyword: 'tool.web-mime-types.primary_keyword',
+		metaTitle: 'tool.web-mime-types.meta_title',
+		metaDescription: 'tool.web-mime-types.meta_description',
 		engine: 'web',
 		operation: 'mime-types',
 		layoutVariant: 'single-panel',
@@ -147,15 +130,14 @@ export const webTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Does this make network requests?',
-				answer:
-					'No. The entire MIME type database is embedded in the tool. All filtering happens client-side.'
+				question: 'tool.web-mime-types.faq.0.question',
+				answer: 'tool.web-mime-types.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Setting correct Content-Type headers in APIs',
-			'Configuring web server MIME type mappings',
-			'Identifying file types by extension'
+			'tool.web-mime-types.use_case.0',
+			'tool.web-mime-types.use_case.1',
+			'tool.web-mime-types.use_case.2'
 		],
 		sampleInput: 'json'
 	},
@@ -163,14 +145,12 @@ export const webTools: ToolDefinition[] = [
 		id: 'web-ip-lookup',
 		category: 'web',
 		slug: 'ip-lookup',
-		displayName: 'IP Address Lookup',
-		tagline: 'Geolocate any IP address — country, city, ISP, ASN.',
-		description:
-			'Look up geolocation, ASN, and ISP information for any public IP address via our Cloudflare Worker proxy. Your own IP is never logged.',
-		primaryKeyword: 'ip address lookup',
-		metaTitle: 'IP Address Lookup | Geolocation & ASN | fmtly',
-		metaDescription:
-			'Find the geolocation, ISP, ASN, city, country, and timezone for any public IP address. Powered by a privacy-respecting proxy Worker.',
+		displayName: 'tool.web-ip-lookup.display_name',
+		tagline: 'tool.web-ip-lookup.tagline',
+		description: 'tool.web-ip-lookup.description',
+		primaryKeyword: 'tool.web-ip-lookup.primary_keyword',
+		metaTitle: 'tool.web-ip-lookup.meta_title',
+		metaDescription: 'tool.web-ip-lookup.meta_description',
 		engine: 'web',
 		operation: 'ip-lookup',
 		layoutVariant: 'single-panel',
@@ -184,15 +164,14 @@ export const webTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Is my IP address stored?',
-				answer:
-					'No. The Cloudflare Worker proxy relays the lookup to ipapi.co and returns the result. No data is logged.'
+				question: 'tool.web-ip-lookup.faq.0.question',
+				answer: 'tool.web-ip-lookup.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Debugging geolocation-based access controls',
-			'Investigating suspicious IP addresses in logs',
-			'Finding your own public IP and location'
+			'tool.web-ip-lookup.use_case.0',
+			'tool.web-ip-lookup.use_case.1',
+			'tool.web-ip-lookup.use_case.2'
 		],
 		sampleInput: '8.8.8.8'
 	},
@@ -200,14 +179,12 @@ export const webTools: ToolDefinition[] = [
 		id: 'web-dns-lookup',
 		category: 'web',
 		slug: 'dns-lookup',
-		displayName: 'DNS Lookup',
-		tagline: 'Query all DNS record types for any domain simultaneously.',
-		description:
-			'Look up A, AAAA, MX, TXT, CNAME, NS, and SOA records for any domain using Cloudflare DNS-over-HTTPS via our proxy Worker. All record types fetched in parallel.',
-		primaryKeyword: 'dns lookup',
-		metaTitle: 'DNS Lookup | A, MX, TXT, CNAME, NS Records | fmtly',
-		metaDescription:
-			'Query all DNS record types (A, AAAA, MX, TXT, CNAME, NS, SOA) for any domain simultaneously. Uses Cloudflare DNS-over-HTTPS.',
+		displayName: 'tool.web-dns-lookup.display_name',
+		tagline: 'tool.web-dns-lookup.tagline',
+		description: 'tool.web-dns-lookup.description',
+		primaryKeyword: 'tool.web-dns-lookup.primary_keyword',
+		metaTitle: 'tool.web-dns-lookup.meta_title',
+		metaDescription: 'tool.web-dns-lookup.meta_description',
 		engine: 'web',
 		operation: 'dns-lookup',
 		layoutVariant: 'single-panel',
@@ -221,15 +198,14 @@ export const webTools: ToolDefinition[] = [
 		],
 		faqs: [
 			{
-				question: 'Which DNS resolver is used?',
-				answer:
-					'Cloudflare DNS-over-HTTPS (cloudflare-dns.com/dns-query) is used via our proxy Worker for accuracy and speed.'
+				question: 'tool.web-dns-lookup.faq.0.question',
+				answer: 'tool.web-dns-lookup.faq.0.answer'
 			}
 		],
 		useCases: [
-			'Verifying DNS propagation after domain changes',
-			'Debugging email delivery by checking MX records',
-			'Auditing SPF/DKIM/DMARC TXT records'
+			'tool.web-dns-lookup.use_case.0',
+			'tool.web-dns-lookup.use_case.1',
+			'tool.web-dns-lookup.use_case.2'
 		],
 		sampleInput: 'example.com'
 	}

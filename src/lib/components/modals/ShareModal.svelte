@@ -4,6 +4,7 @@
 	import { X, Copy, Check, AlertTriangle } from 'lucide-svelte';
 	import { addToast } from '$stores/toast.store';
 	import { input as inputStore } from '$stores/input.store';
+	import { t } from '$lib/stores/language.js';
 	import { generateShareURL } from '$utils/share.js';
 	import type { ShareURLResult } from '$utils/share.js';
 
@@ -56,7 +57,7 @@
 		}
 		await navigator.clipboard.writeText(shareResult.url);
 		justCopied = true;
-		addToast('success', 'Share URL copied');
+		addToast('success', $t('ui.share_url_copied', 'Share URL copied'));
 		if (copyTimer) clearTimeout(copyTimer);
 		copyTimer = setTimeout(() => {
 			justCopied = false;
@@ -80,14 +81,14 @@
 		onkeydown={handleKeydown}
 		role="dialog"
 		aria-modal="true"
-		aria-label="Share"
+		aria-label={$t('ui.share', 'Share')}
 		tabindex="-1"
 	>
 		<div class="modal-card">
 			<!-- Header -->
 			<div class="modal-header">
-				<h2 class="modal-title">Share</h2>
-				<button class="modal-close" onclick={() => (open = false)} aria-label="Close">
+				<h2 class="modal-title">{$t('ui.share', 'Share')}</h2>
+				<button class="modal-close" onclick={() => (open = false)} aria-label={$t('ui.close', 'Close')}>
 					<X size={16} />
 				</button>
 			</div>
@@ -106,30 +107,30 @@
 						<button class="share-copy-btn" onclick={handleCopy}>
 							{#if justCopied}
 								<Check size={14} />
-								<span>Copied</span>
+								<span>{$t('ui.copied', 'Copied')}</span>
 							{:else}
 								<Copy size={14} />
-								<span>Copy Link</span>
+								<span>{$t('ui.copy_link', 'Copy Link')}</span>
 							{/if}
 						</button>
 					</div>
 
 					<p class="share-size">
-						Link size: {shareResult.sizeKB.toFixed(1)} KB
+						{$t('share.link_size', 'Link size')}: {shareResult.sizeKB.toFixed(1)} KB
 					</p>
 
 					{#if shareResult.sizeKB > 6}
 						<div class="share-warning">
 							<AlertTriangle size={14} />
-							<span>This link is large and may not work in all browsers</span>
+							<span>{$t('share.large_link_warning', 'This link is large and may not work in all browsers')}</span>
 						</div>
 					{/if}
 
 					<p class="share-note">
-						The data is encoded in the URL and is never sent to any server for processing.
+						{$t('share.data_encoded_note', 'The data is encoded in the URL and is never sent to any server for processing.')}
 					</p>
 				{:else}
-					<p class="share-empty">Enter some input first to generate a share link.</p>
+					<p class="share-empty">{$t('share.enter_input_first', 'Enter some input first to generate a share link.')}</p>
 				{/if}
 			</div>
 		</div>

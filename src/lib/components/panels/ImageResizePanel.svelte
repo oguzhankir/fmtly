@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import ImagePreview from "./ImagePreview.svelte";
     import { Loader } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let file: globalThis.File | null = $state(null);
     let origSrc = $state("");
@@ -77,14 +78,14 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept="image/*"
-                label="Drop image here or click to select"
+                label={$t('ui.drop_image_here_select', 'Drop image here or click to select')}
             />
         </div>
     {:else}
         <div class="controls">
             <div class="row">
                 <label class="ctrl">
-                    <span class="lbl">Width</span>
+                    <span class="lbl">{$t('ui.width', 'Width')}</span>
                     <input
                         type="number"
                         value={newW}
@@ -94,7 +95,7 @@
                     />
                 </label>
                 <label class="ctrl">
-                    <span class="lbl">Height</span>
+                    <span class="lbl">{$t('ui.height', 'Height')}</span>
                     <input
                         type="number"
                         value={newH}
@@ -105,12 +106,12 @@
                 </label>
                 <label class="ctrl check">
                     <input type="checkbox" bind:checked={lockAspect} />
-                    <span class="lbl">Lock aspect ratio</span>
+                    <span class="lbl">{$t('ui.lock_aspect_ratio', 'Lock aspect ratio')}</span>
                 </label>
             </div>
             <div class="row">
                 <label class="ctrl">
-                    <span class="lbl">Format</span>
+                    <span class="lbl">{$t('ui.format', 'Format')}</span>
                     <select bind:value={outputFormat} class="sel">
                         <option value="image/png">PNG</option>
                         <option value="image/jpeg">JPEG</option>
@@ -119,9 +120,7 @@
                 </label>
                 {#if outputFormat !== "image/png"}
                     <label class="ctrl">
-                        <span class="lbl"
-                            >Quality ({Math.round(quality * 100)}%)</span
-                        >
+                        <span class="lbl">{$t('ui.quality', 'Quality')} ({Math.round(quality * 100)}%)</span>
                         <input
                             type="range"
                             bind:value={quality}
@@ -137,7 +136,7 @@
                     disabled={processing}
                     class="action-btn"
                 >
-                    {#if processing}<Loader size={14} class="spin" />{/if} Resize
+                    {#if processing}<Loader size={14} class="spin" />{/if} {$t('ui.resize', 'Resize')}
                 </button>
             </div>
         </div>
@@ -145,7 +144,7 @@
         <div class="compare">
             <div class="side">
                 <h4 class="side-label">
-                    Original ({origW}×{origH}) — {formatSize(file.size)}
+                    {$t('ui.original', 'Original')} ({origW}×{origH}) — {formatSize(file.size)}
                 </h4>
                 <ImagePreview
                     src={origSrc}
@@ -158,7 +157,7 @@
             {#if resultSrc && resultBlob}
                 <div class="side">
                     <h4 class="side-label">
-                        Resized ({newW}×{newH}) — {formatSize(resultBlob.size)}
+                        {$t('ui.resized', 'Resized')} ({newW}×{newH}) — {formatSize(resultBlob.size)}
                     </h4>
                     <ImagePreview
                         src={resultSrc}

@@ -15,7 +15,8 @@
 			},
 			"suspicious": {
 				"noExplicitAny": "off",
-				"noImplicitAnyLet": "off"
+				"noImplicitAnyLet": "off",
+				"noAssignInExpressions": "off"
 			},
 			"complexity": {
 				"noForEach": "off"

@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import { Copy, Check, Loader } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let jsonOutput = $state("");
     let sheetNames = $state<string[]>([]);
@@ -35,7 +36,7 @@
     function copyJson() {
         if (!jsonOutput) return;
         navigator.clipboard.writeText(jsonOutput);
-        addToast("success", "JSON copied");
+        addToast("success", $t('ui.json_copied', 'JSON copied'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -47,13 +48,13 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept=".xlsx,.xls,.csv,.ods"
-                label="Drop Excel file here (.xlsx, .xls)"
+                label={$t('ui.drop_excel_file', 'Drop Excel file here (.xlsx, .xls)')}
             />
         </div>
     {:else if loading}
         <div class="loading-center">
             <Loader size={24} class="spin" />
-            <p>Parsing Excel…</p>
+            <p>{$t('ui.parsing_excel', 'Parsing Excel…')}</p>
         </div>
     {:else}
         {#if sheetNames.length > 1}
@@ -71,12 +72,12 @@
         <div class="output-section">
             <div class="output-header">
                 <span class="label"
-                    >{activeSheet} — {allData[activeSheet]?.length ?? 0} rows</span
+                    >{activeSheet} — {allData[activeSheet]?.length ?? 0} {$t('ui.rows', 'rows')}</span
                 >
                 <button onclick={copyJson} class="copy-btn">
                     {#if copied}<Check size={12} />{:else}<Copy
                             size={12}
-                        />{/if} Copy
+                        />{/if} {$t('ui.copy', 'Copy')}
                 </button>
             </div>
             <textarea

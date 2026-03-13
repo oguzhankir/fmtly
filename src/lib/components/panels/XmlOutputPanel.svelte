@@ -5,6 +5,7 @@
 	import { input as inputStore } from '$stores/input.store';
 	import { xmlError, xmlStats, xmlFormatOptions, setFormatOptions } from '$stores/xml.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import type { ToolDefinition } from '$registry/types.js';
 	import {
 		Copy,
@@ -125,13 +126,13 @@
 
 	function getWorkspaceLabel(tool: ToolDefinition): string {
 		switch (tool.slug) {
-			case 'formatter': return 'Format';
-			case 'validator': return 'Validate';
-			case 'minifier': return 'Minify';
-			case 'to-json': return '→ JSON';
-			case 'to-yaml': return '→ YAML';
-			case 'to-csv': return '→ CSV';
-			case 'xpath': return 'XPath';
+			case 'formatter': return $t('ui.actions.format', 'Format');
+			case 'validator': return $t('ui.actions.validate', 'Validate');
+			case 'minifier': return $t('ui.actions.minify', 'Minify');
+			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
+			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
+			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
+			case 'xpath': return $t('ui.query.xpath', 'XPath');
 			default: return tool.displayName;
 		}
 	}

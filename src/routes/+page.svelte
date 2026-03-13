@@ -2,17 +2,23 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { Search, ArrowRight } from 'lucide-svelte';
+	import { page } from '$app/stores';
 	import SeoHead from '$components/layout/SeoHead.svelte';
 	import { getAllTools, getToolsByCategory } from '$registry/index.js';
+	import { localizeCategoryMetas, localizeToolDefinitions } from '$lib/registry/localized.js';
 	import { getAllCategoryMeta } from '$registry/categories.js';
 	import { getCategories } from '$registry/index.js';
 	import type { ToolDefinition } from '$registry/types.js';
 	import type { SeoMetadata } from '$utils/seo.js';
+	import { t } from '$lib/stores/language';
+	import { buildAlternateLinks, localizePath, stripLocalePrefix } from '$lib/utils/locale-routing.js';
 
 	const BASE_URL = 'https://fmtly.dev';
+	let currentPath = $derived(stripLocalePrefix($page.url.pathname));
+	let currentLocale = $derived($page.params.lang ?? 'en');
 
-	const allTools = getAllTools();
-	const allCategoryMeta = getAllCategoryMeta();
+	const rawTools = getAllTools();
+	const rawCategoryMeta = getAllCategoryMeta();
 	const categoryCounts = new Map(getCategories().map((c) => [c.category, c.toolCount]));
 
 	const categoryIcons: Record<string, string> = {
@@ -46,9 +52,10 @@
 	let searchShortcut = $state('');
 
 	let filteredTools = $derived.by<ToolDefinition[]>(() => {
+		const localizedTools = localizeToolDefinitions(rawTools, $t);
 		if (!searchQuery.trim()) return [];
 		const q = searchQuery.toLowerCase();
-		return allTools.filter(
+		return localizedTools.filter(
 			(t) =>
 				t.displayName.toLowerCase().includes(q) ||
 				t.tagline.toLowerCase().includes(q) ||
@@ -57,8 +64,12 @@
 		);
 	});
 
+	let allTools = $derived(localizeToolDefinitions(rawTools, $t));
+	let allCategoryMeta = $derived(localizeCategoryMetas(rawCategoryMeta, $t));
+
 	function getTopTools(slug: string): string[] {
-		return getToolsByCategory(slug)
+		return allTools
+			.filter(t => t.category === slug)
 			.slice(0, 3)
 			.map((t) => t.displayName);
 	}
@@ -87,29 +98,26 @@
 		}
 	}
 
-	const seo: SeoMetadata = {
-		title: 'Developer Tools — fmtly.dev',
-		description:
-			'Free online developer tools. Format, convert, and validate JSON, XML, YAML, CSV, CSS and more. Instant, no login, your data stays in your browser.',
-		canonical: BASE_URL,
-		ogTitle: 'Developer Tools — fmtly.dev',
-		ogDescription:
-			'Free online developer tools. Format, convert, and validate JSON, XML, YAML, CSV, CSS and more. Instant, no login, your data stays in your browser.',
-		ogUrl: BASE_URL,
+	const seo: SeoMetadata = $derived.by(() => ({
+		title: $t('seo.home.title', 'Free Online Developer Tools — JSON, XML, YAML, CSV Formatter & Validator'),
+		description: $t('seo.home.description', 'Free online developer tools for JSON, XML, YAML, CSV. Format, convert, validate in your browser. No login, instant results.'),
+		canonical: `${BASE_URL}${currentPath}`,
+		ogTitle: $t('seo.home.og_title', 'Free Online Developer Tools — JSON, XML, YAML, CSV Formatter & Validator'),
+		ogDescription: $t('seo.home.og_description', 'Free online developer tools for JSON, XML, YAML, CSV. Format, convert, validate in your browser. No login, instant results.'),
+		ogUrl: `${BASE_URL}${currentPath}`,
 		ogImage: `${BASE_URL}/og/home.png`,
 		ogType: 'website',
 		twitterCard: 'summary_large_image',
-		twitterTitle: 'Developer Tools — fmtly.dev',
-		twitterDescription:
-			'Free online developer tools. Format, convert, and validate JSON, XML, YAML, CSV, CSS and more.',
+		twitterTitle: $t('seo.home.twitter_title', 'Free Online Developer Tools — JSON, XML, YAML, CSV Formatter & Validator'),
+		twitterDescription: $t('seo.home.twitter_description', 'Free online developer tools for JSON, XML, YAML, CSV. Format, convert, validate in your browser. No login, instant results.'),
 		twitterImage: `${BASE_URL}/og/home.png`,
+		alternates: buildAlternateLinks(BASE_URL, '/'),
 		structuredData: JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'WebSite',
 			name: 'fmtly.dev',
-			url: BASE_URL,
-			description:
-				'Free online developer tools. Format, convert, and validate JSON, XML, YAML, CSV, CSS and more.',
+			url: `${BASE_URL}${currentPath}`,
+			description: $t('seo.home.structured_description', 'Free online developer tools for JSON, XML, YAML, CSV. Format, convert, validate in your browser. No login, instant results.'),
 			potentialAction: {
 				'@type': 'SearchAction',
 				target: {
@@ -119,7 +127,7 @@
 				'query-input': 'required name=search_term_string'
 			}
 		})
-	};
+	}));
 </script>
 
 <SeoHead metadata={seo} />
@@ -127,19 +135,25 @@
 <div class="home">
 	<!-- Hero -->
 	<section class="hero">
-		<p class="hero-eyebrow">Open source &middot; Browser-only &middot; No login</p>
-		<h1 class="hero-headline">Every tool a developer needs.</h1>
-		<p class="hero-subtitle">
-			Format, convert, encode, hash, diff, generate — everything runs in your browser. Nothing sent to a server.
+		<p class="hero-eyebrow">
+			{$t('open_source_browser_only_no_login', 'Open source · Browser-only · No login')}
 		</p>
-
+		<h1 class="hero-headline">
+			{$t('every_tool_a_developer_needs', 'Every tool a developer needs.')}
+		</h1>
+		<p class="hero-subtitle">
+			{$t(
+				'hero_subtitle',
+				'Format, convert, encode, hash, diff, generate — everything runs in your browser. Nothing sent to a server.'
+			)}
+		</p>
 		<!-- Search bar -->
 		<div class="hero-search" class:hero-search--focused={searchFocused}>
 			<Search size={16} style="color: var(--text-muted); flex-shrink: 0;" />
 			<input
 				type="text"
 				bind:value={searchQuery}
-				placeholder="Search {allTools.length}+ tools..."
+				placeholder={$t('ui.placeholder.search_tools_count', { count: allTools.length }, `Search ${allTools.length}+ tools...`)}
 				class="hero-search-input"
 				spellcheck="false"
 				onfocus={() => { searchFocused = true; }}
@@ -154,7 +168,7 @@
 		{#if searchQuery.trim() && filteredTools.length > 0}
 			<div class="search-results">
 				{#each filteredTools.slice(0, 8) as tool (tool.id)}
-					<a href="/{tool.category}/{tool.slug}" class="search-result-card">
+					<a href={localizePath(`/${tool.category}/${tool.slug}`, currentLocale)} class="search-result-card">
 						<div class="search-result-left">
 							<span class="search-result-badge">{tool.category.toUpperCase()}</span>
 							<span class="search-result-name">{tool.displayName}</span>
@@ -164,7 +178,7 @@
 				{/each}
 			</div>
 		{:else if searchQuery.trim()}
-			<p class="search-empty">No tools match &ldquo;{searchQuery}&rdquo;</p>
+			<p class="search-empty">{$t('no_tools_match', 'No tools match')} &ldquo;{searchQuery}&rdquo;</p>
 		{/if}
 	</section>
 
@@ -172,10 +186,10 @@
 		<!-- Recently used -->
 		{#if recentTools.length > 0}
 			<section class="section">
-				<h2 class="section-label">Recently Used</h2>
+				<h2 class="section-label">{$t('recently_used', 'Recently Used')}</h2>
 				<div class="recent-scroll">
 					{#each recentTools as tool (tool.id)}
-						<a href="/{tool.category}/{tool.slug}" class="recent-card">
+						<a href={localizePath(`/${tool.category}/${tool.slug}`, currentLocale)} class="recent-card">
 							<span class="recent-card-badge">{tool.category.toUpperCase()}</span>
 							<span class="recent-card-name">{tool.displayName}</span>
 							<span class="recent-card-tagline">{tool.tagline}</span>
@@ -187,17 +201,19 @@
 
 		<!-- All categories grid -->
 		<section class="section section--categories">
-			<h2 class="section-label">All Categories</h2>
+			<h2 class="section-label">{$t('all_categories', 'All Categories')}</h2>
 			<div class="categories-grid">
 				{#each allCategoryMeta as cat}
 					{@const count = categoryCounts.get(cat.slug) ?? 0}
 					{#if count > 0}
-						<a href="/{cat.slug}" class="category-card">
+						<a href={localizePath(`/${cat.slug}`, currentLocale)} class="category-card">
 							<div class="category-card-top">
 								<div class="category-card-icon">{categoryIcons[cat.slug] ?? '#'}</div>
 								<h3 class="category-card-name">{cat.displayName}</h3>
 							</div>
-							<span class="category-card-count">{count} {count === 1 ? 'tool' : 'tools'}</span>
+							<span class="category-card-count">
+								{count === 1 ? $t('ui.tool_count.one') : $t('ui.tool_count.other', { count })}
+							</span>
 							<span class="category-card-tools">{getTopTools(cat.slug).join(' · ')}</span>
 						</a>
 					{/if}
@@ -518,12 +534,39 @@
 		.hero-search-kbd {
 			display: none;
 		}
+
 	}
 
 	@media (max-width: 480px) {
 		.home {
 			padding: 0 16px;
 			padding-bottom: 80px;
+		}
+
+		.hero {
+			padding: 48px 0 32px;
+		}
+
+		.hero-headline {
+			font-size: 28px;
+			line-height: 1.2;
+		}
+
+		.hero-subtitle {
+			font-size: 15px;
+		}
+
+		.hero-search {
+			height: 48px;
+			margin-top: 24px;
+		}
+
+		.category-card {
+			padding: 16px;
+		}
+
+		.recent-card {
+			width: 180px;
 		}
 	}
 </style>

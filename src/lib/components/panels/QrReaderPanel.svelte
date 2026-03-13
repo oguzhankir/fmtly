@@ -2,6 +2,7 @@
     import PdfDropZone from "./PdfDropZone.svelte";
     import { Copy, Check, Loader } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let decoded = $state("");
     let error = $state<string | null>(null);
@@ -36,10 +37,10 @@
                 decoded = result.data;
             } else {
                 error =
-                    "No QR code found in the image. Try a clearer image with better contrast.";
+                    $t('ui.qr_decoder.error_no_code', 'No QR code found in the image. Try a clearer image with better contrast.');
             }
         } catch {
-            error = "Failed to process image.";
+            error = $t('ui.qr_decoder.error_process', 'Failed to process image.');
         } finally {
             processing = false;
         }
@@ -48,7 +49,7 @@
     function copyDecoded() {
         if (!decoded) return;
         navigator.clipboard.writeText(decoded);
-        addToast("success", "Content copied");
+        addToast("success", $t('ui.qr_decoder.toast_success', 'Content copied'));
         copied = true;
         setTimeout(() => (copied = false), 2000);
     }
@@ -69,19 +70,19 @@
             <PdfDropZone
                 onfiles={handleFiles}
                 accept="image/*"
-                label="Drop image containing QR code"
+                label={$t('ui.qr_decoder.drop_label', 'Drop image containing QR code')}
             />
         </div>
     {:else if processing}
         <div class="loading-center">
             <Loader size={24} class="spin" />
-            <p>Scanning for QR code…</p>
+            <p>{$t('ui.qr_decoder.scanning', 'Scanning for QR code…')}</p>
         </div>
     {:else}
         <div class="result-section">
             {#if previewSrc}
                 <div class="preview-img">
-                    <img src={previewSrc} alt="Uploaded QR code" />
+                    <img src={previewSrc} alt={$t('ui.qr_decoder.alt_text', 'Uploaded QR code')} />
                 </div>
             {/if}
 
@@ -92,11 +93,11 @@
             {#if decoded}
                 <div class="decoded-box">
                     <div class="decoded-header">
-                        <span class="label">Decoded Content</span>
+                        <span class="label">{$t('ui.qr_decoder.decoded_label', 'Decoded Content')}</span>
                         <button onclick={copyDecoded} class="copy-btn">
                             {#if copied}<Check size={12} />{:else}<Copy
                                     size={12}
-                                />{/if} Copy
+                                />{/if} {$t('ui.qr_decoder.copy_button', 'Copy')}
                         </button>
                     </div>
                     <div class="decoded-content">
@@ -120,7 +121,7 @@
                     error = null;
                     previewSrc = "";
                 }}
-                class="reset-btn">Scan Another</button
+                class="reset-btn">{$t('ui.qr_decoder.reset_button', 'Scan Another')}</button
             >
         </div>
     {/if}

@@ -3,24 +3,33 @@
 	import SeoHead from '$components/layout/SeoHead.svelte';
 	import { getToolsByCategory, getCategories } from '$registry/index.js';
 	import { getCategoryMeta, getAllCategoryMeta } from '$registry/categories.js';
+	import { localizeCategoryMeta, localizeCategoryMetas, localizeToolDefinitions } from '$lib/registry/localized.js';
+	import { t } from '$stores/language';
 	import { buildCategorySeo } from '$utils/seo.js';
+	import { buildAlternateLinks, localizePath, stripLocalePrefix } from '$lib/utils/locale-routing.js';
 	import { ArrowRight } from 'lucide-svelte';
 
 	const BASE_URL = 'https://fmtly.dev';
+	let currentPath = $derived(stripLocalePrefix($page.url.pathname));
+	let currentLocale = $derived($page.params.lang ?? 'en');
 
 	let categorySlug = $derived($page.params.category ?? '');
-	let categoryMeta = $derived(getCategoryMeta(categorySlug));
-	let tools = $derived(getToolsByCategory(categorySlug));
+	let categoryMeta = $derived.by(() => {
+		const rawCategory = getCategoryMeta(categorySlug);
+		return rawCategory ? localizeCategoryMeta(rawCategory, $t) : undefined;
+	});
+	let tools = $derived(localizeToolDefinitions(getToolsByCategory(categorySlug), $t));
 	let seo = $derived(
 		buildCategorySeo(
 			categoryMeta?.displayName ?? categorySlug,
 			categoryMeta?.description ?? '',
-			`${BASE_URL}/${categorySlug}`
+			`${BASE_URL}${currentPath}`,
+			buildAlternateLinks(BASE_URL, `/${categorySlug}`)
 		)
 	);
 
 	let relatedCategories = $derived.by(() => {
-		const allMeta = getAllCategoryMeta();
+		const allMeta = localizeCategoryMetas(getAllCategoryMeta(), $t);
 		const allCats = getCategories();
 		const currentIndex = allMeta.findIndex((c) => c.slug === categorySlug);
 		if (currentIndex < 0) return [];
@@ -44,22 +53,26 @@
 	<!-- Header -->
 	<section class="cat-header">
 		<div class="cat-header-top">
-			<a href="/" class="cat-breadcrumb">Home</a>
+			<a href={localizePath('/', currentLocale)} class="cat-breadcrumb">{$t('home', 'Home')}</a>
 			<span class="cat-breadcrumb-sep">/</span>
 			<span class="cat-breadcrumb-current">{categoryMeta?.displayName ?? categorySlug}</span>
 		</div>
-		<h1 class="cat-title">{categoryMeta?.displayName ?? categorySlug}</h1>
-		{#if categoryMeta?.description}
-			<p class="cat-subtitle">{categoryMeta.description}</p>
-		{/if}
-		<span class="cat-count">{tools.length} {tools.length === 1 ? 'tool' : 'tools'}</span>
+		<section class="hero-section">
+			<h1 class="hero-title">{categoryMeta?.displayName ?? categorySlug}</h1>
+			{#if categoryMeta?.description}
+				<p class="hero-subtitle">{categoryMeta.description}</p>
+			{/if}
+			<span class="cat-count">
+				{tools.length === 1 ? $t('ui.tool_count.one') : $t('ui.tool_count.other', { count: tools.length })}
+			</span>
+		</section>
 	</section>
 
 	<!-- Tools grid -->
 	<section class="tools-section">
 		<div class="tools-grid">
 			{#each tools as tool (tool.id)}
-				<a href="/{tool.category}/{tool.slug}" class="tool-card">
+				<a href={localizePath(`/${tool.category}/${tool.slug}`, currentLocale)} class="tool-card">
 					<div class="tool-card-header">
 						<span class="tool-card-op">{tool.operation}</span>
 						<ArrowRight size={14} class="tool-card-arrow" />
@@ -74,13 +87,15 @@
 	<!-- Related categories -->
 	{#if relatedCategories.length > 0}
 		<section class="related-section">
-			<h2 class="related-title">Related Categories</h2>
+			<h2 class="related-title">{$t('ui.related_categories', 'Related Categories')}</h2>
 			<div class="related-grid">
 				{#each relatedCategories as cat}
 					{@const count = getCategories().find((c) => c.category === cat.slug)?.toolCount ?? 0}
-					<a href="/{cat.slug}" class="related-card">
+					<a href={localizePath(`/${cat.slug}`, currentLocale)} class="related-card">
 						<h3 class="related-card-name">{cat.displayName}</h3>
-						<span class="related-card-count">{count} tools</span>
+						<span class="related-card-count">
+							{count === 1 ? $t('ui.tool_count.one') : $t('ui.tool_count.other', { count })}
+						</span>
 					</a>
 				{/each}
 			</div>
@@ -128,22 +143,7 @@
 		color: var(--text-secondary);
 	}
 
-	.cat-title {
-		font-family: var(--font-ui);
-		font-size: 32px;
-		font-weight: 600;
-		color: var(--text-primary);
-		margin: 0 0 8px;
-		line-height: 1.15;
-	}
 
-	.cat-subtitle {
-		font-size: 14px;
-		color: var(--text-secondary);
-		margin: 0 0 12px;
-		max-width: 600px;
-		line-height: 1.5;
-	}
 
 	.cat-count {
 		font-size: 12px;
@@ -296,8 +296,5 @@
 			grid-template-columns: 1fr;
 		}
 
-		.cat-title {
-			font-size: 24px;
-		}
 	}
 </style>

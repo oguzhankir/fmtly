@@ -6,6 +6,7 @@
 	import { jsonStats } from '$stores/json.store';
 	import { formatByteSize, initInput, input, inputByteSize } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$stores/language';
 	import { jsonSamples } from '$lib/utils/jsonSamples.js';
 	import {
 		Upload,
@@ -47,11 +48,15 @@
 		return `UTF-8 · ${formatByteSize($inputByteSize)} · ${lines.toLocaleString()} lines · depth: ${depth}`;
 	});
 	let validityLabel = $derived.by(() => {
-		if (!$input.trim()) return 'Empty';
-		if (validationResult.valid) return 'Valid JSON';
+		if (!$input.trim()) return $t('ui.validity.empty', 'Empty');
+		if (validationResult.valid) return $t('ui.validity.valid', { language: 'JSON' }, 'Valid JSON');
 		const firstError = validationResult.errors[0];
-		if (!firstError) return 'Invalid JSON';
-		return `Line ${firstError.line}, Col ${firstError.column}: ${firstError.message}`;
+		if (!firstError) return $t('ui.validity.invalid', { language: 'JSON' }, 'Invalid JSON');
+		return $t('ui.validity.error_at', {
+			line: firstError.line,
+			column: firstError.column,
+			message: firstError.message
+		}, `Line ${firstError.line}, Col ${firstError.column}: ${firstError.message}`);
 	});
 	let sampleOptions = $derived.by(() =>
 		jsonSamples.map((sample) =>
@@ -81,7 +86,7 @@
 	function handleFileContent(content: string, label: string): void {
 		input.set(content);
 		loadedFilename = label;
-		addToast('success', `File loaded: ${label}`);
+		addToast('success', $t('ui.toast.file_loaded', { name: label }, `File loaded: ${label}`));
 	}
 
 	function handleDragEnter(event: DragEvent): void {
@@ -111,7 +116,7 @@
 		const file = event.dataTransfer?.files[0];
 		if (!file) return;
 		if (!file.type.startsWith('text/') && !/\.(json|txt)$/i.test(file.name)) {
-			addToast('error', 'Only .json and .txt files are supported');
+			addToast('error', $t('ui.error.only_json_txt', 'Only .json and .txt files are supported'));
 			return;
 		}
 
@@ -149,18 +154,18 @@
 		if (sample.value) {
 			input.set(sample.value);
 			loadedFilename = sample.label;
-			addToast('success', `Loaded ${sample.label}`);
+			addToast('success', ($t as any)('ui.loaded_sample', 'Loaded {label}', { label: sample.label }));
 		}
 	}
 
 	function clearInputValue(): void {
-		if ($input.length > 1000 && !window.confirm('Clear the current JSON input?')) {
+		if ($input.length > 1000 && !window.confirm(($t as any)('ui.confirm.clear', { language: 'JSON' }, 'Clear the current JSON input?'))) {
 			return;
 		}
 		input.set('');
 		clipboardJson = '';
 		loadedFilename = '';
-		addToast('info', 'Input cleared');
+		addToast('info', $t('ui.toast.input_cleared', 'Input cleared'));
 	}
 
 	async function loadUrl(): Promise<void> {
@@ -193,7 +198,7 @@
 		const file = target.files?.[0];
 		if (!file) return;
 		if (!file.type.startsWith('text/') && !/\.(json|txt)$/i.test(file.name)) {
-			addToast('error', 'Only .json and .txt files are supported');
+			addToast('error', $t('ui.error.only_json_txt', 'Only .json and .txt files are supported'));
 			target.value = '';
 			return;
 		}
@@ -218,27 +223,27 @@
 	function getWorkspaceLabel(tool: ToolDefinition): string {
 		switch (tool.slug) {
 			case 'formatter':
-				return 'Format';
+				return $t('ui.actions.format', 'Format');
 			case 'viewer':
-				return 'View';
+				return $t('ui.actions.view', 'View');
 			case 'validator':
-				return 'Validate';
+				return $t('ui.actions.validate', 'Validate');
 			case 'minifier':
-				return 'Minify';
+				return $t('ui.actions.minify', 'Minify');
 			case 'to-yaml':
-				return '→ YAML';
+				return $t('ui.convert.to_yaml', '→ YAML');
 			case 'to-csv':
-				return '→ CSV';
+				return $t('ui.convert.to_csv', '→ CSV');
 			case 'to-xml':
-				return '→ XML';
+				return $t('ui.convert.to_xml', '→ XML');
 			case 'to-toml':
-				return '→ TOML';
+				return $t('ui.convert.to_toml', '→ TOML');
 			case 'to-markdown':
-				return '→ MD';
+				return $t('ui.convert.to_markdown', '→ MD');
 			case 'jsonpath':
-				return 'JSONPath';
+				return $t('ui.query.jsonpath', 'JSONPath');
 			case 'jmespath':
-				return 'JMESPath';
+				return $t('ui.query.jmespath', 'JMESPath');
 			default:
 				return tool.displayName;
 		}
@@ -292,7 +297,7 @@
 			<div class="json-input-popover-wrap">
 				<button type="button" class="json-input-btn" onclick={() => (showLoadUrl = !showLoadUrl)}>
 					<Link2 size={13} />
-					Load URL
+					{$t('ui.actions.load_url', 'Load URL')}
 				</button>
 				{#if showLoadUrl}
 					<div class="json-input-popover">
@@ -305,24 +310,24 @@
 						<div class="json-input-popover__actions">
 							<button type="button" class="json-input-btn" onclick={() => (showLoadUrl = false)}>
 								<X size={13} />
-								Close
+								{$t('ui.actions.close', 'Close')}
 							</button>
 							<button type="button" class="json-input-btn" onclick={loadUrl}>
 								<Link2 size={13} />
-								Fetch
+								{$t('ui.actions.fetch', 'Fetch')}
 							</button>
 						</div>
 					</div>
 				{/if}
 			</div>
 			<label class="json-input-select">
-				<span>Sample</span>
+				<span>{$t('ui.actions.sample', 'Sample')}</span>
 				<ChevronDown size={12} />
 				<select
 					bind:value={selectedSample}
 					onchange={(event) => loadSample((event.currentTarget as HTMLSelectElement).value)}
 				>
-					<option value="">Choose…</option>
+					<option value="">{$t('ui.actions.choose_sample', 'Choose…')}</option>
 					{#each sampleOptions as sample}
 						<option value={sample.id}>{sample.label}</option>
 					{/each}
@@ -332,12 +337,12 @@
 		<div class="json-input-toolbar__group">
 			<button type="button" class="json-input-btn" onclick={triggerUpload}>
 				<Upload size={13} />
-				Upload
+				{$t('ui.actions.upload', 'Upload')}
 			</button>
 			{#if $input}
 				<button type="button" class="json-input-btn" onclick={clearInputValue}>
 					<Eraser size={13} />
-					Clear
+					{$t('ui.actions.clear', 'Clear')}
 				</button>
 			{/if}
 		</div>
@@ -347,7 +352,7 @@
 		<div class="json-input-banner">
 			<button type="button" class="json-input-banner__action" onclick={pasteClipboardJson}>
 				<ClipboardPaste size={13} />
-				Paste JSON from clipboard
+				{$t('ui.paste_json', 'Paste JSON from clipboard')}
 			</button>
 		</div>
 	{/if}
@@ -374,20 +379,25 @@
 			</span>
 		</div>
 		<div class="json-input-meta__section json-input-meta__section--center">
-			<span>{statusInfo}</span>
+			<span>{$t('ui.stats.info', {
+				encoding: 'UTF-8',
+				size: formatByteSize($inputByteSize),
+				lines: $input.length === 0 ? 0 : $input.split('\n').length,
+				depth: $jsonStats?.maxDepth ?? 0
+			})}</span>
 			{#if loadedFilename}
 				<span class="json-input-meta__file">{loadedFilename}</span>
 			{/if}
 		</div>
 		<div class="json-input-meta__section json-input-meta__section--right">
-			<span class="json-input-meta__hint"><Upload size={12} /> Drop .json files</span>
+			<span class="json-input-meta__hint"><Upload size={12} /> {($t as any)('ui.drop_files', { extension: 'json' }, 'Drop .json files')}</span>
 		</div>
 	</div>
 
 	{#if isDragOver}
 		<div class="json-input-drop">
 			<div class="json-input-drop__card">
-				<p>Drop to load</p>
+				<p>{$t('ui.drop_to_load', 'Drop to load')}</p>
 			</div>
 		</div>
 	{/if}

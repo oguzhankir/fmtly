@@ -3,6 +3,7 @@
     import type { IpInfo } from "../../engines/network";
     import { browser } from "$app/environment";
     import { MapPin, Loader, AlertCircle, Search } from "lucide-svelte";
+    import { t } from '$lib/stores/language.js';
 
     let ipInput = $state("");
     let loading = $state(false);
@@ -25,7 +26,7 @@
             error =
                 e instanceof Error
                     ? e.message
-                    : "Lookup failed. The proxy Worker may not be deployed yet.";
+                    : $t('ui.ip_lookup.error.fallback', 'Lookup failed. The proxy Worker may not be deployed yet.');
         } finally {
             loading = false;
         }
@@ -46,7 +47,7 @@
             }
         } catch (e) {
             error =
-                e instanceof Error ? e.message : "Could not detect your IP.";
+                e instanceof Error ? e.message : $t('ui.ip_lookup.error.detect_failed', 'Could not detect your IP.');
         } finally {
             loading = false;
         }
@@ -76,9 +77,9 @@
             >
                 {#if loading}
                     <Loader size={14} class="spin" />
-                    Looking up…
+                    {$t('ui.ip_lookup.looking_up', 'Looking up…')}
                 {:else}
-                    <Search size={14} /> Look Up
+                    <Search size={14} /> {$t('ui.ip_lookup.lookup_button', 'Look Up')}
                 {/if}
             </button>
             <button
@@ -86,7 +87,7 @@
                 disabled={loading}
                 class="lookup-btn secondary-btn"
             >
-                My IP
+                {$t('ui.ip_lookup.my_ip_button', 'My IP')}
             </button>
         </div>
     </div>
@@ -95,7 +96,7 @@
     {#if loading}
         <div class="loading-state">
             <Loader size={20} class="spin" />
-            <span>Querying IP information…</span>
+            <span>{$t('ui.ip_lookup.loading_detailed', 'Querying IP information…')}</span>
         </div>
     {/if}
 
@@ -104,12 +105,10 @@
         <div class="error-card">
             <AlertCircle size={16} />
             <div>
-                <strong>Lookup failed</strong>
+                <strong>{$t('ui.ip_lookup.error.title', 'Lookup failed')}</strong>
                 <p>{error}</p>
                 <p class="error-hint">
-                    The Cloudflare Worker proxy must be deployed to <code
-                        >workers.fmtly.dev</code
-                    >. See deployment instructions.
+                    {@html $t('ui.ip_lookup.error.worker_hint', 'The Cloudflare Worker proxy must be deployed to <code>workers.fmtly.dev</code>. See deployment instructions.')}
                 </p>
             </div>
         </div>
@@ -127,7 +126,16 @@
             </div>
 
             <div class="info-cards">
-                {#each [{ icon: "🌍", label: "Country", value: result.country_name || "—" }, { icon: "🏙️", label: "City", value: result.city || "—" }, { icon: "📍", label: "Region", value: result.region || "—" }, { icon: "📮", label: "Postal", value: result.postal || "—" }, { icon: "🏢", label: "ISP / Org", value: result.org || "—" }, { icon: "🔢", label: "ASN", value: result.asn || "—" }, { icon: "🕐", label: "Timezone", value: result.timezone || "—" }, { icon: "🧭", label: "Coordinates", value: result.latitude && result.longitude ? `${result.latitude}, ${result.longitude}` : "—" }] as card}
+                {#each [
+                    { icon: "🌍", label: $t('ui.ip_lookup.cards.country', 'Country'), value: result.country_name || "—" }, 
+                    { icon: "🏙️", label: $t('ui.ip_lookup.cards.city', 'City'), value: result.city || "—" }, 
+                    { icon: "📍", label: $t('ui.ip_lookup.cards.region', 'Region'), value: result.region || "—" }, 
+                    { icon: "📮", label: $t('ui.ip_lookup.cards.postal', 'Postal'), value: result.postal || "—" }, 
+                    { icon: "🏢", label: $t('ui.ip_lookup.cards.isp_org', 'ISP / Org'), value: result.org || "—" }, 
+                    { icon: "🔢", label: $t('ui.ip_lookup.cards.asn', 'ASN'), value: result.asn || "—" }, 
+                    { icon: "🕐", label: $t('ui.ip_lookup.cards.timezone', 'Timezone'), value: result.timezone || "—" }, 
+                    { icon: "🧭", label: $t('ui.ip_lookup.cards.coordinates', 'Coordinates'), value: result.latitude && result.longitude ? `${result.latitude}, ${result.longitude}` : "—" }
+                ] as card}
                     <div class="info-card">
                         <span class="card-icon">{card.icon}</span>
                         <div>
@@ -141,7 +149,7 @@
             {#if result.latitude && result.longitude}
                 <div class="map-embed">
                     <iframe
-                        title="IP Location Map"
+                        title={$t('ui.ip_lookup.map_title', 'IP Location Map')}
                         src="https://www.openstreetmap.org/export/embed.html?bbox={result.longitude -
                             0.5},{result.latitude - 0.5},{result.longitude +
                             0.5},{result.latitude +
@@ -161,8 +169,7 @@
         <div class="empty-state">
             <MapPin size={32} />
             <p>
-                Enter an IP address or click <strong>My IP</strong> to look up your
-                own location.
+                {@html $t('ui.ip_lookup.empty_state', 'Enter an IP address or click <strong>My IP</strong> to look up your own location.')}
             </p>
         </div>
     {/if}
@@ -259,8 +266,11 @@
     .error-hint {
         font-size: var(--text-xs);
     }
-    .error-card code {
+    .error-card :global(code) {
         font-family: var(--font-mono);
+        background: var(--bg-inset);
+        padding: 2px 4px;
+        border-radius: 3px;
     }
     .result-grid {
         display: flex;

@@ -5,6 +5,7 @@
 	import { get } from 'svelte/store';
 	import { output } from '$stores/output.store';
 	import { addToast } from '$stores/toast.store';
+	import { t } from '$lib/stores/language.js';
 	import ToolToolbar from './ToolToolbar.svelte';
 	import HistoryPanel from './HistoryPanel.svelte';
 
@@ -32,14 +33,14 @@
 	async function handleCopy(): Promise<void> {
 		const text = get(output);
 		if (!text) {
-			addToast('info', 'Nothing to copy yet');
+			addToast('info', $t('ui.layout.toast.copy_empty', 'Nothing to copy yet'));
 			return;
 		}
 		try {
 			await navigator.clipboard.writeText(text);
-			addToast('success', 'Copied to clipboard');
+			addToast('success', $t('ui.layout.toast.copy_success', 'Copied to clipboard'));
 		} catch {
-			addToast('error', 'Copy failed — check browser permissions');
+			addToast('error', $t('ui.layout.toast.copy_error', 'Copy failed — check browser permissions'));
 		}
 	}
 
@@ -99,8 +100,8 @@
 	<div class="tool-toolbar-row">
 		<span class="tool-toolbar-name">{tool.displayName}</span>
 		<ToolToolbar
-			{tool}
-			onprocess={onprocess ?? (() => {})}
+			onformat={onprocess ?? (() => {})}
+			onminify={onprocess ?? (() => {})}
 			oncopy={handleCopy}
 			onshare={onshare ?? (() => {})}
 			onhistory={() => { historyOpen = !historyOpen; }}
@@ -122,7 +123,7 @@
 					{#if inputPanel}
 						{@render inputPanel()}
 					{:else}
-						<p class="panel-placeholder">Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
+						<p class="panel-placeholder">{($t as any)('ui.layout.placeholders.input_with_lang', 'Paste or type {{language}} here…', { language: tool.inputLanguage.toUpperCase() })}</p>
 					{/if}
 				</div>
 			</div>
@@ -148,12 +149,12 @@
 							class="output-tab"
 							class:output-tab--active={activeOutputTab === 'output'}
 							onclick={() => { activeOutputTab = 'output'; }}
-						>Output</button>
+						>{$t('ui.layout.tabs.output', 'Output')}</button>
 						<button
 							class="output-tab"
 							class:output-tab--active={activeOutputTab === 'tree'}
 							onclick={() => { activeOutputTab = 'tree'; }}
-						>Tree</button>
+						>{$t('ui.layout.tabs.tree', 'Tree')}</button>
 					</div>
 					{#if activeOutputTab === 'tree'}
 						<div class="panel-content panel-content--tree">
@@ -164,7 +165,7 @@
 							{#if outputPanel}
 								{@render outputPanel()}
 							{:else}
-								<p class="panel-placeholder">Output will appear here</p>
+								<p class="panel-placeholder">{$t('ui.layout.placeholders.output_empty', 'Output will appear here')}</p>
 							{/if}
 						</div>
 					{/if}
@@ -173,7 +174,7 @@
 						{#if outputPanel}
 							{@render outputPanel()}
 						{:else}
-							<p class="panel-placeholder">Output will appear here</p>
+							<p class="panel-placeholder">{$t('ui.layout.placeholders.output_empty', 'Output will appear here')}</p>
 						{/if}
 					</div>
 				{/if}
@@ -187,7 +188,7 @@
 					{#if inputPanel}
 						{@render inputPanel()}
 					{:else}
-						<p class="panel-placeholder">Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
+						<p class="panel-placeholder">{($t as any)('ui.layout.placeholders.input_with_lang', 'Paste or type {{language}} here…', { language: tool.inputLanguage.toUpperCase() })}</p>
 					{/if}
 				</div>
 			</div>
@@ -198,12 +199,12 @@
 							class="output-tab"
 							class:output-tab--active={activeOutputTab === 'output'}
 							onclick={() => { activeOutputTab = 'output'; }}
-						>Output</button>
+						>{$t('ui.layout.tabs.output', 'Output')}</button>
 						<button
 							class="output-tab"
 							class:output-tab--active={activeOutputTab === 'tree'}
 							onclick={() => { activeOutputTab = 'tree'; }}
-						>Tree</button>
+						>{$t('ui.layout.tabs.tree', 'Tree')}</button>
 					</div>
 					{#if activeOutputTab === 'tree'}
 						<div class="panel-content panel-content--tree">
@@ -214,7 +215,7 @@
 							{#if outputPanel}
 								{@render outputPanel()}
 							{:else}
-								<p class="panel-placeholder">Output will appear here</p>
+								<p class="panel-placeholder">{$t('ui.layout.placeholders.output_empty', 'Output will appear here')}</p>
 							{/if}
 						</div>
 					{/if}
@@ -223,7 +224,7 @@
 						{#if outputPanel}
 							{@render outputPanel()}
 						{:else}
-							<p class="panel-placeholder">Output will appear here</p>
+							<p class="panel-placeholder">{$t('ui.layout.placeholders.output_empty', 'Output will appear here')}</p>
 						{/if}
 					</div>
 				{/if}
@@ -242,7 +243,7 @@
 					{#if inputPanel}
 						{@render inputPanel()}
 					{:else}
-						<p class="panel-placeholder">Paste or type {tool.inputLanguage.toUpperCase()} here…</p>
+						<p class="panel-placeholder">{($t as any)('ui.layout.placeholders.input_with_lang', 'Paste or type {{language}} here…', { language: tool.inputLanguage.toUpperCase() })}</p>
 					{/if}
 				</div>
 			</div>

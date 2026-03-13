@@ -1,6 +1,7 @@
 <script lang="ts">
     import { colorOptions } from "../../stores/color.store";
     import { hexToRgb, contrastRatio, wcagResult } from "../../engines/color";
+    import { t } from '$lib/stores/language.js';
 
     let fgRgb = $derived(hexToRgb($colorOptions.contrastFg));
     let bgRgb = $derived(hexToRgb($colorOptions.contrastBg));
@@ -26,7 +27,7 @@
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
             <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Foreground Color</div
+                >{$t('ui.foreground_color', 'Foreground Color')}</div
             >
             <div
                 class="flex items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-2)]"
@@ -49,7 +50,7 @@
         <div class="flex flex-1 flex-col gap-[var(--space-2)]">
             <div
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Background Color</div
+                >{$t('ui.background_color', 'Background Color')}</div
             >
             <div
                 class="flex items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-2)]"
@@ -76,7 +77,7 @@
         <div class="mb-[var(--space-4)] flex items-center justify-between">
             <span
                 class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)]"
-                >Contrast Ratio</span
+                >{$t('ui.contrast_ratio', 'Contrast Ratio')}</span
             >
             <span
                 class="text-[length:var(--text-2xl)] font-[family-name:var(--font-mono)] font-[number:var(--weight-semibold)]"
@@ -94,14 +95,14 @@
             >
                 <span
                     class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider"
-                    >Normal Text (AA)</span
+                    >{$t('ui.normal_text_aa', 'Normal Text (AA)')}</span
                 >
                 <span
                     class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)]"
                     class:text-[var(--color-success)]={wcag.aa_normal}
                     class:text-[var(--color-error)]={!wcag.aa_normal}
                 >
-                    {wcag.aa_normal ? "PASS" : "FAIL"}
+                    {wcag.aa_normal ? $t('ui.pass', 'PASS') : $t('ui.fail', 'FAIL')}
                 </span>
             </div>
 
@@ -110,14 +111,14 @@
             >
                 <span
                     class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider"
-                    >Large Text (AA)</span
+                    >{$t('ui.large_text_aa', 'Large Text (AA)')}</span
                 >
                 <span
                     class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)]"
                     class:text-[var(--color-success)]={wcag.aa_large}
                     class:text-[var(--color-error)]={!wcag.aa_large}
                 >
-                    {wcag.aa_large ? "PASS" : "FAIL"}
+                    {wcag.aa_large ? $t('ui.pass', 'PASS') : $t('ui.fail', 'FAIL')}
                 </span>
             </div>
 
@@ -126,14 +127,14 @@
             >
                 <span
                     class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider"
-                    >Normal Text (AAA)</span
+                    >{$t('ui.normal_text_aaa', 'Normal Text (AAA)')}</span
                 >
                 <span
                     class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)]"
                     class:text-[var(--color-success)]={wcag.aaa_normal}
                     class:text-[var(--color-error)]={!wcag.aaa_normal}
                 >
-                    {wcag.aaa_normal ? "PASS" : "FAIL"}
+                    {wcag.aaa_normal ? $t('ui.pass', 'PASS') : $t('ui.fail', 'FAIL')}
                 </span>
             </div>
 
@@ -142,14 +143,14 @@
             >
                 <span
                     class="text-[length:var(--text-xs)] text-[var(--text-secondary)] uppercase tracking-wider"
-                    >UI Components</span
+                    >{$t('ui.ui_components', 'UI Components')}</span
                 >
                 <span
                     class="text-[length:var(--text-lg)] font-[number:var(--weight-semibold)]"
                     class:text-[var(--color-success)]={wcag.aa_ui}
                     class:text-[var(--color-error)]={!wcag.aa_ui}
                 >
-                    {wcag.aa_ui ? "PASS" : "FAIL"}
+                    {wcag.aa_ui ? $t('ui.pass', 'PASS') : $t('ui.fail', 'FAIL')}
                 </span>
             </div>
         </div>
@@ -164,12 +165,12 @@
             <h3
                 class="mb-[var(--space-4)] text-[length:var(--text-2xl)] font-[number:var(--weight-semibold)] bg-transparent"
             >
-                Large Text Preview — 24px Bold
+                {$t('ui.large_text_preview', 'Large Text Preview — 24px Bold')}
             </h3>
             <p
                 class="text-[length:var(--text-base)] max-w-lg leading-relaxed bg-transparent"
             >
-                This is a normal text preview block to demonstrate readability.
+                {$t('ui.normal_text_preview', 'This is a normal text preview block to demonstrate readability.')}
                 Make sure UI elements and paragraphs contrast effectively
                 against their backdrop securely avoiding accessibility barriers
                 across visually impaired visitors.

@@ -3,6 +3,7 @@
     import { generateRandom } from "../../engines/crypto";
     import { Copy, RefreshCw, Check, CheckSquare, Square } from "lucide-svelte";
     import { addToast } from "../../stores/toast.store";
+    import { t } from '$lib/stores/language.js';
 
     let generatedString = $state("");
     let copied = $state(false);
@@ -10,7 +11,7 @@
 
     function copyToClipboard(text: string) {
         navigator.clipboard.writeText(text);
-        addToast("success", "Copied to clipboard");
+        addToast("success", $t('ui.copied_to_clipboard', 'Copied to clipboard'));
     }
 
     // Ensure at least one character set is selected when checkboxes change
@@ -78,13 +79,13 @@
         <div class="flex items-center justify-between">
             <span
                 class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                >Generated Output</span
+                >{$t('ui.generated_output', 'Generated Output')}</span
             >
             <button
                 onclick={generate}
                 class="flex items-center gap-1.5 text-[length:var(--text-sm)] text-[var(--color-primary)] hover:opacity-80 transition-opacity"
             >
-                <RefreshCw size={14} /> Re-generate
+                <RefreshCw size={14} /> {$t('ui.regenerate', 'Re-generate')}
             </button>
         </div>
 
@@ -96,20 +97,20 @@
             </div>
             <button
                 onclick={handleCopy}
-                title="Copy to clipboard"
+                title={$t('ui.copy_to_clipboard', 'Copy to clipboard')}
                 class="flex w-16 flex-col items-center justify-center gap-1 rounded-r-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-selected)] text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
             >
                 {#if copied}
                     <Check size={20} class="text-[var(--color-success)]" />
                     <span
                         class="text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] text-[var(--color-success)]"
-                        >Copied!</span
+                        >{$t('ui.copied', 'Copied')}!</span
                     >
                 {:else}
                     <Copy size={20} />
                     <span
                         class="text-[length:var(--text-xs)] font-[number:var(--weight-semibold)]"
-                        >Copy</span
+                        >{$t('ui.copy', 'Copy')}</span
                     >
                 {/if}
             </button>
@@ -125,7 +126,7 @@
                 <div class="flex items-center justify-between">
                     <div
                         class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                        >Length</div
+                        >{$t('ui.length', 'Length')}</div
                     >
                     <input
                         type="number"
@@ -148,7 +149,7 @@
             <div class="flex flex-col gap-[var(--space-3)]">
                 <span
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >Character Classes</span
+                    >{$t('ui.character_classes', 'Character Classes')}</span
                 >
 
                 <div class="grid grid-cols-2 gap-3">
@@ -165,7 +166,7 @@
                             />{/if}
                         <span
                             class="text-[length:var(--text-sm)] text-[var(--text-primary)]"
-                            >Uppercase (A-Z)</span
+                            >{$t('ui.uppercase', 'Uppercase')} (A-Z)</span
                         >
                     </button>
 
@@ -182,7 +183,7 @@
                             />{/if}
                         <span
                             class="text-[length:var(--text-sm)] text-[var(--text-primary)]"
-                            >Lowercase (a-z)</span
+                            >{$t('ui.lowercase_az', 'Lowercase (a-z)')}</span
                         >
                     </button>
 
@@ -199,7 +200,7 @@
                             />{/if}
                         <span
                             class="text-[length:var(--text-sm)] text-[var(--text-primary)]"
-                            >Numbers (0-9)</span
+                            >{$t('ui.numbers_09', 'Numbers (0-9)')}</span
                         >
                     </button>
 
@@ -216,7 +217,7 @@
                             />{/if}
                         <span
                             class="text-[length:var(--text-sm)] text-[var(--text-primary)]"
-                            >Symbols (!@#$)</span
+                            >{$t('ui.symbols_special', 'Symbols (!@#$)')}</span
                         >
                     </button>
                 </div>
@@ -229,12 +230,12 @@
             <div class="flex flex-col gap-[var(--space-2)]">
                 <span
                     class="text-[length:var(--text-sm)] font-[number:var(--weight-semibold)] text-[var(--text-secondary)]"
-                    >Custom Characters (Overrides classes)</span
+                    >{$t('ui.custom_characters_override', 'Custom Characters (Overrides classes)')}</span
                 >
                 <input
                     type="text"
                     bind:value={$cryptoOptions.randomCustomChars}
-                    placeholder="e.g. ABCDFGH"
+                    placeholder={$t('ui.placeholder.custom_chars', 'e.g. ABCDFGH')}
                     class="w-full rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-sm)] font-[family-name:var(--font-mono)] outline-none focus-within:border-[var(--color-primary)] placeholder:text-[var(--text-muted)]"
                 />
             </div>
@@ -255,13 +256,13 @@
                         />{/if}
                     <span
                         class="text-[length:var(--text-sm)] text-[var(--text-primary)]"
-                        >Exclude ambiguous characters</span
+                        >{$t('ui.exclude_ambiguous', 'Exclude ambiguous characters')}</span
                     >
                 </button>
                 <p
                     class="text-[length:var(--text-xs)] text-[var(--text-muted)] pl-7"
                 >
-                    Removes characters that are hard to distinguish from one
+                    {$t('ui.exclude_ambiguous_desc', 'Removes characters that are hard to distinguish from one another like: 1, l, I, 0, O')}
                     another like: 1, l, I, 0, O
                 </p>
             </div>

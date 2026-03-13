@@ -8,6 +8,11 @@
 	<title>{metadata.title}</title>
 	<meta name="description" content={metadata.description} />
 	<link rel="canonical" href={metadata.canonical} />
+	{#if metadata.alternates}
+		{#each metadata.alternates as alternate}
+			<link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+		{/each}
+	{/if}
 
 	<!-- Open Graph -->
 	<meta property="og:title" content={metadata.ogTitle} />
@@ -15,7 +20,7 @@
 	<meta property="og:url" content={metadata.ogUrl} />
 	<meta property="og:image" content={metadata.ogImage} />
 	<meta property="og:type" content={metadata.ogType} />
-	<meta property="og:site_name" content="fmtly.dev" />
+	<meta property="og:site_name" content={metadata.siteName || 'fmtly.dev'} />
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content={metadata.twitterCard} />

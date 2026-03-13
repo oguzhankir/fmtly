@@ -1,12 +1,13 @@
 <script lang="ts">
     import { encodeOptions } from "../../stores/encode.store";
+    import { t } from '$lib/stores/language.js';
 
     let { toolSlug }: { toolSlug: string } = $props();
 
     const options = [
-        { value: "named", label: "Named (&amp;)" },
-        { value: "numeric", label: "Numeric (&#38;)" },
-        { value: "hex", label: "Hex (&#x26;)" },
+        { value: "named", label: $t('ui.encoder.named', 'Named (&amp;)') },
+        { value: "numeric", label: $t('ui.encoder.numeric', 'Numeric (&#38;)') },
+        { value: "hex", label: $t('ui.encoder.hex', 'Hex (&#x26;)') },
     ];
 
     function updateOption(value: string) {
@@ -24,7 +25,7 @@
         <label class="flex flex-col gap-1 whitespace-nowrap">
             <span
                 class="text-[length:var(--text-xs)] font-medium text-[var(--text-secondary)] uppercase tracking-wider"
-                >Entity Mode</span
+                >{$t('ui.entity_mode', 'Entity Mode')}</span
             >
             <select
                 class="h-8 rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] px-2 text-[length:var(--text-sm)] text-[var(--text-primary)] focus:border-[var(--border-focus)] focus:outline-none"
