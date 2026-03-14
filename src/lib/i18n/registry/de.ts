@@ -73,7 +73,8 @@ const registryDe: Record<string, string> = {
 		'Formatieren Sie CSS, SCSS, LESS, HTML, JavaScript, TypeScript, GraphQL und Markdown vollständig lokal. Konvertieren Sie cURL-Befehle in fetch() oder Axios.',
 	'category.code.primary_keyword': 'code formatierer online',
 	'category.pdf.display_name': 'PDF-Tools',
-	'category.pdf.description': 'Betrachten Sie PDF-Dateien und extrahieren Sie Text – alles lokal in Ihrem Browser.',
+	'category.pdf.description':
+		'Betrachten Sie PDF-Dateien und extrahieren Sie Text – alles lokal in Ihrem Browser.',
 	'category.pdf.primary_keyword': 'pdf tools online',
 	'category.image.display_name': 'Bild-Tools',
 	'category.image.description':
@@ -382,8 +383,7 @@ const registryDe: Record<string, string> = {
 		'Reinigen und formatieren Sie CSV-Daten mit einheitlichen Trennzeichen und Zeilenenden.',
 	'tool.csv-formatter.primary_keyword': 'csv formatierer',
 	'tool.csv-formatter.meta_title': 'CSV-Formatierer — fmtly.dev',
-	'tool.csv-formatter.meta_description':
-		'Formatieren und reinigen Sie CSV-Daten lokal im Browser.',
+	'tool.csv-formatter.meta_description': 'Formatieren und reinigen Sie CSV-Daten lokal im Browser.',
 	'tool.csv-formatter.operation': 'Formatieren',
 
 	'tool.csv-validator.display_name': 'CSV-Validator',
@@ -621,7 +621,8 @@ const registryDe: Record<string, string> = {
 	'tool.crypto-password-strength.operation': 'Analysieren',
 
 	'tool.crypto-ulid.display_name': 'ULID-Generator',
-	'tool.crypto-ulid.tagline': 'Universally Unique Lexicographically Sortable Identifiers generieren',
+	'tool.crypto-ulid.tagline':
+		'Universally Unique Lexicographically Sortable Identifiers generieren',
 	'tool.crypto-ulid.description':
 		'Generieren Sie ULIDs – zeitlich sortierbare, URL-sichere Identifikatoren.',
 	'tool.crypto-ulid.primary_keyword': 'ulid generator',
@@ -674,8 +675,7 @@ const registryDe: Record<string, string> = {
 
 	'tool.encode-html.display_name': 'HTML Encoder / Decoder',
 	'tool.encode-html.tagline': 'HTML-Entities kodieren und dekodieren',
-	'tool.encode-html.description':
-		'Konvertieren Sie Sonderzeichen in HTML-Entities und zurück.',
+	'tool.encode-html.description': 'Konvertieren Sie Sonderzeichen in HTML-Entities und zurück.',
 	'tool.encode-html.primary_keyword': 'html encoder decoder',
 	'tool.encode-html.meta_title': 'HTML Encoder & Decoder — fmtly.dev',
 	'tool.encode-html.meta_description':
@@ -759,8 +759,7 @@ const registryDe: Record<string, string> = {
 
 	'tool.number-roman.display_name': 'Römische Zahlen Konverter',
 	'tool.number-roman.tagline': 'Zwischen römischen Zahlen und Ganzzahlen konvertieren',
-	'tool.number-roman.description':
-		'Konvertieren Sie Ganzzahlen in römische Zahlen und umgekehrt.',
+	'tool.number-roman.description': 'Konvertieren Sie Ganzzahlen in römische Zahlen und umgekehrt.',
 	'tool.number-roman.primary_keyword': 'römische zahlen konverter',
 	'tool.number-roman.meta_title': 'Römische Zahlen Konverter — fmtly.dev',
 	'tool.number-roman.meta_description':
@@ -887,7 +886,8 @@ const registryDe: Record<string, string> = {
 		'Suchen Sie MIME-Typen nach Dateiendung oder Name. Deckt alle IANA-Typen ab.',
 	'tool.web-mime-types.primary_keyword': 'mime typ suche',
 	'tool.web-mime-types.meta_title': 'MIME-Typ-Suche — fmtly.dev',
-	'tool.web-mime-types.meta_description': 'Schlagen Sie MIME-Typen nach Dateiendung im Browser nach.',
+	'tool.web-mime-types.meta_description':
+		'Schlagen Sie MIME-Typen nach Dateiendung im Browser nach.',
 	'tool.web-mime-types.operation': 'Nachschlagen',
 
 	'tool.web-ip-lookup.display_name': 'IP-Suche',
@@ -1113,8 +1113,7 @@ const registryDe: Record<string, string> = {
 	'ui.validator.xml_validation_desc':
 		'Prüft auf Wohlgeformtheit: offene Tags, falsche Verschachtelung usw.',
 	'ui.validator.xml_success_title': 'Wohlgeformtes XML',
-	'ui.validator.xml_success_desc':
-		'Keine Syntaxfehler. Das Dokument ist wohlgeformt.',
+	'ui.validator.xml_success_desc': 'Keine Syntaxfehler. Das Dokument ist wohlgeformt.',
 	'ui.validator.error_count.one': '1 Fehler gefunden',
 	'ui.validator.error_count.other': '{count} Fehler gefunden',
 	'ui.toast.clipboard_xml': 'Zwischenablage XML',
@@ -1203,14 +1202,16 @@ const registryDe: Record<string, string> = {
 		'Ja! Aktivieren Sie "Schlüssel sortieren", um alle Objektschlüssel alphabetisch zu ordnen. Hilfreich beim Vergleichen von Dateien.',
 	'tool.json-formatter.use_case.0': 'API-Antworten lesbar machen für Debugging',
 	'tool.json-formatter.use_case.1': 'Minifizierte JSON-Dateien aus Webquellen säubern',
-	'tool.json-formatter.use_case.2': 'Konfigurationsdateien einheitlich für die Versionskontrolle vorbereiten',
+	'tool.json-formatter.use_case.2':
+		'Konfigurationsdateien einheitlich für die Versionskontrolle vorbereiten',
 	'tool.json-formatter.use_case.3': 'JSON-Daten präsentabel für die Dokumentation aufbereiten',
 	'tool.json-formatter.use_case.4': 'JSON vor manueller Bearbeitung validieren und formatieren',
 
 	'tool.json-validator.faq.0.question': 'Was prüft die JSON-Validierung?',
 	'tool.json-validator.faq.0.answer':
 		'Sie prüft auf Syntaxfehler wie fehlende Klammern, falsche Anführungszeichen, doppelte Schlüssel und ungültige Escape-Sequenzen.',
-	'tool.json-validator.faq.1.question': 'Was ist der Unterschied zwischen Syntax- und Schema-Validierung?',
+	'tool.json-validator.faq.1.question':
+		'Was ist der Unterschied zwischen Syntax- und Schema-Validierung?',
 	'tool.json-validator.faq.1.answer':
 		'Syntaxvalidierung prüft auf korrekten Aufbau (Wohlgeformtheit). Schemavalidierung prüft gegen vordefinierte Regeln (Datentypen, Pflichtfelder).',
 	'tool.json-validator.faq.2.question': 'Kann ich JSON mit Kommentaren validieren?',
@@ -1334,7 +1335,8 @@ const registryDe: Record<string, string> = {
 	'tool.json-diff.faq.1.question': 'Große Dateien?',
 	'tool.json-diff.faq.1.answer': 'Ja, der Vergleich erfolgt effizient lokal im Browser.',
 	'tool.json-diff.faq.2.question': 'Sicher?',
-	'tool.json-diff.faq.2.answer': 'Absolut. Alles passiert lokal, keine Daten verlassen Ihren Browser.',
+	'tool.json-diff.faq.2.answer':
+		'Absolut. Alles passiert lokal, keine Daten verlassen Ihren Browser.',
 	'tool.json-diff.use_case.0': 'API-Versionen auf Regressionen prüfen',
 	'tool.json-diff.use_case.1': 'Konfigurationsänderungen in Prod-Dateien debuggen',
 	'tool.json-diff.use_case.2': 'Git-Merge-Konflikte in JSON-Manifesten prüfen',
@@ -1347,7 +1349,8 @@ const registryDe: Record<string, string> = {
 	'tool.xml-formatter.faq.1.question': 'Einrückung anpassen?',
 	'tool.xml-formatter.faq.1.answer': 'Ja, wählen Sie zwischen 2, 4 Leerzeichen oder Tabs.',
 	'tool.xml-formatter.faq.2.question': 'Bleiben Kommentare erhalten?',
-	'tool.xml-formatter.faq.2.answer': 'Ja, der Formatierer behält alle Kommentare an ihren Originalpositionen.',
+	'tool.xml-formatter.faq.2.answer':
+		'Ja, der Formatierer behält alle Kommentare an ihren Originalpositionen.',
 	'tool.xml-formatter.use_case.0': 'XML-Dateien für Code-Reviews lesbar machen',
 	'tool.xml-formatter.use_case.1': 'Minifiziertes XML aus Web-APIs säubern',
 	'tool.xml-formatter.use_case.2': 'XML-Formatierung im Team standardisieren',
@@ -1400,7 +1403,8 @@ const registryDe: Record<string, string> = {
 	'tool.xml-to-yaml.faq.0.question': 'Warum XML nach YAML konvertieren?',
 	'tool.xml-to-yaml.faq.0.answer': 'YAML ist besser lesbar und einfacher manuell zu bearbeiten.',
 	'tool.xml-to-yaml.faq.1.question': 'XML-Attribute?',
-	'tool.xml-to-yaml.faq.1.answer': 'Werden meist in Key-Value-Paare innerhalb des YAML-Elements gewandelt.',
+	'tool.xml-to-yaml.faq.1.answer':
+		'Werden meist in Key-Value-Paare innerhalb des YAML-Elements gewandelt.',
 	'tool.xml-to-yaml.faq.2.question': 'Verschachteltes XML?',
 	'tool.xml-to-yaml.faq.2.answer': 'Ja, der Konverter verarbeitet beliebig tiefe Strukturen.',
 	'tool.xml-to-yaml.use_case.0': 'Spring Framework XML-Konfigs nach YAML wandeln',
@@ -1423,20 +1427,23 @@ const registryDe: Record<string, string> = {
 	'tool.xml-minifier.faq.0.question': 'Was ist XML-Minifizierung?',
 	'tool.xml-minifier.faq.0.answer': 'Entfernt unnötige Zeichen zur Reduktion der Dateigröße.',
 	'tool.xml-minifier.faq.1.question': 'Effekt auf Verarbeitung?',
-	'tool.xml-minifier.faq.1.answer': 'Keiner. Parser ignorieren die Leerzeichen meist standardmäßig.',
+	'tool.xml-minifier.faq.1.answer':
+		'Keiner. Parser ignorieren die Leerzeichen meist standardmäßig.',
 	'tool.xml-minifier.use_case.0': 'Dateigrößen für schnellere APIs reduzieren',
 	'tool.xml-minifier.use_case.1': 'XML-Dateien für Prod-Umgebungen optimieren',
 	'tool.xml-minifier.use_case.2': 'Bandbreite bei XML-Übertragung sparen',
 	'tool.xml-minifier.use_case.3': 'XML in andere Dokumente einbetten',
 
 	'tool.xml-xpath.faq.0.question': 'Was ist XPath?',
-	'tool.xml-xpath.faq.0.answer': 'Eine Abfragesprache zum Selektieren von Knoten in XML-Dokumenten.',
+	'tool.xml-xpath.faq.0.answer':
+		'Eine Abfragesprache zum Selektieren von Knoten in XML-Dokumenten.',
 	'tool.xml-xpath.faq.1.question': 'Möglichkeiten?',
-	'tool.xml-xpath.faq.1.answer': 'Selektion nach Name, Wert, Position oder Inhalt mit komplexen Bedingungen.',
+	'tool.xml-xpath.faq.1.answer':
+		'Selektion nach Name, Wert, Position oder Inhalt mit komplexen Bedingungen.',
 	'tool.xml-xpath.use_case.0': 'Daten aus großen XML-Dokumenten extrahieren',
 	'tool.xml-xpath.use_case.1': 'XML-Daten in Test-Suites prüfen',
 	'tool.xml-xpath.use_case.2': 'XML-Daten via XSLT transformieren',
-	'tool.xml-xpath.use_case.3': 'XML-Strukturen programmatisch validieren',
+	'tool.xml-xpath.use_case.3': 'XML-Strukturen programmatisch validieren'
 };
 
 export default registryDe;
