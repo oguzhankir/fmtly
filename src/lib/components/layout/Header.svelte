@@ -10,6 +10,7 @@
 	import { currentLanguageInfo, locale, t } from '$stores/language';
 	import { Moon, Sun, Search, Menu, X, Github } from 'lucide-svelte';
 	import LanguageSelector from '../../../components/LanguageSelector.svelte';
+	import faviconUrl from '/favicon.svg?url';
 
 	type NavCategory = {
 		label: string;
@@ -106,7 +107,7 @@
 >
 	<!-- Left: Logo -->
 	<a href={localizePath('/', currentLocale)} class="header-logo" onclick={() => { mobileMenuOpen = false; }}>
-		<img src="/favicon.svg" alt="" class="header-logo-icon" />
+		<img src={faviconUrl} alt="" class="header-logo-icon" />
 		<span class="header-logo-name">fmtly</span>
 	</a>
 
