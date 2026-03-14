@@ -1,37 +1,33 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 	import { output } from '$stores/output.store';
 	import { input as inputStore } from '$stores/input.store';
 	import { xmlError, xmlStats, xmlFormatOptions, setFormatOptions } from '$stores/xml.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
-	import type { ToolDefinition } from '$registry/types.js';
 	import {
 		Copy,
 		Download,
 		WrapText,
 		Check,
-		AlertTriangle,
-		ChevronDown
+		AlertTriangle
 	} from 'lucide-svelte';
 
 	let {
 		toolSlug,
 		outputLanguage = 'xml',
-		downloadFilename = 'output',
-		workspaceTools = []
+		downloadFilename = 'output'
 	}: {
 		toolSlug: string;
 		outputLanguage?: string;
 		downloadFilename?: string;
-		workspaceTools?: ToolDefinition[];
 	} = $props();
 
 	let highlightedHtml = $state('');
 	let hljs: typeof import('highlight.js').default | undefined = $state(undefined);
 	let wrapLines = $state(false);
 	let copied = $state(false);
+	let supportsStructuredCopy = $derived(outputLanguage === 'json');
 
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isMinifier = $derived(toolSlug === 'minifier');
@@ -91,23 +87,7 @@
 			.replace(/>/g, '&gt;');
 	}
 
-	async function copyOutput(): Promise<void> {
-		if (!$output) return;
-		try {
-			await navigator.clipboard.writeText($output);
-		} catch {
-			const ta = document.createElement('textarea');
-			ta.value = $output;
-			document.body.appendChild(ta);
-			ta.select();
-			document.execCommand('copy');
-			document.body.removeChild(ta);
-		}
-		copied = true;
-		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
-		setTimeout(() => (copied = false), 2000);
-	}
-
+	
 	function downloadOutput(): void {
 		if (!$output) return;
 		const ext = outputLanguage === 'json' ? '.json'
@@ -124,101 +104,126 @@
 		addToast('success', $t('ui.toast.download_success', 'Download complete'));
 	}
 
-	function getWorkspaceLabel(tool: ToolDefinition): string {
-		switch (tool.slug) {
-			case 'formatter': return $t('ui.actions.format', 'Format');
-			case 'validator': return $t('ui.actions.validate', 'Validate');
-			case 'minifier': return $t('ui.actions.minify', 'Minify');
-			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
-			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
-			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
-			case 'xpath': return $t('ui.query.xpath', 'XPath');
-			default: return tool.displayName;
+	function toCopyFormat(mode: 'json' | 'js' | 'python' | 'escaped' = 'json'): string {
+		if (!$output) return '';
+		if (mode === 'json') return $output;
+		if (mode === 'js') {
+			try {
+				const parsed = JSON.parse($output);
+				return `const data = ${JSON.stringify(parsed, null, 2)};`;
+			} catch {
+				return $output;
+			}
 		}
+		if (mode === 'python') {
+			try {
+				const parsed = JSON.parse($output);
+				return `data = ${JSON.stringify(parsed, null, 2)}`;
+			} catch {
+				return $output;
+			}
+		}
+		if (mode === 'escaped') {
+			return $output
+				.replace(/\\/g, '\\\\')
+				.replace(/"/g, '\\"')
+				.replace(/\n/g, '\\n')
+				.replace(/\r/g, '\\r')
+				.replace(/\t/g, '\\t');
+		}
+		return $output;
 	}
 
-	function navigateToWorkspaceTool(slug: string): void {
-		if (slug === toolSlug) return;
-		void goto(`/xml/${slug}`, {
-			replaceState: true,
-			noScroll: true,
-			keepFocus: true
-		});
+	async function handleCopy(mode: 'json' | 'js' | 'python' | 'escaped' = 'json'): Promise<void> {
+		if (!$output) return;
+		const text = toCopyFormat(mode);
+		let copiedSuccessfully = false;
+		try {
+			await navigator.clipboard.writeText(text);
+			copiedSuccessfully = true;
+		} catch {
+			// Fallback for older browsers
+			const ta = document.createElement('textarea');
+			ta.value = text;
+			document.body.appendChild(ta);
+			ta.select();
+			document.execCommand('copy');
+			document.body.removeChild(ta);
+			copiedSuccessfully = true;
+		}
+		if (!copiedSuccessfully) {
+			addToast('error', $t('ui.output.error.copy_failed', 'Could not copy output'));
+			return;
+		}
+		copied = true;
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
+		setTimeout(() => (copied = false), 2000);
 	}
+
 </script>
 
-<div class="xml-output" role="region" aria-label="XML output panel">
-	{#if workspaceTools.length > 0}
-		<div class="xml-workspace-tabs" role="tablist" aria-label="XML workspace tabs">
-			{#each workspaceTools as workspaceTool}
-				<button
-					type="button"
-					role="tab"
-					class="xml-workspace-tab"
-					class:xml-workspace-tab--active={workspaceTool.slug === toolSlug}
-					aria-selected={workspaceTool.slug === toolSlug}
-					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
-				>
-					{getWorkspaceLabel(workspaceTool)}
-				</button>
-			{/each}
-		</div>
-	{/if}
-
+<div class="xml-output" role="region" aria-label={$t('ui.aria.xml_output_panel', 'XML output panel')}>
 	<div class="xml-output-toolbar">
 		<div class="xml-output-toolbar__group">
 			{#if isFormatter}
-				<label class="xml-output-select" aria-label="Indent style">
-					<ChevronDown size={12} />
-					<select
-						value={$xmlFormatOptions.indent}
-						onchange={(e) => {
-							const val = (e.currentTarget as HTMLSelectElement).value;
-							setFormatOptions({ indent: val === '\t' ? '\t' : (Number(val) as 2 | 4) });
-						}}
+			<div class="xml-output-controls">
+				<div class="xml-output-controls__group">
+					<span class="xml-output-controls__label">{$t('ui.output.controls.indent', 'Indent')}</span>
+					<button
+						type="button"
+						class="xml-output-chip"
+						class:xml-output-chip--active={$xmlFormatOptions.indent === 2}
+						onclick={() => setFormatOptions({ indent: 2 })}
 					>
-						<option value="2">2 {$t('ui.output.controls.spaces', 'spaces')}</option>
-						<option value="4">4 {$t('ui.output.controls.spaces', 'spaces')}</option>
-						<option value={'\t'}>{$t('ui.output.controls.tab', 'Tabs')}</option>
-					</select>
-				</label>
-			{/if}
+						2
+					</button>
+					<button
+						type="button"
+						class="xml-output-chip"
+						class:xml-output-chip--active={$xmlFormatOptions.indent === 4}
+						onclick={() => setFormatOptions({ indent: 4 })}
+					>
+						4
+					</button>
+					<button
+						type="button"
+						class="xml-output-chip"
+						class:xml-output-chip--active={$xmlFormatOptions.indent === '\t'}
+						onclick={() => setFormatOptions({ indent: '\t' })}
+					>
+						{$t('ui.output.controls.tab', 'Tab')}
+					</button>
+				</div>
+			</div>
+		{/if}
 			{#if isMinifier && minifySummary}
 				<span class="xml-output-stat">{minifySummary}</span>
 			{/if}
 		</div>
-		<div class="xml-output-toolbar__group">
-			<button
-				type="button"
-				class="xml-output-btn xml-output-btn--icon"
-				class:xml-output-btn--active={wrapLines}
-				onclick={() => (wrapLines = !wrapLines)}
-				title={$t('ui.actions.wrap', 'Toggle word wrap')}
-			>
+		<div class="xml-output-actions">
+			<button type="button" class="xml-output-btn" class:xml-output-btn--active={wrapLines} onclick={() => (wrapLines = !wrapLines)}>
 				<WrapText size={13} />
+				{$t('ui.output.actions.wrap', 'Wrap')}
 			</button>
-			<button
-				type="button"
-				class="xml-output-btn xml-output-btn--icon"
-				onclick={downloadOutput}
-				disabled={!$output}
-				title={$t('ui.actions.download', 'Download')}
-			>
+			{#if supportsStructuredCopy}
+				<select class="xml-output-select" onchange={(event) => handleCopy((event.currentTarget as HTMLSelectElement).value as 'json' | 'js' | 'python' | 'escaped')}>
+					<option value="json">{$t('ui.output.actions.copy_json', 'Copy as JSON')}</option>
+					<option value="js">{$t('ui.output.actions.copy_js', 'Copy as JS Object')}</option>
+					<option value="python">{$t('ui.output.actions.copy_python', 'Copy as Python Dict')}</option>
+					<option value="escaped">{$t('ui.output.actions.copy_escaped', 'Copy escaped')}</option>
+				</select>
+			{/if}
+			<button type="button" class="xml-output-btn" onclick={downloadOutput} disabled={!$output}>
 				<Download size={13} />
+				{$t('ui.actions.download', 'Download')}
 			</button>
-			<button
-				type="button"
-				class="xml-output-btn xml-output-btn--copy"
-				onclick={copyOutput}
-				disabled={!$output}
-			>
+			<button type="button" class="xml-output-btn xml-output-btn--copy" onclick={() => handleCopy()} disabled={!$output}>
 				{#if copied}
 					<Check size={13} />
-					{$t('ui.actions.copied', 'Copied')}
 				{:else}
 					<Copy size={13} />
-					{$t('ui.actions.copy', 'Copy')}
 				{/if}
+				{$t('ui.actions.copy', 'Copy')}
 			</button>
 		</div>
 	</div>
@@ -269,60 +274,30 @@
 		overflow: hidden;
 	}
 
-	.xml-workspace-tabs {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		overflow-x: auto;
-		padding: 0 var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		scrollbar-width: none;
-	}
-
-	.xml-workspace-tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.xml-workspace-tab {
-		flex: 0 0 auto;
-		height: 36px;
-		padding: 0 var(--space-3);
-		border: none;
-		border-bottom: 2px solid transparent;
-		background: transparent;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		white-space: nowrap;
-		cursor: pointer;
-	}
-
-	.xml-workspace-tab--active {
-		border-bottom-color: var(--accent);
-		color: var(--text-primary);
-	}
-
-	.xml-workspace-tab:hover {
-		color: var(--text-primary);
-	}
 
 	.xml-output-toolbar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: var(--space-2);
 		padding: var(--space-2) var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		flex-shrink: 0;
+		border-bottom: 1px solid var(--border-default);
+		gap: var(--space-2);
+		flex-wrap: wrap;
+	}
+
+	.xml-output-actions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: var(--space-2);
+		flex-wrap: wrap;
 	}
 
 	.xml-output-toolbar__group {
 		display: flex;
 		align-items: center;
 		gap: var(--space-2);
+		flex-wrap: wrap;
 	}
 
 	.xml-output-stat {
@@ -331,33 +306,9 @@
 		color: var(--text-muted);
 	}
 
-	.xml-output-select {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-1);
-		height: 28px;
-		padding: 0 var(--space-2);
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-md);
-		background: var(--bg-elevated);
-		color: var(--text-secondary);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		cursor: pointer;
-	}
-
-	.xml-output-select select {
-		border: none;
-		background: transparent;
-		color: var(--text-primary);
-		font: inherit;
-		outline: none;
-	}
-
-	.xml-output-btn {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-1);
+	.xml-output-btn,
+	.xml-output-select,
+	.xml-output-chip {
 		height: 28px;
 		padding: 0 var(--space-2);
 		border: 1px solid var(--border-default);
@@ -367,17 +318,25 @@
 		font-family: var(--font-ui);
 		font-size: 12px;
 		font-weight: 500;
+	}
+
+	.xml-output-btn,
+	.xml-output-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1);
 		cursor: pointer;
 	}
 
-	.xml-output-btn:hover:not(:disabled) {
-		background: var(--bg-hover);
-		color: var(--text-primary);
+	.xml-output-select {
+		cursor: pointer;
 	}
 
-	.xml-output-btn:disabled {
-		opacity: 0.4;
-		cursor: not-allowed;
+	.xml-output-btn:hover:not(:disabled),
+	.xml-output-select:hover,
+	.xml-output-chip:hover {
+		background: var(--bg-hover);
+		color: var(--text-primary);
 	}
 
 	.xml-output-btn--active {
@@ -386,8 +345,9 @@
 		color: var(--text-primary);
 	}
 
-	.xml-output-btn--icon {
-		padding: 0 var(--space-2);
+	.xml-output-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
 	}
 
 	.xml-output-btn--copy {
@@ -400,6 +360,42 @@
 		opacity: 0.9;
 		background: var(--accent);
 		color: white;
+	}
+
+	.xml-output-controls {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-3);
+		flex-wrap: wrap;
+		padding: var(--space-2) var(--space-3);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
+	}
+
+	.xml-output-controls__group {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		flex-wrap: wrap;
+		font-family: var(--font-ui);
+		font-size: 12px;
+		color: var(--text-primary);
+	}
+
+	.xml-output-controls__label {
+		color: var(--text-muted);
+		font-family: var(--font-ui);
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.xml-output-chip--active {
+		border-color: var(--accent-border);
+		background: var(--accent-dim);
+		color: var(--text-primary);
 	}
 
 	.xml-output-body {
@@ -485,5 +481,18 @@
 		font-size: 11px;
 		color: var(--text-muted);
 		flex-shrink: 0;
+	}
+
+	@media (max-width: 767px) {
+		.xml-output-toolbar,
+		.xml-output-controls,
+		.xml-output-meta {
+			padding-left: var(--space-2);
+			padding-right: var(--space-2);
+		}
+
+		.xml-output-actions {
+			justify-content: flex-start;
+		}
 	}
 </style>

@@ -643,7 +643,6 @@
 						outputLanguage={data.tool.outputLanguage}
 						downloadFilename={data.tool.id}
 						toolSlug={data.tool.slug}
-						workspaceTools={xmlWorkspaceTools}
 					/>
 				{:else if data.tool.category === "json" && ["jsonpath", "jmespath"].includes(data.tool.slug)}
 					<JsonQueryOutputPanel toolSlug={data.tool.slug === "jsonpath" ? "jsonpath" : "jmespath"} />

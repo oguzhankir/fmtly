@@ -1159,6 +1159,15 @@ const registryTr: Record<string, string> = {
 	'ui.toast.copy_error': 'Kopyalama başarısız — tarayıcı izinlerini kontrol edin',
 	'ui.toast.copy_success': 'Panoya kopyalandı',
 	'ui.toast.file_loaded': 'Dosya yüklendi: {name}',
+	'ui.toast.clipboard_xml': 'Pano XML',
+	'ui.toast.pasted_xml': 'Panodan XML yapıştırıldı',
+	'ui.toast.xml_file_types':
+		'Yalnızca .xml, .svg, .xhtml, .xsd, .wsdl ve .txt dosyaları desteklenmektedir',
+	'ui.aria.xml_input_panel': 'XML girdi paneli',
+	'ui.aria.xml_output_panel': 'XML çıktı paneli',
+	'ui.aria.xml_workspace_tabs': 'XML çalışma alanı sekmeleri',
+	'ui.aria.xpath_panel': 'XPath sorgu paneli',
+	'ui.aria.xml_validator': 'XML doğrulayıcı',
 	'ui.toast.input_cleared': 'Girdi temizlendi',
 	'ui.loaded_sample': '{label} yüklendi',
 	'ui.toast.url_error': 'Getirilemedi — doğrudan yapıştırmayı deneyin',
@@ -1425,6 +1434,11 @@ const registryTr: Record<string, string> = {
 		"Web yanıtlarından veya API'lerden gelen küçültülmüş XML'i temizleme",
 	'tool.xml-formatter.use_case.2': 'Ekip projelerinde XML biçimlendirmeyi standartlaştırma',
 	'tool.xml-formatter.use_case.3': 'Görsel hiyerarşiyi iyileştirerek XML yapısını hata ayıklama',
+	'tool.xml-formatter.use_case.4':
+		'Preparing XML files for version control with consistent formatting',
+	'tool.xml-formatter.faq.2.question': 'Does the formatter preserve comments?',
+	'tool.xml-formatter.faq.2.answer':
+		'Yes, the XML formatter preserves all comments in their original positions. It only changes the indentation and line breaks to improve readability without affecting the content or structure.',
 
 	'tool.xml-validator.faq.0.question': 'XML doğrulama neyi kontrol eder?',
 	'tool.xml-validator.faq.0.answer':
@@ -1437,6 +1451,11 @@ const registryTr: Record<string, string> = {
 		'Hataları önlemek için yapılandırma dosyalarını dağıtımdan önce kontrol etme',
 	'tool.xml-validator.use_case.2': 'Web uygulamalarında XML ayrıştırma hatalarını hata ayıklama',
 	'tool.xml-validator.use_case.3': 'Sistemler arasında XML değiştirirken veri bütünlüğünü sağlama',
+	'tool.xml-validator.use_case.4':
+		'Ensuring XML compliance before submitting to enterprise systems',
+	'tool.xml-validator.faq.2.question': 'How do I fix XML validation errors?',
+	'tool.xml-validator.faq.2.answer':
+		'The validator shows exact line and column numbers for each error. Common fixes include: closing unclosed tags, fixing mismatched tags, removing duplicate attributes, and ensuring proper character encoding. Click on any error to see detailed explanations.',
 
 	'tool.xml-to-json.faq.0.question': "XML'den JSON'a dönüşüm nasıl çalışır?",
 	'tool.xml-to-json.faq.0.answer':
@@ -1449,6 +1468,10 @@ const registryTr: Record<string, string> = {
 	'tool.xml-to-json.use_case.2': 'Eski XML verilerini modern JSON tabanlı sistemlere geçirme',
 	'tool.xml-to-json.use_case.3':
 		'XML verilerini JSON tabanlı araçlar ve kitaplıklar kullanarak analiz etme',
+	'tool.xml-to-json.use_case.4': 'Transforming RSS feeds into JSON for mobile app consumption',
+	'tool.xml-to-json.faq.2.question': 'How are XML attributes handled in JSON?',
+	'tool.xml-to-json.faq.2.answer':
+		'XML attributes are converted to JSON properties with an "@" prefix by default. This distinguishes them from child elements. You can customize this behavior in advanced settings to use different naming conventions.',
 
 	'tool.json-to-xml.faq.0.question': "JSON'dan XML'e dönüşüm nedir?",
 	'tool.json-to-xml.faq.0.answer':
@@ -1460,6 +1483,10 @@ const registryTr: Record<string, string> = {
 	'tool.json-to-xml.use_case.1': 'JSON içeriğinden RSS/Atom beslemeleri oluşturma',
 	'tool.json-to-xml.use_case.2': 'XML gerektiren eski sistemler için API yanıtlarını dönüştürme',
 	'tool.json-to-xml.use_case.3': "JSON'dan Java uygulamaları için yapılandırma dosyaları oluşturma",
+	'tool.json-to-xml.use_case.4': 'Generating SOAP envelopes from JSON payloads for web services',
+	'tool.json-to-xml.faq.2.question': 'How does the converter handle special characters?',
+	'tool.json-to-xml.faq.2.answer':
+		'Special characters are automatically escaped according to XML standards. This includes &, <, >, ", and \', which are converted to their corresponding XML entities to ensure valid XML output.',
 
 	'tool.xml-to-yaml.faq.0.question': "Neden XML'i YAML'a dönüştürelim?",
 	'tool.xml-to-yaml.faq.0.answer':
@@ -1475,6 +1502,7 @@ const registryTr: Record<string, string> = {
 		"Yapılandırma betiklerini XML'den daha okunabilir YAML formatına geçirme",
 	'tool.xml-to-yaml.use_case.2': 'XML şablonlarından Kubernetes kaynakları oluşturma',
 	'tool.xml-to-yaml.use_case.3': 'Belgeleme amaçlı XML belgelerini işleme',
+	'tool.xml-to-yaml.use_case.4': 'Transforming XML data for Ansible playbooks and automation',
 
 	'tool.xml-to-csv.faq.0.question': "XML'den CSV'ye dönüşüm nasıl çalışır?",
 	'tool.xml-to-csv.faq.0.answer':
@@ -1488,6 +1516,7 @@ const registryTr: Record<string, string> = {
 	'tool.xml-to-csv.use_case.2': "XML günlüklerini Excel'de veri analizi için işleme",
 	'tool.xml-to-csv.use_case.3':
 		'XML ve CSV formatlarını kullanarak sistemler arasında veri geçirme',
+	'tool.xml-to-csv.use_case.4': 'Analyzing XML API responses by converting to tabular format',
 
 	'tool.xml-minifier.faq.0.question': 'XML küçültme nedir?',
 	'tool.xml-minifier.faq.0.answer':

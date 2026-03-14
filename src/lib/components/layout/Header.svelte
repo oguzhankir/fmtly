@@ -10,7 +10,6 @@
 	import { currentLanguageInfo, locale, t } from '$stores/language';
 	import { Moon, Sun, Search, Menu, X, Github } from 'lucide-svelte';
 	import LanguageSelector from '../../../components/LanguageSelector.svelte';
-	import faviconUrl from '/favicon.svg?url';
 
 	type NavCategory = {
 		label: string;
@@ -36,6 +35,7 @@
 		'qr',
 		'generate'
 	];
+	const faviconUrl: string = '/favicon.svg';
 
 	let mobileMenuOpen = $state(false);
 	let scrolled = $state(false);
@@ -66,7 +66,6 @@
 	}
 
 	function handleLanguageSelectorOpen(): void {
-		locale.set(currentLocale);
 		showLanguageSelector = true;
 	}
 

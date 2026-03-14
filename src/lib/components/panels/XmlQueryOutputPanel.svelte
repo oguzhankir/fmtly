@@ -91,47 +91,9 @@
 		}
 	}
 
-	function getWorkspaceLabel(tool: ToolDefinition): string {
-		switch (tool.slug) {
-			case 'formatter': return $t('ui.actions.format', 'Format');
-			case 'validator': return $t('ui.actions.validate', 'Validate');
-			case 'minifier': return $t('ui.actions.minify', 'Minify');
-			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
-			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
-			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
-			case 'xpath': return $t('ui.query.xpath', 'XPath');
-			default: return tool.displayName;
-		}
-	}
-
-	function navigateToWorkspaceTool(slug: string): void {
-		if (slug === toolSlug) return;
-		void goto(`/xml/${slug}`, {
-			replaceState: true,
-			noScroll: true,
-			keepFocus: true
-		});
-	}
 </script>
 
-<div class="xpath-panel" role="region" aria-label="XPath query panel">
-	{#if workspaceTools.length > 0}
-		<div class="xml-workspace-tabs" role="tablist" aria-label="XML workspace tabs">
-			{#each workspaceTools as workspaceTool}
-				<button
-					type="button"
-					role="tab"
-					class="xml-workspace-tab"
-					class:xml-workspace-tab--active={workspaceTool.slug === toolSlug}
-					aria-selected={workspaceTool.slug === toolSlug}
-					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
-				>
-					{getWorkspaceLabel(workspaceTool)}
-				</button>
-			{/each}
-		</div>
-	{/if}
-
+<div class="xpath-panel" role="region" aria-label={$t('ui.aria.xpath_panel', 'XPath query panel')}>
 	<div class="xpath-query-bar">
 		<div class="xpath-query-bar__input-wrap">
 			<Search size={14} class="xpath-query-bar__icon" />
@@ -236,46 +198,7 @@
 		overflow: hidden;
 	}
 
-	.xml-workspace-tabs {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		overflow-x: auto;
-		padding: 0 var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		scrollbar-width: none;
-		flex-shrink: 0;
-	}
-
-	.xml-workspace-tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.xml-workspace-tab {
-		flex: 0 0 auto;
-		height: 36px;
-		padding: 0 var(--space-3);
-		border: none;
-		border-bottom: 2px solid transparent;
-		background: transparent;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		white-space: nowrap;
-		cursor: pointer;
-	}
-
-	.xml-workspace-tab--active {
-		border-bottom-color: var(--accent);
-		color: var(--text-primary);
-	}
-
-	.xml-workspace-tab:hover {
-		color: var(--text-primary);
-	}
-
+	
 	.xpath-query-bar {
 		display: flex;
 		align-items: center;

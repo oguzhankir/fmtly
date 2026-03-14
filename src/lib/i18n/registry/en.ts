@@ -1054,7 +1054,6 @@ const registryEn: Record<string, string> = {
 	'ui.stats.info': '{encoding} · {size} · {lines} lines · depth: {depth}',
 	'ui.toast.copy_error': 'Copy failed — check browser permissions',
 	'ui.toast.copy_success': 'Copied to clipboard',
-	'ui.toast.file_loaded': 'File loaded: {name}',
 	'ui.toast.input_cleared': 'Input cleared',
 	'ui.loaded_sample': 'Loaded {label}',
 	'ui.toast.url_error': 'Could not fetch — try pasting directly',
@@ -1136,6 +1135,15 @@ const registryEn: Record<string, string> = {
 		'No syntax errors detected. The document is well-formed and can be parsed by any XML processor.',
 	'ui.validator.error_count.one': '1 error found',
 	'ui.validator.error_count.other': '{count} errors found',
+	'ui.toast.file_loaded': 'File loaded: {name}',
+	'ui.toast.clipboard_xml': 'Clipboard XML',
+	'ui.toast.pasted_xml': 'Pasted XML from clipboard',
+	'ui.toast.xml_file_types': 'Only .xml, .svg, .xhtml, .xsd, .wsdl, and .txt files are supported',
+	'ui.aria.xml_input_panel': 'XML input panel',
+	'ui.aria.xml_output_panel': 'XML output panel',
+	'ui.aria.xml_workspace_tabs': 'XML workspace tabs',
+	'ui.aria.xpath_panel': 'XPath query panel',
+	'ui.aria.xml_validator': 'XML validator',
 	'ui.convert.to_json': '→ JSON',
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
@@ -1377,11 +1385,16 @@ const registryEn: Record<string, string> = {
 	'tool.xml-formatter.faq.1.question': 'Can I customize the indentation?',
 	'tool.xml-formatter.faq.1.answer':
 		'Yes! You can choose between 2 spaces, 4 spaces, or tabs for indentation. The formatter preserves your XML structure while applying your preferred formatting style.',
+	'tool.xml-formatter.faq.2.question': 'Does the formatter preserve comments?',
+	'tool.xml-formatter.faq.2.answer':
+		'Yes, the XML formatter preserves all comments in their original positions. It only changes the indentation and line breaks to improve readability without affecting the content or structure.',
 	'tool.xml-formatter.use_case.0':
 		'Making XML files more readable for documentation and code reviews',
 	'tool.xml-formatter.use_case.1': 'Cleaning up minified XML from web responses or APIs',
 	'tool.xml-formatter.use_case.2': 'Standardizing XML formatting across team projects',
 	'tool.xml-formatter.use_case.3': 'Debugging XML structure by improving visual hierarchy',
+	'tool.xml-formatter.use_case.4':
+		'Preparing XML files for version control with consistent formatting',
 
 	'tool.xml-validator.faq.0.question': 'What does XML validation check for?',
 	'tool.xml-validator.faq.0.answer':
@@ -1389,11 +1402,16 @@ const registryEn: Record<string, string> = {
 	'tool.xml-validator.faq.1.question': "What's the difference between well-formed and valid XML?",
 	'tool.xml-validator.faq.1.answer':
 		'Well-formed XML follows basic syntax rules but may have structural issues. Valid XML is well-formed AND conforms to a specific DTD or XML Schema that defines the allowed structure and content.',
+	'tool.xml-validator.faq.2.question': 'How do I fix XML validation errors?',
+	'tool.xml-validator.faq.2.answer':
+		'The validator shows exact line and column numbers for each error. Common fixes include: closing unclosed tags, fixing mismatched tags, removing duplicate attributes, and ensuring proper character encoding. Click on any error to see detailed explanations.',
 	'tool.xml-validator.use_case.0': 'Validating API responses before processing in applications',
 	'tool.xml-validator.use_case.1':
 		'Checking configuration files before deployment to prevent errors',
-	'tool.xml-validator.use_case.2': 'Debugging XML parsing errors in web applications',
-	'tool.xml-validator.use_case.3': 'Ensuring data integrity when exchanging XML between systems',
+	'tool.xml-validator.use_case.2': 'Verifying XML data imports from third-party systems',
+	'tool.xml-validator.use_case.3': 'Debugging XML parsing issues in development environments',
+	'tool.xml-validator.use_case.4':
+		'Ensuring XML compliance before submitting to enterprise systems',
 
 	'tool.xml-to-json.faq.0.question': 'How does XML to JSON conversion work?',
 	'tool.xml-to-json.faq.0.answer':
@@ -1401,10 +1419,14 @@ const registryEn: Record<string, string> = {
 	'tool.xml-to-json.faq.1.question': 'Is the conversion reversible?',
 	'tool.xml-to-json.faq.1.answer':
 		'Mostly yes, but some XML features like comments, processing instructions, and the order of attributes may be lost. The core data structure remains intact for round-trip conversion.',
+	'tool.xml-to-json.faq.2.question': 'How are XML attributes handled in JSON?',
+	'tool.xml-to-json.faq.2.answer':
+		'XML attributes are converted to JSON properties with an "@" prefix by default. This distinguishes them from child elements. You can customize this behavior in advanced settings to use different naming conventions.',
 	'tool.xml-to-json.use_case.0': 'Converting SOAP API responses to JSON for modern applications',
 	'tool.xml-to-json.use_case.1': 'Processing XML configuration files in JavaScript applications',
 	'tool.xml-to-json.use_case.2': 'Migrating legacy XML data to modern JSON-based systems',
-	'tool.xml-to-json.use_case.3': 'Analyzing XML data using JSON-based tools and libraries',
+	'tool.xml-to-json.use_case.3': 'Extracting data from XML sitemaps for analysis',
+	'tool.xml-to-json.use_case.4': 'Transforming RSS feeds into JSON for mobile app consumption',
 
 	'tool.json-to-xml.faq.0.question': 'What is JSON to XML conversion?',
 	'tool.json-to-xml.faq.0.answer':
@@ -1412,10 +1434,14 @@ const registryEn: Record<string, string> = {
 	'tool.json-to-xml.faq.1.question': 'How are arrays handled in the conversion?',
 	'tool.json-to-xml.faq.1.answer':
 		'JSON arrays become multiple XML elements with the same tag name. You can configure whether to use wrapper elements or repeat the same element tag for each array item.',
+	'tool.json-to-xml.faq.2.question': 'How does the converter handle special characters?',
+	'tool.json-to-xml.faq.2.answer':
+		'Special characters are automatically escaped according to XML standards. This includes &, <, >, ", and \', which are converted to their corresponding XML entities to ensure valid XML output.',
 	'tool.json-to-xml.use_case.0': 'Creating XML sitemaps from JSON data',
 	'tool.json-to-xml.use_case.1': 'Generating RSS/Atom feeds from JSON content',
 	'tool.json-to-xml.use_case.2': 'Converting API responses for legacy systems requiring XML',
 	'tool.json-to-xml.use_case.3': 'Creating configuration files for Java applications from JSON',
+	'tool.json-to-xml.use_case.4': 'Generating SOAP envelopes from JSON payloads for web services',
 
 	'tool.xml-to-yaml.faq.0.question': 'Why convert XML to YAML?',
 	'tool.xml-to-yaml.faq.0.answer':
@@ -1430,6 +1456,7 @@ const registryEn: Record<string, string> = {
 	'tool.xml-to-yaml.use_case.1': 'Migrating build scripts from XML to more readable YAML format',
 	'tool.xml-to-yaml.use_case.2': 'Creating Kubernetes resources from XML templates',
 	'tool.xml-to-yaml.use_case.3': 'Processing XML documents for documentation purposes',
+	'tool.xml-to-yaml.use_case.4': 'Transforming XML data for Ansible playbooks and automation',
 
 	'tool.xml-to-csv.faq.0.question': 'How does XML to CSV conversion work?',
 	'tool.xml-to-csv.faq.0.answer':
@@ -1440,7 +1467,9 @@ const registryEn: Record<string, string> = {
 	'tool.xml-to-csv.use_case.0': 'Extracting data from XML reports into spreadsheet format',
 	'tool.xml-to-csv.use_case.1': 'Converting XML exports from databases to CSV for analysis',
 	'tool.xml-to-csv.use_case.2': 'Processing XML logs for data analysis in Excel',
-	'tool.xml-to-csv.use_case.3': 'Migrating data between systems using XML and CSV formats',
+	'tool.xml-to-csv.use_case.3':
+		'Migrating product catalogs from XML to CSV for e-commerce platforms',
+	'tool.xml-to-csv.use_case.4': 'Analyzing XML API responses by converting to tabular format',
 
 	'tool.xml-minifier.faq.0.question': 'What is XML minification?',
 	'tool.xml-minifier.faq.0.answer':

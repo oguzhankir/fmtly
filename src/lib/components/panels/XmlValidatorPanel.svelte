@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import type { ToolDefinition } from '$registry/types.js';
 	import { xmlError } from '$stores/xml.store';
 	import { input, initInput } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
 	import { formatXML } from '$engines/xml/index.js';
+	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
 	import {
 		CheckCircle,
 		AlertTriangle,
@@ -91,47 +92,17 @@
 		}
 	}
 
-	function getWorkspaceLabel(tool: ToolDefinition): string {
-		switch (tool.slug) {
-			case 'formatter': return $t('ui.actions.format', 'Format');
-			case 'validator': return $t('ui.actions.validate', 'Validate');
-			case 'minifier': return $t('ui.actions.minify', 'Minify');
-			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
-			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
-			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
-			case 'xpath': return $t('ui.query.xpath', 'XPath');
-			default: return tool.displayName;
-		}
-	}
-
-	function navigateToWorkspaceTool(slug: string): void {
-		if (slug === toolSlug) return;
-		void goto(`/xml/${slug}`, {
-			replaceState: true,
-			noScroll: true,
-			keepFocus: true
-		});
-	}
 </script>
 
-<div class="validator-shell" role="region" aria-label="XML validator">
+<div class="validator-shell" role="region" aria-label={$t('ui.aria.xml_validator', 'XML validator')}>
 	{#if workspaceTools.length > 0}
-		<div class="xml-workspace-tabs" role="tablist" aria-label="XML workspace tabs">
-			{#each workspaceTools as workspaceTool}
-				<button
-					type="button"
-					role="tab"
-					class="xml-workspace-tab"
-					class:xml-workspace-tab--active={workspaceTool.slug === toolSlug}
-					aria-selected={workspaceTool.slug === toolSlug}
-					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
-				>
-					{getWorkspaceLabel(workspaceTool)}
-				</button>
-			{/each}
-		</div>
+		<WorkspaceTabs
+			tools={workspaceTools}
+			activeSlug={toolSlug}
+			category="xml"
+			locale={$page.params.lang || 'en'}
+		/>
 	{/if}
-
 	<div class="validator-layout">
 		<div class="validator-editor">
 			<div class="validator-editor-toolbar">
@@ -222,46 +193,7 @@
 		overflow: hidden;
 	}
 
-	.xml-workspace-tabs {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		overflow-x: auto;
-		padding: 0 var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		scrollbar-width: none;
-		flex-shrink: 0;
-	}
-
-	.xml-workspace-tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.xml-workspace-tab {
-		flex: 0 0 auto;
-		height: 36px;
-		padding: 0 var(--space-3);
-		border: none;
-		border-bottom: 2px solid transparent;
-		background: transparent;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		white-space: nowrap;
-		cursor: pointer;
-	}
-
-	.xml-workspace-tab--active {
-		border-bottom-color: var(--accent);
-		color: var(--text-primary);
-	}
-
-	.xml-workspace-tab:hover {
-		color: var(--text-primary);
-	}
-
+	
 	.validator-layout {
 		display: flex;
 		flex: 1;

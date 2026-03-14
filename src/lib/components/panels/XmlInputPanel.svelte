@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import type { ToolDefinition } from '$registry/types.js';
 	import { xmlStats, xmlError } from '$stores/xml.store';
 	import { initInput, input, inputByteSize, formatByteSize } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
 	import { xmlSamples } from '$lib/utils/xmlSamples.js';
+	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
 	import {
 		Upload,
 		Trash2,
@@ -92,7 +93,7 @@
 	function handleFileContent(content: string, label: string): void {
 		input.set(content);
 		loadedFilename = label;
-		addToast('success', `File loaded: ${label}`);
+		addToast('success', $t('ui.toast.file_loaded', { name: label }));
 	}
 
 	function handleDragEnter(event: DragEvent): void {
@@ -169,7 +170,7 @@
 		if (sample.value) {
 			input.set(sample.value);
 			loadedFilename = sample.label;
-			addToast('success', `Loaded ${sample.label}`);
+			addToast('success', $t('ui.loaded_sample', { label: sample.label }));
 		}
 	}
 
@@ -250,33 +251,12 @@
 	function pasteClipboardXml(): void {
 		if (!clipboardXml) return;
 		input.set(clipboardXml);
-		loadedFilename = 'Clipboard XML';
+		loadedFilename = $t('ui.toast.clipboard_xml', 'Clipboard XML');
 		clipboardXml = '';
-		addToast('success', 'Pasted XML from clipboard');
+		addToast('success', $t('ui.toast.pasted_xml', 'Pasted XML from clipboard'));
 	}
 
-	function getWorkspaceLabel(tool: ToolDefinition): string {
-		switch (tool.slug) {
-			case 'formatter': return $t('ui.actions.format', 'Format');
-			case 'validator': return $t('ui.actions.validate', 'Validate');
-			case 'minifier': return $t('ui.actions.minify', 'Minify');
-			case 'to-json': return $t('ui.convert.to_json', '→ JSON');
-			case 'to-yaml': return $t('ui.convert.to_yaml', '→ YAML');
-			case 'to-csv': return $t('ui.convert.to_csv', '→ CSV');
-			case 'xpath': return $t('ui.query.xpath', 'XPath');
-			default: return tool.displayName;
-		}
-	}
-
-	function navigateToWorkspaceTool(slug: string): void {
-		if (slug === toolSlug) return;
-		void goto(`/xml/${slug}`, {
-			replaceState: true,
-			noScroll: true,
-			keepFocus: true
-		});
-	}
-</script>
+	</script>
 
 <div
 	class="relative flex h-full w-full flex-col"
@@ -285,23 +265,15 @@
 	ondragover={handleDragOver}
 	ondrop={handleDrop}
 	role="region"
-	aria-label="XML input panel"
+	aria-label={$t('ui.aria.xml_input_panel', 'XML input panel')}
 >
 	{#if workspaceTools.length > 0}
-		<div class="xml-workspace-tabs" role="tablist" aria-label="XML workspace tabs">
-			{#each workspaceTools as workspaceTool}
-				<button
-					type="button"
-					role="tab"
-					class="xml-workspace-tab"
-					class:xml-workspace-tab--active={workspaceTool.slug === toolSlug}
-					aria-selected={workspaceTool.slug === toolSlug}
-					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
-				>
-					{getWorkspaceLabel(workspaceTool)}
-				</button>
-			{/each}
-		</div>
+		<WorkspaceTabs
+			tools={workspaceTools}
+			activeSlug={toolSlug}
+			category="xml"
+			locale={$page.params.lang || 'en'}
+		/>
 	{/if}
 
 	<div class="xml-input-toolbar">
@@ -418,45 +390,6 @@
 </div>
 
 <style>
-	.xml-workspace-tabs {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		overflow-x: auto;
-		padding: 0 var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		scrollbar-width: none;
-	}
-
-	.xml-workspace-tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.xml-workspace-tab {
-		flex: 0 0 auto;
-		height: 36px;
-		padding: 0 var(--space-3);
-		border: none;
-		border-bottom: 2px solid transparent;
-		background: transparent;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		white-space: nowrap;
-		cursor: pointer;
-	}
-
-	.xml-workspace-tab--active {
-		border-bottom-color: var(--accent);
-		color: var(--text-primary);
-	}
-
-	.xml-workspace-tab:hover {
-		color: var(--text-primary);
-	}
-
 	.xml-input-toolbar {
 		display: flex;
 		align-items: center;

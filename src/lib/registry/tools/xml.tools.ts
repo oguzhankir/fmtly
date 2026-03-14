@@ -30,13 +30,18 @@ export const xmlTools: ToolDefinition[] = [
 			{
 				question: 'tool.xml-formatter.faq.1.question',
 				answer: 'tool.xml-formatter.faq.1.answer'
+			},
+			{
+				question: 'tool.xml-formatter.faq.2.question',
+				answer: 'tool.xml-formatter.faq.2.answer'
 			}
 		],
 		useCases: [
 			'tool.xml-formatter.use_case.0',
 			'tool.xml-formatter.use_case.1',
 			'tool.xml-formatter.use_case.2',
-			'tool.xml-formatter.use_case.3'
+			'tool.xml-formatter.use_case.3',
+			'tool.xml-formatter.use_case.4'
 		],
 		sampleInput: `<?xml version="1.0" encoding="UTF-8"?><catalog><book id="1"><title>The Great Gatsby</title><author>F. Scott Fitzgerald</author><year>1925</year><price>10.99</price></book><book id="2"><title>To Kill a Mockingbird</title><author>Harper Lee</author><year>1960</year><price>12.99</price></book></catalog>`
 	},
@@ -52,7 +57,7 @@ export const xmlTools: ToolDefinition[] = [
 		metaDescription: 'tool.xml-validator.meta_description',
 		engine: 'xml',
 		operation: 'tool.xml-validator.operation',
-		layoutVariant: 'single',
+		layoutVariant: 'single-panel',
 		inputLanguage: 'xml',
 		outputLanguage: 'xml',
 		hasTreeView: false,
@@ -69,13 +74,18 @@ export const xmlTools: ToolDefinition[] = [
 			{
 				question: 'tool.xml-validator.faq.1.question',
 				answer: 'tool.xml-validator.faq.1.answer'
+			},
+			{
+				question: 'tool.xml-validator.faq.2.question',
+				answer: 'tool.xml-validator.faq.2.answer'
 			}
 		],
 		useCases: [
 			'tool.xml-validator.use_case.0',
 			'tool.xml-validator.use_case.1',
 			'tool.xml-validator.use_case.2',
-			'tool.xml-validator.use_case.3'
+			'tool.xml-validator.use_case.3',
+			'tool.xml-validator.use_case.4'
 		],
 		sampleInput: `<?xml version="1.0" encoding="UTF-8"?>
 <catalog>
@@ -115,13 +125,18 @@ export const xmlTools: ToolDefinition[] = [
 			{
 				question: 'tool.xml-to-json.faq.1.question',
 				answer: 'tool.xml-to-json.faq.1.answer'
+			},
+			{
+				question: 'tool.xml-to-json.faq.2.question',
+				answer: 'tool.xml-to-json.faq.2.answer'
 			}
 		],
 		useCases: [
 			'tool.xml-to-json.use_case.0',
 			'tool.xml-to-json.use_case.1',
 			'tool.xml-to-json.use_case.2',
-			'tool.xml-to-json.use_case.3'
+			'tool.xml-to-json.use_case.3',
+			'tool.xml-to-json.use_case.4'
 		],
 		sampleInput: `<?xml version="1.0" encoding="UTF-8"?>
 <catalog>
@@ -168,13 +183,18 @@ export const xmlTools: ToolDefinition[] = [
 			{
 				question: 'tool.json-to-xml.faq.1.question',
 				answer: 'tool.json-to-xml.faq.1.answer'
+			},
+			{
+				question: 'tool.json-to-xml.faq.2.question',
+				answer: 'tool.json-to-xml.faq.2.answer'
 			}
 		],
 		useCases: [
 			'tool.json-to-xml.use_case.0',
 			'tool.json-to-xml.use_case.1',
 			'tool.json-to-xml.use_case.2',
-			'tool.json-to-xml.use_case.3'
+			'tool.json-to-xml.use_case.3',
+			'tool.json-to-xml.use_case.4'
 		],
 		sampleInput: `{
   "catalog": {
@@ -232,7 +252,8 @@ export const xmlTools: ToolDefinition[] = [
 			'tool.xml-to-yaml.use_case.0',
 			'tool.xml-to-yaml.use_case.1',
 			'tool.xml-to-yaml.use_case.2',
-			'tool.xml-to-yaml.use_case.3'
+			'tool.xml-to-yaml.use_case.3',
+			'tool.xml-to-yaml.use_case.4'
 		],
 		sampleInput: `<?xml version="1.0" encoding="UTF-8"?>
 <config>

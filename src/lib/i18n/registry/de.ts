@@ -251,6 +251,99 @@ const registryDe: Record<string, string> = {
 		'XML sofort im Browser minifizieren. Entfernt Leerzeichen und Kommentare. Keine Daten verlassen Ihr Gerät.',
 	'tool.xml-minifier.operation': 'Minifizieren',
 
+	// XML Tool FAQs and Use Cases
+	'tool.xml-formatter.faq.0.question': 'What is XML formatting?',
+	'tool.xml-formatter.faq.0.answer':
+		'XML formatting is the process of organizing XML code with proper indentation and line breaks to make it more readable and maintainable. This helps developers understand the document structure and hierarchy.',
+	'tool.xml-formatter.faq.1.question': 'Can I customize the indentation?',
+	'tool.xml-formatter.faq.1.answer':
+		'Yes! You can choose between 2 spaces, 4 spaces, or tabs for indentation. The formatter preserves your XML structure while applying your preferred formatting style.',
+	'tool.xml-formatter.faq.2.question': 'Does the formatter preserve comments?',
+	'tool.xml-formatter.faq.2.answer':
+		'Yes, the XML formatter preserves all comments in their original positions. It only changes the indentation and line breaks to improve readability without affecting the content or structure.',
+	'tool.xml-formatter.use_case.0':
+		'Making XML files more readable for documentation and code reviews',
+	'tool.xml-formatter.use_case.1': 'Cleaning up minified XML from web responses or APIs',
+	'tool.xml-formatter.use_case.2': 'Standardizing XML formatting across team projects',
+	'tool.xml-formatter.use_case.3': 'Debugging XML structure by improving visual hierarchy',
+	'tool.xml-formatter.use_case.4':
+		'Preparing XML files for version control with consistent formatting',
+
+	'tool.xml-validator.faq.0.question': 'What does XML validation check for?',
+	'tool.xml-validator.faq.0.answer':
+		'XML validation checks for well-formedness including proper tag nesting, matching opening/closing tags, valid attribute syntax, correct character encoding, and compliance with XML specification rules.',
+	'tool.xml-validator.faq.1.question': "What's the difference between well-formed and valid XML?",
+	'tool.xml-validator.faq.1.answer':
+		'Well-formed XML follows basic syntax rules but may have structural issues. Valid XML is well-formed AND conforms to a specific DTD or XML Schema that defines the allowed structure and content.',
+	'tool.xml-validator.faq.2.question': 'How do I fix XML validation errors?',
+	'tool.xml-validator.faq.2.answer':
+		'The validator shows exact line and column numbers for each error. Common fixes include: closing unclosed tags, fixing mismatched tags, removing duplicate attributes, and ensuring proper character encoding. Click on any error to see detailed explanations.',
+	'tool.xml-validator.use_case.0': 'Validating API responses before processing in applications',
+	'tool.xml-validator.use_case.1':
+		'Checking configuration files before deployment to prevent errors',
+	'tool.xml-validator.use_case.2': 'Verifying XML data imports from third-party systems',
+	'tool.xml-validator.use_case.3': 'Debugging XML parsing issues in development environments',
+	'tool.xml-validator.use_case.4':
+		'Ensuring XML compliance before submitting to enterprise systems',
+
+	'tool.xml-to-json.faq.0.question': 'How does XML to JSON conversion work?',
+	'tool.xml-to-json.faq.0.answer':
+		'The conversion maps XML elements to JSON objects, attributes to key-value pairs, and text content to string values. XML namespaces are preserved, and multiple elements with the same name become arrays.',
+	'tool.xml-to-json.faq.1.question': 'Is the conversion reversible?',
+	'tool.xml-to-json.faq.1.answer':
+		'Mostly yes, but some XML features like comments, processing instructions, and the order of attributes may be lost. The core data structure remains intact for round-trip conversion.',
+	'tool.xml-to-json.faq.2.question': 'How are XML attributes handled in JSON?',
+	'tool.xml-to-json.faq.2.answer':
+		'XML attributes are converted to JSON properties with an "@" prefix by default. This distinguishes them from child elements. You can customize this behavior in advanced settings to use different naming conventions.',
+	'tool.xml-to-json.use_case.0': 'Converting SOAP API responses to JSON for modern applications',
+	'tool.xml-to-json.use_case.1': 'Processing XML configuration files in JavaScript applications',
+	'tool.xml-to-json.use_case.2': 'Migrating legacy XML data to modern JSON-based systems',
+	'tool.xml-to-json.use_case.3': 'Extracting data from XML sitemaps for analysis',
+	'tool.xml-to-json.use_case.4': 'Transforming RSS feeds into JSON for mobile app consumption',
+
+	'tool.json-to-xml.faq.0.question': 'What is JSON to XML conversion?',
+	'tool.json-to-xml.faq.0.answer':
+		'JSON to XML conversion transforms JSON data into XML format, mapping objects to elements, arrays to repeated elements, and primitive values to text content. This enables compatibility with systems that require XML input.',
+	'tool.json-to-xml.faq.1.question': 'How are arrays handled in the conversion?',
+	'tool.json-to-xml.faq.1.answer':
+		'JSON arrays become multiple XML elements with the same tag name. You can configure whether to use wrapper elements or repeat the same element tag for each array item.',
+	'tool.json-to-xml.faq.2.question': 'How does the converter handle special characters?',
+	'tool.json-to-xml.faq.2.answer':
+		'Special characters are automatically escaped according to XML standards. This includes &, <, >, ", and \', which are converted to their corresponding XML entities to ensure valid XML output.',
+	'tool.json-to-xml.use_case.0': 'Creating XML sitemaps from JSON data',
+	'tool.json-to-xml.use_case.1': 'Generating RSS/Atom feeds from JSON content',
+	'tool.json-to-xml.use_case.2': 'Converting API responses for legacy systems requiring XML',
+	'tool.json-to-xml.use_case.3': 'Creating configuration files for Java applications from JSON',
+	'tool.json-to-xml.use_case.4': 'Generating SOAP envelopes from JSON payloads for web services',
+
+	'tool.xml-to-yaml.faq.0.question': 'Why convert XML to YAML?',
+	'tool.xml-to-yaml.faq.0.answer':
+		"YAML is more human-readable and easier to edit manually than XML. It's commonly used for configuration files, documents, and data exchange where readability is important.",
+	'tool.xml-to-yaml.faq.1.question': 'How are XML attributes handled?',
+	'tool.xml-to-yaml.faq.1.answer':
+		'XML attributes are typically converted to key-value pairs within the YAML element. You can configure whether to use a special syntax for attributes or treat them as regular properties.',
+	'tool.xml-to-yaml.faq.2.question': 'Can complex nested XML be converted to YAML?',
+	'tool.xml-to-yaml.faq.2.answer':
+		'Yes! The converter handles arbitrarily deep nesting, mixed content, and complex XML structures. The resulting YAML maintains the same data hierarchy in a more readable format.',
+	'tool.xml-to-yaml.use_case.0': 'Converting Spring Framework XML configurations to YAML',
+	'tool.xml-to-yaml.use_case.1': 'Migrating build scripts from XML to more readable YAML format',
+	'tool.xml-to-yaml.use_case.2': 'Creating Kubernetes resources from XML templates',
+	'tool.xml-to-yaml.use_case.3': 'Processing XML documents for documentation purposes',
+	'tool.xml-to-yaml.use_case.4': 'Transforming XML data for Ansible playbooks and automation',
+
+	'tool.xml-to-csv.faq.0.question': 'How does XML to CSV conversion work?',
+	'tool.xml-to-csv.faq.0.answer':
+		'The converter extracts repeating elements from XML and creates rows in CSV, with element attributes and child elements becoming columns. You can select which elements to convert and customize the output format.',
+	'tool.xml-to-csv.faq.1.question': 'What XML structures work best for CSV conversion?',
+	'tool.xml-to-csv.faq.1.answer':
+		'XML with repeating record-like elements works best. Each repeated element becomes a row, and its properties become columns. Deeply nested structures may need to be flattened.',
+	'tool.xml-to-csv.use_case.0': 'Extracting data from XML reports into spreadsheet format',
+	'tool.xml-to-csv.use_case.1': 'Converting XML exports from databases to CSV for analysis',
+	'tool.xml-to-csv.use_case.2': 'Processing XML logs for data analysis in Excel',
+	'tool.xml-to-csv.use_case.3':
+		'Migrating product catalogs from XML to CSV for e-commerce platforms',
+	'tool.xml-to-csv.use_case.4': 'Analyzing XML API responses by converting to tabular format',
+
 	'tool.xml-xpath.display_name': 'XPath-Abfrage',
 	'tool.xml-xpath.tagline': 'XML-Daten mit XPath-Ausdrücken abfragen',
 	'tool.xml-xpath.description':
@@ -984,6 +1077,15 @@ const registryDe: Record<string, string> = {
 	'ui.toast.copy_error': 'Kopieren fehlgeschlagen — Browserberechtigungen prüfen',
 	'ui.toast.copy_success': 'In die Zwischenablage kopiert',
 	'ui.toast.file_loaded': 'Datei geladen: {name}',
+	'ui.toast.clipboard_xml': 'Zwischenablage XML',
+	'ui.toast.pasted_xml': 'XML aus Zwischenablage eingefügt',
+	'ui.toast.xml_file_types':
+		'Nur .xml, .svg, .xhtml, .xsd, .wsdl und .txt Dateien werden unterstützt',
+	'ui.aria.xml_input_panel': 'XML-Eingabebereich',
+	'ui.aria.xml_output_panel': 'XML-Ausgabebereich',
+	'ui.aria.xml_workspace_tabs': 'XML-Arbeitsbereich-Registerkarten',
+	'ui.aria.xpath_panel': 'XPath-Abfragebereich',
+	'ui.aria.xml_validator': 'XML-Validator',
 	'ui.toast.input_cleared': 'Eingabe gelöscht',
 	'ui.loaded_sample': '{label} geladen',
 	'ui.toast.url_error': 'Abrufen fehlgeschlagen — versuchen Sie, direkt einzufügen',
@@ -1002,7 +1104,337 @@ const registryDe: Record<string, string> = {
 		'Keine Ergebnisse. Versuchen Sie einen anderen Ausdruck oder überprüfen Sie die XML-Struktur.',
 	'ui.xpath.placeholder': 'XML in das linke Panel einfügen, dann einen XPath-Ausdruck ausführen.',
 	'ui.xpath.results_count.one': '1 Ergebnis',
-	'ui.xpath.results_count.other': '{count} Ergebnisse'
+	'ui.xpath.results_count.other': '{count} Ergebnisse',
+
+	// Missing keys from English
+
+	'category.accessibility.description':
+		'Test color contrast, simulate color blindness, and check WCAG font size requirements. Ensure your designs are accessible to everyone.',
+	'category.accessibility.primary_keyword': 'accessibility tools',
+	'tool.accessibility-contrast.display_name': 'Contrast Checker',
+
+	'tool.accessibility-contrast.description':
+		'Enter foreground and background colors to calculate contrast ratio. See WCAG AA/AAA compliance for normal text, large text, and UI elements. Live preview included.',
+	'tool.accessibility-contrast.primary_keyword': 'wcag contrast checker',
+	'tool.accessibility-contrast.meta_title': 'WCAG Contrast Checker — fmtly.dev',
+	'tool.accessibility-contrast.meta_description':
+		'Check WCAG color contrast ratios in your browser. Live preview, AA/AAA compliance. No data leaves your device.',
+	'tool.accessibility-contrast.operation': 'Check',
+	'tool.accessibility-contrast.faq.0.question': 'What contrast ratio is required?',
+	'tool.accessibility-contrast.faq.0.answer':
+		'WCAG AA requires 4.5:1 for normal text and 3:1 for large text. AAA requires 7:1 and 4.5:1 respectively.',
+	'tool.accessibility-contrast.use_case.0': 'Verifying accessibility of website text',
+	'tool.accessibility-contrast.use_case.1': 'Choosing accessible color combinations',
+	'tool.accessibility-color-blindness.display_name': 'Color Blindness Simulator',
+	'tool.accessibility-color-blindness.tagline':
+		'Simulate how colors appear to people with color vision deficiencies',
+	'tool.accessibility-color-blindness.description':
+		'Enter a color or upload an image to see how it appears to people with protanopia, deuteranopia, tritanopia, and achromatopsia. Uses color transformation matrices.',
+	'tool.accessibility-color-blindness.primary_keyword': 'color blindness simulator',
+	'tool.accessibility-color-blindness.meta_title': 'Color Blindness Simulator — fmtly.dev',
+	'tool.accessibility-color-blindness.meta_description':
+		'Simulate protanopia, deuteranopia, tritanopia vision in your browser. Test colors and images. No data uploaded.',
+	'tool.accessibility-color-blindness.operation': 'Simulate',
+	'tool.accessibility-color-blindness.faq.0.question':
+		'What types of color blindness are simulated?',
+
+	'tool.accessibility-color-blindness.use_case.1': 'Checking color palette inclusivity',
+
+	'tool.accessibility-font-size.faq.0.question': 'What is large text in WCAG?',
+
+	'ui.actions.diff': 'Diff',
+	'ui.layout.tabs.output': 'Output',
+	'ui.layout.tabs.tree': 'Tree',
+
+	'ui.layout.aria.input_panel': 'Input panel',
+
+	'ui.actions.wrap': 'Wrap',
+
+	'ui.tree.toast_copy_path': 'Copied',
+	'share.link_size': 'Link size',
+	'share.large_link_warning': 'This link is large and may not work in all browsers',
+	'share.data_encoded_note':
+		'The data is encoded in the URL and is never sent to any server for processing.',
+	'share.enter_input_first': 'Enter some input first to generate a share link.',
+	'ui.share_url_copied': 'Share URL copied',
+	'ui.copy_link': 'Kopieren Link',
+	'ui.share': 'Share',
+	'ui.close': 'Close',
+	'ui.cancel': 'Cancel',
+	'ui.confirm': 'Confirm',
+	'ui.validator.syntax': 'Syntax',
+	'ui.validator.schema': 'Schema',
+
+	'ui.validator.repair_json': 'Repair JSON',
+	'ui.validator.schema_title': 'JSON Schema',
+	'ui.validator.schema_standard': 'Draft-07+ via AJV',
+	'ui.validator.paste_schema_placeholder': 'Paste JSON Schema here…',
+	'ui.validator.paste_json': 'Paste JSON to validate',
+	'ui.validator.paste_schema': 'Paste a JSON Schema to validate against',
+	'ui.validator.validating_schema': 'Gültigating schema…',
+	'ui.validator.schema_invalid': 'Schema is invalid',
+	'ui.validator.json_matches_schema': 'JSON matches schema',
+	'ui.validator.schema_validation_failed': 'Schema validation failed',
+	'ui.validator.no_syntax_errors': 'No syntax errors found.',
+	'ui.validator.json_matches_current_schema': 'JSON matches the current schema.',
+	'ui.validator.schema_match': 'Schema match',
+	'ui.validator.valid_json': 'Gültig JSON',
+	'ui.validator.explanation_must_satisfy': 'must satisfy',
+	'ui.validator.data_error_pos': 'Data error at line {line}, column {column}',
+	'ui.share_url': 'Share URL',
+	'ui.format_xml': 'Formatieren XML',
+	'ui.minify_xml': 'Minifizieren XML',
+	'ui.format_beautify': 'Formatieren / Beautify',
+	'ui.minify': 'Minifizieren',
+	'ui.expand_all': 'Expand all',
+	'ui.collapse_all': 'Collapse all',
+	'ui.expand_to_depth': 'Expand to depth {depth}',
+	'ui.validator.schema_error_pos': 'Schema error at line {line}, column {column}',
+	'ui.validator.syntax_error_pos': 'Syntax error at line {line}, column {column}',
+	'ui.validator.line_col_label': 'Line {line}, column {column}',
+	'ui.validator.well_formed': 'Well-formed',
+	'ui.validator.invalid_xml': 'Ungültig XML',
+	'ui.validator.loading_editor': 'Ladening editor…',
+	'ui.validator.xml_paste_hint': 'Paste or type XML to validate it.',
+	'ui.validator.xml_validation_desc':
+		'Gültigierens well-formedness: unclosed tags, mismatched elements, invalid characters, and more.',
+	'ui.validator.xml_success_title': 'Well-formed XML',
+	'ui.validator.xml_success_desc':
+		'No syntax errors detected. The document is well-formed and can be parsed by any XML processor.',
+	'ui.validator.error_count.one': '1 error found',
+	'ui.validator.error_count.other': '{count} errors found',
+	'ui.convert.to_json': '→ JSON',
+	'ui.convert.to_yaml': '→ YAML',
+	'ui.convert.to_csv': '→ CSV',
+	'ui.convert.to_xml': '→ XML',
+	'ui.convert.to_toml': '→ TOML',
+	'ui.convert.to_markdown': '→ MD',
+
+	'ui.query.result': 'result',
+	'ui.query.results': 'results',
+	'ui.query.history': 'History',
+	'ui.query.sample_query': 'Sample query',
+	'ui.query.guide': 'Guide',
+	'ui.query.query': 'Query',
+	'ui.query.running': 'Running query…',
+	'ui.query.empty_input': 'Paste JSON on the left to evaluate your query.',
+	'ui.query.empty_query': 'Enter a query to see results.',
+	'ui.query.error_fallback': 'Query failed',
+	'ui.query.copy_error': 'Could not copy output',
+	'ui.status.processing': 'Processing…',
+	'ui.status.waiting_output': 'Output will appear here',
+	'ui.output.controls.spaces': 'spaces',
+	'ui.output.stats.chars': 'chars',
+	'ui.output.stats.lines': 'lines',
+	'ui.output.stats.keys': 'keys',
+	'ui.output.stats.objects': 'objects',
+	'ui.output.stats.arrays': 'arrays',
+	'ui.output.stats.strings': 'strings',
+	'ui.output.stats.values': 'values',
+	'ui.output.stats.numbers': 'numbers',
+	'ui.output.stats.booleans': 'booleans',
+	'ui.output.stats.nulls': 'nulls',
+	'ui.output.stats.depth': 'depth',
+	'ui.output.stats.size_in': 'in',
+	'ui.output.stats.size_out': 'out',
+	'ui.output.original': 'Original',
+	'ui.output.minified': 'Minified',
+	'ui.output.saved': 'saved',
+	'ui.output.meta.minified': 'MINIFIED',
+
+	'ui.output.actions.copy_json': 'Kopieren as JSON',
+	'ui.output.actions.copy_js': 'Kopieren as JS Object',
+	'ui.output.actions.copy_python': 'Kopieren as Python Dict',
+	'ui.output.actions.copy_escaped': 'Kopieren escaped',
+	'ui.output.actions.copy': 'Kopieren',
+	'ui.output.actions.download': 'Herunterladen',
+	'ui.output.compare.input': 'Input',
+	'ui.output.error.invalid_title': 'Ungültig JSON',
+	'ui.output.controls.indent': 'Indent',
+	'ui.output.controls.tab': 'Tab',
+	'ui.output.controls.sort_keys': 'Sort keys',
+	'ui.output.controls.clean': 'Clean',
+	'ui.output.controls.clean_nulls': 'Remove null values',
+	'ui.output.controls.clean_strings': 'Remove empty strings',
+	'ui.output.controls.clean_arrays': 'Remove empty arrays',
+	'ui.output.controls.clean_objects': 'Remove empty objects',
+	'ui.output.controls.apply': 'Apply',
+	'tool.json-formatter.faq.0.question': 'What is JSON formatting?',
+	'tool.json-formatter.faq.0.answer':
+		'JSON formatting is the process of organizing JSON data with proper indentation and line breaks to make it more readable and easier to understand.',
+	'tool.json-formatter.faq.1.question': 'Can I customize the indentation?',
+	'tool.json-formatter.faq.1.answer':
+		'Yes! You can choose between 2 spaces, 4 spaces, or tabs for indentation. The formatter preserves your original data structure while applying your preferred formatting.',
+	'tool.json-formatter.faq.2.question': 'Does this tool modify my data?',
+	'tool.json-formatter.faq.2.answer':
+		'No. The formatter only changes the visual presentation of your JSON by adding proper indentation and line breaks. The actual data, keys, and values remain exactly the same.',
+	'tool.json-formatter.faq.3.question': 'Can I sort JSON keys?',
+	'tool.json-formatter.faq.3.answer': 'tool.json-formatter.faq.3.answer',
+	'tool.json-formatter.use_case.0':
+		'Debugging API responses by formatting them for better readability',
+	'tool.json-formatter.use_case.1': 'Cleaning up minified JSON files from web sources',
+	'tool.json-formatter.use_case.2':
+		'Preparing configuration files for version control with consistent formatting',
+	'tool.json-formatter.use_case.3':
+		'Making JSON data more presentable for documentation or presentations',
+	'tool.json-formatter.use_case.4':
+		'Gültigating and formatting JSON before manual editing or review',
+	'tool.json-validator.faq.0.question': 'What does JSON validation check for?',
+	'tool.json-validator.faq.0.answer':
+		'JSON validation checks for syntax errors including missing brackets, unmatched quotes, trailing commas, invalid escape sequences, and duplicate keys in objects.',
+	'tool.json-validator.faq.1.question':
+		'What is the difference between syntax and schema validation?',
+	'tool.json-validator.faq.1.answer':
+		'Syntax validation ensures the JSON is well-formed according to the JSON specification. Schema validation goes further by checking if the JSON structure matches a predefined schema with specific rules for data types, required fields, and value constraints.',
+	'tool.json-validator.faq.2.question': 'Can I validate JSON with comments?',
+	'tool.json-validator.faq.2.answer':
+		'Yes! This validator supports JSON5 format, which allows comments (both // and /* */), trailing commas, and single quotes for strings. It will automatically detect and handle JSON5 syntax.',
+	'tool.json-validator.use_case.0':
+		'Verifying API responses before processing them in your application',
+	'tool.json-validator.use_case.1':
+		'Checking configuration files before deployment to prevent runtime errors',
+	'tool.json-validator.use_case.2': 'Gültigating user-submitted JSON data in forms or file uploads',
+	'tool.json-validator.use_case.3': 'Debugging JSON parsing errors in your code',
+	'tool.json-validator.use_case.4':
+		'Ensuring data integrity when transferring JSON between systems',
+	'tool.crypto-hmac.faq.0.question': 'What is HMAC?',
+	'tool.crypto-hmac.faq.0.answer':
+		'HMAC (Hash-based Message Authentication Code) is a specific type of message authentication code that uses a cryptographic hash function and a secret key. It provides both data integrity and authentication.',
+	'tool.crypto-hmac.faq.1.question': 'What algorithms are supported?',
+	'tool.crypto-hmac.faq.1.answer':
+		'This tool supports multiple HMAC algorithms including SHA-256, SHA-512, SHA-1, MD5, and more. SHA-256 is recommended for most modern applications as it provides a good balance of security and performance.',
+	'tool.crypto-hmac.use_case.0': 'Verifying the integrity and authenticity of API requests',
+	'tool.crypto-hmac.use_case.1': 'Creating secure tokens for session management',
+	'tool.crypto-hmac.use_case.2': 'Generating webhook signatures for services like GitHub or Stripe',
+	'tool.crypto-hmac.use_case.3':
+		'Implementing message authentication in microservices communication',
+	'tool.crypto-hmac.use_case.4': 'Creating checksums for file verification',
+	'tool.json-minifier.faq.0.question': 'What is JSON minification?',
+	'tool.json-minifier.faq.0.answer':
+		'JSON minification is the process of removing all unnecessary characters from JSON data without changing its functionality. This includes removing whitespace, line breaks, and comments to reduce file size.',
+	'tool.json-minifier.faq.1.question': 'Does minification affect JSON functionality?',
+	'tool.json-minifier.faq.1.answer':
+		'No. Minification only removes visual formatting characters like spaces, tabs, and line breaks. The actual data structure, keys, and values remain exactly the same, maintaining full JSON compliance.',
+	'tool.json-minifier.faq.2.question': 'When should I use minified JSON?',
+	'tool.json-minifier.faq.2.answer':
+		'Use minified JSON in production environments, API responses, and when transmitting data over networks. It reduces bandwidth usage and speeds up data transfer. For development and debugging, use formatted JSON.',
+	'tool.json-minifier.use_case.0': 'Reducing file size for API responses to improve loading times',
+	'tool.json-minifier.use_case.1': 'Optimizing JSON configuration files for production deployments',
+	'tool.json-minifier.use_case.2': 'Compressing data before storing in databases or local storage',
+	'tool.json-minifier.use_case.3':
+		'Minimizing bandwidth usage when transmitting JSON over networks',
+	'tool.json-minifier.use_case.4': 'Preparing JSON files for embedding in HTML or JavaScript code',
+	'tool.json-to-yaml.faq.0.question': 'What is JSON zu YAML conversion?',
+	'tool.json-to-yaml.faq.0.answer':
+		'JSON zu YAML conversion transforms JSON data into YAML format, which is more human-readable and commonly used for configuration files. YAML allows for comments, anchors, and a more flexible syntax.',
+	'tool.json-to-yaml.faq.1.question': 'Is the conversion lossless?',
+	'tool.json-to-yaml.faq.1.answer':
+		'Yes! The conversion preserves all data and structure. JSON and YAML can represent the same data structures, so no information is lost during the conversion process.',
+	'tool.json-to-yaml.use_case.0':
+		'Konvertierening JSON configuration files to YAML for better readability',
+	'tool.json-to-yaml.use_case.1': 'Creating Kubernetes manifests from JSON definitions',
+	'tool.json-to-yaml.use_case.2': 'Migrating application configurations from JSON zu YAML format',
+	'tool.json-to-yaml.use_case.3': 'Generating YAML files for CI/CD pipeline configurations',
+	'tool.json-to-toml.faq.0.question': 'What is JSON to TOML conversion?',
+	'tool.json-to-toml.faq.0.answer':
+		'JSON to TOML conversion transforms JSON data into TOML format, which is designed for human-readable configuration files. TOML uses a simple syntax with sections, key-value pairs, and tables.',
+	'tool.json-to-toml.faq.1.question': 'When should I use TOML over JSON?',
+	'tool.json-to-toml.faq.1.answer': 'tool.json-to-toml.faq.1.answer',
+	'tool.json-to-toml.use_case.0':
+		'Konvertierening package.json to pyproject.toml for Python projects',
+	'tool.json-to-toml.use_case.1': 'Creating Cargo.toml files from JSON configurations',
+	'tool.json-to-toml.use_case.2':
+		'Migrating application settings to TOML format for better maintainability',
+	'tool.json-to-markdown.faq.0.question': 'What is JSON to Markdown table conversion?',
+	'tool.json-to-markdown.faq.0.answer':
+		'This tool converts JSON data arrays into Markdown table format, making it easy to display structured data in documentation, README files, or any Markdown-compatible platform.',
+	'tool.json-to-markdown.faq.1.question': 'What JSON structures are supported?',
+	'tool.json-to-markdown.faq.1.answer':
+		'The tool works best with arrays of objects. Each object becomes a row in the table, and object properties become columns. Nested objects are flattened using dot notation.',
+	'tool.json-to-markdown.use_case.0': 'Creating data tables for README files and documentation',
+	'tool.json-to-markdown.use_case.1':
+		'Konvertierening API response examples to documentation tables',
+	'tool.json-to-markdown.use_case.2':
+		'Generating Markdown tables from spreadsheet data exported as JSON',
+	'tool.json-to-markdown.use_case.3': 'Displaying configuration options in project documentation',
+	'tool.json-to-csv.faq.0.question': 'What is JSON zu CSV conversion?',
+	'tool.json-to-csv.faq.0.answer':
+		'JSON zu CSV conversion transforms structured JSON data (usually an array of objects) into a flat Comma-Separated Values format. This is ideal for importing data into spreadsheets like Excel or Google Sheets.',
+	'tool.json-to-csv.faq.1.question': 'What JSON structures work best?',
+	'tool.json-to-csv.faq.1.answer':
+		'The tool works best with a flat array of objects where each object has the same keys. These keys become the CSV headers, and the values become the rows. Nested objects or arrays are usually flattened.',
+	'tool.json-to-csv.use_case.0': 'Exporting API data to Excel for business analysis',
+	'tool.json-to-csv.use_case.1': 'Konvertierening database JSON exports to CSV for bulk imports',
+	'tool.json-to-csv.use_case.2':
+		'Preparing JSON datasets for training machine learning models in CSV format',
+	'tool.json-to-csv.use_case.3': 'Generating report data for spreadsheet applications',
+	'tool.json-jsonpath.faq.0.question': 'What is JSONPath?',
+	'tool.json-jsonpath.faq.0.answer': 'tool.json-jsonpath.faq.0.answer',
+	'tool.json-jsonpath.faq.1.question': 'How does JSONPath syntax work?',
+	'tool.json-jsonpath.faq.1.answer':
+		'JSONPath uses expressions like $.store.book[*].title to navigate through JSON. The $ represents the root, . accesses properties, [*] selects all items in an array, and various operators can filter and transform results.',
+	'tool.json-jsonpath.faq.2.question': 'What can I do with JSONPath results?',
+	'tool.json-jsonpath.faq.2.answer':
+		'You can extract specific values, filter arrays, perform calculations, and transform JSON data. JSONPath is useful for API testing, data extraction, and validating JSON structure in applications.',
+	'tool.json-jsonpath.use_case.0': 'Extracting specific fields from API responses',
+	'tool.json-jsonpath.use_case.1': 'Filtering and querying large JSON datasets',
+	'tool.json-jsonpath.use_case.2': 'Testing API responses in automated tests',
+	'tool.json-jsonpath.use_case.3': 'Gültigating JSON structure and content in data pipelines',
+	'tool.json-jmespath.faq.0.question': 'What is JMESPath?',
+	'tool.json-jmespath.faq.0.answer':
+		'JMESPath is a query language for JSON that enables you to extract and transform elements from JSON documents. It provides more advanced data transformation capabilities than JSONPath, including filtering, mapping, and aggregation functions.',
+	'tool.json-jmespath.faq.1.question': 'How is JMESPath different from JSONPath?',
+	'tool.json-jmespath.faq.1.answer':
+		'JMESPath offers more powerful data transformation features like functions, filters, and pipe expressions. While JSONPath is primarily for extraction, JMESPath can reshape, filter, and transform JSON data into new structures.',
+	'tool.json-jmespath.faq.2.question': 'What are common JMESPath operations?',
+	'tool.json-jmespath.faq.2.answer':
+		'Common operations include filtering with [?condition], selecting fields with {key: value}, sorting with sort_by(), and aggregating data with functions like length(), sum(), and type(). You can also pipe operations with | for complex transformations.',
+	'tool.json-jmespath.use_case.0': 'Transforming API responses to match required data structures',
+	'tool.json-jmespath.use_case.1': 'Filtering and reshaping data from complex JSON documents',
+	'tool.json-jmespath.use_case.2': 'Extracting specific information from nested JSON structures',
+	'tool.json-jmespath.use_case.3': 'Clean up JSON responses for simpler frontend consumption',
+	'tool.json-diff.display_name': 'JSON Diff',
+	'tool.json-diff.tagline': 'Compare two JSON documents',
+	'tool.json-diff.description':
+		'A powerful semantic JSON comparison tool. Paste two JSON documents to instantly see the differences, ignoring key order and arbitrary whitespace. Perfect for debugging API changes or verifying configuration updates.',
+	'tool.json-diff.primary_keyword': 'json diff tool',
+	'tool.json-diff.meta_title': 'JSON Diff Tool - Compare JSON Online',
+	'tool.json-diff.meta_description':
+		'Compare two JSON documents semantically online. Our JSON diff tool ignores key order and formatting differences to show you exactly what changed.',
+	'tool.json-diff.operation': 'Compare',
+	'tool.json-diff.faq.0.question': 'Does it ignore key order?',
+	'tool.json-diff.faq.0.answer': 'tool.json-diff.faq.0.answer',
+	'tool.json-diff.faq.1.question': 'Does it handle large JSON files?',
+	'tool.json-diff.faq.1.answer':
+		'Yes, the comparison is performed efficiently in your browser and displays the additions, removals, and modifications line-by-line.',
+	'tool.json-diff.faq.2.question': 'Is my data secure?',
+	'tool.json-diff.faq.2.answer':
+		'Absolutely. The comparison happens entirely locally in your browser. No JSON data is ever sent to our servers.',
+	'tool.json-diff.use_case.0': 'Compare responses from different API versions mapping regressions',
+	'tool.json-diff.use_case.1':
+		'Debug unexpected configuration changes in production settings files',
+	'tool.json-diff.use_case.2': 'Review git merge conflicts involving JSON manifests or lockfiles',
+	'tool.json-diff.use_case.3': 'Find discrepancies between staging and production database exports',
+	'tool.xml-minifier.faq.0.question': 'What is XML minification?',
+	'tool.xml-minifier.faq.0.answer':
+		'XML minification removes all unnecessary characters from XML without changing its functionality. This includes whitespace, line breaks, and comments to reduce file size.',
+	'tool.xml-minifier.faq.1.question': 'Does minification affect XML processing?',
+	'tool.xml-minifier.faq.1.answer':
+		'No. XML parsers ignore whitespace between tags by default, so minified XML processes identically to formatted XML but loads faster due to smaller file size.',
+	'tool.xml-minifier.use_case.0': 'Reducing file sizes for faster API responses',
+	'tool.xml-minifier.use_case.1': 'Optimizing XML files for production environments',
+	'tool.xml-minifier.use_case.2': 'Minimizing bandwidth usage when transmitting XML data',
+	'tool.xml-minifier.use_case.3': 'Preparing XML files for embedding in other documents',
+	'tool.xml-xpath.faq.0.question': 'What is XPath?',
+	'tool.xml-xpath.faq.0.answer':
+		'XPath is a query language for selecting nodes from XML documents. It uses path expressions to navigate through elements and attributes, similar to file system paths.',
+	'tool.xml-xpath.faq.1.question': 'What can XPath expressions do?',
+	'tool.xml-xpath.faq.1.answer':
+		'XPath can select elements by name, attribute value, position, or content. It supports complex conditions, functions for text manipulation, and mathematical operations for advanced querying.',
+	'tool.xml-xpath.use_case.0': 'Extracting specific data from large XML documents',
+	'tool.xml-xpath.use_case.1': 'Testing XML data in automated test suites',
+	'tool.xml-xpath.use_case.2': 'Transforming XML data using XSLT templates',
+	'tool.xml-xpath.use_case.3': 'Gültigating XML structure and content programmatically'
 };
 
 export default registryDe;

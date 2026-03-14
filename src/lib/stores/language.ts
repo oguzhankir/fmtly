@@ -3,38 +3,14 @@ import { derived, writable } from 'svelte/store';
 
 import registryEn from '$lib/i18n/registry/en.js';
 import registries from '$lib/i18n/registry/index.js';
-import ar from '$lib/paraglide/messages/ar.js';
-import bn from '$lib/paraglide/messages/bn.js';
-import de from '$lib/paraglide/messages/de.js';
-import en from '$lib/paraglide/messages/en.js';
-import es from '$lib/paraglide/messages/es.js';
-import fr from '$lib/paraglide/messages/fr.js';
-import hi from '$lib/paraglide/messages/hi.js';
-import it from '$lib/paraglide/messages/it.js';
-import ja from '$lib/paraglide/messages/ja.js';
-import ko from '$lib/paraglide/messages/ko.js';
-import pt from '$lib/paraglide/messages/pt.js';
-import ru from '$lib/paraglide/messages/ru.js';
-import tr from '$lib/paraglide/messages/tr.js';
-import ur from '$lib/paraglide/messages/ur.js';
-import zh from '$lib/paraglide/messages/zh.js';
 
 const allTranslations: Record<string, Record<string, string>> = {
-	en: { ...en, ...registryEn },
-	ar: { ...ar, ...registries.ar },
-	bn: { ...bn, ...registries.bn },
-	de: { ...de, ...registries.de },
-	es: { ...es, ...registries.es },
-	fr: { ...fr, ...registries.fr },
-	hi: { ...hi, ...registries.hi },
-	it: { ...it, ...registries.it },
-	ja: { ...ja, ...registries.ja },
-	ko: { ...ko, ...registries.ko },
-	pt: { ...pt, ...registries.pt },
-	ru: { ...ru, ...registries.ru },
-	tr: { ...tr, ...registries.tr },
-	ur: { ...ur, ...registries.ur },
-	zh: { ...zh, ...registries.zh }
+	en: registryEn,
+	de: registries.de,
+	es: registries.es,
+	fr: registries.fr,
+	it: registries.it,
+	tr: registries.tr
 };
 
 const RTL_LANGS = new Set(['ar', 'ur']);
@@ -53,16 +29,7 @@ export const languages: Language[] = [
 	{ code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
 	{ code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
 	{ code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
-	{ code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
-	{ code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: '🇵🇹' },
-	{ code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺' },
-	{ code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
-	{ code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
-	{ code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
-	{ code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦', rtl: true },
-	{ code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
-	{ code: 'bn', name: 'Bengali', nativeName: 'বাংলা', flag: '🇧🇩' },
-	{ code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: '🇵🇰', rtl: true }
+	{ code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' }
 ];
 
 function detectLocale(): string {
