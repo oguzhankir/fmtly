@@ -93,14 +93,14 @@
 	}
 </script>
 
-<div class="relative flex h-full w-full flex-col" role="region" aria-label="Output panel">
+<div class="relative flex h-full w-full flex-col" role="region" aria-label={$t('ui.layout.aria.output_panel', 'Output panel')}>
 	{#if $output}
 		<!-- Action buttons -->
 		<div class="absolute right-[var(--space-2)] top-[var(--space-2)] z-[var(--z-above)] flex gap-[var(--space-1)]">
 			<button
 				onclick={handleCopy}
 				class="flex items-center gap-[var(--space-1)] rounded-[var(--radius-md)] bg-[var(--bg-surface)] px-[var(--space-2)] py-[var(--space-1)] text-[length:var(--text-xs)] text-[var(--text-secondary)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--bg-surface-hover)] hover:text-[var(--text-primary)]"
-				aria-label="Copy output"
+				aria-label={$t('ui.layout.aria.copy_output', 'Copy output')}
 			>
 				<Copy size={12} />
 				{$t('ui.actions.copy', 'Copy')}
@@ -108,7 +108,7 @@
 			<button
 				onclick={handleDownload}
 				class="flex items-center gap-[var(--space-1)] rounded-[var(--radius-md)] bg-[var(--bg-surface)] px-[var(--space-2)] py-[var(--space-1)] text-[length:var(--text-xs)] text-[var(--text-secondary)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--bg-surface-hover)] hover:text-[var(--text-primary)]"
-				aria-label={$t('ui.actions.download', 'Download output')}
+				aria-label={$t('ui.layout.aria.download_output', 'Download output')}
 			>
 				<Download size={12} />
 				{$t('ui.actions.download', 'Download')}

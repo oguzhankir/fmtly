@@ -418,5 +418,48 @@ export const jsonTools: ToolDefinition[] = [
     { "name": "Denver", "state": "CO", "population": 715522 }
   ]
 }`
+	},
+	{
+		id: 'json-diff',
+		category: 'json',
+		slug: 'diff',
+		displayName: 'tool.json-diff.display_name',
+		tagline: 'tool.json-diff.tagline',
+		description: 'tool.json-diff.description',
+		primaryKeyword: 'tool.json-diff.primary_keyword',
+		metaTitle: 'tool.json-diff.meta_title',
+		metaDescription: 'tool.json-diff.meta_description',
+		engine: 'diff',
+		operation: 'tool.json-diff.operation',
+		layoutVariant: 'triple',
+		inputLanguage: 'json',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'diff', slug: 'text' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-diff.faq.0.question',
+				answer: 'tool.json-diff.faq.0.answer'
+			},
+			{
+				question: 'tool.json-diff.faq.1.question',
+				answer: 'tool.json-diff.faq.1.answer'
+			},
+			{
+				question: 'tool.json-diff.faq.2.question',
+				answer: 'tool.json-diff.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-diff.use_case.0',
+			'tool.json-diff.use_case.1',
+			'tool.json-diff.use_case.2',
+			'tool.json-diff.use_case.3'
+		],
+		sampleInput: ''
 	}
 ];

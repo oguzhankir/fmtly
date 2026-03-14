@@ -2,7 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { computeJSONDiff, toJSONPatch } from '../../src/lib/engines/diff/json-diff.js';
 import type { DiffOptions } from '../../src/lib/engines/diff/json-diff.js';
 
-const defaultOptions: DiffOptions = { ignoreArrayOrder: false, ignoreWhitespace: true };
+const defaultOptions: DiffOptions = {
+	ignoreArrayOrder: false,
+	ignoreWhitespace: true,
+	ignoreKeys: [],
+	caseSensitive: true
+};
 
 describe('computeJSONDiff', () => {
 	it('identical JSON produces zero differences', () => {
@@ -71,9 +76,10 @@ describe('computeJSONDiff', () => {
 		const right = '{"arr": [1, 2, 4]}';
 		const result = computeJSONDiff(left, right, defaultOptions);
 		expect(result.error).toBeNull();
-		const modified = result.entries.filter((e) => e.type === 'modified');
-		expect(modified).toHaveLength(1);
-		expect(modified[0].path).toBe('arr[2]');
+		const changes = result.entries.filter((e) => e.type === 'removed' || e.type === 'added');
+		expect(changes).toHaveLength(2);
+		expect(changes.some((e) => e.path === 'arr[2]' && e.type === 'removed')).toBe(true);
+		expect(changes.some((e) => e.path === 'arr[2]' && e.type === 'added')).toBe(true);
 	});
 
 	it('detects added array elements', () => {

@@ -7,21 +7,13 @@
 		oncopy = () => {},
 		onshare = () => {},
 		onhistory = () => {},
-		onformat = () => {},
-		onminify = () => {},
 		onsearch = () => {},
-		showFormat = true,
-		showMinify = true,
 		showSearch = false
 	}: {
 		oncopy?: () => void;
 		onshare?: () => void;
 		onhistory?: () => void;
-		onformat?: () => void;
-		onminify?: () => void;
 		onsearch?: () => void;
-		showFormat?: boolean;
-		showMinify?: boolean;
 		showSearch?: boolean;
 	} = $props();
 
@@ -34,19 +26,6 @@
 	};
 
 	const actions = $derived.by<ToolbarAction[]>(() => [
-		{
-			label: $t('ui.actions.format', 'Format'),
-			icon: Braces,
-			action: onformat,
-			show: showFormat,
-			primary: true
-		},
-		{
-			label: $t('ui.actions.minify', 'Minify'),
-			icon: Minimize2,
-			action: onminify,
-			show: showMinify
-		},
 		{
 			label: $t('ui.actions.search', 'Search'),
 			icon: Search,

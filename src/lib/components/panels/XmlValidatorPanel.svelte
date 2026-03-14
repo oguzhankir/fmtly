@@ -85,7 +85,7 @@
 		const result = formatXML(value, { indent: 2 });
 		if (result.success) {
 			input.set(result.output);
-			addToast('success', 'XML formatted');
+			addToast('success', $t('ui.toast.format_success', 'Formatted successfully'));
 		} else {
 			addToast('error', result.error.plainLanguageExplanation ?? result.error.message);
 		}
@@ -139,7 +139,7 @@
 					{#if !isEmpty}
 						<button type="button" class="validator-btn" onclick={formatInPlace}>
 							<Wand2 size={13} />
-							Format
+							{$t('ui.actions.format', 'Format')}
 						</button>
 					{/if}
 				</div>
@@ -147,12 +147,12 @@
 					{#if isValid}
 						<span class="validator-status validator-status--valid">
 							<CheckCircle size={13} />
-							Well-formed
+							{$t('ui.validator.well_formed', 'Well-formed')}
 						</span>
 					{:else if errorSummary}
 						<span class="validator-status validator-status--invalid">
 							<AlertTriangle size={13} />
-							Invalid XML
+							{$t('ui.validator.invalid_xml', 'Invalid XML')}
 						</span>
 					{/if}
 				</div>
@@ -162,7 +162,7 @@
 				{#if MonacoEditor}
 					<MonacoEditor bind:this={monacoEditorRef} language="xml" wordWrap={true} />
 				{:else}
-					<div class="validator-loading">Loading editor…</div>
+					<div class="validator-loading">{$t('ui.validator.loading_editor', 'Loading editor…')}</div>
 				{/if}
 			</div>
 		</div>
@@ -170,20 +170,20 @@
 		<div class="validator-panel">
 			{#if isEmpty}
 				<div class="validator-empty">
-					<p>Paste or type XML to validate it.</p>
-					<p class="validator-empty__hint">Validates well-formedness: unclosed tags, mismatched elements, invalid characters, and more.</p>
+					<p>{$t('ui.validator.xml_paste_hint', 'Paste or type XML to validate it.')}</p>
+					<p class="validator-empty__hint">{$t('ui.validator.xml_validation_desc', 'Validates well-formedness: unclosed tags, mismatched elements, invalid characters, and more.')}</p>
 				</div>
 			{:else if isValid}
 				<div class="validator-success">
 					<CheckCircle size={32} />
-					<p class="validator-success__title">Well-formed XML</p>
-					<p class="validator-success__desc">No syntax errors detected. The document is well-formed and can be parsed by any XML processor.</p>
+					<p class="validator-success__title">{$t('ui.validator.xml_success_title', 'Well-formed XML')}</p>
+					<p class="validator-success__desc">{$t('ui.validator.xml_success_desc', 'No syntax errors detected. The document is well-formed and can be parsed by any XML processor.')}</p>
 				</div>
 			{:else if errorSummary}
 				<div class="validator-errors">
 					<div class="validator-errors__header">
 						<AlertTriangle size={14} />
-						<span>1 error found</span>
+						<span>{$t('ui.validator.error_count', { count: 1 }, '1 error found')}</span>
 					</div>
 					<button
 						type="button"
@@ -193,7 +193,7 @@
 						<div class="validator-error-item__meta">
 							{#if errorSummary.line != null}
 								<span class="validator-error-item__loc">
-									Line {errorSummary.line}{errorSummary.column != null ? `, Col ${errorSummary.column}` : ''}
+									{($t as any)('ui.validator.line_col_label', 'Line {line}, column {column}', { line: errorSummary.line, column: errorSummary.column })}
 								</span>
 							{/if}
 						</div>

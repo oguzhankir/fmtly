@@ -55,11 +55,11 @@
 	let outputMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lineCount = $output.length === 0 ? 0 : $output.split('\n').length;
-		return `${$output.length.toLocaleString()} {$t('ui.output.stats.chars', 'chars')} · ${lineCount.toLocaleString()} {$t('ui.output.stats.lines', 'lines')}`;
+		return `${$output.length.toLocaleString()} ${$t('ui.output.stats.chars', 'chars')} · ${lineCount.toLocaleString()} ${$t('ui.output.stats.lines', 'lines')}`;
 	});
 	let statsSummary = $derived.by(() => {
 		if (!$jsonAdvancedStats) return '';
-		return `${$jsonAdvancedStats.keys} {$t('ui.output.stats.keys', 'keys')} · ${$jsonAdvancedStats.objects} {$t('ui.output.stats.objects', 'objects')} · ${$jsonAdvancedStats.arrays} {$t('ui.output.stats.arrays', 'arrays')} · ${$jsonAdvancedStats.strings} {$t('ui.output.stats.strings', 'strings')} · {$t('ui.output.stats.depth', 'depth')}: ${$jsonAdvancedStats.maxDepth}`;
+		return `${$jsonAdvancedStats.keys} ${$t('ui.output.stats.keys', 'keys')} · ${$jsonAdvancedStats.objects} ${$t('ui.output.stats.objects', 'objects')} · ${$jsonAdvancedStats.arrays} ${$t('ui.output.stats.arrays', 'arrays')} · ${$jsonAdvancedStats.strings} ${$t('ui.output.stats.strings', 'strings')} · ${$t('ui.output.stats.depth', 'depth')}: ${$jsonAdvancedStats.maxDepth}`;
 	});
 	let minifySummary = $derived.by(() => {
 		if (!isMinifier || !$jsonAdvancedStats) return '';
@@ -68,7 +68,7 @@
 		if (original <= 0) return '';
 		const saved = Math.max(original - minified, 0);
 		const ratio = saved === 0 ? 0 : (saved / original) * 100;
-		return `{$t('ui.output.original', 'Original')}: ${(original / 1024).toFixed(1)} KB → {$t('ui.output.minified', 'Minified')}: ${(minified / 1024).toFixed(1)} KB — {$t('ui.output.saved', 'saved')} ${ratio.toFixed(1)}% (${(saved / 1024).toFixed(1)} KB)`;
+		return `${$t('ui.output.original', 'Original')}: ${(original / 1024).toFixed(1)} KB → ${$t('ui.output.minified', 'Minified')}: ${(minified / 1024).toFixed(1)} KB — ${$t('ui.output.saved', 'saved')} ${ratio.toFixed(1)}% (${(saved / 1024).toFixed(1)} KB)`;
 	});
 
 	onMount(async () => {
@@ -177,10 +177,10 @@
 			return;
 		}
 		copied = true;
-		addToast('success', 'Copied to clipboard');
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		setTimeout(() => {
 			copied = false;
-		}, 1500);
+		}, 2000);
 	}
 
 	function deriveDownloadName(): string {
@@ -397,7 +397,7 @@
 
 		{#if isMinifier && minifySummary}
 			<div class="json-output-meta">
-				<span class="json-output-meta__pill">MINIFIED</span>
+				<span class="json-output-meta__pill">{$t('ui.output.meta.minified', 'MINIFIED')}</span>
 				<span>{minifySummary}</span>
 			</div>
 		{/if}
@@ -424,13 +424,13 @@
 				{#if copied}
 					<Check size={13} />
 				{:else}
-					{$t('ui.output.actions.copy', 'Copy')} size={13} />
+					<Copy size={13} />
 				{/if}
-				{$t('ui.output.actions.copy', 'Copy')}
+				<span>{$t('ui.output.actions.copy', 'Copy')}</span>
 			</button>
 			<button type="button" class="json-output-btn" onclick={handleDownload}>
-					{$t('ui.output.actions.download', 'Download')} size={13} />
-				{$t('ui.output.actions.download', 'Download')}
+				<Download size={13} />
+				<span>{$t('ui.output.actions.download', 'Download')}</span>
 			</button>
 		</div>
 

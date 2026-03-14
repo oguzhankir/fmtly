@@ -36,7 +36,7 @@
 	let resultMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lines = $output.length === 0 ? 0 : $output.split('\n').length;
-		return `${$output.length.toLocaleString()} {$t('ui.query.stats.chars', 'chars')} · ${lines.toLocaleString()} {$t('ui.query.stats.lines', 'lines')}`;
+		return `${$output.length.toLocaleString()} ${$t('ui.query.stats.chars', 'chars')} · ${lines.toLocaleString()} ${$t('ui.query.stats.lines', 'lines')}`;
 	});
 
 	function getHistoryKey(): string {
@@ -147,10 +147,10 @@
 			return;
 		}
 		copied = true;
-		addToast('success', 'Copied to clipboard');
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		setTimeout(() => {
 			copied = false;
-		}, 1500);
+		}, 2000);
 	}
 </script>
 

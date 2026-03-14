@@ -171,7 +171,7 @@
 
 	async function copyActivePath(): Promise<void> {
 		await navigator.clipboard.writeText(activePath);
-		addToast('success', ($t as any)('ui.tree.toast_copy_path', 'Copied — {{path}}', { path: activePath }));
+		addToast('success', $t('ui.tree.toast_copy_path', 'Copied'));
 	}
 
 	$effect(() => {

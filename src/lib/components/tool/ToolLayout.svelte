@@ -100,8 +100,6 @@
 	<div class="tool-toolbar-row">
 		<span class="tool-toolbar-name">{tool.displayName}</span>
 		<ToolToolbar
-			onformat={onprocess ?? (() => {})}
-			onminify={onprocess ?? (() => {})}
 			oncopy={handleCopy}
 			onshare={onshare ?? (() => {})}
 			onhistory={() => { historyOpen = !historyOpen; }}
@@ -265,7 +263,7 @@
 					{#if outputPanel}
 						{@render outputPanel()}
 					{:else}
-						<p class="panel-placeholder">Output will appear here</p>
+						<p class="panel-placeholder">{$t('ui.layout.placeholders.output_empty', 'Output will appear here')}</p>
 					{/if}
 				</div>
 			</div>
@@ -274,12 +272,12 @@
 		<div class="panel-container mobile-panels">
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.input', 'Input')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.output', 'Output')}</p>{/if}
 				</div>
 			</div>
 		</div>
@@ -287,15 +285,15 @@
 		<div class="panel-container desktop-panels" style="flex-direction: column;">
 			<div class="panel-container" style="min-height: 40%; flex: 1;">
 				<div class="panel panel-input" style="width: 50%; border-right: 1px solid var(--border-subtle);">
-					<div class="diff-label">Original</div>
+					<div class="diff-label">{$t('ui.diff.labels.original', 'Original')}</div>
 					<div class="panel-content">
-						{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Paste original here…</p>{/if}
+						{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.paste_original', 'Paste original here…')}</p>{/if}
 					</div>
 				</div>
 				<div class="panel panel-output">
-					<div class="diff-label">Modified</div>
+					<div class="diff-label">{$t('ui.diff.labels.modified', 'Modified')}</div>
 					<div class="panel-content">
-						{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Paste modified here…</p>{/if}
+						{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.paste_modified', 'Paste modified here…')}</p>{/if}
 					</div>
 				</div>
 			</div>
@@ -307,12 +305,12 @@
 		<div class="panel-container mobile-panels">
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Original</p>{/if}
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.diff.labels.original', 'Original')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Modified</p>{/if}
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.diff.labels.modified', 'Modified')}</p>{/if}
 				</div>
 			</div>
 		</div>
@@ -320,17 +318,17 @@
 		<div class="panel-container desktop-panels" bind:this={containerEl}>
 			<div class="panel" style="width: 33.3%; border-right: 1px solid var(--border-subtle);">
 				<div class="panel-content">
-					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.input', 'Input')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel" style="width: 33.3%; border-right: 1px solid var(--border-subtle);">
 				<div class="panel-content">
-					{#if treePanel}{@render treePanel()}{:else}<p class="panel-placeholder">Tree view</p>{/if}
+					{#if treePanel}{@render treePanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.tree_empty', 'Tree view')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel panel-output">
 				<div class="panel-content">
-					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.output', 'Output')}</p>{/if}
 				</div>
 			</div>
 		</div>
@@ -338,12 +336,12 @@
 		<div class="panel-container mobile-panels">
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.input', 'Input')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.output', 'Output')}</p>{/if}
 				</div>
 			</div>
 		</div>
@@ -370,12 +368,12 @@
 		<div class="panel-container desktop-panels" style="flex-direction: column;">
 			<div class="panel" style="border-bottom: 1px solid var(--border-subtle); flex: 1;">
 				<div class="panel-content">
-					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.input', 'Input')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel" style="flex: 1;">
 				<div class="panel-content">
-					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.output', 'Output')}</p>{/if}
 				</div>
 			</div>
 		</div>
@@ -383,12 +381,12 @@
 		<div class="panel-container mobile-panels">
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">Input</p>{/if}
+					{#if inputPanel}{@render inputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.input', 'Input')}</p>{/if}
 				</div>
 			</div>
 			<div class="panel panel-full">
 				<div class="panel-content">
-					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">Output</p>{/if}
+					{#if outputPanel}{@render outputPanel()}{:else}<p class="panel-placeholder">{$t('ui.layout.placeholders.output', 'Output')}</p>{/if}
 				</div>
 			</div>
 		</div>

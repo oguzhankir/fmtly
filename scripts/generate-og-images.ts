@@ -81,6 +81,54 @@ function drawGrid(ctx: any) {
 	}
 }
 
+function drawLogo(ctx: any, x: number, y: number, size: number) {
+	const centerX = x + size / 2;
+	const centerY = y + size / 2;
+	const radius = size * 0.38;
+
+	// Lens ring with gradient
+	const gradient = ctx.createLinearGradient(x, y, x + size, y + size);
+	gradient.addColorStop(0, '#22D3EE');
+	gradient.addColorStop(0.45, '#6366F1');
+	gradient.addColorStop(1, '#A855F7');
+
+	ctx.strokeStyle = gradient;
+	ctx.lineWidth = size * 0.06;
+	ctx.beginPath();
+	ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+	ctx.stroke();
+
+	// Code bars inside lens
+	const barGradient = ctx.createLinearGradient(
+		centerX,
+		centerY - radius * 0.6,
+		centerX,
+		centerY + radius * 0.6
+	);
+	barGradient.addColorStop(0, '#22D3EE');
+	barGradient.addColorStop(0.34, '#60A5FA');
+	barGradient.addColorStop(0.67, '#818CF8');
+	barGradient.addColorStop(1, '#C084FC');
+
+	ctx.fillStyle = barGradient;
+
+	const barHeight = size * 0.08;
+	const barSpacing = size * 0.06;
+	const bar1Y = centerY - barSpacing * 1.5 - barHeight;
+	const bar2Y = centerY - barSpacing * 0.5;
+	const bar3Y = centerY + barSpacing * 0.5;
+	const bar4Y = centerY + barSpacing * 1.5 + barHeight * 0.5;
+
+	// Bar 1: long
+	ctx.fillRect(centerX - radius * 0.7, bar1Y, radius * 1.4, barHeight);
+	// Bar 2: medium, indented
+	ctx.fillRect(centerX - radius * 0.3, bar2Y, radius * 0.8, barHeight);
+	// Bar 3: short, indented
+	ctx.fillRect(centerX - radius * 0.3, bar3Y, radius * 0.5, barHeight);
+	// Bar 4: very short
+	ctx.fillRect(centerX - radius * 0.7, bar4Y, radius * 0.6, barHeight);
+}
+
 function generateImage(title: string, category: string, filename: string) {
 	const canvas = createCanvas(WIDTH, HEIGHT);
 	const ctx = canvas.getContext('2d');
@@ -91,6 +139,9 @@ function generateImage(title: string, category: string, filename: string) {
 
 	// Grid
 	drawGrid(ctx);
+
+	// Logo in top-left
+	drawLogo(ctx, 40, 40, 80);
 
 	// Category Badge
 	const badgePaddingX = 24;

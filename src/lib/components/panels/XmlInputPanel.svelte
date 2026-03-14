@@ -17,6 +17,7 @@
 		ChevronDown,
 		X
 	} from 'lucide-svelte';
+	import ConfirmModal from '$components/modals/ConfirmModal.svelte';
 
 	let {
 		toolSlug,
@@ -39,6 +40,9 @@
 	let showLoadUrl = $state(false);
 	let loadUrlValue = $state('');
 	let loadedFilename = $state('');
+	let confirmModalOpen = $state(false);
+	let confirmTitle = $state('');
+	let confirmMessage = $state('');
 
 	let statusInfo = $derived.by(() => {
 		const lines = $input.length === 0 ? 0 : $input.split('\n').length;
@@ -170,21 +174,36 @@
 	}
 
 	function clearInputValue(): void {
-		if ($input.length > 1000 && !window.confirm('Clear the current XML input?')) {
-			return;
+		if ($input.length > 1000) {
+			confirmTitle = ($t as any)('ui.confirm.clear', { language: 'XML' }, 'Clear the current XML input?');
+			confirmMessage = $t('ui.confirm.clear_description', 'This action cannot be undone.');
+			confirmModalOpen = true;
+		} else {
+			doClearInput();
 		}
+	}
+
+	function doClearInput(): void {
 		input.set('');
 		clipboardXml = '';
 		loadedFilename = '';
-		addToast('info', 'Input cleared');
+		addToast('info', $t('ui.toast.input_cleared', 'Input cleared'));
 	}
 
 	async function loadUrl(): Promise<void> {
 		const url = loadUrlValue.trim();
 		if (!url) return;
 
+		let fetchUrl = url;
 		try {
-			const response = await fetch(url);
+			// Handle GitHub blob URLs - convert to raw content URLs
+			if (url.includes('github.com') && url.includes('/blob/')) {
+				fetchUrl = url
+					.replace('github.com', 'raw.githubusercontent.com')
+					.replace('/blob/', '/');
+			}
+			
+			const response = await fetch(fetchUrl);
 			if (!response.ok) {
 				throw new Error('Request failed');
 			}
@@ -196,9 +215,12 @@
 			loadedFilename = new URL(url).hostname;
 			showLoadUrl = false;
 			loadUrlValue = '';
-			addToast('success', 'Loaded XML from URL');
-		} catch {
-			addToast('error', 'Could not fetch — try pasting directly');
+			addToast('success', $t('ui.toast.url_loaded', 'Loaded from URL'));
+		} catch (error) {
+			console.error('XML URL load error:', error);
+			console.error('Original URL:', url);
+			console.error('Fetch URL:', fetchUrl);
+			addToast('error', $t('ui.toast.url_error', 'Could not fetch — try pasting directly'));
 		}
 	}
 
@@ -652,3 +674,11 @@
 		}
 	}
 </style>
+
+<ConfirmModal 
+	bind:open={confirmModalOpen} 
+	title={confirmTitle} 
+	message={confirmMessage}
+	onConfirm={doClearInput}
+	onCancel={() => {}}
+/>

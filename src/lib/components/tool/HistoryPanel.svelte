@@ -10,8 +10,12 @@
 	import type { HistoryEntry } from '$stores/history.store';
 	import { X, Trash2, Edit2, Check, Clock, ExternalLink } from 'lucide-svelte';
 	import { fade, slide } from 'svelte/transition';
+	import ConfirmModal from '$components/modals/ConfirmModal.svelte';
 
 	let { open = $bindable(false) } = $props();
+	let confirmModalOpen = $state(false);
+	let confirmTitle = $state('');
+	let confirmMessage = $state('');
 
 	let editingId = $state<string | null>(null);
 	let editingLabel = $state('');
@@ -45,9 +49,9 @@
 	}
 
 	function handleClear(): void {
-		if (window.confirm($t('ui.history.clear_confirm', 'Clear all history?'))) {
-			clearHistory();
-		}
+		confirmTitle = $t('ui.history.clear_confirm', 'Clear all history?');
+		confirmMessage = $t('ui.history.clear_description', 'This action cannot be undone.');
+		confirmModalOpen = true;
 	}
 </script>
 
@@ -319,3 +323,11 @@
 		border-color: var(--error);
 	}
 </style>
+
+<ConfirmModal 
+	bind:open={confirmModalOpen} 
+	title={confirmTitle} 
+	message={confirmMessage}
+	onConfirm={clearHistory}
+	onCancel={() => {}}
+/>

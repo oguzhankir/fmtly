@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import MonacoEditor from '$components/editor/MonacoEditor.svelte';
 	import { validateJSON } from '$engines/json/index.js';
 	import { validateJsonSchema } from '$engines/json/schemaValidator.js';
@@ -8,8 +9,10 @@
 	import { format, jsonError, repair } from '$stores/json.store';
 	import { initInput, input } from '$stores/input.store';
 	import { t } from '$lib/stores/language.js';
+	import { stripLocalePrefix } from '$lib/utils/locale-routing.js';
+	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
 	import type { ToolDefinition } from '$registry/types.js';
-	import { AlertTriangle, CheckCircle2, Sparkles, Wand2 } from 'lucide-svelte';
+	import { AlertTriangle, CheckCircle2, CircleAlert, Sparkles, Wand2 } from 'lucide-svelte';
 
 	let {
 		toolSlug,
@@ -72,17 +75,33 @@
 			if (!schemaValidationResult) return $t('ui.validator.validating_schema', 'Validating schema…');
 			if (!schemaValidationResult.success) {
 				if (schemaValidationResult.dataError) {
-					return ($t as any)('ui.validator.data_error_pos', 'Data error at line {{line}}, column {{column}}', { line: schemaValidationResult.dataError.line, column: schemaValidationResult.dataError.column });
+					return ($t as any)('ui.validator.data_error_pos', 'Data error at line {line}, column {column}', {
+						line: schemaValidationResult.dataError.line,
+						column: schemaValidationResult.dataError.column
+					});
 				}
 				return $t('ui.validator.schema_invalid', 'Schema is invalid');
 			}
 			if (schemaValidationResult.valid) return $t('ui.validator.json_matches_schema', 'JSON matches schema');
 			const firstIssue = schemaValidationResult.issues[0];
 			return firstIssue
-				? ($t as any)('ui.validator.schema_error_pos', 'Schema error at line {{line}}, column {{column}}', { line: firstIssue.line, column: firstIssue.column })
+				? ($t as any)('ui.validator.schema_error_pos', 'Schema error at line {line}, column {column}', {
+						line: firstIssue.line,
+						column: firstIssue.column
+					})
 				: $t('ui.validator.schema_validation_failed', 'Schema validation failed');
 		}
-		return result.summary;
+
+		if (!$input.trim()) return $t('ui.validator.paste_json', 'Paste JSON to validate');
+		if (result.valid) return $t('ui.validator.valid_json', 'JSON is valid');
+
+		const firstError = result.errors[0];
+		return firstError
+			? ($t as any)('ui.validator.syntax_error_pos', 'Syntax error at line {line}, column {column}', {
+					line: firstError.line,
+					column: firstError.column
+				})
+			: $t('ui.validator.invalid_json', 'Invalid JSON');
 	});
 
 	onMount(() => {
@@ -182,20 +201,12 @@
 
 <div class="validator-shell" role="region" aria-label="JSON validator">
 	{#if workspaceTools.length > 0}
-		<div class="json-workspace-tabs" role="tablist" aria-label="JSON workspace tabs">
-			{#each workspaceTools as workspaceTool}
-				<button
-					type="button"
-					role="tab"
-					class="json-workspace-tab"
-					class:json-workspace-tab--active={workspaceTool.slug === toolSlug}
-					aria-selected={workspaceTool.slug === toolSlug}
-					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
-				>
-					{getWorkspaceLabel(workspaceTool)}
-				</button>
-			{/each}
-		</div>
+		<WorkspaceTabs 
+			tools={workspaceTools} 
+			activeSlug={toolSlug} 
+			category="json" 
+			locale={$page.params.lang || 'en'} 
+		/>
 	{/if}
 
 	<div class="validator-header">
@@ -284,7 +295,10 @@
 						onclick={() => focusIssue(issue.line)}
 					>
 						<div class="validator-error-item__head">
-							<strong>{($t as any)('ui.validator.line_col_label', 'Line {{line}}, column {{column}}', { line: issue.line, column: issue.column })}</strong>
+							<strong>{($t as any)('ui.validator.line_col_label', 'Line {line}, column {column}', {
+								line: issue.line,
+								column: issue.column
+							})}</strong>
 							<span>{issue.code}</span>
 						</div>
 						<p>{issue.message}</p>
@@ -309,46 +323,8 @@
 </div>
 
 <style>
-	.json-workspace-tabs {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		overflow-x: auto;
-		padding: 0 var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		scrollbar-width: none;
-	}
-
-	.json-workspace-tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.json-workspace-tab {
-		flex: 0 0 auto;
-		height: 36px;
-		padding: 0 var(--space-3);
-		border: none;
-		border-bottom: 2px solid transparent;
-		background: transparent;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		white-space: nowrap;
-		cursor: pointer;
-	}
-
-	.json-workspace-tab--active {
-		border-bottom-color: var(--accent);
-		color: var(--text-primary);
-	}
-
-	.json-workspace-tab:hover {
-		color: var(--text-primary);
-	}
-
 	.validator-shell {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		height: 100%;

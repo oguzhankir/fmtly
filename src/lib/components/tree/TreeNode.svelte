@@ -55,7 +55,7 @@
 		const path = dotPath();
 		await navigator.clipboard.writeText(path);
 		justCopied = true;
-		addToast('success', ($t as any)('ui.tree.toast.copied_path', 'Copied — {path}', { path }));
+		addToast('success', $t('ui.tree.toast.copied_path', 'Copied'));
 		if (copyTimer) clearTimeout(copyTimer);
 		copyTimer = setTimeout(() => {
 			justCopied = false;
@@ -104,13 +104,13 @@
 
 	async function contextCopyDot(): Promise<void> {
 		await navigator.clipboard.writeText(dotPath());
-		addToast('success', ($t as any)('ui.tree.toast.copied_path', 'Copied — {path}', { path: dotPath() }));
+		addToast('success', $t('ui.tree.toast.copied_path', 'Copied'));
 		contextMenu = null;
 	}
 
 	async function contextCopyBracket(): Promise<void> {
 		await navigator.clipboard.writeText(bracketPath());
-		addToast('success', ($t as any)('ui.tree.toast.copied_path', 'Copied — {path}', { path: bracketPath() }));
+		addToast('success', $t('ui.tree.toast.copied_path', 'Copied'));
 		contextMenu = null;
 	}
 

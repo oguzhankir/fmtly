@@ -83,6 +83,9 @@ export const t = derived(locale, ($locale) => {
 
 		if (typeof paramsOrFallback === 'string') {
 			fallback = paramsOrFallback;
+			if (maybeFallback && typeof maybeFallback === 'object') {
+				params = maybeFallback;
+			}
 		} else if (paramsOrFallback && typeof paramsOrFallback === 'object') {
 			params = paramsOrFallback;
 			if (typeof maybeFallback === 'string') {

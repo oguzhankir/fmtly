@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { validateJSON } from '$engines/json/index.js';
 	import type { ToolDefinition } from '$registry/types.js';
 	import { jsonStats } from '$stores/json.store';
-	import { formatByteSize, initInput, input, inputByteSize } from '$stores/input.store';
+	import { input as inputStore, initInput, inputByteSize, formatByteSize } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$stores/language';
+	import { stripLocalePrefix } from '$lib/utils/locale-routing.js';
+	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
 	import { jsonSamples } from '$lib/utils/jsonSamples.js';
 	import {
 		Upload,
@@ -17,6 +20,7 @@
 		ChevronDown,
 		X
 	} from 'lucide-svelte';
+	import ConfirmModal from '$components/modals/ConfirmModal.svelte';
 
 	let {
 		toolSlug,
@@ -40,15 +44,18 @@
 	let initializedToolSlug = $state('');
 	let showLoadUrl = $state(false);
 	let loadUrlValue = $state('');
+	let confirmModalOpen = $state(false);
+	let confirmTitle = $state('');
+	let confirmMessage = $state('');
 	let loadedFilename = $state('');
-	let validationResult = $derived(validateJSON($input));
+	let validationResult = $derived(validateJSON($inputStore));
 	let statusInfo = $derived.by(() => {
-		const lines = $input.length === 0 ? 0 : $input.split('\n').length;
+		const lines = $inputStore.length === 0 ? 0 : $inputStore.split('\n').length;
 		const depth = $jsonStats?.maxDepth ?? 0;
 		return `UTF-8 · ${formatByteSize($inputByteSize)} · ${lines.toLocaleString()} lines · depth: ${depth}`;
 	});
 	let validityLabel = $derived.by(() => {
-		if (!$input.trim()) return $t('ui.validity.empty', 'Empty');
+		if (!$inputStore.trim()) return $t('ui.validity.empty', 'Empty');
 		if (validationResult.valid) return $t('ui.validity.valid', { language: 'JSON' }, 'Valid JSON');
 		const firstError = validationResult.errors[0];
 		if (!firstError) return $t('ui.validity.invalid', { language: 'JSON' }, 'Invalid JSON');
@@ -84,7 +91,7 @@
 	}
 
 	function handleFileContent(content: string, label: string): void {
-		input.set(content);
+		inputStore.set(content);
 		loadedFilename = label;
 		addToast('success', $t('ui.toast.file_loaded', { name: label }, `File loaded: ${label}`));
 	}
@@ -139,7 +146,7 @@
 		try {
 			const text = await navigator.clipboard.readText();
 			JSON.parse(text);
-			if (text && text !== $input) {
+			if (text && text !== $inputStore) {
 				clipboardJson = text;
 			}
 		} catch {
@@ -152,17 +159,24 @@
 		if (!sample) return;
 		selectedSample = value;
 		if (sample.value) {
-			input.set(sample.value);
+			inputStore.set(sample.value);
 			loadedFilename = sample.label;
 			addToast('success', ($t as any)('ui.loaded_sample', 'Loaded {label}', { label: sample.label }));
 		}
 	}
 
 	function clearInputValue(): void {
-		if ($input.length > 1000 && !window.confirm(($t as any)('ui.confirm.clear', { language: 'JSON' }, 'Clear the current JSON input?'))) {
-			return;
+		if ($inputStore.length > 1000) {
+			confirmTitle = ($t as any)('ui.confirm.clear', { language: 'JSON' }, 'Clear the current JSON input?');
+			confirmMessage = $t('ui.confirm.clear_description', 'This action cannot be undone.');
+			confirmModalOpen = true;
+		} else {
+			doClearInput();
 		}
-		input.set('');
+	}
+
+	function doClearInput(): void {
+		inputStore.set('');
 		clipboardJson = '';
 		loadedFilename = '';
 		addToast('info', $t('ui.toast.input_cleared', 'Input cleared'));
@@ -172,20 +186,31 @@
 		const url = loadUrlValue.trim();
 		if (!url) return;
 
+		let fetchUrl = url;
 		try {
-			const response = await fetch(url);
+			// Handle GitHub blob URLs - convert to raw content URLs
+			if (url.includes('github.com') && url.includes('/blob/')) {
+				fetchUrl = url
+					.replace('github.com', 'raw.githubusercontent.com')
+					.replace('/blob/', '/');
+			}
+			
+			const response = await fetch(fetchUrl);
 			if (!response.ok) {
 				throw new Error('Request failed');
 			}
 			const text = await response.text();
 			JSON.parse(text);
-			input.set(text);
+			inputStore.set(text);
 			loadedFilename = new URL(url).hostname;
 			showLoadUrl = false;
 			loadUrlValue = '';
-			addToast('success', 'Loaded JSON from URL');
-		} catch {
-			addToast('error', 'Could not fetch — try pasting directly');
+			addToast('success', $t('ui.toast.url_loaded', 'Loaded from URL'));
+		} catch (error) {
+			console.error('URL load error:', error);
+			console.error('Original URL:', url);
+			console.error('Fetch URL:', fetchUrl);
+			addToast('error', $t('ui.toast.url_error', 'Could not fetch — try pasting directly'));
 		}
 	}
 
@@ -214,38 +239,38 @@
 
 	function pasteClipboardJson(): void {
 		if (!clipboardJson) return;
-		input.set(clipboardJson);
+		inputStore.set(clipboardJson);
 		loadedFilename = 'Clipboard JSON';
 		clipboardJson = '';
 		addToast('success', 'Pasted JSON from clipboard');
 	}
 
-	function getWorkspaceLabel(tool: ToolDefinition): string {
-		switch (tool.slug) {
+	function getWorkspaceLabel(tDef: ToolDefinition): string {
+		switch (tDef.slug) {
 			case 'formatter':
 				return $t('ui.actions.format', 'Format');
-			case 'viewer':
-				return $t('ui.actions.view', 'View');
 			case 'validator':
 				return $t('ui.actions.validate', 'Validate');
 			case 'minifier':
 				return $t('ui.actions.minify', 'Minify');
 			case 'to-yaml':
-				return $t('ui.convert.to_yaml', '→ YAML');
-			case 'to-csv':
-				return $t('ui.convert.to_csv', '→ CSV');
-			case 'to-xml':
-				return $t('ui.convert.to_xml', '→ XML');
-			case 'to-toml':
-				return $t('ui.convert.to_toml', '→ TOML');
-			case 'to-markdown':
-				return $t('ui.convert.to_markdown', '→ MD');
+				return 'YAML';
 			case 'jsonpath':
-				return $t('ui.query.jsonpath', 'JSONPath');
+				return 'JSONPath';
 			case 'jmespath':
-				return $t('ui.query.jmespath', 'JMESPath');
+				return 'JMESPath';
+			case 'to-csv':
+				return 'CSV';
+			case 'to-toml':
+				return 'TOML';
+			case 'to-xml':
+				return 'XML';
+			case 'to-markdown':
+				return 'MD';
+			case 'diff':
+				return $t('ui.actions.diff', 'Diff');
 			default:
-				return tool.displayName;
+				return stripLocalePrefix($t(tDef.displayName, tDef.displayName));
 		}
 	}
 
@@ -269,20 +294,12 @@
 	aria-label="JSON input panel"
 >
 	{#if workspaceTools.length > 0}
-		<div class="json-workspace-tabs" role="tablist" aria-label="JSON workspace tabs">
-			{#each workspaceTools as workspaceTool}
-				<button
-					type="button"
-					role="tab"
-					class="json-workspace-tab"
-					class:json-workspace-tab--active={workspaceTool.slug === toolSlug}
-					aria-selected={workspaceTool.slug === toolSlug}
-					onclick={() => navigateToWorkspaceTool(workspaceTool.slug)}
-				>
-					{getWorkspaceLabel(workspaceTool)}
-				</button>
-			{/each}
-		</div>
+		<WorkspaceTabs 
+			tools={workspaceTools} 
+			activeSlug={toolSlug} 
+			category="json" 
+			locale={$page.params.lang || 'en'} 
+		/>
 	{/if}
 
 	<div class="json-input-toolbar">
@@ -339,7 +356,7 @@
 				<Upload size={13} />
 				{$t('ui.actions.upload', 'Upload')}
 			</button>
-			{#if $input}
+			{#if $inputStore}
 				<button type="button" class="json-input-btn" onclick={clearInputValue}>
 					<Eraser size={13} />
 					{$t('ui.actions.clear', 'Clear')}
@@ -371,8 +388,8 @@
 		<div class="json-input-meta__section json-input-meta__section--left">
 			<span
 				class="json-input-meta__validity"
-				class:json-input-meta__validity--valid={validationResult.valid && $input.trim().length > 0}
-				class:json-input-meta__validity--invalid={!validationResult.valid && $input.trim().length > 0}
+				class:json-input-meta__validity--valid={validationResult.valid && $inputStore.trim().length > 0}
+				class:json-input-meta__validity--invalid={!validationResult.valid && $inputStore.trim().length > 0}
 			>
 				<Circle size={8} fill="currentColor" />
 				{validityLabel}
@@ -382,7 +399,7 @@
 			<span>{$t('ui.stats.info', {
 				encoding: 'UTF-8',
 				size: formatByteSize($inputByteSize),
-				lines: $input.length === 0 ? 0 : $input.split('\n').length,
+				lines: $inputStore.length === 0 ? 0 : $inputStore.split('\n').length,
 				depth: $jsonStats?.maxDepth ?? 0
 			})}</span>
 			{#if loadedFilename}
@@ -404,45 +421,6 @@
 </div>
 
 <style>
-	.json-workspace-tabs {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		overflow-x: auto;
-		padding: 0 var(--space-3);
-		border-bottom: 1px solid var(--border-subtle);
-		background: var(--bg-surface);
-		scrollbar-width: none;
-	}
-
-	.json-workspace-tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.json-workspace-tab {
-		flex: 0 0 auto;
-		height: 36px;
-		padding: 0 var(--space-3);
-		border: none;
-		border-bottom: 2px solid transparent;
-		background: transparent;
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		white-space: nowrap;
-		cursor: pointer;
-	}
-
-	.json-workspace-tab--active {
-		border-bottom-color: var(--accent);
-		color: var(--text-primary);
-	}
-
-	.json-workspace-tab:hover {
-		color: var(--text-primary);
-	}
-
 	.json-input-toolbar {
 		display: flex;
 		align-items: center;
@@ -650,3 +628,11 @@
 		}
 	}
 </style>
+
+<ConfirmModal 
+	bind:open={confirmModalOpen} 
+	title={confirmTitle} 
+	message={confirmMessage}
+	onConfirm={doClearInput}
+	onCancel={() => {}}
+/>

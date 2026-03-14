@@ -35,7 +35,7 @@
 
 	async function handleCopyPath(): Promise<void> {
 		await navigator.clipboard.writeText(node.path);
-		addToast('success', ($t as any)('ui.json_viewer.toast_copy_path', 'Copied — {{path}}', { path: node.path }));
+		addToast('success', $t('ui.json_viewer.toast_copy_path', 'Copied'));
 	}
 
 	function getValueDisplay(n: TreeNode): string {

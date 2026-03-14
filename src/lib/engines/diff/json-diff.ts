@@ -5,11 +5,15 @@ export type DiffEntry = {
 	type: DiffType;
 	leftValue: unknown;
 	rightValue: unknown;
+	leftType: string | null;
+	rightType: string | null;
 };
 
 export type DiffOptions = {
 	ignoreArrayOrder: boolean;
 	ignoreWhitespace: boolean;
+	ignoreKeys: string[];
+	caseSensitive: boolean;
 };
 
 export type DiffResult = {
@@ -24,7 +28,14 @@ export type DiffSummary = {
 	unchanged: number;
 	total: number;
 	touchedPaths: string[];
+	similarityScore: number;
 };
+
+function getType(value: unknown): string {
+	if (value === null) return 'null';
+	if (Array.isArray(value)) return 'array';
+	return typeof value;
+}
 
 function sortValue(value: unknown): unknown {
 	if (value === null || typeof value !== 'object') return value;
@@ -44,7 +55,17 @@ function sortValue(value: unknown): unknown {
 	return sorted;
 }
 
-function compareValues(a: unknown, b: unknown, ignoreArrayOrder: boolean): boolean {
+function compareValues(
+	a: unknown,
+	b: unknown,
+	ignoreArrayOrder: boolean,
+	caseSensitive: boolean
+): boolean {
+	if (typeof a === 'string' && typeof b === 'string') {
+		const sa = caseSensitive ? a : a.toLowerCase();
+		const sb = caseSensitive ? b : b.toLowerCase();
+		return sa === sb;
+	}
 	if (a === b) return true;
 	if (a === null || b === null) return a === b;
 	if (typeof a !== typeof b) return false;
@@ -57,7 +78,7 @@ function compareValues(a: unknown, b: unknown, ignoreArrayOrder: boolean): boole
 			const sortedB = sortValue(b);
 			return JSON.stringify(sortedA) === JSON.stringify(sortedB);
 		}
-		return a.every((item, i) => compareValues(item, b[i], ignoreArrayOrder));
+		return a.every((item, i) => compareValues(item, b[i], ignoreArrayOrder, caseSensitive));
 	}
 
 	if (Array.isArray(a) || Array.isArray(b)) return false;
@@ -68,8 +89,116 @@ function compareValues(a: unknown, b: unknown, ignoreArrayOrder: boolean): boole
 	const keysB = Object.keys(objB).sort();
 	if (keysA.length !== keysB.length) return false;
 	return keysA.every(
-		(key, i) => key === keysB[i] && compareValues(objA[key], objB[key], ignoreArrayOrder)
+		(key, i) =>
+			key === keysB[i] && compareValues(objA[key], objB[key], ignoreArrayOrder, caseSensitive)
 	);
+}
+
+function lcsArrayDiff(
+	arrL: unknown[],
+	arrR: unknown[],
+	path: string,
+	entries: DiffEntry[],
+	options: DiffOptions
+): void {
+	const n = arrL.length;
+	const m = arrR.length;
+
+	if (n * m > 90000) {
+		const maxLen = Math.max(n, m);
+		for (let i = 0; i < maxLen; i++) {
+			const childPath = `${path}[${i}]`;
+			if (i < n && i < m) {
+				diffRecursive(arrL[i], arrR[i], childPath, entries, options);
+			} else if (i < n) {
+				entries.push({
+					path: childPath,
+					type: 'removed',
+					leftValue: arrL[i],
+					rightValue: undefined,
+					leftType: getType(arrL[i]),
+					rightType: null
+				});
+			} else {
+				entries.push({
+					path: childPath,
+					type: 'added',
+					leftValue: undefined,
+					rightValue: arrR[i],
+					leftType: null,
+					rightType: getType(arrR[i])
+				});
+			}
+		}
+		return;
+	}
+
+	const dp: number[][] = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+	for (let i = 1; i <= n; i++) {
+		for (let j = 1; j <= m; j++) {
+			if (
+				compareValues(arrL[i - 1], arrR[j - 1], options.ignoreArrayOrder, options.caseSensitive)
+			) {
+				dp[i][j] = dp[i - 1][j - 1] + 1;
+			} else {
+				dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+			}
+		}
+	}
+
+	type LcsOp =
+		| { kind: 'keep'; li: number; ri: number }
+		| { kind: 'remove'; li: number }
+		| { kind: 'add'; ri: number };
+	const ops: LcsOp[] = [];
+	let i = n;
+	let j = m;
+	while (i > 0 || j > 0) {
+		if (
+			i > 0 &&
+			j > 0 &&
+			compareValues(arrL[i - 1], arrR[j - 1], options.ignoreArrayOrder, options.caseSensitive)
+		) {
+			ops.unshift({ kind: 'keep', li: i - 1, ri: j - 1 });
+			i--;
+			j--;
+		} else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+			ops.unshift({ kind: 'add', ri: j - 1 });
+			j--;
+		} else {
+			ops.unshift({ kind: 'remove', li: i - 1 });
+			i--;
+		}
+	}
+
+	let outIdx = 0;
+	for (const op of ops) {
+		if (op.kind === 'keep') {
+			const childPath = `${path}[${op.ri}]`;
+			diffRecursive(arrL[op.li], arrR[op.ri], childPath, entries, options);
+			outIdx++;
+		} else if (op.kind === 'add') {
+			const childPath = `${path}[${op.ri}]`;
+			entries.push({
+				path: childPath,
+				type: 'added',
+				leftValue: undefined,
+				rightValue: arrR[op.ri],
+				leftType: null,
+				rightType: getType(arrR[op.ri])
+			});
+			outIdx++;
+		} else {
+			entries.push({
+				path: `${path}[${op.li}]`,
+				type: 'removed',
+				leftValue: arrL[op.li],
+				rightValue: undefined,
+				leftType: getType(arrL[op.li]),
+				rightType: null
+			});
+		}
+	}
 }
 
 function diffRecursive(
@@ -77,10 +206,17 @@ function diffRecursive(
 	right: unknown,
 	path: string,
 	entries: DiffEntry[],
-	ignoreArrayOrder: boolean
+	options: DiffOptions
 ): void {
-	if (compareValues(left, right, ignoreArrayOrder)) {
-		entries.push({ path, type: 'unchanged', leftValue: left, rightValue: right });
+	if (compareValues(left, right, options.ignoreArrayOrder, options.caseSensitive)) {
+		entries.push({
+			path,
+			type: 'unchanged',
+			leftValue: left,
+			rightValue: right,
+			leftType: getType(left),
+			rightType: getType(right)
+		});
 		return;
 	}
 
@@ -92,24 +228,29 @@ function diffRecursive(
 		const objR = right as Record<string, unknown>;
 		const allKeys = new Set([...Object.keys(objL), ...Object.keys(objR)]);
 		for (const key of [...allKeys].sort()) {
+			if (options.ignoreKeys.includes(key)) continue;
 			const childPath = path ? `${path}.${key}` : key;
 			const inLeft = key in objL;
 			const inRight = key in objR;
 			if (inLeft && inRight) {
-				diffRecursive(objL[key], objR[key], childPath, entries, ignoreArrayOrder);
+				diffRecursive(objL[key], objR[key], childPath, entries, options);
 			} else if (inLeft) {
 				entries.push({
 					path: childPath,
 					type: 'removed',
 					leftValue: objL[key],
-					rightValue: undefined
+					rightValue: undefined,
+					leftType: getType(objL[key]),
+					rightType: null
 				});
 			} else {
 				entries.push({
 					path: childPath,
 					type: 'added',
 					leftValue: undefined,
-					rightValue: objR[key]
+					rightValue: objR[key],
+					leftType: null,
+					rightType: getType(objR[key])
 				});
 			}
 		}
@@ -120,28 +261,48 @@ function diffRecursive(
 	const rightIsArr = Array.isArray(right);
 
 	if (leftIsArr && rightIsArr) {
-		const arrL = left as unknown[];
-		const arrR = right as unknown[];
-		const maxLen = Math.max(arrL.length, arrR.length);
-		for (let i = 0; i < maxLen; i++) {
-			const childPath = `${path}[${i}]`;
-			if (i < arrL.length && i < arrR.length) {
-				diffRecursive(arrL[i], arrR[i], childPath, entries, ignoreArrayOrder);
-			} else if (i < arrL.length) {
-				entries.push({
-					path: childPath,
-					type: 'removed',
-					leftValue: arrL[i],
-					rightValue: undefined
-				});
-			} else {
-				entries.push({ path: childPath, type: 'added', leftValue: undefined, rightValue: arrR[i] });
+		if (options.ignoreArrayOrder) {
+			const arrL = left as unknown[];
+			const arrR = right as unknown[];
+			const maxLen = Math.max(arrL.length, arrR.length);
+			for (let idx = 0; idx < maxLen; idx++) {
+				const childPath = `${path}[${idx}]`;
+				if (idx < arrL.length && idx < arrR.length) {
+					diffRecursive(arrL[idx], arrR[idx], childPath, entries, options);
+				} else if (idx < arrL.length) {
+					entries.push({
+						path: childPath,
+						type: 'removed',
+						leftValue: arrL[idx],
+						rightValue: undefined,
+						leftType: getType(arrL[idx]),
+						rightType: null
+					});
+				} else {
+					entries.push({
+						path: childPath,
+						type: 'added',
+						leftValue: undefined,
+						rightValue: arrR[idx],
+						leftType: null,
+						rightType: getType(arrR[idx])
+					});
+				}
 			}
+		} else {
+			lcsArrayDiff(left as unknown[], right as unknown[], path, entries, options);
 		}
 		return;
 	}
 
-	entries.push({ path, type: 'modified', leftValue: left, rightValue: right });
+	entries.push({
+		path,
+		type: 'modified',
+		leftValue: left,
+		rightValue: right,
+		leftType: getType(left),
+		rightType: getType(right)
+	});
 }
 
 export function computeJSONDiff(left: string, right: string, options: DiffOptions): DiffResult {
@@ -164,7 +325,7 @@ export function computeJSONDiff(left: string, right: string, options: DiffOption
 	}
 
 	const entries: DiffEntry[] = [];
-	diffRecursive(leftData, rightData, '', entries, options.ignoreArrayOrder);
+	diffRecursive(leftData, rightData, '', entries, options);
 	return { entries, error: null };
 }
 
@@ -202,7 +363,8 @@ export function summarizeJSONDiff(entries: DiffEntry[]): DiffSummary {
 		modified: 0,
 		unchanged: 0,
 		total: entries.length,
-		touchedPaths: []
+		touchedPaths: [],
+		similarityScore: 0
 	};
 
 	for (const entry of entries) {
@@ -226,5 +388,44 @@ export function summarizeJSONDiff(entries: DiffEntry[]): DiffSummary {
 	}
 
 	summary.touchedPaths = Array.from(new Set(summary.touchedPaths));
+	const changed = summary.added + summary.removed + summary.modified;
+	summary.similarityScore =
+		summary.total === 0 ? 100 : Math.round((summary.unchanged / summary.total) * 100);
 	return summary;
+}
+
+export function toDiffMarkdown(entries: DiffEntry[]): string {
+	const lines: string[] = ['# JSON Diff Report', ''];
+	for (const entry of entries) {
+		if (entry.type === 'unchanged') continue;
+		const path = entry.path || '(root)';
+		if (entry.type === 'added') {
+			lines.push(`**+ Added** \`${path}\``);
+			lines.push(`\`\`\`json\n${JSON.stringify(entry.rightValue, null, 2)}\n\`\`\``);
+		} else if (entry.type === 'removed') {
+			lines.push(`**- Removed** \`${path}\``);
+			lines.push(`\`\`\`json\n${JSON.stringify(entry.leftValue, null, 2)}\n\`\`\``);
+		} else if (entry.type === 'modified') {
+			lines.push(`**~ Modified** \`${path}\``);
+			lines.push(`Before: \`\`\`json\n${JSON.stringify(entry.leftValue, null, 2)}\n\`\`\``);
+			lines.push(`After: \`\`\`json\n${JSON.stringify(entry.rightValue, null, 2)}\n\`\`\``);
+		}
+		lines.push('');
+	}
+	return lines.join('\n');
+}
+
+export function toDiffCSV(entries: DiffEntry[]): string {
+	const rows: string[] = ['path,type,left_value,right_value'];
+	for (const entry of entries) {
+		if (entry.type === 'unchanged') continue;
+		const escapeValue = (v: unknown) => {
+			const s = v === undefined ? '' : JSON.stringify(v);
+			return `"${s.replace(/"/g, '""')}"`;
+		};
+		rows.push(
+			`${escapeValue(entry.path || '(root)')},${entry.type},${escapeValue(entry.leftValue)},${escapeValue(entry.rightValue)}`
+		);
+	}
+	return rows.join('\n');
 }

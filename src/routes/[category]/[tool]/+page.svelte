@@ -13,6 +13,7 @@
 	import JsonOutputPanel from "$components/panels/JsonOutputPanel.svelte";
 	import JsonQueryOutputPanel from "$components/panels/JsonQueryOutputPanel.svelte";
 	import JsonValidatorPanel from "$components/panels/JsonValidatorPanel.svelte";
+	import WorkspaceTabs from "$components/tool/WorkspaceTabs.svelte";
 	import XmlInputPanel from "$components/panels/XmlInputPanel.svelte";
 	import XmlOutputPanel from "$components/panels/XmlOutputPanel.svelte";
 	import XmlValidatorPanel from "$components/panels/XmlValidatorPanel.svelte";
@@ -64,6 +65,7 @@
 	import { getToolsByCategory } from "$registry";
 	import { localizeToolDefinition, localizeToolDefinitions } from "$lib/registry/localized.js";
 	import { t } from "$stores/language";
+	import { addToast } from "$stores/toast.store";
 	import { generateToolSEO } from "$utils/seo.js";
 	import { registerShortcuts } from "$utils/keyboard.js";
 	import type { ShortcutEntry } from "$utils/keyboard.js";
@@ -105,7 +107,7 @@
 	let toolPath = $derived(`${data.tool.category}/${data.tool.slug}`);
 	let jsonWorkspaceTools = $derived(
 		data.tool.category === "json"
-			? localizeToolDefinitions(getToolsByCategory("json"), $t).filter((tool) => tool.slug !== "diff")
+			? localizeToolDefinitions(getToolsByCategory("json"), $t)
 			: []
 	);
 	let xmlWorkspaceTools = $derived(
@@ -116,6 +118,27 @@
 	let isDiffTool = $derived(data.tool.engine === "diff");
 	let diffLeft = $state("");
 	let diffRight = $state("");
+
+	function swapDiffPanels(): void {
+		const tmp = diffLeft;
+		diffLeft = diffRight;
+		diffRight = tmp;
+	}
+
+	function loadDiffSample(left: string, right: string): void {
+		diffLeft = left;
+		diffRight = right;
+	}
+
+	function shareDiff(): void {
+		if (!browser) return;
+		const params = new URLSearchParams();
+		if (diffLeft.trim()) params.set('left', LZString.compressToEncodedURIComponent(diffLeft));
+		if (diffRight.trim()) params.set('right', LZString.compressToEncodedURIComponent(diffRight));
+		const url = `${window.location.pathname}?${params.toString()}`;
+		void navigator.clipboard.writeText(`${window.location.origin}${url}`);
+		addToast('success', $t('ui.diff.toast.share_copied', 'Share link copied to clipboard'));
+	}
 	let treePanelRef: TreePanel | undefined = $state(undefined);
 
 	function navigateToJsonWorkspaceIndex(index: number): void {
@@ -189,18 +212,27 @@
 
 		if (browser) {
 			const urlParams = new URLSearchParams(window.location.search);
-			const inputParam = urlParams.get("input");
-			const initialInput = inputParam
-				? LZString.decompressFromEncodedURIComponent(inputParam)
-				: null;
 
-			const shared = extractShareData();
-			if (initialInput) {
-				input.set(initialInput);
-				history.replaceState(null, "", window.location.pathname);
-			} else if (shared) {
-				input.set(shared);
-				history.replaceState(null, "", window.location.pathname);
+			if (isDiffTool) {
+				const leftParam = urlParams.get('left');
+				const rightParam = urlParams.get('right');
+				if (leftParam) diffLeft = LZString.decompressFromEncodedURIComponent(leftParam) ?? '';
+				if (rightParam) diffRight = LZString.decompressFromEncodedURIComponent(rightParam) ?? '';
+				if (leftParam || rightParam) history.replaceState(null, '', window.location.pathname);
+			} else {
+				const inputParam = urlParams.get("input");
+				const initialInput = inputParam
+					? LZString.decompressFromEncodedURIComponent(inputParam)
+					: null;
+
+				const shared = extractShareData();
+				if (initialInput) {
+					input.set(initialInput);
+					history.replaceState(null, "", window.location.pathname);
+				} else if (shared) {
+					input.set(shared);
+					history.replaceState(null, "", window.location.pathname);
+				}
 			}
 		}
 
@@ -394,14 +426,26 @@
 {#if isDiffTool}
 	<ToolLayout tool={localizedTool}>
 		{#snippet inputPanel()}
-			<DiffInputPanel
-				value={diffLeft}
-				onchange={(v) => {
-					diffLeft = v;
-				}}
-				language={data.tool.inputLanguage}
-				placeholder={$t('ui.placeholder.original_json', 'Paste original JSON here…')}
-			/>
+			<div class="flex h-full w-full flex-col">
+				{#if data.tool.category === "json" && jsonWorkspaceTools.length > 0}
+					<WorkspaceTabs 
+						tools={jsonWorkspaceTools} 
+						activeSlug={data.tool.slug} 
+						category="json" 
+						locale={currentLocale} 
+					/>
+				{/if}
+				<div class="flex-1 overflow-hidden">
+					<DiffInputPanel
+						value={diffLeft}
+						onchange={(v) => {
+							diffLeft = v;
+						}}
+						language={data.tool.inputLanguage}
+						placeholder={$t('ui.placeholder.original_json', 'Paste original JSON here…')}
+					/>
+				</div>
+			</div>
 		{/snippet}
 		{#snippet outputPanel()}
 			<DiffInputPanel
@@ -414,7 +458,12 @@
 			/>
 		{/snippet}
 		{#snippet diffPanel()}
-			<DiffResultsPanel leftInput={diffLeft} rightInput={diffRight} />
+			<DiffResultsPanel
+				leftInput={diffLeft}
+				rightInput={diffRight}
+				onswap={swapDiffPanels}
+				onsample={loadDiffSample}
+			/>
 		{/snippet}
 	</ToolLayout>
 {:else}

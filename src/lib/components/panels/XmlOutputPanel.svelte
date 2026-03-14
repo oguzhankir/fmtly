@@ -39,7 +39,7 @@
 	let outputMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lineCount = $output.split('\n').length;
-		return `${$output.length.toLocaleString()} chars · ${lineCount.toLocaleString()} lines`;
+		return `${$output.length.toLocaleString()} ${$t('ui.output.stats.chars', 'chars')} · ${lineCount.toLocaleString()} ${$t('ui.output.stats.lines', 'lines')}`;
 	});
 
 	let minifySummary = $derived.by(() => {
@@ -49,7 +49,7 @@
 		if (original <= 0 || minified <= 0) return '';
 		const saved = Math.max(original - minified, 0);
 		const ratio = saved === 0 ? 0 : (saved / original) * 100;
-		return `Original: ${(original / 1024).toFixed(1)} KB → Minified: ${(minified / 1024).toFixed(1)} KB — saved ${ratio.toFixed(1)}%`;
+		return `${$t('ui.output.original', 'Original')}: ${(original / 1024).toFixed(1)} KB → ${$t('ui.output.minified', 'Minified')}: ${(minified / 1024).toFixed(1)} KB — ${$t('ui.output.saved', 'saved')} ${ratio.toFixed(1)}%`;
 	});
 
 	let lines = $derived(highlightedHtml ? highlightedHtml.split('\n') : []);
@@ -104,7 +104,7 @@
 			document.body.removeChild(ta);
 		}
 		copied = true;
-		addToast('success', 'Copied to clipboard');
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		setTimeout(() => (copied = false), 2000);
 	}
 
@@ -121,7 +121,7 @@
 		a.download = `${downloadFilename}${ext}`;
 		a.click();
 		URL.revokeObjectURL(url);
-		addToast('success', `Downloaded ${downloadFilename}${ext}`);
+		addToast('success', $t('ui.toast.download_success', 'Download complete'));
 	}
 
 	function getWorkspaceLabel(tool: ToolDefinition): string {
@@ -177,9 +177,9 @@
 							setFormatOptions({ indent: val === '\t' ? '\t' : (Number(val) as 2 | 4) });
 						}}
 					>
-						<option value="2">2 spaces</option>
-						<option value="4">4 spaces</option>
-						<option value={'\t'}>Tabs</option>
+						<option value="2">2 {$t('ui.output.controls.spaces', 'spaces')}</option>
+						<option value="4">4 {$t('ui.output.controls.spaces', 'spaces')}</option>
+						<option value={'\t'}>{$t('ui.output.controls.tab', 'Tabs')}</option>
 					</select>
 				</label>
 			{/if}
@@ -193,7 +193,7 @@
 				class="xml-output-btn xml-output-btn--icon"
 				class:xml-output-btn--active={wrapLines}
 				onclick={() => (wrapLines = !wrapLines)}
-				title="Toggle word wrap"
+				title={$t('ui.actions.wrap', 'Toggle word wrap')}
 			>
 				<WrapText size={13} />
 			</button>
@@ -202,7 +202,7 @@
 				class="xml-output-btn xml-output-btn--icon"
 				onclick={downloadOutput}
 				disabled={!$output}
-				title="Download"
+				title={$t('ui.actions.download', 'Download')}
 			>
 				<Download size={13} />
 			</button>
@@ -214,10 +214,10 @@
 			>
 				{#if copied}
 					<Check size={13} />
-					Copied
+					{$t('ui.actions.copied', 'Copied')}
 				{:else}
 					<Copy size={13} />
-					Copy
+					{$t('ui.actions.copy', 'Copy')}
 				{/if}
 			</button>
 		</div>
@@ -228,7 +228,7 @@
 			<div class="xml-output-error">
 				<AlertTriangle size={16} />
 				<div class="xml-output-error__content">
-					<p class="xml-output-error__title">Invalid XML</p>
+					<p class="xml-output-error__title">{$t('ui.output.error.invalid_xml', 'Invalid XML')}</p>
 					<p class="xml-output-error__detail">
 						{$xmlError.plainLanguageExplanation ?? $xmlError.message}
 					</p>
@@ -244,11 +244,11 @@
 			><code class="hljs">{#each lines as line, i}{@html line}{#if i < lines.length - 1}{'\n'}{/if}{/each}</code></pre>
 		{:else if $inputStore.trim()}
 			<div class="xml-output-empty">
-				<span>Processing…</span>
+				<span>{$t('ui.status.processing', 'Processing…')}</span>
 			</div>
 		{:else}
 			<div class="xml-output-empty">
-				<span>Output will appear here</span>
+				<span>{$t('ui.status.waiting_output', 'Output will appear here')}</span>
 			</div>
 		{/if}
 	</div>

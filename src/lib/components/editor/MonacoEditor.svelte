@@ -293,7 +293,11 @@
 			value={$input}
 			oninput={handleTextareaInput}
 			onfocus={handleTextareaFocus}
-			placeholder={($t as any)('ui.paste_language_here', 'Paste here…', { language: language.toUpperCase() })}
+			placeholder={($t as any)(
+				'ui.paste_language_here',
+				{ language: language.toUpperCase() },
+				'Paste here…'
+			)}
 			class="h-full w-full resize-none border-none bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none"
 			spellcheck="false"
 			autocomplete="off"
