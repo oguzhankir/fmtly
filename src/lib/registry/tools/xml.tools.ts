@@ -456,5 +456,49 @@ export const xmlTools: ToolDefinition[] = [
     <price>9.99</price>
   </book>
 </catalog>`
+	},
+	{
+		id: 'xml-diff',
+		category: 'xml',
+		slug: 'diff',
+		displayName: 'tool.xml-diff.display_name',
+		tagline: 'tool.xml-diff.tagline',
+		description: 'tool.xml-diff.description',
+		primaryKeyword: 'tool.xml-diff.primary_keyword',
+		metaTitle: 'tool.xml-diff.meta_title',
+		metaDescription: 'tool.xml-diff.meta_description',
+		engine: 'diff',
+		operation: 'tool.xml-diff.operation',
+		layoutVariant: 'triple',
+		inputLanguage: 'xml',
+		outputLanguage: 'xml',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'xml', slug: 'formatter' },
+			{ category: 'xml', slug: 'validator' },
+			{ category: 'json', slug: 'diff' },
+			{ category: 'yaml', slug: 'diff' }
+		],
+		faqs: [
+			{
+				question: 'tool.xml-diff.faq.0.question',
+				answer: 'tool.xml-diff.faq.0.answer'
+			},
+			{
+				question: 'tool.xml-diff.faq.1.question',
+				answer: 'tool.xml-diff.faq.1.answer'
+			},
+			{
+				question: 'tool.xml-diff.faq.2.question',
+				answer: 'tool.xml-diff.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.xml-diff.use_case.0',
+			'tool.xml-diff.use_case.1',
+			'tool.xml-diff.use_case.2',
+			'tool.xml-diff.use_case.3'
+		],
+		sampleInput: ''
 	}
 ];

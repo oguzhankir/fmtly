@@ -26,20 +26,24 @@
 				return $t('ui.actions.minify', 'Minify');
 			case 'diff':
 				return $t('ui.actions.diff', 'Diff');
+			case 'to-json':
+				return $t('ui.convert.to_json', '→ JSON').replace(/^→\s*/, '');
 			case 'to-yaml':
-				return 'YAML';
+				return $t('ui.convert.to_yaml', '→ YAML').replace(/^→\s*/, '');
 			case 'jsonpath':
-				return 'JSONPath';
+				return $t('ui.query.jsonpath', 'JSONPath');
 			case 'jmespath':
-				return 'JMESPath';
+				return $t('ui.query.jmespath', 'JMESPath');
+			case 'xpath':
+				return $t('ui.query.xpath', 'XPath');
 			case 'to-csv':
-				return 'CSV';
+				return $t('ui.convert.to_csv', '→ CSV').replace(/^→\s*/, '');
 			case 'to-toml':
-				return 'TOML';
+				return $t('ui.convert.to_toml', '→ TOML').replace(/^→\s*/, '');
 			case 'to-xml':
-				return 'XML';
+				return $t('ui.convert.to_xml', '→ XML').replace(/^→\s*/, '');
 			case 'to-markdown':
-				return 'MD';
+				return $t('ui.convert.to_markdown', '→ MD').replace(/^→\s*/, '');
 			default:
 				return stripLocalePrefix($t(tDef.displayName, tDef.displayName));
 		}

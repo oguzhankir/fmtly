@@ -214,7 +214,7 @@ const registryEn: Record<string, string> = {
 		'Validate XML in your browser. Detects syntax errors with line and column numbers. No data leaves your device.',
 	'tool.xml-validator.operation': 'Validate',
 
-	'tool.xml-to-json.display_name': 'XML to JSON',
+	'tool.xml-to-json.display_name': 'XML to JSON Converter',
 	'tool.xml-to-json.tagline': 'Convert XML documents to JSON format',
 	'tool.xml-to-json.description':
 		'Convert XML to JSON with automatic attribute and element mapping. Handles namespaces, CDATA sections, and nested XML structures.',
@@ -224,7 +224,7 @@ const registryEn: Record<string, string> = {
 		'Convert XML to JSON instantly in your browser. Handles attributes and nested structures. No data uploaded.',
 	'tool.xml-to-json.operation': 'Convert',
 
-	'tool.xml-to-yaml.display_name': 'XML to YAML',
+	'tool.xml-to-yaml.display_name': 'XML to YAML Converter',
 	'tool.xml-to-yaml.tagline': 'Convert XML documents to YAML format',
 	'tool.xml-to-yaml.description':
 		'Convert XML to YAML format with proper indentation. Handles attributes, text content, and nested XML elements.',
@@ -234,7 +234,7 @@ const registryEn: Record<string, string> = {
 		'Convert XML to YAML instantly in your browser. Handles attributes and nested elements. No data uploaded.',
 	'tool.xml-to-yaml.operation': 'Convert',
 
-	'tool.xml-to-csv.display_name': 'XML to CSV',
+	'tool.xml-to-csv.display_name': 'XML to CSV Converter',
 	'tool.xml-to-csv.tagline': 'Convert XML records to CSV format',
 	'tool.xml-to-csv.description':
 		'Extract repeating XML elements into CSV rows. Detects column headers from element and attribute names automatically.',
@@ -263,6 +263,29 @@ const registryEn: Record<string, string> = {
 	'tool.xml-xpath.meta_description':
 		'Query XML with XPath expressions in your browser. Supports all XPath 1.0 operators. No data uploaded.',
 	'tool.xml-xpath.operation': 'Query',
+
+	'tool.xml-diff.display_name': 'XML Diff',
+	'tool.xml-diff.tagline': 'Compare XML documents and visualize differences',
+	'tool.xml-diff.description':
+		'Compare two XML documents side-by-side and highlight differences. Shows added, removed, and modified elements with precise line numbers and XML-aware diff visualization.',
+	'tool.xml-diff.primary_keyword': 'xml diff',
+	'tool.xml-diff.meta_title': 'XML Diff Tool — fmtly.dev',
+	'tool.xml-diff.meta_description':
+		'Compare XML files and visualize differences in your browser. Shows element-level changes with line numbers. No data uploaded.',
+	'tool.xml-diff.operation': 'Diff',
+	'tool.xml-diff.faq.0.question': 'How is XML Diff different from text diff?',
+	'tool.xml-diff.faq.0.answer':
+		'XML Diff validates both inputs as XML and compares them line by line after XML-aware whitespace normalization. It is better suited to XML documents than plain text comparison.',
+	'tool.xml-diff.faq.1.question': 'Can I compare invalid XML?',
+	'tool.xml-diff.faq.1.answer':
+		'No. Both sides must be valid XML before comparison. If either input is malformed, the tool shows which side needs fixing.',
+	'tool.xml-diff.faq.2.question': 'What kinds of changes are highlighted?',
+	'tool.xml-diff.faq.2.answer':
+		'The tool highlights added, removed, and modified XML lines. This makes it useful for config updates, feed revisions, and markup reviews.',
+	'tool.xml-diff.use_case.0': 'Review changes between two XML API payloads',
+	'tool.xml-diff.use_case.1': 'Compare sitemap, feed, or config XML revisions',
+	'tool.xml-diff.use_case.2': 'Inspect markup changes before deployment',
+	'tool.xml-diff.use_case.3': 'Verify generated XML output against an expected version',
 
 	// ── YAML tools ──────────────────────────────────────────────────────────
 	'tool.yaml-formatter.display_name': 'YAML Formatter',
@@ -1004,7 +1027,7 @@ const registryEn: Record<string, string> = {
 	'ui.diff.summary.removed': 'removed',
 	'ui.diff.summary.modified': 'modified',
 	'ui.diff.summary.similar': 'similar',
-	'ui.diff.summary.empty': 'Enter JSON in both panels to compare',
+	'ui.diff.summary.empty': 'Enter {language} in both panels to compare',
 	'ui.diff.summary.identical': 'Documents are identical',
 	'ui.diff.summary.difference': 'difference',
 	'ui.diff.summary.differences': 'differences',
@@ -1019,12 +1042,15 @@ const registryEn: Record<string, string> = {
 	'ui.diff.actions.copy_value': 'Copy value',
 	'ui.diff.actions.collapse': 'Collapse',
 	'ui.diff.actions.expand': 'Expand',
-	'ui.diff.toast.format_error': 'Cannot format — invalid JSON',
+	'ui.diff.toast.format_error': 'Cannot format — invalid {language}',
+	'ui.diff.error.invalid_left': 'Invalid {language} in left (Original) input',
+	'ui.diff.error.invalid_right': 'Invalid {language} in right (Modified) input',
 	'ui.diff.toast.patch_success': 'JSON Patch copied to clipboard',
 	'ui.diff.toast.copy_value': 'Value copied',
 	'ui.diff.toast.share_copied': 'Share link copied to clipboard',
 	'ui.diff.meta.chars': 'chars',
-	'ui.diff.empty.hint': 'Paste JSON in both panels above to compare them.',
+	'ui.diff.empty.hint': 'Paste {language} in both panels above to compare them.',
+	'ui.diff.report.title': '{language} Diff Report',
 	'ui.diff.empty.load_sample': 'Load sample data',
 	'ui.layout.placeholders.modified': 'Modified',
 	'ui.layout.aria.input_panel': 'Input panel',
@@ -1288,7 +1314,7 @@ const registryEn: Record<string, string> = {
 		'Converting JSON configuration files to YAML for better readability',
 	'tool.json-to-yaml.use_case.1': 'Creating Kubernetes manifests from JSON definitions',
 	'tool.json-to-yaml.use_case.2': 'Migrating application configurations from JSON to YAML format',
-	'tool.json-to-yaml.use_case.3': 'Generating YAML files for CI/CD pipeline configurations',
+	'tool.json-to-yaml.use_case.3': 'Generate YAML files for CI/CD pipeline configurations',
 
 	'tool.json-to-toml.faq.0.question': 'What is JSON to TOML conversion?',
 	'tool.json-to-toml.faq.0.answer':
@@ -1300,6 +1326,22 @@ const registryEn: Record<string, string> = {
 	'tool.json-to-toml.use_case.1': 'Creating Cargo.toml files from JSON configurations',
 	'tool.json-to-toml.use_case.2':
 		'Migrating application settings to TOML format for better maintainability',
+
+	'tool.xml-to-csv.faq.2.question': 'What kinds of XML work best for CSV conversion?',
+	'tool.xml-to-csv.faq.2.answer':
+		'XML with repeated elements (like multiple <row> or <item> tags) works best. The converter detects element names and attributes as column headers automatically.',
+
+	'tool.xml-xpath.faq.2.question': 'What XPath version is supported?',
+	'tool.xml-xpath.faq.2.answer':
+		'This tool supports XPath 1.0, which is the most widely implemented version. It includes all standard axes, functions, and operators for XML querying.',
+
+	'tool.xml-xpath.faq.3.question': 'Can I test XPath on invalid XML?',
+	'tool.xml-xpath.faq.3.answer':
+		'No. XPath requires well-formed XML. If your XML has syntax errors, fix them first using the XML Validator or Formatter before running XPath queries.',
+
+	'tool.xml-minifier.faq.2.question': 'Does minification affect XML functionality?',
+	'tool.xml-minifier.faq.2.answer':
+		'No. XML minification only removes whitespace and comments without changing the structure or data. The minified XML remains fully valid and functionally identical.',
 
 	'tool.json-to-markdown.faq.0.question': 'What is JSON to Markdown table conversion?',
 	'tool.json-to-markdown.faq.0.answer':

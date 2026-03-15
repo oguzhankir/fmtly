@@ -2,6 +2,7 @@
 	import { Copy, ClipboardList, ArrowLeftRight, Download, Search, ChevronDown, ChevronUp, GitCompare, List, Loader2 } from 'lucide-svelte';
 	import { addToast } from '$stores/toast.store';
 	import { computeJSONDiff, toJSONPatch, summarizeJSONDiff, toDiffMarkdown, toDiffCSV } from '$lib/engines/diff/json-diff.js';
+	import { computeXMLDiff, computeDiffSummary } from '$lib/engines/diff/xml-diff.js';
 	import type { DiffEntry, DiffOptions } from '$lib/engines/diff/json-diff.js';
 	import { t } from '$lib/stores/language.js';
 	import type MonacoDiffViewType from '$components/editor/MonacoDiffView.svelte';
@@ -9,11 +10,13 @@
 	let {
 		leftInput = '',
 		rightInput = '',
+		language = 'json',
 		onswap,
 		onsample
 	}: {
 		leftInput?: string;
 		rightInput?: string;
+		language?: string;
 		onswap?: () => void;
 		onsample?: (left: string, right: string) => void;
 	} = $props();
@@ -45,15 +48,38 @@
 		caseSensitive
 	});
 
+	let isXmlDiff = $derived(language === 'xml');
+	let languageLabel = $derived(isXmlDiff ? 'XML' : 'JSON');
+
 	let result = $derived(
 		leftInput.trim() && rightInput.trim()
-			? computeJSONDiff(leftInput, rightInput, options)
+			? isXmlDiff
+				? computeXMLDiff(leftInput, rightInput, options)
+				: computeJSONDiff(leftInput, rightInput, options)
 			: null
 	);
 
 	let diffEntries = $derived(result?.entries ?? []);
-	let summary = $derived(summarizeJSONDiff(diffEntries));
+	let summary = $derived(isXmlDiff ? computeDiffSummary(diffEntries) : summarizeJSONDiff(diffEntries));
 	let diffCount = $derived(summary.added + summary.removed + summary.modified);
+	let errorLabel = $derived.by(() => {
+		if (!result?.error) return null;
+		if (result.error.includes('left')) {
+			return $t(
+				'ui.diff.error.invalid_left',
+				{ language: languageLabel },
+				`Invalid ${languageLabel} in left (Original) input`
+			);
+		}
+		if (result.error.includes('right')) {
+			return $t(
+				'ui.diff.error.invalid_right',
+				{ language: languageLabel },
+				`Invalid ${languageLabel} in right (Modified) input`
+			);
+		}
+		return result.error;
+	});
 
 	let filteredEntries = $derived.by(() => {
 		let entries = showOnlyDiffs ? diffEntries.filter((e) => e.type !== 'unchanged') : diffEntries;
@@ -64,20 +90,54 @@
 		return entries;
 	});
 
-	const SAMPLE_LEFT = JSON.stringify({
+	const SAMPLE_LEFT = $derived(language === 'xml' ? `<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="1" available="true">
+    <title>The Great Gatsby</title>
+    <author>F. Scott Fitzgerald</author>
+    <year>1925</year>
+    <price>10.99</price>
+  </book>
+  <book id="2" available="false">
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <year>1960</year>
+    <price>12.99</price>
+  </book>
+</catalog>` : JSON.stringify({
 		name: "Alice",
 		age: 30,
 		roles: ["admin", "editor"],
 		address: { city: "Berlin", zip: "10115" }
-	}, null, 2);
+	}, null, 2));
 
-	const SAMPLE_RIGHT = JSON.stringify({
+	const SAMPLE_RIGHT = $derived(language === 'xml' ? `<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="1" available="true">
+    <title>The Great Gatsby</title>
+    <author>F. Scott Fitzgerald</author>
+    <year>1925</year>
+    <price>10.99</price>
+  </book>
+  <book id="2" available="true">
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <year>1960</year>
+    <price>12.99</price>
+  </book>
+  <book id="3" available="true">
+    <title>1984</title>
+    <author>George Orwell</author>
+    <year>1949</year>
+    <price>9.99</price>
+  </book>
+</catalog>` : JSON.stringify({
 		name: "Alice",
 		age: 31,
 		roles: ["admin", "viewer"],
 		address: { city: "Berlin", zip: "10117" },
 		email: "alice@example.com"
-	}, null, 2);
+	}, null, 2));
 
 	function formatValue(value: unknown): string {
 		if (value === undefined) return '—';
@@ -136,7 +196,16 @@
 	}
 
 	function exportMarkdown(): void {
-		downloadFile(toDiffMarkdown(diffEntries), 'diff-report.md', 'text/markdown');
+		const reportTitle = $t(
+			'ui.diff.report.title',
+			{ language: languageLabel },
+			`${languageLabel} Diff Report`
+		);
+		downloadFile(
+			toDiffMarkdown(diffEntries).replace('# JSON Diff Report', `# ${reportTitle}`),
+			'diff-report.md',
+			'text/markdown'
+		);
 	}
 
 	function exportCSV(): void {
@@ -162,10 +231,12 @@
 	<!-- Controls bar -->
 	<div class="diff-controls">
 		<div class="diff-controls-left">
-			<label class="diff-toggle">
-				<input type="checkbox" bind:checked={ignoreArrayOrder} />
-				<span>{$t('ui.diff.controls.ignore_order', 'Ignore array order')}</span>
-			</label>
+			{#if !isXmlDiff}
+				<label class="diff-toggle">
+					<input type="checkbox" bind:checked={ignoreArrayOrder} />
+					<span>{$t('ui.diff.controls.ignore_order', 'Ignore array order')}</span>
+				</label>
+			{/if}
 			<label class="diff-toggle">
 				<input type="checkbox" bind:checked={showOnlyDiffs} />
 				<span>{$t('ui.diff.controls.only_diffs', 'Show only diffs')}</span>
@@ -174,14 +245,16 @@
 				<input type="checkbox" bind:checked={caseSensitive} />
 				<span>{$t('ui.diff.controls.case_sensitive', 'Case sensitive')}</span>
 			</label>
-			<div class="diff-ignore-keys">
-				<input
-					type="text"
-					bind:value={ignoreKeysInput}
-					placeholder={$t('ui.diff.controls.ignore_keys_placeholder', 'Ignore keys: id, timestamp…')}
-					class="diff-keys-input"
-				/>
-			</div>
+			{#if !isXmlDiff}
+				<div class="diff-ignore-keys">
+					<input
+						type="text"
+						bind:value={ignoreKeysInput}
+						placeholder={$t('ui.diff.controls.ignore_keys_placeholder', 'Ignore keys: id, timestamp…')}
+						class="diff-keys-input"
+					/>
+				</div>
+			{/if}
 		</div>
 		<div class="diff-controls-right">
 			{#if onswap}
@@ -233,10 +306,12 @@
 					</button>
 					{#if exportOpen}
 						<div class="diff-export-menu" role="menu">
-							<button class="diff-export-item" role="menuitem" onclick={copyJSONPatch}>
-								<ClipboardList size={12} />
-								{$t('ui.diff.controls.copy_patch', 'Copy as JSON Patch')}
-							</button>
+							{#if !isXmlDiff}
+								<button class="diff-export-item" role="menuitem" onclick={copyJSONPatch}>
+									<ClipboardList size={12} />
+									{$t('ui.diff.controls.copy_patch', 'Copy as JSON Patch')}
+								</button>
+							{/if}
 							<button class="diff-export-item" role="menuitem" onclick={exportMarkdown}>
 								<Download size={12} />
 								{$t('ui.diff.controls.export_md', 'Download Markdown report')}
@@ -265,9 +340,11 @@
 	<!-- Status line -->
 	<div class="diff-status">
 		{#if result?.error}
-			<span class="diff-status--error">{result.error}</span>
+			<span class="diff-status--error">{errorLabel}</span>
 		{:else if !result}
-			<span class="diff-status--empty">{$t('ui.diff.summary.empty', 'Enter JSON in both panels to compare')}</span>
+			<span class="diff-status--empty">
+				{$t('ui.diff.summary.empty', { language: languageLabel }, `Enter ${languageLabel} in both panels to compare`)}
+			</span>
 		{:else if diffCount === 0}
 			<span class="diff-status--identical">✓ {$t('ui.diff.summary.identical', 'Documents are identical')}</span>
 		{:else}
@@ -355,7 +432,9 @@
 			</div>
 		{:else if !result && !leftInput.trim() && !rightInput.trim()}
 			<div class="diff-empty-state">
-				<p class="diff-empty-hint">{$t('ui.diff.empty.hint', 'Paste JSON in both panels above to compare them.')}</p>
+				<p class="diff-empty-hint">
+					{$t('ui.diff.empty.hint', { language: languageLabel }, `Paste ${languageLabel} in both panels above to compare them.`)}
+				</p>
 				<button class="diff-sample-btn" onclick={() => onsample?.(SAMPLE_LEFT, SAMPLE_RIGHT)}>
 					{$t('ui.diff.empty.load_sample', 'Load sample data')}
 				</button>

@@ -425,28 +425,37 @@
 
 {#if isDiffTool}
 	<ToolLayout tool={localizedTool}>
-		{#snippet inputPanel()}
-			<div class="flex h-full w-full flex-col">
-				{#if data.tool.category === "json" && jsonWorkspaceTools.length > 0}
-					<WorkspaceTabs 
-						tools={jsonWorkspaceTools} 
-						activeSlug={data.tool.slug} 
-						category="json" 
-						locale={currentLocale} 
-					/>
-				{/if}
-				<div class="flex-1 overflow-hidden">
-					<DiffInputPanel
-						value={diffLeft}
-						onchange={(v) => {
-							diffLeft = v;
-						}}
-						language={data.tool.inputLanguage}
-						placeholder={$t('ui.placeholder.original_json', 'Paste original JSON here…')}
-					/>
+			{#snippet inputPanel()}
+				<div class="flex h-full w-full flex-col">
+					{#if data.tool.category === "json" && jsonWorkspaceTools.length > 0}
+						<WorkspaceTabs 
+							tools={jsonWorkspaceTools} 
+							activeSlug={data.tool.slug} 
+							category="json" 
+							locale={currentLocale} 
+						/>
+					{:else if data.tool.category === "xml" && xmlWorkspaceTools.length > 0}
+						<WorkspaceTabs 
+							tools={xmlWorkspaceTools} 
+							activeSlug={data.tool.slug} 
+							category="xml" 
+							locale={currentLocale} 
+						/>
+					{/if}
+					<div class="flex-1 overflow-hidden">
+						<DiffInputPanel
+							value={diffLeft}
+							onchange={(v) => {
+								diffLeft = v;
+							}}
+							language={data.tool.inputLanguage}
+							placeholder={data.tool.category === 'xml' 
+								? $t('ui.placeholder.original_xml', 'Paste original XML here…')
+								: $t('ui.placeholder.original_json', 'Paste original JSON here…')}
+						/>
+					</div>
 				</div>
-			</div>
-		{/snippet}
+			{/snippet}
 		{#snippet outputPanel()}
 			<DiffInputPanel
 				value={diffRight}
@@ -454,17 +463,20 @@
 					diffRight = v;
 				}}
 				language={data.tool.inputLanguage}
-				placeholder={$t('ui.placeholder.modified_json', 'Paste modified JSON here…')}
+				placeholder={data.tool.category === 'xml' 
+					? $t('ui.placeholder.modified_xml', 'Paste modified XML here…')
+					: $t('ui.placeholder.modified_json', 'Paste modified JSON here…')}
 			/>
 		{/snippet}
-		{#snippet diffPanel()}
-			<DiffResultsPanel
-				leftInput={diffLeft}
-				rightInput={diffRight}
-				onswap={swapDiffPanels}
-				onsample={loadDiffSample}
-			/>
-		{/snippet}
+			{#snippet diffPanel()}
+				<DiffResultsPanel
+					leftInput={diffLeft}
+					rightInput={diffRight}
+					language={data.tool.inputLanguage}
+					onswap={swapDiffPanels}
+					onsample={loadDiffSample}
+				/>
+			{/snippet}
 	</ToolLayout>
 {:else}
 	<ToolLayout

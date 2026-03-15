@@ -285,6 +285,29 @@ const registryEs: Record<string, string> = {
 		'Consulta XML con expresiones XPath en tu navegador. Soporta todos los operadores XPath 1.0. No hay datos cargados.',
 	'tool.xml-xpath.operation': 'Consulta',
 
+	'tool.xml-diff.display_name': 'Diff XML',
+	'tool.xml-diff.tagline': 'Comparar documentos XML y visualizar diferencias',
+	'tool.xml-diff.description':
+		'Comparar dos documentos XML lado a lado y resaltar diferencias. Muestra elementos agregados, eliminados y modificados con números de línea precisos y visualización de diff aware de XML.',
+	'tool.xml-diff.primary_keyword': 'diff xml',
+	'tool.xml-diff.meta_title': 'Herramienta Diff XML — fmtly.dev',
+	'tool.xml-diff.meta_description':
+		'Comparar archivos XML y visualizar diferencias en tu navegador. Muestra cambios a nivel de elemento con números de línea. No hay datos cargados.',
+	'tool.xml-diff.operation': 'Diff',
+	'tool.xml-diff.faq.0.question': '¿En qué se diferencia XML Diff de un diff de texto?',
+	'tool.xml-diff.faq.0.answer':
+		'XML Diff valida ambas entradas como XML y luego las compara línea por línea con una normalización de espacios adaptada a XML. Por eso encaja mejor con documentos XML que una comparación de texto simple.',
+	'tool.xml-diff.faq.1.question': '¿Puedo comparar XML inválido?',
+	'tool.xml-diff.faq.1.answer':
+		'No. Ambos lados deben ser XML válido antes de comparar. Si una entrada está mal formada, la herramienta indica qué lado debes corregir.',
+	'tool.xml-diff.faq.2.question': '¿Qué tipos de cambios resalta?',
+	'tool.xml-diff.faq.2.answer':
+		'La herramienta resalta líneas XML agregadas, eliminadas y modificadas. Esto la hace útil para cambios de configuración, revisiones de feeds y revisiones de marcado.',
+	'tool.xml-diff.use_case.0': 'Revisar cambios entre dos cargas XML de API',
+	'tool.xml-diff.use_case.1': 'Comparar revisiones de XML de sitemap, feed o configuración',
+	'tool.xml-diff.use_case.2': 'Inspeccionar cambios de marcado antes del despliegue',
+	'tool.xml-diff.use_case.3': 'Verificar una salida XML generada contra una versión esperada',
+
 	// ── Herramientas YAML ───────────────────────────────────────────────────
 	'tool.yaml-formatter.display_name': 'Formateador YAML',
 	'tool.yaml-formatter.tagline': 'Formatea y embellece YAML con indentación consistente',
@@ -1027,7 +1050,7 @@ const registryEs: Record<string, string> = {
 	'ui.diff.summary.removed': 'eliminado',
 	'ui.diff.summary.modified': 'modificado',
 	'ui.diff.summary.similar': 'similar',
-	'ui.diff.summary.empty': 'Ingresa JSON en ambos paneles para comparar',
+	'ui.diff.summary.empty': 'Ingresa {language} en ambos paneles para comparar',
 	'ui.diff.summary.identical': 'Los documentos son idénticos',
 	'ui.diff.summary.difference': 'diferencia',
 	'ui.diff.summary.differences': 'diferencias',
@@ -1042,12 +1065,15 @@ const registryEs: Record<string, string> = {
 	'ui.diff.actions.copy_value': 'Copiar valor',
 	'ui.diff.actions.collapse': 'Contraer',
 	'ui.diff.actions.expand': 'Expandir',
-	'ui.diff.toast.format_error': 'No se puede formatea — JSON inválido',
+	'ui.diff.toast.format_error': 'No se puede formatear — {language} inválido',
+	'ui.diff.error.invalid_left': '{language} inválido en la entrada izquierda (Original)',
+	'ui.diff.error.invalid_right': '{language} inválido en la entrada derecha (Modificado)',
 	'ui.diff.toast.patch_success': 'JSON Patch copiado al portapapeles',
 	'ui.diff.toast.copy_value': 'Valor copiado',
 	'ui.diff.toast.share_copied': 'Enlace de compartir copiado al portapapeles',
 	'ui.diff.meta.chars': 'caracteres',
-	'ui.diff.empty.hint': 'Pega JSON en ambos paneles arriba para compararlos.',
+	'ui.diff.empty.hint': 'Pega {language} en ambos paneles de arriba para compararlos.',
+	'ui.diff.report.title': 'Informe de Diff de {language}',
 	'ui.diff.empty.load_sample': 'Cargar datos de ejemplo',
 	'ui.layout.placeholders.modified': 'Modificado',
 	'ui.layout.aria.input_panel': 'Panel de entrada',
@@ -1322,6 +1348,22 @@ const registryEs: Record<string, string> = {
 		'Migración de configuraciones de aplicación de JSON a formato YAML',
 	'tool.json-to-yaml.use_case.3':
 		'Generación de archivos YAML para configuraciones de tubería CI/CD',
+
+	'tool.xml-to-csv.faq.2.question': '¿Qué tipos de XML funcionan mejor para la conversión CSV?',
+	'tool.xml-to-csv.faq.2.answer':
+		'XML con elementos repetidos (como múltiples etiquetas <row> o <item>) funcionan mejor. El convertidor detecta automáticamente nombres de elementos y atributos como encabezados de columna.',
+
+	'tool.xml-xpath.faq.2.question': '¿Qué versión de XPath es compatible?',
+	'tool.xml-xpath.faq.2.answer':
+		'Esta herramienta soporta XPath 1.0, que es la versión más ampliamente implementada. Incluye todos los ejes, funciones y operadores estándar para consultas XML.',
+
+	'tool.xml-xpath.faq.3.question': '¿Puedo probar XPath en XML inválido?',
+	'tool.xml-xpath.faq.3.answer':
+		'No. XPath requiere XML bien formado. Si tu XML tiene errores de sintaxis, corrígelos primero usando el Validador o Formateador XML antes de ejecutar consultas XPath.',
+
+	'tool.xml-minifier.faq.2.question': '¿La minificación afecta la funcionalidad XML?',
+	'tool.xml-minifier.faq.2.answer':
+		'No. La minificación XML solo elimina espacios en blanco y comentarios sin cambiar la estructura o datos. El XML minificado permanece completamente válido y funcionalmente idéntico.',
 
 	'tool.json-to-toml.faq.0.question': '¿Qué es la conversión de JSON a TOML?',
 	'tool.json-to-toml.faq.0.answer':

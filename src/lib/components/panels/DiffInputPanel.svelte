@@ -17,7 +17,18 @@
 		placeholder?: string;
 	} = $props();
 
-	let reactivePlaceholder = $derived(placeholder ?? $t('ui.placeholder.original_json', 'Paste JSON here…'));
+	let languageLabel = $derived(language === 'xml' ? 'XML' : 'JSON');
+	let reactivePlaceholder = $derived(
+		placeholder ??
+			(language === 'xml'
+				? $t('ui.placeholder.original_xml', 'Paste XML here…')
+				: $t('ui.placeholder.original_json', 'Paste JSON here…'))
+	);
+	let acceptedFileTypes = $derived(
+		language === 'xml'
+			? '.xml,.txt,text/plain,application/xml,text/xml'
+			: '.json,.txt,text/plain,application/json'
+	);
 
 	let StandaloneMonacoEditor: typeof StandaloneMonacoEditorType | undefined = $state(undefined);
 	let editorRef: StandaloneMonacoEditorType | undefined = $state(undefined);
@@ -25,14 +36,28 @@
 	let isDragOver = $state(false);
 	let dragCounter = $state(0);
 
-	let isValidJson = $derived.by(() => {
+	function isValidXml(input: string): boolean {
+		if (typeof DOMParser === 'undefined') return true;
+		const doc = new DOMParser().parseFromString(input, 'application/xml');
+		return !doc.querySelector('parsererror');
+	}
+
+	let isValidContent = $derived.by(() => {
 		if (!value.trim()) return null;
-		try { JSON.parse(value); return true; } catch { return false; }
+		if (language === 'xml') return isValidXml(value);
+		try {
+			JSON.parse(value);
+			return true;
+		} catch {
+			return false;
+		}
 	});
 
 	let validityLabel = $derived.by(() => {
-		if (isValidJson === null) return $t('ui.validity.empty', 'Empty');
-		return isValidJson ? $t('ui.validity.valid', { language: 'JSON' }, 'Valid JSON') : $t('ui.validity.invalid', { language: 'JSON' }, 'Invalid JSON');
+		if (isValidContent === null) return $t('ui.validity.empty', 'Empty');
+		return isValidContent
+			? $t('ui.validity.valid', { language: languageLabel }, `Valid ${languageLabel}`)
+			: $t('ui.validity.invalid', { language: languageLabel }, `Invalid ${languageLabel}`);
 	});
 
 	onMount(() => {
@@ -44,13 +69,37 @@
 		StandaloneMonacoEditor = mod.default;
 	}
 
-	function formatJson(): void {
+	async function formatInput(): Promise<void> {
 		if (!value.trim()) return;
+		if (language === 'xml') {
+			const { formatXML } = await import('$lib/engines/xml/index.js');
+			const result = formatXML(value, { indent: 2 });
+			if (result.success) {
+				onchange?.(result.output);
+				return;
+			}
+			addToast(
+				'error',
+				$t(
+					'ui.diff.toast.format_error',
+					{ language: languageLabel },
+					`Cannot format — invalid ${languageLabel}`
+				)
+			);
+			return;
+		}
 		try {
 			const formatted = JSON.stringify(JSON.parse(value), null, 2);
 			onchange?.(formatted);
 		} catch {
-			addToast('error', $t('ui.diff.toast.format_error', 'Cannot format — invalid JSON'));
+			addToast(
+				'error',
+				$t(
+					'ui.diff.toast.format_error',
+					{ language: languageLabel },
+					`Cannot format — invalid ${languageLabel}`
+				)
+			);
 		}
 	}
 
@@ -122,14 +171,14 @@
 	<input
 		bind:this={fileInputEl}
 		type="file"
-		accept=".json,.txt,text/plain,application/json"
+		accept={acceptedFileTypes}
 		class="sr-only"
 		onchange={handleUpload}
 	/>
 
 	<div class="diff-input-toolbar">
 		<div class="diff-toolbar-group">
-			<button type="button" class="diff-toolbar-btn" onclick={formatJson} title={$t('ui.diff.actions.format', 'Format JSON')}>
+			<button type="button" class="diff-toolbar-btn" onclick={formatInput} title={$t('ui.diff.actions.format', 'Format')}>
 				<WandSparkles size={12} />
 				{$t('ui.diff.actions.format', 'Format')}
 			</button>
@@ -169,8 +218,8 @@
 	<div class="diff-input-meta">
 		<span
 			class="diff-validity"
-			class:diff-validity--valid={isValidJson === true}
-			class:diff-validity--invalid={isValidJson === false}
+			class:diff-validity--valid={isValidContent === true}
+			class:diff-validity--invalid={isValidContent === false}
 		>
 			<Circle size={7} fill="currentColor" />
 			{validityLabel}

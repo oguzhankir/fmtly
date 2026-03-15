@@ -32,6 +32,14 @@
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isMinifier = $derived(toolSlug === 'minifier');
 	let isConverter = $derived(['to-json', 'to-yaml', 'to-csv'].includes(toolSlug));
+	let errorLocationLabel = $derived.by(() => {
+		if (!$xmlError?.line) return '';
+		return ($t as any)(
+			'ui.validator.line_col_label',
+			{ line: $xmlError.line, column: $xmlError.column ?? 1 },
+			`Line ${$xmlError.line}, column ${$xmlError.column ?? 1}`
+		);
+	});
 	let outputMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lineCount = $output.split('\n').length;
@@ -233,12 +241,12 @@
 			<div class="xml-output-error">
 				<AlertTriangle size={16} />
 				<div class="xml-output-error__content">
-					<p class="xml-output-error__title">{$t('ui.output.error.invalid_xml', 'Invalid XML')}</p>
+					<p class="xml-output-error__title">{$t('ui.validator.invalid_xml', 'Invalid XML')}</p>
 					<p class="xml-output-error__detail">
 						{$xmlError.plainLanguageExplanation ?? $xmlError.message}
 					</p>
 					{#if $xmlError.line != null}
-						<p class="xml-output-error__location">Line {$xmlError.line}{$xmlError.column != null ? `, Col ${$xmlError.column}` : ''}</p>
+						<p class="xml-output-error__location">{errorLocationLabel}</p>
 					{/if}
 				</div>
 			</div>

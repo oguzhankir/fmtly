@@ -265,6 +265,29 @@ const registryDe: Record<string, string> = {
 		'Fragen Sie XML mit XPath-Ausdrücken im Browser ab. Unterstützt alle Standard-Achsen.',
 	'tool.xml-xpath.operation': 'Abfragen',
 
+	'tool.xml-diff.display_name': 'XML Diff',
+	'tool.xml-diff.tagline': 'XML-Dokumente vergleichen und Unterschiede visualisieren',
+	'tool.xml-diff.description':
+		'Vergleichen Sie zwei XML-Dokumente nebeneinander und heben Sie Unterschiede hervor. Zeigt hinzugefügte, entfernte und geänderte Elemente mit präzisen Zeilennummern und XML-bewusster Diff-Visualisierung.',
+	'tool.xml-diff.primary_keyword': 'xml diff',
+	'tool.xml-diff.meta_title': 'XML Diff Tool — fmtly.dev',
+	'tool.xml-diff.meta_description':
+		'Vergleichen Sie XML-Dateien und visualisieren Sie Unterschiede im Browser. Zeigt Änderungen auf Elementebene mit Zeilennummern. Keine Datenübertragung.',
+	'tool.xml-diff.operation': 'Diff',
+	'tool.xml-diff.faq.0.question': 'Wie unterscheidet sich XML Diff von einem Text-Diff?',
+	'tool.xml-diff.faq.0.answer':
+		'XML Diff validiert beide Eingaben zuerst als XML und vergleicht sie dann zeilenweise mit XML-gerechter Whitespace-Normalisierung. Dadurch eignet es sich besser für XML-Dokumente als ein reiner Textvergleich.',
+	'tool.xml-diff.faq.1.question': 'Kann ich ungültiges XML vergleichen?',
+	'tool.xml-diff.faq.1.answer':
+		'Nein. Beide Seiten müssen gültiges XML sein, bevor der Vergleich läuft. Wenn eine Eingabe fehlerhaft ist, zeigt das Tool an, welche Seite korrigiert werden muss.',
+	'tool.xml-diff.faq.2.question': 'Welche Arten von Änderungen werden hervorgehoben?',
+	'tool.xml-diff.faq.2.answer':
+		'Das Tool markiert hinzugefügte, entfernte und geänderte XML-Zeilen. Das ist nützlich für Konfigurationsänderungen, Feed-Revisionen und Markup-Reviews.',
+	'tool.xml-diff.use_case.0': 'Änderungen zwischen zwei XML-API-Payloads prüfen',
+	'tool.xml-diff.use_case.1': 'Versionen von Sitemap-, Feed- oder Konfigurations-XML vergleichen',
+	'tool.xml-diff.use_case.2': 'Markup-Änderungen vor dem Deployment kontrollieren',
+	'tool.xml-diff.use_case.3': 'Erzeugte XML-Ausgabe mit einer erwarteten Version abgleichen',
+
 	// ── YAML Tools ──────────────────────────────────────────────────────────
 	'tool.yaml-formatter.display_name': 'YAML-Formatierer',
 	'tool.yaml-formatter.tagline': 'YAML formatieren und verschönern mit einheitlicher Einrückung',
@@ -986,7 +1009,7 @@ const registryDe: Record<string, string> = {
 	'ui.diff.summary.removed': 'entfernt',
 	'ui.diff.summary.modified': 'geändert',
 	'ui.diff.summary.similar': 'ähnlich',
-	'ui.diff.summary.empty': 'JSON in beide Panels eingeben zum Vergleichen',
+	'ui.diff.summary.empty': '{language} in beide Panels eingeben zum Vergleichen',
 	'ui.diff.summary.identical': 'Dokumente sind identisch',
 	'ui.diff.summary.difference': 'Unterschied',
 	'ui.diff.summary.differences': 'Unterschiede',
@@ -1001,12 +1024,15 @@ const registryDe: Record<string, string> = {
 	'ui.diff.actions.copy_value': 'Wert kopieren',
 	'ui.diff.actions.collapse': 'Zuklappen',
 	'ui.diff.actions.expand': 'Aufklappen',
-	'ui.diff.toast.format_error': 'Formatierung nicht möglich – ungültiges JSON',
+	'ui.diff.toast.format_error': 'Formatierung nicht möglich – ungültiges {language}',
+	'ui.diff.error.invalid_left': 'Ungültiges {language} in der linken Eingabe (Original)',
+	'ui.diff.error.invalid_right': 'Ungültiges {language} in der rechten Eingabe (Geändert)',
 	'ui.diff.toast.patch_success': 'JSON-Patch in Zwischenablage kopiert',
 	'ui.diff.toast.copy_value': 'Wert kopiert',
 	'ui.diff.toast.share_copied': 'Teilen-Link in Zwischenablage kopiert',
 	'ui.diff.meta.chars': 'Zeichen',
-	'ui.diff.empty.hint': 'Fügen Sie oben in beide Panels JSON ein, um sie zu vergleichen.',
+	'ui.diff.empty.hint': 'Fügen Sie oben in beide Panels {language} ein, um sie zu vergleichen.',
+	'ui.diff.report.title': '{language}-Diff-Bericht',
 	'ui.diff.empty.load_sample': 'Beispieldaten laden',
 	'ui.layout.placeholders.modified': 'Geändert',
 	'ui.layout.aria.input_panel': 'Eingabepanel',
@@ -1306,6 +1332,22 @@ const registryDe: Record<string, string> = {
 	'tool.json-jsonpath.use_case.1': 'Große JSON-Datensätze filtern und abfragen',
 	'tool.json-jsonpath.use_case.2': 'API-Antworten in automatisierten Tests prüfen',
 	'tool.json-jsonpath.use_case.3': 'Strukturen in Datenpipelines validieren',
+
+	'tool.xml-to-csv.faq.2.question': 'Welche XML-Typen eignen sich am besten für CSV-Konvertierung?',
+	'tool.xml-to-csv.faq.2.answer':
+		'XML mit wiederholten Elementen (wie mehrere <row> oder <item> Tags) funktioniert am besten. Der Konverter erkennt automatisch Elementnamen und Attribute als Spaltenüberschriften.',
+
+	'tool.xml-xpath.faq.2.question': 'Welche XPath-Version wird unterstützt?',
+	'tool.xml-xpath.faq.2.answer':
+		'Dieses Tool unterstützt XPath 1.0, die am weitesten verbreitete Version. Es umfasst alle Standard-Achsen, Funktionen und Operatoren für XML-Abfragen.',
+
+	'tool.xml-xpath.faq.3.question': 'Kann ich XPath auf ungültigem XML testen?',
+	'tool.xml-xpath.faq.3.answer':
+		'Nein. XPath erfordert wohlgeformtes XML. Wenn Ihr XML Syntaxfehler hat, korrigieren Sie diese zuerst mit dem XML-Validator oder -Formatter vor XPath-Abfragen.',
+
+	'tool.xml-minifier.faq.2.question': 'Beeinflusst die Minimierung die XML-Funktionalität?',
+	'tool.xml-minifier.faq.2.answer':
+		'Nein. XML-Minimierung entfernt nur Leerzeichen und Kommentare ohne die Struktur oder Daten zu ändern. Das minimierte XML bleibt vollständig gültig und funktional identisch.',
 
 	'tool.json-jmespath.faq.0.question': 'Was ist JMESPath?',
 	'tool.json-jmespath.faq.0.answer':

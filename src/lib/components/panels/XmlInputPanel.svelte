@@ -49,15 +49,23 @@
 		const lines = $input.length === 0 ? 0 : $input.split('\n').length;
 		const depth = $xmlStats?.maxDepth ?? 0;
 		const bytes = formatByteSize($inputByteSize);
-		return `UTF-8 · ${bytes} · ${lines.toLocaleString()} lines · depth: ${depth}`;
+		return ($t as any)(
+			'ui.stats.info',
+			{ encoding: 'UTF-8', size: bytes, lines: lines.toLocaleString(), depth },
+			`UTF-8 · ${bytes} · ${lines.toLocaleString()} lines · depth: ${depth}`
+		);
 	});
 
 	let validityLabel = $derived.by(() => {
-		if (!$input.trim()) return 'Empty';
-		if (!$xmlError) return 'Well-formed';
+		if (!$input.trim()) return $t('ui.validity.empty', 'Empty');
+		if (!$xmlError) return $t('ui.validator.well_formed', 'Well-formed');
 		const err = $xmlError;
 		if (err.line != null && err.column != null) {
-			return `Line ${err.line}, Col ${err.column}: ${err.message}`;
+			return ($t as any)(
+				'ui.validity.error_at',
+				{ line: err.line, column: err.column, message: err.message },
+				`Line ${err.line}, Col ${err.column}: ${err.message}`
+			);
 		}
 		return err.message;
 	});
@@ -123,7 +131,13 @@
 		const file = event.dataTransfer?.files[0];
 		if (!file) return;
 		if (!isXmlFile(file)) {
-			addToast('error', 'Only .xml, .svg, .xhtml, .xsd, .wsdl, and .txt files are supported');
+			addToast(
+				'error',
+				$t(
+					'ui.toast.xml_file_types',
+					'Only .xml, .svg, .xhtml, .xsd, .wsdl, and .txt files are supported'
+				)
+			);
 			return;
 		}
 
@@ -234,7 +248,13 @@
 		const file = target.files?.[0];
 		if (!file) return;
 		if (!isXmlFile(file)) {
-			addToast('error', 'Only .xml, .svg, .xhtml, .xsd, .wsdl, and .txt files are supported');
+			addToast(
+				'error',
+				$t(
+					'ui.toast.xml_file_types',
+					'Only .xml, .svg, .xhtml, .xsd, .wsdl, and .txt files are supported'
+				)
+			);
 			target.value = '';
 			return;
 		}
@@ -353,7 +373,7 @@
 			<MonacoEditor language="xml" wordWrap={false} />
 		{:else}
 			<div class="xml-input-loading">
-				Loading editor…
+				{$t('ui.validator.loading_editor', 'Loading editor…')}
 			</div>
 		{/if}
 	</div>
@@ -376,14 +396,17 @@
 			{/if}
 		</div>
 		<div class="xml-input-meta__section xml-input-meta__section--right">
-			<span class="xml-input-meta__hint"><Upload size={12} /> Drop .xml files</span>
+			<span class="xml-input-meta__hint"
+				><Upload size={12} />
+				{($t as any)('ui.drop_files', { extension: 'xml' }, 'Drop .xml files')}</span
+			>
 		</div>
 	</div>
 
 	{#if isDragOver}
 		<div class="xml-input-drop">
 			<div class="xml-input-drop__card">
-				<p>Drop to load</p>
+				<p>{$t('ui.drop_to_load', 'Drop to load')}</p>
 			</div>
 		</div>
 	{/if}

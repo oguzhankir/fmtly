@@ -265,6 +265,29 @@ const registryTr: Record<string, string> = {
 		'XML verilerini tarayıcıda XPath ifadeleri ile sorgula. Tüm XPath 1.0 operatörlerini destekle. Yükleme yok.',
 	'tool.xml-xpath.operation': 'Sorgula',
 
+	'tool.xml-diff.display_name': 'XML Diff',
+	'tool.xml-diff.tagline': 'XML belgelerini karşılaştır ve farklılıkları görselleştir',
+	'tool.xml-diff.description':
+		'İki XML belgesini yan yana karşılaştırın ve farklılıkları vurgulayın. Eklenen, kaldırılan ve değiştirilen elementleri kesin satır numaraları ve XML-bilinçli diff görselleştirmesi ile gösterir.',
+	'tool.xml-diff.primary_keyword': 'xml diff',
+	'tool.xml-diff.meta_title': 'XML Diff Aracı — fmtly.dev',
+	'tool.xml-diff.meta_description':
+		'XML dosyalarını tarayıcınızda karşılaştırın ve farklılıkları görselleştirin. Element düzeyindeki değişiklikleri satır numaralarıyla gösterir. Veri yüklenmez.',
+	'tool.xml-diff.operation': 'Diff',
+	'tool.xml-diff.faq.0.question': 'XML Diff düz metin diff’ten nasıl farklıdır?',
+	'tool.xml-diff.faq.0.answer':
+		'XML Diff önce iki girdiyi de XML olarak doğrular, ardından XML’e uygun boşluk normalizasyonu ile satır satır karşılaştırır. Bu yüzden düz metin karşılaştırmasına göre XML belgeleri için daha uygundur.',
+	'tool.xml-diff.faq.1.question': 'Geçersiz XML karşılaştırabilir miyim?',
+	'tool.xml-diff.faq.1.answer':
+		'Hayır. Karşılaştırmadan önce iki tarafın da geçerli XML olması gerekir. Girdilerden biri bozuksa araç hangi tarafın düzeltilmesi gerektiğini gösterir.',
+	'tool.xml-diff.faq.2.question': 'Hangi değişiklik türleri vurgulanır?',
+	'tool.xml-diff.faq.2.answer':
+		'Araç eklenen, kaldırılan ve değiştirilen XML satırlarını vurgular. Bu sayede yapılandırma güncellemeleri, feed revizyonları ve markup incelemeleri için kullanışlıdır.',
+	'tool.xml-diff.use_case.0': 'İki XML API yükü arasındaki değişiklikleri inceleme',
+	'tool.xml-diff.use_case.1': 'Sitemap, feed veya yapılandırma XML sürümlerini karşılaştırma',
+	'tool.xml-diff.use_case.2': 'Dağıtımdan önce markup değişikliklerini denetleme',
+	'tool.xml-diff.use_case.3': 'Üretilen XML çıktısını beklenen sürümle doğrulama',
+
 	// ── YAML araçları ────────────────────────────────────────────────────────
 	'tool.yaml-formatter.display_name': 'YAML Biçimlendirici',
 	'tool.yaml-formatter.tagline': "YAML'ı tutarlı girintileme ile biçimlendir ve güzelleştir",
@@ -1000,7 +1023,7 @@ const registryTr: Record<string, string> = {
 	'ui.diff.summary.removed': 'kaldırıldı',
 	'ui.diff.summary.modified': 'değiştirildi',
 	'ui.diff.summary.similar': 'benzer',
-	'ui.diff.summary.empty': 'Karşılaştırmak için her iki panele de JSON gir',
+	'ui.diff.summary.empty': 'Karşılaştırmak için her iki panele de {language} gir',
 	'ui.diff.summary.identical': 'Belgeler aynı',
 	'ui.diff.summary.difference': 'farklılık',
 	'ui.diff.summary.differences': 'farklılıklar',
@@ -1015,12 +1038,15 @@ const registryTr: Record<string, string> = {
 	'ui.diff.actions.copy_value': 'Değeri Kopyala',
 	'ui.diff.actions.collapse': 'Daralt',
 	'ui.diff.actions.expand': 'Genişlet',
-	'ui.diff.toast.format_error': 'Biçimlendir — geçersiz JSON',
+	'ui.diff.toast.format_error': 'Biçimlendirilemiyor — geçersiz {language}',
+	'ui.diff.error.invalid_left': 'Sol (Orijinal) girdide geçersiz {language}',
+	'ui.diff.error.invalid_right': 'Sağ (Değiştirilen) girdide geçersiz {language}',
 	'ui.diff.toast.patch_success': 'JSON Patch panoya kopyalandı',
 	'ui.diff.toast.copy_value': 'Değer kopyalandı',
 	'ui.diff.toast.share_copied': 'Paylaş bağlantısı panoya kopyalandı',
 	'ui.diff.meta.chars': 'karakterler',
-	'ui.diff.empty.hint': 'Karşılaştırmak için yukarıdaki her iki panele de JSON yapıştır.',
+	'ui.diff.empty.hint': 'Karşılaştırmak için yukarıdaki iki panele de {language} yapıştır.',
+	'ui.diff.report.title': '{language} Diff Raporu',
 	'ui.diff.empty.load_sample': 'Örnek verileri yükle',
 	'ui.layout.placeholders.modified': 'Değiştirildi',
 	'ui.layout.aria.input_panel': 'Girdi paneli',
@@ -1125,7 +1151,7 @@ const registryTr: Record<string, string> = {
 	'ui.validator.xml_paste_hint': 'Doğrulamak için XML yapıştır veya yaz.',
 	'ui.validator.xml_validation_desc':
 		'İyi biçimlendirilme doğrulaması: kapalı olmayan etiketler, uyumsuz öğeler, geçersiz karakterler ve daha fazlası.',
-	'ui.validator.xml_success_title': 'İyi Biçimlendirildi XML',
+	'ui.validator.xml_success_title': 'İyi Biçimlendirilmiş XML',
 	'ui.validator.xml_success_desc':
 		'Sözdizimi hatası algılanmadı. Belge iyi biçimlendirildi ve herhangi bir XML işlemcisi tarafından ayrıştırılabilir.',
 	'ui.validator.error_count.one': '1 hata bulundu',
@@ -1137,7 +1163,7 @@ const registryTr: Record<string, string> = {
 		'Yalnızca .xml, .svg, .xhtml, .xsd, .wsdl ve .txt dosyaları desteklenir',
 	'ui.aria.xml_input_panel': 'XML girdi paneli',
 	'ui.aria.xml_output_panel': 'XML çıkış paneli',
-	'ui.aria.xml_workspace_tabs': 'XML çalışma alanı sekmeler',
+	'ui.aria.xml_workspace_tabs': 'XML çalışma alanı sekmeleri',
 	'ui.aria.xpath_panel': 'XPath sorgu paneli',
 	'ui.aria.xml_validator': 'XML doğrulayıcı',
 	'ui.convert.to_json': '→ JSON',
@@ -1299,6 +1325,22 @@ const registryTr: Record<string, string> = {
 		"package.json'ı Python projeleri için pyproject.toml'a dönüştürme",
 	'tool.json-to-toml.use_case.1': 'JSON yapılandırmalarından Cargo.toml dosyaları oluşturma',
 	'tool.json-to-toml.use_case.2': 'Uygulama ayarlarını daha iyi bakım için TOML biçimine taşıma',
+
+	'tool.xml-to-csv.faq.2.question': 'CSV dönüşümü için hangi XML türleri en iyisidir?',
+	'tool.xml-to-csv.faq.2.answer':
+		'Tekrar eden elementleri (birden fazla <row> veya <item> etiketi gibi) olan XML en iyi şekilde çalışır. Dönüştürücü, element adlarını ve niteliklerini otomatik olarak sütun başlıkları olarak algılar.',
+
+	'tool.xml-xpath.faq.2.question': 'Hangi XPath sürümü destekleniyor?',
+	'tool.xml-xpath.faq.2.answer':
+		'Bu araç XPath 1.0\'ı destekler, bu en yaygın olarak uygulanan sürümdür. XML sorgulama için tüm standart eksenleri, fonksiyonları ve operatörleri içerir.',
+
+	'tool.xml-xpath.faq.3.question': 'Geçersiz XML üzerinde XPath test edebilir miyim?',
+	'tool.xml-xpath.faq.3.answer':
+		'Hayır. XPath iyi yapılandırılmış XML gerektirir. XML\'inizde sözdizimi hataları varsa, XPath sorgularını çalıştırmadan önce bunları XML Doğrulayıcı veya Biçimlendirici kullanarak düzeltin.',
+
+	'tool.xml-minifier.faq.2.question': 'Minifikasyon XML işlevselliğini etkiler mi?',
+	'tool.xml-minifier.faq.2.answer':
+		'Hayır. XML minifikasyonu sadece yapıyı veya verileri değiştirmeden boşlukları ve yorumları kaldırır. Minifiye edilmiş XML tamamen geçerli kalır ve işlevsel olarak aynıdır.',
 
 	'tool.json-to-markdown.faq.0.question': "JSON'dan Markdown tablosuna dönüştürme nedir?",
 	'tool.json-to-markdown.faq.0.answer':
