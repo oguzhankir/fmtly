@@ -1392,8 +1392,7 @@ const registryEs: Record<string, string> = {
 	'ui.validator.csv_validation_desc':
 		'Valida la estructura del delimitador, la consistencia de filas y el entrecomillado mal formado en entradas CSV.',
 	'ui.validator.csv_error.header_empty': 'La columna de encabezado {column} está vacía',
-	'ui.validator.csv_error.duplicate_header':
-		'Se encontró un encabezado duplicado "{value}"',
+	'ui.validator.csv_error.duplicate_header': 'Se encontró un encabezado duplicado "{value}"',
 	'ui.validator.csv_error.row_width':
 		'La fila {row} tiene {actual} columnas, pero se esperaban {expected}',
 	'ui.validator.csv_success_title': 'CSV válido',

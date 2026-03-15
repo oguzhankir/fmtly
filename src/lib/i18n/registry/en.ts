@@ -1372,8 +1372,7 @@ const registryEn: Record<string, string> = {
 		'Validates delimiter structure, row consistency, and malformed quoting in CSV input.',
 	'ui.validator.csv_error.header_empty': 'Header column {column} is empty',
 	'ui.validator.csv_error.duplicate_header': 'Duplicate header "{value}" found',
-	'ui.validator.csv_error.row_width':
-		'Row {row} has {actual} columns but expected {expected}',
+	'ui.validator.csv_error.row_width': 'Row {row} has {actual} columns but expected {expected}',
 	'ui.validator.csv_success_title': 'Valid CSV',
 	'ui.validator.csv_success_desc':
 		'No structural CSV errors were detected. The document can be parsed successfully.',

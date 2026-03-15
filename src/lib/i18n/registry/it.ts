@@ -1374,8 +1374,7 @@ const registryIt: Record<string, string> = {
 		'Valida la struttura del delimitatore, la coerenza delle righe e le virgolette malformate nell’input CSV.',
 	'ui.validator.csv_error.header_empty': 'La colonna di intestazione {column} è vuota',
 	'ui.validator.csv_error.duplicate_header': 'Intestazione duplicata "{value}" trovata',
-	'ui.validator.csv_error.row_width':
-		'La riga {row} ha {actual} colonne invece di {expected}',
+	'ui.validator.csv_error.row_width': 'La riga {row} ha {actual} colonne invece di {expected}',
 	'ui.validator.csv_success_title': 'CSV valido',
 	'ui.validator.csv_success_desc':
 		'Non sono stati rilevati errori strutturali nel CSV. Il documento può essere analizzato correttamente.',
