@@ -486,6 +486,17 @@ const registryTr: Record<string, string> = {
 	'tool.csv-to-json.meta_description':
 		"CSV'yi tarayıcıda anında JSON'a dönüştür. Başlıkları, dinamik yazı kullanımını ve özel sınırlayıcıları destekle. Yükleme yok.",
 	'tool.csv-to-json.operation': 'Dönüştür',
+	'tool.csv-to-json.faq.0.question': 'İlk satırı başlık olarak kullanabilir miyim?',
+	'tool.csv-to-json.faq.0.answer':
+		'Evet. CSV kontrolleriyle ilk satırı başlık olarak tutabilir veya tüm satırları normal sütun verisi olarak dönüştürebilirsiniz.',
+	'tool.csv-to-json.faq.1.question': 'Sayı ve boolean değerleri otomatik algılar mı?',
+	'tool.csv-to-json.faq.1.answer':
+		'Evet. Sayı ve boolean gibi görünen değerler daha temiz JSON çıktısı için otomatik yorumlanır.',
+	'tool.csv-to-json.use_case.0':
+		'E-tablo dışa aktarımlarını API’ye hazır JSON payload’larına dönüştürme',
+	'tool.csv-to-json.use_case.1': 'CSV satırlarını yapılandırılmış nesneler olarak inceleme',
+	'tool.csv-to-json.use_case.2': 'Ayraçlı verileri tarayıcı dostu JSON biçimine normalleştirme',
+	'tool.csv-to-json.use_case.3': 'CSV veri kümelerini sonraki JSON tabanlı akışlara hazırlama',
 
 	'tool.csv-to-xml.display_name': "CSV'den XML'e",
 	'tool.csv-to-xml.tagline': 'CSV verilerini XML biçimine dönüştür',
@@ -496,6 +507,13 @@ const registryTr: Record<string, string> = {
 	'tool.csv-to-xml.meta_description':
 		"CSV'yi tarayıcıda anında XML'e dönüştür. Başlıkları öğe adlarına eşle. Yükleme yok.",
 	'tool.csv-to-xml.operation': 'Dönüştür',
+	'tool.csv-to-xml.faq.0.question': 'XML öğe adları nasıl seçiliyor?',
+	'tool.csv-to-xml.faq.0.answer':
+		'Başlık satırı açıksa her CSV başlığı, satır düğümü içindeki bir XML alt öğesine dönüşür.',
+	'tool.csv-to-xml.use_case.0':
+		'Tablolu dışa aktarımları eski sistemler için XML fixture’lara dönüştürme',
+	'tool.csv-to-xml.use_case.1':
+		'CSV başlıklarının satır tabanlı XML kayıtlara nasıl eşlendiğini önizleme',
 
 	'tool.csv-to-yaml.display_name': "CSV'den YAML'a",
 	'tool.csv-to-yaml.tagline': 'CSV verilerini YAML biçimine dönüştür',
@@ -505,16 +523,29 @@ const registryTr: Record<string, string> = {
 	'tool.csv-to-yaml.meta_title': "CSV'den YAML'a Dönüştürücü — fmtly.dev",
 	'tool.csv-to-yaml.meta_description': "CSV'yi tarayıcıda anında YAML'a dönüştür. Yükleme yok.",
 	'tool.csv-to-yaml.operation': 'Dönüştür',
+	'tool.csv-to-yaml.faq.0.question': 'Her YAML öğesi neyi temsil eder?',
+	'tool.csv-to-yaml.faq.0.answer':
+		'Başlık modu açıksa her CSV satırı bir YAML nesnesine, sütun başlıkları da anahtarlara dönüşür.',
+	'tool.csv-to-yaml.use_case.0':
+		'Tablolu yapılandırma verilerini okunabilir YAML listelerine dönüştürme',
+	'tool.csv-to-yaml.use_case.1': 'E-tablo tabanlı ayarları YAML kullanan akışlara taşıma',
 
-	'tool.csv-to-html.display_name': "CSV'den HTML Tablosuna",
-	'tool.csv-to-html.tagline': 'CSV verilerini HTML tablosuna dönüştür',
+	'tool.csv-to-html.display_name': "CSV'den HTML'e",
+	'tool.csv-to-html.tagline': 'CSV verilerini HTML tablo koduna dönüştür',
 	'tool.csv-to-html.description':
-		'CSV dosyalarını biçimlendirilmiş HTML tablolarına dönüştür. İlk satırı sütun başlıkları olarak kullan.',
-	'tool.csv-to-html.primary_keyword': "csv'den html tablosuna",
-	'tool.csv-to-html.meta_title': "CSV'den HTML Tablosuna Dönüştürücü — fmtly.dev",
+		'CSV dosyalarını biçimlendirilmiş HTML tablo koduna dönüştür. İlk satırı sütun başlıkları olarak kullan.',
+	'tool.csv-to-html.primary_keyword': "csv'den html'e",
+	'tool.csv-to-html.meta_title': "CSV'den HTML'e Dönüştürücü — fmtly.dev",
 	'tool.csv-to-html.meta_description':
-		"CSV'yi tarayıcıda anında HTML tablosuna dönüştür. Yükleme yok.",
+		"CSV'yi tarayıcıda anında HTML tablo koduna dönüştür. Yükleme yok.",
 	'tool.csv-to-html.operation': 'Dönüştür',
+	'tool.csv-to-html.faq.0.question': 'HTML’i kopyalamadan önce tabloyu görebilir miyim?',
+	'tool.csv-to-html.faq.0.answer':
+		'Evet. Çıkış panelinde hem render edilmiş tablo önizlemesi hem de ham HTML görünümü bulunur.',
+	'tool.csv-to-html.use_case.0':
+		'Dokümanlar, yönetim ekranları veya CMS parçaları için HTML tablo üretme',
+	'tool.csv-to-html.use_case.1':
+		'Üretilen işaretlemeyi eklemeden önce tablo yapısını görsel olarak kontrol etme',
 
 	'tool.csv-formatter.display_name': 'CSV Biçimlendirici',
 	'tool.csv-formatter.tagline': 'CSV verilerini biçimlendir ve normalleştir',
@@ -525,6 +556,12 @@ const registryTr: Record<string, string> = {
 	'tool.csv-formatter.meta_description':
 		'CSV verilerini tarayıcıda biçimlendir ve temizle. Yükleme yok.',
 	'tool.csv-formatter.operation': 'Biçimlendir',
+	'tool.csv-formatter.faq.0.question': 'Biçimlendirirken neleri normalleştirebilirim?',
+	'tool.csv-formatter.faq.0.answer':
+		'Ayraç değiştirebilir, hücre boşluklarını kırpabilir, başlık satırını koruyabilir, boş satırları atlayabilir ve tüm hücreleri zorunlu tırnaklayabilirsiniz.',
+	'tool.csv-formatter.use_case.0':
+		'CSV dosyalarını veritabanı veya BI araçlarına almadan önce standartlaştırma',
+	'tool.csv-formatter.use_case.1': 'Tutarsız e-tablo çıktılarıni sunucuya göndermeden temizleme',
 
 	'tool.csv-validator.display_name': 'CSV Doğrulayıcı',
 	'tool.csv-validator.tagline': 'CSV yapısını ve sözdizimini doğrula',
@@ -535,6 +572,12 @@ const registryTr: Record<string, string> = {
 	'tool.csv-validator.meta_description':
 		"CSV'yi tarayıcıda doğrula. Satır numaraları ile yapı hatalarını algıla. Hiçbir veri cihazdan ayrılmaz.",
 	'tool.csv-validator.operation': 'Doğrula',
+	'tool.csv-validator.faq.0.question': 'Doğrulayıcı hangi hataları bulur?',
+	'tool.csv-validator.faq.0.answer':
+		'Ayrıştırma hatalarını, boş veya yinelenen başlıkları ve sütun sayısı diğer satırlarla uyuşmayan kayıtları işaretler.',
+	'tool.csv-validator.use_case.0': 'İçe aktarma veya dönüştürme öncesi bozuk CSV’yi yakalama',
+	'tool.csv-validator.use_case.1':
+		'Paylaşılan veri kümelerinde başlık ve satır genişliği tutarlılığını doğrulama',
 
 	// ── Metin araçları ───────────────────────────────────────────────────────
 	'tool.text-word-counter.display_name': 'Kelime Sayacı',
@@ -1230,12 +1273,13 @@ const registryTr: Record<string, string> = {
 	'ui.xpath.placeholder': 'Sol panele XML yapıştır, ardından XPath ifadesini çalıştır.',
 	'ui.xpath.results_count.one': '1 sonuç',
 	'ui.xpath.results_count.other': '{count} sonuç',
-	'ui.validator.syntax': 'Sözdizimi',
-	'ui.validator.schema': 'Şema',
-	'ui.validator.mode': 'Doğrulama modu',
-	'ui.validator.issue': 'sorun',
-	'ui.validator.issues': 'sorunlar',
-	'ui.validator.first_issue': 'İlk sorun',
+	'ui.validator.syntax': 'Syntax',
+	'ui.validator.schema': 'Schema',
+	'ui.validator.mode': 'Validator mode',
+	'ui.validator.issue': 'issue',
+	'ui.validator.issues': 'issues',
+	'ui.validator.row': 'Satır',
+	'ui.validator.warning': 'warning',
 	'ui.validator.repair_json': "JSON'u Onar",
 	'ui.validator.schema_title': 'JSON Şeması',
 	'ui.validator.schema_standard': 'Draft-07+ via AJV',
@@ -1304,7 +1348,54 @@ const registryTr: Record<string, string> = {
 	'ui.aria.xml_validator': 'XML doğrulayıcı',
 	'ui.aria.yaml_output_panel': 'YAML çıkış paneli',
 	'ui.aria.yaml_validator': 'YAML doğrulayıcı',
+	'ui.aria.csv_validator': 'CSV doğrulayıcı',
+	'ui.csv.controls.delimiter': 'Ayraç',
+	'ui.csv.controls.header_row': 'Başlık satırı',
+	'ui.csv.controls.skip_empty_lines': 'Boş satırları atla',
+	'ui.csv.controls.trim_cells': 'Hücreleri kırp',
+	'ui.csv.controls.quote_all': 'Tüm hücreleri tırnakla',
+	'ui.csv.delimiter.comma': 'Virgül (,)',
+	'ui.csv.delimiter.semicolon': 'Noktalı virgül (;)',
+	'ui.csv.delimiter.tab': 'Sekme',
+	'ui.csv.delimiter.pipe': 'Dikey çizgi (|)',
+	'ui.csv.view.preview': 'Önizleme',
+	'ui.csv.view.raw': 'Ham',
+	'ui.csv.stats.rows': 'satır',
+	'ui.csv.stats.columns': 'sütun',
+	'ui.csv.preview.column_name': 'Sütun {index}',
+	'ui.csv.preview.no_rows': 'Önizlenecek veri satırı yok',
+	'ui.csv.preview.delimiter': 'ayraç',
+	'ui.csv.preview.header_mode': 'başlık',
+	'ui.csv.preview.no_header': 'Üretilen sütunlar',
+	'ui.csv.preview.remaining_rows': 'Önizlemede yalnızca {count} ek satır gösteriliyor',
+	'ui.csv.empty.title': 'Başlamak için CSV yapıştırın',
+	'ui.csv.empty.desc':
+		'CSV verilerini tamamen tarayıcınızda biçimlendirin, doğrulayın, önizleyin veya dönüştürün.',
+	'ui.csv.empty.waiting_title': 'CSV çıktısı bekleniyor',
+	'ui.csv.empty.waiting_desc':
+		'Ayrıştırılan satırlar, biçimlendirilmiş çıktı veya dönüştürme sonuçları burada görünecek.',
 	'ui.validator.invalid_yaml': 'Geçersiz YAML',
+	'ui.validator.invalid_csv': 'Geçersiz CSV',
+	'ui.validator.csv_paste_hint': 'Doğrulamak için CSV yapıştırın veya yazın.',
+	'ui.validator.csv_validation_desc':
+		'CSV girdisindeki ayraç yapısını, satır tutarlılığını ve bozuk tırnaklamayı doğrular.',
+	'ui.validator.csv_error.header_empty': 'Başlık satırındaki {column}. sütun boş',
+	'ui.validator.csv_error.duplicate_header': '"{value}" başlığı birden fazla kez kullanılıyor',
+	'ui.validator.csv_error.row_width':
+		'{row}. satırda {actual} sütun var, beklenen sütun sayısı {expected}',
+	'ui.validator.csv_success_title': 'Geçerli CSV',
+	'ui.validator.csv_success_desc':
+		'Yapısal CSV hatası bulunmadı. Belge başarıyla ayrıştırılabiliyor.',
+	'ui.validator.csv_paste_schema': 'Doğrulamak için bir şema yapıştırın',
+	'ui.validator.csv_paste_schema_data': 'Doğrulamak için CSV yapıştırın',
+	'ui.validator.csv_validating_schema': 'Şema doğrulanıyor…',
+	'ui.validator.csv_matches_schema': 'CSV şemayla eşleşiyor',
+	'ui.validator.csv_matches_current_schema': 'CSV satırları mevcut şemayla eşleşiyor.',
+	'ui.validator.csv_schema_title': 'Şema',
+	'ui.validator.csv_schema_standard': 'AJV ile JSON Schema Draft-07+',
+	'ui.validator.csv_paste_schema_placeholder': 'JSON Schema veya YAML şemayı buraya yapıştırın…',
+	'ui.validator.csv_schema_validation_desc':
+		'CSV satırlarını tarayıcı içinde çalışan bir şemaya göre doğrulayın. Ayrıştırılan her satır, geçerli CSV seçenekleriyle nesne olarak doğrulanır.',
 	'ui.validator.yaml_paste_hint': 'Doğrulamak için YAML yapıştırın veya yazın.',
 	'ui.validator.yaml_validation_desc':
 		'YAML sözdizimini, girintiyi, geçersiz karakterleri ve bozuk yapıları doğrular.',
@@ -1323,6 +1414,7 @@ const registryTr: Record<string, string> = {
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
 	'ui.convert.to_xml': '→ XML',
+	'ui.convert.to_html': '→ HTML',
 	'ui.convert.to_toml': '→ TOML',
 	'ui.convert.to_markdown': '→ MD',
 	'ui.query.jsonpath': 'JSONPath',
@@ -1364,6 +1456,13 @@ const registryTr: Record<string, string> = {
 	'ui.output.stats.size_in': 'giriş',
 	'ui.output.stats.size_out': 'çıkış',
 	'ui.output.original': 'Orijinal',
+	'ui.command_palette.title': 'Komut paleti',
+	'ui.command_palette.placeholder': 'Araç, kategori ve biçim ara…',
+	'ui.command_palette.recent': 'Son kullanılanlar',
+	'ui.command_palette.no_results': 'Eşleşen araç bulunamadı',
+	'ui.command_palette.hint_navigate': 'Gezin',
+	'ui.command_palette.hint_open': 'Aç',
+	'ui.command_palette.hint_close': 'Kapat',
 	'ui.output.minified': 'Küçültüldü',
 	'ui.output.saved': 'kaydedildi',
 	'ui.output.meta.minified': 'KÜÇÜLTÜLDÜ',

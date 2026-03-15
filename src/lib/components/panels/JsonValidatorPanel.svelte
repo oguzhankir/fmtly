@@ -8,11 +8,14 @@
 	import type { SchemaValidationResult } from '$engines/json/schemaValidator.js';
 	import { format, jsonError, repair } from '$stores/json.store';
 	import { initInput, input } from '$stores/input.store';
+	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
 	import { stripLocalePrefix } from '$lib/utils/locale-routing.js';
+	import { fetchRemoteText } from '$lib/utils/url-loader.js';
+	import ConfirmModal from '$components/modals/ConfirmModal.svelte';
 	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
 	import type { ToolDefinition } from '$registry/types.js';
-	import { AlertTriangle, CheckCircle2, CircleAlert, Sparkles, Wand2 } from 'lucide-svelte';
+	import { AlertTriangle, CheckCircle2, CircleAlert, Sparkles, Wand2, Link2, X, Eraser } from 'lucide-svelte';
 
 	let {
 		toolSlug,
@@ -31,6 +34,11 @@
 	);
 	let schemaValidationResult = $state<SchemaValidationResult | null>(null);
 	let schemaValidationToken = 0;
+	let showLoadUrl = $state(false);
+	let loadUrlValue = $state('');
+	let confirmModalOpen = $state(false);
+	let confirmTitle = $state('');
+	let confirmMessage = $state('');
 	let schemaErrorMessage = $derived.by(() => {
 		if (!schemaValidationResult || schemaValidationResult.success) return '';
 		if (schemaValidationResult.dataError) {
@@ -150,6 +158,43 @@
 		await format();
 	}
 
+	async function loadUrl(): Promise<void> {
+		const url = loadUrlValue.trim();
+		if (!url) return;
+
+		try {
+			const text = await fetchRemoteText(url);
+			const validation = validateJSON(text);
+			if (!validation.valid) {
+				throw new Error('Response does not look like JSON');
+			}
+			input.set(text);
+			showLoadUrl = false;
+			loadUrlValue = '';
+			addToast('success', $t('ui.toast.url_loaded', 'Loaded from URL'));
+		} catch {
+			addToast('error', $t('ui.toast.url_error', 'Could not fetch — try pasting directly'));
+		}
+	}
+
+	function clearInputValue(): void {
+		if ($input.length > 1000) {
+			confirmTitle = $t('ui.confirm.clear', { language: 'JSON' }, 'Clear the current JSON input?');
+			confirmMessage = $t('ui.confirm.clear_description', 'This action cannot be undone.');
+			confirmModalOpen = true;
+			return;
+		}
+
+		doClearInput();
+	}
+
+	function doClearInput(): void {
+		input.set('');
+		showLoadUrl = false;
+		loadUrlValue = '';
+		addToast('info', $t('ui.toast.input_cleared', 'Input cleared'));
+	}
+
 	function focusIssue(line: number): void {
 		editorRef?.revealLine(line);
 	}
@@ -252,10 +297,42 @@
 					{$t('ui.validator.first_issue', 'First issue')}
 				</button>
 			{/if}
+			<div class="validator-popover-wrap">
+				<button type="button" class="validator-btn" onclick={() => (showLoadUrl = !showLoadUrl)}>
+					<Link2 size={13} />
+					{$t('ui.actions.load_url', 'Load URL')}
+				</button>
+				{#if showLoadUrl}
+					<div class="validator-popover">
+						<input
+							bind:value={loadUrlValue}
+							type="url"
+							class="validator-popover__field"
+							placeholder="https://example.com/data.json"
+						/>
+						<div class="validator-popover__actions">
+							<button type="button" class="validator-btn" onclick={() => (showLoadUrl = false)}>
+								<X size={13} />
+								{$t('ui.actions.close', 'Close')}
+							</button>
+							<button type="button" class="validator-btn" onclick={loadUrl}>
+								<Link2 size={13} />
+								{$t('ui.actions.fetch', 'Fetch')}
+							</button>
+						</div>
+					</div>
+				{/if}
+			</div>
 			<button type="button" class="validator-btn" onclick={handleFormat}>
 				<Sparkles size={13} />
 				{$t('ui.actions.format', 'Format')}
 			</button>
+			{#if $input.trim()}
+				<button type="button" class="validator-btn" onclick={clearInputValue}>
+					<Eraser size={13} />
+					{$t('ui.actions.clear', 'Clear')}
+				</button>
+			{/if}
 			<button type="button" class="validator-btn validator-btn--primary" onclick={handleRepair}>
 				<Wand2 size={13} />
 				{$t('ui.validator.repair_json', 'Repair JSON')}
@@ -321,6 +398,14 @@
 		</div>
 	{/if}
 </div>
+
+<ConfirmModal
+	bind:open={confirmModalOpen}
+	title={confirmTitle}
+	message={confirmMessage}
+	onConfirm={doClearInput}
+	onCancel={() => {}}
+/>
 
 <style>
 	.validator-shell {
@@ -395,6 +480,44 @@
 		align-items: center;
 		gap: var(--space-2);
 		flex-wrap: wrap;
+	}
+
+	.validator-popover-wrap {
+		position: relative;
+	}
+
+	.validator-popover {
+		position: absolute;
+		right: 0;
+		top: calc(100% + 6px);
+		z-index: var(--z-dropdown);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		width: min(320px, 80vw);
+		padding: var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-lg);
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow-md);
+	}
+
+	.validator-popover__field {
+		height: 32px;
+		padding: 0 var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-base);
+		color: var(--text-primary);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		outline: none;
+	}
+
+	.validator-popover__actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: var(--space-2);
 	}
 
 	.validator-btn {

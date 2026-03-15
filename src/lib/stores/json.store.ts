@@ -127,7 +127,7 @@ async function applyToolOutput(value: string): Promise<void> {
 			await applyYamlOutput(value);
 			return;
 		case 'to-csv':
-			applyCsvOutput(value);
+			await applyCsvOutput(value);
 			return;
 		case 'to-xml':
 			applyXmlOutput(value);
@@ -195,8 +195,8 @@ async function applyTomlOutput(value: string): Promise<void> {
 	jsonFormatWarnings.set([]);
 }
 
-function applyCsvOutput(value: string): void {
-	const result = jsonToCSV(value);
+async function applyCsvOutput(value: string): Promise<void> {
+	const result = await jsonToCSV(value);
 	if (result.success) {
 		output.set(result.output);
 		jsonAdvancedStats.set(null);

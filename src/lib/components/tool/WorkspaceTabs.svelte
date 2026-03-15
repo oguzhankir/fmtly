@@ -44,6 +44,8 @@
 				return $t('ui.convert.to_toml', '→ TOML').replace(/^→\s*/, '');
 			case 'to-xml':
 				return $t('ui.convert.to_xml', '→ XML').replace(/^→\s*/, '');
+			case 'to-html':
+				return $t('ui.convert.to_html', '→ HTML').replace(/^→\s*/, '');
 			case 'to-markdown':
 				return $t('ui.convert.to_markdown', '→ MD').replace(/^→\s*/, '');
 			default:

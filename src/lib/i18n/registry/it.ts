@@ -483,6 +483,17 @@ const registryIt: Record<string, string> = {
 	'tool.csv-to-json.meta_description':
 		'Converti CSV a JSON istantaneamente nel tuo browser. Supporta intestazioni, tipizzazione dinamica e delimitatori personalizzati. Nessun caricamento dati.',
 	'tool.csv-to-json.operation': 'Converti',
+	'tool.csv-to-json.faq.0.question': 'Posso trattare la prima riga come intestazione?',
+	'tool.csv-to-json.faq.0.answer':
+		'Sì. I controlli CSV ti permettono di mantenere la prima riga come intestazione oppure convertire tutte le righe come semplici dati di colonna.',
+	'tool.csv-to-json.faq.1.question': 'Rileva automaticamente numeri e booleani?',
+	'tool.csv-to-json.faq.1.answer':
+		'Sì. I valori che sembrano numeri o booleani vengono interpretati automaticamente durante la conversione.',
+	'tool.csv-to-json.use_case.0':
+		'Trasformare export da fogli di calcolo in payload JSON pronti per API',
+	'tool.csv-to-json.use_case.1': 'Ispezionare righe CSV come oggetti strutturati',
+	'tool.csv-to-json.use_case.2': 'Normalizzare dati delimitati in JSON adatto al browser',
+	'tool.csv-to-json.use_case.3': 'Preparare dataset CSV per flussi successivi basati su JSON',
 
 	'tool.csv-to-xml.display_name': 'CSV a XML',
 	'tool.csv-to-xml.tagline': 'Converti dati CSV in formato XML',
@@ -493,6 +504,12 @@ const registryIt: Record<string, string> = {
 	'tool.csv-to-xml.meta_description':
 		'Converti CSV a XML istantaneamente nel tuo browser. Mappa intestazioni in nomi di elementi. Nessun caricamento dati.',
 	'tool.csv-to-xml.operation': 'Converti',
+	'tool.csv-to-xml.faq.0.question': 'Come vengono scelti i nomi degli elementi XML?',
+	'tool.csv-to-xml.faq.0.answer':
+		'Quando la modalità intestazione è attiva, ogni intestazione CSV diventa un elemento figlio XML all’interno di un nodo riga.',
+	'tool.csv-to-xml.use_case.0': 'Convertire export tabellari in fixture XML per sistemi legacy',
+	'tool.csv-to-xml.use_case.1':
+		'Verificare come le intestazioni CSV si mappano su record XML per riga',
 
 	'tool.csv-to-yaml.display_name': 'CSV a YAML',
 	'tool.csv-to-yaml.tagline': 'Converti dati CSV in formato YAML',
@@ -503,6 +520,12 @@ const registryIt: Record<string, string> = {
 	'tool.csv-to-yaml.meta_description':
 		'Converti CSV a YAML istantaneamente nel tuo browser. Nessun caricamento dati.',
 	'tool.csv-to-yaml.operation': 'Converti',
+	'tool.csv-to-yaml.faq.0.question': 'Cosa rappresenta ogni elemento YAML?',
+	'tool.csv-to-yaml.faq.0.answer':
+		'Ogni riga CSV diventa un oggetto YAML e le intestazioni diventano chiavi quando la modalità intestazione è attiva.',
+	'tool.csv-to-yaml.use_case.0': 'Trasformare dati tabellari in liste YAML leggibili',
+	'tool.csv-to-yaml.use_case.1':
+		'Portare configurazioni guidate da fogli di calcolo in workflow YAML',
 
 	'tool.csv-to-html.display_name': 'CSV a Tabella HTML',
 	'tool.csv-to-html.tagline': 'Converti dati CSV in tabella HTML',
@@ -513,6 +536,14 @@ const registryIt: Record<string, string> = {
 	'tool.csv-to-html.meta_description':
 		'Converti CSV a tabella HTML istantaneamente nel tuo browser. Nessun caricamento dati.',
 	'tool.csv-to-html.operation': 'Converti',
+	'tool.csv-to-html.faq.0.question':
+		'Posso vedere l’anteprima della tabella prima di copiare l’HTML?',
+	'tool.csv-to-html.faq.0.answer':
+		'Sì. Il pannello di output offre sia l’anteprima renderizzata sia la vista HTML grezza.',
+	'tool.csv-to-html.use_case.0':
+		'Generare tabelle HTML per documentazione, tool interni o snippet CMS',
+	'tool.csv-to-html.use_case.1':
+		'Controllare visivamente la struttura della tabella prima di incorporare il markup',
 
 	'tool.csv-formatter.display_name': 'Formattatore CSV',
 	'tool.csv-formatter.tagline': 'Formatta e normalizza dati CSV',
@@ -523,6 +554,13 @@ const registryIt: Record<string, string> = {
 	'tool.csv-formatter.meta_description':
 		'Formatta e pulisci dati CSV nel tuo browser. Nessun caricamento dati.',
 	'tool.csv-formatter.operation': 'Formatta',
+	'tool.csv-formatter.faq.0.question': 'Cosa posso normalizzare durante la formattazione?',
+	'tool.csv-formatter.faq.0.answer':
+		'Puoi cambiare delimitatore, rifilare spazi nelle celle, mantenere la riga di intestazione, saltare righe vuote e forzare le virgolette su tutte le celle.',
+	'tool.csv-formatter.use_case.0':
+		'Standardizzare file CSV prima di importarli in database o tool BI',
+	'tool.csv-formatter.use_case.1':
+		'Pulire export incoerenti da fogli di calcolo senza inviare dati a un server',
 
 	'tool.csv-validator.display_name': 'Validatore CSV',
 	'tool.csv-validator.tagline': 'Valida struttura e sintassi CSV',
@@ -533,6 +571,12 @@ const registryIt: Record<string, string> = {
 	'tool.csv-validator.meta_description':
 		'Valida CSV nel tuo browser. Rileva errori di struttura con numeri di riga. Nessun dato lascia il tuo dispositivo.',
 	'tool.csv-validator.operation': 'Valida',
+	'tool.csv-validator.faq.0.question': 'Quali problemi rileva il validatore?',
+	'tool.csv-validator.faq.0.answer':
+		'Segnala errori del parser, intestazioni vuote o duplicate e righe con un numero di colonne diverso dal resto del file.',
+	'tool.csv-validator.use_case.0': 'Individuare CSV malformati prima di importazione o conversione',
+	'tool.csv-validator.use_case.1':
+		'Verificare coerenza di intestazioni e larghezza righe in dataset condivisi',
 
 	// ── Strumenti Testo ──────────────────────────────────────────────────────
 	'tool.text-word-counter.display_name': 'Contatore Parole',
@@ -1236,6 +1280,7 @@ const registryIt: Record<string, string> = {
 	'ui.validator.schema': 'Schema',
 	'ui.validator.issue': 'problema',
 	'ui.validator.issues': 'problemi',
+	'ui.validator.row': 'Riga',
 	'ui.validator.warning': 'avviso',
 	'ui.validator.warnings': 'avvisi',
 	'ui.validator.first_issue': 'Primo problema',
@@ -1296,7 +1341,54 @@ const registryIt: Record<string, string> = {
 	'ui.aria.xml_validator': 'Validatore XML',
 	'ui.aria.yaml_output_panel': 'Pannello di output YAML',
 	'ui.aria.yaml_validator': 'Validatore YAML',
+	'ui.aria.csv_validator': 'Validatore CSV',
+	'ui.csv.controls.delimiter': 'Delimitatore',
+	'ui.csv.controls.header_row': 'Riga di intestazione',
+	'ui.csv.controls.skip_empty_lines': 'Salta righe vuote',
+	'ui.csv.controls.trim_cells': 'Rifila celle',
+	'ui.csv.controls.quote_all': 'Metti tra virgolette tutte le celle',
+	'ui.csv.delimiter.comma': 'Virgola (,)',
+	'ui.csv.delimiter.semicolon': 'Punto e virgola (;)',
+	'ui.csv.delimiter.tab': 'Tabulazione',
+	'ui.csv.delimiter.pipe': 'Pipe (|)',
+	'ui.csv.view.preview': 'Anteprima',
+	'ui.csv.view.raw': 'Raw',
+	'ui.csv.stats.rows': 'righe',
+	'ui.csv.stats.columns': 'colonne',
+	'ui.csv.preview.column_name': 'Colonna {index}',
+	'ui.csv.preview.no_rows': 'Nessuna riga dati da mostrare in anteprima',
+	'ui.csv.preview.delimiter': 'delimitatore',
+	'ui.csv.preview.header_mode': 'intestazione',
+	'ui.csv.preview.no_header': 'Colonne generate',
+	'ui.csv.preview.remaining_rows': 'L’anteprima mostra solo altre {count} righe',
+	'ui.csv.empty.title': 'Incolla CSV per iniziare',
+	'ui.csv.empty.desc':
+		'Formatta, valida, anteprima o converti dati CSV interamente nel tuo browser.',
+	'ui.csv.empty.waiting_title': 'In attesa dell’output CSV',
+	'ui.csv.empty.waiting_desc':
+		'Le righe analizzate, l’output formattato o i risultati convertiti appariranno qui.',
 	'ui.validator.invalid_yaml': 'YAML non valido',
+	'ui.validator.invalid_csv': 'CSV non valido',
+	'ui.validator.csv_paste_hint': 'Incolla o digita CSV da validare.',
+	'ui.validator.csv_validation_desc':
+		'Valida la struttura del delimitatore, la coerenza delle righe e le virgolette malformate nell’input CSV.',
+	'ui.validator.csv_error.header_empty': 'La colonna di intestazione {column} è vuota',
+	'ui.validator.csv_error.duplicate_header': 'Intestazione duplicata "{value}" trovata',
+	'ui.validator.csv_error.row_width':
+		'La riga {row} ha {actual} colonne invece di {expected}',
+	'ui.validator.csv_success_title': 'CSV valido',
+	'ui.validator.csv_success_desc':
+		'Non sono stati rilevati errori strutturali nel CSV. Il documento può essere analizzato correttamente.',
+	'ui.validator.csv_paste_schema': 'Incolla uno schema da validare',
+	'ui.validator.csv_paste_schema_data': 'Incolla CSV da validare',
+	'ui.validator.csv_validating_schema': 'Validazione schema…',
+	'ui.validator.csv_matches_schema': 'Il CSV corrisponde allo schema',
+	'ui.validator.csv_matches_current_schema': 'Le righe CSV corrispondono allo schema corrente.',
+	'ui.validator.csv_schema_title': 'Schema',
+	'ui.validator.csv_schema_standard': 'JSON Schema Draft-07+ tramite AJV',
+	'ui.validator.csv_paste_schema_placeholder': 'Incolla qui JSON Schema o schema YAML…',
+	'ui.validator.csv_schema_validation_desc':
+		'Valida le righe CSV rispetto a uno schema eseguito nel browser. Ogni riga analizzata viene validata come oggetto usando le opzioni CSV correnti.',
 	'ui.validator.yaml_paste_hint': 'Incolla o scrivi YAML da validare.',
 	'ui.validator.yaml_validation_desc':
 		'Valida sintassi YAML, indentazione, caratteri non validi e strutture malformate.',
@@ -1315,6 +1407,7 @@ const registryIt: Record<string, string> = {
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
 	'ui.convert.to_xml': '→ XML',
+	'ui.convert.to_html': '→ HTML',
 	'ui.convert.to_toml': '→ TOML',
 	'ui.convert.to_markdown': '→ MD',
 	'ui.query.jsonpath': 'JSONPath',
@@ -1356,6 +1449,13 @@ const registryIt: Record<string, string> = {
 	'ui.output.stats.size_in': 'dentro',
 	'ui.output.stats.size_out': 'fuori',
 	'ui.output.original': 'Originale',
+	'ui.command_palette.title': 'Palette dei comandi',
+	'ui.command_palette.placeholder': 'Cerca strumenti, categorie e formati…',
+	'ui.command_palette.recent': 'Recenti',
+	'ui.command_palette.no_results': 'Nessuno strumento corrispondente trovato',
+	'ui.command_palette.hint_navigate': 'Naviga',
+	'ui.command_palette.hint_open': 'Apri',
+	'ui.command_palette.hint_close': 'Chiudi',
 	'ui.output.minified': 'Minimizzato',
 	'ui.output.saved': 'salvato',
 	'ui.output.meta.minified': 'MINIMIZZATO',

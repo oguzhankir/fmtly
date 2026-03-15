@@ -487,6 +487,17 @@ const registryDe: Record<string, string> = {
 	'tool.csv-to-json.meta_description':
 		'Konvertieren Sie CSV sofort in JSON. Unterstützt Header und benutzerdefinierte Trennzeichen.',
 	'tool.csv-to-json.operation': 'Konvertieren',
+	'tool.csv-to-json.faq.0.question': 'Kann ich die erste Zeile als Header behandeln?',
+	'tool.csv-to-json.faq.0.answer':
+		'Ja. Über die CSV-Steuerung können Sie die erste Zeile als Header behalten oder alle Zeilen als reine Spaltendaten umwandeln.',
+	'tool.csv-to-json.faq.1.question': 'Werden Zahlen und Booleans automatisch erkannt?',
+	'tool.csv-to-json.faq.1.answer':
+		'Ja. Zahlen- und Boolean-ähnliche Werte werden bei der Umwandlung automatisch interpretiert, damit das JSON sauberer wird.',
+	'tool.csv-to-json.use_case.0': 'Spreadsheet-Exporte in API-fertige JSON-Payloads umwandeln',
+	'tool.csv-to-json.use_case.1': 'CSV-Zeilen als strukturierte Objekte prüfen',
+	'tool.csv-to-json.use_case.2':
+		'Getrennte Tabellendaten in browserfreundliches JSON normalisieren',
+	'tool.csv-to-json.use_case.3': 'CSV-Datensätze für nachgelagerte JSON-Workflows vorbereiten',
 
 	'tool.csv-to-xml.display_name': 'CSV nach XML',
 	'tool.csv-to-xml.tagline': 'CSV-Daten in das XML-Format konvertieren',
@@ -497,6 +508,12 @@ const registryDe: Record<string, string> = {
 	'tool.csv-to-xml.meta_description':
 		'Konvertieren Sie CSV sofort in XML. Lokal und sicher im Browser.',
 	'tool.csv-to-xml.operation': 'Konvertieren',
+	'tool.csv-to-xml.faq.0.question': 'Wie werden die XML-Elementnamen festgelegt?',
+	'tool.csv-to-xml.faq.0.answer':
+		'Wenn der Header-Modus aktiv ist, wird jede CSV-Spaltenüberschrift zu einem XML-Kindelement innerhalb eines Zeileneintrags.',
+	'tool.csv-to-xml.use_case.0': 'Tabellarische Exporte in XML-Fixtures für Altsysteme umwandeln',
+	'tool.csv-to-xml.use_case.1':
+		'Prüfen, wie CSV-Header auf zeilenbasierte XML-Datensätze abgebildet werden',
 
 	'tool.csv-to-yaml.display_name': 'CSV nach YAML',
 	'tool.csv-to-yaml.tagline': 'CSV-Daten in das YAML-Format konvertieren',
@@ -507,6 +524,13 @@ const registryDe: Record<string, string> = {
 	'tool.csv-to-yaml.meta_description':
 		'Konvertieren Sie CSV sofort in YAML. Keine Datenübertragung erforderlich.',
 	'tool.csv-to-yaml.operation': 'Konvertieren',
+	'tool.csv-to-yaml.faq.0.question': 'Wofür steht jeder YAML-Eintrag?',
+	'tool.csv-to-yaml.faq.0.answer':
+		'Jede CSV-Zeile wird zu einem YAML-Objekt, und Spaltenüberschriften werden im Header-Modus zu Schlüsseln.',
+	'tool.csv-to-yaml.use_case.0':
+		'Tabellarische Konfigurationsdaten in lesbare YAML-Listen überführen',
+	'tool.csv-to-yaml.use_case.1':
+		'Spreadsheet-gesteuerte Einstellungen in YAML-Workflows verschieben',
 
 	'tool.csv-to-html.display_name': 'CSV nach HTML-Tabelle',
 	'tool.csv-to-html.tagline': 'CSV-Daten in eine HTML-Tabelle konvertieren',
@@ -517,6 +541,13 @@ const registryDe: Record<string, string> = {
 	'tool.csv-to-html.meta_description':
 		'Konvertieren Sie CSV sofort in eine HTML-Tabelle. Ideal für Web-Präsentationen.',
 	'tool.csv-to-html.operation': 'Konvertieren',
+	'tool.csv-to-html.faq.0.question': 'Kann ich die Tabelle vor dem Kopieren des HTML prüfen?',
+	'tool.csv-to-html.faq.0.answer':
+		'Ja. Das Ausgabepanel bietet sowohl eine gerenderte Vorschau als auch die rohe HTML-Ansicht.',
+	'tool.csv-to-html.use_case.0':
+		'HTML-Tabellen für Doku, Admin-Oberflächen oder CMS-Snippets erzeugen',
+	'tool.csv-to-html.use_case.1':
+		'Tabellenstruktur visuell prüfen, bevor generiertes Markup eingebettet wird',
 
 	'tool.csv-formatter.display_name': 'CSV-Formatierer',
 	'tool.csv-formatter.tagline': 'CSV-Daten formatieren und normalisieren',
@@ -526,6 +557,11 @@ const registryDe: Record<string, string> = {
 	'tool.csv-formatter.meta_title': 'CSV-Formatierer — fmtly.dev',
 	'tool.csv-formatter.meta_description': 'Formatieren und reinigen Sie CSV-Daten lokal im Browser.',
 	'tool.csv-formatter.operation': 'Formatieren',
+	'tool.csv-formatter.faq.0.question': 'Was kann ich beim Formatieren normalisieren?',
+	'tool.csv-formatter.faq.0.answer':
+		'Sie können Trennzeichen ändern, Zell-Whitespace trimmen, eine Header-Zeile beibehalten, leere Zeilen überspringen und alle Zellen quoten.',
+	'tool.csv-formatter.use_case.0': 'CSV-Dateien vor Datenbank- oder BI-Importen standardisieren',
+	'tool.csv-formatter.use_case.1': 'Uneinheitliche Spreadsheet-Exporte ohne Server bereinigen',
 
 	'tool.csv-validator.display_name': 'CSV-Validator',
 	'tool.csv-validator.tagline': 'CSV-Struktur und Syntax validieren',
@@ -536,6 +572,12 @@ const registryDe: Record<string, string> = {
 	'tool.csv-validator.meta_description':
 		'Validieren Sie CSV im Browser. Erkennt Strukturfehler mit Zeilenangaben.',
 	'tool.csv-validator.operation': 'Validieren',
+	'tool.csv-validator.faq.0.question': 'Welche Probleme erkennt der Validator?',
+	'tool.csv-validator.faq.0.answer':
+		'Er meldet Parserfehler, leere oder doppelte Header sowie Zeilen mit abweichender Spaltenanzahl.',
+	'tool.csv-validator.use_case.0': 'Fehlerhaftes CSV vor Import oder Konvertierung erkennen',
+	'tool.csv-validator.use_case.1':
+		'Header- und Zeilenbreiten-Konsistenz in geteilten Datensätzen prüfen',
 
 	// ── Text Tools ──────────────────────────────────────────────────────────
 	'tool.text-word-counter.display_name': 'Wortzähler',
@@ -1214,11 +1256,13 @@ const registryDe: Record<string, string> = {
 	'ui.xpath.no_results': 'Keine Ergebnisse. Versuchen Sie es mit einem anderen Ausdruck.',
 	'ui.xpath.placeholder': 'XML links einfügen, dann XPath-Ausdruck ausführen.',
 	'ui.xpath.results_count.one': '1 Ergebnis',
-	'ui.xpath.results_count.other': '{count Ergebnisse',
+	'ui.xpath.results_count.other': '{count} Ergebnisse',
 	'ui.validator.syntax': 'Syntax',
-	'ui.validator.schema': 'Schema',
-	'ui.validator.issue': 'Problem',
-	'ui.validator.issues': 'Probleme',
+	'ui.validator.mode': 'Validator mode',
+	'ui.validator.issue': 'issue',
+	'ui.validator.issues': 'issues',
+	'ui.validator.row': 'Zeile',
+	'ui.validator.warning': 'warning',
 	'ui.validator.first_issue': 'Erstes Problem',
 	'ui.validator.repair_json': 'JSON reparieren',
 	'ui.validator.schema_title': 'JSON-Schema',
@@ -1285,7 +1329,54 @@ const registryDe: Record<string, string> = {
 	'ui.aria.xml_validator': 'XML-Validator',
 	'ui.aria.yaml_output_panel': 'YAML-Ausgabepanel',
 	'ui.aria.yaml_validator': 'YAML-Validator',
+	'ui.aria.csv_validator': 'CSV-Validator',
+	'ui.csv.controls.delimiter': 'Trennzeichen',
+	'ui.csv.controls.header_row': 'Header-Zeile',
+	'ui.csv.controls.skip_empty_lines': 'Leere Zeilen überspringen',
+	'ui.csv.controls.trim_cells': 'Zellen trimmen',
+	'ui.csv.controls.quote_all': 'Alle Zellen quoten',
+	'ui.csv.delimiter.comma': 'Komma (,)',
+	'ui.csv.delimiter.semicolon': 'Semikolon (;)',
+	'ui.csv.delimiter.tab': 'Tabulator',
+	'ui.csv.delimiter.pipe': 'Pipe (|)',
+	'ui.csv.view.preview': 'Vorschau',
+	'ui.csv.view.raw': 'Roh',
+	'ui.csv.stats.rows': 'Zeilen',
+	'ui.csv.stats.columns': 'Spalten',
+	'ui.csv.preview.column_name': 'Spalte {index}',
+	'ui.csv.preview.no_rows': 'Keine Datenzeilen zur Vorschau',
+	'ui.csv.preview.delimiter': 'Trennzeichen',
+	'ui.csv.preview.header_mode': 'Header',
+	'ui.csv.preview.no_header': 'Generierte Spalten',
+	'ui.csv.preview.remaining_rows': 'In der Vorschau werden nur noch {count} weitere Zeilen gezeigt',
+	'ui.csv.empty.title': 'CSV einfügen, um zu starten',
+	'ui.csv.empty.desc':
+		'CSV-Daten vollständig im Browser formatieren, validieren, voranschaun oder konvertieren.',
+	'ui.csv.empty.waiting_title': 'Warte auf CSV-Ausgabe',
+	'ui.csv.empty.waiting_desc':
+		'Geparste Zeilen, formatierte Ausgabe oder Konvertierungsergebnisse erscheinen hier.',
 	'ui.validator.invalid_yaml': 'Ungültiges YAML',
+	'ui.validator.invalid_csv': 'Ungültiges CSV',
+	'ui.validator.csv_paste_hint': 'CSV zum Validieren einfügen oder eingeben.',
+	'ui.validator.csv_validation_desc':
+		'Prüft Trennzeichenstruktur, Zeilenkonsistenz und fehlerhafte Anführungszeichen in CSV-Eingaben.',
+	'ui.validator.csv_error.header_empty': 'Header-Spalte {column} ist leer',
+	'ui.validator.csv_error.duplicate_header': 'Doppelter Header "{value}" gefunden',
+	'ui.validator.csv_error.row_width':
+		'Zeile {row} hat {actual} Spalten, erwartet wurden {expected}',
+	'ui.validator.csv_success_title': 'Gültiges CSV',
+	'ui.validator.csv_success_desc':
+		'Es wurden keine strukturellen CSV-Fehler gefunden. Das Dokument kann erfolgreich geparst werden.',
+	'ui.validator.csv_paste_schema': 'Schema zum Validieren einfügen',
+	'ui.validator.csv_paste_schema_data': 'CSV zum Validieren einfügen',
+	'ui.validator.csv_validating_schema': 'Schema wird validiert…',
+	'ui.validator.csv_matches_schema': 'CSV entspricht dem Schema',
+	'ui.validator.csv_matches_current_schema': 'Die CSV-Zeilen entsprechen dem aktuellen Schema.',
+	'ui.validator.csv_schema_title': 'Schema',
+	'ui.validator.csv_schema_standard': 'JSON Schema Draft-07+ via AJV',
+	'ui.validator.csv_paste_schema_placeholder': 'JSON Schema oder YAML-Schema hier einfügen…',
+	'ui.validator.csv_schema_validation_desc':
+		'Validiert CSV-Zeilen gegen ein browserseitiges Schema. Jede geparste Zeile wird mit den aktuellen CSV-Optionen als Objekt geprüft.',
 	'ui.validator.yaml_paste_hint': 'YAML zum Validieren einfügen oder eingeben.',
 	'ui.validator.yaml_validation_desc':
 		'Prüft YAML-Syntax, Einrückungen, ungültige Zeichen und fehlerhafte Strukturen.',
@@ -1304,6 +1395,7 @@ const registryDe: Record<string, string> = {
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
 	'ui.convert.to_xml': '→ XML',
+	'ui.convert.to_html': '→ HTML',
 	'ui.convert.to_toml': '→ TOML',
 	'ui.convert.to_markdown': '→ MD',
 	'ui.query.jsonpath': 'JSONPath',
@@ -1345,6 +1437,13 @@ const registryDe: Record<string, string> = {
 	'ui.output.stats.size_in': 'in',
 	'ui.output.stats.size_out': 'out',
 	'ui.output.original': 'Original',
+	'ui.command_palette.title': 'Befehlspalette',
+	'ui.command_palette.placeholder': 'Tools, Kategorien und Formate suchen…',
+	'ui.command_palette.recent': 'Zuletzt verwendet',
+	'ui.command_palette.no_results': 'Keine passenden Tools gefunden',
+	'ui.command_palette.hint_navigate': 'Navigieren',
+	'ui.command_palette.hint_open': 'Öffnen',
+	'ui.command_palette.hint_close': 'Schließen',
 	'ui.output.minified': 'Minifiziert',
 	'ui.output.saved': 'gespart',
 	'ui.output.meta.minified': 'MINIFIZIERT',

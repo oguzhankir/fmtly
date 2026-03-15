@@ -18,6 +18,8 @@
 	import XmlOutputPanel from "$components/panels/XmlOutputPanel.svelte";
 	import XmlValidatorPanel from "$components/panels/XmlValidatorPanel.svelte";
 	import XmlQueryOutputPanel from "$components/panels/XmlQueryOutputPanel.svelte";
+	import CsvValidatorPanel from "$components/panels/CsvValidatorPanel.svelte";
+	import CsvOutputPanel from "$components/panels/CsvOutputPanel.svelte";
 	import YamlOutputPanel from "$components/panels/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/YamlValidatorPanel.svelte";
 	import TreePanel from "$components/panels/TreePanel.svelte";
@@ -94,6 +96,12 @@
 		minifyYaml,
 		processYamlTool
 	} from "$stores/yaml.store";
+	import {
+		initCSVStore,
+		destroyCSVStore,
+		formatCsv,
+		processCsvTool
+	} from "$stores/csv.store";
 	import { initTextStore, textOptions } from "$stores/text.store";
 	import { initNumberStore, numberOptions } from "$stores/number.store";
 	import { initEncodeStore, encodeOptions } from "$stores/encode.store";
@@ -127,6 +135,11 @@
 	let yamlWorkspaceTools = $derived(
 		data.tool.category === "yaml"
 			? localizeToolDefinitions(getToolsByCategory("yaml"), $t)
+			: []
+	);
+	let csvWorkspaceTools = $derived(
+		data.tool.category === "csv"
+			? localizeToolDefinitions(getToolsByCategory("csv"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -175,6 +188,16 @@
 		});
 	}
 
+	function navigateToCsvWorkspaceIndex(index: number): void {
+		const target = csvWorkspaceTools[index];
+		if (!target || target.slug === data.tool.slug) return;
+		void goto(localizePath(`/csv/${target.slug}`, currentLocale), {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true,
+		});
+	}
+
 	let faqStructuredData = $derived(
 		JSON.stringify({
 			"@context": "https://schema.org",
@@ -211,6 +234,7 @@
 		destroyJSONStore();
 		destroyXMLStore();
 		destroyYAMLStore();
+		destroyCSVStore();
 
 		if (data.tool.engine === "json") {
 			initJSONStore(data.tool.slug);
@@ -218,6 +242,8 @@
 			initXMLStore(data.tool.slug);
 		} else if (data.tool.engine === "yaml") {
 			initYAMLStore(data.tool.slug);
+		} else if (data.tool.engine === "csv") {
+			initCSVStore(data.tool.slug);
 		} else if (data.tool.engine === "text") {
 			initTextStore(data.tool.slug);
 		} else if (data.tool.engine === "number") {
@@ -345,6 +371,29 @@
 					label: ($t as any)('switch_to_yaml_tab', 'Switch to YAML tab {index}', { index: index + 1 }),
 					handler: () => {
 						navigateToYamlWorkspaceIndex(index);
+					},
+				});
+			}
+		}
+
+		if (data.tool.engine === "csv") {
+			shortcuts.push({
+				key: "f",
+				ctrl: true,
+				shift: true,
+				scope: "tool",
+				label: $t('ui.actions.format', 'Format'),
+				handler: () => { void formatCsv(); },
+			});
+
+			for (const [index] of csvWorkspaceTools.entries()) {
+				if (index > 8) break;
+				shortcuts.push({
+					key: String(index + 1),
+					scope: "tool",
+					label: ($t as any)('switch_to_tab', 'Switch to tab {index}', { index: index + 1 }),
+					handler: () => {
+						navigateToCsvWorkspaceIndex(index);
 					},
 				});
 			}
@@ -480,6 +529,7 @@
 		destroyJSONStore();
 		destroyXMLStore();
 		destroyYAMLStore();
+		destroyCSVStore();
 		destroyHistory();
 	});
 </script>
@@ -559,6 +609,7 @@
 			if (data.tool.engine === 'json') { format(); }
 			else if (data.tool.engine === 'xml') { formatXml(); }
 			else if (data.tool.engine === 'yaml') { void processYamlTool(); }
+			else if (data.tool.engine === 'csv') { void processCsvTool(); }
 		}}
 		onshare={() => { shareModalOpen = true; }}
 	>
@@ -730,6 +781,31 @@
 							inputLanguage={data.tool.inputLanguage}
 							acceptedExtensions={acceptedExts}
 							sampleInput={data.tool.sampleInput}
+							enableRemoteActions={true}
+							remoteInputKind="yaml"
+						/>
+					</div>
+				</div>
+			{:else if data.tool.category === "csv" && data.tool.slug === "validator"}
+				<CsvValidatorPanel toolSlug={data.tool.slug} workspaceTools={csvWorkspaceTools} />
+			{:else if data.tool.category === "csv"}
+				<div class="flex h-full w-full flex-col">
+					{#if csvWorkspaceTools.length > 0}
+						<WorkspaceTabs
+							tools={csvWorkspaceTools}
+							activeSlug={data.tool.slug}
+							category="csv"
+							locale={currentLocale}
+						/>
+					{/if}
+					<div class="flex-1 overflow-hidden">
+						<InputPanel
+							toolSlug="csv-workspace"
+							inputLanguage={data.tool.inputLanguage}
+							acceptedExtensions={acceptedExts}
+							sampleInput={data.tool.sampleInput}
+							enableRemoteActions={true}
+							remoteInputKind="csv"
 						/>
 					</div>
 				</div>
@@ -768,6 +844,12 @@
 					/>
 				{:else if data.tool.category === "yaml" && data.tool.slug !== "validator"}
 					<YamlOutputPanel
+						outputLanguage={data.tool.outputLanguage}
+						downloadFilename={data.tool.id}
+						toolSlug={data.tool.slug}
+					/>
+				{:else if data.tool.category === "csv" && data.tool.slug !== "validator"}
+					<CsvOutputPanel
 						outputLanguage={data.tool.outputLanguage}
 						downloadFilename={data.tool.id}
 						toolSlug={data.tool.slug}

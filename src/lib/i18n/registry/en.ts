@@ -480,6 +480,16 @@ const registryEn: Record<string, string> = {
 	'tool.csv-to-json.meta_description':
 		'Convert CSV to JSON instantly in your browser. Supports headers, dynamic typing, and custom delimiters. No data uploaded.',
 	'tool.csv-to-json.operation': 'Convert',
+	'tool.csv-to-json.faq.0.question': 'Can I treat the first row as headers?',
+	'tool.csv-to-json.faq.0.answer':
+		'Yes. The CSV controls let you keep the first row as headers or convert every row as plain column data.',
+	'tool.csv-to-json.faq.1.question': 'Does it detect numbers and booleans automatically?',
+	'tool.csv-to-json.faq.1.answer':
+		'Yes. Numeric and boolean-looking values are inferred during CSV to JSON conversion for cleaner output.',
+	'tool.csv-to-json.use_case.0': 'Turn spreadsheet exports into API-ready JSON payloads',
+	'tool.csv-to-json.use_case.1': 'Inspect CSV rows as structured objects before further processing',
+	'tool.csv-to-json.use_case.2': 'Normalize delimiter-separated data into browser-friendly JSON',
+	'tool.csv-to-json.use_case.3': 'Prepare CSV datasets for JSON-based downstream tooling',
 
 	'tool.csv-to-xml.display_name': 'CSV to XML',
 	'tool.csv-to-xml.tagline': 'Convert CSV data to XML format',
@@ -490,6 +500,11 @@ const registryEn: Record<string, string> = {
 	'tool.csv-to-xml.meta_description':
 		'Convert CSV to XML instantly in your browser. Maps headers to element names. No data uploaded.',
 	'tool.csv-to-xml.operation': 'Convert',
+	'tool.csv-to-xml.faq.0.question': 'How are XML element names chosen?',
+	'tool.csv-to-xml.faq.0.answer':
+		'When header row mode is enabled, each CSV header becomes an XML child element inside a row node.',
+	'tool.csv-to-xml.use_case.0': 'Convert tabular exports into XML fixtures for legacy systems',
+	'tool.csv-to-xml.use_case.1': 'Preview how CSV headers map into row-based XML records',
 
 	'tool.csv-to-yaml.display_name': 'CSV to YAML',
 	'tool.csv-to-yaml.tagline': 'Convert CSV data to YAML format',
@@ -500,6 +515,11 @@ const registryEn: Record<string, string> = {
 	'tool.csv-to-yaml.meta_description':
 		'Convert CSV to YAML instantly in your browser. No data uploaded.',
 	'tool.csv-to-yaml.operation': 'Convert',
+	'tool.csv-to-yaml.faq.0.question': 'What does each YAML item represent?',
+	'tool.csv-to-yaml.faq.0.answer':
+		'Each CSV row becomes one YAML object, and column headers become keys when header mode is enabled.',
+	'tool.csv-to-yaml.use_case.0': 'Transform CSV configuration data into readable YAML lists',
+	'tool.csv-to-yaml.use_case.1': 'Move spreadsheet-driven settings into YAML-based workflows',
 
 	'tool.csv-to-html.display_name': 'CSV to HTML Table',
 	'tool.csv-to-html.tagline': 'Convert CSV data to an HTML table',
@@ -510,6 +530,11 @@ const registryEn: Record<string, string> = {
 	'tool.csv-to-html.meta_description':
 		'Convert CSV to HTML table instantly in your browser. No data uploaded.',
 	'tool.csv-to-html.operation': 'Convert',
+	'tool.csv-to-html.faq.0.question': 'Can I preview the rendered table before copying the HTML?',
+	'tool.csv-to-html.faq.0.answer':
+		'Yes. The output panel includes a preview mode so you can inspect the rendered table as well as the raw HTML.',
+	'tool.csv-to-html.use_case.0': 'Generate HTML tables for docs, admin tools, or CMS snippets',
+	'tool.csv-to-html.use_case.1': 'Check table structure visually before embedding generated markup',
 
 	'tool.csv-formatter.display_name': 'CSV Formatter',
 	'tool.csv-formatter.tagline': 'Format and normalize CSV data',
@@ -520,6 +545,13 @@ const registryEn: Record<string, string> = {
 	'tool.csv-formatter.meta_description':
 		'Format and clean CSV data in your browser. No data uploaded.',
 	'tool.csv-formatter.operation': 'Format',
+	'tool.csv-formatter.faq.0.question': 'What can I normalize while formatting?',
+	'tool.csv-formatter.faq.0.answer':
+		'You can change delimiters, trim cell whitespace, choose whether to keep a header row, skip empty lines, and force quotes around every cell.',
+	'tool.csv-formatter.use_case.0':
+		'Standardize CSV files before importing them into databases or BI tools',
+	'tool.csv-formatter.use_case.1':
+		'Clean inconsistent spreadsheet exports without sending data to a server',
 
 	'tool.csv-validator.display_name': 'CSV Validator',
 	'tool.csv-validator.tagline': 'Validate CSV structure and syntax',
@@ -530,6 +562,11 @@ const registryEn: Record<string, string> = {
 	'tool.csv-validator.meta_description':
 		'Validate CSV in your browser. Detects structure errors with line numbers. No data leaves your device.',
 	'tool.csv-validator.operation': 'Validate',
+	'tool.csv-validator.faq.0.question': 'What issues does the validator detect?',
+	'tool.csv-validator.faq.0.answer':
+		'It flags parser errors, empty or duplicate headers, and rows whose column count does not match the rest of the file.',
+	'tool.csv-validator.use_case.0': 'Catch malformed CSV before import or conversion',
+	'tool.csv-validator.use_case.1': 'Verify header consistency and row width across shared datasets',
 
 	// ── Text tools ──────────────────────────────────────────────────────────
 	'tool.text-word-counter.display_name': 'Word Counter',
@@ -1232,6 +1269,7 @@ const registryEn: Record<string, string> = {
 	'ui.validator.mode': 'Validator mode',
 	'ui.validator.issue': 'issue',
 	'ui.validator.issues': 'issues',
+	'ui.validator.row': 'Row',
 	'ui.validator.warning': 'warning',
 	'ui.validator.warnings': 'warnings',
 	'ui.validator.first_issue': 'First issue',
@@ -1302,7 +1340,53 @@ const registryEn: Record<string, string> = {
 	'ui.aria.xml_validator': 'XML validator',
 	'ui.aria.yaml_output_panel': 'YAML output panel',
 	'ui.aria.yaml_validator': 'YAML validator',
+	'ui.aria.csv_validator': 'CSV validator',
+	'ui.csv.controls.delimiter': 'Delimiter',
+	'ui.csv.controls.header_row': 'Header row',
+	'ui.csv.controls.skip_empty_lines': 'Skip empty lines',
+	'ui.csv.controls.trim_cells': 'Trim cells',
+	'ui.csv.controls.quote_all': 'Quote all cells',
+	'ui.csv.delimiter.comma': 'Comma (,)',
+	'ui.csv.delimiter.semicolon': 'Semicolon (;)',
+	'ui.csv.delimiter.tab': 'Tab',
+	'ui.csv.delimiter.pipe': 'Pipe (|)',
+	'ui.csv.view.preview': 'Preview',
+	'ui.csv.view.raw': 'Raw',
+	'ui.csv.stats.rows': 'rows',
+	'ui.csv.stats.columns': 'columns',
+	'ui.csv.preview.column_name': 'Column {index}',
+	'ui.csv.preview.no_rows': 'No data rows to preview',
+	'ui.csv.preview.delimiter': 'delimiter',
+	'ui.csv.preview.header_mode': 'header',
+	'ui.csv.preview.no_header': 'Generated columns',
+	'ui.csv.preview.remaining_rows': 'Showing {count} more rows in preview only',
+	'ui.csv.empty.title': 'Paste CSV to get started',
+	'ui.csv.empty.desc': 'Format, validate, preview, or convert CSV data entirely in your browser.',
+	'ui.csv.empty.waiting_title': 'Waiting for CSV output',
+	'ui.csv.empty.waiting_desc':
+		'Parsed rows, formatted output, or converted results will appear here.',
 	'ui.validator.invalid_yaml': 'Invalid YAML',
+	'ui.validator.invalid_csv': 'Invalid CSV',
+	'ui.validator.csv_paste_hint': 'Paste or type CSV to validate it.',
+	'ui.validator.csv_validation_desc':
+		'Validates delimiter structure, row consistency, and malformed quoting in CSV input.',
+	'ui.validator.csv_error.header_empty': 'Header column {column} is empty',
+	'ui.validator.csv_error.duplicate_header': 'Duplicate header "{value}" found',
+	'ui.validator.csv_error.row_width':
+		'Row {row} has {actual} columns but expected {expected}',
+	'ui.validator.csv_success_title': 'Valid CSV',
+	'ui.validator.csv_success_desc':
+		'No structural CSV errors were detected. The document can be parsed successfully.',
+	'ui.validator.csv_paste_schema': 'Paste a schema to validate against',
+	'ui.validator.csv_paste_schema_data': 'Paste CSV to validate',
+	'ui.validator.csv_validating_schema': 'Validating schema…',
+	'ui.validator.csv_matches_schema': 'CSV matches schema',
+	'ui.validator.csv_matches_current_schema': 'CSV rows match the current schema.',
+	'ui.validator.csv_schema_title': 'Schema',
+	'ui.validator.csv_schema_standard': 'JSON Schema Draft-07+ via AJV',
+	'ui.validator.csv_paste_schema_placeholder': 'Paste JSON Schema or YAML schema here…',
+	'ui.validator.csv_schema_validation_desc':
+		'Validate CSV rows against a browser-side schema. Each parsed row is validated as an object using the current CSV options.',
 	'ui.validator.yaml_paste_hint': 'Paste or type YAML to validate it.',
 	'ui.validator.yaml_validation_desc':
 		'Validates YAML syntax, indentation, invalid characters, and malformed structures.',
@@ -1321,6 +1405,7 @@ const registryEn: Record<string, string> = {
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
 	'ui.convert.to_xml': '→ XML',
+	'ui.convert.to_html': '→ HTML',
 	'ui.convert.to_toml': '→ TOML',
 	'ui.convert.to_markdown': '→ MD',
 	'ui.query.jsonpath': 'JSONPath',
@@ -1362,6 +1447,13 @@ const registryEn: Record<string, string> = {
 	'ui.output.stats.size_in': 'in',
 	'ui.output.stats.size_out': 'out',
 	'ui.output.original': 'Original',
+	'ui.command_palette.title': 'Command palette',
+	'ui.command_palette.placeholder': 'Search tools, categories, and formats…',
+	'ui.command_palette.recent': 'Recent',
+	'ui.command_palette.no_results': 'No matching tools found',
+	'ui.command_palette.hint_navigate': 'Navigate',
+	'ui.command_palette.hint_open': 'Open',
+	'ui.command_palette.hint_close': 'Close',
 	'ui.output.minified': 'Minified',
 	'ui.output.saved': 'saved',
 	'ui.output.meta.minified': 'MINIFIED',

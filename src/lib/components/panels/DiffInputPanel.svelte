@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 	import { t } from '$lib/stores/language.js';
 	import { addToast } from '$stores/toast.store';
-	import { WandSparkles, Upload, Eraser, Circle } from 'lucide-svelte';
+	import { fetchRemoteText } from '$lib/utils/url-loader.js';
+	import { WandSparkles, Upload, Eraser, Circle, Link2, X } from 'lucide-svelte';
 	import type StandaloneMonacoEditorType from '$components/editor/StandaloneMonacoEditor.svelte';
 
 	let {
@@ -42,6 +43,8 @@
 	let fileInputEl: HTMLInputElement | undefined = $state(undefined);
 	let isDragOver = $state(false);
 	let dragCounter = $state(0);
+	let showLoadUrl = $state(false);
+	let loadUrlValue = $state('');
 
 	function isValidXml(input: string): boolean {
 		if (typeof DOMParser === 'undefined') return true;
@@ -95,6 +98,30 @@
 		if (!yamlLib) return null;
 		try {
 			yamlLib.load(input);
+			return true;
+		} catch {
+			return false;
+		}
+	}
+
+	async function validateRemoteText(text: string): Promise<boolean> {
+		if (language === 'xml') {
+			return isValidXml(text);
+		}
+
+		if (language === 'yaml') {
+			const mod = yamlLib ?? (await import('js-yaml'));
+			yamlLib = mod;
+			try {
+				mod.load(text);
+				return true;
+			} catch {
+				return false;
+			}
+		}
+
+		try {
+			JSON.parse(text);
 			return true;
 		} catch {
 			return false;
@@ -160,6 +187,25 @@
 
 	function clearValue(): void {
 		onchange?.('');
+	}
+
+	async function loadUrl(): Promise<void> {
+		const url = loadUrlValue.trim();
+		if (!url) return;
+
+		try {
+			const text = await fetchRemoteText(url);
+			const isValid = await validateRemoteText(text);
+			if (!isValid) {
+				throw new Error(`Response does not look like ${languageLabel}`);
+			}
+			onchange?.(text);
+			showLoadUrl = false;
+			loadUrlValue = '';
+			addToast('success', $t('ui.toast.url_loaded', 'Loaded from URL'));
+		} catch {
+			addToast('error', $t('ui.toast.url_error', 'Could not fetch — try pasting directly'));
+		}
 	}
 
 	function triggerUpload(): void {
@@ -233,6 +279,36 @@
 
 	<div class="diff-input-toolbar">
 		<div class="diff-toolbar-group">
+			<div class="diff-input-popover-wrap">
+				<button type="button" class="diff-toolbar-btn" onclick={() => (showLoadUrl = !showLoadUrl)}>
+					<Link2 size={12} />
+					{$t('ui.actions.load_url', 'Load URL')}
+				</button>
+				{#if showLoadUrl}
+					<div class="diff-input-popover">
+						<input
+							bind:value={loadUrlValue}
+							type="url"
+							class="diff-input-popover__field"
+							placeholder={language === 'xml'
+								? 'https://example.com/feed.xml'
+								: language === 'yaml'
+									? 'https://example.com/data.yaml'
+									: 'https://example.com/data.json'}
+						/>
+						<div class="diff-input-popover__actions">
+							<button type="button" class="diff-toolbar-btn" onclick={() => (showLoadUrl = false)}>
+								<X size={12} />
+								{$t('ui.actions.close', 'Close')}
+							</button>
+							<button type="button" class="diff-toolbar-btn" onclick={loadUrl}>
+								<Link2 size={12} />
+								{$t('ui.actions.fetch', 'Fetch')}
+							</button>
+						</div>
+					</div>
+				{/if}
+			</div>
 			<button type="button" class="diff-toolbar-btn" onclick={formatInput} title={$t('ui.diff.actions.format', 'Format')}>
 				<WandSparkles size={12} />
 				{$t('ui.diff.actions.format', 'Format')}
@@ -316,7 +392,46 @@
 	.diff-toolbar-group {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: var(--space-1);
+	}
+
+	.diff-input-popover-wrap {
+		position: relative;
+	}
+
+	.diff-input-popover {
+		position: absolute;
+		left: 0;
+		top: calc(100% + 6px);
+		z-index: var(--z-dropdown);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		width: min(320px, 80vw);
+		padding: var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-lg);
+		background: var(--bg-elevated);
+		box-shadow: var(--shadow-md);
+	}
+
+	.diff-input-popover__field {
+		height: 32px;
+		padding: 0 var(--space-2);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-base);
+		color: var(--text-primary);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		outline: none;
+	}
+
+	.diff-input-popover__actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: var(--space-2);
 	}
 
 	.diff-toolbar-btn {

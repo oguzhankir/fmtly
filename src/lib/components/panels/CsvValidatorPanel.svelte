@@ -2,21 +2,19 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { ToolDefinition } from '$registry/types.js';
+	import { csvError, csvProcessingOptions, csvStats } from '$stores/csv.store';
+	import { format as formatCSV } from '$engines/csv/csv.engine.js';
 	import {
-		yamlError,
-		yamlLintWarnings,
-		parseYAMLText,
-		formatYAMLText,
-		type YAMLLintCode
-	} from '$stores/yaml.store';
-	import {
-		validateYamlSchema,
-		type YamlSchemaValidationResult
-	} from '$engines/yaml/schemaValidator.js';
+		validateCsvSchema,
+		type CsvSchemaValidationResult
+	} from '$engines/csv/schemaValidator.js';
+	import { parseCSV } from '$engines/csv/index.js';
 	import { input, initInput } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
+	import { localizeCsvEngineError } from '$lib/utils/csv-errors.js';
 	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
+	import CsvOptionsToolbar from '$components/panels/CsvOptionsToolbar.svelte';
 	import ConfirmModal from '$components/modals/ConfirmModal.svelte';
 	import { fetchRemoteText } from '$lib/utils/url-loader.js';
 	import { CheckCircle, AlertTriangle, ChevronRight, Wand2, Eraser, Link2, X } from 'lucide-svelte';
@@ -33,12 +31,11 @@
 		$state(undefined);
 	let monacoEditorRef: import('$components/editor/MonacoEditor.svelte').default | undefined =
 		$state(undefined);
-	let initialized = $state(false);
 	let validationMode = $state<'syntax' | 'schema'>('syntax');
 	let schemaInput = $state(
-		'type: object\nrequired:\n  - apiVersion\n  - kind\nproperties:\n  apiVersion:\n    type: string\n  kind:\n    type: string\n  metadata:\n    type: object'
+		'{\n  "type": "object",\n  "required": ["id", "status"],\n  "properties": {\n    "id": { "type": "number" },\n    "status": { "enum": ["active", "inactive"] }\n  }\n}'
 	);
-	let schemaValidationResult = $state<YamlSchemaValidationResult | null>(null);
+	let schemaValidationResult = $state<CsvSchemaValidationResult | null>(null);
 	let schemaValidationToken = 0;
 	let showLoadUrl = $state(false);
 	let loadUrlValue = $state('');
@@ -46,14 +43,31 @@
 	let confirmTitle = $state('');
 	let confirmMessage = $state('');
 
-	let isValid = $derived($input.trim().length > 0 && !$yamlError);
 	let isEmpty = $derived(!$input.trim());
-	let hasWarnings = $derived(isValid && $yamlLintWarnings.length > 0);
-	let errorSummary = $derived($yamlError);
+	let isValid = $derived($input.trim().length > 0 && !$csvError);
+	let errorSummary = $derived($csvError);
+	let localizedErrorSummary = $derived.by(() =>
+		errorSummary ? localizeCsvEngineError(errorSummary, $t) : ''
+	);
+	let isSchemaMode = $derived(validationMode === 'schema');
+	let statsSummary = $derived.by(() => {
+		if (!$csvStats) return '';
+		return `${$csvStats.rowCount.toLocaleString()} ${$t('ui.csv.stats.rows', 'rows')} · ${$csvStats.columnCount.toLocaleString()} ${$t('ui.csv.stats.columns', 'columns')}`;
+	});
+	let schemaIssues = $derived.by(() => {
+		if (!schemaValidationResult || !schemaValidationResult.success) return [];
+		return schemaValidationResult.issues.map((issue) => ({
+			...issue,
+			path: issue.instancePath || '/',
+			plainLanguageExplanation: issue.columnName
+				? `${issue.columnName} ${$t('ui.validator.explanation_must_satisfy', 'must satisfy')} ${issue.keyword}`
+				: `${$t('ui.validator.row', 'Row')} ${issue.row} ${$t('ui.validator.explanation_must_satisfy', 'must satisfy')} ${issue.keyword}`
+		}));
+	});
 	let schemaErrorMessage = $derived.by(() => {
 		if (!schemaValidationResult || schemaValidationResult.success) return '';
 		if (schemaValidationResult.dataError) {
-			return schemaValidationResult.dataError.plainLanguageExplanation ?? schemaValidationResult.dataError.message;
+			return localizeCsvEngineError(schemaValidationResult.dataError, $t);
 		}
 		if (!schemaValidationResult.schemaError) return '';
 		if (schemaValidationResult.schemaError instanceof Error) {
@@ -61,34 +75,11 @@
 		}
 		return schemaValidationResult.schemaError.plainLanguageExplanation ?? schemaValidationResult.schemaError.message;
 	});
-	let warningSummary = $derived.by(() =>
-		$yamlLintWarnings.map((warning) => ({
-			...warning,
-			message: getLintMessage(warning.code)
-		}))
-	);
-	let schemaIssues = $derived.by(() => {
-		if (!schemaValidationResult || !schemaValidationResult.success) return [];
-		return schemaValidationResult.issues.map((issue) => ({
-			line: issue.line,
-			column: issue.column,
-			message: issue.message,
-			code: issue.keyword,
-			path: issue.instancePath || '/',
-			plainLanguageExplanation: `${issue.instancePath || '/'} ${($t as any)('ui.validator.explanation_must_satisfy', 'must satisfy')} ${issue.keyword}`
-		}));
-	});
-	let warningCountLabel = $derived(
-		warningSummary.length > 0
-			? `${warningSummary.length} ${warningSummary.length === 1 ? $t('ui.validator.warning', 'warning') : $t('ui.validator.warnings', 'warnings')}`
-			: ''
-	);
 	let schemaIssueCountLabel = $derived(
 		schemaIssues.length > 0
 			? `${schemaIssues.length} ${schemaIssues.length === 1 ? $t('ui.validator.issue', 'issue') : $t('ui.validator.issues', 'issues')}`
 			: ''
 	);
-	let isSchemaMode = $derived(validationMode === 'schema');
 	let isSchemaValidationSuccessful = $derived(
 		schemaValidationResult?.success === true && schemaValidationResult.valid
 	);
@@ -98,50 +89,53 @@
 			if (schemaValidationResult?.success === true && schemaValidationResult.valid) return 'valid';
 			return 'invalid';
 		}
-		if (errorSummary) return 'invalid';
-		if (hasWarnings) return 'warning';
 		if (isValid) return 'valid';
+		if (errorSummary) return 'invalid';
 		return 'idle';
 	});
 	let statusText = $derived.by(() => {
 		if (isSchemaMode) {
-			if (!$input.trim()) return $t('ui.validator.paste_yaml', 'Paste YAML to validate');
-			if (!schemaInput.trim()) return $t('ui.validator.yaml_paste_schema', 'Paste a schema to validate against');
-			if (!schemaValidationResult) return $t('ui.validator.yaml_validating_schema', 'Validating schema…');
+			if (!$input.trim()) return $t('ui.validator.csv_paste_schema_data', 'Paste CSV to validate');
+			if (!schemaInput.trim()) return $t('ui.validator.csv_paste_schema', 'Paste a schema to validate against');
+			if (!schemaValidationResult) return $t('ui.validator.csv_validating_schema', 'Validating schema…');
 			if (!schemaValidationResult.success) {
 				if (schemaValidationResult.dataError) {
-					return ($t as any)('ui.validator.data_error_pos', 'Data error at line {line}, column {column}', {
-						line: schemaValidationResult.dataError.line,
-						column: schemaValidationResult.dataError.column
-					});
+					return $t(
+						'ui.validator.data_error_pos',
+						{
+							line: schemaValidationResult.dataError.line ?? 1,
+							column: schemaValidationResult.dataError.column ?? 1
+						},
+						'Data error at line {line}, column {column}'
+					);
 				}
 				return schemaErrorMessage || $t('ui.validator.schema_invalid', 'Schema is invalid');
 			}
 			if (schemaValidationResult.valid) {
-				return $t('ui.validator.yaml_matches_schema', 'YAML matches schema');
+				return $t('ui.validator.csv_matches_schema', 'CSV matches schema');
 			}
 			const firstIssue = schemaValidationResult.issues[0];
 			return firstIssue
-				? ($t as any)('ui.validator.schema_error_pos', 'Schema error at line {line}, column {column}', {
-						line: firstIssue.line,
-						column: firstIssue.column
-					})
+				? $t(
+						'ui.validator.schema_error_pos',
+						{ line: firstIssue.line, column: firstIssue.column },
+						'Schema error at line {line}, column {column}'
+					)
 				: $t('ui.validator.schema_validation_failed', 'Schema validation failed');
 		}
-		if (errorSummary) return $t('ui.validator.invalid_yaml', 'Invalid YAML');
-		if (hasWarnings) return warningCountLabel;
-		if (isValid) return $t('ui.validity.valid', { language: 'YAML' }, 'Valid YAML');
+
+		if (isValid) return $t('ui.validity.valid', { language: 'CSV' }, 'Valid CSV');
+		if (errorSummary) return $t('ui.validator.invalid_csv', 'Invalid CSV');
 		return '';
 	});
 
 	onMount(() => {
-		initInput('yaml-workspace');
-		initialized = true;
+		initInput('csv-workspace');
 		void loadMonacoComponent();
 	});
 
 	$effect(() => {
-		if (!initialized || !monacoEditorRef) return;
+		if (!monacoEditorRef) return;
 		if (isSchemaMode) {
 			monacoEditorRef.setErrorMarkers(
 				schemaIssues.map((issue) => ({
@@ -153,25 +147,19 @@
 			);
 			return;
 		}
-		if ($yamlError?.line != null) {
+		const err = $csvError;
+		if (err?.line != null) {
 			monacoEditorRef.setErrorMarkers([
 				{
-					line: $yamlError.line,
-					column: $yamlError.column ?? 1,
-					message: $yamlError.plainLanguageExplanation ?? $yamlError.message,
+					line: err.line,
+					column: err.column ?? 1,
+					message: localizeCsvEngineError(err, $t),
 					severity: 'error'
 				}
 			]);
 			return;
 		}
-		monacoEditorRef.setErrorMarkers(
-			$yamlLintWarnings.map((warning) => ({
-				line: warning.line,
-				column: warning.column,
-				message: getLintMessage(warning.code),
-				severity: 'warning'
-			}))
-		);
+		monacoEditorRef.setErrorMarkers([]);
 	});
 
 	$effect(() => {
@@ -186,7 +174,7 @@
 		}
 
 		const nextToken = ++schemaValidationToken;
-		void validateYamlSchema($input, schemaInput).then((nextResult) => {
+		void validateCsvSchema($input, schemaInput, $csvProcessingOptions).then((nextResult) => {
 			if (nextToken !== schemaValidationToken) return;
 			schemaValidationResult = nextResult;
 		});
@@ -198,13 +186,8 @@
 	}
 
 	function navigateToError(): void {
-		if (!$yamlError?.line || !monacoEditorRef) return;
-		monacoEditorRef.revealLine($yamlError.line);
-	}
-
-	function navigateToWarning(line: number): void {
-		if (!monacoEditorRef) return;
-		monacoEditorRef.revealLine(line);
+		if (!$csvError?.line || !monacoEditorRef) return;
+		monacoEditorRef.revealLine($csvError.line);
 	}
 
 	function navigateToSchemaIssue(line: number): void {
@@ -212,27 +195,10 @@
 		monacoEditorRef.revealLine(line);
 	}
 
-	function getLintMessage(code: YAMLLintCode): string {
-		switch (code) {
-			case 'tabs':
-				return $t('ui.validator.yaml_lint.tabs', 'Tabs found in indentation. YAML is usually safer with spaces only.');
-			case 'trailing_whitespace':
-				return $t('ui.validator.yaml_lint.trailing_whitespace', 'Trailing whitespace found.');
-			case 'odd_indentation':
-				return $t('ui.validator.yaml_lint.odd_indentation', 'Odd indentation width found. YAML is usually more consistent with 2-space indentation.');
-		}
-	}
-
 	async function formatInPlace(): Promise<void> {
 		const value = $input;
 		if (!value.trim()) return;
-		const result = await formatYAMLText(value);
-		if (result.success) {
-			input.set(result.output);
-			addToast('success', $t('ui.toast.format_success', 'Formatted successfully'));
-			return;
-		}
-		addToast('error', result.error.plainLanguageExplanation ?? result.error.message);
+		input.set(await formatCSV(value, $csvProcessingOptions));
 	}
 
 	function selectSyntaxMode(): void {
@@ -251,11 +217,7 @@
 
 	function clearInputValue(): void {
 		if ($input.length > 1000) {
-			confirmTitle = $t(
-				'ui.confirm.clear',
-				{ language: 'YAML' },
-				'Clear the current YAML input?'
-			);
+			confirmTitle = $t('ui.confirm.clear', { language: 'CSV' }, 'Clear the current CSV input?');
 			confirmMessage = $t('ui.confirm.clear_description', 'This action cannot be undone.');
 			confirmModalOpen = true;
 			return;
@@ -277,9 +239,13 @@
 
 		try {
 			const text = await fetchRemoteText(url);
-			const result = await parseYAMLText(text);
+			const result = await parseCSV(text, {
+				delimiter: $csvProcessingOptions.delimiter,
+				skipEmptyLines: $csvProcessingOptions.skipEmptyLines,
+				trimCells: $csvProcessingOptions.trimCells
+			});
 			if (!result.success) {
-				throw new Error('Response does not look like YAML');
+				throw new Error('Response does not look like CSV');
 			}
 			input.set(text);
 			showLoadUrl = false;
@@ -291,15 +257,16 @@
 	}
 </script>
 
-<div class="validator-shell" role="region" aria-label={$t('ui.aria.yaml_validator', 'YAML validator')}>
+<div class="validator-shell" role="region" aria-label={$t('ui.aria.csv_validator', 'CSV validator')}>
 	{#if workspaceTools.length > 0}
 		<WorkspaceTabs
 			tools={workspaceTools}
 			activeSlug={toolSlug}
-			category="yaml"
+			category="csv"
 			locale={$page.params.lang || 'en'}
 		/>
 	{/if}
+	<CsvOptionsToolbar showQuoteAll={true} />
 	<div class="validator-layout">
 		<div class="validator-editor">
 			<div class="validator-editor-toolbar">
@@ -337,7 +304,7 @@
 									bind:value={loadUrlValue}
 									type="url"
 									class="h-[32px] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] px-[var(--space-2)] text-[12px] text-[var(--text-primary)] outline-none"
-									placeholder="https://example.com/data.yaml"
+									placeholder="https://example.com/data.csv"
 								/>
 								<div class="flex justify-end gap-[var(--space-2)]">
 									<button type="button" class="validator-btn" onclick={() => (showLoadUrl = false)}>
@@ -364,19 +331,14 @@
 					{/if}
 				</div>
 				<div class="validator-editor-toolbar__group">
-					{#if statusTone === 'invalid'}
-						<span class="validator-status validator-status--invalid">
-							<AlertTriangle size={13} />
-							{statusText}
-						</span>
-					{:else if statusTone === 'warning'}
-						<span class="validator-status validator-status--warning">
-							<AlertTriangle size={13} />
-							{statusText}
-						</span>
-					{:else if statusTone === 'valid'}
+					{#if statusTone === 'valid'}
 						<span class="validator-status validator-status--valid">
 							<CheckCircle size={13} />
+							{statusText}
+						</span>
+					{:else if statusTone === 'invalid'}
+						<span class="validator-status validator-status--invalid">
+							<AlertTriangle size={13} />
 							{statusText}
 						</span>
 					{/if}
@@ -385,7 +347,7 @@
 
 			<div class="validator-editor-body">
 				{#if MonacoEditor}
-					<MonacoEditor bind:this={monacoEditorRef} language="yaml" wordWrap={true} />
+					<MonacoEditor bind:this={monacoEditorRef} language="plaintext" wordWrap={true} />
 				{:else}
 					<div class="validator-loading">{$t('ui.validator.loading_editor', 'Loading editor…')}</div>
 				{/if}
@@ -396,41 +358,45 @@
 			{#if isSchemaMode}
 				<div class="validator-schema">
 					<div class="validator-schema__header">
-						<strong>{$t('ui.validator.yaml_schema_title', 'Schema')}</strong>
-						<span>{$t('ui.validator.yaml_schema_standard', 'JSON Schema Draft-07+ via AJV')}</span>
+						<strong>{$t('ui.validator.csv_schema_title', 'Schema')}</strong>
+						<span>{$t('ui.validator.csv_schema_standard', 'JSON Schema Draft-07+ via AJV')}</span>
 					</div>
 					<textarea
 						value={schemaInput}
 						class="validator-schema__input"
-						placeholder={$t('ui.validator.yaml_paste_schema_placeholder', 'Paste JSON Schema or YAML schema here…')}
+						placeholder={$t('ui.validator.csv_paste_schema_placeholder', 'Paste JSON Schema or YAML schema here…')}
 						spellcheck="false"
 						oninput={handleSchemaInput}
 					></textarea>
 				</div>
 				{#if isEmpty}
 					<div class="validator-empty validator-panel-section">
-						<p>{$t('ui.validator.paste_yaml', 'Paste YAML to validate')}</p>
+						<p>{$t('ui.validator.csv_paste_schema_data', 'Paste CSV to validate')}</p>
 						<p class="validator-empty__hint">
-							{$t('ui.validator.yaml_schema_validation_desc', 'Validate YAML structure against a JSON Schema. Schema input can be written in JSON or YAML.')}
+							{$t('ui.validator.csv_schema_validation_desc', 'Validate CSV rows against a browser-side schema. Each parsed row is validated as an object using the current CSV options.')}
 						</p>
 					</div>
 				{:else if errorSummary}
 					<div class="validator-errors validator-panel-section">
 						<div class="validator-errors__header">
 							<AlertTriangle size={14} />
-							<span>{($t as any)('ui.validator.error_count', { count: 1 }, '1 error found')}</span>
+							<span>{$t('ui.validator.error_count.one', '1 error found')}</span>
 						</div>
 						<button type="button" class="validator-error-item" onclick={navigateToError}>
 							<div class="validator-error-item__meta">
 								{#if errorSummary.line != null}
 									<span class="validator-error-item__loc">
-										{($t as any)('ui.validator.line_col_label', 'Line {line}, column {column}', { line: errorSummary.line, column: errorSummary.column ?? 1 })}
+										{$t(
+											'ui.validator.line_col_label',
+											{ line: errorSummary.line, column: errorSummary.column ?? 1 },
+											'Line {line}, column {column}'
+										)}
 									</span>
 								{/if}
 							</div>
 							<div class="validator-error-item__body">
 								<p class="validator-error-item__plain">
-									{errorSummary.plainLanguageExplanation ?? errorSummary.message}
+									{localizedErrorSummary}
 								</p>
 							</div>
 							<span class="validator-error-item__arrow">
@@ -452,7 +418,11 @@
 							>
 								<div class="validator-error-item__meta">
 									<span class="validator-error-item__loc">
-										{($t as any)('ui.validator.line_col_label', 'Line {line}, column {column}', { line: issue.line, column: issue.column })}
+										{$t(
+											'ui.validator.line_col_label',
+											{ line: issue.line, column: issue.column },
+											'Line {line}, column {column}'
+										)}
 									</span>
 								</div>
 								<div class="validator-error-item__body">
@@ -474,35 +444,55 @@
 					<div class="validator-success validator-panel-section">
 						<CheckCircle size={32} />
 						<p class="validator-success__title">
-							{$t('ui.validator.yaml_matches_schema', 'YAML matches schema')}
+							{$t('ui.validator.csv_matches_schema', 'CSV matches schema')}
 						</p>
 						<p class="validator-success__desc">
-							{$t('ui.validator.yaml_matches_current_schema', 'YAML matches the current schema.')}
+							{$t('ui.validator.csv_matches_current_schema', 'CSV rows match the current schema.')}
 						</p>
+						{#if statsSummary}
+							<p class="validator-success__desc">{statsSummary}</p>
+						{/if}
 					</div>
 				{/if}
 			{:else if isEmpty}
 				<div class="validator-empty">
-					<p>{$t('ui.validator.yaml_paste_hint', 'Paste or type YAML to validate it.')}</p>
-					<p class="validator-empty__hint">{$t('ui.validator.yaml_validation_desc', 'Validates YAML syntax, indentation, invalid characters, and malformed structures.')}</p>
+					<p>{$t('ui.validator.csv_paste_hint', 'Paste or type CSV to validate it.')}</p>
+					<p class="validator-empty__hint">
+						{$t('ui.validator.csv_validation_desc', 'Validates delimiter structure, row consistency, and malformed quoting in CSV input.')}
+					</p>
+				</div>
+			{:else if isValid}
+				<div class="validator-success">
+					<CheckCircle size={32} />
+					<p class="validator-success__title">{$t('ui.validator.csv_success_title', 'Valid CSV')}</p>
+					<p class="validator-success__desc">
+						{$t('ui.validator.csv_success_desc', 'No structural CSV errors were detected. The document can be parsed successfully.')}
+					</p>
+					{#if statsSummary}
+						<p class="validator-success__desc">{statsSummary}</p>
+					{/if}
 				</div>
 			{:else if errorSummary}
 				<div class="validator-errors">
 					<div class="validator-errors__header">
 						<AlertTriangle size={14} />
-						<span>{($t as any)('ui.validator.error_count', { count: 1 }, '1 error found')}</span>
+						<span>{$t('ui.validator.error_count.one', '1 error found')}</span>
 					</div>
 					<button type="button" class="validator-error-item" onclick={navigateToError}>
 						<div class="validator-error-item__meta">
 							{#if errorSummary.line != null}
 								<span class="validator-error-item__loc">
-									{($t as any)('ui.validator.line_col_label', 'Line {line}, column {column}', { line: errorSummary.line, column: errorSummary.column ?? 1 })}
+									{$t(
+										'ui.validator.line_col_label',
+										{ line: errorSummary.line, column: errorSummary.column ?? 1 },
+										'Line {line}, column {column}'
+									)}
 								</span>
 							{/if}
 						</div>
 						<div class="validator-error-item__body">
 							<p class="validator-error-item__plain">
-								{errorSummary.plainLanguageExplanation ?? errorSummary.message}
+								{localizedErrorSummary}
 							</p>
 						</div>
 						<span class="validator-error-item__arrow">
@@ -510,47 +500,18 @@
 						</span>
 					</button>
 				</div>
-			{:else if hasWarnings}
-				<div class="validator-warnings">
-					<div class="validator-warnings__intro">
-						<AlertTriangle size={20} />
-						<div class="validator-warnings__copy">
-							<p class="validator-warnings__title">{$t('ui.validator.yaml_warning_title', 'Valid YAML with style warnings')}</p>
-							<p class="validator-warnings__desc">{$t('ui.validator.yaml_warning_desc', 'The document parses successfully, but a few style issues may reduce readability or consistency.')}</p>
-						</div>
-					</div>
-					<div class="validator-errors__header validator-errors__header--warning">
-						<AlertTriangle size={14} />
-						<span>{warningCountLabel}</span>
-					</div>
-					{#each warningSummary as warning}
-						<button type="button" class="validator-error-item validator-error-item--warning" onclick={() => navigateToWarning(warning.line)}>
-							<div class="validator-error-item__meta">
-								<span class="validator-error-item__loc">
-									{($t as any)('ui.validator.line_col_label', 'Line {line}, column {column}', { line: warning.line, column: warning.column })}
-								</span>
-							</div>
-							<div class="validator-error-item__body">
-								<p class="validator-error-item__plain">{warning.message}</p>
-							</div>
-							<span class="validator-error-item__arrow">
-								<ChevronRight size={14} />
-							</span>
-						</button>
-					{/each}
-				</div>
-			{:else if isValid}
-				<div class="validator-success">
-					<CheckCircle size={32} />
-					<p class="validator-success__title">{$t('ui.validator.yaml_success_title', 'Valid YAML')}</p>
-					<p class="validator-success__desc">{$t('ui.validator.yaml_success_desc', 'No syntax errors detected. The document can be parsed successfully as YAML.')}</p>
-				</div>
 			{/if}
 		</div>
 	</div>
 </div>
 
-<ConfirmModal bind:open={confirmModalOpen} title={confirmTitle} message={confirmMessage} onConfirm={doClearInput} onCancel={() => {}} />
+<ConfirmModal
+	bind:open={confirmModalOpen}
+	title={confirmTitle}
+	message={confirmMessage}
+	onConfirm={doClearInput}
+	onCancel={() => {}}
+/>
 
 <style>
 	.validator-shell {
@@ -597,20 +558,19 @@
 	.validator-modes {
 		display: inline-flex;
 		align-items: center;
-		gap: 4px;
-		padding: 4px;
+		padding: 2px;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		background: var(--bg-elevated);
 	}
 
 	.validator-mode-btn {
-		height: 28px;
-		padding: 0 var(--space-3);
+		height: 26px;
+		padding: 0 var(--space-2);
 		border: none;
-		border-radius: var(--radius-sm);
+		border-radius: calc(var(--radius-md) - 2px);
 		background: transparent;
-		color: var(--text-muted);
+		color: var(--text-secondary);
 		font-family: var(--font-ui);
 		font-size: 12px;
 		font-weight: 600;
@@ -618,8 +578,8 @@
 	}
 
 	.validator-mode-btn--active {
-		background: var(--accent);
-		color: var(--text-on-accent);
+		background: var(--bg-hover);
+		color: var(--text-primary);
 	}
 
 	.validator-editor-body {
@@ -653,7 +613,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: var(--space-1);
-		height: 28px;
+		height: 24px;
 		padding: 0 var(--space-2);
 		border-radius: var(--radius-full);
 		font-family: var(--font-ui);
@@ -662,65 +622,13 @@
 	}
 
 	.validator-status--valid {
-		background: var(--success-bg);
-		color: var(--success-text);
+		background: color-mix(in srgb, var(--success) 14%, transparent);
+		color: var(--success);
 	}
 
 	.validator-status--invalid {
-		background: var(--danger-bg);
-		color: var(--danger-text);
-	}
-
-	.validator-status--warning {
-		background: var(--status-warning-bg);
-		color: var(--status-warning);
-	}
-
-	.validator-panel {
-		width: min(360px, 35%);
-		min-width: 280px;
-		max-width: 420px;
-		padding: var(--space-4);
-		overflow: auto;
-		background: var(--bg-surface);
-	}
-
-	.validator-panel-section {
-		min-height: 220px;
-	}
-
-	.validator-schema {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-2);
-		margin-bottom: var(--space-4);
-	}
-
-	.validator-schema__header {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-		font-family: var(--font-ui);
-		font-size: 12px;
-		color: var(--text-muted);
-	}
-
-	.validator-schema__header strong {
-		color: var(--text-primary);
-	}
-
-	.validator-schema__input {
-		min-height: 160px;
-		width: 100%;
-		resize: vertical;
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-md);
-		background: var(--bg-base);
-		color: var(--text-primary);
-		padding: var(--space-3);
-		font-family: var(--font-mono);
-		font-size: 12px;
-		line-height: 1.6;
+		background: color-mix(in srgb, var(--error) 14%, transparent);
+		color: var(--error);
 	}
 
 	.validator-loading,
@@ -731,87 +639,98 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
+		padding: var(--space-8);
 		text-align: center;
 		color: var(--text-secondary);
-		padding: var(--space-6);
-		gap: var(--space-2);
 	}
 
 	.validator-empty__hint,
 	.validator-success__desc {
-		color: var(--text-tertiary);
-		font-size: var(--text-sm);
+		max-width: 34rem;
+		color: var(--text-muted);
+	}
+
+	.validator-success {
+		gap: var(--space-3);
+		color: var(--success);
 	}
 
 	.validator-success__title {
-		font-weight: 600;
+		margin: 0;
+		font-size: var(--text-lg);
+		font-weight: var(--weight-semibold);
 		color: var(--text-primary);
+	}
+
+	.validator-success__desc,
+	.validator-empty p {
+		margin: 0;
+	}
+
+	.validator-panel-section {
+		flex: 1;
+	}
+
+	.validator-panel {
+		width: min(32rem, 38%);
+		min-width: 18rem;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-surface);
 	}
 
 	.validator-errors {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-3);
+		padding: var(--space-4);
 	}
 
-	.validator-warnings {
+	.validator-schema {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-3);
+		gap: var(--space-2);
+		padding: var(--space-4);
+		border-bottom: 1px solid var(--border-subtle);
+		background: var(--bg-base);
 	}
 
-	.validator-warnings__intro {
-		display: flex;
-		align-items: flex-start;
-		gap: var(--space-3);
-		padding: var(--space-3);
-		border: 1px solid color-mix(in srgb, var(--status-warning) 25%, transparent);
-		border-radius: var(--radius-lg);
-		background: var(--status-warning-bg);
-		color: var(--status-warning);
-	}
-
-	.validator-warnings__copy {
+	.validator-schema__header {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-1);
-	}
-
-	.validator-warnings__title,
-	.validator-warnings__desc {
-		margin: 0;
-	}
-
-	.validator-warnings__title {
-		font-size: 13px;
-		font-weight: 600;
-		color: var(--text-primary);
-	}
-
-	.validator-warnings__desc {
+		font-family: var(--font-ui);
 		font-size: 12px;
-		color: var(--text-secondary);
+		color: var(--text-muted);
+	}
+
+	.validator-schema__input {
+		min-height: 10rem;
+		resize: vertical;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-md);
+		background: var(--bg-elevated);
+		padding: var(--space-3);
+		font-family: var(--font-mono);
+		font-size: 12px;
+		color: var(--text-primary);
 	}
 
 	.validator-errors__header {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--space-1);
+		gap: var(--space-2);
+		font-family: var(--font-ui);
 		font-size: 12px;
 		font-weight: 600;
-		color: var(--danger-text);
-	}
-
-	.validator-errors__header--warning {
-		color: var(--status-warning);
+		color: var(--error);
 	}
 
 	.validator-error-item {
-		width: 100%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr auto;
 		gap: var(--space-3);
+		width: 100%;
 		padding: var(--space-3);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
@@ -822,51 +741,40 @@
 
 	.validator-error-item:hover {
 		border-color: var(--border-focus);
-		background: var(--bg-hover);
-	}
-
-	.validator-error-item--warning {
-		border-color: color-mix(in srgb, var(--status-warning) 18%, var(--border-default));
 	}
 
 	.validator-error-item__meta {
-		flex-shrink: 0;
+		grid-column: 1 / -1;
 	}
 
 	.validator-error-item__loc {
-		font-size: 11px;
+		font-family: var(--font-ui);
+		font-size: 12px;
 		font-weight: 600;
-		color: var(--text-tertiary);
+		color: var(--text-muted);
 	}
 
 	.validator-error-item__body {
-		flex: 1;
-		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
 	}
 
 	.validator-error-item__plain {
 		margin: 0;
-		font-size: 13px;
-		line-height: 1.5;
 		color: var(--text-primary);
 	}
 
 	.validator-error-item__detail,
 	.validator-error-item__path {
-		margin: 4px 0 0;
+		margin: 0;
 		font-size: 12px;
-		line-height: 1.5;
-		color: var(--text-secondary);
-	}
-
-	.validator-error-item__path {
-		font-family: var(--font-mono);
-		color: var(--text-tertiary);
+		color: var(--text-muted);
 	}
 
 	.validator-error-item__arrow {
-		flex-shrink: 0;
-		color: var(--text-tertiary);
+		align-self: center;
+		color: var(--text-muted);
 	}
 
 	@media (max-width: 900px) {
@@ -881,7 +789,6 @@
 
 		.validator-panel {
 			width: 100%;
-			max-width: none;
 			min-width: 0;
 		}
 	}

@@ -11,7 +11,7 @@ export const csvTools: ToolDefinition[] = [
 		primaryKeyword: 'tool.csv-to-json.primary_keyword',
 		metaTitle: 'tool.csv-to-json.meta_title',
 		metaDescription: 'tool.csv-to-json.meta_description',
-		engine: 'encoder',
+		engine: 'csv',
 		operation: 'tool.csv-to-json.operation',
 		layoutVariant: 'split',
 		inputLanguage: 'csv',
@@ -19,8 +19,8 @@ export const csvTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'to-csv' },
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'csv', slug: 'to-json' }
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'csv', slug: 'validator' }
 		],
 		faqs: [
 			{
@@ -104,14 +104,18 @@ Diana,28,Tokyo,true`
 		outputLanguage: 'xml',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'csv', slug: 'to-yaml' },
+			{ category: 'csv', slug: 'validator' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: 'id,name\n1,Alice'
+		faqs: [
+			{
+				question: 'tool.csv-to-xml.faq.0.question',
+				answer: 'tool.csv-to-xml.faq.0.answer'
+			}
+		],
+		useCases: ['tool.csv-to-xml.use_case.0', 'tool.csv-to-xml.use_case.1'],
+		sampleInput: 'id,name,status\n1,Alice,active\n2,Bob,inactive'
 	},
 	{
 		id: 'csv-to-yaml',
@@ -130,14 +134,18 @@ Diana,28,Tokyo,true`
 		outputLanguage: 'yaml',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'csv', slug: 'to-xml' },
+			{ category: 'csv', slug: 'validator' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: 'id,value\n1,true'
+		faqs: [
+			{
+				question: 'tool.csv-to-yaml.faq.0.question',
+				answer: 'tool.csv-to-yaml.faq.0.answer'
+			}
+		],
+		useCases: ['tool.csv-to-yaml.use_case.0', 'tool.csv-to-yaml.use_case.1'],
+		sampleInput: 'service,port,enabled\napi,8080,true\nworker,9090,false'
 	},
 	{
 		id: 'csv-to-html',
@@ -156,14 +164,18 @@ Diana,28,Tokyo,true`
 		outputLanguage: 'html',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'csv', slug: 'validator' },
+			{ category: 'csv', slug: 'to-xml' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: 'header1,header2\ndata1,data2'
+		faqs: [
+			{
+				question: 'tool.csv-to-html.faq.0.question',
+				answer: 'tool.csv-to-html.faq.0.answer'
+			}
+		],
+		useCases: ['tool.csv-to-html.use_case.0', 'tool.csv-to-html.use_case.1'],
+		sampleInput: 'name,score,team\nAlice,98,Blue\nBob,91,Green'
 	},
 	{
 		id: 'csv-formatter',
@@ -182,14 +194,18 @@ Diana,28,Tokyo,true`
 		outputLanguage: 'csv',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'csv', slug: 'validator' },
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'csv', slug: 'to-html' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: 'id,name\n1,john'
+		faqs: [
+			{
+				question: 'tool.csv-formatter.faq.0.question',
+				answer: 'tool.csv-formatter.faq.0.answer'
+			}
+		],
+		useCases: ['tool.csv-formatter.use_case.0', 'tool.csv-formatter.use_case.1'],
+		sampleInput: 'id ; name ; city\n1 ; Alice ; Berlin\n2 ; Bob ; Paris'
 	},
 	{
 		id: 'csv-validator',
@@ -203,18 +219,22 @@ Diana,28,Tokyo,true`
 		metaDescription: 'tool.csv-validator.meta_description',
 		engine: 'csv',
 		operation: 'validate',
-		layoutVariant: 'single',
+		layoutVariant: 'single-panel',
 		inputLanguage: 'csv',
 		outputLanguage: 'csv',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'csv', slug: 'to-html' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: 'col1,col2\nval1,val2'
+		faqs: [
+			{
+				question: 'tool.csv-validator.faq.0.question',
+				answer: 'tool.csv-validator.faq.0.answer'
+			}
+		],
+		useCases: ['tool.csv-validator.use_case.0', 'tool.csv-validator.use_case.1'],
+		sampleInput: 'id,name,name\n1,Alice,Alice\n2,Bob'
 	}
 ];

@@ -6,8 +6,9 @@
 	import { goto } from '$app/navigation';
 	import { getAllTools } from '$registry/index.js';
 	import { localizeToolDefinitions } from '$registry/localized.js';
-	import { t } from '$stores/language';
+	import { locale, t } from '$stores/language';
 	import type { ToolDefinition } from '$registry/types.js';
+	import { localizePath } from '$lib/utils/locale-routing.js';
 
 	let { open = $bindable(false) }: { open?: boolean } = $props();
 	let query = $state('');
@@ -46,7 +47,7 @@
 	function openTool(tool: ToolDefinition): void {
 		open = false;
 		query = '';
-		goto(`/${tool.category}/${tool.id}`);
+		void goto(localizePath(`/${tool.category}/${tool.slug}`, get(locale)));
 	}
 
 	function handleKeydown(event: KeyboardEvent): void {
@@ -121,48 +122,48 @@
 		tabindex="-1"
 	>
 		<div class="palette-modal">
-			<div class="palette-input-row">
+			<div class="palette-search-row">
 				<div class="search-input-wrapper">
 					<Search class="search-icon" size={20} />
 					<input
 						bind:this={inputEl}
 						type="text"
-						placeholder={get(t)('ui.command_palette.placeholder')}
+						placeholder={get(t)('ui.command_palette.placeholder', 'Search tools, categories, and formats…')}
 						bind:value={query}
 						onkeydown={handleKeydown}
 					/>
 				</div>
+			</div>
 
-				<div class="palette-results">
-					{#if !query.trim() && recentIds.length > 0}
-						<div class="palette-section-label">{$t('ui.command_palette.recent')}</div>
-					{/if}
+			<div class="palette-results">
+				{#if !query.trim() && recentIds.length > 0}
+					<div class="palette-section-label">{$t('ui.command_palette.recent', 'Recent')}</div>
+				{/if}
 
-					{#each filteredTools as tool, i (tool.id)}
-						<button
-							class="palette-result"
-							class:palette-result--active={i === selectedIndex}
-							onclick={() => openTool(tool)}
-							onmouseenter={() => { selectedIndex = i; }}
-						>
-							<div class="palette-result-left">
-								<span class="palette-result-badge">{tool.category.toUpperCase()}</span>
-								<span class="palette-result-name">{tool.displayName}</span>
-							</div>
-							<span class="palette-result-category">{tool.tagline}</span>
-						</button>
-					{:else}
-						<div class="no-results">
-							<p>{get(t)('ui.command_palette.no_results')}</p>
+				{#each filteredTools as tool, i (tool.id)}
+					<button
+						class="palette-result"
+						class:palette-result--active={i === selectedIndex}
+						onclick={() => openTool(tool)}
+						onmouseenter={() => { selectedIndex = i; }}
+					>
+						<div class="palette-result-left">
+							<span class="palette-result-badge">{tool.category.toUpperCase()}</span>
+							<span class="palette-result-name">{tool.displayName}</span>
 						</div>
-					{/each}
-				</div>
+						<span class="palette-result-category">{tool.tagline}</span>
+					</button>
+				{:else}
+					<div class="no-results">
+						<p>{get(t)('ui.command_palette.no_results', 'No matching tools found')}</p>
+					</div>
+				{/each}
+			</div>
 
-				<div class="palette-footer">
-					<span class="palette-hint"><kbd>↑↓</kbd> {$t('ui.command_palette.hint_navigate')}</span>
-					<span class="palette-hint"><kbd>↵</kbd> {$t('ui.command_palette.hint_open')}</span>
-					<span class="palette-hint"><kbd>esc</kbd> {$t('ui.command_palette.hint_close')}</span>
-				</div>
+			<div class="palette-footer">
+				<span class="palette-hint"><kbd>↑↓</kbd> {$t('ui.command_palette.hint_navigate', 'Navigate')}</span>
+				<span class="palette-hint"><kbd>↵</kbd> {$t('ui.command_palette.hint_open', 'Open')}</span>
+				<span class="palette-hint"><kbd>esc</kbd> {$t('ui.command_palette.hint_close', 'Close')}</span>
 			</div>
 		</div>
 	</div>
@@ -194,19 +195,46 @@
 		overflow: hidden;
 	}
 
-	.palette-input-row {
+	.palette-search-row {
+		padding: 12px 16px;
+		border-bottom: 1px solid var(--border-subtle);
+	}
+
+	.search-input-wrapper {
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		padding: 12px 16px;
-		border-bottom: 1px solid var(--border-subtle);
+		width: 100%;
+		min-width: 0;
+	}
+
+	.search-input-wrapper :global(svg) {
+		flex-shrink: 0;
+		color: var(--text-muted);
+	}
+
+	.search-input-wrapper input {
+		width: 100%;
+		min-width: 0;
+		height: 36px;
+		border: none;
+		background: transparent;
+		color: var(--text-primary);
+		font-family: var(--font-ui);
+		font-size: 14px;
+		outline: none;
+	}
+
+	.search-input-wrapper input::placeholder {
+		color: var(--text-tertiary);
 	}
 
 
 	.palette-results {
 		flex: 1;
 		overflow-y: auto;
-		padding: 4px;
+		padding: 6px;
+		min-height: 0;
 		max-height: 380px;
 	}
 
@@ -245,6 +273,7 @@
 		align-items: center;
 		gap: 8px;
 		min-width: 0;
+		flex: 1;
 	}
 
 	.palette-result-badge {
@@ -279,13 +308,26 @@
 		margin-left: 8px;
 	}
 
+	.no-results {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 120px;
+		padding: 24px 16px;
+		color: var(--text-muted);
+		font-size: 13px;
+		text-align: center;
+	}
+
 
 	.palette-footer {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 16px;
 		padding: 8px 16px;
 		border-top: 1px solid var(--border-subtle);
+		background: var(--bg-surface);
 	}
 
 	.palette-hint {

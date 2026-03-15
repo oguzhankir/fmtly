@@ -6,13 +6,18 @@
 	import { input, initInput } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
-	import { formatXML } from '$engines/xml/index.js';
+	import { formatXML, parseXML } from '$engines/xml/index.js';
 	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
+	import ConfirmModal from '$components/modals/ConfirmModal.svelte';
+	import { fetchRemoteText } from '$lib/utils/url-loader.js';
 	import {
 		CheckCircle,
 		AlertTriangle,
 		ChevronRight,
-		Wand2
+		Wand2,
+		Eraser,
+		Link2,
+		X
 	} from 'lucide-svelte';
 
 	let {
@@ -28,6 +33,11 @@
 	let monacoEditorRef: import('$components/editor/MonacoEditor.svelte').default | undefined =
 		$state(undefined);
 	let initializedToolSlug = $state('');
+	let showLoadUrl = $state(false);
+	let loadUrlValue = $state('');
+	let confirmModalOpen = $state(false);
+	let confirmTitle = $state('');
+	let confirmMessage = $state('');
 
 	let isValid = $derived($input.trim().length > 0 && !$xmlError);
 	let isEmpty = $derived(!$input.trim());
@@ -92,6 +102,43 @@
 		}
 	}
 
+	function clearInputValue(): void {
+		if ($input.length > 1000) {
+			confirmTitle = $t('ui.confirm.clear', { language: 'XML' }, 'Clear the current XML input?');
+			confirmMessage = $t('ui.confirm.clear_description', 'This action cannot be undone.');
+			confirmModalOpen = true;
+			return;
+		}
+
+		doClearInput();
+	}
+
+	function doClearInput(): void {
+		input.set('');
+		showLoadUrl = false;
+		loadUrlValue = '';
+		addToast('info', $t('ui.toast.input_cleared', 'Input cleared'));
+	}
+
+	async function loadUrl(): Promise<void> {
+		const url = loadUrlValue.trim();
+		if (!url) return;
+
+		try {
+			const text = await fetchRemoteText(url);
+			const result = parseXML(text);
+			if (!result.success) {
+				throw new Error('Response does not look like XML');
+			}
+			input.set(text);
+			showLoadUrl = false;
+			loadUrlValue = '';
+			addToast('success', $t('ui.toast.url_loaded', 'Loaded from URL'));
+		} catch {
+			addToast('error', $t('ui.toast.url_error', 'Could not fetch — try pasting directly'));
+		}
+	}
+
 </script>
 
 <div class="validator-shell" role="region" aria-label={$t('ui.aria.xml_validator', 'XML validator')}>
@@ -107,10 +154,40 @@
 		<div class="validator-editor">
 			<div class="validator-editor-toolbar">
 				<div class="validator-editor-toolbar__group">
+					<div class="relative">
+						<button type="button" class="validator-btn" onclick={() => (showLoadUrl = !showLoadUrl)}>
+							<Link2 size={13} />
+							{$t('ui.actions.load_url', 'Load URL')}
+						</button>
+						{#if showLoadUrl}
+							<div class="absolute left-0 top-[calc(100%+6px)] z-[var(--z-dropdown)] flex w-[min(320px,80vw)] flex-col gap-[var(--space-2)] rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-elevated)] p-[var(--space-2)] shadow-[var(--shadow-md)]">
+								<input
+									bind:value={loadUrlValue}
+									type="url"
+									class="h-[32px] rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] px-[var(--space-2)] text-[12px] text-[var(--text-primary)] outline-none"
+									placeholder="https://example.com/feed.xml"
+								/>
+								<div class="flex justify-end gap-[var(--space-2)]">
+									<button type="button" class="validator-btn" onclick={() => (showLoadUrl = false)}>
+										<X size={13} />
+										{$t('ui.actions.close', 'Close')}
+									</button>
+									<button type="button" class="validator-btn" onclick={loadUrl}>
+										<Link2 size={13} />
+										{$t('ui.actions.fetch', 'Fetch')}
+									</button>
+								</div>
+							</div>
+						{/if}
+					</div>
 					{#if !isEmpty}
 						<button type="button" class="validator-btn" onclick={formatInPlace}>
 							<Wand2 size={13} />
 							{$t('ui.actions.format', 'Format')}
+						</button>
+						<button type="button" class="validator-btn" onclick={clearInputValue}>
+							<Eraser size={13} />
+							{$t('ui.actions.clear', 'Clear')}
 						</button>
 					{/if}
 				</div>
@@ -183,6 +260,14 @@
 		</div>
 	</div>
 </div>
+
+<ConfirmModal
+	bind:open={confirmModalOpen}
+	title={confirmTitle}
+	message={confirmMessage}
+	onConfirm={doClearInput}
+	onCancel={() => {}}
+/>
 
 <style>
 	.validator-shell {
