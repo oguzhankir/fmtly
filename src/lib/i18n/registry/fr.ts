@@ -272,9 +272,9 @@ const registryFr: Record<string, string> = {
 	'tool.xml-diff.primary_keyword': 'diff xml',
 	'tool.xml-diff.meta_title': 'Outil de Diff XML — fmtly.dev',
 	'tool.xml-diff.meta_description':
-		'Comparer des fichiers XML et visualiser les différences dans votre navigateur. Affiche les changements au niveau des éléments avec des numéros de ligne. Pas d\'envoi de données.',
+		"Comparer des fichiers XML et visualiser les différences dans votre navigateur. Affiche les changements au niveau des éléments avec des numéros de ligne. Pas d'envoi de données.",
 	'tool.xml-diff.operation': 'Diff',
-	'tool.xml-diff.faq.0.question': "Quelle est la différence entre XML Diff et un diff de texte ?",
+	'tool.xml-diff.faq.0.question': 'Quelle est la différence entre XML Diff et un diff de texte ?',
 	'tool.xml-diff.faq.0.answer':
 		"XML Diff valide d'abord les deux entrées comme XML puis les compare ligne par ligne avec une normalisation des espaces adaptée au XML. Il convient donc mieux aux documents XML qu'une simple comparaison de texte.",
 	'tool.xml-diff.faq.1.question': 'Puis-je comparer du XML invalide ?',
@@ -1336,17 +1336,18 @@ const registryFr: Record<string, string> = {
 	'tool.json-to-yaml.use_case.3':
 		'Générer des fichiers YAML pour les configurations de pipeline CI/CD',
 
-	'tool.xml-to-csv.faq.2.question': 'Quels types de XML fonctionnent le mieux pour la conversion CSV ?',
+	'tool.xml-to-csv.faq.2.question':
+		'Quels types de XML fonctionnent le mieux pour la conversion CSV ?',
 	'tool.xml-to-csv.faq.2.answer':
-		'Les XML avec des éléments répétés (comme plusieurs balises <row> ou <item>) fonctionnent le mieux. Le convertisseur détecte automatiquement les noms d\'éléments et les attributs comme en-têtes de colonnes.',
+		"Les XML avec des éléments répétés (comme plusieurs balises <row> ou <item>) fonctionnent le mieux. Le convertisseur détecte automatiquement les noms d'éléments et les attributs comme en-têtes de colonnes.",
 
 	'tool.xml-xpath.faq.2.question': 'Quelle version XPath est supportée ?',
 	'tool.xml-xpath.faq.2.answer':
-		'Cet outil supporte XPath 1.0, qui est la version la plus largement implémentée. Il inclut tous les axes, fonctions et opérateurs standard pour l\'interrogation XML.',
+		"Cet outil supporte XPath 1.0, qui est la version la plus largement implémentée. Il inclut tous les axes, fonctions et opérateurs standard pour l'interrogation XML.",
 
 	'tool.xml-xpath.faq.3.question': 'Puis-je tester XPath sur du XML invalide ?',
 	'tool.xml-xpath.faq.3.answer':
-		'Non. XPath nécessite du XML bien formé. Si votre XML contient des erreurs de syntaxe, corrigez-les d\'abord en utilisant le Validateur ou le Formateur XML avant d\'exécuter des requêtes XPath.',
+		"Non. XPath nécessite du XML bien formé. Si votre XML contient des erreurs de syntaxe, corrigez-les d'abord en utilisant le Validateur ou le Formateur XML avant d'exécuter des requêtes XPath.",
 
 	'tool.xml-minifier.faq.2.question': 'La minification affecte-t-elle la fonctionnalité XML ?',
 	'tool.xml-minifier.faq.2.answer':

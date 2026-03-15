@@ -1,4 +1,4 @@
-import type { DiffOptions, DiffResult, DiffEntry, DiffType, DiffSummary } from './json-diff.js';
+import type { DiffEntry, DiffOptions, DiffResult, DiffSummary, DiffType } from './json-diff.js';
 
 // Simple XML diff implementation
 // For now, we'll convert XML to text and do line-based diff

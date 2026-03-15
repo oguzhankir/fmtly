@@ -1332,11 +1332,11 @@ const registryTr: Record<string, string> = {
 
 	'tool.xml-xpath.faq.2.question': 'Hangi XPath sürümü destekleniyor?',
 	'tool.xml-xpath.faq.2.answer':
-		'Bu araç XPath 1.0\'ı destekler, bu en yaygın olarak uygulanan sürümdür. XML sorgulama için tüm standart eksenleri, fonksiyonları ve operatörleri içerir.',
+		"Bu araç XPath 1.0'ı destekler, bu en yaygın olarak uygulanan sürümdür. XML sorgulama için tüm standart eksenleri, fonksiyonları ve operatörleri içerir.",
 
 	'tool.xml-xpath.faq.3.question': 'Geçersiz XML üzerinde XPath test edebilir miyim?',
 	'tool.xml-xpath.faq.3.answer':
-		'Hayır. XPath iyi yapılandırılmış XML gerektirir. XML\'inizde sözdizimi hataları varsa, XPath sorgularını çalıştırmadan önce bunları XML Doğrulayıcı veya Biçimlendirici kullanarak düzeltin.',
+		"Hayır. XPath iyi yapılandırılmış XML gerektirir. XML'inizde sözdizimi hataları varsa, XPath sorgularını çalıştırmadan önce bunları XML Doğrulayıcı veya Biçimlendirici kullanarak düzeltin.",
 
 	'tool.xml-minifier.faq.2.question': 'Minifikasyon XML işlevselliğini etkiler mi?',
 	'tool.xml-minifier.faq.2.answer':

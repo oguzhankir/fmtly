@@ -1342,7 +1342,7 @@ const registryIt: Record<string, string> = {
 
 	'tool.xml-xpath.faq.2.question': 'Quale versione XPath è supportata?',
 	'tool.xml-xpath.faq.2.answer':
-		'Questo strumento supporta XPath 1.0, che è la versione più ampiamente implementata. Include tutti gli assi, funzioni e operatori standard per l\'interrogazione XML.',
+		"Questo strumento supporta XPath 1.0, che è la versione più ampiamente implementata. Include tutti gli assi, funzioni e operatori standard per l'interrogazione XML.",
 
 	'tool.xml-xpath.faq.3.question': 'Posso testare XPath su XML non valido?',
 	'tool.xml-xpath.faq.3.answer':
@@ -1350,7 +1350,7 @@ const registryIt: Record<string, string> = {
 
 	'tool.xml-minifier.faq.2.question': 'La minificazione affects la funzionalità XML?',
 	'tool.xml-minifier.faq.2.answer':
-		'No. La minificazione XML rimuove solo spazi bianchi e commenti senza cambiare la struttura o i dati. L\'XML minificato rimane completamente valido e funzionalmente identico.',
+		"No. La minificazione XML rimuove solo spazi bianchi e commenti senza cambiare la struttura o i dati. L'XML minificato rimane completamente valido e funzionalmente identico.",
 
 	'tool.json-to-markdown.faq.0.question': "Che cos'è la conversione da JSON a tabella Markdown?",
 	'tool.json-to-markdown.faq.0.answer':
