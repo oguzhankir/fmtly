@@ -226,7 +226,12 @@
 	}
 
 	export function setErrorMarkers(
-		errors: Array<{ line: number; column: number; message: string }>,
+		errors: Array<{
+			line: number;
+			column: number;
+			message: string;
+			severity?: 'error' | 'warning';
+		}>,
 	): void {
 		if (!editorInstance || !monacoApi) return;
 		const model = editorInstance.getModel();
@@ -239,7 +244,10 @@
 		}
 
 		const markers = errors.map((err) => ({
-			severity: monacoApi!.MarkerSeverity.Error,
+			severity:
+				err.severity === 'warning'
+					? monacoApi!.MarkerSeverity.Warning
+					: monacoApi!.MarkerSeverity.Error,
 			startLineNumber: err.line,
 			startColumn: err.column,
 			endLineNumber: err.line,
@@ -253,8 +261,10 @@
 			range: new monacoApi!.Range(err.line, 1, err.line, 1),
 			options: {
 				isWholeLine: true,
-				className: "fmtly-error-line",
-				glyphMarginClassName: "fmtly-error-glyph",
+				className:
+					err.severity === 'warning' ? 'fmtly-warning-line' : 'fmtly-error-line',
+				glyphMarginClassName:
+					err.severity === 'warning' ? 'fmtly-warning-glyph' : 'fmtly-error-glyph',
 			},
 		}));
 
@@ -314,8 +324,20 @@
 		background-color: rgba(239, 68, 68, 0.1);
 	}
 
+	:global(.fmtly-warning-line) {
+		background-color: var(--status-warning-bg);
+	}
+
 	:global(.fmtly-error-glyph) {
 		background-color: #ef4444;
+		border-radius: 50%;
+		margin-left: 4px;
+		width: 8px !important;
+		height: 8px !important;
+	}
+
+	:global(.fmtly-warning-glyph) {
+		background-color: var(--status-warning);
 		border-radius: 50%;
 		margin-left: 4px;
 		width: 8px !important;

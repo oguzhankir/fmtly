@@ -17,17 +17,24 @@
 		placeholder?: string;
 	} = $props();
 
-	let languageLabel = $derived(language === 'xml' ? 'XML' : 'JSON');
+	let yamlLib: Awaited<typeof import('js-yaml')> | null = $state(null);
+	let languageLabel = $derived(
+		language === 'xml' ? 'XML' : language === 'yaml' ? 'YAML' : 'JSON'
+	);
 	let reactivePlaceholder = $derived(
 		placeholder ??
 			(language === 'xml'
 				? $t('ui.placeholder.original_xml', 'Paste XML here…')
-				: $t('ui.placeholder.original_json', 'Paste JSON here…'))
+				: language === 'yaml'
+					? $t('ui.placeholder.original_yaml', 'Paste YAML here…')
+					: $t('ui.placeholder.original_json', 'Paste JSON here…'))
 	);
 	let acceptedFileTypes = $derived(
 		language === 'xml'
 			? '.xml,.txt,text/plain,application/xml,text/xml'
-			: '.json,.txt,text/plain,application/json'
+			: language === 'yaml'
+				? '.yaml,.yml,.txt,text/plain,application/x-yaml,text/yaml'
+				: '.json,.txt,text/plain,application/json'
 	);
 
 	let StandaloneMonacoEditor: typeof StandaloneMonacoEditorType | undefined = $state(undefined);
@@ -45,6 +52,7 @@
 	let isValidContent = $derived.by(() => {
 		if (!value.trim()) return null;
 		if (language === 'xml') return isValidXml(value);
+		if (language === 'yaml') return isValidYaml(value);
 		try {
 			JSON.parse(value);
 			return true;
@@ -62,11 +70,35 @@
 
 	onMount(() => {
 		void loadEditor();
+		if (language === 'yaml') {
+			void loadYamlLibrary();
+		}
+	});
+
+	$effect(() => {
+		if (language === 'yaml' && !yamlLib) {
+			void loadYamlLibrary();
+		}
 	});
 
 	async function loadEditor(): Promise<void> {
 		const mod = await import('$components/editor/StandaloneMonacoEditor.svelte');
 		StandaloneMonacoEditor = mod.default;
+	}
+
+	async function loadYamlLibrary(): Promise<void> {
+		const mod = await import('js-yaml');
+		yamlLib = mod;
+	}
+
+	function isValidYaml(input: string): boolean | null {
+		if (!yamlLib) return null;
+		try {
+			yamlLib.load(input);
+			return true;
+		} catch {
+			return false;
+		}
 	}
 
 	async function formatInput(): Promise<void> {
@@ -86,6 +118,29 @@
 					`Cannot format — invalid ${languageLabel}`
 				)
 			);
+			return;
+		}
+		if (language === 'yaml') {
+			const mod = yamlLib ?? (await import('js-yaml'));
+			yamlLib = mod;
+			try {
+				const formatted = mod.dump(mod.load(value), {
+					indent: 2,
+					lineWidth: 120,
+					noRefs: true,
+					sortKeys: false
+				});
+				onchange?.(formatted);
+			} catch {
+				addToast(
+					'error',
+					$t(
+						'ui.diff.toast.format_error',
+						{ language: languageLabel },
+						`Cannot format — invalid ${languageLabel}`
+					)
+				);
+			}
 			return;
 		}
 		try {

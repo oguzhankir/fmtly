@@ -324,6 +324,14 @@ export function computeJSONDiff(left: string, right: string, options: DiffOption
 		return { entries: [], error: 'Invalid JSON in right (Modified) input' };
 	}
 
+	return computeStructuredDiff(leftData, rightData, options);
+}
+
+export function computeStructuredDiff(
+	leftData: unknown,
+	rightData: unknown,
+	options: DiffOptions
+): DiffResult {
 	const entries: DiffEntry[] = [];
 	diffRecursive(leftData, rightData, '', entries, options);
 	return { entries, error: null };

@@ -290,74 +290,186 @@ const registryDe: Record<string, string> = {
 
 	// ── YAML Tools ──────────────────────────────────────────────────────────
 	'tool.yaml-formatter.display_name': 'YAML-Formatierer',
-	'tool.yaml-formatter.tagline': 'YAML formatieren und verschönern mit einheitlicher Einrückung',
+	'tool.yaml-formatter.tagline': 'YAML mit konsistenter Einrückung formatieren und verschönern',
 	'tool.yaml-formatter.description':
-		'Formatieren Sie YAML-Dateien mit 2-Leerzeichen-Einrückung. Normalisiert Syntax und Schlüsselordnung.',
+		'Formatieren Sie YAML-Dateien mit konsistenter 2-Leerzeichen-Einrückung. Validiert YAML-Syntax und normalisiert Anführungszeichen, Anchors und Schlüsselreihenfolge.',
 	'tool.yaml-formatter.primary_keyword': 'yaml formatierer',
-	'tool.yaml-formatter.meta_title': 'YAML Formatierer & Verschönerer — fmtly.dev',
+	'tool.yaml-formatter.meta_title': 'YAML-Formatierer & Beautifier — fmtly.dev',
 	'tool.yaml-formatter.meta_description':
-		'Formatieren und verschönern Sie YAML im Browser. Validiert Syntax und normalisiert Einrückungen.',
+		'Formatieren und verschönern Sie YAML im Browser. Validiert Syntax und normalisiert Einrückungen. Keine Daten verlassen Ihr Gerät.',
 	'tool.yaml-formatter.operation': 'Formatieren',
+	'tool.yaml-formatter.faq.0.question': 'Was normalisiert der YAML-Formatierer?',
+	'tool.yaml-formatter.faq.0.answer':
+		'Er vereinheitlicht Einrückung, Leerzeichen, Zitierstil und das allgemeine Layout, damit das YAML lesbarer wird, ohne die Datenbedeutung zu verändern.',
+	'tool.yaml-formatter.faq.1.question': 'Verändert das Formatieren meine YAML-Daten?',
+	'tool.yaml-formatter.faq.1.answer':
+		'Nein. Es verbessert die Darstellung, nicht die Datenstruktur. Ziel ist eine sauberere und konsistentere Ausgabe.',
+	'tool.yaml-formatter.use_case.0': 'Kubernetes-Manifeste vor dem Review verschönern',
+	'tool.yaml-formatter.use_case.1': 'CI-Konfigurationen für sauberere Diffs vereinheitlichen',
+	'tool.yaml-formatter.use_case.2': 'Helm-Values-Dateien vor dem Commit neu formatieren',
+	'tool.yaml-formatter.use_case.3': 'Große YAML-Konfigurationen leichter lesbar machen',
+
+	'tool.yaml-minifier.display_name': 'YAML-Minifier',
+	'tool.yaml-minifier.tagline': 'YAML in eine kompakte gültige Darstellung minimieren',
+	'tool.yaml-minifier.description':
+		'Minimieren Sie YAML-Dokumente in eine kompakte Flow-Style-Darstellung. Unterstützt Multi-Dokument-YAML und behält dieselbe Datenstruktur bei, während Layout-Rauschen reduziert wird.',
+	'tool.yaml-minifier.primary_keyword': 'yaml minifier',
+	'tool.yaml-minifier.meta_title': 'YAML-Minifier — fmtly.dev',
+	'tool.yaml-minifier.meta_description':
+		'Minimieren Sie YAML im Browser. Unterstützt Multi-Dokument-YAML und kompakte Ausgabe. Keine Daten verlassen Ihr Gerät.',
+	'tool.yaml-minifier.operation': 'Minimieren',
+	'tool.yaml-minifier.faq.0.question': 'Wie funktioniert die YAML-Minimierung?',
+	'tool.yaml-minifier.faq.0.answer':
+		'Die Eingabe wird zuerst als YAML geparst und dann als kompakteres gültiges YAML neu ausgegeben. Dadurch verschwindet ein Großteil des Formatierungsrauschens, während die Daten erhalten bleiben.',
+	'tool.yaml-minifier.faq.1.question': 'Unterstützt das Tool mehrere YAML-Dokumente?',
+	'tool.yaml-minifier.faq.1.answer':
+		'Ja. Mehrere Dokumente, die durch Dokument-Trenner getrennt sind, bleiben erhalten und werden dokumentweise minimiert.',
+	'tool.yaml-minifier.use_case.0': 'YAML vor dem Teilen in Tickets oder Chats verkleinern',
+	'tool.yaml-minifier.use_case.1': 'Kompakte Multi-Dokument-Manifeste prüfen',
+	'tool.yaml-minifier.use_case.2': 'Whitespace reduzieren, bevor generierte YAML-Fixtures gespeichert werden',
+	'tool.yaml-minifier.use_case.3': 'Formatierte und kompakte YAML-Darstellungen nebeneinander vergleichen',
 
 	'tool.yaml-validator.display_name': 'YAML-Validator',
-	'tool.yaml-validator.tagline': 'YAML-Syntax und Struktur validieren',
+	'tool.yaml-validator.tagline': 'YAML-Syntax und Schema validieren',
 	'tool.yaml-validator.description':
-		'Prüfen Sie YAML-Dokumente auf Syntaxfehler. Erkennt Einrückungsprobleme und doppelte Schlüssel.',
+		'Validieren Sie YAML-Syntax in Echtzeit und prüfen Sie Dokumente gegen ein Schema. Erkennt Einrückungsprobleme, fehlerhafte Strukturen und Schema-Abweichungen mit Zeilenbezug.',
 	'tool.yaml-validator.primary_keyword': 'yaml validator',
 	'tool.yaml-validator.meta_title': 'YAML-Validator — fmtly.dev',
 	'tool.yaml-validator.meta_description':
-		'Validieren Sie YAML im Browser. Erkennt Syntaxfehler mit präzisen Zeilenangaben.',
+		'Validieren Sie YAML-Syntax und Schema direkt im Browser. Erkennt Parserfehler und Schema-Abweichungen mit Zeilennummern. Keine Daten verlassen Ihr Gerät.',
 	'tool.yaml-validator.operation': 'Validieren',
+	'tool.yaml-validator.faq.0.question': 'Welche YAML-Fehler kann das Tool erkennen?',
+	'tool.yaml-validator.faq.0.answer':
+		'Es erkennt fehlerhafte Einrückung, ungültige Mappings, falsch platzierte Sequenzen und andere Parserfehler. Im Schema-Modus meldet es zusätzlich Pfade und Werte, die das Schema nicht erfüllen.',
+	'tool.yaml-validator.faq.1.question': 'Kann ich YAML gegen ein Schema validieren?',
+	'tool.yaml-validator.faq.1.answer':
+		'Ja. Wechseln Sie in den Schema-Modus und geben Sie ein JSON-Schema an. Die Schema-Eingabe kann als JSON oder YAML geschrieben werden – praktisch für Manifeste, Konfigurationsdateien und API-Payloads.',
+	'tool.yaml-validator.use_case.0': 'Deployment-Manifeste vor dem Release prüfen',
+	'tool.yaml-validator.use_case.1': 'Aus der Dokumentation kopiertes YAML validieren',
+	'tool.yaml-validator.use_case.2': 'Einrückungsfehler in CI- und Automatisierungsdateien finden',
+	'tool.yaml-validator.use_case.3': 'Helm-Values oder Manifeste gegen ein erwartetes Schema prüfen',
 
 	'tool.yaml-to-json.display_name': 'YAML nach JSON',
 	'tool.yaml-to-json.tagline': 'YAML in das JSON-Format konvertieren',
 	'tool.yaml-to-json.description':
-		'Konvertieren Sie YAML-Dokumente in formatiertes JSON. Unterstützt Anchors und Aliases.',
+		'Konvertieren Sie YAML-Dokumente in formatiertes JSON. Unterstützt Anchors, Aliases, Multi-Dokument-YAML und alle YAML-Datentypen.',
 	'tool.yaml-to-json.primary_keyword': 'yaml nach json',
-	'tool.yaml-to-json.meta_title': 'YAML nach JSON Konverter — fmtly.dev',
+	'tool.yaml-to-json.meta_title': 'YAML-nach-JSON-Konverter — fmtly.dev',
 	'tool.yaml-to-json.meta_description':
-		'Konvertieren Sie YAML sofort in JSON. Verarbeitet komplexe YAML-Features lokal.',
+		'Konvertieren Sie YAML sofort in JSON im Browser. Unterstützt Anchors, Aliases und Multi-Dokument-YAML. Kein Upload.',
 	'tool.yaml-to-json.operation': 'Konvertieren',
+	'tool.yaml-to-json.faq.0.question': 'Wann sollte ich YAML in JSON umwandeln?',
+	'tool.yaml-to-json.faq.0.answer':
+		'Wenn APIs, JavaScript-Tools, Tests oder nachgelagerte Systeme JSON als strengeres Format erwarten.',
+	'tool.yaml-to-json.faq.1.question': 'Bleiben verschachtelte Objekte und Arrays erhalten?',
+	'tool.yaml-to-json.faq.1.answer':
+		'Ja. Verschachtelte Mappings und Sequenzen werden in ihre JSON-Entsprechungen umgewandelt, während die Gesamtstruktur erhalten bleibt.',
+	'tool.yaml-to-json.use_case.0': 'YAML-Konfigurationen für API-Payloads in JSON umwandeln',
+	'tool.yaml-to-json.use_case.1': 'YAML-Daten in einem strengeren Format inspizieren',
+	'tool.yaml-to-json.use_case.2': 'Konfigurationsdaten in JavaScript-Workflows übernehmen',
+	'tool.yaml-to-json.use_case.3': 'YAML für JSON-basierte Tools vorbereiten',
 
 	'tool.yaml-to-xml.display_name': 'YAML nach XML',
 	'tool.yaml-to-xml.tagline': 'YAML in das XML-Format konvertieren',
 	'tool.yaml-to-xml.description':
-		'Konvertieren Sie YAML-Dokumente in wohlgeformtes XML. Mappt YAML-Schlüssel auf XML-Elemente.',
+		'Konvertieren Sie YAML-Dokumente in wohlgeformtes XML. Ordnet YAML-Schlüssel XML-Elementen zu und unterstützt verschachtelte Strukturen und Arrays.',
 	'tool.yaml-to-xml.primary_keyword': 'yaml nach xml',
-	'tool.yaml-to-xml.meta_title': 'YAML nach XML Konverter — fmtly.dev',
+	'tool.yaml-to-xml.meta_title': 'YAML-nach-XML-Konverter — fmtly.dev',
 	'tool.yaml-to-xml.meta_description':
-		'Konvertieren Sie YAML sofort in XML. Lokal im Browser ausgeführt.',
+		'Konvertieren Sie YAML sofort in XML im Browser. Kein Upload.',
 	'tool.yaml-to-xml.operation': 'Konvertieren',
+	'tool.yaml-to-xml.faq.0.question': 'Wie wird YAML bei der Konvertierung auf XML abgebildet?',
+	'tool.yaml-to-xml.faq.0.answer':
+		'Schlüssel werden zu Elementnamen, verschachtelte Objekte zu verschachtelten Elementen und Arrays zu wiederholten Einträgen.',
+	'tool.yaml-to-xml.faq.1.question': 'Kann ich die Ausgabe in anderen XML-Tools weiterverwenden?',
+	'tool.yaml-to-xml.faq.1.answer':
+		'Ja. Die Ausgabe wird als wohlgeformtes XML erzeugt und kann anschließend weiter formatiert oder validiert werden.',
+	'tool.yaml-to-xml.use_case.0': 'YAML-Daten in XML-basierte Integrationen überführen',
+	'tool.yaml-to-xml.use_case.1': 'XML-Fixtures aus YAML-Testdaten erzeugen',
+	'tool.yaml-to-xml.use_case.2': 'YAML-Workflows mit XML-Pipelines verbinden',
+	'tool.yaml-to-xml.use_case.3': 'Strukturierten YAML-Inhalt für XML-Export vorbereiten',
 
 	'tool.yaml-to-csv.display_name': 'YAML nach CSV',
 	'tool.yaml-to-csv.tagline': 'YAML-Arrays in das CSV-Format konvertieren',
 	'tool.yaml-to-csv.description':
-		'Konvertieren Sie YAML-Arrays von Objekten in das CSV-Format. Extrahiert Header automatisch.',
+		'Konvertieren Sie YAML-Objekt-Arrays in das CSV-Format. Extrahiert Spalten aus Objektschlüsseln und schreibt die Daten als Zeilen.',
 	'tool.yaml-to-csv.primary_keyword': 'yaml nach csv',
-	'tool.yaml-to-csv.meta_title': 'YAML nach CSV Konverter — fmtly.dev',
+	'tool.yaml-to-csv.meta_title': 'YAML-nach-CSV-Konverter — fmtly.dev',
 	'tool.yaml-to-csv.meta_description':
-		'Konvertieren Sie YAML sofort in CSV. Keine Daten verlassen Ihren Browser.',
+		'Konvertieren Sie YAML sofort in CSV im Browser. Kein Upload.',
 	'tool.yaml-to-csv.operation': 'Konvertieren',
+	'tool.yaml-to-csv.faq.0.question': 'Welche YAML-Strukturen lassen sich am besten in CSV umwandeln?',
+	'tool.yaml-to-csv.faq.0.answer':
+		'Arrays von Objekten funktionieren am besten. Jedes Objekt wird zu einer Zeile und gemeinsame Schlüssel werden zu CSV-Spalten.',
+	'tool.yaml-to-csv.faq.1.question': 'Kann ich ein einzelnes YAML-Objekt in CSV umwandeln?',
+	'tool.yaml-to-csv.faq.1.answer':
+		'Ja. Ein einzelnes Objekt kann als einzelne CSV-Zeile exportiert werden, was für einfache Datensätze praktisch ist.',
+	'tool.yaml-to-csv.use_case.0': 'YAML-Datensätze für Tabellen exportieren',
+	'tool.yaml-to-csv.use_case.1': 'Strukturierte YAML-Datensätze für Analysten in CSV umwandeln',
+	'tool.yaml-to-csv.use_case.2': 'Inventar- oder Konfigurationslisten in Tabellenform abflachen',
+	'tool.yaml-to-csv.use_case.3': 'YAML für Import-Tools vorbereiten, die CSV erwarten',
 
 	'tool.yaml-to-toml.display_name': 'YAML nach TOML',
 	'tool.yaml-to-toml.tagline': 'YAML in das TOML-Konfigurationsformat konvertieren',
 	'tool.yaml-to-toml.description':
-		'Konvertieren Sie YAML-Konfigurationsdateien in das TOML-Format. Unterstützt alle YAML-Datentypen.',
+		'Konvertieren Sie YAML-Konfigurationsdateien in das TOML-Format. Unterstützt verschachtelte Tabellen, Arrays und alle YAML-Datentypen.',
 	'tool.yaml-to-toml.primary_keyword': 'yaml nach toml',
-	'tool.yaml-to-toml.meta_title': 'YAML nach TOML Konverter — fmtly.dev',
+	'tool.yaml-to-toml.meta_title': 'YAML-nach-TOML-Konverter — fmtly.dev',
 	'tool.yaml-to-toml.meta_description':
-		'Konvertieren Sie YAML sofort in TOML. Sicher und lokal im Browser.',
+		'Konvertieren Sie YAML sofort in TOML im Browser. Kein Upload.',
 	'tool.yaml-to-toml.operation': 'Konvertieren',
+	'tool.yaml-to-toml.faq.0.question': 'Warum sollte ich YAML in TOML umwandeln?',
+	'tool.yaml-to-toml.faq.0.answer':
+		'TOML wird oft für von Hand gepflegte Konfigurationsdateien bevorzugt. Wenn ein Projekt TOML erwartet, spart die Umwandlung Zeit.',
+	'tool.yaml-to-toml.faq.1.question': 'Bleiben verschachtelte Konfigurationsabschnitte erhalten?',
+	'tool.yaml-to-toml.faq.1.answer':
+		'Ja. Verschachtelte Mappings werden – sofern vom Format unterstützt – in TOML-Tabellen und Arrays umgewandelt.',
+	'tool.yaml-to-toml.use_case.0': 'YAML-Einstellungen in TOML-basierte Projekte übernehmen',
+	'tool.yaml-to-toml.use_case.1': 'TOML-Konfigurationen aus bestehenden YAML-Quellen erzeugen',
+	'tool.yaml-to-toml.use_case.2': 'Deployment-Einstellungen in TOML-freundliche Tools portieren',
+	'tool.yaml-to-toml.use_case.3': 'Dieselbe Konfiguration in YAML und TOML vergleichen',
 
 	'tool.yaml-diff.display_name': 'YAML-Diff',
 	'tool.yaml-diff.tagline': 'Zwei YAML-Dokumente nebeneinander vergleichen',
 	'tool.yaml-diff.description':
-		'Vergleichen Sie zwei YAML-Dokumente und markieren Sie Hinzufügungen, Löschungen und Änderungen.',
+		'Vergleichen Sie zwei YAML-Dokumente und markieren Sie Ergänzungen, Löschungen und Änderungen. Berücksichtigt die YAML-Struktur für semantische Vergleiche.',
 	'tool.yaml-diff.primary_keyword': 'yaml diff',
-	'tool.yaml-diff.meta_title': 'YAML-Diff Tool — fmtly.dev',
+	'tool.yaml-diff.meta_title': 'YAML-Diff-Tool — fmtly.dev',
 	'tool.yaml-diff.meta_description':
-		'Vergleichen Sie zwei YAML-Dokumente im Browser. Markiert alle Unterschiede übersichtlich.',
+		'Vergleichen Sie zwei YAML-Dokumente im Browser. Hebt Ergänzungen, Löschungen und Änderungen hervor. Kein Upload.',
 	'tool.yaml-diff.operation': 'Vergleichen',
+	'tool.yaml-diff.faq.0.question': 'Worin unterscheidet sich YAML-Diff von einem normalen Textvergleich?',
+	'tool.yaml-diff.faq.0.answer':
+		'Beide Eingaben werden als YAML-Daten geparst und anschließend strukturell verglichen. Änderungen werden also über Schlüssel, Arrays und Werte erkannt und nicht nur über Formatierung.',
+	'tool.yaml-diff.faq.1.question': 'Kann ich ungültiges YAML vergleichen?',
+	'tool.yaml-diff.faq.1.answer':
+		'Nein. Beide Seiten müssen gültiges YAML sein. Fehlerhafte Eingaben müssen zuerst korrigiert werden.',
+	'tool.yaml-diff.faq.2.question': 'Welche Änderungen werden hervorgehoben?',
+	'tool.yaml-diff.faq.2.answer':
+		'Es werden hinzugefügte, entfernte und geänderte YAML-Pfade und Werte hervorgehoben. Das erleichtert die Prüfung von Konfigurationsrevisionen.',
+	'tool.yaml-diff.use_case.0': 'Änderungen zwischen zwei Deployment-Manifests prüfen',
+	'tool.yaml-diff.use_case.1': 'Revisionen von CI-Konfigurationen vergleichen',
+	'tool.yaml-diff.use_case.2': 'Bearbeitete Helm- oder Values-Dateien vor dem Commit prüfen',
+	'tool.yaml-diff.use_case.3': 'Erzeugtes YAML mit einer erwarteten Version abgleichen',
+	'tool.yaml-query.display_name': 'YAML-Abfrage',
+	'tool.yaml-query.tagline': 'YAML mit JSONPath und JMESPath abfragen',
+	'tool.yaml-query.description':
+		'Führen Sie JSONPath- oder JMESPath-Ausdrücke direkt auf YAML im Browser aus. Parsen Sie YAML, durchsuchen Sie verschachtelte Daten und prüfen Sie Ergebnisse ohne manuelle Konvertierung.',
+	'tool.yaml-query.primary_keyword': 'yaml abfrage',
+	'tool.yaml-query.meta_title': 'YAML-Abfrage-Tool — fmtly.dev',
+	'tool.yaml-query.meta_description':
+		'YAML mit JSONPath oder JMESPath direkt im Browser abfragen. Keine manuelle Konvertierung und kein Upload.',
+	'tool.yaml-query.operation': 'Abfragen',
+	'tool.yaml-query.faq.0.question': 'Welche Abfragesprachen werden unterstützt?',
+	'tool.yaml-query.faq.0.answer':
+		'Sie können zwischen JSONPath und JMESPath wechseln. Beide arbeiten auf dem geparsten YAML-Datenmodell, sodass verschachtelte Mappings, Sequenzen und Multi-Dokument-Eingaben direkt abgefragt werden können.',
+	'tool.yaml-query.faq.1.question': 'Muss ich YAML zuerst in JSON umwandeln?',
+	'tool.yaml-query.faq.1.answer':
+		'Nein. Das Tool parst YAML für Sie und gibt die Ergebnisse als formatiertes JSON zurück. Das ist besonders praktisch für Konfigurationen, Manifeste, Values-Dateien und andere YAML-lastige Workflows.',
+	'tool.yaml-query.use_case.0': 'Bestimmte Felder aus Kubernetes-Manifests oder Helm-Values extrahieren',
+	'tool.yaml-query.use_case.1': 'Verschachtelte YAML-Konfigurationen ohne manuelle Umwandlung untersuchen',
+	'tool.yaml-query.use_case.2': 'JSONPath- oder JMESPath-Ausdrücke auf YAML-Payloads testen',
+	'tool.yaml-query.use_case.3': 'Listen, IDs oder Flags aus großen YAML-Dokumenten herausziehen',
 
 	// ── CSV Tools ───────────────────────────────────────────────────────────
 	'tool.csv-to-json.display_name': 'CSV nach JSON',
@@ -1055,6 +1167,8 @@ const registryDe: Record<string, string> = {
 	'ui.history.title': 'Verlauf',
 	'ui.paste_here': 'Hier einfügen…',
 	'ui.paste_language_here': '{language} hier einfügen…',
+	'ui.placeholder.original_yaml': 'Originales YAML hier einfügen…',
+	'ui.placeholder.modified_yaml': 'Geändertes YAML hier einfügen…',
 	'ui.placeholder.search_tools_count': 'Suche in {count}+ Tools...',
 	'ui.placeholder.url': 'https://example.com/data.json',
 	'ui.placeholder.xpath': '//book[@available=\x27true\x27]',
@@ -1116,8 +1230,20 @@ const registryDe: Record<string, string> = {
 	'ui.validator.valid_json': 'Gültiges JSON',
 	'ui.validator.explanation_must_satisfy': 'muss erfüllen',
 	'ui.validator.data_error_pos': 'Datenfehler in Zeile {line}, Spalte {column}',
+	'ui.validator.paste_yaml': 'YAML zum Validieren einfügen',
+	'ui.validator.yaml_paste_schema': 'Ein Schema zum Validieren einfügen',
+	'ui.validator.yaml_validating_schema': 'Schema wird validiert…',
+	'ui.validator.yaml_matches_schema': 'YAML entspricht dem Schema',
+	'ui.validator.yaml_matches_current_schema': 'YAML entspricht dem aktuellen Schema.',
+	'ui.validator.yaml_schema_title': 'Schema',
+	'ui.validator.yaml_schema_standard': 'JSON-Schema Draft-07+ via AJV',
+	'ui.validator.yaml_paste_schema_placeholder': 'JSON-Schema oder YAML-Schema hier einfügen…',
+	'ui.validator.yaml_schema_validation_desc':
+		'Prüfen Sie die YAML-Struktur gegen ein JSON-Schema. Die Schema-Eingabe kann als JSON oder YAML geschrieben werden.',
+	'ui.load_sample': 'Beispiel laden',
 	'ui.share_url': 'Teilen-URL',
 	'ui.format_xml': 'XML formatieren',
+	'ui.format_yaml': 'YAML formatieren',
 	'ui.minify_xml': 'XML minifizieren',
 	'ui.format_beautify': 'Formatieren / Verschönern',
 	'ui.minify': 'Minifizieren',
@@ -1127,6 +1253,7 @@ const registryDe: Record<string, string> = {
 	'ui.expand_to_depth': 'Bis Tiefe {depth} aufklappen',
 	switch_to_tab: 'Zu Tab {index} wechseln',
 	switch_to_xml_tab: 'Zu XML-Tab {index} wechseln',
+	switch_to_yaml_tab: 'Zu YAML-Tab {index} wechseln',
 	use_cases: 'Anwendungsfälle',
 	faq: 'FAQ',
 	'ui.validator.schema_error_pos': 'Schemafehler in Zeile {line}, Spalte {column}',
@@ -1150,6 +1277,23 @@ const registryDe: Record<string, string> = {
 	'ui.aria.xml_workspace_tabs': 'XML-Arbeitsbereich-Tabs',
 	'ui.aria.xpath_panel': 'XPath-Abfragepanel',
 	'ui.aria.xml_validator': 'XML-Validator',
+	'ui.aria.yaml_output_panel': 'YAML-Ausgabepanel',
+	'ui.aria.yaml_validator': 'YAML-Validator',
+	'ui.validator.invalid_yaml': 'Ungültiges YAML',
+	'ui.validator.yaml_paste_hint': 'YAML zum Validieren einfügen oder eingeben.',
+	'ui.validator.yaml_validation_desc':
+		'Prüft YAML-Syntax, Einrückungen, ungültige Zeichen und fehlerhafte Strukturen.',
+	'ui.validator.yaml_success_title': 'Gültiges YAML',
+	'ui.validator.yaml_success_desc':
+		'Keine Syntaxfehler gefunden. Das Dokument kann erfolgreich als YAML geparst werden.',
+	'ui.validator.yaml_warning_title': 'Gültiges YAML mit Stilwarnungen',
+	'ui.validator.yaml_warning_desc':
+		'Das Dokument lässt sich erfolgreich parsen, aber einige Stilprobleme können Lesbarkeit oder Konsistenz verschlechtern.',
+	'ui.validator.yaml_lint.tabs':
+		'Tabs in der Einrückung gefunden. YAML ist mit reinen Leerzeichen meist sicherer.',
+	'ui.validator.yaml_lint.trailing_whitespace': 'Nachgestellte Leerzeichen gefunden.',
+	'ui.validator.yaml_lint.odd_indentation':
+		'Ungerade Einrückungsbreite gefunden. YAML ist mit 2-Leerzeichen-Einrückung meist konsistenter.',
 	'ui.convert.to_json': '→ JSON',
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
@@ -1167,16 +1311,22 @@ const registryDe: Record<string, string> = {
 	'ui.query.sample_query': 'Beispielabfrage',
 	'ui.query.guide': 'Anleitung',
 	'ui.query.query': 'Abfrage',
+	'ui.query.mode': 'Abfragemodus',
 	'ui.query.running': 'Abfrage läuft…',
 	'ui.query.empty_input': 'JSON links einfügen für Abfrage.',
+	'ui.query.empty_input_yaml': 'YAML links einfügen für Abfrage.',
 	'ui.query.empty_query': 'Abfrage eingeben für Ergebnisse.',
 	'ui.query.error_fallback': 'Abfrage fehlgeschlagen',
 	'ui.query.copy_error': 'Ausgabe nicht kopierbar',
+	'ui.aria.json_query_panel': 'JSON-Abfragebereich',
+	'ui.aria.yaml_query_panel': 'YAML-Abfragebereich',
 	'ui.status.processing': 'Verarbeitung…',
 	'ui.status.waiting_output': 'Die Ausgabe erscheint hier',
 	'ui.output.controls.spaces': 'Leerzeichen',
 	'ui.output.stats.chars': 'Zeichen',
 	'ui.output.stats.lines': 'Zeilen',
+	'ui.output.stats.documents': 'Dokumente',
+	'ui.output.stats.top_level_keys': 'Top-Level-Schlüssel',
 	'ui.output.stats.keys': 'Schlüssel',
 	'ui.output.stats.objects': 'Objekte',
 	'ui.output.stats.arrays': 'Arrays',

@@ -18,6 +18,8 @@
 	import XmlOutputPanel from "$components/panels/XmlOutputPanel.svelte";
 	import XmlValidatorPanel from "$components/panels/XmlValidatorPanel.svelte";
 	import XmlQueryOutputPanel from "$components/panels/XmlQueryOutputPanel.svelte";
+	import YamlOutputPanel from "$components/panels/YamlOutputPanel.svelte";
+	import YamlValidatorPanel from "$components/panels/YamlValidatorPanel.svelte";
 	import TreePanel from "$components/panels/TreePanel.svelte";
 	import TextAnalysisPanel from "$components/panels/TextAnalysisPanel.svelte";
 	import TextControlsPanel from "$components/panels/TextControlsPanel.svelte";
@@ -85,6 +87,13 @@
 		formatXml,
 		minifyXml,
 	} from "$stores/xml.store";
+	import {
+		initYAMLStore,
+		destroyYAMLStore,
+		formatYaml,
+		minifyYaml,
+		processYamlTool
+	} from "$stores/yaml.store";
 	import { initTextStore, textOptions } from "$stores/text.store";
 	import { initNumberStore, numberOptions } from "$stores/number.store";
 	import { initEncodeStore, encodeOptions } from "$stores/encode.store";
@@ -113,6 +122,11 @@
 	let xmlWorkspaceTools = $derived(
 		data.tool.category === "xml"
 			? localizeToolDefinitions(getToolsByCategory("xml"), $t)
+			: []
+	);
+	let yamlWorkspaceTools = $derived(
+		data.tool.category === "yaml"
+			? localizeToolDefinitions(getToolsByCategory("yaml"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -145,6 +159,16 @@
 		const target = jsonWorkspaceTools[index];
 		if (!target || target.slug === data.tool.slug) return;
 		void goto(localizePath(`/json/${target.slug}`, currentLocale), {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true,
+		});
+	}
+
+	function navigateToYamlWorkspaceIndex(index: number): void {
+		const target = yamlWorkspaceTools[index];
+		if (!target || target.slug === data.tool.slug) return;
+		void goto(localizePath(`/yaml/${target.slug}`, currentLocale), {
 			replaceState: true,
 			noScroll: true,
 			keepFocus: true,
@@ -184,11 +208,16 @@
 
 	function initializeToolRuntime(): void {
 		initHistory(data.tool.category, data.tool.slug);
+		destroyJSONStore();
+		destroyXMLStore();
+		destroyYAMLStore();
 
 		if (data.tool.engine === "json") {
 			initJSONStore(data.tool.slug);
 		} else if (data.tool.engine === "xml") {
 			initXMLStore(data.tool.slug);
+		} else if (data.tool.engine === "yaml") {
+			initYAMLStore(data.tool.slug);
 		} else if (data.tool.engine === "text") {
 			initTextStore(data.tool.slug);
 		} else if (data.tool.engine === "number") {
@@ -283,6 +312,39 @@
 							noScroll: true,
 							keepFocus: true
 						});
+					},
+				});
+			}
+		}
+
+		if (data.tool.engine === "yaml") {
+			shortcuts.push(
+				{
+					key: "f",
+					ctrl: true,
+					shift: true,
+					scope: "tool",
+					label: $t('ui.format_yaml', 'Format YAML'),
+					handler: () => { void formatYaml(); },
+				},
+				{
+					key: "m",
+					ctrl: true,
+					shift: true,
+					scope: "tool",
+					label: $t('ui.minify', 'Minify'),
+					handler: () => { void minifyYaml(); },
+				}
+			);
+
+			for (const [index] of yamlWorkspaceTools.entries()) {
+				if (index > 8) break;
+				shortcuts.push({
+					key: String(index + 1),
+					scope: "tool",
+					label: ($t as any)('switch_to_yaml_tab', 'Switch to YAML tab {index}', { index: index + 1 }),
+					handler: () => {
+						navigateToYamlWorkspaceIndex(index);
 					},
 				});
 			}
@@ -417,6 +479,7 @@
 		unregisterToolShortcuts?.();
 		destroyJSONStore();
 		destroyXMLStore();
+		destroyYAMLStore();
 		destroyHistory();
 	});
 </script>
@@ -441,6 +504,13 @@
 							category="xml" 
 							locale={currentLocale} 
 						/>
+					{:else if data.tool.category === "yaml" && yamlWorkspaceTools.length > 0}
+						<WorkspaceTabs
+							tools={yamlWorkspaceTools}
+							activeSlug={data.tool.slug}
+							category="yaml"
+							locale={currentLocale}
+						/>
 					{/if}
 					<div class="flex-1 overflow-hidden">
 						<DiffInputPanel
@@ -449,9 +519,11 @@
 								diffLeft = v;
 							}}
 							language={data.tool.inputLanguage}
-							placeholder={data.tool.category === 'xml' 
+							placeholder={data.tool.category === 'xml'
 								? $t('ui.placeholder.original_xml', 'Paste original XML here…')
-								: $t('ui.placeholder.original_json', 'Paste original JSON here…')}
+								: data.tool.category === 'yaml'
+									? $t('ui.placeholder.original_yaml', 'Paste original YAML here…')
+									: $t('ui.placeholder.original_json', 'Paste original JSON here…')}
 						/>
 					</div>
 				</div>
@@ -463,9 +535,11 @@
 					diffRight = v;
 				}}
 				language={data.tool.inputLanguage}
-				placeholder={data.tool.category === 'xml' 
+				placeholder={data.tool.category === 'xml'
 					? $t('ui.placeholder.modified_xml', 'Paste modified XML here…')
-					: $t('ui.placeholder.modified_json', 'Paste modified JSON here…')}
+					: data.tool.category === 'yaml'
+						? $t('ui.placeholder.modified_yaml', 'Paste modified YAML here…')
+						: $t('ui.placeholder.modified_json', 'Paste modified JSON here…')}
 			/>
 		{/snippet}
 			{#snippet diffPanel()}
@@ -484,6 +558,7 @@
 		onprocess={() => {
 			if (data.tool.engine === 'json') { format(); }
 			else if (data.tool.engine === 'xml') { formatXml(); }
+			else if (data.tool.engine === 'yaml') { void processYamlTool(); }
 		}}
 		onshare={() => { shareModalOpen = true; }}
 	>
@@ -637,6 +712,27 @@
 					sampleInput={data.tool.sampleInput ?? ""}
 					workspaceTools={jsonWorkspaceTools}
 				/>
+			{:else if data.tool.category === "yaml" && data.tool.slug === "validator"}
+				<YamlValidatorPanel toolSlug={data.tool.slug} workspaceTools={yamlWorkspaceTools} />
+			{:else if data.tool.category === "yaml"}
+				<div class="flex h-full w-full flex-col">
+					{#if yamlWorkspaceTools.length > 0}
+						<WorkspaceTabs
+							tools={yamlWorkspaceTools}
+							activeSlug={data.tool.slug}
+							category="yaml"
+							locale={currentLocale}
+						/>
+					{/if}
+					<div class="flex-1 overflow-hidden">
+						<InputPanel
+							toolSlug="yaml-workspace"
+							inputLanguage={data.tool.inputLanguage}
+							acceptedExtensions={acceptedExts}
+							sampleInput={data.tool.sampleInput}
+						/>
+					</div>
+				</div>
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}
@@ -660,6 +756,18 @@
 					<JsonQueryOutputPanel toolSlug={data.tool.slug === "jsonpath" ? "jsonpath" : "jmespath"} />
 				{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
 					<JsonOutputPanel
+						outputLanguage={data.tool.outputLanguage}
+						downloadFilename={data.tool.id}
+						toolSlug={data.tool.slug}
+					/>
+				{:else if data.tool.category === "yaml" && data.tool.slug === "query"}
+					<JsonQueryOutputPanel
+						toolSlug="jsonpath"
+						inputLanguage="yaml"
+						allowModeSwitching={true}
+					/>
+				{:else if data.tool.category === "yaml" && data.tool.slug !== "validator"}
+					<YamlOutputPanel
 						outputLanguage={data.tool.outputLanguage}
 						downloadFilename={data.tool.id}
 						toolSlug={data.tool.slug}

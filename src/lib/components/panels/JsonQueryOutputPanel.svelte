@@ -1,18 +1,34 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { jsonpathQuery, jmespathQuery } from '$engines/json/json.engine.js';
+	import { yamlJsonpathQuery, yamlJmespathQuery } from '$engines/yaml/yaml.engine.js';
 	import { input } from '$stores/input.store';
 	import { output } from '$stores/output.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
 	import { Check, Copy, Play, Sparkles, WrapText, History, CircleHelp } from 'lucide-svelte';
 
-	const props = $props<{
+	let {
+		toolSlug,
+		inputLanguage: inputLanguageProp = 'json',
+		allowModeSwitching = false
+	}: {
 		toolSlug: 'jsonpath' | 'jmespath';
-	}>();
+		inputLanguage?: 'json' | 'yaml';
+		allowModeSwitching?: boolean;
+	} = $props();
 
+	let queryMode = $state<'jsonpath' | 'jmespath'>('jsonpath');
+	let inputLanguage = $derived(inputLanguageProp);
+	let isYamlInput = $derived(inputLanguage === 'yaml');
 	let defaultQuery = $derived(
-		props.toolSlug === 'jsonpath' ? '$.store.book[*].title' : 'foo.bar'
+		isYamlInput
+			? queryMode === 'jsonpath'
+				? '$.store.book[*].title'
+				: 'store.book[].title'
+			: queryMode === 'jsonpath'
+				? '$.store.book[*].title'
+				: 'foo.bar'
 	);
 	let query = $state('');
 	let resultError = $state('');
@@ -24,7 +40,7 @@
 	let selectedHistory = $state('');
 	let showCheatSheet = $state(false);
 	let cheatSheet = $derived(
-		props.toolSlug === 'jsonpath'
+		queryMode === 'jsonpath'
 			? [
 					'$.store.book[*].title',
 					'$.users[?(@.age > 18)].name',
@@ -38,10 +54,26 @@
 		const lines = $output.length === 0 ? 0 : $output.split('\n').length;
 		return `${$output.length.toLocaleString()} ${$t('ui.query.stats.chars', 'chars')} · ${lines.toLocaleString()} ${$t('ui.query.stats.lines', 'lines')}`;
 	});
+	let panelAriaLabel = $derived(
+		isYamlInput
+			? $t('ui.aria.yaml_query_panel', 'YAML query panel')
+			: $t('ui.aria.json_query_panel', 'JSON query panel')
+	);
+	let emptyInputLabel = $derived(
+		isYamlInput
+			? $t('ui.query.empty_input_yaml', 'Paste YAML on the left to evaluate your query.')
+			: $t('ui.query.empty_input', 'Paste JSON on the left to evaluate your query.')
+	);
 
 	function getHistoryKey(): string {
-		return `fmtly-${props.toolSlug}-query-history`;
+		return `fmtly-${inputLanguage}-${queryMode}-query-history`;
 	}
+
+	$effect(() => {
+		if (!allowModeSwitching) {
+			queryMode = toolSlug;
+		}
+	});
 
 	$effect(() => {
 		if (!query) {
@@ -76,9 +108,13 @@
 
 		try {
 			const result =
-				props.toolSlug === 'jsonpath'
-					? await jsonpathQuery($input, query)
-					: await jmespathQuery($input, query);
+				queryMode === 'jsonpath'
+					? isYamlInput
+						? await yamlJsonpathQuery($input, query)
+						: await jsonpathQuery($input, query)
+					: isYamlInput
+						? await yamlJmespathQuery($input, query)
+						: await jmespathQuery($input, query);
 
 			resultCount = Array.isArray(result) ? result.length : result === null || result === undefined ? 0 : 1;
 			output.set(JSON.stringify(result, null, 2));
@@ -154,10 +190,31 @@
 	}
 </script>
 
-<div class="query-shell" role="region" aria-label="JSON query panel">
+<div class="query-shell" role="region" aria-label={panelAriaLabel}>
 	<div class="query-toolbar">
 		<div class="query-toolbar__meta">
-			<span class="query-pill">{props.toolSlug === 'jsonpath' ? 'JSONPath' : 'JMESPath'}</span>
+			{#if allowModeSwitching}
+				<div class="query-mode-group" role="group" aria-label={$t('ui.query.mode', 'Query mode')}>
+					<button
+						type="button"
+						class="query-mode-btn"
+						class:query-mode-btn--active={queryMode === 'jsonpath'}
+						onclick={() => (queryMode = 'jsonpath')}
+					>
+						{$t('ui.query.jsonpath', 'JSONPath')}
+					</button>
+					<button
+						type="button"
+						class="query-mode-btn"
+						class:query-mode-btn--active={queryMode === 'jmespath'}
+						onclick={() => (queryMode = 'jmespath')}
+					>
+						{$t('ui.query.jmespath', 'JMESPath')}
+					</button>
+				</div>
+			{:else}
+				<span class="query-pill">{queryMode === 'jsonpath' ? 'JSONPath' : 'JMESPath'}</span>
+			{/if}
 			{#if resultCount !== null}
 				<span class="query-count">{resultCount} {resultCount === 1 ? $t('ui.query.result', 'result') : $t('ui.query.results', 'results')}</span>
 			{/if}
@@ -207,7 +264,7 @@
 			id="json-query-input"
 			bind:value={query}
 			class="query-input"
-			placeholder={props.toolSlug === 'jsonpath' ? '$.items[*].id' : 'items[].id'}
+			placeholder={queryMode === 'jsonpath' ? '$.items[*].id' : 'items[].id'}
 			spellcheck="false"
 		></textarea>
 		{#if showCheatSheet}
@@ -226,7 +283,7 @@
 	{:else if isRunning}
 		<div class="query-empty">{$t('ui.query.running', 'Running query…')}</div>
 	{:else if !$input.trim()}
-		<div class="query-empty">{$t('ui.query.empty_input', 'Paste JSON on the left to evaluate your query.')}</div>
+		<div class="query-empty">{emptyInputLabel}</div>
 	{:else if !query.trim()}
 		<div class="query-empty">{$t('ui.query.empty_query', 'Enter a query to see results.')}</div>
 	{:else if $output}
@@ -299,6 +356,37 @@
 	.query-pill {
 		color: var(--accent);
 		background: var(--accent-dim);
+	}
+
+	.query-mode-group {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 2px;
+		border-radius: var(--radius-full);
+		background: var(--bg-elevated);
+		border: 1px solid var(--border-default);
+	}
+
+	.query-mode-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 24px;
+		padding: 0 var(--space-2);
+		border: none;
+		border-radius: var(--radius-full);
+		background: transparent;
+		color: var(--text-secondary);
+		font-family: var(--font-ui);
+		font-size: 12px;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.query-mode-btn--active {
+		background: var(--accent-dim);
+		color: var(--accent);
 	}
 
 	.query-count {

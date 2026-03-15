@@ -36,6 +36,8 @@
 				return $t('ui.query.jmespath', 'JMESPath');
 			case 'xpath':
 				return $t('ui.query.xpath', 'XPath');
+			case 'query':
+				return $t('ui.query.query', 'Query');
 			case 'to-csv':
 				return $t('ui.convert.to_csv', '→ CSV').replace(/^→\s*/, '');
 			case 'to-toml':

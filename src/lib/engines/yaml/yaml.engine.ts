@@ -1,7 +1,44 @@
-export async function toXml(yaml: string): Promise<string> {
+type QueryableYamlValue =
+	| string
+	| number
+	| boolean
+	| null
+	| QueryableYamlValue[]
+	| { [key: string]: QueryableYamlValue };
+
+function toQueryableYamlValue(value: unknown): QueryableYamlValue {
+	if (value === null || value === undefined) return null;
+	if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+		return value;
+	}
+	if (Array.isArray(value)) {
+		return value.map((entry) => toQueryableYamlValue(entry));
+	}
+	if (typeof value === 'object') {
+		return Object.fromEntries(
+			Object.entries(value as Record<string, unknown>).map(([key, entry]) => [
+				key,
+				toQueryableYamlValue(entry)
+			])
+		);
+	}
+	return String(value);
+}
+
+async function loadYamlData(yamlText: string): Promise<QueryableYamlValue> {
 	const jsYaml = await import('js-yaml');
+	const documents: unknown[] = [];
+
+	jsYaml.loadAll(yamlText, (document: unknown) => {
+		documents.push(document);
+	});
+
+	return toQueryableYamlValue(documents.length <= 1 ? (documents[0] ?? null) : documents);
+}
+
+export async function toXml(yaml: string): Promise<string> {
 	const { XMLBuilder } = await import('fast-xml-parser');
-	const obj = jsYaml.load(yaml);
+	const obj = await loadYamlData(yaml);
 	const builder = new XMLBuilder({ ignoreAttributes: false, format: true });
 	if (Array.isArray(obj)) {
 		return builder.build({ root: { item: obj } });
@@ -10,9 +47,8 @@ export async function toXml(yaml: string): Promise<string> {
 }
 
 export async function toCsv(yaml: string): Promise<string> {
-	const jsYaml = await import('js-yaml');
 	const Papa = (await import('papaparse')).default || (await import('papaparse'));
-	const obj = jsYaml.load(yaml);
+	const obj = await loadYamlData(yaml);
 	let data = obj;
 	if (!Array.isArray(obj)) {
 		if (typeof obj === 'object' && obj !== null) {
@@ -39,10 +75,22 @@ export async function toCsv(yaml: string): Promise<string> {
 }
 
 export async function toToml(yaml: string): Promise<string> {
-	const jsYaml = await import('js-yaml');
 	const { stringify } = await import('smol-toml');
-	const obj = jsYaml.load(yaml);
+	const obj = await loadYamlData(yaml);
 	return stringify(obj as any);
+}
+
+export async function yamlJsonpathQuery(yaml: string, query: string): Promise<unknown> {
+	const { JSONPath } = await import('jsonpath-plus');
+	const parsed = await loadYamlData(yaml);
+	return JSONPath({ path: query, json: parsed });
+}
+
+export async function yamlJmespathQuery(yaml: string, query: string): Promise<unknown> {
+	const mod = await import('jmespath');
+	const jmespath = mod.default ?? mod;
+	const parsed = await loadYamlData(yaml);
+	return jmespath.search(parsed, query);
 }
 
 export type DiffResult = { valid: boolean; error?: string };

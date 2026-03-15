@@ -19,6 +19,7 @@ export const yamlTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'yaml', slug: 'validator' },
+			{ category: 'yaml', slug: 'minifier' },
 			{ category: 'yaml', slug: 'to-json' },
 			{ category: 'json', slug: 'to-yaml' }
 		],
@@ -49,6 +50,57 @@ scripts:
   build: vite build`
 	},
 	{
+		id: 'yaml-minifier',
+		category: 'yaml',
+		slug: 'minifier',
+		displayName: 'tool.yaml-minifier.display_name',
+		tagline: 'tool.yaml-minifier.tagline',
+		description: 'tool.yaml-minifier.description',
+		primaryKeyword: 'tool.yaml-minifier.primary_keyword',
+		metaTitle: 'tool.yaml-minifier.meta_title',
+		metaDescription: 'tool.yaml-minifier.meta_description',
+		engine: 'yaml',
+		operation: 'tool.yaml-minifier.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'yaml',
+		outputLanguage: 'yaml',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'yaml', slug: 'validator' },
+			{ category: 'yaml', slug: 'diff' }
+		],
+		faqs: [
+			{
+				question: 'tool.yaml-minifier.faq.0.question',
+				answer: 'tool.yaml-minifier.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-minifier.faq.1.question',
+				answer: 'tool.yaml-minifier.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-minifier.use_case.0',
+			'tool.yaml-minifier.use_case.1',
+			'tool.yaml-minifier.use_case.2',
+			'tool.yaml-minifier.use_case.3'
+		],
+		sampleInput: `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  theme: dark
+  retries: "3"
+---
+services:
+  - name: api
+    port: 8080
+  - name: worker
+    port: 9090`
+	},
+	{
 		id: 'yaml-validator',
 		category: 'yaml',
 		slug: 'validator',
@@ -60,12 +112,13 @@ scripts:
 		metaDescription: 'tool.yaml-validator.meta_description',
 		engine: 'yaml',
 		operation: 'tool.yaml-validator.operation',
-		layoutVariant: 'single',
+		layoutVariant: 'single-panel',
 		inputLanguage: 'yaml',
 		outputLanguage: 'yaml',
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'yaml', slug: 'minifier' },
 			{ category: 'yaml', slug: 'to-json' },
 			{ category: 'json', slug: 'to-yaml' }
 		],
@@ -164,13 +217,26 @@ logging:
 		outputLanguage: 'xml',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'xml', slug: 'formatter' },
+			{ category: 'xml', slug: 'validator' }
 		],
-		faqs: [],
-		useCases: [],
+		faqs: [
+			{
+				question: 'tool.yaml-to-xml.faq.0.question',
+				answer: 'tool.yaml-to-xml.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-to-xml.faq.1.question',
+				answer: 'tool.yaml-to-xml.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-to-xml.use_case.0',
+			'tool.yaml-to-xml.use_case.1',
+			'tool.yaml-to-xml.use_case.2',
+			'tool.yaml-to-xml.use_case.3'
+		],
 		sampleInput: 'root:\n  item: "Hello"'
 	},
 	{
@@ -190,13 +256,26 @@ logging:
 		outputLanguage: 'csv',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'json', slug: 'to-csv' }
 		],
-		faqs: [],
-		useCases: [],
+		faqs: [
+			{
+				question: 'tool.yaml-to-csv.faq.0.question',
+				answer: 'tool.yaml-to-csv.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-to-csv.faq.1.question',
+				answer: 'tool.yaml-to-csv.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-to-csv.use_case.0',
+			'tool.yaml-to-csv.use_case.1',
+			'tool.yaml-to-csv.use_case.2',
+			'tool.yaml-to-csv.use_case.3'
+		],
 		sampleInput: '- id: 1\n  name: "item"'
 	},
 	{
@@ -216,13 +295,26 @@ logging:
 		outputLanguage: 'toml',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'toml', slug: 'formatter' },
+			{ category: 'toml', slug: 'to-json' }
 		],
-		faqs: [],
-		useCases: [],
+		faqs: [
+			{
+				question: 'tool.yaml-to-toml.faq.0.question',
+				answer: 'tool.yaml-to-toml.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-to-toml.faq.1.question',
+				answer: 'tool.yaml-to-toml.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-to-toml.use_case.0',
+			'tool.yaml-to-toml.use_case.1',
+			'tool.yaml-to-toml.use_case.2',
+			'tool.yaml-to-toml.use_case.3'
+		],
 		sampleInput: 'server:\n  port: 8080'
 	},
 	{
@@ -235,20 +327,91 @@ logging:
 		primaryKeyword: 'tool.yaml-diff.primary_keyword',
 		metaTitle: 'tool.yaml-diff.meta_title',
 		metaDescription: 'tool.yaml-diff.meta_description',
-		engine: 'yaml',
+		engine: 'diff',
 		operation: 'tool.yaml-diff.operation',
-		layoutVariant: 'dual-input',
+		layoutVariant: 'triple',
 		inputLanguage: 'yaml',
 		outputLanguage: 'yaml',
 		hasTreeView: false,
 		relatedTools: [
-			{ category: 'json', slug: 'formatter' },
-			{ category: 'text', slug: 'word-counter' },
-			{ category: 'color', slug: 'contrast' },
-			{ category: 'crypto', slug: 'hash' }
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'yaml', slug: 'validator' },
+			{ category: 'json', slug: 'diff' },
+			{ category: 'xml', slug: 'diff' }
 		],
-		faqs: [],
-		useCases: [],
-		sampleInput: 'a: 1'
+		faqs: [
+			{
+				question: 'tool.yaml-diff.faq.0.question',
+				answer: 'tool.yaml-diff.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-diff.faq.1.question',
+				answer: 'tool.yaml-diff.faq.1.answer'
+			},
+			{
+				question: 'tool.yaml-diff.faq.2.question',
+				answer: 'tool.yaml-diff.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-diff.use_case.0',
+			'tool.yaml-diff.use_case.1',
+			'tool.yaml-diff.use_case.2',
+			'tool.yaml-diff.use_case.3'
+		],
+		sampleInput: 'service:\n  name: api\n  replicas: 2'
+	},
+	{
+		id: 'yaml-query',
+		category: 'yaml',
+		slug: 'query',
+		displayName: 'tool.yaml-query.display_name',
+		tagline: 'tool.yaml-query.tagline',
+		description: 'tool.yaml-query.description',
+		primaryKeyword: 'tool.yaml-query.primary_keyword',
+		metaTitle: 'tool.yaml-query.meta_title',
+		metaDescription: 'tool.yaml-query.meta_description',
+		engine: 'yaml',
+		operation: 'tool.yaml-query.operation',
+		layoutVariant: 'dual-input',
+		inputLanguage: 'yaml',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'yaml', slug: 'validator' },
+			{ category: 'yaml', slug: 'to-json' },
+			{ category: 'yaml', slug: 'diff' },
+			{ category: 'json', slug: 'jsonpath' }
+		],
+		faqs: [
+			{
+				question: 'tool.yaml-query.faq.0.question',
+				answer: 'tool.yaml-query.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-query.faq.1.question',
+				answer: 'tool.yaml-query.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-query.use_case.0',
+			'tool.yaml-query.use_case.1',
+			'tool.yaml-query.use_case.2',
+			'tool.yaml-query.use_case.3'
+		],
+		sampleInput: `store:
+  book:
+    - title: Sayings of the Century
+      price: 8.95
+      category: reference
+    - title: Sword of Honour
+      price: 12.99
+      category: fiction
+    - title: Moby Dick
+      price: 8.99
+      category: fiction
+  bicycle:
+    color: red
+    price: 19.95`
 	}
 ];

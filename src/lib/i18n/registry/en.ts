@@ -297,16 +297,56 @@ const registryEn: Record<string, string> = {
 	'tool.yaml-formatter.meta_description':
 		'Format and beautify YAML in your browser. Validates syntax and normalizes indentation. No data leaves your device.',
 	'tool.yaml-formatter.operation': 'Format',
+	'tool.yaml-formatter.faq.0.question': 'What does the YAML Formatter normalize?',
+	'tool.yaml-formatter.faq.0.answer':
+		'It reformats indentation, spacing, quoting style, and overall layout so the document is easier to read while staying valid YAML.',
+	'tool.yaml-formatter.faq.1.question': 'Will formatting change my YAML data?',
+	'tool.yaml-formatter.faq.1.answer':
+		'No. It rewrites presentation, not meaning. The goal is to preserve the same data structure while producing cleaner output.',
+	'tool.yaml-formatter.use_case.0': 'Beautify Kubernetes manifests before review',
+	'tool.yaml-formatter.use_case.1': 'Normalize CI configuration files for cleaner diffs',
+	'tool.yaml-formatter.use_case.2': 'Reformat Helm values files before committing',
+	'tool.yaml-formatter.use_case.3': 'Make large YAML configs easier to scan and edit',
+
+	'tool.yaml-minifier.display_name': 'YAML Minifier',
+	'tool.yaml-minifier.tagline': 'Minify YAML into a compact valid output',
+	'tool.yaml-minifier.description':
+		'Minify YAML documents into a compact flow-style representation. Supports multi-document YAML and preserves the same data structure while reducing layout noise.',
+	'tool.yaml-minifier.primary_keyword': 'yaml minifier',
+	'tool.yaml-minifier.meta_title': 'YAML Minifier — fmtly.dev',
+	'tool.yaml-minifier.meta_description':
+		'Minify YAML in your browser. Supports multi-document YAML and compact output. No data leaves your device.',
+	'tool.yaml-minifier.operation': 'Minify',
+	'tool.yaml-minifier.faq.0.question': 'How does YAML minification work?',
+	'tool.yaml-minifier.faq.0.answer':
+		'It parses the YAML first and then rewrites it as a more compact valid YAML document. That removes most formatting noise while preserving the same data.',
+	'tool.yaml-minifier.faq.1.question': 'Does it support multiple YAML documents?',
+	'tool.yaml-minifier.faq.1.answer':
+		'Yes. Multi-document inputs separated by document markers are preserved and minified document by document.',
+	'tool.yaml-minifier.use_case.0': 'Shrink YAML before sharing snippets in tickets or chat',
+	'tool.yaml-minifier.use_case.1': 'Inspect compact multi-document manifests',
+	'tool.yaml-minifier.use_case.2': 'Reduce whitespace before storing generated YAML fixtures',
+	'tool.yaml-minifier.use_case.3': 'Compare pretty and compact YAML representations side by side',
 
 	'tool.yaml-validator.display_name': 'YAML Validator',
-	'tool.yaml-validator.tagline': 'Validate YAML syntax and structure',
+	'tool.yaml-validator.tagline': 'Validate YAML syntax and schema',
 	'tool.yaml-validator.description':
-		'Validate YAML documents for syntax errors. Identifies indentation issues, duplicate keys, and invalid characters with precise line numbers.',
+		'Validate YAML syntax in real time and check documents against a schema. Catch indentation problems, malformed structures, and schema mismatches with line-level feedback.',
 	'tool.yaml-validator.primary_keyword': 'yaml validator',
 	'tool.yaml-validator.meta_title': 'YAML Validator — fmtly.dev',
 	'tool.yaml-validator.meta_description':
-		'Validate YAML in your browser. Detects syntax errors with line numbers. No data leaves your device.',
+		'Validate YAML syntax and schema in your browser. Catch parser errors and schema mismatches with line numbers. No data leaves your device.',
 	'tool.yaml-validator.operation': 'Validate',
+	'tool.yaml-validator.faq.0.question': 'What kinds of YAML errors can it detect?',
+	'tool.yaml-validator.faq.0.answer':
+		'It catches parser errors such as bad indentation, invalid mappings, misplaced sequences, and malformed documents. In schema mode it also reports paths and values that do not satisfy the schema.',
+	'tool.yaml-validator.faq.1.question': 'Can I validate YAML against a schema?',
+	'tool.yaml-validator.faq.1.answer':
+		'Yes. Switch to Schema mode and provide a JSON Schema. The schema input can be written in JSON or YAML, which is useful for manifests, config files, and API payloads.',
+	'tool.yaml-validator.use_case.0': 'Check deployment manifests before shipping',
+	'tool.yaml-validator.use_case.1': 'Validate YAML copied from docs or Stack Overflow',
+	'tool.yaml-validator.use_case.2': 'Catch indentation mistakes in CI and automation configs',
+	'tool.yaml-validator.use_case.3': 'Validate Helm values or manifests against an expected schema',
 
 	'tool.yaml-to-json.display_name': 'YAML to JSON',
 	'tool.yaml-to-json.tagline': 'Convert YAML to JSON format',
@@ -317,6 +357,16 @@ const registryEn: Record<string, string> = {
 	'tool.yaml-to-json.meta_description':
 		'Convert YAML to JSON instantly in your browser. Handles anchors, aliases, and multi-document YAML. No data uploaded.',
 	'tool.yaml-to-json.operation': 'Convert',
+	'tool.yaml-to-json.faq.0.question': 'When should I convert YAML to JSON?',
+	'tool.yaml-to-json.faq.0.answer':
+		'Convert YAML to JSON when you need a stricter data format for APIs, JavaScript tooling, testing pipelines, or downstream processors that expect JSON.',
+	'tool.yaml-to-json.faq.1.question': 'Does the converter preserve nested objects and arrays?',
+	'tool.yaml-to-json.faq.1.answer':
+		'Yes. Nested mappings and sequences are converted to their JSON equivalents so the overall data structure remains intact.',
+	'tool.yaml-to-json.use_case.0': 'Turn YAML configs into JSON for API payloads',
+	'tool.yaml-to-json.use_case.1': 'Inspect YAML data in a stricter machine-friendly format',
+	'tool.yaml-to-json.use_case.2': 'Move configuration data into JavaScript workflows',
+	'tool.yaml-to-json.use_case.3': 'Prepare YAML content for JSONPath or schema-based tooling',
 
 	'tool.yaml-to-xml.display_name': 'YAML to XML',
 	'tool.yaml-to-xml.tagline': 'Convert YAML to XML format',
@@ -327,6 +377,16 @@ const registryEn: Record<string, string> = {
 	'tool.yaml-to-xml.meta_description':
 		'Convert YAML to XML instantly in your browser. No data uploaded.',
 	'tool.yaml-to-xml.operation': 'Convert',
+	'tool.yaml-to-xml.faq.0.question': 'How does YAML map to XML during conversion?',
+	'tool.yaml-to-xml.faq.0.answer':
+		'Keys are turned into element names, nested objects become nested elements, and arrays are expanded into repeated items inside the generated XML tree.',
+	'tool.yaml-to-xml.faq.1.question': 'Is the output suitable for further XML tooling?',
+	'tool.yaml-to-xml.faq.1.answer':
+		'Yes. The result is generated as well-formed XML so you can continue with XML formatting, validation, or downstream processing.',
+	'tool.yaml-to-xml.use_case.0': 'Convert YAML config data into XML-based integrations',
+	'tool.yaml-to-xml.use_case.1': 'Generate XML fixtures from YAML test data',
+	'tool.yaml-to-xml.use_case.2': 'Bridge YAML authoring workflows into XML pipelines',
+	'tool.yaml-to-xml.use_case.3': 'Prepare structured YAML content for XML review and export',
 
 	'tool.yaml-to-csv.display_name': 'YAML to CSV',
 	'tool.yaml-to-csv.tagline': 'Convert YAML arrays to CSV format',
@@ -337,6 +397,16 @@ const registryEn: Record<string, string> = {
 	'tool.yaml-to-csv.meta_description':
 		'Convert YAML to CSV instantly in your browser. No data uploaded.',
 	'tool.yaml-to-csv.operation': 'Convert',
+	'tool.yaml-to-csv.faq.0.question': 'What YAML structures convert best to CSV?',
+	'tool.yaml-to-csv.faq.0.answer':
+		'Arrays of objects work best. Each object becomes a row, and matching keys become CSV columns. Nested objects are flattened into dotted paths when possible.',
+	'tool.yaml-to-csv.faq.1.question': 'Can I convert a single YAML object to CSV?',
+	'tool.yaml-to-csv.faq.1.answer':
+		'Yes. A single object can be treated as one row, which is useful for exporting simple records or config snapshots.',
+	'tool.yaml-to-csv.use_case.0': 'Export YAML records into spreadsheets for review',
+	'tool.yaml-to-csv.use_case.1': 'Turn structured YAML datasets into CSV for analysts',
+	'tool.yaml-to-csv.use_case.2': 'Flatten inventory or config lists into tabular output',
+	'tool.yaml-to-csv.use_case.3': 'Prepare YAML data for bulk import tools that expect CSV',
 
 	'tool.yaml-to-toml.display_name': 'YAML to TOML',
 	'tool.yaml-to-toml.tagline': 'Convert YAML to TOML configuration format',
@@ -347,6 +417,16 @@ const registryEn: Record<string, string> = {
 	'tool.yaml-to-toml.meta_description':
 		'Convert YAML to TOML instantly in your browser. No data uploaded.',
 	'tool.yaml-to-toml.operation': 'Convert',
+	'tool.yaml-to-toml.faq.0.question': 'Why convert YAML to TOML?',
+	'tool.yaml-to-toml.faq.0.answer':
+		'TOML is often preferred for human-edited configuration files in developer tooling. Converting helps when a project or package manager expects TOML instead of YAML.',
+	'tool.yaml-to-toml.faq.1.question': 'Are nested configuration sections preserved?',
+	'tool.yaml-to-toml.faq.1.answer':
+		'Yes. Nested mappings are converted into TOML tables and arrays where the format allows it, keeping the configuration hierarchy readable.',
+	'tool.yaml-to-toml.use_case.0': 'Move YAML app settings into TOML-based projects',
+	'tool.yaml-to-toml.use_case.1': 'Generate TOML configs from existing YAML sources',
+	'tool.yaml-to-toml.use_case.2': 'Port deployment settings into TOML-friendly tooling',
+	'tool.yaml-to-toml.use_case.3': 'Compare the same configuration across YAML and TOML formats',
 
 	'tool.yaml-diff.display_name': 'YAML Diff',
 	'tool.yaml-diff.tagline': 'Compare two YAML documents side by side',
@@ -357,6 +437,38 @@ const registryEn: Record<string, string> = {
 	'tool.yaml-diff.meta_description':
 		'Compare two YAML documents in your browser. Highlights all additions, deletions, and changes. No data uploaded.',
 	'tool.yaml-diff.operation': 'Compare',
+	'tool.yaml-diff.faq.0.question': 'How is YAML Diff different from plain text diff?',
+	'tool.yaml-diff.faq.0.answer':
+		'YAML Diff parses both inputs as YAML data and compares the resulting structure. That means changes are matched by keys, arrays, and values instead of relying on formatting alone.',
+	'tool.yaml-diff.faq.1.question': 'Can I compare invalid YAML?',
+	'tool.yaml-diff.faq.1.answer':
+		'No. Both sides need to be valid YAML first. If one side is malformed, the tool tells you which input needs to be fixed before comparison.',
+	'tool.yaml-diff.faq.2.question': 'What kinds of changes are highlighted?',
+	'tool.yaml-diff.faq.2.answer':
+		'It highlights added, removed, and modified YAML paths and values, which is especially useful for reviewing config revisions and deployment changes.',
+	'tool.yaml-diff.use_case.0': 'Review changes between two deployment manifests',
+	'tool.yaml-diff.use_case.1': 'Compare CI pipeline config revisions',
+	'tool.yaml-diff.use_case.2': 'Inspect edited Helm or values files before commit',
+	'tool.yaml-diff.use_case.3': 'Verify generated YAML against an expected config version',
+	'tool.yaml-query.display_name': 'YAML Query',
+	'tool.yaml-query.tagline': 'Query YAML with JSONPath and JMESPath',
+	'tool.yaml-query.description':
+		'Run JSONPath or JMESPath expressions against YAML directly in your browser. Parse YAML, query nested data, and inspect results without converting files manually.',
+	'tool.yaml-query.primary_keyword': 'yaml query',
+	'tool.yaml-query.meta_title': 'YAML Query Tool — fmtly.dev',
+	'tool.yaml-query.meta_description':
+		'Query YAML with JSONPath or JMESPath in your browser. No manual conversion and no data uploaded.',
+	'tool.yaml-query.operation': 'Query',
+	'tool.yaml-query.faq.0.question': 'Which query languages are supported?',
+	'tool.yaml-query.faq.0.answer':
+		'You can switch between JSONPath and JMESPath. Both run against the parsed YAML data model, so nested mappings, sequences, and multi-document inputs can be queried directly.',
+	'tool.yaml-query.faq.1.question': 'Do I need to convert YAML to JSON first?',
+	'tool.yaml-query.faq.1.answer':
+		'No. The tool parses YAML for you and returns JSON-formatted results. That makes it useful for configs, manifests, values files, and other YAML-heavy workflows.',
+	'tool.yaml-query.use_case.0': 'Extract specific fields from Kubernetes manifests or Helm values',
+	'tool.yaml-query.use_case.1': 'Inspect nested YAML config data without manual conversion',
+	'tool.yaml-query.use_case.2': 'Prototype JSONPath or JMESPath expressions against YAML payloads',
+	'tool.yaml-query.use_case.3': 'Pull lists, ids, or flags from large multi-level YAML documents',
 
 	// ── CSV tools ───────────────────────────────────────────────────────────
 	'tool.csv-to-json.display_name': 'CSV to JSON',
@@ -1073,6 +1185,8 @@ const registryEn: Record<string, string> = {
 	'ui.history.title': 'History',
 	'ui.paste_here': 'Paste here…',
 	'ui.paste_language_here': 'Paste {language} here…',
+	'ui.placeholder.original_yaml': 'Paste original YAML here…',
+	'ui.placeholder.modified_yaml': 'Paste modified YAML here…',
 	'ui.placeholder.search_tools_count': 'Search {count}+ tools...',
 	'ui.placeholder.url': 'https://example.com/data.json',
 	'ui.placeholder.xpath': '//book[@available=\x27true\x27]',
@@ -1115,8 +1229,11 @@ const registryEn: Record<string, string> = {
 	'ui.xpath.results_count.other': '{count} results',
 	'ui.validator.syntax': 'Syntax',
 	'ui.validator.schema': 'Schema',
+	'ui.validator.mode': 'Validator mode',
 	'ui.validator.issue': 'issue',
 	'ui.validator.issues': 'issues',
+	'ui.validator.warning': 'warning',
+	'ui.validator.warnings': 'warnings',
 	'ui.validator.first_issue': 'First issue',
 	'ui.validator.repair_json': 'Repair JSON',
 	'ui.validator.schema_title': 'JSON Schema',
@@ -1134,8 +1251,20 @@ const registryEn: Record<string, string> = {
 	'ui.validator.valid_json': 'Valid JSON',
 	'ui.validator.explanation_must_satisfy': 'must satisfy',
 	'ui.validator.data_error_pos': 'Data error at line {line}, column {column}',
+	'ui.validator.paste_yaml': 'Paste YAML to validate',
+	'ui.validator.yaml_paste_schema': 'Paste a schema to validate against',
+	'ui.validator.yaml_validating_schema': 'Validating schema…',
+	'ui.validator.yaml_matches_schema': 'YAML matches schema',
+	'ui.validator.yaml_matches_current_schema': 'YAML matches the current schema.',
+	'ui.validator.yaml_schema_title': 'Schema',
+	'ui.validator.yaml_schema_standard': 'JSON Schema Draft-07+ via AJV',
+	'ui.validator.yaml_paste_schema_placeholder': 'Paste JSON Schema or YAML schema here…',
+	'ui.validator.yaml_schema_validation_desc':
+		'Validate YAML structure against a JSON Schema. Schema input can be written in JSON or YAML.',
+	'ui.load_sample': 'Load a sample',
 	'ui.share_url': 'Share URL',
 	'ui.format_xml': 'Format XML',
+	'ui.format_yaml': 'Format YAML',
 	'ui.minify_xml': 'Minify XML',
 	'ui.format_beautify': 'Format / Beautify',
 	'ui.minify': 'Minify',
@@ -1145,6 +1274,7 @@ const registryEn: Record<string, string> = {
 	'ui.expand_to_depth': 'Expand to depth {depth}',
 	switch_to_tab: 'Switch to tab {index}',
 	switch_to_xml_tab: 'Switch to XML tab {index}',
+	switch_to_yaml_tab: 'Switch to YAML tab {index}',
 	use_cases: 'Use Cases',
 	faq: 'FAQ',
 	'ui.validator.schema_error_pos': 'Schema error at line {line}, column {column}',
@@ -1170,6 +1300,23 @@ const registryEn: Record<string, string> = {
 	'ui.aria.xml_workspace_tabs': 'XML workspace tabs',
 	'ui.aria.xpath_panel': 'XPath query panel',
 	'ui.aria.xml_validator': 'XML validator',
+	'ui.aria.yaml_output_panel': 'YAML output panel',
+	'ui.aria.yaml_validator': 'YAML validator',
+	'ui.validator.invalid_yaml': 'Invalid YAML',
+	'ui.validator.yaml_paste_hint': 'Paste or type YAML to validate it.',
+	'ui.validator.yaml_validation_desc':
+		'Validates YAML syntax, indentation, invalid characters, and malformed structures.',
+	'ui.validator.yaml_success_title': 'Valid YAML',
+	'ui.validator.yaml_success_desc':
+		'No syntax errors detected. The document can be parsed successfully as YAML.',
+	'ui.validator.yaml_warning_title': 'Valid YAML with style warnings',
+	'ui.validator.yaml_warning_desc':
+		'The document parses successfully, but a few style issues may reduce readability or consistency.',
+	'ui.validator.yaml_lint.tabs':
+		'Tabs found in indentation. YAML is usually safer with spaces only.',
+	'ui.validator.yaml_lint.trailing_whitespace': 'Trailing whitespace found.',
+	'ui.validator.yaml_lint.odd_indentation':
+		'Odd indentation width found. YAML is usually more consistent with 2-space indentation.',
 	'ui.convert.to_json': '→ JSON',
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
@@ -1187,16 +1334,22 @@ const registryEn: Record<string, string> = {
 	'ui.query.sample_query': 'Sample query',
 	'ui.query.guide': 'Guide',
 	'ui.query.query': 'Query',
+	'ui.query.mode': 'Query mode',
 	'ui.query.running': 'Running query…',
 	'ui.query.empty_input': 'Paste JSON on the left to evaluate your query.',
+	'ui.query.empty_input_yaml': 'Paste YAML on the left to evaluate your query.',
 	'ui.query.empty_query': 'Enter a query to see results.',
 	'ui.query.error_fallback': 'Query failed',
 	'ui.query.copy_error': 'Could not copy output',
+	'ui.aria.json_query_panel': 'JSON query panel',
+	'ui.aria.yaml_query_panel': 'YAML query panel',
 	'ui.status.processing': 'Processing…',
 	'ui.status.waiting_output': 'Output will appear here',
 	'ui.output.controls.spaces': 'spaces',
 	'ui.output.stats.chars': 'chars',
 	'ui.output.stats.lines': 'lines',
+	'ui.output.stats.documents': 'documents',
+	'ui.output.stats.top_level_keys': 'top-level keys',
 	'ui.output.stats.keys': 'keys',
 	'ui.output.stats.objects': 'objects',
 	'ui.output.stats.arrays': 'arrays',

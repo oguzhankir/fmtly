@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import { dev } from '$app/environment';
 	import type { Snippet } from 'svelte';
 	import { onMount, onDestroy, setContext } from 'svelte';
 	import { theme, toggleTheme } from '$stores/settings.store';
@@ -19,25 +18,15 @@
 
 	let shortcutsModalOpen = $state(false);
 	let commandPaletteOpen = $state(false);
-	let analyticsScript = $state<HTMLScriptElement | null>(null);
 
 	setContext('theme', theme);
 
 	onMount(() => {
 		initKeyboardShortcuts();
-		if (!dev) {
-			const script = document.createElement('script');
-			script.defer = true;
-			script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-			script.dataset.cfBeacon = '{"token":"41ffb0ac032f4a2d8c9482987d93faaf"}';
-			document.head.appendChild(script);
-			analyticsScript = script;
-		}
 	});
 
 	onDestroy(() => {
 		destroyKeyboardShortcuts();
-		analyticsScript?.remove();
 	});
 
 	function openCommandPalette(): void {

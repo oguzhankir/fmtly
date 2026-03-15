@@ -3,7 +3,8 @@
 	import { addToast } from '$stores/toast.store';
 	import { computeJSONDiff, toJSONPatch, summarizeJSONDiff, toDiffMarkdown, toDiffCSV } from '$lib/engines/diff/json-diff.js';
 	import { computeXMLDiff, computeDiffSummary } from '$lib/engines/diff/xml-diff.js';
-	import type { DiffEntry, DiffOptions } from '$lib/engines/diff/json-diff.js';
+	import { computeYAMLDiff } from '$lib/engines/diff/yaml-diff.js';
+	import type { DiffEntry, DiffOptions, DiffResult } from '$lib/engines/diff/json-diff.js';
 	import { t } from '$lib/stores/language.js';
 	import type MonacoDiffViewType from '$components/editor/MonacoDiffView.svelte';
 
@@ -49,18 +50,51 @@
 	});
 
 	let isXmlDiff = $derived(language === 'xml');
-	let languageLabel = $derived(isXmlDiff ? 'XML' : 'JSON');
+	let isYamlDiff = $derived(language === 'yaml');
+	let isJsonDiff = $derived(language === 'json');
+	let languageLabel = $derived(
+		isXmlDiff ? 'XML' : isYamlDiff ? 'YAML' : 'JSON'
+	);
+
+	let yamlResult = $state<DiffResult | null>(null);
+	let yamlDiffLoading = $state(false);
+	let yamlDiffToken = 0;
+
+	$effect(() => {
+		if (!isYamlDiff) {
+			yamlResult = null;
+			yamlDiffLoading = false;
+			return;
+		}
+		if (!leftInput.trim() || !rightInput.trim()) {
+			yamlResult = null;
+			yamlDiffLoading = false;
+			return;
+		}
+
+		const nextToken = ++yamlDiffToken;
+		yamlDiffLoading = true;
+		void computeYAMLDiff(leftInput, rightInput, options).then((nextResult) => {
+			if (nextToken !== yamlDiffToken) return;
+			yamlResult = nextResult;
+			yamlDiffLoading = false;
+		});
+	});
 
 	let result = $derived(
-		leftInput.trim() && rightInput.trim()
-			? isXmlDiff
-				? computeXMLDiff(leftInput, rightInput, options)
-				: computeJSONDiff(leftInput, rightInput, options)
-			: null
+		isYamlDiff
+			? yamlResult
+			: leftInput.trim() && rightInput.trim()
+				? isXmlDiff
+					? computeXMLDiff(leftInput, rightInput, options)
+					: computeJSONDiff(leftInput, rightInput, options)
+				: null
 	);
 
 	let diffEntries = $derived(result?.entries ?? []);
-	let summary = $derived(isXmlDiff ? computeDiffSummary(diffEntries) : summarizeJSONDiff(diffEntries));
+	let summary = $derived(
+		isXmlDiff || isYamlDiff ? computeDiffSummary(diffEntries) : summarizeJSONDiff(diffEntries)
+	);
 	let diffCount = $derived(summary.added + summary.removed + summary.modified);
 	let errorLabel = $derived.by(() => {
 		if (!result?.error) return null;
@@ -104,7 +138,16 @@
     <year>1960</year>
     <price>12.99</price>
   </book>
-</catalog>` : JSON.stringify({
+</catalog>` : language === 'yaml' ? `service:
+  name: api
+  replicas: 2
+  image: fmtly/api:1.0.0
+  env:
+    LOG_LEVEL: info
+    REGION: eu-west-1
+  ports:
+    - 8080
+    - 8443` : JSON.stringify({
 		name: "Alice",
 		age: 30,
 		roles: ["admin", "editor"],
@@ -131,7 +174,17 @@
     <year>1949</year>
     <price>9.99</price>
   </book>
-</catalog>` : JSON.stringify({
+</catalog>` : language === 'yaml' ? `service:
+  name: api
+  replicas: 3
+  image: fmtly/api:1.1.0
+  env:
+    LOG_LEVEL: debug
+    REGION: eu-west-1
+  ports:
+    - 8080
+  healthcheck:
+    path: /health` : JSON.stringify({
 		name: "Alice",
 		age: 31,
 		roles: ["admin", "viewer"],
@@ -231,7 +284,7 @@
 	<!-- Controls bar -->
 	<div class="diff-controls">
 		<div class="diff-controls-left">
-			{#if !isXmlDiff}
+			{#if isJsonDiff}
 				<label class="diff-toggle">
 					<input type="checkbox" bind:checked={ignoreArrayOrder} />
 					<span>{$t('ui.diff.controls.ignore_order', 'Ignore array order')}</span>
@@ -245,7 +298,7 @@
 				<input type="checkbox" bind:checked={caseSensitive} />
 				<span>{$t('ui.diff.controls.case_sensitive', 'Case sensitive')}</span>
 			</label>
-			{#if !isXmlDiff}
+			{#if isJsonDiff}
 				<div class="diff-ignore-keys">
 					<input
 						type="text"
@@ -306,7 +359,7 @@
 					</button>
 					{#if exportOpen}
 						<div class="diff-export-menu" role="menu">
-							{#if !isXmlDiff}
+							{#if isJsonDiff}
 								<button class="diff-export-item" role="menuitem" onclick={copyJSONPatch}>
 									<ClipboardList size={12} />
 									{$t('ui.diff.controls.copy_patch', 'Copy as JSON Patch')}
@@ -341,6 +394,8 @@
 	<div class="diff-status">
 		{#if result?.error}
 			<span class="diff-status--error">{errorLabel}</span>
+		{:else if isYamlDiff && yamlDiffLoading}
+			<span class="diff-status--empty">{$t('ui.status.processing', 'Processing…')}</span>
 		{:else if !result}
 			<span class="diff-status--empty">
 				{$t('ui.diff.summary.empty', { language: languageLabel }, `Enter ${languageLabel} in both panels to compare`)}

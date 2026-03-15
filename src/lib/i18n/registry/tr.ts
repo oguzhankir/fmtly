@@ -298,16 +298,56 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-formatter.meta_description':
 		"YAML'ı tarayıcıda biçimlendir ve güzelleştir. Sözdizimini doğrula ve girinti normalleştir. Hiçbir veri cihazdan ayrılmaz.",
 	'tool.yaml-formatter.operation': 'Biçimlendir',
+	'tool.yaml-formatter.faq.0.question': 'YAML Biçimlendirici tam olarak neyi düzenler?',
+	'tool.yaml-formatter.faq.0.answer':
+		'Belgeyi daha okunur hale getirmek için girintiyi, boşlukları, alıntı stilini ve genel yerleşimi düzenler; YAML verisinin anlamını değiştirmez.',
+	'tool.yaml-formatter.faq.1.question': 'Biçimlendirme YAML verimin içeriğini değiştirir mi?',
+	'tool.yaml-formatter.faq.1.answer':
+		'Hayır. Amaç veri yapısını koruyup çıktıyı daha temiz ve tutarlı hale getirmektir.',
+	'tool.yaml-formatter.use_case.0': 'İnceleme öncesi Kubernetes manifestlerini güzelleştirme',
+	'tool.yaml-formatter.use_case.1': 'Daha temiz diffler için CI yapılandırmalarını normalize etme',
+	'tool.yaml-formatter.use_case.2': 'Commit öncesi Helm values dosyalarını yeniden biçimlendirme',
+	'tool.yaml-formatter.use_case.3': 'Büyük YAML yapılandırmalarını daha kolay taranır hale getirme',
+
+	'tool.yaml-minifier.display_name': 'YAML Küçültücü',
+	'tool.yaml-minifier.tagline': "YAML'ı kompakt ve geçerli bir çıktıya küçült",
+	'tool.yaml-minifier.description':
+		"YAML belgelerini kompakt akış stili bir gösterime küçült. Çok belgeli YAML'ı destekler ve veri yapısını korurken yerleşim gürültüsünü azaltır.",
+	'tool.yaml-minifier.primary_keyword': 'yaml küçültücü',
+	'tool.yaml-minifier.meta_title': 'YAML Küçültücü — fmtly.dev',
+	'tool.yaml-minifier.meta_description':
+		"YAML'ı tarayıcıda küçült. Çok belgeli YAML'ı ve kompakt çıktıyı destekler. Hiçbir veri cihazdan ayrılmaz.",
+	'tool.yaml-minifier.operation': 'Küçült',
+	'tool.yaml-minifier.faq.0.question': 'YAML küçültme nasıl çalışır?',
+	'tool.yaml-minifier.faq.0.answer':
+		"Önce YAML ayrıştırılır, ardından daha kompakt ama geçerli bir YAML olarak yeniden yazılır. Böylece veri korunurken biçim gürültüsü azalır.",
+	'tool.yaml-minifier.faq.1.question': 'Birden fazla YAML belgesini destekliyor mu?',
+	'tool.yaml-minifier.faq.1.answer':
+		'Evet. Belge ayırıcılarla ayrılmış çok belgeli girdiler korunur ve her belge ayrı ayrı küçültülür.',
+	'tool.yaml-minifier.use_case.0': 'YAML parçalarını ticket veya sohbette paylaşmadan önce küçültme',
+	'tool.yaml-minifier.use_case.1': 'Kompakt çok belgeli manifestleri inceleme',
+	'tool.yaml-minifier.use_case.2': 'Üretilen YAML fixture’larını saklamadan önce boşlukları azaltma',
+	'tool.yaml-minifier.use_case.3': 'Biçimlendirilmiş ve kompakt YAML gösterimlerini yan yana karşılaştırma',
 
 	'tool.yaml-validator.display_name': 'YAML Doğrulayıcı',
-	'tool.yaml-validator.tagline': 'YAML sözdizimini ve yapısını doğrula',
+	'tool.yaml-validator.tagline': 'YAML sözdizimini ve şemasını doğrula',
 	'tool.yaml-validator.description':
-		'YAML belgelerini sözdizimi hataları açısından doğrula. Girinti sorunlarını, yinelenen anahtarları ve geçersiz karakterleri kesin satır numaraları ile tanımla.',
+		'YAML sözdizimini gerçek zamanlı doğrula ve belgeleri bir şemaya karşı kontrol et. Girinti sorunlarını, bozuk yapıları ve şema uyuşmazlıklarını satır bazlı geri bildirimle yakala.',
 	'tool.yaml-validator.primary_keyword': 'yaml doğrulayıcı',
 	'tool.yaml-validator.meta_title': 'YAML Doğrulayıcı — fmtly.dev',
 	'tool.yaml-validator.meta_description':
-		"YAML'ı tarayıcıda doğrula. Satır numaraları ile sözdizimi hatalarını algıla. Hiçbir veri cihazdan ayrılmaz.",
+		'Tarayıcıda YAML sözdizimini ve şemasını doğrula. Ayrıştırma hatalarını ve şema uyuşmazlıklarını satır numaralarıyla yakala. Veriler cihazınızdan ayrılmaz.',
 	'tool.yaml-validator.operation': 'Doğrula',
+	'tool.yaml-validator.faq.0.question': 'Hangi YAML hatalarını tespit edebilir?',
+	'tool.yaml-validator.faq.0.answer':
+		'Kötü girinti, geçersiz eşlemeler, yanlış yerleştirilmiş diziler ve bozuk belgeler gibi ayrıştırıcı hatalarını yakalar. Şema modunda ayrıca şemayı karşılamayan yolları ve değerleri de raporlar.',
+	'tool.yaml-validator.faq.1.question': 'YAML’i bir şemaya karşı doğrulayabilir miyim?',
+	'tool.yaml-validator.faq.1.answer':
+		'Evet. Şema moduna geçip bir JSON Şeması verin. Şema girdisi JSON veya YAML olarak yazılabilir; bu da manifestler, yapılandırma dosyaları ve API payload’ları için kullanışlıdır.',
+	'tool.yaml-validator.use_case.0': 'Yayın öncesi deployment manifestlerini kontrol etme',
+	'tool.yaml-validator.use_case.1': 'Dokümantasyondan kopyalanan YAML’i doğrulama',
+	'tool.yaml-validator.use_case.2': 'CI ve otomasyon dosyalarındaki girinti hatalarını yakalama',
+	'tool.yaml-validator.use_case.3': 'Helm values veya manifestleri beklenen bir şemaya karşı doğrulama',
 
 	'tool.yaml-to-json.display_name': "YAML'dan JSON'a",
 	'tool.yaml-to-json.tagline': "YAML'ı JSON biçimine dönüştür",
@@ -318,6 +358,16 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-to-json.meta_description':
 		"YAML'ı tarayıcıda anında JSON'a dönüştür. Bulantıları, diğer adları ve çok belgeli YAML'ı işle. Yükleme yok.",
 	'tool.yaml-to-json.operation': 'Dönüştür',
+	'tool.yaml-to-json.faq.0.question': "YAML'ı ne zaman JSON'a dönüştürmek gerekir?",
+	'tool.yaml-to-json.faq.0.answer':
+		'API’ler, JavaScript araçları, test akışları veya JSON bekleyen alt sistemler için daha katı bir veri biçimine ihtiyaç duyduğunuzda dönüştürmek faydalıdır.',
+	'tool.yaml-to-json.faq.1.question': 'İç içe nesneler ve listeler korunur mu?',
+	'tool.yaml-to-json.faq.1.answer':
+		'Evet. İç içe eşlemeler ve diziler JSON karşılıklarına dönüştürülür; veri yapısı korunur.',
+	'tool.yaml-to-json.use_case.0': "YAML yapılandırmalarını API yükleri için JSON'a çevirme",
+	'tool.yaml-to-json.use_case.1': 'YAML verisini daha katı bir makine dostu formatta inceleme',
+	'tool.yaml-to-json.use_case.2': 'Yapılandırma verilerini JavaScript iş akışlarına taşıma',
+	'tool.yaml-to-json.use_case.3': 'YAML içeriğini JSON tabanlı araçlara hazırlama',
 
 	'tool.yaml-to-xml.display_name': "YAML'dan XML'e",
 	'tool.yaml-to-xml.tagline': "YAML'ı XML biçimine dönüştür",
@@ -327,6 +377,16 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-to-xml.meta_title': "YAML'dan XML'e Dönüştürücü — fmtly.dev",
 	'tool.yaml-to-xml.meta_description': "YAML'ı tarayıcıda anında XML'e dönüştür. Yükleme yok.",
 	'tool.yaml-to-xml.operation': 'Dönüştür',
+	'tool.yaml-to-xml.faq.0.question': "YAML XML'e dönüşürken nasıl eşlenir?",
+	'tool.yaml-to-xml.faq.0.answer':
+		'Anahtarlar öğe adına dönüşür, iç içe nesneler iç içe XML öğeleri olur, listeler ise tekrarlanan öğeler halinde genişletilir.',
+	'tool.yaml-to-xml.faq.1.question': 'Çıktı diğer XML araçlarında kullanılabilir mi?',
+	'tool.yaml-to-xml.faq.1.answer':
+		'Evet. Çıktı iyi biçimlendirilmiş XML olarak üretilir; sonrasında XML biçimlendirme ve doğrulama araçlarıyla kullanılabilir.',
+	'tool.yaml-to-xml.use_case.0': 'YAML verisini XML tabanlı entegrasyonlara dönüştürme',
+	'tool.yaml-to-xml.use_case.1': 'YAML test verilerinden XML fixture üretme',
+	'tool.yaml-to-xml.use_case.2': 'YAML yazım akışlarını XML pipeline’larına bağlama',
+	'tool.yaml-to-xml.use_case.3': 'Yapılandırılmış YAML içeriğini XML olarak dışa hazırlama',
 
 	'tool.yaml-to-csv.display_name': "YAML'dan CSV'ye",
 	'tool.yaml-to-csv.tagline': 'YAML dizilerini CSV biçimine dönüştür',
@@ -336,6 +396,16 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-to-csv.meta_title': "YAML'dan CSV'ye Dönüştürücü — fmtly.dev",
 	'tool.yaml-to-csv.meta_description': "YAML'ı tarayıcıda anında CSV'ye dönüştür. Yükleme yok.",
 	'tool.yaml-to-csv.operation': 'Dönüştür',
+	'tool.yaml-to-csv.faq.0.question': 'Hangi YAML yapıları CSV’ye en iyi dönüşür?',
+	'tool.yaml-to-csv.faq.0.answer':
+		'Nesne dizileri en iyi sonucu verir. Her nesne bir satıra, ortak anahtarlar da CSV sütunlarına dönüşür.',
+	'tool.yaml-to-csv.faq.1.question': 'Tek bir YAML nesnesi CSV’ye çevrilebilir mi?',
+	'tool.yaml-to-csv.faq.1.answer':
+		'Evet. Tek bir nesne tek satırlık CSV olarak dışa aktarılabilir; bu basit kayıtlar için kullanışlıdır.',
+	'tool.yaml-to-csv.use_case.0': 'YAML kayıtlarını tablo olarak incelemek için dışa aktarma',
+	'tool.yaml-to-csv.use_case.1': 'Yapılandırılmış YAML veri kümelerini analistler için CSV’ye çevirme',
+	'tool.yaml-to-csv.use_case.2': 'Envanter veya yapılandırma listelerini tabloya düzleştirme',
+	'tool.yaml-to-csv.use_case.3': 'CSV bekleyen içe aktarma araçları için YAML verisi hazırlama',
 
 	'tool.yaml-to-toml.display_name': "YAML'dan TOML'a",
 	'tool.yaml-to-toml.tagline': "YAML'ı TOML yapılandırma biçimine dönüştür",
@@ -345,6 +415,16 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-to-toml.meta_title': "YAML'dan TOML'a Dönüştürücü — fmtly.dev",
 	'tool.yaml-to-toml.meta_description': "YAML'ı tarayıcıda anında TOML'a dönüştür. Yükleme yok.",
 	'tool.yaml-to-toml.operation': 'Dönüştür',
+	'tool.yaml-to-toml.faq.0.question': "Neden YAML'ı TOML'a dönüştüreyim?",
+	'tool.yaml-to-toml.faq.0.answer':
+		'TOML, geliştirici araçlarında insan tarafından düzenlenen yapılandırmalar için sık tercih edilir. Proje TOML bekliyorsa dönüşüm işinizi kolaylaştırır.',
+	'tool.yaml-to-toml.faq.1.question': 'İç içe yapılandırma bölümleri korunur mu?',
+	'tool.yaml-to-toml.faq.1.answer':
+		'Evet. İç içe eşlemeler, formatın izin verdiği ölçüde TOML tablolarına ve dizilerine dönüştürülür.',
+	'tool.yaml-to-toml.use_case.0': 'YAML ayarlarını TOML tabanlı projelere taşıma',
+	'tool.yaml-to-toml.use_case.1': 'Var olan YAML kaynaklarından TOML yapılandırmaları üretme',
+	'tool.yaml-to-toml.use_case.2': 'Dağıtım ayarlarını TOML kullanan araçlara taşıma',
+	'tool.yaml-to-toml.use_case.3': 'Aynı yapılandırmayı YAML ve TOML olarak karşılaştırma',
 
 	'tool.yaml-diff.display_name': 'YAML Diff',
 	'tool.yaml-diff.tagline': 'İki YAML belgesini yan yana karşılaştır',
@@ -355,6 +435,38 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-diff.meta_description':
 		'İki YAML belgesini tarayıcıda karşılaştır. Tüm ekleme, silme ve değişiklikleri vurgula. Yükleme yok.',
 	'tool.yaml-diff.operation': 'Karşılaştır',
+	'tool.yaml-diff.faq.0.question': 'YAML Diff düz metin diff’ten nasıl ayrılır?',
+	'tool.yaml-diff.faq.0.answer':
+		'İki girdiyi YAML verisi olarak ayrıştırır ve ortaya çıkan yapıyı karşılaştırır. Böylece değişiklikler yalnızca biçime göre değil, anahtarlar, diziler ve değerler üzerinden eşleştirilir.',
+	'tool.yaml-diff.faq.1.question': 'Geçersiz YAML karşılaştırılabilir mi?',
+	'tool.yaml-diff.faq.1.answer':
+		'Hayır. İki tarafın da geçerli YAML olması gerekir. Bozuk olan giriş önce düzeltilmelidir.',
+	'tool.yaml-diff.faq.2.question': 'Hangi değişiklikler vurgulanır?',
+	'tool.yaml-diff.faq.2.answer':
+		'Eklenen, silinen ve değişen YAML yollarını ve değerlerini vurgular; bu da yapılandırma revizyonlarını incelemeyi kolaylaştırır.',
+	'tool.yaml-diff.use_case.0': 'İki deployment manifesti arasındaki farkları gözden geçirme',
+	'tool.yaml-diff.use_case.1': 'CI pipeline yapılandırma revizyonlarını karşılaştırma',
+	'tool.yaml-diff.use_case.2': 'Commit öncesi düzenlenen Helm/values dosyalarını inceleme',
+	'tool.yaml-diff.use_case.3': 'Üretilen YAML’i beklenen sürümle doğrulama',
+	'tool.yaml-query.display_name': 'YAML Sorgu',
+	'tool.yaml-query.tagline': 'JSONPath ve JMESPath ile YAML sorgula',
+	'tool.yaml-query.description':
+		'JSONPath veya JMESPath ifadelerini doğrudan YAML üzerinde tarayıcıda çalıştır. YAML’i ayrıştır, iç içe verileri sorgula ve dosyayı elle dönüştürmeden sonuçları incele.',
+	'tool.yaml-query.primary_keyword': 'yaml sorgu',
+	'tool.yaml-query.meta_title': 'YAML Sorgu Aracı — fmtly.dev',
+	'tool.yaml-query.meta_description':
+		'Tarayıcıda JSONPath veya JMESPath ile YAML sorgula. Elle dönüştürmeye gerek yok, veri yüklenmez.',
+	'tool.yaml-query.operation': 'Sorgula',
+	'tool.yaml-query.faq.0.question': 'Hangi sorgu dilleri destekleniyor?',
+	'tool.yaml-query.faq.0.answer':
+		'JSONPath ve JMESPath arasında geçiş yapabilirsiniz. İkisi de ayrıştırılmış YAML veri modeli üzerinde çalışır; iç içe eşlemeler, diziler ve çok belgeli girdiler doğrudan sorgulanabilir.',
+	'tool.yaml-query.faq.1.question': 'Önce YAML’i JSON’a dönüştürmem gerekir mi?',
+	'tool.yaml-query.faq.1.answer':
+		'Hayır. Araç YAML’i sizin için ayrıştırır ve sonuçları JSON biçiminde döndürür. Bu da yapılandırmalar, manifestler, values dosyaları ve diğer YAML ağırlıklı akışlarda pratiklik sağlar.',
+	'tool.yaml-query.use_case.0': 'Kubernetes manifestlerinden veya Helm values dosyalarından belirli alanları çekme',
+	'tool.yaml-query.use_case.1': 'İç içe YAML yapılandırmalarını elle dönüştürmeden inceleme',
+	'tool.yaml-query.use_case.2': 'YAML payload’ları üzerinde JSONPath veya JMESPath ifadelerini deneme',
+	'tool.yaml-query.use_case.3': 'Büyük YAML belgelerinden liste, kimlik veya bayrak değerleri çıkarma',
 
 	// ── CSV araçları ─────────────────────────────────────────────────────────
 	'tool.csv-to-json.display_name': "CSV'den JSON'a",
@@ -1069,6 +1181,8 @@ const registryTr: Record<string, string> = {
 	'ui.history.title': 'Geçmiş',
 	'ui.paste_here': 'Buraya yapıştır…',
 	'ui.paste_language_here': '{language} buraya yapıştır…',
+	'ui.placeholder.original_yaml': 'Orijinal YAML buraya yapıştır…',
+	'ui.placeholder.modified_yaml': 'Değiştirilmiş YAML buraya yapıştır…',
 	'ui.placeholder.search_tools_count': '{count}+ araçlarında ara...',
 	'ui.placeholder.url': 'https://example.com/data.json',
 	'ui.placeholder.xpath': "//book[@available='true']",
@@ -1110,6 +1224,7 @@ const registryTr: Record<string, string> = {
 	'ui.xpath.results_count.other': '{count} sonuç',
 	'ui.validator.syntax': 'Sözdizimi',
 	'ui.validator.schema': 'Şema',
+	'ui.validator.mode': 'Doğrulama modu',
 	'ui.validator.issue': 'sorun',
 	'ui.validator.issues': 'sorunlar',
 	'ui.validator.first_issue': 'İlk sorun',
@@ -1129,8 +1244,20 @@ const registryTr: Record<string, string> = {
 	'ui.validator.valid_json': 'Geçerli JSON',
 	'ui.validator.explanation_must_satisfy': 'karşılaması gerekir',
 	'ui.validator.data_error_pos': 'Veri hatası satır {line}, sütun {column}',
+	'ui.validator.paste_yaml': 'Doğrulamak için YAML yapıştır',
+	'ui.validator.yaml_paste_schema': 'Doğrulamak için bir şema yapıştır',
+	'ui.validator.yaml_validating_schema': 'Şema doğrulanıyor…',
+	'ui.validator.yaml_matches_schema': 'YAML şemayla eşleşiyor',
+	'ui.validator.yaml_matches_current_schema': 'YAML geçerli şemayla eşleşiyor.',
+	'ui.validator.yaml_schema_title': 'Şema',
+	'ui.validator.yaml_schema_standard': 'JSON Şeması Draft-07+ via AJV',
+	'ui.validator.yaml_paste_schema_placeholder': 'JSON Şemasını veya YAML şemasını buraya yapıştır…',
+	'ui.validator.yaml_schema_validation_desc':
+		'YAML yapısını bir JSON Şemasına karşı doğrula. Şema girdisi JSON veya YAML olarak yazılabilir.',
+	'ui.load_sample': 'Örnek yükle',
 	'ui.share_url': "Paylaş URL'si",
 	'ui.format_xml': "XML'i Biçimlendir",
+	'ui.format_yaml': "YAML'ı Biçimlendir",
 	'ui.minify_xml': "XML'i Küçült",
 	'ui.format_beautify': 'Biçimlendir / Güzelleştir',
 	'ui.minify': 'Küçült',
@@ -1140,6 +1267,7 @@ const registryTr: Record<string, string> = {
 	'ui.expand_to_depth': "Derinlik {depth}'e Genişlet",
 	switch_to_tab: '{index} sekmesine geç',
 	switch_to_xml_tab: "XML sekmesi {index}'e geç",
+	switch_to_yaml_tab: "YAML sekmesi {index}'e geç",
 	use_cases: 'Kullanım Durumları',
 	faq: 'SSS',
 	'ui.validator.schema_error_pos': 'Şema hatası satır {line}, sütun {column}',
@@ -1166,6 +1294,23 @@ const registryTr: Record<string, string> = {
 	'ui.aria.xml_workspace_tabs': 'XML çalışma alanı sekmeleri',
 	'ui.aria.xpath_panel': 'XPath sorgu paneli',
 	'ui.aria.xml_validator': 'XML doğrulayıcı',
+	'ui.aria.yaml_output_panel': 'YAML çıkış paneli',
+	'ui.aria.yaml_validator': 'YAML doğrulayıcı',
+	'ui.validator.invalid_yaml': 'Geçersiz YAML',
+	'ui.validator.yaml_paste_hint': 'Doğrulamak için YAML yapıştırın veya yazın.',
+	'ui.validator.yaml_validation_desc':
+		'YAML sözdizimini, girintiyi, geçersiz karakterleri ve bozuk yapıları doğrular.',
+	'ui.validator.yaml_success_title': 'Geçerli YAML',
+	'ui.validator.yaml_success_desc':
+		'Sözdizimi hatası bulunamadı. Belge YAML olarak başarıyla ayrıştırılabiliyor.',
+	'ui.validator.yaml_warning_title': 'Stil uyarılarıyla birlikte geçerli YAML',
+	'ui.validator.yaml_warning_desc':
+		'Belge başarıyla ayrıştırılıyor, ancak birkaç stil sorunu okunabilirliği veya tutarlılığı azaltabilir.',
+	'ui.validator.yaml_lint.tabs':
+		'Girintide sekme karakteri bulundu. YAML genelde yalnızca boşluk kullanıldığında daha güvenlidir.',
+	'ui.validator.yaml_lint.trailing_whitespace': 'Satır sonunda gereksiz boşluk bulundu.',
+	'ui.validator.yaml_lint.odd_indentation':
+		'Tek sayılı girinti genişliği bulundu. YAML genelde 2 boşluklu girintiyle daha tutarlı olur.',
 	'ui.convert.to_json': '→ JSON',
 	'ui.convert.to_yaml': '→ YAML',
 	'ui.convert.to_csv': '→ CSV',
@@ -1183,31 +1328,37 @@ const registryTr: Record<string, string> = {
 	'ui.query.sample_query': 'Örnek sorgu',
 	'ui.query.guide': 'Kılavuz',
 	'ui.query.query': 'Sorgu',
+	'ui.query.mode': 'Sorgu modu',
 	'ui.query.running': 'Sorgu çalışıyor…',
 	'ui.query.empty_input': 'Sorgunuzu değerlendirmek için solda JSON yapıştır.',
+	'ui.query.empty_input_yaml': 'Sorgunuzu değerlendirmek için solda YAML yapıştır.',
 	'ui.query.empty_query': 'Sonuçları görmek için bir sorgu gir.',
 	'ui.query.error_fallback': 'Sorgu başarısız',
 	'ui.query.copy_error': 'Çıkışı kopyalayamadı',
+	'ui.aria.json_query_panel': 'JSON sorgu paneli',
+	'ui.aria.yaml_query_panel': 'YAML sorgu paneli',
 	'ui.status.processing': 'İşleniyor…',
 	'ui.status.waiting_output': 'Çıkış burada görünecek',
 	'ui.output.controls.spaces': 'boşluklar',
 	'ui.output.stats.chars': 'karakterler',
 	'ui.output.stats.lines': 'satırlar',
+	'ui.output.stats.documents': 'belgeler',
+	'ui.output.stats.top_level_keys': 'üst seviye anahtarlar',
 	'ui.output.stats.keys': 'anahtarlar',
 	'ui.output.stats.objects': 'nesneler',
 	'ui.output.stats.arrays': 'diziler',
 	'ui.output.stats.strings': 'dizgiler',
 	'ui.output.stats.values': 'değerler',
 	'ui.output.stats.numbers': 'sayılar',
-	'ui.output.stats.booleans': 'boşlanlar',
-	'ui.output.stats.nulls': 'nulllar',
+	'ui.output.stats.booleans': 'booleanlar',
+	'ui.output.stats.nulls': 'null değerler',
 	'ui.output.stats.depth': 'derinlik',
 	'ui.output.stats.size_in': 'giriş',
 	'ui.output.stats.size_out': 'çıkış',
 	'ui.output.original': 'Orijinal',
 	'ui.output.minified': 'Küçültüldü',
 	'ui.output.saved': 'kaydedildi',
-	'ui.output.meta.minified': 'KÜÇÜLTÜLDİ',
+	'ui.output.meta.minified': 'KÜÇÜLTÜLDÜ',
 	'ui.output.actions.wrap': 'Kaydır',
 	'ui.output.actions.compare': 'Karşılaştır',
 	'ui.output.actions.copy_json': 'JSON olarak Kopyala',
