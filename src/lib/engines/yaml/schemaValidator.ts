@@ -1,5 +1,5 @@
-import type { AnySchema, ErrorObject } from 'ajv';
 import type { EngineParseError } from '$engines/types.js';
+import type { AnySchema, ErrorObject } from 'ajv';
 
 export type YamlSchemaValidationIssue = {
 	keyword: string;

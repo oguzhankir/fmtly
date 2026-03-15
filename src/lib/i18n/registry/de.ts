@@ -326,8 +326,10 @@ const registryDe: Record<string, string> = {
 		'Ja. Mehrere Dokumente, die durch Dokument-Trenner getrennt sind, bleiben erhalten und werden dokumentweise minimiert.',
 	'tool.yaml-minifier.use_case.0': 'YAML vor dem Teilen in Tickets oder Chats verkleinern',
 	'tool.yaml-minifier.use_case.1': 'Kompakte Multi-Dokument-Manifeste prüfen',
-	'tool.yaml-minifier.use_case.2': 'Whitespace reduzieren, bevor generierte YAML-Fixtures gespeichert werden',
-	'tool.yaml-minifier.use_case.3': 'Formatierte und kompakte YAML-Darstellungen nebeneinander vergleichen',
+	'tool.yaml-minifier.use_case.2':
+		'Whitespace reduzieren, bevor generierte YAML-Fixtures gespeichert werden',
+	'tool.yaml-minifier.use_case.3':
+		'Formatierte und kompakte YAML-Darstellungen nebeneinander vergleichen',
 
 	'tool.yaml-validator.display_name': 'YAML-Validator',
 	'tool.yaml-validator.tagline': 'YAML-Syntax und Schema validieren',
@@ -398,7 +400,8 @@ const registryDe: Record<string, string> = {
 	'tool.yaml-to-csv.meta_description':
 		'Konvertieren Sie YAML sofort in CSV im Browser. Kein Upload.',
 	'tool.yaml-to-csv.operation': 'Konvertieren',
-	'tool.yaml-to-csv.faq.0.question': 'Welche YAML-Strukturen lassen sich am besten in CSV umwandeln?',
+	'tool.yaml-to-csv.faq.0.question':
+		'Welche YAML-Strukturen lassen sich am besten in CSV umwandeln?',
 	'tool.yaml-to-csv.faq.0.answer':
 		'Arrays von Objekten funktionieren am besten. Jedes Objekt wird zu einer Zeile und gemeinsame Schlüssel werden zu CSV-Spalten.',
 	'tool.yaml-to-csv.faq.1.question': 'Kann ich ein einzelnes YAML-Objekt in CSV umwandeln?',
@@ -438,7 +441,8 @@ const registryDe: Record<string, string> = {
 	'tool.yaml-diff.meta_description':
 		'Vergleichen Sie zwei YAML-Dokumente im Browser. Hebt Ergänzungen, Löschungen und Änderungen hervor. Kein Upload.',
 	'tool.yaml-diff.operation': 'Vergleichen',
-	'tool.yaml-diff.faq.0.question': 'Worin unterscheidet sich YAML-Diff von einem normalen Textvergleich?',
+	'tool.yaml-diff.faq.0.question':
+		'Worin unterscheidet sich YAML-Diff von einem normalen Textvergleich?',
 	'tool.yaml-diff.faq.0.answer':
 		'Beide Eingaben werden als YAML-Daten geparst und anschließend strukturell verglichen. Änderungen werden also über Schlüssel, Arrays und Werte erkannt und nicht nur über Formatierung.',
 	'tool.yaml-diff.faq.1.question': 'Kann ich ungültiges YAML vergleichen?',
@@ -466,8 +470,10 @@ const registryDe: Record<string, string> = {
 	'tool.yaml-query.faq.1.question': 'Muss ich YAML zuerst in JSON umwandeln?',
 	'tool.yaml-query.faq.1.answer':
 		'Nein. Das Tool parst YAML für Sie und gibt die Ergebnisse als formatiertes JSON zurück. Das ist besonders praktisch für Konfigurationen, Manifeste, Values-Dateien und andere YAML-lastige Workflows.',
-	'tool.yaml-query.use_case.0': 'Bestimmte Felder aus Kubernetes-Manifests oder Helm-Values extrahieren',
-	'tool.yaml-query.use_case.1': 'Verschachtelte YAML-Konfigurationen ohne manuelle Umwandlung untersuchen',
+	'tool.yaml-query.use_case.0':
+		'Bestimmte Felder aus Kubernetes-Manifests oder Helm-Values extrahieren',
+	'tool.yaml-query.use_case.1':
+		'Verschachtelte YAML-Konfigurationen ohne manuelle Umwandlung untersuchen',
 	'tool.yaml-query.use_case.2': 'JSONPath- oder JMESPath-Ausdrücke auf YAML-Payloads testen',
 	'tool.yaml-query.use_case.3': 'Listen, IDs oder Flags aus großen YAML-Dokumenten herausziehen',
 

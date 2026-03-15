@@ -324,10 +324,13 @@ const registryFr: Record<string, string> = {
 	'tool.yaml-minifier.faq.1.question': 'Est-ce que cela prend en charge plusieurs documents YAML ?',
 	'tool.yaml-minifier.faq.1.answer':
 		'Oui. Les entrées multi-documents séparées par des marqueurs de document sont conservées et minifiées document par document.',
-	'tool.yaml-minifier.use_case.0': 'Réduire du YAML avant de partager des extraits dans un ticket ou un chat',
+	'tool.yaml-minifier.use_case.0':
+		'Réduire du YAML avant de partager des extraits dans un ticket ou un chat',
 	'tool.yaml-minifier.use_case.1': 'Inspecter des manifests multi-documents compacts',
-	'tool.yaml-minifier.use_case.2': 'Réduire les espaces avant de stocker des fixtures YAML générées',
-	'tool.yaml-minifier.use_case.3': 'Comparer côte à côte une version lisible et une version compacte du YAML',
+	'tool.yaml-minifier.use_case.2':
+		'Réduire les espaces avant de stocker des fixtures YAML générées',
+	'tool.yaml-minifier.use_case.3':
+		'Comparer côte à côte une version lisible et une version compacte du YAML',
 
 	'tool.yaml-validator.display_name': 'Validateur YAML',
 	'tool.yaml-validator.tagline': 'Valider la syntaxe et le schéma YAML',
@@ -366,7 +369,8 @@ const registryFr: Record<string, string> = {
 		'Oui. Les mappages et séquences imbriqués sont convertis vers leurs équivalents JSON tout en gardant la structure globale.',
 	'tool.yaml-to-json.use_case.0': 'Transformer des configs YAML en JSON pour des payloads API',
 	'tool.yaml-to-json.use_case.1': 'Inspecter des données YAML dans un format plus strict',
-	'tool.yaml-to-json.use_case.2': 'Réutiliser des données de configuration dans des workflows JavaScript',
+	'tool.yaml-to-json.use_case.2':
+		'Réutiliser des données de configuration dans des workflows JavaScript',
 	'tool.yaml-to-json.use_case.3': 'Préparer du YAML pour des outils basés sur JSON',
 
 	'tool.yaml-to-xml.display_name': 'YAML vers XML',
@@ -466,10 +470,13 @@ const registryFr: Record<string, string> = {
 	'tool.yaml-query.faq.1.question': 'Faut-il convertir le YAML en JSON avant ?',
 	'tool.yaml-query.faq.1.answer':
 		'Non. L’outil analyse le YAML pour vous et renvoie des résultats formatés en JSON. C’est pratique pour les configs, manifests, fichiers values et autres flux centrés sur YAML.',
-	'tool.yaml-query.use_case.0': 'Extraire des champs précis depuis des manifests Kubernetes ou Helm values',
-	'tool.yaml-query.use_case.1': 'Inspecter des configurations YAML imbriquées sans conversion manuelle',
+	'tool.yaml-query.use_case.0':
+		'Extraire des champs précis depuis des manifests Kubernetes ou Helm values',
+	'tool.yaml-query.use_case.1':
+		'Inspecter des configurations YAML imbriquées sans conversion manuelle',
 	'tool.yaml-query.use_case.2': 'Tester des expressions JSONPath ou JMESPath sur des payloads YAML',
-	'tool.yaml-query.use_case.3': 'Récupérer des listes, ids ou indicateurs depuis de gros documents YAML',
+	'tool.yaml-query.use_case.3':
+		'Récupérer des listes, ids ou indicateurs depuis de gros documents YAML',
 
 	// ── CSV tools ───────────────────────────────────────────────────────────
 	'tool.csv-to-json.display_name': 'CSV vers JSON',
@@ -1315,8 +1322,7 @@ const registryFr: Record<string, string> = {
 		'Le document est analysé correctement, mais quelques problèmes de style peuvent nuire à la lisibilité ou à la cohérence.',
 	'ui.validator.yaml_lint.tabs':
 		'Des tabulations ont été trouvées dans l’indentation. Le YAML est généralement plus sûr avec des espaces uniquement.',
-	'ui.validator.yaml_lint.trailing_whitespace':
-		'Des espaces de fin de ligne ont été trouvés.',
+	'ui.validator.yaml_lint.trailing_whitespace': 'Des espaces de fin de ligne ont été trouvés.',
 	'ui.validator.yaml_lint.odd_indentation':
 		'Une largeur d’indentation impaire a été trouvée. Le YAML est généralement plus cohérent avec une indentation de 2 espaces.',
 	'ui.convert.to_json': '→ JSON',

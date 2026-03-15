@@ -320,14 +320,17 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-minifier.operation': 'Küçült',
 	'tool.yaml-minifier.faq.0.question': 'YAML küçültme nasıl çalışır?',
 	'tool.yaml-minifier.faq.0.answer':
-		"Önce YAML ayrıştırılır, ardından daha kompakt ama geçerli bir YAML olarak yeniden yazılır. Böylece veri korunurken biçim gürültüsü azalır.",
+		'Önce YAML ayrıştırılır, ardından daha kompakt ama geçerli bir YAML olarak yeniden yazılır. Böylece veri korunurken biçim gürültüsü azalır.',
 	'tool.yaml-minifier.faq.1.question': 'Birden fazla YAML belgesini destekliyor mu?',
 	'tool.yaml-minifier.faq.1.answer':
 		'Evet. Belge ayırıcılarla ayrılmış çok belgeli girdiler korunur ve her belge ayrı ayrı küçültülür.',
-	'tool.yaml-minifier.use_case.0': 'YAML parçalarını ticket veya sohbette paylaşmadan önce küçültme',
+	'tool.yaml-minifier.use_case.0':
+		'YAML parçalarını ticket veya sohbette paylaşmadan önce küçültme',
 	'tool.yaml-minifier.use_case.1': 'Kompakt çok belgeli manifestleri inceleme',
-	'tool.yaml-minifier.use_case.2': 'Üretilen YAML fixture’larını saklamadan önce boşlukları azaltma',
-	'tool.yaml-minifier.use_case.3': 'Biçimlendirilmiş ve kompakt YAML gösterimlerini yan yana karşılaştırma',
+	'tool.yaml-minifier.use_case.2':
+		'Üretilen YAML fixture’larını saklamadan önce boşlukları azaltma',
+	'tool.yaml-minifier.use_case.3':
+		'Biçimlendirilmiş ve kompakt YAML gösterimlerini yan yana karşılaştırma',
 
 	'tool.yaml-validator.display_name': 'YAML Doğrulayıcı',
 	'tool.yaml-validator.tagline': 'YAML sözdizimini ve şemasını doğrula',
@@ -347,7 +350,8 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-validator.use_case.0': 'Yayın öncesi deployment manifestlerini kontrol etme',
 	'tool.yaml-validator.use_case.1': 'Dokümantasyondan kopyalanan YAML’i doğrulama',
 	'tool.yaml-validator.use_case.2': 'CI ve otomasyon dosyalarındaki girinti hatalarını yakalama',
-	'tool.yaml-validator.use_case.3': 'Helm values veya manifestleri beklenen bir şemaya karşı doğrulama',
+	'tool.yaml-validator.use_case.3':
+		'Helm values veya manifestleri beklenen bir şemaya karşı doğrulama',
 
 	'tool.yaml-to-json.display_name': "YAML'dan JSON'a",
 	'tool.yaml-to-json.tagline': "YAML'ı JSON biçimine dönüştür",
@@ -403,7 +407,8 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-to-csv.faq.1.answer':
 		'Evet. Tek bir nesne tek satırlık CSV olarak dışa aktarılabilir; bu basit kayıtlar için kullanışlıdır.',
 	'tool.yaml-to-csv.use_case.0': 'YAML kayıtlarını tablo olarak incelemek için dışa aktarma',
-	'tool.yaml-to-csv.use_case.1': 'Yapılandırılmış YAML veri kümelerini analistler için CSV’ye çevirme',
+	'tool.yaml-to-csv.use_case.1':
+		'Yapılandırılmış YAML veri kümelerini analistler için CSV’ye çevirme',
 	'tool.yaml-to-csv.use_case.2': 'Envanter veya yapılandırma listelerini tabloya düzleştirme',
 	'tool.yaml-to-csv.use_case.3': 'CSV bekleyen içe aktarma araçları için YAML verisi hazırlama',
 
@@ -463,10 +468,13 @@ const registryTr: Record<string, string> = {
 	'tool.yaml-query.faq.1.question': 'Önce YAML’i JSON’a dönüştürmem gerekir mi?',
 	'tool.yaml-query.faq.1.answer':
 		'Hayır. Araç YAML’i sizin için ayrıştırır ve sonuçları JSON biçiminde döndürür. Bu da yapılandırmalar, manifestler, values dosyaları ve diğer YAML ağırlıklı akışlarda pratiklik sağlar.',
-	'tool.yaml-query.use_case.0': 'Kubernetes manifestlerinden veya Helm values dosyalarından belirli alanları çekme',
+	'tool.yaml-query.use_case.0':
+		'Kubernetes manifestlerinden veya Helm values dosyalarından belirli alanları çekme',
 	'tool.yaml-query.use_case.1': 'İç içe YAML yapılandırmalarını elle dönüştürmeden inceleme',
-	'tool.yaml-query.use_case.2': 'YAML payload’ları üzerinde JSONPath veya JMESPath ifadelerini deneme',
-	'tool.yaml-query.use_case.3': 'Büyük YAML belgelerinden liste, kimlik veya bayrak değerleri çıkarma',
+	'tool.yaml-query.use_case.2':
+		'YAML payload’ları üzerinde JSONPath veya JMESPath ifadelerini deneme',
+	'tool.yaml-query.use_case.3':
+		'Büyük YAML belgelerinden liste, kimlik veya bayrak değerleri çıkarma',
 
 	// ── CSV araçları ─────────────────────────────────────────────────────────
 	'tool.csv-to-json.display_name': "CSV'den JSON'a",

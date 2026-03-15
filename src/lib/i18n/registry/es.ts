@@ -366,7 +366,8 @@ const registryEs: Record<string, string> = {
 		'Sí. Cambia al modo Esquema y proporciona un JSON Schema. La entrada del esquema puede escribirse en JSON o en YAML, lo que resulta útil para manifests, archivos de configuración y payloads de API.',
 	'tool.yaml-validator.use_case.0': 'Revisar manifiestos de despliegue antes de publicarlos',
 	'tool.yaml-validator.use_case.1': 'Validar YAML copiado desde documentación',
-	'tool.yaml-validator.use_case.2': 'Detectar errores de indentación en configs de CI y automatización',
+	'tool.yaml-validator.use_case.2':
+		'Detectar errores de indentación en configs de CI y automatización',
 	'tool.yaml-validator.use_case.3': 'Validar Helm values o manifests contra un esquema esperado',
 
 	'tool.yaml-to-json.display_name': 'YAML a JSON',
@@ -446,7 +447,8 @@ const registryEs: Record<string, string> = {
 		'Sí. Los mapas anidados se convierten en tablas y arrays TOML siempre que el formato lo permita.',
 	'tool.yaml-to-toml.use_case.0': 'Mover ajustes YAML a proyectos basados en TOML',
 	'tool.yaml-to-toml.use_case.1': 'Generar configuraciones TOML desde fuentes YAML',
-	'tool.yaml-to-toml.use_case.2': 'Portar ajustes de despliegue a herramientas compatibles con TOML',
+	'tool.yaml-to-toml.use_case.2':
+		'Portar ajustes de despliegue a herramientas compatibles con TOML',
 	'tool.yaml-to-toml.use_case.3': 'Comparar la misma configuración en YAML y TOML',
 
 	'tool.yaml-diff.display_name': 'Diff YAML',

@@ -60,10 +60,7 @@ function countTopLevelKeys(value: unknown): number {
 function computeStats(documents: unknown[]): YAMLStats {
 	return {
 		documentCount: documents.length,
-		topLevelKeys: documents.reduce<number>(
-			(sum, document) => sum + countTopLevelKeys(document),
-			0
-		),
+		topLevelKeys: documents.reduce<number>((sum, document) => sum + countTopLevelKeys(document), 0),
 		maxDepth: documents.reduce<number>(
 			(maxDepth, document) => Math.max(maxDepth, computeDepth(document)),
 			0

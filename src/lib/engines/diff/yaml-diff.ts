@@ -1,4 +1,4 @@
-import { computeStructuredDiff, type DiffOptions, type DiffResult } from './json-diff.js';
+import { type DiffOptions, type DiffResult, computeStructuredDiff } from './json-diff.js';
 
 async function parseYamlDocuments(input: string): Promise<unknown> {
 	const yaml = await import('js-yaml');

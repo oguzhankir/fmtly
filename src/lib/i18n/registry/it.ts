@@ -406,7 +406,8 @@ const registryIt: Record<string, string> = {
 	'tool.yaml-to-csv.use_case.0': 'Esportare record YAML in fogli di calcolo',
 	'tool.yaml-to-csv.use_case.1': 'Convertire dataset YAML strutturati per analisti',
 	'tool.yaml-to-csv.use_case.2': 'Appiattire liste di inventario o configurazione in tabelle',
-	'tool.yaml-to-csv.use_case.3': 'Preparare YAML per strumenti di importazione che si aspettano CSV',
+	'tool.yaml-to-csv.use_case.3':
+		'Preparare YAML per strumenti di importazione che si aspettano CSV',
 
 	'tool.yaml-to-toml.display_name': 'YAML a TOML',
 	'tool.yaml-to-toml.tagline': 'Converti YAML in formato di configurazione TOML',
@@ -425,7 +426,8 @@ const registryIt: Record<string, string> = {
 		'Sì. Le mappature annidate vengono convertite in tabelle e array TOML quando il formato lo consente.',
 	'tool.yaml-to-toml.use_case.0': 'Spostare impostazioni YAML in progetti basati su TOML',
 	'tool.yaml-to-toml.use_case.1': 'Generare configurazioni TOML da sorgenti YAML',
-	'tool.yaml-to-toml.use_case.2': 'Portare impostazioni di deploy in strumenti compatibili con TOML',
+	'tool.yaml-to-toml.use_case.2':
+		'Portare impostazioni di deploy in strumenti compatibili con TOML',
 	'tool.yaml-to-toml.use_case.3': 'Confrontare la stessa configurazione in YAML e TOML',
 
 	'tool.yaml-diff.display_name': 'Diff YAML',
@@ -466,7 +468,8 @@ const registryIt: Record<string, string> = {
 	'tool.yaml-query.faq.1.answer':
 		'No. Lo strumento analizza YAML per te e restituisce risultati formattati in JSON. È molto utile per configurazioni, manifest, file values e altri flussi basati su YAML.',
 	'tool.yaml-query.use_case.0': 'Estrarre campi specifici da manifest Kubernetes o Helm values',
-	'tool.yaml-query.use_case.1': 'Ispezionare configurazioni YAML annidate senza conversione manuale',
+	'tool.yaml-query.use_case.1':
+		'Ispezionare configurazioni YAML annidate senza conversione manuale',
 	'tool.yaml-query.use_case.2': 'Provare espressioni JSONPath o JMESPath su payload YAML',
 	'tool.yaml-query.use_case.3': 'Recuperare liste, id o flag da grandi documenti YAML',
 
@@ -1305,8 +1308,7 @@ const registryIt: Record<string, string> = {
 		'Il documento viene analizzato correttamente, ma alcuni problemi di stile possono ridurre leggibilità o coerenza.',
 	'ui.validator.yaml_lint.tabs':
 		'Sono state trovate tabulazioni nell’indentazione. YAML di solito è più sicuro usando solo spazi.',
-	'ui.validator.yaml_lint.trailing_whitespace':
-		'Sono stati trovati spazi finali di riga.',
+	'ui.validator.yaml_lint.trailing_whitespace': 'Sono stati trovati spazi finali di riga.',
 	'ui.validator.yaml_lint.odd_indentation':
 		'È stata trovata una larghezza di indentazione dispari. YAML di solito è più coerente con un’indentazione di 2 spazi.',
 	'ui.convert.to_json': '→ JSON',
