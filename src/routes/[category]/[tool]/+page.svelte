@@ -5,67 +5,25 @@
 	import SeoHead from "$components/layout/SeoHead.svelte";
 	import LZString from "lz-string";
 	import ToolLayout from "$components/tool/ToolLayout.svelte";
-	import InputPanel from "$components/panels/InputPanel.svelte";
-	import OutputPanel from "$components/panels/OutputPanel.svelte";
-	import DiffInputPanel from "$components/panels/DiffInputPanel.svelte";
+	import InputPanel from "$components/panels/shared/InputPanel.svelte";
+	import OutputPanel from "$components/panels/shared/OutputPanel.svelte";
+	import DiffInputPanel from "$components/panels/shared/DiffInputPanel.svelte";
 	import DiffResultsPanel from "$components/tool/DiffResultsPanel.svelte";
-	import JsonInputPanel from "$components/panels/JsonInputPanel.svelte";
-	import JsonOutputPanel from "$components/panels/JsonOutputPanel.svelte";
-	import JsonQueryOutputPanel from "$components/panels/JsonQueryOutputPanel.svelte";
-	import JsonValidatorPanel from "$components/panels/JsonValidatorPanel.svelte";
+	import JsonInputPanel from "$components/panels/json/JsonInputPanel.svelte";
+	import JsonOutputPanel from "$components/panels/json/JsonOutputPanel.svelte";
+	import JsonQueryOutputPanel from "$components/panels/json/JsonQueryOutputPanel.svelte";
+	import JsonValidatorPanel from "$components/panels/json/JsonValidatorPanel.svelte";
 	import WorkspaceTabs from "$components/tool/WorkspaceTabs.svelte";
-	import XmlInputPanel from "$components/panels/XmlInputPanel.svelte";
-	import XmlOutputPanel from "$components/panels/XmlOutputPanel.svelte";
-	import XmlValidatorPanel from "$components/panels/XmlValidatorPanel.svelte";
-	import XmlQueryOutputPanel from "$components/panels/XmlQueryOutputPanel.svelte";
-	import CsvValidatorPanel from "$components/panels/CsvValidatorPanel.svelte";
-	import CsvOutputPanel from "$components/panels/CsvOutputPanel.svelte";
-	import YamlOutputPanel from "$components/panels/YamlOutputPanel.svelte";
-	import YamlValidatorPanel from "$components/panels/YamlValidatorPanel.svelte";
-	import TomlValidatorPanel from "$components/panels/TomlValidatorPanel.svelte";
-	import TreePanel from "$components/panels/TreePanel.svelte";
-	import TextAnalysisPanel from "$components/panels/TextAnalysisPanel.svelte";
-	import TextControlsPanel from "$components/panels/TextControlsPanel.svelte";
-	import NumberControlsPanel from "$components/panels/NumberControlsPanel.svelte";
-	import PercentagePanel from "$components/panels/PercentagePanel.svelte";
-	import UnicodePanel from "$components/panels/UnicodePanel.svelte";
-	import EncoderControlsPanel from "$components/panels/EncoderControlsPanel.svelte";
-	import EscaperControlsPanel from "$components/panels/EscaperControlsPanel.svelte";
-	import ColorContrastPanel from "$components/panels/ColorContrastPanel.svelte";
-	import ColorPalettePanel from "$components/panels/ColorPalettePanel.svelte";
-	import ColorGradientPanel from "$components/panels/ColorGradientPanel.svelte";
-	import ColorBlindnessPanel from "$components/panels/ColorBlindnessPanel.svelte";
-	import CryptoHmacPanel from "$components/panels/CryptoHmacPanel.svelte";
-	import CryptoPasswordStrengthPanel from "$components/panels/CryptoPasswordStrengthPanel.svelte";
-	import CryptoUlidPanel from "$components/panels/CryptoUlidPanel.svelte";
-	import CryptoRandomStringPanel from "$components/panels/CryptoRandomStringPanel.svelte";
-	import WebUrlParserPanel from "$components/panels/WebUrlParserPanel.svelte";
-	import WebUserAgentPanel from "$components/panels/WebUserAgentPanel.svelte";
-	import WebCorsPanel from "$components/panels/WebCorsPanel.svelte";
-	import WebMimeTypesPanel from "$components/panels/WebMimeTypesPanel.svelte";
-	import WebIpLookupPanel from "$components/panels/WebIpLookupPanel.svelte";
-	import WebDnsLookupPanel from "$components/panels/WebDnsLookupPanel.svelte";
-	import CodeFormatterPanel from "$components/panels/CodeFormatterPanel.svelte";
-	import CurlConverterPanel from "$components/panels/CurlConverterPanel.svelte";
-	import PdfViewerPanel from "$components/panels/PdfViewerPanel.svelte";
-	import PdfToTextPanel from "$components/panels/PdfToTextPanel.svelte";
-	import PdfMergePanel from "$components/panels/PdfMergePanel.svelte";
-	import PdfSplitPanel from "$components/panels/PdfSplitPanel.svelte";
-	import PdfExtractPanel from "$components/panels/PdfExtractPanel.svelte";
-	import ImageToBase64Panel from "$components/panels/ImageToBase64Panel.svelte";
-	import ImageFromBase64Panel from "$components/panels/ImageFromBase64Panel.svelte";
-	import ImageResizePanel from "$components/panels/ImageResizePanel.svelte";
-	import ImageConvertPanel from "$components/panels/ImageConvertPanel.svelte";
-	import ImageCompressPanel from "$components/panels/ImageCompressPanel.svelte";
-	import SvgOptimizerPanel from "$components/panels/SvgOptimizerPanel.svelte";
-	import ZipCreatePanel from "$components/panels/ZipCreatePanel.svelte";
-	import ZipExtractPanel from "$components/panels/ZipExtractPanel.svelte";
-	import FileHashPanel from "$components/panels/FileHashPanel.svelte";
-	import ExcelToJsonPanel from "$components/panels/ExcelToJsonPanel.svelte";
-	import JsonToExcelPanel from "$components/panels/JsonToExcelPanel.svelte";
-	import QrGeneratorPanel from "$components/panels/QrGeneratorPanel.svelte";
-	import QrReaderPanel from "$components/panels/QrReaderPanel.svelte";
-	import FakeDataPanel from "$components/panels/FakeDataPanel.svelte";
+	import XmlInputPanel from "$components/panels/xml/XmlInputPanel.svelte";
+	import XmlOutputPanel from "$components/panels/xml/XmlOutputPanel.svelte";
+	import XmlValidatorPanel from "$components/panels/xml/XmlValidatorPanel.svelte";
+	import XmlQueryOutputPanel from "$components/panels/xml/XmlQueryOutputPanel.svelte";
+	import CsvValidatorPanel from "$components/panels/csv/CsvValidatorPanel.svelte";
+	import CsvOutputPanel from "$components/panels/csv/CsvOutputPanel.svelte";
+	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
+	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
+	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
+	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
 	import { localizeToolDefinition, localizeToolDefinitions } from "$lib/registry/localized.js";
@@ -76,13 +34,11 @@
 	import type { ShortcutEntry } from "$utils/keyboard.js";
 	import { extractShareData } from "$utils/share.js";
 	import { input } from "$stores/input.store";
-	import { clearOutput, output } from "$stores/output.store";
 	import {
 		destroyJSONStore,
 		format,
 		minify,
 		repair,
-		sortKeys,
 		initJSONStore,
 	} from "$stores/json.store";
 	import {
@@ -111,13 +67,6 @@
 		minifyTomlTool,
 		processTomlTool
 	} from "$stores/toml.store";
-	import { initTextStore, textOptions } from "$stores/text.store";
-	import { initNumberStore, numberOptions } from "$stores/number.store";
-	import { initEncodeStore, encodeOptions } from "$stores/encode.store";
-	import { initEscapeStore, escapeOptions } from "$stores/escape.store";
-	import { initColorStore } from "$stores/color.store";
-	import { initCryptoStore } from "$stores/crypto.store";
-	import { initGenerateStore } from "$stores/generate.store";
 	import { initHistory, destroyHistory } from "$stores/history.store";
 	import { page } from "$app/stores";
 	import { localizePath, stripLocalePrefix } from "$lib/utils/locale-routing.js";
@@ -242,8 +191,6 @@
 		xml: [".xml", ".txt"],
 		yaml: [".yaml", ".yml", ".txt"],
 		toml: [".toml", ".txt"],
-		css: [".css", ".txt"],
-		html: [".html", ".htm", ".txt"],
 		csv: [".csv", ".txt"],
 	};
 
@@ -272,20 +219,6 @@
 			initCSVStore(data.tool.slug);
 		} else if (data.tool.engine === "toml") {
 			initTOMLStore(data.tool.slug);
-		} else if (data.tool.engine === "text") {
-			initTextStore(data.tool.slug);
-		} else if (data.tool.engine === "number") {
-			initNumberStore(data.tool.slug);
-		} else if (data.tool.engine === "encoder") {
-			initEncodeStore(data.tool.slug);
-		} else if (data.tool.engine === "escaper") {
-			initEscapeStore(data.tool.slug);
-		} else if (data.tool.engine === "color") {
-			initColorStore(data.tool.slug);
-		} else if (data.tool.engine === "crypto") {
-			initCryptoStore(data.tool.slug);
-		} else if (data.tool.engine === "generate") {
-			initGenerateStore(data.tool.slug);
 		}
 	}
 
@@ -687,139 +620,7 @@
 		onshare={() => { shareModalOpen = true; }}
 	>
 		{#snippet inputPanel()}
-			{#if data.tool.category === "text" && (data.tool.slug === "word-counter" || data.tool.slug === "readability")}
-				<TextAnalysisPanel toolSlug={data.tool.slug} />
-			{:else if data.tool.category === "text" && ["line-sorter", "deduplicate", "whitespace", "markdown-to-html", "reverser"].includes(data.tool.slug)}
-				<div class="flex flex-col h-full w-full">
-					<TextControlsPanel toolSlug={data.tool.slug} />
-					<div class="flex-1 overflow-hidden relative">
-						<InputPanel
-							toolSlug={data.tool.slug}
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-						/>
-					</div>
-				</div>
-			{:else if data.tool.category === "number" && data.tool.slug === "percentage"}
-				<PercentagePanel />
-			{:else if data.tool.category === "number" && ["formatter"].includes(data.tool.slug)}
-				<div class="flex flex-col h-full w-full">
-					<NumberControlsPanel toolSlug={data.tool.slug} />
-					<div class="flex-1 overflow-hidden relative">
-						<InputPanel
-							toolSlug={data.tool.slug}
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-						/>
-					</div>
-				</div>
-			{:else if data.tool.category === "encode" && data.tool.slug === "unicode"}
-				<UnicodePanel />
-			{:else if data.tool.category === "encode" && ["html-entities"].includes(data.tool.slug)}
-				<div class="flex flex-col h-full w-full">
-					<EncoderControlsPanel toolSlug={data.tool.slug} />
-					<div class="flex-1 overflow-hidden relative">
-						<InputPanel
-							toolSlug={data.tool.slug}
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-						/>
-					</div>
-				</div>
-			{:else if data.tool.category === "escape" && ["sql"].includes(data.tool.slug)}
-				<div class="flex flex-col h-full w-full">
-					<EscaperControlsPanel toolSlug={data.tool.slug} />
-					<div class="flex-1 overflow-hidden relative">
-						<InputPanel
-							toolSlug={data.tool.slug}
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-						/>
-					</div>
-				</div>
-			{:else if data.tool.category === "color" && data.tool.slug === "contrast"}
-				<ColorContrastPanel />
-			{:else if data.tool.category === "color" && data.tool.slug === "palette"}
-				<ColorPalettePanel />
-			{:else if data.tool.category === "color" && data.tool.slug === "gradient"}
-				<ColorGradientPanel />
-			{:else if data.tool.category === "color" && data.tool.slug === "blindness"}
-				<ColorBlindnessPanel />
-			{:else if data.tool.category === "crypto" && data.tool.slug === "hmac"}
-				<CryptoHmacPanel />
-			{:else if data.tool.category === "crypto" && data.tool.slug === "password-strength"}
-				<CryptoPasswordStrengthPanel />
-			{:else if data.tool.category === "crypto" && data.tool.slug === "ulid"}
-				<CryptoUlidPanel />
-			{:else if data.tool.category === "crypto" && data.tool.slug === "random-string"}
-				<CryptoRandomStringPanel />
-			{:else if data.tool.category === "web" && data.tool.slug === "url-parser"}
-				<WebUrlParserPanel />
-			{:else if data.tool.category === "web" && data.tool.slug === "user-agent"}
-				<WebUserAgentPanel />
-			{:else if data.tool.category === "web" && data.tool.slug === "cors"}
-				<WebCorsPanel />
-			{:else if data.tool.category === "web" && data.tool.slug === "mime-types"}
-				<WebMimeTypesPanel />
-			{:else if data.tool.category === "web" && data.tool.slug === "ip-lookup"}
-				<WebIpLookupPanel />
-			{:else if data.tool.category === "web" && data.tool.slug === "dns-lookup"}
-				<WebDnsLookupPanel />
-			{:else if data.tool.category === "code" && (data.tool.slug === "curl-to-fetch" || data.tool.slug === "curl-to-axios")}
-				<CurlConverterPanel
-					mode={data.tool.slug === "curl-to-fetch"
-						? "fetch"
-						: "axios"}
-					sampleInput={data.tool.sampleInput ?? ""}
-				/>
-			{:else if data.tool.category === "code"}
-				<CodeFormatterPanel
-					toolSlug={data.tool.slug}
-					sampleInput={data.tool.sampleInput ?? ""}
-				/>
-			{:else if data.tool.category === "pdf" && data.tool.slug === "viewer"}
-				<PdfViewerPanel />
-			{:else if data.tool.category === "pdf" && data.tool.slug === "to-text"}
-				<PdfToTextPanel />
-			{:else if data.tool.category === "pdf" && data.tool.slug === "merge"}
-				<PdfMergePanel />
-			{:else if data.tool.category === "pdf" && data.tool.slug === "split"}
-				<PdfSplitPanel />
-			{:else if data.tool.category === "pdf" && data.tool.slug === "extract-pages"}
-				<PdfExtractPanel />
-			{:else if data.tool.category === "image" && data.tool.slug === "to-base64"}
-				<ImageToBase64Panel />
-			{:else if data.tool.category === "image" && data.tool.slug === "from-base64"}
-				<ImageFromBase64Panel />
-			{:else if data.tool.category === "image" && data.tool.slug === "resize"}
-				<ImageResizePanel />
-			{:else if data.tool.category === "image" && data.tool.slug === "convert"}
-				<ImageConvertPanel />
-			{:else if data.tool.category === "image" && data.tool.slug === "compress"}
-				<ImageCompressPanel />
-			{:else if data.tool.category === "image" && data.tool.slug === "svg-optimizer"}
-				<SvgOptimizerPanel />
-			{:else if data.tool.category === "file" && data.tool.slug === "zip"}
-				<ZipCreatePanel />
-			{:else if data.tool.category === "file" && data.tool.slug === "unzip"}
-				<ZipExtractPanel />
-			{:else if data.tool.category === "file" && data.tool.slug === "hash"}
-				<FileHashPanel />
-			{:else if data.tool.category === "file" && data.tool.slug === "excel-to-json"}
-				<ExcelToJsonPanel />
-			{:else if data.tool.category === "file" && data.tool.slug === "json-to-excel"}
-				<JsonToExcelPanel />
-			{:else if data.tool.category === "qr" && data.tool.slug === "generator"}
-				<QrGeneratorPanel />
-			{:else if data.tool.category === "qr" && data.tool.slug === "reader"}
-				<QrReaderPanel />
-			{:else if data.tool.category === "generate" && data.tool.slug === "fake-data"}
-				<FakeDataPanel />
-			{:else if data.tool.category === "xml" && data.tool.slug === "validator"}
+			{#if data.tool.category === "xml" && data.tool.slug === "validator"}
 				<XmlValidatorPanel toolSlug={data.tool.slug} workspaceTools={xmlWorkspaceTools} />
 			{:else if data.tool.category === "xml" && data.tool.slug !== "validator"}
 				<XmlInputPanel
@@ -954,8 +755,6 @@
 					<OutputPanel
 						outputLanguage={data.tool.outputLanguage}
 						downloadFilename={data.tool.id}
-						isHtmlPreview={data.tool.slug === "markdown-to-html" &&
-							$textOptions.markdownPreview}
 					/>
 				{/if}
 			{/if}

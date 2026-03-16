@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { Copy, ClipboardList, ArrowLeftRight, Download, Search, ChevronDown, ChevronUp, GitCompare, List, Loader2 } from 'lucide-svelte';
 	import { addToast } from '$stores/toast.store';
-	import { computeJSONDiff, toJSONPatch, summarizeJSONDiff, toDiffMarkdown, toDiffCSV } from '$lib/engines/diff/json-diff.js';
-	import { computeXMLDiff, computeDiffSummary } from '$lib/engines/diff/xml-diff.js';
-	import { computeYAMLDiff } from '$lib/engines/diff/yaml-diff.js';
-	import { computeTOMLDiff } from '$lib/engines/diff/toml-diff.js';
-	import type { DiffEntry, DiffOptions, DiffResult } from '$lib/engines/diff/json-diff.js';
+	import { computeJSONDiff, toJSONPatch, summarizeJSONDiff, toDiffMarkdown, toDiffCSV } from '$engines/json/diff.js';
+	import { computeXMLDiff, computeDiffSummary } from '$engines/xml/diff.js';
+	import { computeYAMLDiff } from '$engines/yaml/diff.js';
+	import { computeTOMLDiff } from '$engines/toml/diff.js';
+	import type { DiffEntry, DiffOptions, DiffResult } from '$engines/json/diff.js';
 	import { t } from '$lib/stores/language.js';
 	import type MonacoDiffViewType from '$components/editor/MonacoDiffView.svelte';
 

@@ -1,8 +1,10 @@
 # fmtly
 
-**Every tool a developer needs. One place. No login. No server. Instant.**
+**Format, validate, convert, and diff structured data. No login. No server. Instant.**
 
-fmtly is an open-source, browser-based developer utility platform. Every tool runs entirely in your browser — nothing is sent to a server, nothing is stored, no account required.
+fmtly is an open-source, browser-based developer utility platform. While it currently focuses on deep, polished tools for structured data formats (JSON, XML, YAML, CSV, TOML), its vision is to become the ultimate client-side toolchain for developers — eventually encompassing AI/LLM utilities, code formatters, security tools, and more.
+
+Every tool runs entirely in your browser — nothing is sent to a server, nothing is stored, no account required.
 
 **[fmtly.dev](https://fmtly.dev)**
 
@@ -10,40 +12,28 @@ fmtly is an open-source, browser-based developer utility platform. Every tool ru
 
 ## What is fmtly?
 
-A developer's daily workflow involves dozens of small utility tasks — formatting JSON, converting colors, decoding JWTs, hashing strings, generating UUIDs, parsing cron expressions. Each one sends you to a different slow, cluttered website.
+Developers constantly format JSON, validate YAML, convert CSV to JSON, diff XML documents, and query nested data structures. Each task typically sends you to a different slow, cluttered, ad-heavy website.
 
-fmtly puts every tool in one place. Fast, private, and open source.
+fmtly puts every developer tool in one place. Fast, private, and open source.
 
 - **Fast.** Lighthouse Performance ≥ 95 on mobile, enforced by CI on every deploy.
 - **Private.** All processing runs in your browser. Your data never leaves your device.
-- **Complete.** Every utility a developer reaches for, in one place.
+- **Focused.** Deep, polished tools built specifically for developer workflows.
 - **Open.** MIT license. Every tool, engine, and decision is in this repository.
 
 ---
 
-## Tools
+## Tools (45 shipped)
 
 | Category | Tools |
 |---|---|
-| **JSON** | Formatter, Viewer, Validator, Minifier, Diff, Repair, JSONPath, JMESPath, Schema, converters |
-| **XML** | Formatter, Validator, Minifier, converters |
-| **YAML** | Formatter, Validator, Diff, converters |
-| **CSV** | Formatter, Validator, converters |
-| **TOML** | Formatter, Validator, converters |
-| **Text** | Case converter, Regex tester, Word counter, Readability, Diff, Lorem ipsum, Slug, Markdown |
-| **Numbers** | Base converter, Timestamp, Byte size, Unit converter, Statistics, Matrix |
-| **Encoding** | Base64, URL, JWT decoder, HTML entities, Unicode converter |
-| **Escaping** | HTML, JavaScript, JSON, XML, SQL, CSV, Shell |
-| **Colors** | Converter, Picker, Contrast checker, Palette, Gradient, Color blindness simulator |
-| **Crypto** | Hash generator, UUID, Password generator, HMAC, ULID, AES encrypt/decrypt |
-| **Web** | HTTP status codes, Cron parser, URL parser, User agent, CORS, MIME types, IP/DNS lookup |
-| **Code** | SQL formatter, CSS/SCSS/LESS/HTML/JS/TS/GraphQL formatters, Code diff, cURL converter |
-| **PDF** | Viewer, Merger, Splitter, to Text, to Image, from Image, Metadata, Compressor |
-| **Images** | Resize, Convert, Compress, SVG optimizer, Crop, EXIF reader, Favicon generator |
-| **Files** | ZIP create/extract, Excel ↔ JSON, File hash, Type detector |
-| **QR & Barcode** | QR generator, QR reader, Barcode generator, Barcode reader |
-| **Generators** | Fake data, JSON → TypeScript/Python/Go/Zod/Rust/Java/C#, JSON Schema |
-| **Accessibility** | Contrast checker, Color blindness simulator, Font size checker |
+| **JSON** (13) | Formatter, Minifier, Validator, Tree Viewer, Diff, Sorter, JSONPath, JMESPath, → YAML, → XML, → CSV, → TOML, → Markdown |
+| **XML** (9) | Formatter, Minifier, Validator, Stats, Diff, XPath, → JSON, → YAML, → CSV |
+| **YAML** (10) | Formatter, Minifier, Validator, Diff, Query, → JSON, → XML, → CSV, → TOML, → HTML |
+| **CSV** (7) | Formatter, Validator, → JSON, → XML, → YAML, → HTML, → SQL (planned) |
+| **TOML** (8) | Formatter, Minifier, Validator, Diff, → JSON, → YAML, → XML, → HTML |
+
+> **Full roadmap with 100+ planned tools across 15 categories (AI, Crypto, Encoders, Web, etc.):** see [ROADMAP.md](ROADMAP.md)
 
 ---
 
@@ -66,19 +56,17 @@ Every processing library is lazy loaded via dynamic `import()` — never in the 
 
 ## Architecture
 
-Every tool is a configuration object in the **Tool Registry** (`src/lib/registry/`). The platform auto-generates the page, routing, SEO metadata, and sitemap entry from that config. Adding a new tool means writing a config object and a processing function — the rest is automatic.
+The project is built on a highly scalable, category-based architecture designed to support hundreds of tools. Every tool is a configuration object in the **Tool Registry**. The platform auto-generates the page, routing, SEO metadata, and sitemap entry from that config.
 
 ```
-src/lib/registry/    Tool Registry (source of truth for all tools)
-src/lib/engines/     Processing engines — one per category, lazy loaded
-src/lib/components/  Shared UI components
-src/lib/stores/      Svelte stores and localStorage access
-src/lib/utils/       SEO generation, keyboard shortcuts, URL sharing
-workers/proxy/       Cloudflare Worker — network tools only, no user data
-static/              _headers, _redirects, manifest.json, favicon
+src/lib/
+├── registry/tools/          # Tool definitions by category (json.tools.ts, etc.)
+├── engines/[category]/      # Processing engines (e.g., engines/json/formatter.ts)
+├── components/panels/       # UI panels grouped by category
+├── stores/[category].ts     # Category-specific state
+├── utils/                   # SEO generation, keyboard shortcuts, etc.
+└── i18n/registry/           # Localized strings for tools and categories
 ```
-
-The Cloudflare Worker proxy exists only for tools that require outbound network requests (IP lookup, DNS lookup, HTTP headers, SSL checker). It makes the request and returns the result — no user data is logged or stored.
 
 ---
 
@@ -118,7 +106,7 @@ pnpm test:e2e    # Playwright end-to-end tests
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 
 Good first contributions:
-- Add a new tool from the [planned list](https://fmtly.dev)
+- Add a new tool from the [ROADMAP.md](ROADMAP.md) backlog
 - Improve tool content (description, use cases, FAQ)
 - Write missing unit tests
 - Fix a reported bug
@@ -130,12 +118,6 @@ All PRs run CI automatically: TypeScript check, Biome lint, Vitest, build, Light
 ## Deployment
 
 Cloudflare Pages deploys automatically on every push to `main`. Preview deployments are created for every pull request.
-
-The Cloudflare Worker (`workers/proxy/`) is deployed separately:
-```bash
-cd workers/proxy
-npx wrangler deploy
-```
 
 ---
 

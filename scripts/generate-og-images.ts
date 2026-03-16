@@ -7,37 +7,13 @@ import { GlobalFonts, createCanvas } from '@napi-rs/canvas';
 import registryEn from '../src/lib/i18n/registry/en.js';
 import { examples } from '../src/lib/registry/examples/index.js';
 import { localizeToolDefinitions } from '../src/lib/registry/localized.js';
-import { codeTools } from '../src/lib/registry/tools/code.tools.js';
-import { colorTools } from '../src/lib/registry/tools/color.tools.js';
-import { cryptoTools } from '../src/lib/registry/tools/crypto.tools.js';
 import { csvTools } from '../src/lib/registry/tools/csv.tools.js';
-import { fileTools } from '../src/lib/registry/tools/file.tools.js';
-import { generateTools } from '../src/lib/registry/tools/generate.tools.js';
-import { imageTools } from '../src/lib/registry/tools/image.tools.js';
 import { jsonTools } from '../src/lib/registry/tools/json.tools.js';
-import { numberTools } from '../src/lib/registry/tools/number.tools.js';
-import { pdfTools } from '../src/lib/registry/tools/pdf.tools.js';
-import { textTools } from '../src/lib/registry/tools/text.tools.js';
-import { webTools } from '../src/lib/registry/tools/web.tools.js';
+import { tomlTools } from '../src/lib/registry/tools/toml.tools.js';
 import { xmlTools } from '../src/lib/registry/tools/xml.tools.js';
 import { yamlTools } from '../src/lib/registry/tools/yaml.tools.js';
 
-const allTools = [
-	...jsonTools,
-	...yamlTools,
-	...xmlTools,
-	...csvTools,
-	...textTools,
-	...colorTools,
-	...codeTools,
-	...cryptoTools,
-	...webTools,
-	...pdfTools,
-	...imageTools,
-	...fileTools,
-	...numberTools,
-	...generateTools
-];
+const allTools = [...jsonTools, ...yamlTools, ...xmlTools, ...csvTools, ...tomlTools];
 
 const translate = (key: string, fallback?: string): string => registryEn[key] ?? fallback ?? key;
 const localizedTools = localizeToolDefinitions(allTools, translate);

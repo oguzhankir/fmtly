@@ -293,8 +293,7 @@ export const jsonTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'json', slug: 'to-yaml' },
-			{ category: 'text', slug: 'markdown-to-html' }
+			{ category: 'json', slug: 'to-yaml' }
 		],
 		faqs: [
 			{
@@ -437,8 +436,7 @@ export const jsonTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'formatter' },
-			{ category: 'json', slug: 'validator' },
-			{ category: 'diff', slug: 'text' }
+			{ category: 'json', slug: 'validator' }
 		],
 		faqs: [
 			{

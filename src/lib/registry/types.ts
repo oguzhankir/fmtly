@@ -1,37 +1,32 @@
 export type EngineType =
+	// ── Active ──
 	| 'json'
 	| 'xml'
 	| 'yaml'
-	| 'css'
-	| 'html'
-	| 'code'
-	| 'encoder'
-	| 'escaper'
-	| 'generator'
-	| 'diff'
-	| 'toml'
 	| 'csv'
+	| 'toml'
 	| 'diff'
-	| 'escaper'
-	| 'color'
+	// ── Backlog (add here when implemented) ──
+	| 'encode'
 	| 'text'
-	| 'number'
+	| 'code'
+	| 'ai'
 	| 'crypto'
 	| 'web'
 	| 'network'
-	| 'code'
+	| 'number'
+	| 'color'
 	| 'pdf'
 	| 'image'
 	| 'file'
 	| 'qr'
 	| 'generate'
-	| 'accessibility';
+	| 'a11y';
 
 export type LayoutVariant =
 	| 'split'
 	| 'single'
 	| 'triple'
-	| 'generator'
 	| 'dual-input'
 	| 'single-panel'
 	| 'bidirectional';

@@ -8,14 +8,16 @@ Read [.windsurfrules](.windsurfrules) before writing any code.
 
 1. Add tool definition to `src/lib/registry/tools/[category].tools.ts`
 2. Add engine at `src/lib/engines/[category]/` — pure functions only
-3. Write unit tests in `tests/unit/`
-4. Run `pnpm build` — confirm page appears at correct URL
-5. Run Lighthouse — must score ≥ 95 mobile
-6. Confirm URL in `/sitemap.xml`
-7. Link from at least one related tool
-8. Test full keyboard navigation
+3. Add Svelte panels to `src/lib/components/panels/[category]/`
+4. Add localization keys to `src/lib/i18n/registry/[lang].ts`
+5. Write unit tests in `tests/unit/[category]/`
+6. Run `pnpm build` — confirm page appears at correct URL
+7. Run Lighthouse — must score ≥ 95 mobile
+8. Confirm URL in `/sitemap.xml`
+9. Link from at least one related tool
+10. Test full keyboard navigation
 
-Do not open a PR until all 8 steps pass.
+Do not open a PR until all 10 steps pass.
 
 ---
 

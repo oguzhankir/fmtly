@@ -26,24 +26,7 @@
 		xml: '</>',
 		yaml: '~',
 		csv: '\u229E',
-		toml: '\u2261',
-		text: 'T',
-		number: '#',
-		encode: '\u27F3',
-		escape: '\\',
-		diff: '\u2194',
-		color: '\u25C9',
-		crypto: '\u26BF',
-		web: '\u2B21',
-		code: '\u2328',
-		pdf: '\u25A4',
-		image: '\u2B1A',
-		file: '\u25A1',
-		qr: '\u229E',
-		generate: '\u26A1',
-		css: '{ }',
-		html: '<>',
-		js: 'JS'
+		toml: '\u2261'
 	};
 
 	let searchQuery = $state('');

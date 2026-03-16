@@ -1,6 +1,6 @@
 export async function format(toml: string): Promise<string> {
-	const { formatCode } = await import('../code/prettier.engine.js');
-	return formatCode(toml, 'toml');
+	const { parse, stringify } = await import('smol-toml');
+	return stringify(parse(toml));
 }
 
 export type ValidationResult = { valid: boolean; error?: string };
@@ -30,8 +30,13 @@ export async function toJson(toml: string): Promise<string> {
 }
 
 export async function minifyToml(toml: string): Promise<string> {
-	const { minifyCode } = await import('../code/prettier.engine.js');
-	return minifyCode(toml, 'toml');
+	const { parse } = await import('smol-toml');
+	const parsed = parse(toml);
+	// Rebuild TOML from parsed object — minified by serializing with minimal whitespace
+	const { stringify } = await import('smol-toml');
+	return stringify(parsed)
+		.replace(/\n{2,}/g, '\n')
+		.trim();
 }
 
 export async function toYaml(toml: string): Promise<string> {

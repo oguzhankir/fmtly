@@ -55,7 +55,7 @@
 		const path = dotPath();
 		await navigator.clipboard.writeText(path);
 		justCopied = true;
-		addToast('success', $t('ui.tree.toast.copied_path', 'Copied'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		if (copyTimer) clearTimeout(copyTimer);
 		copyTimer = setTimeout(() => {
 			justCopied = false;
@@ -65,12 +65,12 @@
 	async function copyValue(): Promise<void> {
 		const value = typeof node.value === 'string' ? node.value : JSON.stringify(node.value);
 		await navigator.clipboard.writeText(value ?? '');
-		addToast('success', $t('ui.tree.toast.copied_value', 'Value copied successfully'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 	}
 
 	async function copyJson(): Promise<void> {
 		await navigator.clipboard.writeText(JSON.stringify(node.value, null, 2));
-		addToast('success', $t('ui.tree.toast.copied_json', 'JSON copied successfully'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 	}
 
 	function expandSubtree(): void {
@@ -104,26 +104,26 @@
 
 	async function contextCopyDot(): Promise<void> {
 		await navigator.clipboard.writeText(dotPath());
-		addToast('success', $t('ui.tree.toast.copied_path', 'Copied'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		contextMenu = null;
 	}
 
 	async function contextCopyBracket(): Promise<void> {
 		await navigator.clipboard.writeText(bracketPath());
-		addToast('success', $t('ui.tree.toast.copied_path', 'Copied'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		contextMenu = null;
 	}
 
 	async function contextCopyValue(): Promise<void> {
 		const val = typeof node.value === 'string' ? node.value : JSON.stringify(node.value);
 		await navigator.clipboard.writeText(val);
-		addToast('success', $t('ui.tree.toast.copied_value', 'Value copied successfully'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		contextMenu = null;
 	}
 
 	async function contextCopyJSON(): Promise<void> {
 		await navigator.clipboard.writeText(JSON.stringify(node.value, null, 2));
-		addToast('success', $t('ui.tree.toast.copied_json', 'JSON copied successfully'));
+		addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		contextMenu = null;
 	}
 

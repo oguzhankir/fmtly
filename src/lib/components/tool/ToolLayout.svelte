@@ -38,9 +38,9 @@
 		}
 		try {
 			await navigator.clipboard.writeText(text);
-			addToast('success', $t('ui.layout.toast.copy_success', 'Copied to clipboard'));
+			addToast('success', $t('ui.toast.copy_success', 'Copied to clipboard'));
 		} catch {
-			addToast('error', $t('ui.layout.toast.copy_error', 'Copy failed — check browser permissions'));
+			addToast('error', $t('ui.toast.copy_error', 'Copy failed — check browser permissions'));
 		}
 	}
 

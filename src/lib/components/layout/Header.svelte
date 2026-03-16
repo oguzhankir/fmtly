@@ -20,20 +20,8 @@
 		'json',
 		'xml',
 		'yaml',
-		'text',
-		'crypto',
-		'web',
-		'code',
 		'csv',
-		'toml',
-		'number',
-		'encode',
-		'color',
-		'pdf',
-		'image',
-		'file',
-		'qr',
-		'generate'
+		'toml'
 	];
 	const faviconUrl: string = '/favicon.svg';
 
