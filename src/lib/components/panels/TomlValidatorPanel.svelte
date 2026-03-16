@@ -498,16 +498,18 @@
 	}
 
 	.validator-error-item {
+		width: 100%;
 		display: flex;
 		align-items: flex-start;
-		gap: var(--space-2);
-		width: 100%;
+		justify-content: space-between;
+		gap: var(--space-3);
 		padding: var(--space-3);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		background: var(--bg-elevated);
+		background: var(--bg-base);
 		text-align: left;
 		cursor: pointer;
+		word-break: break-word;
 	}
 
 	.validator-error-item:hover {

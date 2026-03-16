@@ -818,6 +818,7 @@
 		background: var(--bg-base);
 		text-align: left;
 		cursor: pointer;
+		word-break: break-word;
 	}
 
 	.validator-error-item:hover {

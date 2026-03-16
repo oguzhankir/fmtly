@@ -158,7 +158,7 @@
 	function formatValue(value: unknown): string {
 		if (value === null) return 'null';
 		if (typeof value === 'string') {
-			if (value.length > 80) return `"${value.slice(0, 77)}…"`;
+			if (value.length > 500) return `"${value.slice(0, 500)}…"`;
 			return `"${value}"`;
 		}
 		if (typeof value === 'boolean' || typeof value === 'number') return String(value);
@@ -166,7 +166,10 @@
 	}
 
 	function fullValueTooltip(value: unknown): string {
-		if (typeof value === 'string' && value.length > 80) return `"${value}"`;
+		if (typeof value === 'string' && value.length > 500) {
+			if (value.length > 2000) return `"${value.slice(0, 2000)}… (truncated)"`;
+			return `"${value}"`;
+		}
 		return '';
 	}
 
@@ -232,7 +235,7 @@
 		{:else}
 			<span
 				class="tree-value"
-				style="color: {typeColor(node.type)}"
+				style="color: {typeColor(node.type)}; white-space: pre-wrap; word-break: break-all;"
 				title={fullValueTooltip(node.value)}
 			>
 				{formatValue(node.value)}

@@ -10,12 +10,14 @@
 		value = '',
 		onchange,
 		language = 'json',
-		placeholder
+		placeholder,
+		wordWrap = true
 	}: {
 		value?: string;
 		onchange?: (value: string) => void;
 		language?: string;
 		placeholder?: string;
+		wordWrap?: boolean;
 	} = $props();
 
 	let yamlLib: Awaited<typeof import('js-yaml')> | null = $state(null);
@@ -379,6 +381,7 @@
 				{value}
 				onchange={(v) => onchange?.(v)}
 				{language}
+				{wordWrap}
 				placeholder={reactivePlaceholder}
 			/>
 		{:else}

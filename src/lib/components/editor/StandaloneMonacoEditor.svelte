@@ -8,7 +8,7 @@
 		onchange,
 		language = 'json',
 		placeholder = 'Paste here…',
-		wordWrap = false
+		wordWrap = true
 	}: {
 		value?: string;
 		onchange?: (value: string) => void;

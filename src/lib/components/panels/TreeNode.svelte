@@ -41,7 +41,7 @@
 	function getValueDisplay(n: TreeNode): string {
 		if (n.type === 'string') {
 			const str = n.value as string;
-			if (str.length > 80) return `"${str.slice(0, 77)}…"`;
+			if (str.length > 500) return `"${str.slice(0, 500)}…"`;
 			return `"${str}"`;
 		}
 		if (n.type === 'null') return $t('ui.json_viewer.null', 'null');

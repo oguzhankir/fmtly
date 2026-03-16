@@ -613,6 +613,7 @@
 		color: var(--text-primary);
 		text-align: left;
 		cursor: pointer;
+		word-break: break-word;
 	}
 
 	.validator-error-item__head {
