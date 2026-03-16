@@ -1030,6 +1030,152 @@ const registryTr: Record<string, string> = {
 	'tool.toml-formatter.meta_description':
 		"TOML'yi tarayıcıda biçimlendir ve doğrula. Hiçbir veri cihazdan ayrılmaz.",
 	'tool.toml-formatter.operation': 'Biçimlendir',
+	'tool.toml-validator.display_name': 'TOML Doğrulayıcı',
+	'tool.toml-validator.tagline': 'Biçimlendirmeden veya dönüştürmeden önce TOML sözdizimini doğrula',
+	'tool.toml-validator.description':
+		'TOML yapılandırma dosyalarını tarayıcıda yerel olarak doğrula. Kaydetmeden, dönüştürmeden veya karşılaştırmadan önce sözdizimi hatalarını yakala.',
+	'tool.toml-validator.primary_keyword': 'toml doğrulayıcı',
+	'tool.toml-validator.meta_title': 'TOML Doğrulayıcı — fmtly.dev',
+	'tool.toml-validator.meta_description':
+		"TOML'yi tarayıcıda doğrula. Biçimlendirme veya dönüştürme öncesi sözdizimi hatalarını yakala.",
+	'tool.toml-validator.operation': 'Doğrula',
+	'tool.toml-to-json.display_name': "TOML'den JSON'a",
+	'tool.toml-to-json.tagline': "TOML belgelerini JSON'a dönüştür",
+	'tool.toml-to-json.description':
+		"TOML yapılandırma verilerini tarayıcıda biçimlendirilmiş JSON'a dönüştür. İç içe tabloları, dizileri ve skaler değerleri dosya yüklemeden koru.",
+	'tool.toml-to-json.primary_keyword': "toml'den json'a",
+	'tool.toml-to-json.meta_title': "TOML'den JSON'a Dönüştürücü — fmtly.dev",
+	'tool.toml-to-json.meta_description':
+		"TOML'yi tarayıcıda anında biçimlendirilmiş JSON'a dönüştür. Hiçbir veri cihazdan ayrılmaz.",
+	'tool.toml-to-json.operation': 'Dönüştür',
+	'tool.toml-to-yaml.display_name': "TOML'den YAML'a",
+	'tool.toml-to-yaml.tagline': "TOML belgelerini YAML'a dönüştür",
+	'tool.toml-to-yaml.description':
+		"TOML yapılandırmalarını tarayıcıda okunabilir YAML'a dönüştür. İç içe tabloları, dizileri ve temel veri türlerini koru.",
+	'tool.toml-to-yaml.primary_keyword': "toml'den yaml'a",
+	'tool.toml-to-yaml.meta_title': "TOML'den YAML'a Dönüştürücü — fmtly.dev",
+	'tool.toml-to-yaml.meta_description':
+		"TOML'yi tarayıcıda anında YAML'a dönüştür. Dosya yükleme yok.",
+	'tool.toml-to-yaml.operation': 'Dönüştür',
+	'tool.toml-diff.display_name': 'TOML Karşılaştırma',
+	'tool.toml-diff.tagline': 'İki TOML belgesini yan yana karşılaştır',
+	'tool.toml-diff.description':
+		'İki TOML belgesini karşılaştır ve eklenen, silinen ve değişen anahtarları vurgula. Yapılandırma değişikliklerini tarayıcıdan çıkmadan incele.',
+	'tool.toml-diff.primary_keyword': 'toml karşılaştırma',
+	'tool.toml-diff.meta_title': 'TOML Karşılaştırma Aracı — fmtly.dev',
+	'tool.toml-diff.meta_description':
+		'İki TOML belgesini tarayıcıda karşılaştır ve tüm değişiklikleri vurgula.',
+	'tool.toml-diff.operation': 'Karşılaştır',
+	'tool.toml-formatter.faq.0.question': 'Biçimlendirme TOML değerlerini değiştirir mi?',
+	'tool.toml-formatter.faq.0.answer':
+		'Hayır. Geçerli TOML içeriğini normalleştirilmiş bir düzene çevirir; ayrıştırılan veri yapısı ve değerler korunur.',
+	'tool.toml-formatter.faq.1.question': 'Biçimlendirici yerine ne zaman doğrulayıcıyı kullanmalıyım?',
+	'tool.toml-formatter.faq.1.answer':
+		'Yalnızca sözdizimini kontrol etmek istiyorsanız doğrulayıcıyı kullanın. TOML zaten geçerliyse ve daha düzenli çıktı istiyorsanız biçimlendirici daha uygundur.',
+	'tool.toml-formatter.use_case.0': "Değişiklikleri commit etmeden önce pyproject.toml'yi düzenleme",
+	'tool.toml-formatter.use_case.1': 'Dokümandan kopyalanan yapılandırma parçalarını temizleme',
+	'tool.toml-formatter.use_case.2': 'Uzun TOML bölümlerini daha okunur hale getirme',
+	'tool.toml-formatter.use_case.3': "TOML'yi karşılaştırma veya dönüştürme öncesi hazırlama",
+	'tool.toml-validator.faq.0.question': 'Doğrulayıcı hangi TOML sorunlarını yakalar?',
+	'tool.toml-validator.faq.0.answer':
+		'Bozuk dizeler, geçersiz tablo tanımları, hatalı diziler ve ayrıştırıcının raporladığı diğer TOML sözdizimi hatalarını yakalar.',
+	'tool.toml-validator.faq.1.question': 'TOML doğrulayıcı şema desteği sunuyor mu?',
+	'tool.toml-validator.faq.1.answer':
+		'Hayır. Yalnızca TOML sözdizimini doğrular. Biçimlendirme, dönüştürme veya karşılaştırma öncesi belgenin temiz şekilde ayrıştırıldığını doğrulamak için idealdir.',
+	'tool.toml-validator.use_case.0': "Build araçlarını çalıştırmadan önce pyproject.toml'yi kontrol etme",
+	'tool.toml-validator.use_case.1': 'Uygulama yapılandırmalarındaki sözdizimi hatalarını yakalama',
+	'tool.toml-validator.use_case.2': 'Paket dokümanlarından kopyalanan TOML içeriğini doğrulama',
+	'tool.toml-validator.use_case.3': 'Karşılaştırma öncesi yapılandırma değişikliklerini doğrulama',
+	'tool.toml-to-json.faq.0.question': 'İç içe tablolar ve diziler JSON çıktısında korunur mu?',
+	'tool.toml-to-json.faq.0.answer':
+		'Evet. Ayrıştırılan TOML nesneleri eşdeğer JSON nesnelerine ve dizilerine dönüştürülür; genel yapı korunur.',
+	'tool.toml-to-json.faq.1.question': "TOML'yi JSON'a dönüştürmek ne zaman faydalıdır?",
+	'tool.toml-to-json.faq.1.answer':
+		'Aynı yapılandırma verisini JSON bekleyen araç zincirlerinde, API’lerde, scriptlerde veya test fixture’larında yeniden kullanmanız gerektiğinde faydalıdır.',
+	'tool.toml-to-json.use_case.0': 'TOML yapılandırmasını JavaScript araçları için JSON’a çevirme',
+	'tool.toml-to-json.use_case.1': 'TOML verisini daha katı bir makine dostu yapıda inceleme',
+	'tool.toml-to-json.use_case.2': 'TOML ayarlarını API fixture veya testlerde yeniden kullanma',
+	'tool.toml-to-json.use_case.3': 'TOML ile JSON tabanlı sistemler arasında köprü kurma',
+	'tool.toml-to-yaml.faq.0.question': "TOML'yi neden YAML'a dönüştürmeliyim?",
+	'tool.toml-to-yaml.faq.0.answer':
+		'YAML, altyapı ve otomasyon iş akışlarında çoğu zaman daha kolay taranır. Ekip veya araç YAML sözdizimini tercih ediyorsa dönüştürme yararlıdır.',
+	'tool.toml-to-yaml.faq.1.question': 'TOML yapısı YAML çıktısında korunur mu?',
+	'tool.toml-to-yaml.faq.1.answer':
+		'Evet. Tablolar, iç içe nesneler, diziler ve skaler değerler YAML karşılıklarına eşlenir.',
+	'tool.toml-to-yaml.use_case.0': 'Dağıtım iş akışları için TOML yapılandırmasını YAML’a çevirme',
+	'tool.toml-to-yaml.use_case.1': 'TOML tabanlı ayarları YAML odaklı ekiplerle paylaşma',
+	'tool.toml-to-yaml.use_case.2': 'Aynı yapılandırmayı TOML ve YAML olarak karşılaştırma',
+	'tool.toml-to-yaml.use_case.3': 'Farklı format tercih eden ekosistemler arasında yapılandırma taşıma',
+	'tool.toml-diff.faq.0.question': 'TOML Karşılaştırma metin diff’i mi yoksa yapısal diff mi?',
+	'tool.toml-diff.faq.0.answer':
+		'Yapısaldır. Önce iki giriş de TOML olarak ayrıştırılır, sonra ortaya çıkan veri anahtarlar, diziler ve değerler üzerinden karşılaştırılır.',
+	'tool.toml-diff.faq.1.question': 'Geçersiz TOML belgelerini karşılaştırabilir miyim?',
+	'tool.toml-diff.faq.1.answer':
+		'Hayır. Her iki girişin de geçerli TOML olması gerekir. Taraflardan biri ayrıştırılamazsa araç hangi tarafın geçersiz olduğunu gösterir.',
+	'tool.toml-diff.use_case.0': 'İki sürüm arasındaki yapılandırma değişikliklerini gözden geçirme',
+	'tool.toml-diff.use_case.1': 'Ortam bazlı TOML ayarlarını karşılaştırma',
+	'tool.toml-diff.use_case.2': 'Üretilen TOML içeriğini beklenen sürümle kontrol etme',
+	'tool.toml-diff.use_case.3': "Commit öncesi pyproject.toml veya araç zinciri değişikliklerini inceleme",
+
+	'tool.toml-minifier.display_name': 'TOML Küçültücü',
+	'tool.toml-minifier.tagline': 'TOML yapılandırma dosyalarını küçült ve sıkıştır',
+	'tool.toml-minifier.description':
+		'Dosya boyutunu küçültmek için TOML dosyalarından gereksiz boşlukları ve yorumları kaldır. TOML yapılandırmalarını tarayıcıda yerel olarak küçült.',
+	'tool.toml-minifier.primary_keyword': 'toml küçültücü',
+	'tool.toml-minifier.meta_title': 'TOML Küçültücü — fmtly.dev',
+	'tool.toml-minifier.meta_description':
+		'TOML dosyalarını tarayıcıda küçült ve sıkıştır. Boşlukları ve yorumları güvenle kaldır. Hiçbir veri cihazdan ayrılmaz.',
+	'tool.toml-minifier.operation': 'Küçült',
+	'tool.toml-minifier.faq.0.question': 'TOML küçültücü ne yapar?',
+	'tool.toml-minifier.faq.0.answer':
+		'TOML dosyanızı ayrıştırır ve gereken en az boşlukla yeniden yazar. Dosya boyutunu küçültmek için yorumlar da kaldırılır.',
+	'tool.toml-minifier.faq.1.question': 'TOML dosyalarını küçültmek güvenli midir?',
+	'tool.toml-minifier.faq.1.answer':
+		'Evet. Küçültücü, TOML verisinin yapısal anlamının tamamen aynı kalmasını sağlar. Yalnızca biçimlendirme ve yorumlar atılır.',
+	'tool.toml-minifier.use_case.0': 'Dağıtım için büyük TOML yapılandırmalarını sıkıştırma',
+	'tool.toml-minifier.use_case.1': 'Yapılandırma dosyalarını paylaşmadan önce yorumları kaldırma',
+	'tool.toml-minifier.use_case.2': 'Gömülü sistemler veya sınırlı depolama için TOML dosyalarını hazırlama',
+	'tool.toml-minifier.use_case.3': 'TOML dosyalarını kompakt bir formata normalleştirme',
+
+	'tool.toml-to-xml.display_name': "TOML'den XML'e",
+	'tool.toml-to-xml.tagline': "TOML yapılandırma dosyalarını XML formatına dönüştür",
+	'tool.toml-to-xml.description':
+		"TOML veri yapılarını tarayıcınızda doğrudan XML belgelerine dönüştürün. İç içe geçmiş tabloları ve dizileri XML düğüm hiyerarşilerinde korur.",
+	'tool.toml-to-xml.primary_keyword': "toml'den xml'e",
+	'tool.toml-to-xml.meta_title': "TOML'den XML'e Dönüştürücü — fmtly.dev",
+	'tool.toml-to-xml.meta_description':
+		"TOML yapılandırmalarını tarayıcıda anında XML'e dönüştürün. Dosya yükleme yok.",
+	'tool.toml-to-xml.operation': 'Dönüştür',
+	'tool.toml-to-xml.faq.0.question': "TOML dizileri XML'e nasıl dönüştürülür?",
+	'tool.toml-to-xml.faq.0.answer':
+		'XML doğal olarak isimsiz dizileri desteklemez, bu nedenle diziler genellikle düğüm adının tekrarlanmasıyla veya ayrıştırıcıya bağlı olarak öğelerin standart liste etiketleriyle sarılmasıyla temsil edilir.',
+	'tool.toml-to-xml.faq.1.question': "Daha sonra tekrar TOML'ye dönüştürebilir miyim?",
+	'tool.toml-to-xml.faq.1.answer':
+		"Evet, XML'den TOML'ye dönüştürücümüzü kullanabilirsiniz, ancak bazı tür bilgileri (örneğin sayılara karşı açık dizeler) geri dönüşte XML ayrıştırıcısı tarafından farklı yorumlanabilir.",
+	'tool.toml-to-xml.use_case.0': 'Modern TOML yapılandırmalarını eski XML sistemlerine uyarlama',
+	'tool.toml-to-xml.use_case.1': 'TOML tabanlı uygulamaları kurumsal SOAP API’leri ile entegre etme',
+	'tool.toml-to-xml.use_case.2': 'pyproject.toml verilerini Maven veya Ant derleme dosyalarına dönüştürme',
+	'tool.toml-to-xml.use_case.3': 'Yapılandırma mantığını genel XML veri setlerine çıkarma',
+
+	'tool.toml-to-html.display_name': "TOML'den HTML'e",
+	'tool.toml-to-html.tagline': "TOML yapılandırmasını duyarlı bir HTML tablosuna dönüştür",
+	'tool.toml-to-html.description':
+		"TOML yapılandırma dosyalarını temiz, okunabilir HTML tablolarına dönüştürün. Belge oluşturma, raporlama ve yapılandırma durumlarını paylaşmak için idealdir.",
+	'tool.toml-to-html.primary_keyword': "toml'den html'e",
+	'tool.toml-to-html.meta_title': "TOML'den HTML Tablosuna Dönüştürücü — fmtly.dev",
+	'tool.toml-to-html.meta_description':
+		"Tarayıcınızda anında TOML'den HTML tabloları oluşturun. İç içe TOML verilerinden duyarlı ve temiz tablolar yaratır.",
+	'tool.toml-to-html.operation': 'Dönüştür',
+	'tool.toml-to-html.faq.0.question': 'İç içe geçmiş TOML tabloları nasıl işlenir?',
+	'tool.toml-to-html.faq.0.answer':
+		'İç içe tablolar ve diziler, iç HTML tabloları olarak yinelemeli bir şekilde işlenir ve veri yapısının görsel olarak birebir korunması sağlanır.',
+	'tool.toml-to-html.faq.1.question': 'Çıktıyı doğrudan belgelerime kopyalayabilir miyim?',
+	'tool.toml-to-html.faq.1.answer':
+		'Evet, çıktı doğrudan Markdown dosyalarına, Notion, Confluence veya herhangi bir standart web sayfasına kopyalanıp yapıştırılabilen standart HTML kodudur.',
+	'tool.toml-to-html.use_case.0': 'TOML yapılandırma dosyalarından görsel raporlar oluşturma',
+	'tool.toml-to-html.use_case.1': 'Uygulama ayarlarını proje belgelerine yapıştırma',
+	'tool.toml-to-html.use_case.2': 'Ortama özgü değişkenleri şirket içi panolarda görüntüleme',
+	'tool.toml-to-html.use_case.3': 'Karmaşık iç içe TOML yapılarını erişilebilir bir formatta inceleme',
 
 	// ── Web araçları ─────────────────────────────────────────────────────────
 	'tool.web-url-parser.display_name': 'URL Ayrıştırıcı',
@@ -1349,6 +1495,7 @@ const registryTr: Record<string, string> = {
 	'ui.aria.yaml_output_panel': 'YAML çıkış paneli',
 	'ui.aria.yaml_validator': 'YAML doğrulayıcı',
 	'ui.aria.csv_validator': 'CSV doğrulayıcı',
+	'ui.aria.toml_validator': 'TOML doğrulayıcı',
 	'ui.csv.controls.delimiter': 'Ayraç',
 	'ui.csv.controls.header_row': 'Başlık satırı',
 	'ui.csv.controls.skip_empty_lines': 'Boş satırları atla',

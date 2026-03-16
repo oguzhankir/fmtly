@@ -1049,6 +1049,152 @@ const registryEs: Record<string, string> = {
 	'tool.toml-formatter.meta_description':
 		'Formatea y valida TOML en tu navegador. No hay datos que dejen tu dispositivo.',
 	'tool.toml-formatter.operation': 'Formatea',
+	'tool.toml-validator.display_name': 'Validador TOML',
+	'tool.toml-validator.tagline': 'Valida la sintaxis TOML antes de formatear o convertir',
+	'tool.toml-validator.description':
+		'Valida archivos de configuración TOML localmente en tu navegador. Detecta errores de sintaxis antes de guardar, convertir o comparar.',
+	'tool.toml-validator.primary_keyword': 'validador toml',
+	'tool.toml-validator.meta_title': 'Validador TOML — fmtly.dev',
+	'tool.toml-validator.meta_description':
+		'Valida TOML en tu navegador y detecta errores de sintaxis antes de formatear o convertir.',
+	'tool.toml-validator.operation': 'Valida',
+	'tool.toml-to-json.display_name': 'TOML a JSON',
+	'tool.toml-to-json.tagline': 'Convierte documentos TOML a JSON',
+	'tool.toml-to-json.description':
+		'Convierte datos de configuración TOML a JSON con formato en tu navegador. Conserva tablas anidadas, arrays y valores escalares sin subir archivos.',
+	'tool.toml-to-json.primary_keyword': 'toml a json',
+	'tool.toml-to-json.meta_title': 'Convertidor de TOML a JSON — fmtly.dev',
+	'tool.toml-to-json.meta_description':
+		'Convierte TOML a JSON con formato al instante en tu navegador. Ningún dato sale de tu dispositivo.',
+	'tool.toml-to-json.operation': 'Convierte',
+	'tool.toml-to-yaml.display_name': 'TOML a YAML',
+	'tool.toml-to-yaml.tagline': 'Convierte documentos TOML a YAML',
+	'tool.toml-to-yaml.description':
+		'Convierte datos de configuración TOML a YAML legible en tu navegador. Conserva tablas anidadas, arrays y valores escalares principales.',
+	'tool.toml-to-yaml.primary_keyword': 'toml a yaml',
+	'tool.toml-to-yaml.meta_title': 'Convertidor de TOML a YAML — fmtly.dev',
+	'tool.toml-to-yaml.meta_description':
+		'Convierte TOML a YAML al instante en tu navegador. No hace falta subir archivos.',
+	'tool.toml-to-yaml.operation': 'Convierte',
+	'tool.toml-diff.display_name': 'Comparador TOML',
+	'tool.toml-diff.tagline': 'Compara dos documentos TOML lado a lado',
+	'tool.toml-diff.description':
+		'Compara dos documentos TOML y resalta claves añadidas, eliminadas y modificadas. Revisa cambios de configuración sin salir del navegador.',
+	'tool.toml-diff.primary_keyword': 'comparador toml',
+	'tool.toml-diff.meta_title': 'Comparador TOML — fmtly.dev',
+	'tool.toml-diff.meta_description':
+		'Compara dos documentos TOML en tu navegador y resalta cada cambio.',
+	'tool.toml-diff.operation': 'Compara',
+	'tool.toml-formatter.faq.0.question': '¿Formatear cambia los valores de TOML?',
+	'tool.toml-formatter.faq.0.answer':
+		'No. Reescribe TOML válido con un formato normalizado sin alterar los valores ni la estructura de datos interpretada.',
+	'tool.toml-formatter.faq.1.question': '¿Cuándo debo usar el formateador en lugar del validador?',
+	'tool.toml-formatter.faq.1.answer':
+		'Usa el validador si solo quieres comprobar la sintaxis. Usa el formateador cuando el TOML ya sea válido y quieras una salida más limpia y consistente.',
+	'tool.toml-formatter.use_case.0': 'Normalizar pyproject.toml antes de hacer commit',
+	'tool.toml-formatter.use_case.1': 'Limpiar fragmentos de configuración copiados desde documentación',
+	'tool.toml-formatter.use_case.2': 'Hacer más legibles secciones largas de TOML',
+	'tool.toml-formatter.use_case.3': 'Preparar TOML antes de compararlo o convertirlo',
+	'tool.toml-validator.faq.0.question': '¿Qué problemas de TOML detecta el validador?',
+	'tool.toml-validator.faq.0.answer':
+		'Detecta errores de análisis como cadenas mal formadas, sintaxis de tablas no válida, arrays rotos y otros problemas de sintaxis TOML.',
+	'tool.toml-validator.faq.1.question': '¿El validador TOML admite esquemas?',
+	'tool.toml-validator.faq.1.answer':
+		'No. Solo valida la sintaxis TOML. Sirve para confirmar que un documento se puede analizar correctamente antes de formatearlo, convertirlo o compararlo.',
+	'tool.toml-validator.use_case.0': 'Comprobar pyproject.toml antes de ejecutar herramientas de build',
+	'tool.toml-validator.use_case.1': 'Detectar errores de sintaxis en configuraciones de aplicación',
+	'tool.toml-validator.use_case.2': 'Verificar TOML copiado desde documentación de paquetes',
+	'tool.toml-validator.use_case.3': 'Confirmar cambios de configuración antes de comparar',
+	'tool.toml-to-json.faq.0.question': '¿Se conservan tablas anidadas y arrays en JSON?',
+	'tool.toml-to-json.faq.0.answer':
+		'Sí. Los objetos TOML analizados se convierten en objetos y arrays JSON equivalentes, por lo que la estructura general se mantiene.',
+	'tool.toml-to-json.faq.1.question': '¿Cuándo conviene convertir de TOML a JSON?',
+	'tool.toml-to-json.faq.1.answer':
+		'Conviene cuando una herramienta, API, script o fixture de prueba espera JSON en lugar de TOML, pero necesitas reutilizar los mismos datos de configuración.',
+	'tool.toml-to-json.use_case.0': 'Convertir configuración TOML a JSON para tooling JavaScript',
+	'tool.toml-to-json.use_case.1': 'Inspeccionar TOML como estructura más estricta y legible por máquinas',
+	'tool.toml-to-json.use_case.2': 'Reutilizar ajustes TOML en fixtures o tests de API',
+	'tool.toml-to-json.use_case.3': 'Conectar datos de configuración entre TOML y sistemas basados en JSON',
+	'tool.toml-to-yaml.faq.0.question': '¿Por qué convertir TOML a YAML?',
+	'tool.toml-to-yaml.faq.0.answer':
+		'YAML suele ser más fácil de revisar en flujos de infraestructura y automatización. La conversión ayuda cuando un equipo o herramienta prefiere sintaxis YAML.',
+	'tool.toml-to-yaml.faq.1.question': '¿Se conserva la estructura TOML en la salida YAML?',
+	'tool.toml-to-yaml.faq.1.answer':
+		'Sí. Tablas, objetos anidados, arrays y valores escalares se trasladan a sus equivalentes en YAML.',
+	'tool.toml-to-yaml.use_case.0': 'Reescribir configuración TOML a YAML para flujos de despliegue',
+	'tool.toml-to-yaml.use_case.1': 'Compartir ajustes basados en TOML con equipos centrados en YAML',
+	'tool.toml-to-yaml.use_case.2': 'Comparar la misma configuración en formato TOML y YAML',
+	'tool.toml-to-yaml.use_case.3': 'Migrar configuración entre ecosistemas con formatos preferidos distintos',
+	'tool.toml-diff.faq.0.question': '¿TOML Diff es un diff de texto o estructural?',
+	'tool.toml-diff.faq.0.answer':
+		'Es estructural. Primero se analiza cada entrada como TOML y luego se comparan claves, arrays y valores resultantes.',
+	'tool.toml-diff.faq.1.question': '¿Puedo comparar documentos TOML no válidos?',
+	'tool.toml-diff.faq.1.answer':
+		'No. Ambos lados deben ser TOML válido. Si uno falla al analizarse, la herramienta indica qué lado es inválido.',
+	'tool.toml-diff.use_case.0': 'Revisar cambios de configuración entre dos versiones',
+	'tool.toml-diff.use_case.1': 'Comparar ajustes TOML por entorno',
+	'tool.toml-diff.use_case.2': 'Comprobar TOML generado frente a una versión esperada',
+	'tool.toml-diff.use_case.3': 'Inspeccionar cambios de pyproject.toml o toolchains antes del commit',
+
+	'tool.toml-minifier.display_name': 'Minificador TOML',
+	'tool.toml-minifier.tagline': 'Minifica y comprime archivos de configuración TOML',
+	'tool.toml-minifier.description':
+		'Elimina espacios en blanco innecesarios y comentarios de archivos TOML para reducir el tamaño del archivo. Minifica configuraciones TOML localmente en tu navegador.',
+	'tool.toml-minifier.primary_keyword': 'minificador toml',
+	'tool.toml-minifier.meta_title': 'Minificador TOML — fmtly.dev',
+	'tool.toml-minifier.meta_description':
+		'Minifica y comprime archivos TOML en tu navegador. Elimina espacios en blanco y comentarios de forma segura. Ningún dato sale de tu dispositivo.',
+	'tool.toml-minifier.operation': 'Minificar',
+	'tool.toml-minifier.faq.0.question': '¿Qué hace el minificador TOML?',
+	'tool.toml-minifier.faq.0.answer':
+		'Analiza tu archivo TOML y lo reescribe con la cantidad mínima de espacios en blanco requeridos. Los comentarios también se eliminan para reducir el tamaño total del archivo.',
+	'tool.toml-minifier.faq.1.question': '¿Es seguro minificar archivos TOML?',
+	'tool.toml-minifier.faq.1.answer':
+		'Sí. El minificador garantiza que el significado estructural de los datos TOML permanezca exactamente igual. Solo se eliminan el formato y los comentarios.',
+	'tool.toml-minifier.use_case.0': 'Comprimir grandes configuraciones TOML para implementación',
+	'tool.toml-minifier.use_case.1': 'Eliminar comentarios antes de compartir archivos de configuración',
+	'tool.toml-minifier.use_case.2': 'Preparar archivos TOML para sistemas integrados o almacenamiento limitado',
+	'tool.toml-minifier.use_case.3': 'Normalizar archivos TOML en un formato compacto',
+
+	'tool.toml-to-xml.display_name': 'TOML a XML',
+	'tool.toml-to-xml.tagline': 'Convierte archivos de configuración TOML a formato XML',
+	'tool.toml-to-xml.description':
+		'Convierte estructuras de datos TOML a documentos XML directamente en tu navegador. Conserva tablas anidadas y arrays en jerarquías de nodos XML.',
+	'tool.toml-to-xml.primary_keyword': 'toml a xml',
+	'tool.toml-to-xml.meta_title': 'Convertidor de TOML a XML — fmtly.dev',
+	'tool.toml-to-xml.meta_description':
+		'Convierte configuraciones TOML a XML al instante en tu navegador. Sin subir archivos.',
+	'tool.toml-to-xml.operation': 'Convertir',
+	'tool.toml-to-xml.faq.0.question': '¿Cómo se convierten los arrays TOML a XML?',
+	'tool.toml-to-xml.faq.0.answer':
+		'XML no soporta nativamente arrays sin nombre, por lo que típicamente se representan repitiendo el nombre del nodo o envolviendo elementos en etiquetas de lista estándar según el analizador.',
+	'tool.toml-to-xml.faq.1.question': '¿Puedo volver a convertirlo a TOML más tarde?',
+	'tool.toml-to-xml.faq.1.answer':
+		'Sí, puedes usar nuestro convertidor de XML a TOML, aunque alguna información de tipo (como cadenas explícitas frente a números) podría ser interpretada de manera diferente por el analizador XML al regresar.',
+	'tool.toml-to-xml.use_case.0': 'Adaptar configuraciones TOML modernas para sistemas XML heredados',
+	'tool.toml-to-xml.use_case.1': 'Integrar aplicaciones basadas en TOML con API SOAP empresariales',
+	'tool.toml-to-xml.use_case.2': 'Convertir datos pyproject.toml en archivos de compilación Maven o Ant',
+	'tool.toml-to-xml.use_case.3': 'Extraer lógica de configuración en conjuntos de datos XML genéricos',
+
+	'tool.toml-to-html.display_name': 'TOML a HTML',
+	'tool.toml-to-html.tagline': 'Convierte configuración TOML en una tabla HTML responsiva',
+	'tool.toml-to-html.description':
+		'Transforma archivos de configuración TOML en tablas HTML limpias y legibles. Perfecto para documentación, informes y compartir estados de configuración.',
+	'tool.toml-to-html.primary_keyword': 'toml a html',
+	'tool.toml-to-html.meta_title': 'Convertidor de TOML a Tabla HTML — fmtly.dev',
+	'tool.toml-to-html.meta_description':
+		'Convierte TOML a tablas HTML al instante en tu navegador. Crea tablas responsivas a partir de datos TOML anidados.',
+	'tool.toml-to-html.operation': 'Convertir',
+	'tool.toml-to-html.faq.0.question': '¿Cómo maneja las tablas TOML anidadas?',
+	'tool.toml-to-html.faq.0.answer':
+		'Las tablas anidadas y los arrays se representan recursivamente como tablas HTML internas, asegurando que la estructura exacta de los datos se mantenga visualmente.',
+	'tool.toml-to-html.faq.1.question': '¿Puedo copiar el resultado directamente a mi documentación?',
+	'tool.toml-to-html.faq.1.answer':
+		'Sí, el resultado es HTML estándar que se puede copiar y pegar directamente en archivos Markdown, Notion, Confluence o cualquier página web estándar.',
+	'tool.toml-to-html.use_case.0': 'Generar informes visuales a partir de archivos de configuración TOML',
+	'tool.toml-to-html.use_case.1': 'Pegar configuraciones de la aplicación en la documentación del proyecto',
+	'tool.toml-to-html.use_case.2': 'Mostrar variables específicas del entorno en paneles internos',
+	'tool.toml-to-html.use_case.3': 'Revisar estructuras TOML anidadas complejas en un formato accesible',
 
 	// ── Herramientas Web ────────────────────────────────────────────────────
 	'tool.web-url-parser.display_name': 'Analizador de URL',
