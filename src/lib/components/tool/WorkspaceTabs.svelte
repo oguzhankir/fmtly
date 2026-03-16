@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { t } from '$stores/language';
 	import { goto } from '$app/navigation';
-	import { localizePath, stripLocalePrefix } from '$lib/utils/locale-routing.js';
+	import { localizePath } from '$lib/utils/locale-routing.js';
 	import type { ToolDefinition } from '$lib/registry/types.js';
 
 	let {
@@ -48,8 +48,10 @@
 				return $t('ui.convert.to_html', '→ HTML').replace(/^→\s*/, '');
 			case 'to-markdown':
 				return $t('ui.convert.to_markdown', '→ MD').replace(/^→\s*/, '');
+			case 'to-sql':
+				return $t('ui.convert.to_sql', 'CSV → SQL');
 			default:
-				return stripLocalePrefix($t(tDef.displayName, tDef.displayName));
+				return $t(tDef.displayName, tDef.displayName);
 		}
 	}
 

@@ -4,10 +4,12 @@
 
 	let {
 		showHeaderRow = true,
-		showQuoteAll = true
+		showQuoteAll = true,
+		showSqlOptions = false
 	}: {
 		showHeaderRow?: boolean;
 		showQuoteAll?: boolean;
+		showSqlOptions?: boolean;
 	} = $props();
 
 	const delimiterOptions: Array<{ value: string; labelKey: string; fallback: string }> = [
@@ -24,6 +26,14 @@
 	function updateToggle(key: 'headerRow' | 'skipEmptyLines' | 'trimCells' | 'quoteAll', value: boolean): void {
 		setCsvProcessingOptions({ [key]: value });
 	}
+
+	function updateTableName(value: string): void {
+		setCsvProcessingOptions({ tableName: value });
+	}
+
+	function updateBatchSize(value: number): void {
+		setCsvProcessingOptions({ batchSize: Math.max(1, value) });
+	}
 </script>
 
 <div class="csv-toolbar">
@@ -39,6 +49,30 @@
 			{/each}
 		</select>
 	</label>
+
+	{#if showSqlOptions}
+		<label class="csv-toolbar__field">
+			<span class="csv-toolbar__label">{$t('ui.csv.controls.table_name', 'Table Name')}</span>
+			<input
+				type="text"
+				class="csv-toolbar__input"
+				value={$csvProcessingOptions.tableName}
+				oninput={(event) => updateTableName((event.currentTarget as HTMLInputElement).value)}
+				placeholder="my_table"
+			/>
+		</label>
+		<label class="csv-toolbar__field">
+			<span class="csv-toolbar__label">{$t('ui.csv.controls.batch_size', 'Batch Size')}</span>
+			<input
+				type="number"
+				class="csv-toolbar__input csv-toolbar__input--number"
+				value={$csvProcessingOptions.batchSize}
+				oninput={(event) => updateBatchSize(parseInt((event.currentTarget as HTMLInputElement).value, 10))}
+				min="1"
+				max="1000"
+			/>
+		</label>
+	{/if}
 
 	{#if showHeaderRow}
 		<label class="csv-toolbar__toggle">
@@ -108,7 +142,8 @@
 		letter-spacing: 0.04em;
 	}
 
-	.csv-toolbar__select {
+	.csv-toolbar__select,
+	.csv-toolbar__input {
 		height: 32px;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
@@ -117,6 +152,14 @@
 		color: var(--text-primary);
 		font-family: var(--font-ui);
 		font-size: 13px;
+	}
+
+	.csv-toolbar__input {
+		width: 100px;
+	}
+
+	.csv-toolbar__input--number {
+		width: 60px;
 	}
 
 	.csv-toolbar__toggle {

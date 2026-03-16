@@ -236,5 +236,35 @@ Diana,28,Tokyo,true`
 		],
 		useCases: ['tool.csv-validator.use_case.0', 'tool.csv-validator.use_case.1'],
 		sampleInput: 'id,name,name\n1,Alice,Alice\n2,Bob'
+	},
+	{
+		id: 'csv-to-sql',
+		category: 'csv',
+		slug: 'to-sql',
+		displayName: 'tool.csv-to-sql.display_name',
+		tagline: 'tool.csv-to-sql.tagline',
+		description: 'tool.csv-to-sql.description',
+		primaryKeyword: 'tool.csv-to-sql.primary_keyword',
+		metaTitle: 'tool.csv-to-sql.meta_title',
+		metaDescription: 'tool.csv-to-sql.meta_description',
+		engine: 'csv',
+		operation: 'toSql',
+		layoutVariant: 'split',
+		inputLanguage: 'csv',
+		outputLanguage: 'sql',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'csv', slug: 'to-json' },
+			{ category: 'csv', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.csv-to-sql.faq.0.question',
+				answer: 'tool.csv-to-sql.faq.0.answer'
+			}
+		],
+		useCases: ['tool.csv-to-sql.use_case.0', 'tool.csv-to-sql.use_case.1'],
+		sampleInput:
+			'id,name,age,active,joined_at\n1,Alice,30,true,2023-01-15\n2,Bob,25,false,2023-02-20\n3,Charlie,,true,2023-03-10'
 	}
 ];

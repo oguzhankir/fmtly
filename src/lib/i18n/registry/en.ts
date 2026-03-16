@@ -1287,7 +1287,24 @@ const registryEn: Record<string, string> = {
 	'tool.xml-xpath.use_case.0': 'Extracting specific data from large XML documents',
 	'tool.xml-xpath.use_case.1': 'Testing XML data in automated test suites',
 	'tool.xml-xpath.use_case.2': 'Transforming XML data using XSLT templates',
-	'tool.xml-xpath.use_case.3': 'Validating XML structure and content programmatically'
+	'tool.xml-xpath.use_case.3': 'Validating XML structure and content programmatically',
+	'tool.csv-to-sql.display_name': 'CSV → SQL',
+	'tool.csv-to-sql.tagline': 'Convert CSV data to SQL INSERT statements',
+	'tool.csv-to-sql.description':
+		'Convert CSV rows to SQL INSERT statements with type inference for numbers and booleans. Configurable table name and batch size.',
+	'tool.csv-to-sql.primary_keyword': 'csv to sql',
+	'tool.csv-to-sql.meta_title': 'CSV to SQL Converter — fmtly.dev',
+	'tool.csv-to-sql.meta_description':
+		'Generate SQL INSERT statements from CSV data in your browser. Configurable table name and batch sizes. No data uploaded.',
+	'tool.csv-to-sql.operation': 'To SQL',
+	'tool.csv-to-sql.faq.0.question': 'How does type inference work?',
+	'tool.csv-to-sql.faq.0.answer':
+		'The converter automatically detects numbers and boolean values (true/false). Everything else is safely escaped as string literals using single quotes.',
+	'tool.csv-to-sql.use_case.0': 'Generate SQL seeds from spreadsheet data for database migrations',
+	'tool.csv-to-sql.use_case.1':
+		'Quickly import CSV data into SQL databases without writing custom scripts',
+	'ui.csv.controls.table_name': 'Table Name',
+	'ui.csv.controls.batch_size': 'Batch Size'
 };
 
 export default registryEn;

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	format,
 	toHtmlTable,
+	toSql,
 	toXml,
 	toYaml,
 	validate
@@ -28,6 +29,14 @@ describe('CSV Engine', () => {
 		expect(result).toContain('<table>');
 		expect(result).toContain('<th>id</th>');
 		expect(result).toContain('<td>Alice</td>');
+	});
+
+	it('converts CSV to SQL with inferred types', async () => {
+		const data = "id,name,active,score\n1,Alice,true,98.5\n2,O'Brian,FALSE,0";
+		const result = await toSql(data, { tableName: 'users' });
+		expect(result).toContain('INSERT INTO "users" ("id", "name", "active", "score") VALUES');
+		expect(result).toContain("  (1, 'Alice', TRUE, 98.5),");
+		expect(result).toContain("  (2, 'O''Brian', FALSE, 0);");
 	});
 
 	it('formats CSV correctly', async () => {

@@ -112,8 +112,8 @@
 </script>
 
 <div class="csv-output" role="region" aria-label={$t('ui.layout.aria.output_panel', 'Output panel')}>
-	{#if isFormatter || toolSlug === 'to-json' || toolSlug === 'to-xml' || toolSlug === 'to-yaml' || toolSlug === 'to-html'}
-		<CsvOptionsToolbar showQuoteAll={isFormatter} />
+	{#if isFormatter || toolSlug === 'to-json' || toolSlug === 'to-xml' || toolSlug === 'to-yaml' || toolSlug === 'to-html' || toolSlug === 'to-sql'}
+		<CsvOptionsToolbar showQuoteAll={isFormatter} showSqlOptions={toolSlug === 'to-sql'} />
 	{/if}
 
 	{#if outputMeta}

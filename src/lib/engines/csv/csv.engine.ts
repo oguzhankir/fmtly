@@ -191,6 +191,65 @@ function escapeHtml(str: string): string {
 	);
 }
 
+export type CsvToSqlOptions = CSVProcessingOptions & {
+	tableName?: string;
+	batchSize?: number;
+};
+
+function escapeSqlValue(value: unknown): string {
+	if (value === null || value === undefined || value === '') return 'NULL';
+	if (typeof value === 'number') return String(value);
+	if (typeof value === 'boolean') return value ? 'TRUE' : 'FALSE';
+
+	const str = String(value);
+
+	// Infer numbers
+	if (/^-?\d+(\.\d+)?$/.test(str)) {
+		return str;
+	}
+
+	// Infer booleans
+	const lower = str.toLowerCase();
+	if (lower === 'true') return 'TRUE';
+	if (lower === 'false') return 'FALSE';
+	if (lower === 'null') return 'NULL';
+
+	// Otherwise, it's a string. Escape single quotes.
+	return `'${str.replace(/'/g, "''")}'`;
+}
+
+export async function toSql(csv: string, options: CsvToSqlOptions = {}): Promise<string> {
+	const parsed = await parseObjectRows(csv, options);
+	if (parsed.error) {
+		throw new Error(parsed.error.message);
+	}
+
+	const data = parsed.rows;
+	if (data.length === 0) return '-- No data found';
+
+	const tableName = options.tableName || 'my_table';
+	const batchSize = Math.max(1, options.batchSize || 100);
+
+	const columns = Object.keys(data[0]);
+	const columnsSql = columns.map((c) => `"${c.replace(/"/g, '""')}"`).join(', ');
+
+	let sql = '';
+	for (let i = 0; i < data.length; i += batchSize) {
+		const batch = data.slice(i, i + batchSize);
+
+		sql += `INSERT INTO "${tableName}" (${columnsSql}) VALUES\n`;
+
+		const valuesSql = batch.map((row) => {
+			const rowValues = columns.map((col) => escapeSqlValue(row[col]));
+			return `  (${rowValues.join(', ')})`;
+		});
+
+		sql += `${valuesSql.join(',\n')};\n\n`;
+	}
+
+	return sql.trim();
+}
+
 export async function format(csv: string, options: CSVProcessingOptions = {}): Promise<string> {
 	const Papa = await loadPapaParse();
 	const normalized = getNormalizedOptions(options);

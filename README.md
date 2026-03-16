@@ -23,14 +23,14 @@ fmtly puts every developer tool in one place. Fast, private, and open source.
 
 ---
 
-## Tools (45 shipped)
+## Tools (46 shipped)
 
 | Category | Tools |
 |---|---|
 | **JSON** (13) | Formatter, Minifier, Validator, Tree Viewer, Diff, Sorter, JSONPath, JMESPath, → YAML, → XML, → CSV, → TOML, → Markdown |
 | **XML** (9) | Formatter, Minifier, Validator, Stats, Diff, XPath, → JSON, → YAML, → CSV |
 | **YAML** (10) | Formatter, Minifier, Validator, Diff, Query, → JSON, → XML, → CSV, → TOML, → HTML |
-| **CSV** (7) | Formatter, Validator, → JSON, → XML, → YAML, → HTML, → SQL (planned) |
+| **CSV** (8) | Formatter, Validator, → JSON, → XML, → YAML, → HTML, → SQL |
 | **TOML** (8) | Formatter, Minifier, Validator, Diff, → JSON, → YAML, → XML, → HTML |
 
 > **Full roadmap with 100+ planned tools across 15 categories (AI, Crypto, Encoders, Web, etc.):** see [ROADMAP.md](ROADMAP.md)

@@ -136,3 +136,13 @@ export async function jsonToCSV(input: string): Promise<ConvertResult> {
 		};
 	}
 }
+
+export {
+	format,
+	toHtmlTable,
+	toXml,
+	toYaml,
+	toSql,
+	type CSVProcessingOptions,
+	type CsvToSqlOptions
+} from './csv.engine.js';

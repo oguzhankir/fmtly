@@ -17,14 +17,19 @@ export type CSVStats = {
 	columnCount: number;
 };
 
-export type CSVFormatOptions = Required<CSVProcessingOptions>;
+export type CSVFormatOptions = Required<CSVProcessingOptions> & {
+	tableName: string;
+	batchSize: number;
+};
 
 const DEFAULT_CSV_OPTIONS: CSVFormatOptions = {
 	delimiter: ',',
 	headerRow: true,
 	skipEmptyLines: true,
 	trimCells: false,
-	quoteAll: true
+	quoteAll: true,
+	tableName: 'my_table',
+	batchSize: 100
 };
 
 export const csvError = writable<EngineParseError | null>(null);
@@ -177,6 +182,14 @@ async function applyToolOutput(value: string, options: CSVFormatOptions): Promis
 		case 'to-html':
 			try {
 				output.set(await toHtmlTable(value, options));
+			} catch {
+				clearOutput();
+			}
+			return;
+		case 'to-sql':
+			try {
+				const { toSql } = await import('$engines/csv/csv.engine.js');
+				output.set(await toSql(value, options));
 			} catch {
 				clearOutput();
 			}

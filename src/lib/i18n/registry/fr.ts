@@ -1348,7 +1348,25 @@ const registryFr: Record<string, string> = {
 	'tool.xml-xpath.use_case.0': 'Extraire des données spécifiques de documents XML volumineux',
 	'tool.xml-xpath.use_case.1': 'Tester les données XML dans des suites de tests automatisés',
 	'tool.xml-xpath.use_case.2': 'Transformer des données XML en utilisant des templates XSLT',
-	'tool.xml-xpath.use_case.3': 'Valider la structure et le contenu XML de manière programmatique'
+	'tool.xml-xpath.use_case.3': 'Valider la structure et le contenu XML de manière programmatique',
+	'tool.csv-to-sql.display_name': 'CSV → SQL',
+	'tool.csv-to-sql.tagline': 'Convertir des données CSV en instructions SQL INSERT',
+	'tool.csv-to-sql.description':
+		'Convertissez des lignes CSV en instructions SQL INSERT avec inférence de type pour les nombres et les booléens. Nom de table et taille de lot configurables.',
+	'tool.csv-to-sql.primary_keyword': 'csv to sql',
+	'tool.csv-to-sql.meta_title': 'Convertisseur CSV vers SQL — fmtly.dev',
+	'tool.csv-to-sql.meta_description':
+		'Générez des instructions SQL INSERT à partir de données CSV dans votre navigateur. Aucune donnée téléchargée.',
+	'tool.csv-to-sql.operation': 'Vers SQL',
+	'tool.csv-to-sql.faq.0.question': "Comment fonctionne l'inférence de type ?",
+	'tool.csv-to-sql.faq.0.answer':
+		'Le convertisseur détecte automatiquement les nombres et les valeurs booléennes (true/false). Tout le reste est échappé de manière sécurisée en tant que littéraux de chaîne utilisant des guillemets simples.',
+	'tool.csv-to-sql.use_case.0':
+		'Générer des seeds SQL à partir de données de tableur pour les migrations de bases de données',
+	'tool.csv-to-sql.use_case.1':
+		'Importer rapidement des données CSV dans des bases de données SQL sans écrire de scripts personnalisés',
+	'ui.csv.controls.table_name': 'Nom de Table',
+	'ui.csv.controls.batch_size': 'Taille de Lot'
 };
 
 export default registryFr;

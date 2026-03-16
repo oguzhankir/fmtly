@@ -1312,7 +1312,25 @@ const registryTr: Record<string, string> = {
 	'tool.xml-xpath.use_case.0': 'Büyük XML belgelerinden belirli veriler çıkarma',
 	'tool.xml-xpath.use_case.1': 'Otomatik test paketlerinde XML verilerini test etme',
 	'tool.xml-xpath.use_case.2': 'XSLT şablonları kullanarak XML verilerini dönüştürme',
-	'tool.xml-xpath.use_case.3': 'XML yapısını ve içeriğini programlı olarak doğrulama'
+	'tool.xml-xpath.use_case.3': 'XML yapısını ve içeriğini programlı olarak doğrulama',
+	'tool.csv-to-sql.display_name': 'CSV → SQL',
+	'tool.csv-to-sql.tagline': 'CSV verisini SQL INSERT komutlarına dönüştür',
+	'tool.csv-to-sql.description':
+		'CSV satırlarını, sayılar ve boolean değerleri için tip tahmini ile SQL INSERT komutlarına dönüştürün. Özelleştirilebilir tablo adı ve yığın (batch) boyutu.',
+	'tool.csv-to-sql.primary_keyword': 'csv sql çevirici',
+	'tool.csv-to-sql.meta_title': 'CSV to SQL Çevirici — fmtly.dev',
+	'tool.csv-to-sql.meta_description':
+		'Tarayıcınızda CSV verisinden SQL INSERT komutları oluşturun. Verileriniz sunucuya gönderilmez.',
+	'tool.csv-to-sql.operation': 'SQL Yap',
+	'tool.csv-to-sql.faq.0.question': 'Tip tahmini nasıl çalışıyor?',
+	'tool.csv-to-sql.faq.0.answer':
+		'Dönüştürücü, sayıları ve boolean (doğru/yanlış) değerlerini otomatik olarak algılar. Diğer her şey, tek tırnak kullanılarak string değeri olarak güvenli bir şekilde kaçış (escape) işlemine tabi tutulur.',
+	'tool.csv-to-sql.use_case.0':
+		'Veritabanı migrationları için e-tablo verilerinden SQL verileri (seed) oluşturma',
+	'tool.csv-to-sql.use_case.1':
+		'Özel scriptler yazmadan CSV verilerini SQL veritabanlarına hızlıca aktarma',
+	'ui.csv.controls.table_name': 'Tablo Adı',
+	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };
 
 export default registryTr;
