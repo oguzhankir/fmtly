@@ -19,8 +19,10 @@
 	} = $props();
 
 	let yamlLib: Awaited<typeof import('js-yaml')> | null = $state(null);
+	let tomlIsValid = $state<boolean | null>(null);
+	let tomlValidationToken = 0;
 	let languageLabel = $derived(
-		language === 'xml' ? 'XML' : language === 'yaml' ? 'YAML' : 'JSON'
+		language === 'xml' ? 'XML' : language === 'yaml' ? 'YAML' : language === 'toml' ? 'TOML' : 'JSON'
 	);
 	let reactivePlaceholder = $derived(
 		placeholder ??
@@ -28,13 +30,17 @@
 				? $t('ui.placeholder.original_xml', 'Paste XML here…')
 				: language === 'yaml'
 					? $t('ui.placeholder.original_yaml', 'Paste YAML here…')
-					: $t('ui.placeholder.original_json', 'Paste JSON here…'))
+					: language === 'toml'
+						? $t('ui.paste_language_here', { language: 'TOML' }, 'Paste TOML here…')
+						: $t('ui.placeholder.original_json', 'Paste JSON here…'))
 	);
 	let acceptedFileTypes = $derived(
 		language === 'xml'
 			? '.xml,.txt,text/plain,application/xml,text/xml'
 			: language === 'yaml'
 				? '.yaml,.yml,.txt,text/plain,application/x-yaml,text/yaml'
+				: language === 'toml'
+					? '.toml,.txt,text/plain,application/toml'
 				: '.json,.txt,text/plain,application/json'
 	);
 
@@ -56,6 +62,7 @@
 		if (!value.trim()) return null;
 		if (language === 'xml') return isValidXml(value);
 		if (language === 'yaml') return isValidYaml(value);
+		if (language === 'toml') return tomlIsValid;
 		try {
 			JSON.parse(value);
 			return true;
@@ -82,6 +89,21 @@
 		if (language === 'yaml' && !yamlLib) {
 			void loadYamlLibrary();
 		}
+	});
+
+	$effect(() => {
+		if (language !== 'toml' || !value.trim()) {
+			tomlIsValid = null;
+			return;
+		}
+
+		const nextToken = ++tomlValidationToken;
+		void import('$engines/toml/toml.engine.js')
+			.then(({ validate }) => validate(value))
+			.then((result) => {
+				if (nextToken !== tomlValidationToken) return;
+				tomlIsValid = result.valid;
+			});
 	});
 
 	async function loadEditor(): Promise<void> {
@@ -118,6 +140,12 @@
 			} catch {
 				return false;
 			}
+		}
+
+		if (language === 'toml') {
+			const { validate } = await import('$engines/toml/toml.engine.js');
+			const result = await validate(text);
+			return result.valid;
 		}
 
 		try {
@@ -168,6 +196,23 @@
 					)
 				);
 			}
+			return;
+		}
+		if (language === 'toml') {
+			const { format, validate } = await import('$engines/toml/toml.engine.js');
+			const result = await validate(value);
+			if (result.valid) {
+				onchange?.(await format(value));
+				return;
+			}
+			addToast(
+				'error',
+				$t(
+					'ui.diff.toast.format_error',
+					{ language: languageLabel },
+					`Cannot format — invalid ${languageLabel}`
+				)
+			);
 			return;
 		}
 		try {
@@ -294,6 +339,8 @@
 								? 'https://example.com/feed.xml'
 								: language === 'yaml'
 									? 'https://example.com/data.yaml'
+									: language === 'toml'
+										? 'https://example.com/pyproject.toml'
 									: 'https://example.com/data.json'}
 						/>
 						<div class="diff-input-popover__actions">

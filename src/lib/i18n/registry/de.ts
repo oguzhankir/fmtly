@@ -1070,11 +1070,13 @@ const registryDe: Record<string, string> = {
 	'tool.toml-formatter.faq.0.question': 'Ändert das Formatieren TOML-Werte?',
 	'tool.toml-formatter.faq.0.answer':
 		'Nein. Gültiges TOML wird in ein einheitliches Layout überführt, ohne die geparsten Werte oder die Datenstruktur zu ändern.',
-	'tool.toml-formatter.faq.1.question': 'Wann sollte ich den Formatierer statt des Validators verwenden?',
+	'tool.toml-formatter.faq.1.question':
+		'Wann sollte ich den Formatierer statt des Validators verwenden?',
 	'tool.toml-formatter.faq.1.answer':
 		'Nutzen Sie den Validator nur zur Syntaxprüfung. Der Formatierer ist sinnvoll, wenn das TOML bereits gültig ist und Sie eine saubere, konsistente Darstellung möchten.',
 	'tool.toml-formatter.use_case.0': 'pyproject.toml vor einem Commit vereinheitlichen',
-	'tool.toml-formatter.use_case.1': 'Aus Dokumentationen kopierte Konfigurations-Snippets bereinigen',
+	'tool.toml-formatter.use_case.1':
+		'Aus Dokumentationen kopierte Konfigurations-Snippets bereinigen',
 	'tool.toml-formatter.use_case.2': 'Lange TOML-Abschnitte leichter lesbar machen',
 	'tool.toml-formatter.use_case.3': 'TOML vor Diff oder Konvertierung vorbereiten',
 	'tool.toml-validator.faq.0.question': 'Welche TOML-Probleme erkennt der Validator?',
@@ -1087,7 +1089,8 @@ const registryDe: Record<string, string> = {
 	'tool.toml-validator.use_case.1': 'Syntaxfehler in App-Konfigurationen finden',
 	'tool.toml-validator.use_case.2': 'Aus Paketdokumentationen kopiertes TOML prüfen',
 	'tool.toml-validator.use_case.3': 'Konfigurationsänderungen vor dem Diff validieren',
-	'tool.toml-to-json.faq.0.question': 'Bleiben verschachtelte Tabellen und Arrays in JSON erhalten?',
+	'tool.toml-to-json.faq.0.question':
+		'Bleiben verschachtelte Tabellen und Arrays in JSON erhalten?',
 	'tool.toml-to-json.faq.0.answer':
 		'Ja. Geparste TOML-Objekte werden in gleichwertige JSON-Objekte und Arrays umgewandelt, sodass die Struktur erhalten bleibt.',
 	'tool.toml-to-json.faq.1.question': 'Wann ist eine Konvertierung von TOML zu JSON sinnvoll?',
@@ -1096,17 +1099,20 @@ const registryDe: Record<string, string> = {
 	'tool.toml-to-json.use_case.0': 'TOML-Konfiguration für JavaScript-Tools in JSON umwandeln',
 	'tool.toml-to-json.use_case.1': 'TOML als striktere maschinenlesbare Struktur prüfen',
 	'tool.toml-to-json.use_case.2': 'TOML-Einstellungen in Fixtures oder Tests wiederverwenden',
-	'tool.toml-to-json.use_case.3': 'Konfigurationsdaten zwischen TOML- und JSON-Systemen überbrücken',
+	'tool.toml-to-json.use_case.3':
+		'Konfigurationsdaten zwischen TOML- und JSON-Systemen überbrücken',
 	'tool.toml-to-yaml.faq.0.question': 'Warum sollte ich TOML in YAML konvertieren?',
 	'tool.toml-to-yaml.faq.0.answer':
 		'YAML lässt sich in Infrastruktur- und Automatisierungs-Workflows oft schneller überblicken. Die Konvertierung hilft, wenn ein Team oder Tool YAML bevorzugt.',
 	'tool.toml-to-yaml.faq.1.question': 'Bleibt die TOML-Struktur in YAML erhalten?',
 	'tool.toml-to-yaml.faq.1.answer':
 		'Ja. Tabellen, verschachtelte Objekte, Arrays und Skalare werden in ihre YAML-Entsprechungen übertragen.',
-	'tool.toml-to-yaml.use_case.0': 'TOML-Konfigurationen für Deployment-Workflows in YAML umschreiben',
+	'tool.toml-to-yaml.use_case.0':
+		'TOML-Konfigurationen für Deployment-Workflows in YAML umschreiben',
 	'tool.toml-to-yaml.use_case.1': 'TOML-basierte Einstellungen mit YAML-orientierten Teams teilen',
 	'tool.toml-to-yaml.use_case.2': 'Dieselbe Konfiguration in TOML- und YAML-Form vergleichen',
-	'tool.toml-to-yaml.use_case.3': 'Konfiguration zwischen Ökosystemen mit unterschiedlichen Formaten migrieren',
+	'tool.toml-to-yaml.use_case.3':
+		'Konfiguration zwischen Ökosystemen mit unterschiedlichen Formaten migrieren',
 	'tool.toml-diff.faq.0.question': 'Ist TOML-Diff ein Text-Diff oder ein struktureller Diff?',
 	'tool.toml-diff.faq.0.answer':
 		'Es ist strukturell. Beide Eingaben werden zuerst als TOML geparst und danach nach Schlüsseln, Arrays und Werten verglichen.',
@@ -1135,7 +1141,8 @@ const registryDe: Record<string, string> = {
 		'Ja. Der Minifier stellt sicher, dass die strukturelle Bedeutung der TOML-Daten exakt gleich bleibt. Nur Formatierungen und Kommentare werden entfernt.',
 	'tool.toml-minifier.use_case.0': 'Große TOML-Konfigurationen für das Deployment komprimieren',
 	'tool.toml-minifier.use_case.1': 'Kommentare vor dem Teilen von Konfigurationsdateien entfernen',
-	'tool.toml-minifier.use_case.2': 'TOML-Dateien für eingebettete Systeme oder begrenzten Speicher vorbereiten',
+	'tool.toml-minifier.use_case.2':
+		'TOML-Dateien für eingebettete Systeme oder begrenzten Speicher vorbereiten',
 	'tool.toml-minifier.use_case.3': 'TOML-Dateien in ein kompaktes Format überführen',
 
 	'tool.toml-to-xml.display_name': 'TOML zu XML',
@@ -1155,7 +1162,8 @@ const registryDe: Record<string, string> = {
 		'Ja, Sie können unseren XML-zu-TOML-Konverter nutzen, allerdings können bestimmte Typinformationen (wie explizite Strings vs. Zahlen) vom XML-Parser abweichend interpretiert werden.',
 	'tool.toml-to-xml.use_case.0': 'Moderne TOML-Konfigurationen an Legacy-XML-Systeme anpassen',
 	'tool.toml-to-xml.use_case.1': 'TOML-basierte Apps in Enterprise-SOAP-APIs integrieren',
-	'tool.toml-to-xml.use_case.2': 'pyproject.toml-Daten in Maven- oder Ant-Build-Dateien konvertieren',
+	'tool.toml-to-xml.use_case.2':
+		'pyproject.toml-Daten in Maven- oder Ant-Build-Dateien konvertieren',
 	'tool.toml-to-xml.use_case.3': 'Konfigurationslogik in generische XML-Datensätze extrahieren',
 
 	'tool.toml-to-html.display_name': 'TOML zu HTML',
@@ -1170,13 +1178,15 @@ const registryDe: Record<string, string> = {
 	'tool.toml-to-html.faq.0.question': 'Wie werden verschachtelte TOML-Tabellen behandelt?',
 	'tool.toml-to-html.faq.0.answer':
 		'Verschachtelte Tabellen und Arrays werden rekursiv als innere HTML-Tabellen gerendert, wodurch die exakte Datenstruktur visuell erhalten bleibt.',
-	'tool.toml-to-html.faq.1.question': 'Kann ich die Ausgabe direkt in meine Dokumentation kopieren?',
+	'tool.toml-to-html.faq.1.question':
+		'Kann ich die Ausgabe direkt in meine Dokumentation kopieren?',
 	'tool.toml-to-html.faq.1.answer':
 		'Ja, die Ausgabe ist Standard-HTML, das direkt in Markdown-Dateien, Notion, Confluence oder jede normale Webseite eingefügt werden kann.',
 	'tool.toml-to-html.use_case.0': 'Visuelle Berichte aus TOML-Konfigurationsdateien erstellen',
 	'tool.toml-to-html.use_case.1': 'Anwendungseinstellungen in die Projektdokumentation einfügen',
 	'tool.toml-to-html.use_case.2': 'Umgebungsspezifische Variablen auf internen Dashboards anzeigen',
-	'tool.toml-to-html.use_case.3': 'Komplexe verschachtelte TOML-Strukturen übersichtlich überprüfen',
+	'tool.toml-to-html.use_case.3':
+		'Komplexe verschachtelte TOML-Strukturen übersichtlich überprüfen',
 
 	// ── Web Tools ─────────────────────────────────────────────────────────────
 	'tool.web-url-parser.display_name': 'URL-Parser',

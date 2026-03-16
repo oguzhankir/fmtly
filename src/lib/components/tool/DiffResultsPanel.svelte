@@ -4,6 +4,7 @@
 	import { computeJSONDiff, toJSONPatch, summarizeJSONDiff, toDiffMarkdown, toDiffCSV } from '$lib/engines/diff/json-diff.js';
 	import { computeXMLDiff, computeDiffSummary } from '$lib/engines/diff/xml-diff.js';
 	import { computeYAMLDiff } from '$lib/engines/diff/yaml-diff.js';
+	import { computeTOMLDiff } from '$lib/engines/diff/toml-diff.js';
 	import type { DiffEntry, DiffOptions, DiffResult } from '$lib/engines/diff/json-diff.js';
 	import { t } from '$lib/stores/language.js';
 	import type MonacoDiffViewType from '$components/editor/MonacoDiffView.svelte';
@@ -51,14 +52,18 @@
 
 	let isXmlDiff = $derived(language === 'xml');
 	let isYamlDiff = $derived(language === 'yaml');
+	let isTomlDiff = $derived(language === 'toml');
 	let isJsonDiff = $derived(language === 'json');
 	let languageLabel = $derived(
-		isXmlDiff ? 'XML' : isYamlDiff ? 'YAML' : 'JSON'
+		isXmlDiff ? 'XML' : isYamlDiff ? 'YAML' : isTomlDiff ? 'TOML' : 'JSON'
 	);
 
 	let yamlResult = $state<DiffResult | null>(null);
 	let yamlDiffLoading = $state(false);
 	let yamlDiffToken = 0;
+	let tomlResult = $state<DiffResult | null>(null);
+	let tomlDiffLoading = $state(false);
+	let tomlDiffToken = 0;
 
 	$effect(() => {
 		if (!isYamlDiff) {
@@ -81,9 +86,32 @@
 		});
 	});
 
+	$effect(() => {
+		if (!isTomlDiff) {
+			tomlResult = null;
+			tomlDiffLoading = false;
+			return;
+		}
+		if (!leftInput.trim() || !rightInput.trim()) {
+			tomlResult = null;
+			tomlDiffLoading = false;
+			return;
+		}
+
+		const nextToken = ++tomlDiffToken;
+		tomlDiffLoading = true;
+		void computeTOMLDiff(leftInput, rightInput, options).then((nextResult) => {
+			if (nextToken !== tomlDiffToken) return;
+			tomlResult = nextResult;
+			tomlDiffLoading = false;
+		});
+	});
+
 	let result = $derived(
 		isYamlDiff
 			? yamlResult
+			: isTomlDiff
+				? tomlResult
 			: leftInput.trim() && rightInput.trim()
 				? isXmlDiff
 					? computeXMLDiff(leftInput, rightInput, options)
@@ -93,7 +121,9 @@
 
 	let diffEntries = $derived(result?.entries ?? []);
 	let summary = $derived(
-		isXmlDiff || isYamlDiff ? computeDiffSummary(diffEntries) : summarizeJSONDiff(diffEntries)
+		isXmlDiff || isYamlDiff || isTomlDiff
+			? computeDiffSummary(diffEntries)
+			: summarizeJSONDiff(diffEntries)
 	);
 	let diffCount = $derived(summary.added + summary.removed + summary.modified);
 	let errorLabel = $derived.by(() => {
@@ -147,7 +177,14 @@
     REGION: eu-west-1
   ports:
     - 8080
-    - 8443` : JSON.stringify({
+    - 8443` : language === 'toml' ? `title = "fmtly"
+
+[server]
+host = "localhost"
+port = 8080
+
+[features]
+analytics = false` : JSON.stringify({
 		name: "Alice",
 		age: 30,
 		roles: ["admin", "editor"],
@@ -184,7 +221,17 @@
   ports:
     - 8080
   healthcheck:
-    path: /health` : JSON.stringify({
+    path: /health` : language === 'toml' ? `title = "fmtly"
+
+[server]
+host = "localhost"
+port = 9090
+
+[features]
+analytics = true
+
+[database]
+pool = 10` : JSON.stringify({
 		name: "Alice",
 		age: 31,
 		roles: ["admin", "viewer"],
@@ -394,7 +441,7 @@
 	<div class="diff-status">
 		{#if result?.error}
 			<span class="diff-status--error">{errorLabel}</span>
-		{:else if isYamlDiff && yamlDiffLoading}
+		{:else if (isYamlDiff && yamlDiffLoading) || (isTomlDiff && tomlDiffLoading)}
 			<span class="diff-status--empty">{$t('ui.status.processing', 'Processing…')}</span>
 		{:else if !result}
 			<span class="diff-status--empty">

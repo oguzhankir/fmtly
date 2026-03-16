@@ -22,6 +22,7 @@
 	import CsvOutputPanel from "$components/panels/CsvOutputPanel.svelte";
 	import YamlOutputPanel from "$components/panels/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/YamlValidatorPanel.svelte";
+	import TomlValidatorPanel from "$components/panels/TomlValidatorPanel.svelte";
 	import TreePanel from "$components/panels/TreePanel.svelte";
 	import TextAnalysisPanel from "$components/panels/TextAnalysisPanel.svelte";
 	import TextControlsPanel from "$components/panels/TextControlsPanel.svelte";
@@ -75,6 +76,7 @@
 	import type { ShortcutEntry } from "$utils/keyboard.js";
 	import { extractShareData } from "$utils/share.js";
 	import { input } from "$stores/input.store";
+	import { clearOutput, output } from "$stores/output.store";
 	import {
 		destroyJSONStore,
 		format,
@@ -102,6 +104,13 @@
 		formatCsv,
 		processCsvTool
 	} from "$stores/csv.store";
+	import {
+		initTOMLStore,
+		destroyTOMLStore,
+		formatToml,
+		minifyTomlTool,
+		processTomlTool
+	} from "$stores/toml.store";
 	import { initTextStore, textOptions } from "$stores/text.store";
 	import { initNumberStore, numberOptions } from "$stores/number.store";
 	import { initEncodeStore, encodeOptions } from "$stores/encode.store";
@@ -140,6 +149,11 @@
 	let csvWorkspaceTools = $derived(
 		data.tool.category === "csv"
 			? localizeToolDefinitions(getToolsByCategory("csv"), $t)
+			: []
+	);
+	let tomlWorkspaceTools = $derived(
+		data.tool.category === "toml"
+			? localizeToolDefinitions(getToolsByCategory("toml"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -198,6 +212,16 @@
 		});
 	}
 
+	function navigateToTomlWorkspaceIndex(index: number): void {
+		const target = tomlWorkspaceTools[index];
+		if (!target || target.slug === data.tool.slug) return;
+		void goto(localizePath(`/toml/${target.slug}`, currentLocale), {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true,
+		});
+	}
+
 	let faqStructuredData = $derived(
 		JSON.stringify({
 			"@context": "https://schema.org",
@@ -217,6 +241,7 @@
 		json: [".json", ".txt"],
 		xml: [".xml", ".txt"],
 		yaml: [".yaml", ".yml", ".txt"],
+		toml: [".toml", ".txt"],
 		css: [".css", ".txt"],
 		html: [".html", ".htm", ".txt"],
 		csv: [".csv", ".txt"],
@@ -235,6 +260,7 @@
 		destroyXMLStore();
 		destroyYAMLStore();
 		destroyCSVStore();
+		destroyTOMLStore();
 
 		if (data.tool.engine === "json") {
 			initJSONStore(data.tool.slug);
@@ -244,6 +270,8 @@
 			initYAMLStore(data.tool.slug);
 		} else if (data.tool.engine === "csv") {
 			initCSVStore(data.tool.slug);
+		} else if (data.tool.engine === "toml") {
+			initTOMLStore(data.tool.slug);
 		} else if (data.tool.engine === "text") {
 			initTextStore(data.tool.slug);
 		} else if (data.tool.engine === "number") {
@@ -394,6 +422,39 @@
 					label: ($t as any)('switch_to_tab', 'Switch to tab {index}', { index: index + 1 }),
 					handler: () => {
 						navigateToCsvWorkspaceIndex(index);
+					},
+				});
+			}
+		}
+
+		if (data.tool.engine === "toml") {
+			shortcuts.push(
+				{
+					key: "f",
+					ctrl: true,
+					shift: true,
+					scope: "tool",
+					label: $t('ui.actions.format', 'Format'),
+					handler: () => { void formatToml(); },
+				},
+				{
+					key: "m",
+					ctrl: true,
+					shift: true,
+					scope: "tool",
+					label: $t('ui.actions.minify', 'Minify'),
+					handler: () => { void minifyTomlTool(); },
+				}
+			);
+
+			for (const [index] of tomlWorkspaceTools.entries()) {
+				if (index > 8) break;
+				shortcuts.push({
+					key: String(index + 1),
+					scope: "tool",
+					label: ($t as any)('switch_to_tab', 'Switch to tab {index}', { index: index + 1 }),
+					handler: () => {
+						navigateToTomlWorkspaceIndex(index);
 					},
 				});
 			}
@@ -561,6 +622,13 @@
 							category="yaml"
 							locale={currentLocale}
 						/>
+					{:else if data.tool.category === "toml" && tomlWorkspaceTools.length > 0}
+						<WorkspaceTabs
+							tools={tomlWorkspaceTools}
+							activeSlug={data.tool.slug}
+							category="toml"
+							locale={currentLocale}
+						/>
 					{/if}
 					<div class="flex-1 overflow-hidden">
 						<DiffInputPanel
@@ -573,6 +641,8 @@
 								? $t('ui.placeholder.original_xml', 'Paste original XML here…')
 								: data.tool.category === 'yaml'
 									? $t('ui.placeholder.original_yaml', 'Paste original YAML here…')
+									: data.tool.category === 'toml'
+										? $t('ui.paste_language_here', { language: 'TOML' }, 'Paste TOML here…')
 									: $t('ui.placeholder.original_json', 'Paste original JSON here…')}
 						/>
 					</div>
@@ -589,6 +659,8 @@
 					? $t('ui.placeholder.modified_xml', 'Paste modified XML here…')
 					: data.tool.category === 'yaml'
 						? $t('ui.placeholder.modified_yaml', 'Paste modified YAML here…')
+						: data.tool.category === 'toml'
+							? $t('ui.paste_language_here', { language: 'TOML' }, 'Paste TOML here…')
 						: $t('ui.placeholder.modified_json', 'Paste modified JSON here…')}
 			/>
 		{/snippet}
@@ -610,6 +682,7 @@
 			else if (data.tool.engine === 'xml') { formatXml(); }
 			else if (data.tool.engine === 'yaml') { void processYamlTool(); }
 			else if (data.tool.engine === 'csv') { void processCsvTool(); }
+			else if (data.tool.engine === 'toml') { void processTomlTool(); }
 		}}
 		onshare={() => { shareModalOpen = true; }}
 	>
@@ -806,6 +879,29 @@
 							sampleInput={data.tool.sampleInput}
 							enableRemoteActions={true}
 							remoteInputKind="csv"
+						/>
+					</div>
+				</div>
+			{:else if data.tool.category === "toml" && data.tool.slug === "validator"}
+				<TomlValidatorPanel toolSlug={data.tool.slug} workspaceTools={tomlWorkspaceTools} />
+			{:else if data.tool.category === "toml"}
+				<div class="flex h-full w-full flex-col">
+					{#if tomlWorkspaceTools.length > 0}
+						<WorkspaceTabs
+							tools={tomlWorkspaceTools}
+							activeSlug={data.tool.slug}
+							category="toml"
+							locale={currentLocale}
+						/>
+					{/if}
+					<div class="flex-1 overflow-hidden">
+						<InputPanel
+							toolSlug="toml-workspace"
+							inputLanguage={data.tool.inputLanguage}
+							acceptedExtensions={acceptedExts}
+							sampleInput={data.tool.sampleInput}
+							enableRemoteActions={true}
+							remoteInputKind="toml"
 						/>
 					</div>
 				</div>

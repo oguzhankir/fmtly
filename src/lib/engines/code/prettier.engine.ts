@@ -29,16 +29,25 @@ async function loadPrettier(): Promise<{
 
 	if (!loadPromise) {
 		loadPromise = (async () => {
-			const [prettier, pluginBabel, pluginEstree, pluginCss, pluginHtml, pluginGql, pluginMd] =
-				await Promise.all([
-					import('prettier/standalone'),
-					import('prettier/plugins/babel'),
-					import('prettier/plugins/estree'),
-					import('prettier/plugins/postcss'),
-					import('prettier/plugins/html'),
-					import('prettier/plugins/graphql'),
-					import('prettier/plugins/markdown')
-				]);
+			const [
+				prettier,
+				pluginBabel,
+				pluginEstree,
+				pluginCss,
+				pluginHtml,
+				pluginGql,
+				pluginMd,
+				pluginToml
+			] = await Promise.all([
+				import('prettier/standalone'),
+				import('prettier/plugins/babel'),
+				import('prettier/plugins/estree'),
+				import('prettier/plugins/postcss'),
+				import('prettier/plugins/html'),
+				import('prettier/plugins/graphql'),
+				import('prettier/plugins/markdown'),
+				import('prettier-plugin-toml')
+			]);
 
 			prettierModule = prettier;
 			plugins = [
@@ -47,7 +56,8 @@ async function loadPrettier(): Promise<{
 				pluginCss as unknown as Plugin,
 				pluginHtml as unknown as Plugin,
 				pluginGql as unknown as Plugin,
-				pluginMd as unknown as Plugin
+				pluginMd as unknown as Plugin,
+				pluginToml.default as unknown as Plugin
 			];
 		})();
 	}

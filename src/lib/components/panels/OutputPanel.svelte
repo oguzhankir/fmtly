@@ -26,6 +26,7 @@
 			json: () => import('highlight.js/lib/languages/json'),
 			xml: () => import('highlight.js/lib/languages/xml'),
 			yaml: () => import('highlight.js/lib/languages/yaml'),
+			toml: () => import('highlight.js/lib/languages/ini'),
 			css: () => import('highlight.js/lib/languages/css'),
 			html: () => import('highlight.js/lib/languages/xml')
 		};
@@ -76,6 +77,7 @@
 			json: '.json',
 			xml: '.xml',
 			yaml: '.yaml',
+			toml: '.toml',
 			css: '.css',
 			html: '.html',
 			csv: '.csv',

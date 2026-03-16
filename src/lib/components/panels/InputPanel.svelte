@@ -9,13 +9,13 @@
 	import { fetchRemoteText } from '$lib/utils/url-loader.js';
 	import { Eraser, Link2, X } from 'lucide-svelte';
 
-	type RemoteInputKind = 'yaml' | 'csv';
+	type RemoteInputKind = 'yaml' | 'csv' | 'toml';
 
 	let {
 		toolSlug,
 		inputLanguage,
 		wordWrap = true,
-		acceptedExtensions = ['.json', '.xml', '.yaml', '.yml', '.csv', '.txt', '.log'],
+		acceptedExtensions = ['.json', '.xml', '.yaml', '.yml', '.csv', '.toml', '.txt', '.log'],
 		sampleInput = '',
 		enableRemoteActions = false,
 		remoteInputKind
@@ -124,6 +124,8 @@
 				return 'https://example.com/data.yaml';
 			case 'csv':
 				return 'https://example.com/data.csv';
+			case 'toml':
+				return 'https://example.com/pyproject.toml';
 			default:
 				return 'https://example.com/data.txt';
 		}
@@ -153,6 +155,14 @@
 				});
 				if (!result.success) {
 					throw new Error('Response does not look like CSV');
+				}
+				return;
+			}
+			case 'toml': {
+				const { validate } = await import('$engines/toml/toml.engine.js');
+				const result = await validate(text);
+				if (!result.valid) {
+					throw new Error('Response does not look like TOML');
 				}
 				return;
 			}

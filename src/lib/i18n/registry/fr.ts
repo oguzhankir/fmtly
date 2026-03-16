@@ -1083,7 +1083,8 @@ const registryFr: Record<string, string> = {
 	'tool.toml-formatter.faq.1.answer':
 		'Utilisez le validateur si vous voulez seulement vérifier la syntaxe. Utilisez le formateur quand le TOML est déjà valide et que vous voulez une sortie plus propre et cohérente.',
 	'tool.toml-formatter.use_case.0': 'Uniformiser pyproject.toml avant un commit',
-	'tool.toml-formatter.use_case.1': 'Nettoyer des extraits de configuration copiés depuis une documentation',
+	'tool.toml-formatter.use_case.1':
+		'Nettoyer des extraits de configuration copiés depuis une documentation',
 	'tool.toml-formatter.use_case.2': 'Rendre de longues sections TOML plus lisibles',
 	'tool.toml-formatter.use_case.3': 'Préparer du TOML avant comparaison ou conversion',
 	'tool.toml-validator.faq.0.question': 'Quels problèmes TOML le validateur détecte-t-il ?',
@@ -1093,17 +1094,21 @@ const registryFr: Record<string, string> = {
 	'tool.toml-validator.faq.1.answer':
 		'Non. Il valide uniquement la syntaxe TOML. Il sert à confirmer qu’un document peut être analysé proprement avant formatage, conversion ou comparaison.',
 	'tool.toml-validator.use_case.0': 'Vérifier pyproject.toml avant de lancer des outils de build',
-	'tool.toml-validator.use_case.1': 'Détecter des erreurs de syntaxe dans des configurations applicatives',
+	'tool.toml-validator.use_case.1':
+		'Détecter des erreurs de syntaxe dans des configurations applicatives',
 	'tool.toml-validator.use_case.2': 'Vérifier du TOML copié depuis une documentation de package',
 	'tool.toml-validator.use_case.3': 'Confirmer des changements de configuration avant comparaison',
-	'tool.toml-to-json.faq.0.question': 'Les tables imbriquées et les tableaux sont-ils conservés en JSON ?',
+	'tool.toml-to-json.faq.0.question':
+		'Les tables imbriquées et les tableaux sont-ils conservés en JSON ?',
 	'tool.toml-to-json.faq.0.answer':
 		'Oui. Les objets TOML analysés sont convertis en objets et tableaux JSON équivalents, ce qui conserve la structure globale.',
 	'tool.toml-to-json.faq.1.question': 'Quand est-il utile de convertir du TOML en JSON ?',
 	'tool.toml-to-json.faq.1.answer':
 		'C’est utile lorsqu’un outil, une API, un script ou un fixture de test attend du JSON au lieu du TOML, tout en réutilisant les mêmes données de configuration.',
-	'tool.toml-to-json.use_case.0': 'Transformer une configuration TOML en JSON pour des outils JavaScript',
-	'tool.toml-to-json.use_case.1': 'Inspecter du TOML sous une structure plus stricte et lisible par machine',
+	'tool.toml-to-json.use_case.0':
+		'Transformer une configuration TOML en JSON pour des outils JavaScript',
+	'tool.toml-to-json.use_case.1':
+		'Inspecter du TOML sous une structure plus stricte et lisible par machine',
 	'tool.toml-to-json.use_case.2': 'Réutiliser des réglages TOML dans des fixtures ou tests API',
 	'tool.toml-to-json.use_case.3': 'Faire le pont entre des systèmes de configuration TOML et JSON',
 	'tool.toml-to-yaml.faq.0.question': 'Pourquoi convertir du TOML en YAML ?',
@@ -1112,10 +1117,12 @@ const registryFr: Record<string, string> = {
 	'tool.toml-to-yaml.faq.1.question': 'La structure TOML est-elle conservée dans la sortie YAML ?',
 	'tool.toml-to-yaml.faq.1.answer':
 		'Oui. Les tables, objets imbriqués, tableaux et valeurs scalaires sont transposés dans leurs équivalents YAML.',
-	'tool.toml-to-yaml.use_case.0': 'Réécrire une configuration TOML en YAML pour des workflows de déploiement',
+	'tool.toml-to-yaml.use_case.0':
+		'Réécrire une configuration TOML en YAML pour des workflows de déploiement',
 	'tool.toml-to-yaml.use_case.1': 'Partager des réglages TOML avec des équipes orientées YAML',
 	'tool.toml-to-yaml.use_case.2': 'Comparer la même configuration en TOML et en YAML',
-	'tool.toml-to-yaml.use_case.3': 'Migrer une configuration entre des écosystèmes aux formats préférés différents',
+	'tool.toml-to-yaml.use_case.3':
+		'Migrer une configuration entre des écosystèmes aux formats préférés différents',
 	'tool.toml-diff.faq.0.question': 'TOML Diff est-il un diff texte ou structurel ?',
 	'tool.toml-diff.faq.0.answer':
 		'Il est structurel. Les deux entrées sont d’abord analysées comme TOML, puis comparées par clés, tableaux et valeurs.',
@@ -1125,7 +1132,8 @@ const registryFr: Record<string, string> = {
 	'tool.toml-diff.use_case.0': 'Examiner des changements de configuration entre deux versions',
 	'tool.toml-diff.use_case.1': 'Comparer des réglages TOML selon les environnements',
 	'tool.toml-diff.use_case.2': 'Comparer du TOML généré à une version attendue',
-	'tool.toml-diff.use_case.3': 'Inspecter des changements de pyproject.toml ou de toolchain avant commit',
+	'tool.toml-diff.use_case.3':
+		'Inspecter des changements de pyproject.toml ou de toolchain avant commit',
 
 	'tool.toml-minifier.display_name': 'Minifieur TOML',
 	'tool.toml-minifier.tagline': 'Minifier et compresser les fichiers de configuration TOML',
@@ -1143,8 +1151,10 @@ const registryFr: Record<string, string> = {
 	'tool.toml-minifier.faq.1.answer':
 		'Oui. Le minifieur garantit que la signification structurelle des données TOML reste exactement la même. Seuls le formatage et les commentaires sont supprimés.',
 	'tool.toml-minifier.use_case.0': 'Compresser de grandes configurations TOML pour le déploiement',
-	'tool.toml-minifier.use_case.1': 'Supprimer les commentaires avant de partager des fichiers de configuration',
-	'tool.toml-minifier.use_case.2': 'Préparer des fichiers TOML pour des systèmes embarqués ou un stockage limité',
+	'tool.toml-minifier.use_case.1':
+		'Supprimer les commentaires avant de partager des fichiers de configuration',
+	'tool.toml-minifier.use_case.2':
+		'Préparer des fichiers TOML pour des systèmes embarqués ou un stockage limité',
 	'tool.toml-minifier.use_case.3': 'Normaliser les fichiers TOML dans un format compact',
 
 	'tool.toml-to-xml.display_name': 'TOML vers XML',
@@ -1162,10 +1172,14 @@ const registryFr: Record<string, string> = {
 	'tool.toml-to-xml.faq.1.question': 'Puis-je le convertir à nouveau en TOML plus tard ?',
 	'tool.toml-to-xml.faq.1.answer':
 		'Oui, vous pouvez utiliser notre convertisseur XML vers TOML, bien que certaines informations de type (comme les chaînes explicites vs les nombres) puissent être interprétées différemment par l’analyseur XML au retour.',
-	'tool.toml-to-xml.use_case.0': 'Adapter des configurations TOML modernes pour des systèmes XML hérités',
-	'tool.toml-to-xml.use_case.1': 'Intégrer des applications basées sur TOML avec des API SOAP d’entreprise',
-	'tool.toml-to-xml.use_case.2': 'Convertir des données pyproject.toml en fichiers de construction Maven ou Ant',
-	'tool.toml-to-xml.use_case.3': 'Extraire la logique de configuration dans des ensembles de données XML génériques',
+	'tool.toml-to-xml.use_case.0':
+		'Adapter des configurations TOML modernes pour des systèmes XML hérités',
+	'tool.toml-to-xml.use_case.1':
+		'Intégrer des applications basées sur TOML avec des API SOAP d’entreprise',
+	'tool.toml-to-xml.use_case.2':
+		'Convertir des données pyproject.toml en fichiers de construction Maven ou Ant',
+	'tool.toml-to-xml.use_case.3':
+		'Extraire la logique de configuration dans des ensembles de données XML génériques',
 
 	'tool.toml-to-html.display_name': 'TOML vers HTML',
 	'tool.toml-to-html.tagline': 'Convertir une configuration TOML en un tableau HTML réactif',
@@ -1179,13 +1193,18 @@ const registryFr: Record<string, string> = {
 	'tool.toml-to-html.faq.0.question': 'Comment gère-t-il les tables TOML imbriquées ?',
 	'tool.toml-to-html.faq.0.answer':
 		'Les tables imbriquées et les tableaux sont rendus récursivement sous forme de tableaux HTML internes, garantissant que la structure exacte des données est maintenue visuellement.',
-	'tool.toml-to-html.faq.1.question': 'Puis-je copier la sortie directement dans ma documentation ?',
+	'tool.toml-to-html.faq.1.question':
+		'Puis-je copier la sortie directement dans ma documentation ?',
 	'tool.toml-to-html.faq.1.answer':
 		'Oui, la sortie est du code HTML standard qui peut être copié et collé directement dans des fichiers Markdown, Notion, Confluence ou toute page web standard.',
-	'tool.toml-to-html.use_case.0': 'Générer des rapports visuels à partir de fichiers de configuration TOML',
-	'tool.toml-to-html.use_case.1': 'Coller les paramètres d’application dans la documentation du projet',
-	'tool.toml-to-html.use_case.2': 'Afficher des variables spécifiques à un environnement sur des tableaux de bord internes',
-	'tool.toml-to-html.use_case.3': 'Examiner des structures TOML imbriquées complexes dans un format accessible',
+	'tool.toml-to-html.use_case.0':
+		'Générer des rapports visuels à partir de fichiers de configuration TOML',
+	'tool.toml-to-html.use_case.1':
+		'Coller les paramètres d’application dans la documentation du projet',
+	'tool.toml-to-html.use_case.2':
+		'Afficher des variables spécifiques à un environnement sur des tableaux de bord internes',
+	'tool.toml-to-html.use_case.3':
+		'Examiner des structures TOML imbriquées complexes dans un format accessible',
 
 	// ── Web tools ─────────────────────────────────────────────────────────────
 	'tool.web-url-parser.display_name': "Analyseur d'URL",
