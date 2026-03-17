@@ -23,12 +23,12 @@ fmtly puts every developer tool in one place. Fast, private, and open source.
 
 ---
 
-## Tools (47 shipped)
+## Tools (48 shipped)
 
 | Category | Tools |
 |---|---|
 | **JSON** (14) | Formatter, Minifier, Validator, Tree Viewer, Diff, Sorter, JSONPath, JMESPath, Schema Generator, → YAML, → XML, → CSV, → TOML, → Markdown |
-| **XML** (9) | Formatter, Minifier, Validator, Stats, Diff, XPath, → JSON, → YAML, → CSV |
+| **XML** (10) | Formatter, Minifier, Validator, Stats, Diff, XPath, → JSON, → JSON Schema, → YAML, → CSV |
 | **YAML** (10) | Formatter, Minifier, Validator, Diff, Query, → JSON, → XML, → CSV, → TOML, → HTML |
 | **CSV** (8) | Formatter, Validator, → JSON, → XML, → YAML, → HTML, → SQL |
 | **TOML** (8) | Formatter, Minifier, Validator, Diff, → JSON, → YAML, → XML, → HTML |

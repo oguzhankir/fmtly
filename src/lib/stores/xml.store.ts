@@ -1,6 +1,6 @@
 import { computeXMLStats, formatXML, minifyXML, parseXML, xmlToJSON } from '$engines/xml/index.js';
 import type { XMLFormatOptions, XMLParseError, XMLStats } from '$engines/xml/index.js';
-import { toCsv, toYaml } from '$engines/xml/xml.engine.js';
+import { toCsv, toJsonSchema, toYaml } from '$engines/xml/xml.engine.js';
 import { input } from '$stores/input.store';
 import { clearOutput, output } from '$stores/output.store';
 import { get, writable } from 'svelte/store';
@@ -67,6 +67,9 @@ async function applyToolOutput(value: string): Promise<void> {
 		case 'to-json':
 			applyJsonOutput(value);
 			return;
+		case 'to-json-schema':
+			await applyJsonSchemaOutput(value);
+			return;
 		case 'to-yaml':
 			await applyYamlOutput(value);
 			return;
@@ -105,6 +108,14 @@ function applyJsonOutput(value: string): void {
 	if (result.success) {
 		output.set(result.output);
 	} else {
+		clearOutput();
+	}
+}
+
+async function applyJsonSchemaOutput(value: string): Promise<void> {
+	try {
+		output.set(await toJsonSchema(value));
+	} catch {
 		clearOutput();
 	}
 }

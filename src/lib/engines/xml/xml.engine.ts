@@ -6,6 +6,31 @@ export async function toYaml(xml: string): Promise<string> {
 	return yaml.dump(obj, { indent: 2 });
 }
 
+export async function toJsonSchema(xml: string): Promise<string> {
+	const { XMLParser, XMLValidator } = await import('fast-xml-parser');
+	const { generateJsonSchema } = await import('../json/json.engine.js');
+
+	const validation = XMLValidator.validate(xml);
+	if (validation !== true) {
+		throw new Error(validation.err?.msg ?? 'Invalid XML');
+	}
+
+	const parser = new XMLParser({
+		ignoreAttributes: false,
+		attributeNamePrefix: '@_',
+		trimValues: true,
+		parseTagValue: true,
+		parseAttributeValue: true
+	});
+
+	const parsed = parser.parse(xml) as unknown;
+	if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+		throw new Error('Could not infer JSON Schema from XML input');
+	}
+
+	return generateJsonSchema(JSON.stringify(parsed));
+}
+
 export async function toCsv(xml: string): Promise<string> {
 	const { XMLParser } = await import('fast-xml-parser');
 	const Papa = (await import('papaparse')).default || (await import('papaparse'));

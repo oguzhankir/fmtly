@@ -151,6 +151,32 @@ const registryIt: Record<string, string> = {
 	'tool.xml-to-json.meta_description':
 		'Converti XML a JSON istantaneamente nel tuo browser. Gestisce attributi e strutture annidate. Nessun caricamento dati.',
 	'tool.xml-to-json.operation': 'Converti',
+	'tool.xml-to-json-schema.display_name': 'XML a JSON Schema',
+	'tool.xml-to-json-schema.tagline': 'Inferisci JSON Schema dalla struttura XML',
+	'tool.xml-to-json-schema.description':
+		'Genera uno JSON Schema Draft 2020-12 da XML analizzando struttura degli elementi, attributi e cardinalità. Gli elementi ripetuti vengono inferiti come array e i campi condivisi come required.',
+	'tool.xml-to-json-schema.primary_keyword': 'xml a json schema',
+	'tool.xml-to-json-schema.meta_title': 'Generatore XML a JSON Schema — fmtly.dev',
+	'tool.xml-to-json-schema.meta_description':
+		'Inferisci JSON Schema da XML nel browser. Rileva automaticamente strutture annidate, elementi ripetuti e campi obbligatori.',
+	'tool.xml-to-json-schema.operation': 'Genera Schema',
+	'tool.xml-to-json-schema.faq.0.question': 'Come viene inferita la cardinalità da XML?',
+	'tool.xml-to-json-schema.faq.0.answer':
+		'Quando elementi fratelli con lo stesso nome si ripetono sotto lo stesso padre, vengono inferiti come array. Le occorrenze singole restano campi scalari o oggetto.',
+	'tool.xml-to-json-schema.faq.1.question': 'Come sono rappresentati gli attributi XML nello schema?',
+	'tool.xml-to-json-schema.faq.1.answer':
+		'Gli attributi sono inclusi come proprietà normali usando il formato chiave parsato (ad esempio @_id), così da validarli insieme agli elementi figli.',
+	'tool.xml-to-json-schema.faq.2.question': 'Quale versione di JSON Schema viene generata?',
+	'tool.xml-to-json-schema.faq.2.answer':
+		"L'output usa JSON Schema Draft 2020-12 e include parole chiave standard come $schema, type, properties, required e items.",
+	'tool.xml-to-json-schema.use_case.0':
+		'Creare schemi di validazione iniziali da payload XML esistenti',
+	'tool.xml-to-json-schema.use_case.1':
+		'Documentare strutture complesse di feed XML per sistemi downstream',
+	'tool.xml-to-json-schema.use_case.2':
+		'Generare uno schema base prima di irrigidire i vincoli manualmente',
+	'tool.xml-to-json-schema.use_case.3':
+		'Portare integrazioni XML in workflow di validazione orientati al JSON',
 
 	'tool.xml-to-yaml.display_name': 'XML a YAML',
 	'tool.xml-to-yaml.tagline': 'Converti documenti XML in formato YAML',

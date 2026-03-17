@@ -151,6 +151,32 @@ const registryTr: Record<string, string> = {
 	'tool.xml-to-json.meta_description':
 		"XML'i tarayıcıda anında JSON'a dönüştür. Nitelikleri ve iç içe yapıları işle. Yükleme yok.",
 	'tool.xml-to-json.operation': 'Dönüştür',
+	'tool.xml-to-json-schema.display_name': "XML'den JSON Şemasına",
+	'tool.xml-to-json-schema.tagline': 'XML yapısından JSON Şeması çıkar',
+	'tool.xml-to-json-schema.description':
+		'Öğe yapısını, nitelikleri ve çokluk bilgisini analiz ederek XML’den Draft 2020-12 uyumlu JSON Şeması üret. Tekrarlayan öğeleri dizi olarak, ortak alanları zorunlu alan olarak çıkarır.',
+	'tool.xml-to-json-schema.primary_keyword': 'xmlden json semasina',
+	'tool.xml-to-json-schema.meta_title': "XML'den JSON Şemasına Dönüştürücü — fmtly.dev",
+	'tool.xml-to-json-schema.meta_description':
+		'Tarayıcıda XML’den JSON Şeması üret. İç içe yapıları, tekrarlayan öğeleri ve zorunlu alanları otomatik algılar.',
+	'tool.xml-to-json-schema.operation': 'Şema Üret',
+	'tool.xml-to-json-schema.faq.0.question': 'XML’de cardinality nasıl çıkarılıyor?',
+	'tool.xml-to-json-schema.faq.0.answer':
+		'Aynı ebeveyn altında tekrar eden kardeş öğeler dizi olarak yorumlanır. Tek sefer görünen öğeler, tekrar kanıtı yoksa tekil alan olarak çıkarılır.',
+	'tool.xml-to-json-schema.faq.1.question': 'XML nitelikleri şemada nasıl gösterilir?',
+	'tool.xml-to-json-schema.faq.1.answer':
+		'Nitelikler ayrıştırılmış anahtar biçimiyle (ör. @_id) normal property olarak şemaya eklenir ve çocuk öğelerle birlikte doğrulanabilir.',
+	'tool.xml-to-json-schema.faq.2.question': 'Hangi JSON Schema sürümü üretilir?',
+	'tool.xml-to-json-schema.faq.2.answer':
+		'Çıktı JSON Schema Draft 2020-12 kullanır ve $schema, type, properties, required, items gibi standart anahtarları içerir.',
+	'tool.xml-to-json-schema.use_case.0':
+		'Mevcut XML payload örneklerinden başlangıç doğrulama şemaları üretmek',
+	'tool.xml-to-json-schema.use_case.1':
+		'Karmaşık XML feed yapısını tüketiciler için dokümante etmek',
+	'tool.xml-to-json-schema.use_case.2':
+		'Elle kısıt sıkılaştırmadan önce temel şema çıkarmak',
+	'tool.xml-to-json-schema.use_case.3':
+		'XML entegrasyonlarını JSON tabanlı doğrulama akışlarına taşımak',
 
 	'tool.xml-to-yaml.display_name': "XML'den YAML'a",
 	'tool.xml-to-yaml.tagline': 'XML belgelerini YAML biçimine dönüştür',

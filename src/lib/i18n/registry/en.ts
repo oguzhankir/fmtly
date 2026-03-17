@@ -151,6 +151,32 @@ const registryEn: Record<string, string> = {
 	'tool.xml-to-json.meta_description':
 		'Convert XML to JSON instantly in your browser. Handles attributes and nested structures. No data uploaded.',
 	'tool.xml-to-json.operation': 'Convert',
+	'tool.xml-to-json-schema.display_name': 'XML to JSON Schema',
+	'tool.xml-to-json-schema.tagline': 'Infer JSON Schema from XML structure',
+	'tool.xml-to-json-schema.description':
+		'Generate a Draft 2020-12 JSON Schema from XML by analyzing element structure, attributes, and cardinality. Repeated elements are inferred as arrays, and required fields are inferred from shared element presence.',
+	'tool.xml-to-json-schema.primary_keyword': 'xml to json schema',
+	'tool.xml-to-json-schema.meta_title': 'XML to JSON Schema Generator — fmtly.dev',
+	'tool.xml-to-json-schema.meta_description':
+		'Infer JSON Schema from XML in your browser. Detects nested structures, repeated elements, and required fields automatically.',
+	'tool.xml-to-json-schema.operation': 'Generate Schema',
+	'tool.xml-to-json-schema.faq.0.question': 'How is cardinality inferred from XML?',
+	'tool.xml-to-json-schema.faq.0.answer':
+		'When sibling elements repeat under the same parent, they are inferred as arrays. Single occurrences are inferred as scalar/object nodes unless repetition is observed.',
+	'tool.xml-to-json-schema.faq.1.question': 'How are XML attributes represented in the schema?',
+	'tool.xml-to-json-schema.faq.1.answer':
+		'Attributes are included as regular properties using the parsed attribute key format (for example, @_id) so they can be validated alongside child elements.',
+	'tool.xml-to-json-schema.faq.2.question': 'Which JSON Schema draft does it generate?',
+	'tool.xml-to-json-schema.faq.2.answer':
+		'The output uses JSON Schema Draft 2020-12 and includes standard keywords such as $schema, type, properties, required, and items.',
+	'tool.xml-to-json-schema.use_case.0':
+		'Bootstrap validation schemas from existing XML payload samples',
+	'tool.xml-to-json-schema.use_case.1':
+		'Document complex XML feed structures for downstream consumers',
+	'tool.xml-to-json-schema.use_case.2':
+		'Generate baseline schemas before tightening constraints manually',
+	'tool.xml-to-json-schema.use_case.3':
+		'Map XML integrations into JSON-native validation workflows',
 
 	'tool.xml-to-yaml.display_name': 'XML to YAML Converter',
 	'tool.xml-to-yaml.tagline': 'Convert XML documents to YAML format',

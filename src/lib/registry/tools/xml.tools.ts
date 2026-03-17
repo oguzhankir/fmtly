@@ -155,6 +155,71 @@ export const xmlTools: ToolDefinition[] = [
 </catalog>`
 	},
 	{
+		id: 'xml-to-json-schema',
+		category: 'xml',
+		slug: 'to-json-schema',
+		displayName: 'tool.xml-to-json-schema.display_name',
+		tagline: 'tool.xml-to-json-schema.tagline',
+		description: 'tool.xml-to-json-schema.description',
+		primaryKeyword: 'tool.xml-to-json-schema.primary_keyword',
+		metaTitle: 'tool.xml-to-json-schema.meta_title',
+		metaDescription: 'tool.xml-to-json-schema.meta_description',
+		engine: 'xml',
+		operation: 'tool.xml-to-json-schema.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'xml',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'xml', slug: 'to-json' },
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'xml', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.xml-to-json-schema.faq.0.question',
+				answer: 'tool.xml-to-json-schema.faq.0.answer'
+			},
+			{
+				question: 'tool.xml-to-json-schema.faq.1.question',
+				answer: 'tool.xml-to-json-schema.faq.1.answer'
+			},
+			{
+				question: 'tool.xml-to-json-schema.faq.2.question',
+				answer: 'tool.xml-to-json-schema.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.xml-to-json-schema.use_case.0',
+			'tool.xml-to-json-schema.use_case.1',
+			'tool.xml-to-json-schema.use_case.2',
+			'tool.xml-to-json-schema.use_case.3'
+		],
+		sampleInput: `<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="1" available="true">
+    <title>The Great Gatsby</title>
+    <author>F. Scott Fitzgerald</author>
+    <year>1925</year>
+    <price currency="USD">10.99</price>
+    <tags>
+      <tag>classic</tag>
+      <tag>fiction</tag>
+    </tags>
+  </book>
+  <book id="2" available="false">
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <year>1960</year>
+    <price currency="USD">12.99</price>
+    <edition>2</edition>
+    <tags>
+      <tag>classic</tag>
+    </tags>
+  </book>
+</catalog>`
+	},
+	{
 		id: 'json-to-xml',
 		category: 'json',
 		slug: 'to-xml',
