@@ -20,6 +20,10 @@ const registryDe: Record<string, string> = {
 	'category.toml.description':
 		'Formatieren, validieren und konvertieren Sie TOML-Dateien. Konvertieren Sie TOML sicher in JSON und YAML.',
 	'category.toml.primary_keyword': 'toml tools',
+	'category.text.display_name': 'Text',
+	'category.text.description':
+		'Text analysieren, zählen und aufbereiten. Messen Sie Wörter, Zeichen, Struktur und Lesezeit direkt im Browser.',
+	'category.text.primary_keyword': 'text tools',
 	// ── JSON Tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON-Formatierer',
 	'tool.json-formatter.tagline': 'JSON formatieren und verschönern mit konfigurierbarer Einrückung',
@@ -1365,6 +1369,41 @@ const registryDe: Record<string, string> = {
 	'tool.json-schema-validate.use_case.2':
 		'Fixtures und Mock-Daten gegen strikte Schemakontrakte prüfen',
 	'tool.json-schema-validate.use_case.3': 'Migration von Draft-07 auf Draft 2020-12 verifizieren',
+	'tool.text-word-character-counter.display_name': 'Wort- und Zeichenzähler',
+	'tool.text-word-character-counter.tagline': 'Wörter, Zeichen und Lesezeit sofort zählen',
+	'tool.text-word-character-counter.description':
+		'Zählen Sie Wörter, Zeichen, Sätze, Absätze und die geschätzte Lesezeit für beliebige Texte. Schnell, privat und vollständig im Browser.',
+	'tool.text-word-character-counter.primary_keyword': 'wort zeichen zähler',
+	'tool.text-word-character-counter.meta_title': 'Wort- und Zeichenzähler — fmtly.dev',
+	'tool.text-word-character-counter.meta_description':
+		'Kostenloser Online-Wort- und Zeichenzähler mit Satz-, Absatz- und Lesezeit-Metriken. Läuft vollständig im Browser.',
+	'tool.text-word-character-counter.operation': 'Text zählen',
+	'tool.text-word-character-counter.faq.0.question': 'Wie werden Wörter gezählt?',
+	'tool.text-word-character-counter.faq.0.answer':
+		'Wörter werden anhand von Buchstaben- und Zahlengruppen gezählt, inklusive üblicher Apostroph- und Bindestrichformen.',
+	'tool.text-word-character-counter.faq.1.question': 'Wie wird die Lesezeit berechnet?',
+	'tool.text-word-character-counter.faq.1.answer':
+		'Die Lesezeit basiert auf etwa 200 Wörtern pro Minute und wird auf ganze Minuten aufgerundet.',
+	'tool.text-word-character-counter.faq.2.question': 'Verlässt mein Text mein Gerät?',
+	'tool.text-word-character-counter.faq.2.answer':
+		'Nein. Alle Berechnungen laufen lokal im Browser, ohne Upload auf einen Server.',
+	'tool.text-word-character-counter.use_case.0':
+		'Artikel- und Dokumentlängen vor der Veröffentlichung prüfen',
+	'tool.text-word-character-counter.use_case.1':
+		'UI-Texte und Prompts auf Zeichenlimits optimieren',
+	'tool.text-word-character-counter.use_case.2':
+		'Lesezeit für Blogposts, Dokumentation und Release Notes schätzen',
+	'tool.text-word-character-counter.use_case.3':
+		'Textentwürfe anhand objektiver Längenmetriken vergleichen',
+	'ui.text_counter.words': 'Wörter',
+	'ui.text_counter.characters': 'Zeichen',
+	'ui.text_counter.characters_no_spaces': 'Zeichen (ohne Leerzeichen)',
+	'ui.text_counter.sentences': 'Sätze',
+	'ui.text_counter.paragraphs': 'Absätze',
+	'ui.text_counter.reading_time': 'Lesezeit',
+	'ui.text_counter.minutes': 'Min',
+	'ui.text_counter.lines': 'Zeilen',
+	'ui.text_counter.placeholder': 'Text hier eingeben oder einfügen...',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };

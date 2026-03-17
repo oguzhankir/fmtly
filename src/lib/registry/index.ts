@@ -1,5 +1,6 @@
 import { csvTools } from './tools/csv.tools.js';
 import { jsonTools } from './tools/json.tools.js';
+import { textTools } from './tools/text.tools.js';
 import { tomlTools } from './tools/toml.tools.js';
 import { xmlTools } from './tools/xml.tools.js';
 import { yamlTools } from './tools/yaml.tools.js';
@@ -10,7 +11,8 @@ const allTools: ToolDefinition[] = [
 	...yamlTools,
 	...csvTools,
 	...xmlTools,
-	...tomlTools
+	...tomlTools,
+	...textTools
 ];
 
 export function getAllTools(): ToolDefinition[] {

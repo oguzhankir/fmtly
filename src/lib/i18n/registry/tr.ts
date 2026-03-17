@@ -20,6 +20,10 @@ const registryTr: Record<string, string> = {
 	'category.toml.description':
 		"TOML dosyalarını biçimlendir, doğrula ve dönüştür. TOML'ü JSON ve YAML'a güvenle dönüştür.",
 	'category.toml.primary_keyword': 'toml araçları',
+	'category.text.display_name': 'Metin',
+	'category.text.description':
+		'Metinleri analiz et, say ve düzenle. Kelime, karakter, cümle, paragraf ve okuma süresini tarayıcıda anında ölç.',
+	'category.text.primary_keyword': 'metin araçları',
 	// ── JSON araçları ────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Biçimlendirici',
 	'tool.json-formatter.tagline': "JSON'u ayarlanabilir girinti ile biçimlendir ve güzelleştir",
@@ -1405,6 +1409,41 @@ const registryTr: Record<string, string> = {
 	'tool.json-schema-validate.use_case.2':
 		'Fixture ve mock verileri sıkı şema kurallarına karşı test etmek',
 	'tool.json-schema-validate.use_case.3': 'Draft-07 şemalarından Draft 2020-12 geçişini doğrulamak',
+	'tool.text-word-character-counter.display_name': 'Kelime ve Karakter Sayacı',
+	'tool.text-word-character-counter.tagline': 'Kelime, karakter ve okuma süresini anında ölç',
+	'tool.text-word-character-counter.description':
+		'Herhangi bir metindeki kelime, karakter, cümle, paragraf ve tahmini okuma süresini anında hesapla. Hızlı, gizli ve tamamen tarayıcı içinde çalışır.',
+	'tool.text-word-character-counter.primary_keyword': 'kelime karakter sayaci',
+	'tool.text-word-character-counter.meta_title': 'Kelime ve Karakter Sayacı — fmtly.dev',
+	'tool.text-word-character-counter.meta_description':
+		'Ücretsiz çevrimiçi kelime ve karakter sayacı. Cümle, paragraf ve okuma süresi metriklerini tarayıcıda anında gör.',
+	'tool.text-word-character-counter.operation': 'Metni Say',
+	'tool.text-word-character-counter.faq.0.question': 'Kelime sayısı nasıl hesaplanıyor?',
+	'tool.text-word-character-counter.faq.0.answer':
+		'Kelime sayımı harf ve rakam gruplarına göre yapılır; yaygın kesme işareti ve kısa çizgi kullanımını da dikkate alır.',
+	'tool.text-word-character-counter.faq.1.question': 'Okuma süresi nasıl hesaplanıyor?',
+	'tool.text-word-character-counter.faq.1.answer':
+		'Okuma süresi dakikada yaklaşık 200 kelime varsayımıyla hesaplanır ve yukarı yuvarlanır.',
+	'tool.text-word-character-counter.faq.2.question': 'Metnim cihazımdan dışarı çıkar mı?',
+	'tool.text-word-character-counter.faq.2.answer':
+		'Hayır. Tüm sayım ve analiz işlemleri tarayıcıda çalışır, metin sunucuya gönderilmez.',
+	'tool.text-word-character-counter.use_case.0':
+		'Makale ve doküman uzunluğunu yayından önce kontrol etmek',
+	'tool.text-word-character-counter.use_case.1':
+		'UI metinlerini ve promptları karakter limitlerine göre optimize etmek',
+	'tool.text-word-character-counter.use_case.2':
+		'Blog yazıları ve teknik dokümanlar için okuma süresi tahmini çıkarmak',
+	'tool.text-word-character-counter.use_case.3':
+		'Taslak sürümleri objektif metin uzunluğu metrikleriyle karşılaştırmak',
+	'ui.text_counter.words': 'Kelime',
+	'ui.text_counter.characters': 'Karakter',
+	'ui.text_counter.characters_no_spaces': 'Karakter (boşluksuz)',
+	'ui.text_counter.sentences': 'Cümle',
+	'ui.text_counter.paragraphs': 'Paragraf',
+	'ui.text_counter.reading_time': 'Okuma süresi',
+	'ui.text_counter.minutes': 'dk',
+	'ui.text_counter.lines': 'satır',
+	'ui.text_counter.placeholder': 'Metninizi buraya yazın veya yapıştırın...',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

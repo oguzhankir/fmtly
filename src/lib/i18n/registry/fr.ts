@@ -20,6 +20,10 @@ const registryFr: Record<string, string> = {
 	'category.toml.description':
 		'Formater, valider et convertir des fichiers TOML. Convertir TOML en JSON et YAML en toute sécurité.',
 	'category.toml.primary_keyword': 'outils toml',
+	'category.text.display_name': 'Texte',
+	'category.text.description':
+		'Analyser, compter et transformer du texte brut. Mesurez mots, caractères, structure et temps de lecture instantanément.',
+	'category.text.primary_keyword': 'outils texte',
 	// ── JSON tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'Formatteur JSON',
 	'tool.json-formatter.tagline': 'Formater et embellir le JSON avec indentation configurable',
@@ -1443,6 +1447,42 @@ const registryFr: Record<string, string> = {
 	'tool.json-schema-validate.use_case.2':
 		'Contrôler fixtures et mocks avec des contraintes de schéma strictes',
 	'tool.json-schema-validate.use_case.3': 'Vérifier une migration de Draft-07 vers Draft 2020-12',
+	'tool.text-word-character-counter.display_name': 'Compteur de Mots et Caractères',
+	'tool.text-word-character-counter.tagline':
+		'Comptez mots, caractères et temps de lecture instantanément',
+	'tool.text-word-character-counter.description':
+		'Comptez les mots, caractères, phrases, paragraphes et le temps de lecture estimé pour n’importe quel texte. Rapide, privé et entièrement dans le navigateur.',
+	'tool.text-word-character-counter.primary_keyword': 'compteur mots caractères',
+	'tool.text-word-character-counter.meta_title': 'Compteur de Mots et Caractères — fmtly.dev',
+	'tool.text-word-character-counter.meta_description':
+		'Compteur gratuit de mots et caractères avec métriques de phrases, paragraphes et temps de lecture. Fonctionne entièrement dans votre navigateur.',
+	'tool.text-word-character-counter.operation': 'Compter le texte',
+	'tool.text-word-character-counter.faq.0.question': 'Comment les mots sont-ils comptés ?',
+	'tool.text-word-character-counter.faq.0.answer':
+		'Les mots sont comptés à partir de groupes de lettres et de chiffres, y compris les apostrophes et traits d’union courants.',
+	'tool.text-word-character-counter.faq.1.question': 'Comment le temps de lecture est-il estimé ?',
+	'tool.text-word-character-counter.faq.1.answer':
+		'Le temps de lecture est estimé à environ 200 mots par minute puis arrondi à la minute supérieure.',
+	'tool.text-word-character-counter.faq.2.question': 'Mon texte quitte-t-il mon appareil ?',
+	'tool.text-word-character-counter.faq.2.answer':
+		'Non. Tout le comptage et l’analyse se font localement dans votre navigateur, sans envoi au serveur.',
+	'tool.text-word-character-counter.use_case.0':
+		'Vérifier la longueur d’articles et de documentations avant publication',
+	'tool.text-word-character-counter.use_case.1':
+		'Optimiser les textes UI et prompts selon des limites de caractères',
+	'tool.text-word-character-counter.use_case.2':
+		'Estimer le temps de lecture de billets, docs et notes de version',
+	'tool.text-word-character-counter.use_case.3':
+		'Comparer des brouillons avec des métriques objectives de longueur',
+	'ui.text_counter.words': 'Mots',
+	'ui.text_counter.characters': 'Caractères',
+	'ui.text_counter.characters_no_spaces': 'Caractères (sans espaces)',
+	'ui.text_counter.sentences': 'Phrases',
+	'ui.text_counter.paragraphs': 'Paragraphes',
+	'ui.text_counter.reading_time': 'Temps de lecture',
+	'ui.text_counter.minutes': 'min',
+	'ui.text_counter.lines': 'lignes',
+	'ui.text_counter.placeholder': 'Saisissez ou collez votre texte ici...',
 	'ui.csv.controls.table_name': 'Nom de Table',
 	'ui.csv.controls.batch_size': 'Taille de Lot'
 };
