@@ -1,5 +1,5 @@
 import type { AnySchema, ErrorObject, ValidateFunction } from 'ajv';
-import { parseJSON } from './parser.js';
+import { initParser, parseJSON } from './parser.js';
 import type { ParseError, SourceMap } from './types.js';
 
 export type SchemaValidationIssue = {
@@ -95,6 +95,8 @@ export async function validateJsonSchema(
 	jsonInput: string,
 	schemaInput: string
 ): Promise<SchemaValidationResult> {
+	await initParser();
+
 	const parsedData = parseJSON(jsonInput);
 	if (!parsedData.success) {
 		return {
