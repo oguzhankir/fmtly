@@ -308,7 +308,12 @@ function getPrimitiveSchemaType(value: JsonScalar): JsonSchemaType {
 }
 
 function isJsonPrimitive(value: JsonValue): value is JsonScalar {
-	return value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
+	return (
+		value === null ||
+		typeof value === 'string' ||
+		typeof value === 'number' ||
+		typeof value === 'boolean'
+	);
 }
 
 function isJsonArray(value: JsonValue): value is JsonArray {

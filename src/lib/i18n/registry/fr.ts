@@ -1383,8 +1383,7 @@ const registryFr: Record<string, string> = {
 	'tool.json-schema-generator.faq.2.question': 'Quelle version de JSON Schema est générée ?',
 	'tool.json-schema-generator.faq.2.answer':
 		'La sortie inclut l’URI $schema Draft 2020-12 et utilise les mots-clés standards comme type, properties, required, anyOf et items.',
-	'tool.json-schema-generator.use_case.0':
-		'Ébaucher des contrats API à partir de payloads réels',
+	'tool.json-schema-generator.use_case.0': 'Ébaucher des contrats API à partir de payloads réels',
 	'tool.json-schema-generator.use_case.1':
 		'Créer des schémas de validation pour fixtures et jeux de test',
 	'tool.json-schema-generator.use_case.2':
