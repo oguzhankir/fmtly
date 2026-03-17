@@ -1271,7 +1271,25 @@ const registryDe: Record<string, string> = {
 	'tool.xml-xpath.use_case.0': 'Daten aus großen XML-Dokumenten extrahieren',
 	'tool.xml-xpath.use_case.1': 'XML-Daten in Test-Suites prüfen',
 	'tool.xml-xpath.use_case.2': 'XML-Daten via XSLT transformieren',
-	'tool.xml-xpath.use_case.3': 'XML-Strukturen programmatisch validieren'
+	'tool.xml-xpath.use_case.3': 'XML-Strukturen programmatisch validieren',
+	'tool.csv-to-sql.display_name': 'CSV → SQL',
+	'tool.csv-to-sql.tagline': 'CSV-Daten in SQL-INSERT-Anweisungen konvertieren',
+	'tool.csv-to-sql.description':
+		'Konvertieren Sie CSV-Zeilen in SQL-INSERT-Anweisungen mit Typinferenz für Zahlen und Wahrheitswerte. Konfigurierbarer Tabellenname und Stapelgröße.',
+	'tool.csv-to-sql.primary_keyword': 'csv to sql',
+	'tool.csv-to-sql.meta_title': 'CSV zu SQL Konverter — fmtly.dev',
+	'tool.csv-to-sql.meta_description':
+		'Generieren Sie SQL-INSERT-Anweisungen aus CSV-Daten in Ihrem Browser. Keine Daten hochgeladen.',
+	'tool.csv-to-sql.operation': 'Zu SQL',
+	'tool.csv-to-sql.faq.0.question': 'Wie funktioniert die Typinferenz?',
+	'tool.csv-to-sql.faq.0.answer':
+		'Der Konverter erkennt automatisch Zahlen und Wahrheitswerte (true/false). Alles andere wird sicher als Zeichenfolgen-Literal mit einfachen Anführungszeichen maskiert.',
+	'tool.csv-to-sql.use_case.0':
+		'Generieren von SQL-Seeds aus Tabellenkalkulationsdaten für Datenbankmigrationen',
+	'tool.csv-to-sql.use_case.1':
+		'Schnelles Importieren von CSV-Daten in SQL-Datenbanken ohne benutzerdefinierte Skripte',
+	'ui.csv.controls.table_name': 'Tabellenname',
+	'ui.csv.controls.batch_size': 'Stapelgröße'
 };
 
 export default registryDe;

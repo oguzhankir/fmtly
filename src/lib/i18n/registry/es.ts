@@ -1328,7 +1328,25 @@ const registryEs: Record<string, string> = {
 	'tool.xml-xpath.use_case.0': 'Extraer datos específicos de documentos XML de gran tamaño',
 	'tool.xml-xpath.use_case.1': 'Probar datos XML en suites de pruebas automatizadas',
 	'tool.xml-xpath.use_case.2': 'Transformar datos XML utilizando plantillas XSLT',
-	'tool.xml-xpath.use_case.3': 'Validar la estructura y el contenido de XML de forma programática'
+	'tool.xml-xpath.use_case.3': 'Validar la estructura y el contenido de XML de forma programática',
+	'tool.csv-to-sql.display_name': 'CSV → SQL',
+	'tool.csv-to-sql.tagline': 'Convertir datos CSV a declaraciones SQL INSERT',
+	'tool.csv-to-sql.description':
+		'Convierta filas CSV a declaraciones SQL INSERT con inferencia de tipos para números y booleanos. Nombre de tabla y tamaño de lote configurables.',
+	'tool.csv-to-sql.primary_keyword': 'csv to sql',
+	'tool.csv-to-sql.meta_title': 'Convertidor CSV a SQL — fmtly.dev',
+	'tool.csv-to-sql.meta_description':
+		'Genere declaraciones SQL INSERT a partir de datos CSV en su navegador. No se suben datos.',
+	'tool.csv-to-sql.operation': 'A SQL',
+	'tool.csv-to-sql.faq.0.question': '¿Cómo funciona la inferencia de tipos?',
+	'tool.csv-to-sql.faq.0.answer':
+		'El convertidor detecta automáticamente números y valores booleanos (true/false). Todo lo demás se escapa de forma segura como literales de cadena usando comillas simples.',
+	'tool.csv-to-sql.use_case.0':
+		'Generar seeds SQL a partir de datos de hojas de cálculo para migraciones de bases de datos',
+	'tool.csv-to-sql.use_case.1':
+		'Importar rápidamente datos CSV a bases de datos SQL sin escribir scripts personalizados',
+	'ui.csv.controls.table_name': 'Nombre de Tabla',
+	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };
 
 export default registryEs;
