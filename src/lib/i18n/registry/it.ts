@@ -163,7 +163,8 @@ const registryIt: Record<string, string> = {
 	'tool.xml-to-json-schema.faq.0.question': 'Come viene inferita la cardinalità da XML?',
 	'tool.xml-to-json-schema.faq.0.answer':
 		'Quando elementi fratelli con lo stesso nome si ripetono sotto lo stesso padre, vengono inferiti come array. Le occorrenze singole restano campi scalari o oggetto.',
-	'tool.xml-to-json-schema.faq.1.question': 'Come sono rappresentati gli attributi XML nello schema?',
+	'tool.xml-to-json-schema.faq.1.question':
+		'Come sono rappresentati gli attributi XML nello schema?',
 	'tool.xml-to-json-schema.faq.1.answer':
 		'Gli attributi sono inclusi come proprietà normali usando il formato chiave parsato (ad esempio @_id), così da validarli insieme agli elementi figli.',
 	'tool.xml-to-json-schema.faq.2.question': 'Quale versione di JSON Schema viene generata?',

@@ -173,8 +173,7 @@ const registryTr: Record<string, string> = {
 		'Mevcut XML payload örneklerinden başlangıç doğrulama şemaları üretmek',
 	'tool.xml-to-json-schema.use_case.1':
 		'Karmaşık XML feed yapısını tüketiciler için dokümante etmek',
-	'tool.xml-to-json-schema.use_case.2':
-		'Elle kısıt sıkılaştırmadan önce temel şema çıkarmak',
+	'tool.xml-to-json-schema.use_case.2': 'Elle kısıt sıkılaştırmadan önce temel şema çıkarmak',
 	'tool.xml-to-json-schema.use_case.3':
 		'XML entegrasyonlarını JSON tabanlı doğrulama akışlarına taşımak',
 
