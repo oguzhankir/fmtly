@@ -59,12 +59,12 @@ Core category — format, validate, convert, diff, and query structured data.
 | 46 | TOML Diff | `toml/diff` | done | Side-by-side diff of two TOML documents. |
 | 47 | JSON Schema Generator | `json/schema-generator` | done | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
 | 48 | XML → JSON Schema | `xml/to-json-schema` | done | Infer a JSON Schema from XML by analyzing element structure and cardinality. |
+| 49 | JSON ↔ JSON Schema Validator | `json/schema-validate` | done | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
 
 ### Backlog — Data Formats
 
-| 49 | Tool | Slug | Description |
+| 50 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 50 | JSON ↔ JSON Schema Validator | `json/schema-validate` | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
 | 51 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
 | 52 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
 | 53 | JSON → TypeScript Types | `json/to-typescript` | Infer TypeScript interfaces/types from any JSON sample using quicktype. |

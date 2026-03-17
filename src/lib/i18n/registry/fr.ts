@@ -1417,6 +1417,32 @@ const registryFr: Record<string, string> = {
 		'Documenter rapidement des formats JSON imbriqués pour des intégrations',
 	'tool.json-schema-generator.use_case.3':
 		'Produire un schéma de base avant affinage manuel des contraintes',
+	'tool.json-schema-validate.display_name': 'Validateur de schéma JSON',
+	'tool.json-schema-validate.tagline': 'Valider un JSON contre un schéma fourni',
+	'tool.json-schema-validate.description':
+		'Validez des payloads JSON contre JSON Schema Draft-07 ou Draft 2020-12. Les erreurs sont annotées par chemin avec correspondance ligne/colonne.',
+	'tool.json-schema-validate.primary_keyword': 'validateur schema json',
+	'tool.json-schema-validate.meta_title': 'Validateur de schéma JSON — fmtly.dev',
+	'tool.json-schema-validate.meta_description':
+		'Validez du JSON contre JSON Schema Draft-07 et 2020-12 dans votre navigateur. Annotations d’erreurs par chemin, ligne et colonne.',
+	'tool.json-schema-validate.operation': 'Valider le schéma',
+	'tool.json-schema-validate.faq.0.question': 'Quels drafts de schéma sont pris en charge ?',
+	'tool.json-schema-validate.faq.0.answer':
+		'Le validateur prend en charge JSON Schema Draft-07 et Draft 2020-12. Le draft est détecté automatiquement via la URI $schema.',
+	'tool.json-schema-validate.faq.1.question':
+		'Comment les erreurs de validation sont-elles reliées au JSON d’entrée ?',
+	'tool.json-schema-validate.faq.1.answer':
+		'Chaque erreur inclut un chemin JSON Pointer et est mappée à la ligne et colonne correspondantes dans le JSON d’entrée.',
+	'tool.json-schema-validate.faq.2.question': 'Que se passe-t-il si le schéma est invalide ?',
+	'tool.json-schema-validate.faq.2.answer':
+		'Si le schéma ne peut pas être parsé ou compilé, l’outil affiche séparément les erreurs de schéma et les erreurs de validation des données.',
+	'tool.json-schema-validate.use_case.0':
+		'Valider les payloads API entrants et sortants contre des schémas de contrat',
+	'tool.json-schema-validate.use_case.1':
+		'Déboguer des payloads webhook en échec avec un feedback par chemin',
+	'tool.json-schema-validate.use_case.2':
+		'Contrôler fixtures et mocks avec des contraintes de schéma strictes',
+	'tool.json-schema-validate.use_case.3': 'Vérifier une migration de Draft-07 vers Draft 2020-12',
 	'ui.csv.controls.table_name': 'Nom de Table',
 	'ui.csv.controls.batch_size': 'Taille de Lot'
 };

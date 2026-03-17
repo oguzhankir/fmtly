@@ -29,8 +29,9 @@
 	let result = $derived(validateJSON($input));
 	let initializedToolSlug = $state('');
 	let validationMode = $state<'syntax' | 'schema'>('syntax');
+	let isSchemaOnlyTool = $derived(toolSlug === 'schema-validate');
 	let schemaInput = $state(
-		'{\n  "type": "object",\n  "required": ["id"],\n  "properties": {\n    "id": { "type": "number" }\n  }\n}'
+		'{\n  "$schema": "https://json-schema.org/draft/2020-12/schema",\n  "type": "object",\n  "required": ["id", "kind", "amount", "currency"],\n  "properties": {\n    "id": { "type": "string" },\n    "kind": { "type": "string" },\n    "amount": { "type": "integer" },\n    "currency": { "type": "string" },\n    "customer": {\n      "type": "object",\n      "required": ["id", "email"],\n      "properties": {\n        "id": { "type": "string" },\n        "email": { "type": "string", "format": "email" }\n      }\n    }\n  }\n}'
 	);
 	let schemaValidationResult = $state<SchemaValidationResult | null>(null);
 	let schemaValidationToken = 0;
@@ -115,12 +116,16 @@
 	onMount(() => {
 		initInput(toolSlug);
 		initializedToolSlug = toolSlug;
+		if (toolSlug === 'schema-validate') {
+			validationMode = 'schema';
+		}
 	});
 
 	$effect(() => {
 		if (initializedToolSlug === '' || initializedToolSlug === toolSlug) return;
 		initInput(toolSlug);
 		initializedToolSlug = toolSlug;
+		validationMode = toolSlug === 'schema-validate' ? 'schema' : 'syntax';
 	});
 
 	$effect(() => {
@@ -255,28 +260,30 @@
 	{/if}
 
 	<div class="validator-header">
-		<div class="validator-modes" role="tablist" aria-label="Validator mode">
-			<button
-				type="button"
-				role="tab"
-				class="validator-mode-btn"
-				class:validator-mode-btn--active={validationMode === 'syntax'}
-				aria-selected={validationMode === 'syntax'}
-				onclick={() => (validationMode = 'syntax')}
-			>
-				{$t('ui.validator.syntax', 'Syntax')}
-			</button>
-			<button
-				type="button"
-				role="tab"
-				class="validator-mode-btn"
-				class:validator-mode-btn--active={validationMode === 'schema'}
-				aria-selected={validationMode === 'schema'}
-				onclick={() => (validationMode = 'schema')}
-			>
-				{$t('ui.validator.schema', 'Schema')}
-			</button>
-		</div>
+		{#if !isSchemaOnlyTool}
+			<div class="validator-modes" role="tablist" aria-label="Validator mode">
+				<button
+					type="button"
+					role="tab"
+					class="validator-mode-btn"
+					class:validator-mode-btn--active={validationMode === 'syntax'}
+					aria-selected={validationMode === 'syntax'}
+					onclick={() => (validationMode = 'syntax')}
+				>
+					{$t('ui.validator.syntax', 'Syntax')}
+				</button>
+				<button
+					type="button"
+					role="tab"
+					class="validator-mode-btn"
+					class:validator-mode-btn--active={validationMode === 'schema'}
+					aria-selected={validationMode === 'schema'}
+					onclick={() => (validationMode = 'schema')}
+				>
+					{$t('ui.validator.schema', 'Schema')}
+				</button>
+			</div>
+		{/if}
 		<div
 			class="validator-status"
 			class:validator-status--invalid={!isValidationSuccessful}

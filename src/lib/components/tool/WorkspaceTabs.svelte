@@ -48,6 +48,8 @@
 				return $t('ui.convert.to_html', '→ HTML').replace(/^→\s*/, '');
 			case 'to-markdown':
 				return $t('ui.convert.to_markdown', '→ MD').replace(/^→\s*/, '');
+			case 'schema-validate':
+				return $t('ui.validator.schema', 'Schema');
 			case 'to-sql':
 				return $t('ui.convert.to_sql', 'CSV → SQL');
 			default:

@@ -628,9 +628,9 @@
 					sampleInput={data.tool.sampleInput ?? ""}
 					workspaceTools={xmlWorkspaceTools}
 				/>
-			{:else if data.tool.category === "json" && data.tool.slug === "validator"}
+			{:else if data.tool.category === "json" && ["validator", "schema-validate"].includes(data.tool.slug)}
 				<JsonValidatorPanel toolSlug={data.tool.slug} workspaceTools={jsonWorkspaceTools} />
-			{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
+			{:else if data.tool.category === "json" && !["validator", "schema-validate"].includes(data.tool.slug)}
 				<JsonInputPanel
 					toolSlug={data.tool.slug}
 					inputLanguage={data.tool.inputLanguage}

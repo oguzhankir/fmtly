@@ -1380,6 +1380,31 @@ const registryTr: Record<string, string> = {
 		'Entegrasyonlarda iç içe JSON event formatlarını hızlıca dokümante etmek',
 	'tool.json-schema-generator.use_case.3':
 		'Elle ince ayar yapmadan önce başlangıç şeması oluşturmak',
+	'tool.json-schema-validate.display_name': 'JSON Şema Doğrulayıcı',
+	'tool.json-schema-validate.tagline': 'JSON verisini sağlanan şemaya karşı doğrula',
+	'tool.json-schema-validate.description':
+		'JSON payloadlarını JSON Schema Draft-07 veya Draft 2020-12 ile doğrula. Path bazlı hataları satır ve sütun eşleşmesiyle görerek sorunlu alanları hızlıca düzelt.',
+	'tool.json-schema-validate.primary_keyword': 'json sema dogrulayici',
+	'tool.json-schema-validate.meta_title': 'JSON Şema Doğrulayıcı — fmtly.dev',
+	'tool.json-schema-validate.meta_description':
+		'Tarayıcıda JSON verisini Draft-07 ve 2020-12 JSON Schema ile doğrula. Path, satır ve sütun bazlı hata açıklamaları al.',
+	'tool.json-schema-validate.operation': 'Şema Doğrula',
+	'tool.json-schema-validate.faq.0.question': 'Hangi şema sürümleri destekleniyor?',
+	'tool.json-schema-validate.faq.0.answer':
+		'Doğrulayıcı JSON Schema Draft-07 ve Draft 2020-12 destekler. Şema sürümü $schema URI üzerinden otomatik tespit edilir.',
+	'tool.json-schema-validate.faq.1.question': 'Doğrulama hataları girişte nasıl işaretleniyor?',
+	'tool.json-schema-validate.faq.1.answer':
+		'Her hata JSON Pointer path’iyle gelir ve JSON girişindeki karşılık gelen satır/sütun konumuna eşlenir.',
+	'tool.json-schema-validate.faq.2.question': 'Geçersiz şema dosyaları da kontrol edilebilir mi?',
+	'tool.json-schema-validate.faq.2.answer':
+		'Evet. Şema derlenemiyorsa ya da geçersizse, araç şema kaynaklı hataları veri doğrulama hatalarından ayrı gösterir.',
+	'tool.json-schema-validate.use_case.0':
+		'API istek ve yanıt payloadlarını sözleşme şemalarına göre doğrulamak',
+	'tool.json-schema-validate.use_case.1':
+		'Webhook payload hatalarını path bazlı geri bildirimle hızla ayıklamak',
+	'tool.json-schema-validate.use_case.2':
+		'Fixture ve mock verileri sıkı şema kurallarına karşı test etmek',
+	'tool.json-schema-validate.use_case.3': 'Draft-07 şemalarından Draft 2020-12 geçişini doğrulamak',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

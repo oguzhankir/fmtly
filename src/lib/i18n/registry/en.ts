@@ -1355,6 +1355,31 @@ const registryEn: Record<string, string> = {
 		'Quickly document nested JSON event formats for integrations',
 	'tool.json-schema-generator.use_case.3':
 		'Prepare a baseline schema before refining constraints manually',
+	'tool.json-schema-validate.display_name': 'JSON Schema Validator',
+	'tool.json-schema-validate.tagline': 'Validate JSON against a user-supplied schema',
+	'tool.json-schema-validate.description':
+		'Validate JSON payloads against JSON Schema Draft-07 or Draft 2020-12. See per-path errors with line and column mapping to fix invalid fields quickly.',
+	'tool.json-schema-validate.primary_keyword': 'json schema validator',
+	'tool.json-schema-validate.meta_title': 'JSON Schema Validator — fmtly.dev',
+	'tool.json-schema-validate.meta_description':
+		'Validate JSON against Draft-07 and 2020-12 JSON Schema in your browser. Get path-based error annotations with line and column locations.',
+	'tool.json-schema-validate.operation': 'Validate Schema',
+	'tool.json-schema-validate.faq.0.question': 'Which schema drafts are supported?',
+	'tool.json-schema-validate.faq.0.answer':
+		'The validator supports JSON Schema Draft-07 and Draft 2020-12. The draft is detected from the schema $schema URI automatically.',
+	'tool.json-schema-validate.faq.1.question': 'How are validation errors mapped back to the input?',
+	'tool.json-schema-validate.faq.1.answer':
+		'Each schema error includes a JSON Pointer path and is mapped to the matching line and column in your JSON input for faster debugging.',
+	'tool.json-schema-validate.faq.2.question': 'Can I validate invalid schema documents?',
+	'tool.json-schema-validate.faq.2.answer':
+		'Yes. If the schema itself is invalid or cannot be compiled, the tool reports schema-level errors separately from data validation errors.',
+	'tool.json-schema-validate.use_case.0':
+		'Validate API request and response payloads against contract schemas',
+	'tool.json-schema-validate.use_case.1':
+		'Debug failed webhook payloads with path-based validation feedback',
+	'tool.json-schema-validate.use_case.2':
+		'Test fixture and mock data against strict schema constraints',
+	'tool.json-schema-validate.use_case.3': 'Verify migration from Draft-07 schemas to Draft 2020-12',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

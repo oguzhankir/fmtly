@@ -376,6 +376,59 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
+		id: 'json-schema-validate',
+		category: 'json',
+		slug: 'schema-validate',
+		displayName: 'tool.json-schema-validate.display_name',
+		tagline: 'tool.json-schema-validate.tagline',
+		description: 'tool.json-schema-validate.description',
+		primaryKeyword: 'tool.json-schema-validate.primary_keyword',
+		metaTitle: 'tool.json-schema-validate.meta_title',
+		metaDescription: 'tool.json-schema-validate.meta_description',
+		engine: 'json',
+		operation: 'tool.json-schema-validate.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'json',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'to-yaml' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-schema-validate.faq.0.question',
+				answer: 'tool.json-schema-validate.faq.0.answer'
+			},
+			{
+				question: 'tool.json-schema-validate.faq.1.question',
+				answer: 'tool.json-schema-validate.faq.1.answer'
+			},
+			{
+				question: 'tool.json-schema-validate.faq.2.question',
+				answer: 'tool.json-schema-validate.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-schema-validate.use_case.0',
+			'tool.json-schema-validate.use_case.1',
+			'tool.json-schema-validate.use_case.2',
+			'tool.json-schema-validate.use_case.3'
+		],
+		sampleInput: `{
+  "id": "evt_1029",
+  "kind": "invoice.created",
+  "amount": 1299,
+  "currency": "USD",
+  "customer": {
+    "id": "cus_55",
+    "email": "billing@example.com"
+  }
+}`
+	},
+	{
 		id: 'json-jsonpath',
 		category: 'json',
 		slug: 'jsonpath',
