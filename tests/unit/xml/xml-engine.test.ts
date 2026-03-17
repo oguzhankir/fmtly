@@ -6,6 +6,7 @@ import {
 	parseXML,
 	xmlToJSON
 } from '../../../src/lib/engines/xml/index.js';
+import { toJsonSchema } from '../../../src/lib/engines/xml/xml.engine.js';
 
 const sampleXML = `<?xml version="1.0" encoding="UTF-8"?>
 <catalog>
@@ -169,5 +170,44 @@ describe('round-trip', () => {
 		const data = JSON.parse(jsonResult.output);
 		expect(data.root.name).toBe('test');
 		expect(data.root.value).toBe(42);
+	});
+});
+
+describe('toJsonSchema', () => {
+	it('infers array cardinality and required fields from repeated XML elements', async () => {
+		const xml = `<catalog>
+  <book id="1" available="true">
+    <title>The Great Gatsby</title>
+    <price>10.99</price>
+  </book>
+  <book id="2" available="false">
+    <title>To Kill a Mockingbird</title>
+    <price>12.99</price>
+    <edition>2</edition>
+  </book>
+</catalog>`;
+		const schemaText = await toJsonSchema(xml);
+		const schema = JSON.parse(schemaText) as Record<string, unknown>;
+		const catalog = (schema.properties as Record<string, Record<string, unknown>>).catalog;
+		const books = (catalog.properties as Record<string, Record<string, unknown>>).book;
+		const bookItems = books.items as Record<string, unknown>;
+		const bookProperties = bookItems.properties as Record<string, unknown>;
+		const required = bookItems.required as string[];
+
+		expect(schema.$schema).toBe('https://json-schema.org/draft/2020-12/schema');
+		expect(books.type).toBe('array');
+		expect(required).toContain('@_id');
+		expect(required).toContain('@_available');
+		expect(required).toContain('title');
+		expect(required).toContain('price');
+		expect(required).not.toContain('edition');
+		expect(bookProperties['@_available']).toMatchObject({
+			type: 'boolean',
+			enum: [true, false]
+		});
+	});
+
+	it('throws for invalid XML', async () => {
+		await expect(toJsonSchema('<catalog>')).rejects.toThrow();
 	});
 });

@@ -31,7 +31,7 @@
 
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isMinifier = $derived(toolSlug === 'minifier');
-	let isConverter = $derived(['to-json', 'to-yaml', 'to-csv'].includes(toolSlug));
+	let isConverter = $derived(['to-json', 'to-json-schema', 'to-yaml', 'to-csv'].includes(toolSlug));
 	let errorLocationLabel = $derived.by(() => {
 		if (!$xmlError?.line) return '';
 		return ($t as any)(

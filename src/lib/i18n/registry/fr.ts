@@ -151,6 +151,33 @@ const registryFr: Record<string, string> = {
 	'tool.xml-to-json.meta_description':
 		"Convertir XML en JSON instantanément dans votre navigateur. Gère les attributs et structures imbriquées. Pas d'envoi de données.",
 	'tool.xml-to-json.operation': 'Convertir',
+	'tool.xml-to-json-schema.display_name': 'XML vers schéma JSON',
+	'tool.xml-to-json-schema.tagline': 'Inférer un schéma JSON à partir de la structure XML',
+	'tool.xml-to-json-schema.description':
+		'Générez un schéma JSON Draft 2020-12 à partir de XML en analysant la structure des éléments, les attributs et la cardinalité. Les éléments répétés sont inférés en tableaux et les champs partagés en required.',
+	'tool.xml-to-json-schema.primary_keyword': 'xml vers schéma json',
+	'tool.xml-to-json-schema.meta_title': 'Générateur XML vers schéma JSON — fmtly.dev',
+	'tool.xml-to-json-schema.meta_description':
+		'Inférez un schéma JSON depuis XML dans votre navigateur. Détecte automatiquement structures imbriquées, éléments répétés et champs requis.',
+	'tool.xml-to-json-schema.operation': 'Générer le schéma',
+	'tool.xml-to-json-schema.faq.0.question': 'Comment la cardinalité est-elle inférée depuis XML ?',
+	'tool.xml-to-json-schema.faq.0.answer':
+		'Quand des éléments frères de même nom se répètent sous un même parent, ils sont inférés comme des tableaux. Une occurrence unique reste un champ scalaire ou objet.',
+	'tool.xml-to-json-schema.faq.1.question':
+		'Comment les attributs XML sont-ils représentés dans le schéma ?',
+	'tool.xml-to-json-schema.faq.1.answer':
+		'Les attributs sont inclus comme propriétés normales avec la clé d’attribut parsée (par exemple @_id), afin d’être validés avec les éléments enfants.',
+	'tool.xml-to-json-schema.faq.2.question': 'Quelle version de JSON Schema est générée ?',
+	'tool.xml-to-json-schema.faq.2.answer':
+		'La sortie utilise JSON Schema Draft 2020-12 et inclut des mots-clés standards comme $schema, type, properties, required et items.',
+	'tool.xml-to-json-schema.use_case.0':
+		'Créer des schémas de validation initiaux depuis des payloads XML existants',
+	'tool.xml-to-json-schema.use_case.1':
+		'Documenter des structures de flux XML complexes pour les consommateurs en aval',
+	'tool.xml-to-json-schema.use_case.2':
+		'Générer un schéma de base avant de renforcer les contraintes manuellement',
+	'tool.xml-to-json-schema.use_case.3':
+		'Intégrer des flux XML dans des workflows de validation orientés JSON',
 
 	'tool.xml-to-yaml.display_name': 'XML vers YAML',
 	'tool.xml-to-yaml.tagline': 'Convertir des documents XML au format YAML',

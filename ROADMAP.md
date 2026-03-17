@@ -58,22 +58,22 @@ Core category — format, validate, convert, diff, and query structured data.
 | 45 | TOML → HTML | `toml/to-html` | done | Render TOML as a nested HTML table. |
 | 46 | TOML Diff | `toml/diff` | done | Side-by-side diff of two TOML documents. |
 | 47 | JSON Schema Generator | `json/schema-generator` | done | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
+| 48 | XML → JSON Schema | `xml/to-json-schema` | done | Infer a JSON Schema from XML by analyzing element structure and cardinality. |
 
 ### Backlog — Data Formats
 
-| 48 | Tool | Slug | Description |
+| 49 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 49 | JSON ↔ JSON Schema Validator | `json/schema-validate` | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
-| 50 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
-| 51 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
-| 52 | JSON → TypeScript Types | `json/to-typescript` | Infer TypeScript interfaces/types from any JSON sample using quicktype. |
-| 53 | JSON → Go Structs | `json/to-go` | Generate Go struct definitions from JSON. |
-| 54 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
-| 55 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
-| 56 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
-| 57 | YAML Anchor Resolver | `yaml/resolve-anchors` | Resolve all YAML anchors and aliases into their expanded form. |
-| 58 | YAML Multi-Doc Splitter | `yaml/split` | Split a multi-document YAML file (---) into individual documents. |
-| 59 | XML → JSON Schema | `xml/to-json-schema` | Infer a JSON Schema from XML by analyzing element structure and cardinality. |
+| 50 | JSON ↔ JSON Schema Validator | `json/schema-validate` | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
+| 51 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
+| 52 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
+| 53 | JSON → TypeScript Types | `json/to-typescript` | Infer TypeScript interfaces/types from any JSON sample using quicktype. |
+| 54 | JSON → Go Structs | `json/to-go` | Generate Go struct definitions from JSON. |
+| 55 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
+| 56 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
+| 57 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
+| 58 | YAML Anchor Resolver | `yaml/resolve-anchors` | Resolve all YAML anchors and aliases into their expanded form. |
+| 59 | YAML Multi-Doc Splitter | `yaml/split` | Split a multi-document YAML file (---) into individual documents. |
 | 60 | XSD Validator | `xml/xsd-validate` | Validate XML against an XSD schema. |
 | 61 | CSV Column Reorder / Drop | `csv/columns` | Visually reorder, rename, or drop CSV columns via drag-and-drop. |
 | 62 | CSV Deduplicator | `csv/deduplicate` | Remove duplicate rows from CSV, with configurable key columns. |

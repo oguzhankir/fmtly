@@ -151,6 +151,32 @@ const registryDe: Record<string, string> = {
 	'tool.xml-to-json.meta_description':
 		'Konvertieren Sie XML sofort in JSON. Verarbeitet Attribute und verschachtelte Strukturen.',
 	'tool.xml-to-json.operation': 'Konvertieren',
+	'tool.xml-to-json-schema.display_name': 'XML zu JSON Schema',
+	'tool.xml-to-json-schema.tagline': 'JSON Schema aus XML-Struktur ableiten',
+	'tool.xml-to-json-schema.description':
+		'Erzeugen Sie ein Draft-2020-12-JSON-Schema aus XML durch Analyse von Elementstruktur, Attributen und Kardinalität. Wiederholte Elemente werden als Arrays erkannt, gemeinsame Felder als required.',
+	'tool.xml-to-json-schema.primary_keyword': 'xml zu json schema',
+	'tool.xml-to-json-schema.meta_title': 'XML zu JSON Schema Generator — fmtly.dev',
+	'tool.xml-to-json-schema.meta_description':
+		'Leiten Sie JSON Schema im Browser aus XML ab. Erkennt verschachtelte Strukturen, wiederholte Elemente und Pflichtfelder automatisch.',
+	'tool.xml-to-json-schema.operation': 'Schema erzeugen',
+	'tool.xml-to-json-schema.faq.0.question': 'Wie wird die Kardinalität aus XML erkannt?',
+	'tool.xml-to-json-schema.faq.0.answer':
+		'Wenn gleichnamige Geschwister unter demselben Elternknoten mehrfach vorkommen, werden sie als Arrays abgeleitet. Einmalige Vorkommen bleiben Skalar- oder Objektfelder.',
+	'tool.xml-to-json-schema.faq.1.question': 'Wie werden XML-Attribute im Schema dargestellt?',
+	'tool.xml-to-json-schema.faq.1.answer':
+		'Attribute werden als normale Properties mit dem geparsten Attributschlüssel (z. B. @_id) in das Schema übernommen und zusammen mit Kindelementen validiert.',
+	'tool.xml-to-json-schema.faq.2.question': 'Welche JSON-Schema-Version wird erzeugt?',
+	'tool.xml-to-json-schema.faq.2.answer':
+		'Die Ausgabe nutzt JSON Schema Draft 2020-12 und enthält Standard-Schlüsselwörter wie $schema, type, properties, required und items.',
+	'tool.xml-to-json-schema.use_case.0':
+		'Validierungsschemata aus vorhandenen XML-Payload-Beispielen ableiten',
+	'tool.xml-to-json-schema.use_case.1':
+		'Komplexe XML-Feed-Strukturen für nachgelagerte Systeme dokumentieren',
+	'tool.xml-to-json-schema.use_case.2':
+		'Ein Basisschema erzeugen, bevor Regeln manuell verschärft werden',
+	'tool.xml-to-json-schema.use_case.3':
+		'XML-Integrationen in JSON-basierte Validierungs-Workflows überführen',
 
 	'tool.xml-to-yaml.display_name': 'XML nach YAML',
 	'tool.xml-to-yaml.tagline': 'XML-Dokumente in das YAML-Format konvertieren',
