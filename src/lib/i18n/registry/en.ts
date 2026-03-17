@@ -1439,6 +1439,31 @@ const registryEn: Record<string, string> = {
 		'Standardize team naming patterns in docs, schemas, and payload examples',
 	'tool.text-string-case-converter.use_case.3':
 		'Prepare consistent identifiers for TypeScript, Python, SQL, and shell scripts',
+	'tool.text-text-reverser.display_name': 'Text Reverser',
+	'tool.text-text-reverser.tagline': 'Reverse text by characters, words, or lines in one click',
+	'tool.text-text-reverser.description':
+		'Reverse text instantly by characters, words, or lines. Great for quick string transformations, debugging text flows, and content experiments in your browser.',
+	'tool.text-text-reverser.primary_keyword': 'text reverser',
+	'tool.text-text-reverser.meta_title': 'Text Reverser — fmtly.dev',
+	'tool.text-text-reverser.meta_description':
+		'Free online text reverser that flips text by characters, words, or lines instantly. Fast, private, and fully browser-based.',
+	'tool.text-text-reverser.operation': 'Reverse Text',
+	'tool.text-text-reverser.faq.0.question': 'What reverse modes are available?',
+	'tool.text-text-reverser.faq.0.answer':
+		'You can reverse text by individual characters, by words, or by full lines, each shown as a separate output.',
+	'tool.text-text-reverser.faq.1.question': 'Does word reverse keep spaces and tabs in place?',
+	'tool.text-text-reverser.faq.1.answer':
+		'Yes. Word mode preserves whitespace structure while reversing token order, so spacing stays readable.',
+	'tool.text-text-reverser.faq.2.question': 'Does my text stay on device?',
+	'tool.text-text-reverser.faq.2.answer':
+		'Yes. Reversal runs locally in your browser and no input is uploaded to any server.',
+	'tool.text-text-reverser.use_case.0':
+		'Generate mirrored strings for testing parsers and tokenizers',
+	'tool.text-text-reverser.use_case.1': 'Reorder multiline notes quickly by reversing line order',
+	'tool.text-text-reverser.use_case.2':
+		'Validate word-splitting logic with whitespace-preserving reverse output',
+	'tool.text-text-reverser.use_case.3':
+		'Create playful transformed text variants for content experiments',
 	'ui.text_counter.words': 'Words',
 	'ui.text_counter.characters': 'Characters',
 	'ui.text_counter.characters_no_spaces': 'Characters (no spaces)',
@@ -1457,6 +1482,12 @@ const registryEn: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Title Case',
 	'ui.text_case.sentence_case': 'Sentence case',
+	'ui.text_reverser.tab_label': 'Reverse',
+	'ui.text_reverser.placeholder': 'Type or paste text to reverse...',
+	'ui.text_reverser.characters': 'Reverse by characters',
+	'ui.text_reverser.words': 'Reverse by words',
+	'ui.text_reverser.lines': 'Reverse by lines',
+	'ui.text_reverser.lines_count': 'lines',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

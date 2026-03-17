@@ -54,6 +54,8 @@
 				return $t('ui.convert.to_sql', 'CSV → SQL');
 			case 'case':
 				return $t('ui.text_case.tab_label', 'Case');
+			case 'reverser':
+				return $t('ui.text_reverser.tab_label', 'Reverse');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

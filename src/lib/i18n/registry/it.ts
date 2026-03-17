@@ -1476,6 +1476,31 @@ const registryIt: Record<string, string> = {
 		'Standardizzare i pattern di naming tra documentazione, schemi ed esempi payload',
 	'tool.text-string-case-converter.use_case.3':
 		'Preparare identificatori coerenti per TypeScript, Python, SQL e script shell',
+	'tool.text-text-reverser.display_name': 'Invertitore di Testo',
+	'tool.text-text-reverser.tagline': 'Inverti testo per caratteri, parole o righe con un clic',
+	'tool.text-text-reverser.description':
+		'Inverti istantaneamente testo per caratteri, parole o righe. Ideale per trasformazioni rapide di stringhe, debug di flussi testuali ed esperimenti di contenuto nel browser.',
+	'tool.text-text-reverser.primary_keyword': 'invertitore di testo',
+	'tool.text-text-reverser.meta_title': 'Invertitore di Testo — fmtly.dev',
+	'tool.text-text-reverser.meta_description':
+		'Invertitore di testo gratuito che inverte testo per caratteri, parole o righe all’istante. Veloce, privato e completamente nel browser.',
+	'tool.text-text-reverser.operation': 'Inverti Testo',
+	'tool.text-text-reverser.faq.0.question': 'Quali modalità di inversione sono disponibili?',
+	'tool.text-text-reverser.faq.0.answer':
+		'Puoi invertire per caratteri, per parole o per righe complete. Ogni modalità ha un output separato.',
+	'tool.text-text-reverser.faq.1.question': 'La modalità per parole mantiene spazi e tabulazioni?',
+	'tool.text-text-reverser.faq.1.answer':
+		'Sì. La modalità per parole mantiene la struttura degli spazi invertendo l’ordine dei token.',
+	'tool.text-text-reverser.faq.2.question': 'Il mio testo resta sul dispositivo?',
+	'tool.text-text-reverser.faq.2.answer':
+		'Sì. L’inversione avviene localmente nel browser senza upload a server.',
+	'tool.text-text-reverser.use_case.0':
+		'Generare stringhe specchiate per testare parser e tokenizer',
+	'tool.text-text-reverser.use_case.1':
+		'Riordinare note multilinea invertendo rapidamente l’ordine delle righe',
+	'tool.text-text-reverser.use_case.2':
+		'Validare la logica di separazione parole con output che preserva gli spazi',
+	'tool.text-text-reverser.use_case.3': 'Creare varianti testuali per esperimenti di contenuto',
 	'ui.text_counter.words': 'Parole',
 	'ui.text_counter.characters': 'Caratteri',
 	'ui.text_counter.characters_no_spaces': 'Caratteri (senza spazi)',
@@ -1494,6 +1519,12 @@ const registryIt: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Title Case',
 	'ui.text_case.sentence_case': 'Formato frase',
+	'ui.text_reverser.tab_label': 'Inverti',
+	'ui.text_reverser.placeholder': 'Scrivi o incolla testo da invertire...',
+	'ui.text_reverser.characters': 'Inverti per caratteri',
+	'ui.text_reverser.words': 'Inverti per parole',
+	'ui.text_reverser.lines': 'Inverti per righe',
+	'ui.text_reverser.lines_count': 'righe',
 	'ui.csv.controls.table_name': 'Nome Tabella',
 	'ui.csv.controls.batch_size': 'Dimensione Batch'
 };

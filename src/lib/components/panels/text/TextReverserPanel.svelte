@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import type { ToolDefinition } from '$registry/types.js';
 	import WorkspaceTabs from '$components/tool/WorkspaceTabs.svelte';
-	import { convertTextCases, type TextCaseConversions } from '$engines/text/index.js';
+	import { reverseText, type TextReverseResults } from '$engines/text/index.js';
 	import { input, initInput, inputByteSize, formatByteSize } from '$stores/input.store';
 	import { t } from '$stores/language';
 	import { addToast } from '$stores/toast.store';
@@ -23,27 +23,18 @@
 	let confirmTitle = $state('');
 	let confirmMessage = $state('');
 
-	let conversions = $derived(convertTextCases($input));
-	let statusLine = $derived(`${formatByteSize($inputByteSize)}`);
+	let results = $derived(reverseText($input));
+	let lineCount = $derived($input.length === 0 ? 0 : $input.split(/\r?\n/).length);
+	let statusLine = $derived(
+		`${formatByteSize($inputByteSize)} · ${lineCount.toLocaleString()} ${$t('ui.text_reverser.lines_count', 'lines')}`
+	);
 
-	const outputOrder: Array<keyof TextCaseConversions> = [
-		'camelCase',
-		'pascalCase',
-		'snakeCase',
-		'kebabCase',
-		'constantCase',
-		'titleCase',
-		'sentenceCase'
-	];
+	const outputOrder: Array<keyof TextReverseResults> = ['characters', 'words', 'lines'];
 
-	const labelMap: Record<keyof TextCaseConversions, string> = {
-		camelCase: 'ui.text_case.camel_case',
-		pascalCase: 'ui.text_case.pascal_case',
-		snakeCase: 'ui.text_case.snake_case',
-		kebabCase: 'ui.text_case.kebab_case',
-		constantCase: 'ui.text_case.constant_case',
-		titleCase: 'ui.text_case.title_case',
-		sentenceCase: 'ui.text_case.sentence_case'
+	const labelMap: Record<keyof TextReverseResults, string> = {
+		characters: 'ui.text_reverser.characters',
+		words: 'ui.text_reverser.words',
+		lines: 'ui.text_reverser.lines'
 	};
 
 	onMount(() => {
@@ -89,9 +80,9 @@
 	function handleCopyClick(event: MouseEvent): void {
 		const target = event.currentTarget;
 		if (!(target instanceof HTMLButtonElement)) return;
-		const key = target.dataset.caseKey as keyof TextCaseConversions | undefined;
+		const key = target.dataset.reverseKey as keyof TextReverseResults | undefined;
 		if (!key) return;
-		void copyValue(conversions[key]);
+		void copyValue(results[key]);
 	}
 </script>
 
@@ -121,7 +112,7 @@
 			<textarea
 				bind:value={$input}
 				class="h-full w-full resize-none border-0 bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] outline-none"
-				placeholder={$t('ui.text_case.placeholder', 'Type or paste text to convert case...')}
+				placeholder={$t('ui.text_reverser.placeholder', 'Type or paste text to reverse...')}
 				spellcheck="false"
 			></textarea>
 		</div>
@@ -136,7 +127,7 @@
 							</h3>
 							<button
 								type="button"
-								data-case-key={key}
+								data-reverse-key={key}
 								onclick={handleCopyClick}
 								class="inline-flex items-center gap-[var(--space-1)] rounded-[var(--radius-sm)] border border-[var(--border-default)] px-[var(--space-2)] py-[2px] text-[length:var(--text-xs)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-hover)]"
 							>
@@ -144,8 +135,8 @@
 								{$t('ui.actions.copy', 'Copy')}
 							</button>
 						</div>
-						<div class="max-h-32 overflow-y-auto break-all rounded-[var(--radius-sm)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-2)] py-[var(--space-2)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-primary)]">
-							{conversions[key]}
+						<div class="max-h-32 overflow-y-auto whitespace-pre-wrap break-all rounded-[var(--radius-sm)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-2)] py-[var(--space-2)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--text-primary)]">
+							{results[key]}
 						</div>
 					</div>
 				{/each}

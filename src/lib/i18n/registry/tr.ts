@@ -1463,6 +1463,34 @@ const registryTr: Record<string, string> = {
 		'Doküman, şema ve örnek payloadlarda ekip adlandırma standardını korumak',
 	'tool.text-string-case-converter.use_case.3':
 		'TypeScript, Python, SQL ve shell scriptleri için tutarlı kimlik adları hazırlamak',
+	'tool.text-text-reverser.display_name': 'Metin Ters Çevirici',
+	'tool.text-text-reverser.tagline':
+		'Metni karakterlere, kelimelere veya satırlara göre tek tıkla ters çevir',
+	'tool.text-text-reverser.description':
+		'Metni karakter, kelime veya satır bazında anında ters çevir. Hızlı metin dönüşümleri, akış testleri ve içerik denemeleri için ideal; tamamen tarayıcıda çalışır.',
+	'tool.text-text-reverser.primary_keyword': 'metin ters cevirici',
+	'tool.text-text-reverser.meta_title': 'Metin Ters Çevirici — fmtly.dev',
+	'tool.text-text-reverser.meta_description':
+		'Ücretsiz çevrimiçi metin ters çevirici: metni karakter, kelime veya satır bazında anında tersine çevir. Hızlı, gizli ve tamamen tarayıcı tabanlı.',
+	'tool.text-text-reverser.operation': 'Metni Ters Çevir',
+	'tool.text-text-reverser.faq.0.question': 'Hangi ters çevirme modları var?',
+	'tool.text-text-reverser.faq.0.answer':
+		'Metni karakter, kelime veya satır bazında ters çevirebilirsiniz. Her mod ayrı çıktı olarak gösterilir.',
+	'tool.text-text-reverser.faq.1.question':
+		'Kelimelere göre ters çevirme boşluk ve sekmeleri korur mu?',
+	'tool.text-text-reverser.faq.1.answer':
+		'Evet. Kelime modu, token sırasını ters çevirirken boşluk yapısını korur.',
+	'tool.text-text-reverser.faq.2.question': 'Metnim cihazımdan dışarı çıkar mı?',
+	'tool.text-text-reverser.faq.2.answer':
+		'Hayır. Tüm ters çevirme işlemleri tarayıcıda çalışır, metin sunucuya gönderilmez.',
+	'tool.text-text-reverser.use_case.0':
+		'Parser ve tokenizer testleri için aynalanmış metin üretmek',
+	'tool.text-text-reverser.use_case.1':
+		'Çok satırlı notları satır sırasını ters çevirerek hızlıca yeniden düzenlemek',
+	'tool.text-text-reverser.use_case.2':
+		'Boşluk korumalı çıktı ile kelime ayrıştırma mantığını doğrulamak',
+	'tool.text-text-reverser.use_case.3':
+		'İçerik denemeleri için eğlenceli dönüştürülmüş metin varyasyonları üretmek',
 	'ui.text_counter.words': 'Kelime',
 	'ui.text_counter.characters': 'Karakter',
 	'ui.text_counter.characters_no_spaces': 'Karakter (boşluksuz)',
@@ -1481,6 +1509,12 @@ const registryTr: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Başlık Biçimi',
 	'ui.text_case.sentence_case': 'Cümle biçimi',
+	'ui.text_reverser.tab_label': 'Ters Çevir',
+	'ui.text_reverser.placeholder': 'Ters çevirmek için metin yazın veya yapıştırın...',
+	'ui.text_reverser.characters': 'Karaktere göre ters çevir',
+	'ui.text_reverser.words': 'Kelimeye göre ters çevir',
+	'ui.text_reverser.lines': 'Satıra göre ters çevir',
+	'ui.text_reverser.lines_count': 'satır',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

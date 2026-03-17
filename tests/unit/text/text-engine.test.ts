@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { analyzeText, convertTextCases } from '../../../src/lib/engines/text/text.engine.js';
+import {
+	analyzeText,
+	convertTextCases,
+	reverseText
+} from '../../../src/lib/engines/text/text.engine.js';
 
 describe('analyzeText', () => {
 	it('counts words, characters, sentences, and paragraphs', () => {
@@ -29,6 +33,30 @@ describe('analyzeText', () => {
 		const resultLong = analyzeText(longText);
 		expect(resultLong.words).toBe(450);
 		expect(resultLong.readingTimeMinutes).toBe(3);
+	});
+});
+
+describe('reverseText', () => {
+	it('reverses characters with unicode-safe behavior', () => {
+		const result = reverseText('hello 👋');
+		expect(result.characters).toBe('👋 olleh');
+	});
+
+	it('reverses words while preserving whitespace positions', () => {
+		const result = reverseText('alpha   beta\tgamma');
+		expect(result.words).toBe('gamma   beta\talpha');
+	});
+
+	it('reverses lines with normalized output newlines', () => {
+		const result = reverseText('line 1\r\nline 2\nline 3');
+		expect(result.lines).toBe('line 3\nline 2\nline 1');
+	});
+
+	it('handles empty input', () => {
+		const result = reverseText('');
+		expect(result.characters).toBe('');
+		expect(result.words).toBe('');
+		expect(result.lines).toBe('');
 	});
 });
 
