@@ -35,6 +35,12 @@ const categoryMetaList: CategoryMeta[] = [
 		displayName: 'category.toml.display_name',
 		description: 'category.toml.description',
 		primaryKeyword: 'category.toml.primary_keyword'
+	},
+	{
+		slug: 'text',
+		displayName: 'category.text.display_name',
+		description: 'category.text.description',
+		primaryKeyword: 'category.text.primary_keyword'
 	}
 ];
 

@@ -4,6 +4,7 @@
 	import { browser } from '$app/environment';
 	import { get } from 'svelte/store';
 	import { output } from '$stores/output.store';
+	import { input } from '$stores/input.store';
 	import { addToast } from '$stores/toast.store';
 	import { t } from '$lib/stores/language.js';
 	import ToolToolbar from './ToolToolbar.svelte';
@@ -31,7 +32,9 @@
 	} = $props();
 
 	async function handleCopy(): Promise<void> {
-		const text = get(output);
+		const outputText = get(output);
+		const text =
+			outputText || (tool.category === 'text' && tool.layoutVariant === 'single-panel' ? get(input) : '');
 		if (!text) {
 			addToast('info', $t('ui.layout.toast.copy_empty', 'Nothing to copy yet'));
 			return;

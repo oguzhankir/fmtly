@@ -20,6 +20,10 @@ const registryEn: Record<string, string> = {
 	'category.toml.description':
 		'Format, validate, and convert TOML files. Convert TOML to JSON and YAML safely.',
 	'category.toml.primary_keyword': 'toml tools',
+	'category.text.display_name': 'Text',
+	'category.text.description':
+		'Count, analyze, and transform plain text. Measure words, characters, structure, and readability instantly in your browser.',
+	'category.text.primary_keyword': 'text tools',
 	// ── JSON tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Formatter',
 	'tool.json-formatter.tagline': 'Format and beautify JSON with configurable indentation',
@@ -1380,6 +1384,41 @@ const registryEn: Record<string, string> = {
 	'tool.json-schema-validate.use_case.2':
 		'Test fixture and mock data against strict schema constraints',
 	'tool.json-schema-validate.use_case.3': 'Verify migration from Draft-07 schemas to Draft 2020-12',
+	'tool.text-word-character-counter.display_name': 'Word & Character Counter',
+	'tool.text-word-character-counter.tagline': 'Count words, characters, and reading time instantly',
+	'tool.text-word-character-counter.description':
+		'Count words, characters, sentences, paragraphs, and estimated reading time for any text. Fast, private, and fully browser-based.',
+	'tool.text-word-character-counter.primary_keyword': 'word character counter',
+	'tool.text-word-character-counter.meta_title': 'Word & Character Counter — fmtly.dev',
+	'tool.text-word-character-counter.meta_description':
+		'Free online word and character counter with sentence, paragraph, and reading-time metrics. Runs entirely in your browser.',
+	'tool.text-word-character-counter.operation': 'Count Text',
+	'tool.text-word-character-counter.faq.0.question': 'How are words counted?',
+	'tool.text-word-character-counter.faq.0.answer':
+		'Words are counted from letter and number groups, including common apostrophes and hyphenated forms.',
+	'tool.text-word-character-counter.faq.1.question': 'How is reading time estimated?',
+	'tool.text-word-character-counter.faq.1.answer':
+		'Reading time is estimated at about 200 words per minute and rounded up to whole minutes.',
+	'tool.text-word-character-counter.faq.2.question': 'Does my text leave my device?',
+	'tool.text-word-character-counter.faq.2.answer':
+		'No. Counting and analysis run entirely in your browser and no text is uploaded to a server.',
+	'tool.text-word-character-counter.use_case.0':
+		'Check article and documentation length before publishing',
+	'tool.text-word-character-counter.use_case.1':
+		'Optimize UI copy and prompts against character limits',
+	'tool.text-word-character-counter.use_case.2':
+		'Estimate reading time for blog posts, docs, and release notes',
+	'tool.text-word-character-counter.use_case.3':
+		'Compare draft versions using objective text length metrics',
+	'ui.text_counter.words': 'Words',
+	'ui.text_counter.characters': 'Characters',
+	'ui.text_counter.characters_no_spaces': 'Characters (no spaces)',
+	'ui.text_counter.sentences': 'Sentences',
+	'ui.text_counter.paragraphs': 'Paragraphs',
+	'ui.text_counter.reading_time': 'Reading time',
+	'ui.text_counter.minutes': 'min',
+	'ui.text_counter.lines': 'lines',
+	'ui.text_counter.placeholder': 'Type or paste your text here...',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

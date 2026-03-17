@@ -103,9 +103,16 @@ Encode, decode, hash, and escape strings across common formats.
 
 Analyze, transform, and manipulate plain text.
 
-| 74 | Tool | Slug | Description |
+### Shipped — Text & String Tools
+
+| # | Tool | Slug | Status | Description |
+|---|------|------|--------|-------------|
+| 75 | Word & Character Counter | `text/word-counter` | done | Count words, characters, sentences, paragraphs, and reading time. |
+
+### Backlog — Text & String Tools
+
+| 75 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 75 | Word & Character Counter | `text/word-counter` | Count words, characters, sentences, paragraphs, and reading time. |
 | 76 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
 | 77 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
 | 78 | Duplicate Line Remover | `text/deduplicate` | Remove duplicate lines preserving first occurrence order. |

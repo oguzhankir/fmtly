@@ -20,6 +20,7 @@
 	import XmlQueryOutputPanel from "$components/panels/xml/XmlQueryOutputPanel.svelte";
 	import CsvValidatorPanel from "$components/panels/csv/CsvValidatorPanel.svelte";
 	import CsvOutputPanel from "$components/panels/csv/CsvOutputPanel.svelte";
+	import TextCounterPanel from "$components/panels/text/TextCounterPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -103,6 +104,11 @@
 	let tomlWorkspaceTools = $derived(
 		data.tool.category === "toml"
 			? localizeToolDefinitions(getToolsByCategory("toml"), $t)
+			: []
+	);
+	let textWorkspaceTools = $derived(
+		data.tool.category === "text"
+			? localizeToolDefinitions(getToolsByCategory("text"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -192,6 +198,7 @@
 		yaml: [".yaml", ".yml", ".txt"],
 		toml: [".toml", ".txt"],
 		csv: [".csv", ".txt"],
+		txt: [".txt", ".md", ".log"],
 	};
 
 	let acceptedExts = $derived(
@@ -706,6 +713,8 @@
 						/>
 					</div>
 				</div>
+			{:else if data.tool.category === "text" && data.tool.slug === "word-counter"}
+				<TextCounterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

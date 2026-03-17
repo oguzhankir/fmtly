@@ -24,6 +24,10 @@ const registryEs: Record<string, string> = {
 	'category.toml.description':
 		'Formatea, valida y convierte archivos TOML. Convierte TOML a JSON y YAML de forma segura.',
 	'category.toml.primary_keyword': 'herramientas toml',
+	'category.text.display_name': 'Texto',
+	'category.text.description':
+		'Analiza, cuenta y transforma texto plano. Mide palabras, caracteres, estructura y tiempo de lectura al instante.',
+	'category.text.primary_keyword': 'herramientas de texto',
 
 	'tool.json-formatter.display_name': 'Formateador JSON',
 	'tool.json-formatter.tagline': 'Formatea y embellece JSON con indentación configurable',
@@ -1422,6 +1426,42 @@ const registryEs: Record<string, string> = {
 	'tool.json-schema-validate.use_case.2':
 		'Comprobar fixtures y mocks contra restricciones estrictas de esquema',
 	'tool.json-schema-validate.use_case.3': 'Verificar migraciones de Draft-07 a Draft 2020-12',
+	'tool.text-word-character-counter.display_name': 'Contador de Palabras y Caracteres',
+	'tool.text-word-character-counter.tagline':
+		'Cuenta palabras, caracteres y tiempo de lectura al instante',
+	'tool.text-word-character-counter.description':
+		'Cuenta palabras, caracteres, frases, párrafos y tiempo de lectura estimado en cualquier texto. Rápido, privado y 100% en el navegador.',
+	'tool.text-word-character-counter.primary_keyword': 'contador palabras caracteres',
+	'tool.text-word-character-counter.meta_title': 'Contador de Palabras y Caracteres — fmtly.dev',
+	'tool.text-word-character-counter.meta_description':
+		'Contador gratuito de palabras y caracteres con métricas de frases, párrafos y tiempo de lectura. Funciona completamente en tu navegador.',
+	'tool.text-word-character-counter.operation': 'Contar Texto',
+	'tool.text-word-character-counter.faq.0.question': '¿Cómo se cuentan las palabras?',
+	'tool.text-word-character-counter.faq.0.answer':
+		'Las palabras se cuentan por grupos de letras y números, incluyendo apóstrofes y guiones comunes.',
+	'tool.text-word-character-counter.faq.1.question': '¿Cómo se estima el tiempo de lectura?',
+	'tool.text-word-character-counter.faq.1.answer':
+		'El tiempo de lectura se calcula con una media de 200 palabras por minuto y se redondea hacia arriba.',
+	'tool.text-word-character-counter.faq.2.question': '¿Mi texto sale de mi dispositivo?',
+	'tool.text-word-character-counter.faq.2.answer':
+		'No. El conteo y análisis se realizan localmente en tu navegador, sin subir texto al servidor.',
+	'tool.text-word-character-counter.use_case.0':
+		'Revisar la longitud de artículos y documentación antes de publicar',
+	'tool.text-word-character-counter.use_case.1':
+		'Optimizar textos de UI y prompts según límites de caracteres',
+	'tool.text-word-character-counter.use_case.2':
+		'Estimar tiempo de lectura para posts, docs y notas de versión',
+	'tool.text-word-character-counter.use_case.3':
+		'Comparar borradores con métricas objetivas de longitud',
+	'ui.text_counter.words': 'Palabras',
+	'ui.text_counter.characters': 'Caracteres',
+	'ui.text_counter.characters_no_spaces': 'Caracteres (sin espacios)',
+	'ui.text_counter.sentences': 'Frases',
+	'ui.text_counter.paragraphs': 'Párrafos',
+	'ui.text_counter.reading_time': 'Tiempo de lectura',
+	'ui.text_counter.minutes': 'min',
+	'ui.text_counter.lines': 'líneas',
+	'ui.text_counter.placeholder': 'Escribe o pega tu texto aquí...',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };
