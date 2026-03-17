@@ -40,6 +40,19 @@ export interface FormatResult {
 	warnings: string[];
 }
 
+type JsonSchemaType = 'object' | 'array' | 'string' | 'number' | 'integer' | 'boolean' | 'null';
+
+export interface JsonSchema {
+	$schema?: string;
+	type?: JsonSchemaType | JsonSchemaType[];
+	properties?: Record<string, JsonSchema>;
+	required?: string[];
+	additionalProperties?: boolean;
+	items?: JsonSchema;
+	anyOf?: JsonSchema[];
+	enum?: JsonScalar[];
+}
+
 const DEFAULT_FORMAT_OPTIONS: FormatOptions = {
 	indent: 2,
 	sortKeys: false,
@@ -148,6 +161,21 @@ export async function toMarkdownTable(json: string): Promise<string> {
 	return markdown;
 }
 
+export function generateJsonSchema(json: string): string {
+	const parsed = parseJSON(json);
+	if (!parsed.success) {
+		throw new Error(parsed.error.plainLanguageExplanation);
+	}
+
+	const inferred = inferSchemaFromValues([parsed.data as JsonValue]);
+	const schema: JsonSchema = {
+		$schema: 'https://json-schema.org/draft/2020-12/schema',
+		...inferred
+	};
+
+	return JSON.stringify(schema, null, 2);
+}
+
 export async function jsonpathQuery(json: string, query: string): Promise<unknown> {
 	const { JSONPath } = await import('jsonpath-plus');
 	const parsed = JSON.parse(json) as JsonValue;
@@ -171,6 +199,135 @@ function formatMarkdownCell(value: unknown): string {
 	}
 
 	return String(value).replaceAll('|', '\\|').replaceAll('\n', '<br>');
+}
+
+function inferSchemaFromValues(values: JsonValue[]): JsonSchema {
+	if (values.length === 0) {
+		return {};
+	}
+
+	if (values.every(isJsonObject)) {
+		return inferObjectSchema(values);
+	}
+
+	if (values.every(isJsonArray)) {
+		return inferArraySchema(values);
+	}
+
+	if (values.every(isJsonPrimitive)) {
+		return inferPrimitiveSchema(values);
+	}
+
+	const variants = dedupeSchemas(values.map((value) => inferSchemaFromValues([value])));
+	if (variants.length === 1) {
+		return variants[0];
+	}
+
+	return { anyOf: variants };
+}
+
+function inferObjectSchema(objects: JsonObject[]): JsonSchema {
+	const allKeys = new Set<string>();
+	const keyCounts = new Map<string, number>();
+	const valueBuckets = new Map<string, JsonValue[]>();
+
+	for (const objectValue of objects) {
+		for (const [key, value] of Object.entries(objectValue)) {
+			allKeys.add(key);
+			keyCounts.set(key, (keyCounts.get(key) ?? 0) + 1);
+			const existingValues = valueBuckets.get(key) ?? [];
+			existingValues.push(value);
+			valueBuckets.set(key, existingValues);
+		}
+	}
+
+	const sortedKeys = Array.from(allKeys).sort((left, right) => left.localeCompare(right));
+	const properties: Record<string, JsonSchema> = {};
+	for (const key of sortedKeys) {
+		properties[key] = inferSchemaFromValues(valueBuckets.get(key) ?? []);
+	}
+
+	const required = sortedKeys.filter((key) => (keyCounts.get(key) ?? 0) === objects.length);
+
+	return {
+		type: 'object',
+		properties,
+		required: required.length > 0 ? required : undefined,
+		additionalProperties: false
+	};
+}
+
+function inferArraySchema(arrays: JsonArray[]): JsonSchema {
+	const flattened = arrays.flat();
+	return {
+		type: 'array',
+		items: flattened.length > 0 ? inferSchemaFromValues(flattened) : {}
+	};
+}
+
+function inferPrimitiveSchema(values: JsonScalar[]): JsonSchema {
+	const types = normalizePrimitiveTypes(values.map((value) => getPrimitiveSchemaType(value)));
+	const enumValues = inferEnum(values);
+
+	return {
+		type: types.length === 1 ? types[0] : types,
+		enum: enumValues
+	};
+}
+
+function inferEnum(values: JsonScalar[]): JsonScalar[] | undefined {
+	if (values.length < 2) {
+		return undefined;
+	}
+
+	const uniqueValues = Array.from(new Set(values));
+	if (uniqueValues.length === 0 || uniqueValues.length > 8) {
+		return undefined;
+	}
+
+	if (uniqueValues.length <= 3 || uniqueValues.length < values.length) {
+		return uniqueValues;
+	}
+
+	return undefined;
+}
+
+function normalizePrimitiveTypes(types: JsonSchemaType[]): JsonSchemaType[] {
+	const unique = Array.from(new Set(types));
+	if (unique.includes('number') && unique.includes('integer')) {
+		return unique.filter((type) => type !== 'integer');
+	}
+	return unique;
+}
+
+function getPrimitiveSchemaType(value: JsonScalar): JsonSchemaType {
+	if (value === null) return 'null';
+	if (typeof value === 'string') return 'string';
+	if (typeof value === 'boolean') return 'boolean';
+	return Number.isInteger(value) ? 'integer' : 'number';
+}
+
+function isJsonPrimitive(value: JsonValue): value is JsonScalar {
+	return value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
+}
+
+function isJsonArray(value: JsonValue): value is JsonArray {
+	return Array.isArray(value);
+}
+
+function isJsonObject(value: JsonValue): value is JsonObject {
+	return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function dedupeSchemas(schemas: JsonSchema[]): JsonSchema[] {
+	const unique = new Map<string, JsonSchema>();
+	for (const schema of schemas) {
+		const key = JSON.stringify(schema);
+		if (!unique.has(key)) {
+			unique.set(key, schema);
+		}
+	}
+	return Array.from(unique.values());
 }
 
 function cleanJsonValue(value: JsonValue, options: FormatOptions): JsonValue | undefined {

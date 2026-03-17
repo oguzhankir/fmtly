@@ -1337,6 +1337,32 @@ const registryIt: Record<string, string> = {
 		'Generare seed SQL da dati di fogli di calcolo per migrazioni di database',
 	'tool.csv-to-sql.use_case.1':
 		'Importare rapidamente dati CSV in database SQL senza scrivere script personalizzati',
+	'tool.json-schema-generator.display_name': 'Generatore di JSON Schema',
+	'tool.json-schema-generator.tagline': 'Inferire JSON Schema da esempi JSON',
+	'tool.json-schema-generator.description':
+		'Genera uno JSON Schema Draft 2020-12 da qualsiasi documento JSON. Rileva automaticamente strutture annidate, array, campi obbligatori, tipi di dato e possibili enum.',
+	'tool.json-schema-generator.primary_keyword': 'generatore json schema',
+	'tool.json-schema-generator.meta_title': 'Generatore di JSON Schema — fmtly.dev',
+	'tool.json-schema-generator.meta_description':
+		'Inferisci JSON Schema da JSON direttamente nel browser. Rileva tipi annidati, campi required e candidati enum senza upload.',
+	'tool.json-schema-generator.operation': 'Genera Schema',
+	'tool.json-schema-generator.faq.0.question': 'Come vengono rilevati i campi obbligatori?',
+	'tool.json-schema-generator.faq.0.answer':
+		'Negli oggetti, le chiavi presenti in tutte le voci osservate vengono marcate come required. Le chiavi mancanti restano opzionali.',
+	'tool.json-schema-generator.faq.1.question': 'Come vengono inferiti gli enum?',
+	'tool.json-schema-generator.faq.1.answer':
+		'Se un campo presenta un insieme piccolo e ricorrente di valori scalari, il generatore aggiunge un enum per rappresentare quelle categorie.',
+	'tool.json-schema-generator.faq.2.question': 'Quale versione di JSON Schema viene generata?',
+	'tool.json-schema-generator.faq.2.answer':
+		"L'output include la URI $schema Draft 2020-12 e usa parole chiave standard come type, properties, required, anyOf e items.",
+	'tool.json-schema-generator.use_case.0':
+		'Creare rapidamente contratti API iniziali da payload reali',
+	'tool.json-schema-generator.use_case.1':
+		'Preparare schemi di validazione per fixture e dati di test',
+	'tool.json-schema-generator.use_case.2':
+		'Documentare velocemente formati JSON annidati per integrazioni',
+	'tool.json-schema-generator.use_case.3':
+		'Generare uno schema di base prima di rifinire i vincoli manualmente',
 	'ui.csv.controls.table_name': 'Nome Tabella',
 	'ui.csv.controls.batch_size': 'Dimensione Batch'
 };

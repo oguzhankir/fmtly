@@ -1345,6 +1345,32 @@ const registryEs: Record<string, string> = {
 		'Generar seeds SQL a partir de datos de hojas de cálculo para migraciones de bases de datos',
 	'tool.csv-to-sql.use_case.1':
 		'Importar rápidamente datos CSV a bases de datos SQL sin escribir scripts personalizados',
+	'tool.json-schema-generator.display_name': 'Generador de JSON Schema',
+	'tool.json-schema-generator.tagline': 'Inferir JSON Schema a partir de ejemplos JSON',
+	'tool.json-schema-generator.description':
+		'Genere un JSON Schema Draft 2020-12 desde cualquier documento JSON. Detecta automáticamente estructuras anidadas, arrays, campos obligatorios, tipos y posibles enum.',
+	'tool.json-schema-generator.primary_keyword': 'generador json schema',
+	'tool.json-schema-generator.meta_title': 'Generador de JSON Schema — fmtly.dev',
+	'tool.json-schema-generator.meta_description':
+		'Infiere JSON Schema desde JSON en tu navegador. Detecta tipos anidados, campos required y candidatos enum sin subir datos.',
+	'tool.json-schema-generator.operation': 'Generar Esquema',
+	'tool.json-schema-generator.faq.0.question': '¿Cómo se detectan los campos obligatorios?',
+	'tool.json-schema-generator.faq.0.answer':
+		'En objetos, las claves presentes en todos los registros observados se marcan como required. Las que faltan en alguno se consideran opcionales.',
+	'tool.json-schema-generator.faq.1.question': '¿Cómo se infieren los enum?',
+	'tool.json-schema-generator.faq.1.answer':
+		'Si un campo tiene un conjunto pequeño y repetido de valores escalares, el generador agrega un enum para representar esas categorías.',
+	'tool.json-schema-generator.faq.2.question': '¿Qué versión de JSON Schema se genera?',
+	'tool.json-schema-generator.faq.2.answer':
+		'La salida incluye la URI $schema de Draft 2020-12 y usa palabras clave estándar como type, properties, required, anyOf e items.',
+	'tool.json-schema-generator.use_case.0':
+		'Crear contratos de API iniciales a partir de payloads reales',
+	'tool.json-schema-generator.use_case.1':
+		'Preparar esquemas de validación para fixtures y datos de prueba',
+	'tool.json-schema-generator.use_case.2':
+		'Documentar rápidamente formatos JSON anidados para integraciones',
+	'tool.json-schema-generator.use_case.3':
+		'Generar un esquema base antes de refinar restricciones manualmente',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };

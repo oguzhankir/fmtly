@@ -42,12 +42,22 @@
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isMinifier = $derived(toolSlug === 'minifier');
 	let isConverter = $derived(
-		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown'].includes(toolSlug)
-	);
-	let needsValidJson = $derived(
-		['formatter', 'viewer', 'minifier', 'to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown'].includes(
+		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown', 'schema-generator'].includes(
 			toolSlug
 		)
+	);
+	let needsValidJson = $derived(
+		[
+			'formatter',
+			'viewer',
+			'minifier',
+			'to-yaml',
+			'to-csv',
+			'to-xml',
+			'to-toml',
+			'to-markdown',
+			'schema-generator'
+		].includes(toolSlug)
 	);
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
 	let supportsCompare = $derived(toolSlug === 'formatter' || toolSlug === 'minifier');

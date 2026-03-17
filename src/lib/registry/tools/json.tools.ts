@@ -318,6 +318,64 @@ export const jsonTools: ToolDefinition[] = [
 ]`
 	},
 	{
+		id: 'json-schema-generator',
+		category: 'json',
+		slug: 'schema-generator',
+		displayName: 'tool.json-schema-generator.display_name',
+		tagline: 'tool.json-schema-generator.tagline',
+		description: 'tool.json-schema-generator.description',
+		primaryKeyword: 'tool.json-schema-generator.primary_keyword',
+		metaTitle: 'tool.json-schema-generator.meta_title',
+		metaDescription: 'tool.json-schema-generator.meta_description',
+		engine: 'json',
+		operation: 'tool.json-schema-generator.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'json',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'json', slug: 'to-toml' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-schema-generator.faq.0.question',
+				answer: 'tool.json-schema-generator.faq.0.answer'
+			},
+			{
+				question: 'tool.json-schema-generator.faq.1.question',
+				answer: 'tool.json-schema-generator.faq.1.answer'
+			},
+			{
+				question: 'tool.json-schema-generator.faq.2.question',
+				answer: 'tool.json-schema-generator.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-schema-generator.use_case.0',
+			'tool.json-schema-generator.use_case.1',
+			'tool.json-schema-generator.use_case.2',
+			'tool.json-schema-generator.use_case.3'
+		],
+		sampleInput: `{
+  "project": "fmtly",
+  "tier": "pro",
+  "active": true,
+  "limits": {
+    "requestsPerMinute": 120,
+    "burst": 200
+  },
+  "environments": [
+    { "name": "production", "region": "eu-west-1", "enabled": true },
+    { "name": "staging", "region": "eu-west-1", "enabled": true },
+    { "name": "development", "region": "us-east-1", "enabled": false }
+  ],
+  "features": ["json", "schema", "validation"]
+}`
+	},
+	{
 		id: 'json-jsonpath',
 		category: 'json',
 		slug: 'jsonpath',

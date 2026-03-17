@@ -57,12 +57,12 @@ Core category — format, validate, convert, diff, and query structured data.
 | 44 | TOML → XML | `toml/to-xml` | done | Convert TOML to XML. |
 | 45 | TOML → HTML | `toml/to-html` | done | Render TOML as a nested HTML table. |
 | 46 | TOML Diff | `toml/diff` | done | Side-by-side diff of two TOML documents. |
+| 47 | JSON Schema Generator | `json/schema-generator` | done | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
 
 ### Backlog — Data Formats
 
-| 47 | Tool | Slug | Description |
+| 48 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 48 | JSON Schema Generator | `json/schema-generator` | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
 | 49 | JSON ↔ JSON Schema Validator | `json/schema-validate` | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
 | 50 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
 | 51 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |

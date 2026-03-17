@@ -1303,6 +1303,32 @@ const registryEn: Record<string, string> = {
 	'tool.csv-to-sql.use_case.0': 'Generate SQL seeds from spreadsheet data for database migrations',
 	'tool.csv-to-sql.use_case.1':
 		'Quickly import CSV data into SQL databases without writing custom scripts',
+	'tool.json-schema-generator.display_name': 'JSON Schema Generator',
+	'tool.json-schema-generator.tagline': 'Infer JSON Schema from JSON samples',
+	'tool.json-schema-generator.description':
+		'Generate a Draft 2020-12 JSON Schema from any JSON document. Infers nested objects, arrays, required fields, primitive types, and candidate enum values.',
+	'tool.json-schema-generator.primary_keyword': 'json schema generator',
+	'tool.json-schema-generator.meta_title': 'JSON Schema Generator — fmtly.dev',
+	'tool.json-schema-generator.meta_description':
+		'Infer JSON Schema from JSON instantly in your browser. Auto-detects nested types, required fields, and enum candidates. No data leaves your device.',
+	'tool.json-schema-generator.operation': 'Generate Schema',
+	'tool.json-schema-generator.faq.0.question': 'How are required fields detected?',
+	'tool.json-schema-generator.faq.0.answer':
+		'For objects, keys that appear in all observed entries are marked as required. Missing keys are treated as optional.',
+	'tool.json-schema-generator.faq.1.question': 'How are enums inferred?',
+	'tool.json-schema-generator.faq.1.answer':
+		'When a field has a small, repeating set of scalar values, the generator adds an enum to capture those likely categories.',
+	'tool.json-schema-generator.faq.2.question': 'Which JSON Schema draft is generated?',
+	'tool.json-schema-generator.faq.2.answer':
+		'The output includes the JSON Schema Draft 2020-12 $schema URI and uses standard keywords such as type, properties, required, anyOf, and items.',
+	'tool.json-schema-generator.use_case.0':
+		'Bootstrap API contracts from real sample payloads before formal schema design',
+	'tool.json-schema-generator.use_case.1':
+		'Create validation schemas for test fixtures and mock data generation',
+	'tool.json-schema-generator.use_case.2':
+		'Quickly document nested JSON event formats for integrations',
+	'tool.json-schema-generator.use_case.3':
+		'Prepare a baseline schema before refining constraints manually',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

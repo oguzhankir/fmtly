@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { formatJSON, minifyJSON } from '../../../src/lib/engines/json/formatter.js';
-import { toMarkdownTable, toToml, toYaml } from '../../../src/lib/engines/json/json.engine.js';
+import {
+	generateJsonSchema,
+	toMarkdownTable,
+	toToml,
+	toYaml
+} from '../../../src/lib/engines/json/json.engine.js';
 import { parseJSON } from '../../../src/lib/engines/json/parser.js';
 import { repairJSON } from '../../../src/lib/engines/json/repairer.js';
 import { sortJSONKeys } from '../../../src/lib/engines/json/sorter.js';
@@ -251,6 +256,71 @@ describe('advanced json conversions', () => {
 		const result = await toMarkdownTable('[{"name":"fmtly","type":"tool"}]');
 		expect(result).toContain('| name | type |');
 		expect(result).toContain('| fmtly | tool |');
+	});
+});
+
+describe('generateJsonSchema', () => {
+	it('infers required fields and enum values from object arrays', () => {
+		const schemaText = generateJsonSchema(`{
+  "users": [
+    { "id": 1, "role": "admin", "active": true },
+    { "id": 2, "role": "editor", "active": true },
+    { "id": 3, "role": "admin", "active": false }
+  ]
+}`);
+		const schema = JSON.parse(schemaText) as Record<string, unknown>;
+		const properties = schema.properties as Record<string, unknown>;
+		const users = properties.users as Record<string, unknown>;
+		const userItems = users.items as Record<string, unknown>;
+		const userProperties = userItems.properties as Record<string, unknown>;
+
+		expect(schema.$schema).toBe('https://json-schema.org/draft/2020-12/schema');
+		expect(schema.type).toBe('object');
+		expect((schema.required as string[]).includes('users')).toBe(true);
+		expect(userItems.type).toBe('object');
+		expect(userItems.required).toEqual(['active', 'id', 'role']);
+		expect(userProperties.id).toMatchObject({ type: 'integer' });
+		expect(userProperties.active).toMatchObject({ type: 'boolean', enum: [true, false] });
+		expect(userProperties.role).toMatchObject({ type: 'string', enum: ['admin', 'editor'] });
+	});
+
+	it('infers nested arrays and optional fields', () => {
+		const schemaText = generateJsonSchema(`{
+  "orders": [
+    { "id": 1001, "tags": ["new", "priority"], "note": "rush" },
+    { "id": 1002, "tags": ["new"] },
+    { "id": 1003, "tags": ["return"] }
+  ]
+}`);
+		const schema = JSON.parse(schemaText) as Record<string, unknown>;
+		const orders = (schema.properties as Record<string, Record<string, unknown>>).orders;
+		const orderItems = orders.items as Record<string, unknown>;
+		const orderProps = orderItems.properties as Record<string, unknown>;
+
+		expect(orderItems.required).toEqual(['id', 'tags']);
+		expect(orderProps.note).toMatchObject({ type: 'string' });
+		expect(orderProps.tags).toMatchObject({ type: 'array' });
+		expect((orderProps.tags as Record<string, Record<string, unknown>>).items).toMatchObject({
+			type: 'string',
+			enum: ['new', 'priority', 'return']
+		});
+	});
+
+	it('emits union types for mixed primitive arrays', () => {
+		const schemaText = generateJsonSchema('[1, "two", null]');
+		const schema = JSON.parse(schemaText) as Record<string, unknown>;
+		const items = schema.items as Record<string, unknown>;
+		const itemTypes = items.type as string[];
+
+		expect(schema.type).toBe('array');
+		expect(Array.isArray(itemTypes)).toBe(true);
+		expect(itemTypes).toContain('integer');
+		expect(itemTypes).toContain('string');
+		expect(itemTypes).toContain('null');
+	});
+
+	it('throws for invalid JSON input', () => {
+		expect(() => generateJsonSchema('{invalid')).toThrow();
 	});
 });
 
