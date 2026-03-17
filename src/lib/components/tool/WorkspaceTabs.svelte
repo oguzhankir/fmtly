@@ -52,6 +52,8 @@
 				return $t('ui.validator.schema', 'Schema');
 			case 'to-sql':
 				return $t('ui.convert.to_sql', 'CSV → SQL');
+			case 'case':
+				return $t('ui.text_case.tab_label', 'Case');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

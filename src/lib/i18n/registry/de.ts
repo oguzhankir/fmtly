@@ -1395,6 +1395,35 @@ const registryDe: Record<string, string> = {
 		'Lesezeit für Blogposts, Dokumentation und Release Notes schätzen',
 	'tool.text-word-character-counter.use_case.3':
 		'Textentwürfe anhand objektiver Längenmetriken vergleichen',
+	'tool.text-string-case-converter.display_name': 'String Case Converter',
+	'tool.text-string-case-converter.tagline':
+		'Text in camelCase, PascalCase, snake_case, kebab-case und weitere Stile umwandeln',
+	'tool.text-string-case-converter.description':
+		'Konvertieren Sie Text sofort zwischen camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case und Satzschreibung. Schnell, privat und vollständig im Browser.',
+	'tool.text-string-case-converter.primary_keyword': 'string case converter',
+	'tool.text-string-case-converter.meta_title': 'String Case Converter — fmtly.dev',
+	'tool.text-string-case-converter.meta_description':
+		'Kostenloser Online-String-Case-Converter für camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case und Satzschreibung.',
+	'tool.text-string-case-converter.operation': 'Case umwandeln',
+	'tool.text-string-case-converter.faq.0.question': 'Welche Namensstile werden unterstützt?',
+	'tool.text-string-case-converter.faq.0.answer':
+		'Das Tool unterstützt camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case und Satzschreibung in einer Ansicht.',
+	'tool.text-string-case-converter.faq.1.question':
+		'Kann gemischte Eingabe wie camelCase, Unterstriche und Bindestriche verarbeitet werden?',
+	'tool.text-string-case-converter.faq.1.answer':
+		'Ja. Gemischte Trennzeichen und vorhandene Groß-/Kleinschreibung werden zuerst tokenisiert und dann konsistent in jedes Zielformat umgewandelt.',
+	'tool.text-string-case-converter.faq.2.question':
+		'Passiert die Umwandlung lokal auf meinem Gerät?',
+	'tool.text-string-case-converter.faq.2.answer':
+		'Ja. Die gesamte Konvertierung läuft im Browser, ohne dass Text auf einen Server hochgeladen wird.',
+	'tool.text-string-case-converter.use_case.0':
+		'API-Feldnamen und Konfigurationsschlüssel zwischen Namenskonventionen vereinheitlichen',
+	'tool.text-string-case-converter.use_case.1':
+		'UI-Beschriftungen schnell in codefähige Variablennamen umwandeln',
+	'tool.text-string-case-converter.use_case.2':
+		'Namenskonventionen im Team über Doku, Schemas und Payload-Beispiele hinweg standardisieren',
+	'tool.text-string-case-converter.use_case.3':
+		'Konsistente Bezeichner für TypeScript, Python, SQL und Shell-Skripte vorbereiten',
 	'ui.text_counter.words': 'Wörter',
 	'ui.text_counter.characters': 'Zeichen',
 	'ui.text_counter.characters_no_spaces': 'Zeichen (ohne Leerzeichen)',
@@ -1404,6 +1433,15 @@ const registryDe: Record<string, string> = {
 	'ui.text_counter.minutes': 'Min',
 	'ui.text_counter.lines': 'Zeilen',
 	'ui.text_counter.placeholder': 'Text hier eingeben oder einfügen...',
+	'ui.text_case.tab_label': 'Case',
+	'ui.text_case.placeholder': 'Text eingeben oder einfügen, um die Schreibweise zu konvertieren...',
+	'ui.text_case.camel_case': 'camelCase',
+	'ui.text_case.pascal_case': 'PascalCase',
+	'ui.text_case.snake_case': 'snake_case',
+	'ui.text_case.kebab_case': 'kebab-case',
+	'ui.text_case.constant_case': 'CONSTANT_CASE',
+	'ui.text_case.title_case': 'Title Case',
+	'ui.text_case.sentence_case': 'Satzschreibung',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };

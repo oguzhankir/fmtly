@@ -1453,6 +1453,35 @@ const registryEs: Record<string, string> = {
 		'Estimar tiempo de lectura para posts, docs y notas de versión',
 	'tool.text-word-character-counter.use_case.3':
 		'Comparar borradores con métricas objetivas de longitud',
+	'tool.text-string-case-converter.display_name': 'Convertidor de Formato de Texto',
+	'tool.text-string-case-converter.tagline':
+		'Convierte texto entre camelCase, PascalCase, snake_case, kebab-case y más',
+	'tool.text-string-case-converter.description':
+		'Convierte texto al instante entre camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case y formato de oración. Rápido, privado y 100% en el navegador.',
+	'tool.text-string-case-converter.primary_keyword': 'convertidor string case',
+	'tool.text-string-case-converter.meta_title': 'Convertidor de Formato de Texto — fmtly.dev',
+	'tool.text-string-case-converter.meta_description':
+		'Convertidor gratuito de formato de texto para camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case y formato de oración.',
+	'tool.text-string-case-converter.operation': 'Convertir Formato',
+	'tool.text-string-case-converter.faq.0.question': '¿Qué estilos de nombres admite?',
+	'tool.text-string-case-converter.faq.0.answer':
+		'La herramienta admite camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case y formato de oración en una sola vista.',
+	'tool.text-string-case-converter.faq.1.question':
+		'¿Puede procesar entradas mixtas con camelCase, guiones bajos y guiones?',
+	'tool.text-string-case-converter.faq.1.answer':
+		'Sí. Primero tokeniza delimitadores mixtos y mayúsculas/minúsculas existentes, luego convierte de forma consistente a cada estilo objetivo.',
+	'tool.text-string-case-converter.faq.2.question':
+		'¿La conversión se hace localmente en mi dispositivo?',
+	'tool.text-string-case-converter.faq.2.answer':
+		'Sí. Toda la conversión se ejecuta en tu navegador y no se envía texto al servidor.',
+	'tool.text-string-case-converter.use_case.0':
+		'Normalizar campos de API y claves de configuración entre distintas convenciones',
+	'tool.text-string-case-converter.use_case.1':
+		'Convertir etiquetas de UI en nombres de variables listos para código',
+	'tool.text-string-case-converter.use_case.2':
+		'Estandarizar patrones de nombres en documentación, esquemas y ejemplos de payload',
+	'tool.text-string-case-converter.use_case.3':
+		'Preparar identificadores consistentes para TypeScript, Python, SQL y scripts de shell',
 	'ui.text_counter.words': 'Palabras',
 	'ui.text_counter.characters': 'Caracteres',
 	'ui.text_counter.characters_no_spaces': 'Caracteres (sin espacios)',
@@ -1462,6 +1491,15 @@ const registryEs: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'líneas',
 	'ui.text_counter.placeholder': 'Escribe o pega tu texto aquí...',
+	'ui.text_case.tab_label': 'Formato',
+	'ui.text_case.placeholder': 'Escribe o pega texto para convertir su formato...',
+	'ui.text_case.camel_case': 'camelCase',
+	'ui.text_case.pascal_case': 'PascalCase',
+	'ui.text_case.snake_case': 'snake_case',
+	'ui.text_case.kebab_case': 'kebab-case',
+	'ui.text_case.constant_case': 'CONSTANT_CASE',
+	'ui.text_case.title_case': 'Title Case',
+	'ui.text_case.sentence_case': 'Formato de oración',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };

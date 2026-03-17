@@ -1410,6 +1410,35 @@ const registryEn: Record<string, string> = {
 		'Estimate reading time for blog posts, docs, and release notes',
 	'tool.text-word-character-counter.use_case.3':
 		'Compare draft versions using objective text length metrics',
+	'tool.text-string-case-converter.display_name': 'String Case Converter',
+	'tool.text-string-case-converter.tagline':
+		'Convert text between camelCase, PascalCase, snake_case, kebab-case, and more',
+	'tool.text-string-case-converter.description':
+		'Convert text instantly between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, and Sentence case. Fast, private, and fully browser-based.',
+	'tool.text-string-case-converter.primary_keyword': 'string case converter',
+	'tool.text-string-case-converter.meta_title': 'String Case Converter — fmtly.dev',
+	'tool.text-string-case-converter.meta_description':
+		'Free online string case converter for camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, and Sentence case.',
+	'tool.text-string-case-converter.operation': 'Convert Case',
+	'tool.text-string-case-converter.faq.0.question':
+		'Which naming styles does the converter support?',
+	'tool.text-string-case-converter.faq.0.answer':
+		'The tool supports camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, and Sentence case in one view.',
+	'tool.text-string-case-converter.faq.1.question':
+		'Can it parse mixed input like camelCase, underscores, and hyphens?',
+	'tool.text-string-case-converter.faq.1.answer':
+		'Yes. Mixed delimiters and existing casing are tokenized first, then converted to each target style consistently.',
+	'tool.text-string-case-converter.faq.2.question': 'Does text conversion happen locally?',
+	'tool.text-string-case-converter.faq.2.answer':
+		'Yes. All case conversion runs in your browser and no text is sent to a server.',
+	'tool.text-string-case-converter.use_case.0':
+		'Normalize API fields and config keys across different naming conventions',
+	'tool.text-string-case-converter.use_case.1':
+		'Convert UI labels into code-ready variable names quickly',
+	'tool.text-string-case-converter.use_case.2':
+		'Standardize team naming patterns in docs, schemas, and payload examples',
+	'tool.text-string-case-converter.use_case.3':
+		'Prepare consistent identifiers for TypeScript, Python, SQL, and shell scripts',
 	'ui.text_counter.words': 'Words',
 	'ui.text_counter.characters': 'Characters',
 	'ui.text_counter.characters_no_spaces': 'Characters (no spaces)',
@@ -1419,6 +1448,15 @@ const registryEn: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'lines',
 	'ui.text_counter.placeholder': 'Type or paste your text here...',
+	'ui.text_case.tab_label': 'Case',
+	'ui.text_case.placeholder': 'Type or paste text to convert case...',
+	'ui.text_case.camel_case': 'camelCase',
+	'ui.text_case.pascal_case': 'PascalCase',
+	'ui.text_case.snake_case': 'snake_case',
+	'ui.text_case.kebab_case': 'kebab-case',
+	'ui.text_case.constant_case': 'CONSTANT_CASE',
+	'ui.text_case.title_case': 'Title Case',
+	'ui.text_case.sentence_case': 'Sentence case',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

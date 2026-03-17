@@ -1474,6 +1474,35 @@ const registryFr: Record<string, string> = {
 		'Estimer le temps de lecture de billets, docs et notes de version',
 	'tool.text-word-character-counter.use_case.3':
 		'Comparer des brouillons avec des métriques objectives de longueur',
+	'tool.text-string-case-converter.display_name': 'Convertisseur de Casse',
+	'tool.text-string-case-converter.tagline':
+		'Convertissez du texte entre camelCase, PascalCase, snake_case, kebab-case et plus',
+	'tool.text-string-case-converter.description':
+		'Convertissez instantanément du texte entre camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case et casse de phrase. Rapide, privé et entièrement dans le navigateur.',
+	'tool.text-string-case-converter.primary_keyword': 'convertisseur de casse',
+	'tool.text-string-case-converter.meta_title': 'Convertisseur de Casse — fmtly.dev',
+	'tool.text-string-case-converter.meta_description':
+		'Convertisseur de casse gratuit pour camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case et casse de phrase.',
+	'tool.text-string-case-converter.operation': 'Convertir la Casse',
+	'tool.text-string-case-converter.faq.0.question': 'Quels styles de nommage sont pris en charge ?',
+	'tool.text-string-case-converter.faq.0.answer':
+		'L’outil prend en charge camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case et la casse de phrase dans une seule vue.',
+	'tool.text-string-case-converter.faq.1.question':
+		'Peut-il traiter des entrées mixtes avec camelCase, underscores et tirets ?',
+	'tool.text-string-case-converter.faq.1.answer':
+		'Oui. Les délimiteurs mixtes et la casse existante sont d’abord découpés en tokens, puis convertis de façon cohérente dans chaque style cible.',
+	'tool.text-string-case-converter.faq.2.question':
+		'La conversion se fait-elle localement sur mon appareil ?',
+	'tool.text-string-case-converter.faq.2.answer':
+		'Oui. Toute la conversion s’exécute dans votre navigateur sans envoi du texte au serveur.',
+	'tool.text-string-case-converter.use_case.0':
+		'Normaliser les champs API et les clés de configuration entre plusieurs conventions',
+	'tool.text-string-case-converter.use_case.1':
+		'Convertir rapidement des libellés UI en noms de variables prêts pour le code',
+	'tool.text-string-case-converter.use_case.2':
+		'Standardiser les conventions de nommage entre documentation, schémas et exemples de payload',
+	'tool.text-string-case-converter.use_case.3':
+		'Préparer des identifiants cohérents pour TypeScript, Python, SQL et scripts shell',
 	'ui.text_counter.words': 'Mots',
 	'ui.text_counter.characters': 'Caractères',
 	'ui.text_counter.characters_no_spaces': 'Caractères (sans espaces)',
@@ -1483,6 +1512,15 @@ const registryFr: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'lignes',
 	'ui.text_counter.placeholder': 'Saisissez ou collez votre texte ici...',
+	'ui.text_case.tab_label': 'Casse',
+	'ui.text_case.placeholder': 'Saisissez ou collez du texte pour convertir la casse...',
+	'ui.text_case.camel_case': 'camelCase',
+	'ui.text_case.pascal_case': 'PascalCase',
+	'ui.text_case.snake_case': 'snake_case',
+	'ui.text_case.kebab_case': 'kebab-case',
+	'ui.text_case.constant_case': 'CONSTANT_CASE',
+	'ui.text_case.title_case': 'Title Case',
+	'ui.text_case.sentence_case': 'Casse de phrase',
 	'ui.csv.controls.table_name': 'Nom de Table',
 	'ui.csv.controls.batch_size': 'Taille de Lot'
 };
