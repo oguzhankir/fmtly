@@ -1424,6 +1424,32 @@ const registryDe: Record<string, string> = {
 		'Namenskonventionen im Team über Doku, Schemas und Payload-Beispiele hinweg standardisieren',
 	'tool.text-string-case-converter.use_case.3':
 		'Konsistente Bezeichner für TypeScript, Python, SQL und Shell-Skripte vorbereiten',
+	'tool.text-text-reverser.display_name': 'Text-Umkehrer',
+	'tool.text-text-reverser.tagline': 'Text per Klick nach Zeichen, Wörtern oder Zeilen umkehren',
+	'tool.text-text-reverser.description':
+		'Drehen Sie Text sofort nach Zeichen, Wörtern oder Zeilen um. Ideal für schnelle String-Transformationen, Debugging von Textflüssen und Content-Experimente im Browser.',
+	'tool.text-text-reverser.primary_keyword': 'text umkehrer',
+	'tool.text-text-reverser.meta_title': 'Text-Umkehrer — fmtly.dev',
+	'tool.text-text-reverser.meta_description':
+		'Kostenloser Online-Text-Umkehrer, der Text nach Zeichen, Wörtern oder Zeilen sofort umkehrt. Schnell, privat und vollständig im Browser.',
+	'tool.text-text-reverser.operation': 'Text umkehren',
+	'tool.text-text-reverser.faq.0.question': 'Welche Umkehrmodi gibt es?',
+	'tool.text-text-reverser.faq.0.answer':
+		'Sie können Text nach einzelnen Zeichen, nach Wörtern oder nach kompletten Zeilen umkehren. Jeder Modus hat eine eigene Ausgabe.',
+	'tool.text-text-reverser.faq.1.question': 'Bleiben Leerzeichen und Tabs beim Wortmodus erhalten?',
+	'tool.text-text-reverser.faq.1.answer':
+		'Ja. Der Wortmodus kehrt die Token-Reihenfolge um und behält die Whitespace-Struktur bei.',
+	'tool.text-text-reverser.faq.2.question': 'Bleibt mein Text auf dem Gerät?',
+	'tool.text-text-reverser.faq.2.answer':
+		'Ja. Die Umkehrung läuft lokal im Browser, ohne Upload auf einen Server.',
+	'tool.text-text-reverser.use_case.0':
+		'Gespiegelte Strings zum Testen von Parsern und Tokenizern erzeugen',
+	'tool.text-text-reverser.use_case.1':
+		'Mehrzeilige Notizen schnell durch umgekehrte Zeilenreihenfolge neu ordnen',
+	'tool.text-text-reverser.use_case.2':
+		'Word-Splitting-Logik mit Whitespace-erhaltender Ausgabe prüfen',
+	'tool.text-text-reverser.use_case.3':
+		'Spielerische Textvarianten für Content-Experimente erzeugen',
 	'ui.text_counter.words': 'Wörter',
 	'ui.text_counter.characters': 'Zeichen',
 	'ui.text_counter.characters_no_spaces': 'Zeichen (ohne Leerzeichen)',
@@ -1442,6 +1468,12 @@ const registryDe: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Title Case',
 	'ui.text_case.sentence_case': 'Satzschreibung',
+	'ui.text_reverser.tab_label': 'Umkehren',
+	'ui.text_reverser.placeholder': 'Text eingeben oder einfügen, um ihn umzukehren...',
+	'ui.text_reverser.characters': 'Nach Zeichen umkehren',
+	'ui.text_reverser.words': 'Nach Wörtern umkehren',
+	'ui.text_reverser.lines': 'Nach Zeilen umkehren',
+	'ui.text_reverser.lines_count': 'Zeilen',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };

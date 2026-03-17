@@ -22,6 +22,7 @@
 	import CsvOutputPanel from "$components/panels/csv/CsvOutputPanel.svelte";
 	import TextCaseConverterPanel from "$components/panels/text/TextCaseConverterPanel.svelte";
 	import TextCounterPanel from "$components/panels/text/TextCounterPanel.svelte";
+	import TextReverserPanel from "$components/panels/text/TextReverserPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -718,6 +719,8 @@
 				<TextCounterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "case"}
 				<TextCaseConverterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "reverser"}
+				<TextReverserPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

@@ -91,5 +91,49 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 			'tool.text-string-case-converter.use_case.3'
 		],
 		sampleInput: 'user profile API response'
+	},
+	{
+		id: 'text-text-reverser',
+		category: 'text',
+		slug: 'reverser',
+		displayName: 'tool.text-text-reverser.display_name',
+		tagline: 'tool.text-text-reverser.tagline',
+		description: 'tool.text-text-reverser.description',
+		primaryKeyword: 'tool.text-text-reverser.primary_keyword',
+		metaTitle: 'tool.text-text-reverser.meta_title',
+		metaDescription: 'tool.text-text-reverser.meta_description',
+		engine: 'text',
+		operation: 'tool.text-text-reverser.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'text', slug: 'case' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'yaml', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-text-reverser.faq.0.question',
+				answer: 'tool.text-text-reverser.faq.0.answer'
+			},
+			{
+				question: 'tool.text-text-reverser.faq.1.question',
+				answer: 'tool.text-text-reverser.faq.1.answer'
+			},
+			{
+				question: 'tool.text-text-reverser.faq.2.question',
+				answer: 'tool.text-text-reverser.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-text-reverser.use_case.0',
+			'tool.text-text-reverser.use_case.1',
+			'tool.text-text-reverser.use_case.2',
+			'tool.text-text-reverser.use_case.3'
+		],
+		sampleInput: 'line one\nline two\nline three'
 	}
 ];

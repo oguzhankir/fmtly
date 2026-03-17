@@ -1482,6 +1482,31 @@ const registryEs: Record<string, string> = {
 		'Estandarizar patrones de nombres en documentación, esquemas y ejemplos de payload',
 	'tool.text-string-case-converter.use_case.3':
 		'Preparar identificadores consistentes para TypeScript, Python, SQL y scripts de shell',
+	'tool.text-text-reverser.display_name': 'Inversor de Texto',
+	'tool.text-text-reverser.tagline': 'Invierte texto por caracteres, palabras o líneas con un clic',
+	'tool.text-text-reverser.description':
+		'Invierte texto al instante por caracteres, palabras o líneas. Ideal para transformaciones rápidas de cadenas, depuración de flujos de texto y pruebas de contenido en el navegador.',
+	'tool.text-text-reverser.primary_keyword': 'inversor de texto',
+	'tool.text-text-reverser.meta_title': 'Inversor de Texto — fmtly.dev',
+	'tool.text-text-reverser.meta_description':
+		'Inversor de texto gratuito que invierte texto por caracteres, palabras o líneas al instante. Rápido, privado y 100% en el navegador.',
+	'tool.text-text-reverser.operation': 'Invertir Texto',
+	'tool.text-text-reverser.faq.0.question': '¿Qué modos de inversión están disponibles?',
+	'tool.text-text-reverser.faq.0.answer':
+		'Puedes invertir por caracteres individuales, por palabras o por líneas completas. Cada modo se muestra en una salida separada.',
+	'tool.text-text-reverser.faq.1.question':
+		'¿El modo por palabras conserva espacios y tabulaciones?',
+	'tool.text-text-reverser.faq.1.answer':
+		'Sí. El modo por palabras conserva la estructura de espacios mientras invierte el orden de tokens.',
+	'tool.text-text-reverser.faq.2.question': '¿Mi texto permanece en mi dispositivo?',
+	'tool.text-text-reverser.faq.2.answer':
+		'Sí. La inversión se ejecuta localmente en tu navegador y no se sube texto al servidor.',
+	'tool.text-text-reverser.use_case.0':
+		'Generar cadenas espejadas para probar parsers y tokenizadores',
+	'tool.text-text-reverser.use_case.1': 'Reordenar notas multilinea invirtiendo el orden de líneas',
+	'tool.text-text-reverser.use_case.2':
+		'Validar lógica de separación de palabras con salida que preserva espacios',
+	'tool.text-text-reverser.use_case.3': 'Crear variantes de texto para experimentos de contenido',
 	'ui.text_counter.words': 'Palabras',
 	'ui.text_counter.characters': 'Caracteres',
 	'ui.text_counter.characters_no_spaces': 'Caracteres (sin espacios)',
@@ -1500,6 +1525,12 @@ const registryEs: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Title Case',
 	'ui.text_case.sentence_case': 'Formato de oración',
+	'ui.text_reverser.tab_label': 'Invertir',
+	'ui.text_reverser.placeholder': 'Escribe o pega texto para invertirlo...',
+	'ui.text_reverser.characters': 'Invertir por caracteres',
+	'ui.text_reverser.words': 'Invertir por palabras',
+	'ui.text_reverser.lines': 'Invertir por líneas',
+	'ui.text_reverser.lines_count': 'líneas',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };

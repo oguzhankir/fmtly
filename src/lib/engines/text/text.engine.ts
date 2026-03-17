@@ -17,6 +17,12 @@ export type TextCaseConversions = {
 	sentenceCase: string;
 };
 
+export type TextReverseResults = {
+	characters: string;
+	words: string;
+	lines: string;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -61,6 +67,32 @@ function toWordTokens(input: string): string[] {
 	return matches?.map((word) => word.trim()).filter((word) => word.length > 0) ?? [];
 }
 
+function reverseCharacters(input: string): string {
+	return Array.from(input).reverse().join('');
+}
+
+function reverseWords(input: string): string {
+	if (!input.trim()) return input;
+
+	const parts = input.split(/(\s+)/);
+	const words = parts.filter((part) => part.trim().length > 0).reverse();
+	let wordIndex = 0;
+
+	return parts
+		.map((part) => {
+			if (part.trim().length === 0) return part;
+			const word = words[wordIndex];
+			wordIndex += 1;
+			return word;
+		})
+		.join('');
+}
+
+function reverseLines(input: string): string {
+	if (!input) return '';
+	return input.split(/\r?\n/).reverse().join('\n');
+}
+
 export function convertTextCases(input: string): TextCaseConversions {
 	const words = toWordTokens(input);
 	if (words.length === 0) {
@@ -86,6 +118,14 @@ export function convertTextCases(input: string): TextCaseConversions {
 		constantCase: words.map((word) => word.toUpperCase()).join('_'),
 		titleCase: titleWords.join(' '),
 		sentenceCase: `${capitalizeWord(lowerWords[0])}${lowerWords.length > 1 ? ` ${lowerWords.slice(1).join(' ')}` : ''}`
+	};
+}
+
+export function reverseText(input: string): TextReverseResults {
+	return {
+		characters: reverseCharacters(input),
+		words: reverseWords(input),
+		lines: reverseLines(input)
 	};
 }
 
