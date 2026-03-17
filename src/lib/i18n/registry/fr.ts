@@ -1529,7 +1529,36 @@ const registryFr: Record<string, string> = {
 	'tool.text-text-reverser.use_case.2':
 		'Valider la logique de découpage des mots avec une sortie qui préserve les espaces',
 	'tool.text-text-reverser.use_case.3':
-		'Créer des variantes de texte pour des expérimentations éditoriales',
+		'Créer des variantes de texte transformées et amusantes pour les expérimentations éditoriales',
+	'tool.text-duplicate-line-remover.display_name': 'Suppresseur de Lignes en Double',
+	'tool.text-duplicate-line-remover.tagline':
+		"Supprime les lignes en double en préservant l'ordre de première occurrence",
+	'tool.text-duplicate-line-remover.description':
+		'Supprime les lignes en double du texte tout en préservant la première occurrence de chaque ligne. Idéal pour nettoyer les journaux, dédupliquer les listes et préparer des jeux de données uniques dans votre navigateur.',
+	'tool.text-duplicate-line-remover.primary_keyword': 'suppresseur de lignes en double',
+	'tool.text-duplicate-line-remover.meta_title': 'Suppresseur de Lignes en Double — fmtly.dev',
+	'tool.text-duplicate-line-remover.meta_description':
+		"Suppresseur gratuit de lignes en double qui supprime les lignes en double en préservant l'ordre de première occurrence. Rapide, privé et 100% dans votre navigateur.",
+	'tool.text-duplicate-line-remover.operation': 'Supprimer les Doublons',
+	'tool.text-duplicate-line-remover.faq.0.question':
+		'Quelles lignes sont conservées comme doublons ?',
+	'tool.text-duplicate-line-remover.faq.0.answer':
+		'La première occurrence de chaque ligne est conservée ; les lignes identiques suivantes sont supprimées comme doublons.',
+	'tool.text-duplicate-line-remover.faq.1.question':
+		'Les lignes vides sont-elles traitées comme des doublons ?',
+	'tool.text-duplicate-line-remover.faq.1.answer':
+		'Oui. Les lignes vides sont des entrées uniques, donc plusieurs lignes vides seront dédupliquées en une seule ligne vide.',
+	'tool.text-duplicate-line-remover.faq.2.question': 'Mon texte est-il traité localement ?',
+	'tool.text-duplicate-line-remover.faq.2.answer':
+		"Oui. Toute la déduplication s'exécute dans votre navigateur ; votre texte ne quitte jamais votre appareil.",
+	'tool.text-duplicate-line-remover.use_case.0':
+		"Nettoyer les journaux de serveur et les traces d'application en supprimant les entrées répétées",
+	'tool.text-duplicate-line-remover.use_case.1':
+		"Dédupliquer les listes d'URL, les listes d'e-mails ou les enregistrements d'inventaire avant importation",
+	'tool.text-duplicate-line-remover.use_case.2':
+		'Préparer des listes de mots uniques pour tester le vocabulaire ou les modèles de langue',
+	'tool.text-duplicate-line-remover.use_case.3':
+		"Consolider les valeurs de configuration ou les listes de variables d'environnement",
 	'ui.text_counter.words': 'Mots',
 	'ui.text_counter.characters': 'Caractères',
 	'ui.text_counter.characters_no_spaces': 'Caractères (sans espaces)',
@@ -1554,6 +1583,12 @@ const registryFr: Record<string, string> = {
 	'ui.text_reverser.words': 'Inverser par mots',
 	'ui.text_reverser.lines': 'Inverser par lignes',
 	'ui.text_reverser.lines_count': 'lignes',
+	'ui.duplicate_line_remover.tab_label': 'Dédoublonner',
+	'ui.duplicate_line_remover.placeholder':
+		'Tapez ou collez du texte pour supprimer les lignes en double...',
+	'ui.duplicate_line_remover.unique_lines': 'Lignes uniques',
+	'ui.duplicate_line_remover.duplicates_removed': 'Doublons supprimés',
+	'ui.duplicate_line_remover.result': 'Résultat',
 	'ui.csv.controls.table_name': 'Nom de Table',
 	'ui.csv.controls.batch_size': 'Taille de Lot'
 };

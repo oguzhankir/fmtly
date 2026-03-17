@@ -1491,6 +1491,33 @@ const registryTr: Record<string, string> = {
 		'Boşluk korumalı çıktı ile kelime ayrıştırma mantığını doğrulamak',
 	'tool.text-text-reverser.use_case.3':
 		'İçerik denemeleri için eğlenceli dönüştürülmüş metin varyasyonları üretmek',
+	'tool.text-duplicate-line-remover.display_name': 'Tekrar Eden Satır Kaldırıcı',
+	'tool.text-duplicate-line-remover.tagline':
+		'İlk oluşum sırasını koruyarak tekrar eden satırları kaldır',
+	'tool.text-duplicate-line-remover.description':
+		'Her satırın ilk oluşumunu koruyarak metindeki tekrar eden satırları kaldır. Logları temizlemek, listeleri tekilleştirmek ve tarayıcıda benzersiz veri setleri hazırlamak için ideal.',
+	'tool.text-duplicate-line-remover.primary_keyword': 'tekrar eden satır kaldırıcı',
+	'tool.text-duplicate-line-remover.meta_title': 'Tekrar Eden Satır Kaldırıcı — fmtly.dev',
+	'tool.text-duplicate-line-remover.meta_description':
+		'Ücretsiz tekrar eden satır kaldırıcı: ilk oluşum sırasını koruyarak tekrar eden satırları anında kaldır. Hızlı, gizli ve tamamen tarayıcı tabanlı.',
+	'tool.text-duplicate-line-remover.operation': 'Tekrarları Kaldır',
+	'tool.text-duplicate-line-remover.faq.0.question': 'Hangi satırlar tekrar olarak kabul edilir?',
+	'tool.text-duplicate-line-remover.faq.0.answer':
+		'Her satırın ilk görüneni saklanır; sonraki aynı satırlar tekrar olarak kaldırılır.',
+	'tool.text-duplicate-line-remover.faq.1.question': 'Boş satırlar tekrar olarak işlenir mi?',
+	'tool.text-duplicate-line-remover.faq.1.answer':
+		'Evet. Boş satırlar benzersiz girişlerdir, bu yüzden birden fazla boş satır tek bir boş satıra tekilleştirilir.',
+	'tool.text-duplicate-line-remover.faq.2.question': 'Metnim yerel olarak işlenir mi?',
+	'tool.text-duplicate-line-remover.faq.2.answer':
+		'Evet. Tüm tekilleştirme tarayıcınızda çalışır; metniniz asla cihazınızdan dışarı çıkmaz.',
+	'tool.text-duplicate-line-remover.use_case.0':
+		'Tekrar eden girişleri kaldırarak sunucu loglarını ve uygulama izlerini temizlemek',
+	'tool.text-duplicate-line-remover.use_case.1':
+		'URL listelerini, e-posta listelerini veya envanter kayıtlarını içe aktarmadan önce tekilleştirmek',
+	'tool.text-duplicate-line-remover.use_case.2':
+		'Vocabulary veya dil modellerini test etmek için benzersiz kelime listeleri hazırlamak',
+	'tool.text-duplicate-line-remover.use_case.3':
+		'Yapılandırma değerlerini veya ortam değişkeni listelerini birleştirmek',
 	'ui.text_counter.words': 'Kelime',
 	'ui.text_counter.characters': 'Karakter',
 	'ui.text_counter.characters_no_spaces': 'Karakter (boşluksuz)',
@@ -1515,6 +1542,12 @@ const registryTr: Record<string, string> = {
 	'ui.text_reverser.words': 'Kelimeye göre ters çevir',
 	'ui.text_reverser.lines': 'Satıra göre ters çevir',
 	'ui.text_reverser.lines_count': 'satır',
+	'ui.duplicate_line_remover.tab_label': 'Tekilleştir',
+	'ui.duplicate_line_remover.placeholder':
+		'Tekrar eden satırları kaldırmak için metin yazın veya yapıştırın...',
+	'ui.duplicate_line_remover.unique_lines': 'Benzersiz satır',
+	'ui.duplicate_line_remover.duplicates_removed': 'Kaldırılan tekrar',
+	'ui.duplicate_line_remover.result': 'Sonuç',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

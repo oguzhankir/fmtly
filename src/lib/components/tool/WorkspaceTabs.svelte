@@ -56,6 +56,8 @@
 				return $t('ui.text_case.tab_label', 'Case');
 			case 'reverser':
 				return $t('ui.text_reverser.tab_label', 'Reverse');
+			case 'deduplicate':
+				return $t('ui.duplicate_line_remover.tab_label', 'Deduplicate');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

@@ -1464,6 +1464,33 @@ const registryEn: Record<string, string> = {
 		'Validate word-splitting logic with whitespace-preserving reverse output',
 	'tool.text-text-reverser.use_case.3':
 		'Create playful transformed text variants for content experiments',
+	'tool.text-duplicate-line-remover.display_name': 'Duplicate Line Remover',
+	'tool.text-duplicate-line-remover.tagline':
+		'Remove duplicate lines while preserving first occurrence order',
+	'tool.text-duplicate-line-remover.description':
+		'Remove duplicate lines from text while preserving the first occurrence of each line. Ideal for cleaning logs, deduplicating lists, and preparing unique datasets in your browser.',
+	'tool.text-duplicate-line-remover.primary_keyword': 'duplicate line remover',
+	'tool.text-duplicate-line-remover.meta_title': 'Duplicate Line Remover — fmtly.dev',
+	'tool.text-duplicate-line-remover.meta_description':
+		'Free duplicate line remover that removes duplicate lines while preserving first occurrence order. Fast, private, and 100% in your browser.',
+	'tool.text-duplicate-line-remover.operation': 'Remove Duplicates',
+	'tool.text-duplicate-line-remover.faq.0.question': 'Which lines are kept as duplicates?',
+	'tool.text-duplicate-line-remover.faq.0.answer':
+		'The first occurrence of each line is kept; subsequent identical lines are removed as duplicates.',
+	'tool.text-duplicate-line-remover.faq.1.question': 'Are empty lines treated as duplicates?',
+	'tool.text-duplicate-line-remover.faq.1.answer':
+		'Yes. Empty lines are unique entries, so multiple empty lines will be deduplicated to a single empty line.',
+	'tool.text-duplicate-line-remover.faq.2.question': 'Is my text processed locally?',
+	'tool.text-duplicate-line-remover.faq.2.answer':
+		'Yes. All deduplication runs in your browser; your text never leaves your device.',
+	'tool.text-duplicate-line-remover.use_case.0':
+		'Clean server logs and application traces by removing repeated entries',
+	'tool.text-duplicate-line-remover.use_case.1':
+		'Deduplicate URL lists, email lists, or inventory records before import',
+	'tool.text-duplicate-line-remover.use_case.2':
+		'Prepare unique word lists for testing vocabulary or language models',
+	'tool.text-duplicate-line-remover.use_case.3':
+		'Consolidate configuration values or environment variable lists',
 	'ui.text_counter.words': 'Words',
 	'ui.text_counter.characters': 'Characters',
 	'ui.text_counter.characters_no_spaces': 'Characters (no spaces)',
@@ -1488,6 +1515,11 @@ const registryEn: Record<string, string> = {
 	'ui.text_reverser.words': 'Reverse by words',
 	'ui.text_reverser.lines': 'Reverse by lines',
 	'ui.text_reverser.lines_count': 'lines',
+	'ui.duplicate_line_remover.tab_label': 'Deduplicate',
+	'ui.duplicate_line_remover.placeholder': 'Type or paste text to remove duplicate lines...',
+	'ui.duplicate_line_remover.unique_lines': 'Unique lines',
+	'ui.duplicate_line_remover.duplicates_removed': 'Duplicates removed',
+	'ui.duplicate_line_remover.result': 'Result',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

@@ -23,6 +23,12 @@ export type TextReverseResults = {
 	lines: string;
 };
 
+export type TextDuplicateRemovalResult = {
+	removed: string;
+	duplicateCount: number;
+	uniqueCount: number;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -126,6 +132,32 @@ export function reverseText(input: string): TextReverseResults {
 		characters: reverseCharacters(input),
 		words: reverseWords(input),
 		lines: reverseLines(input)
+	};
+}
+
+export function removeDuplicateLines(input: string): TextDuplicateRemovalResult {
+	if (!input) {
+		return { removed: '', duplicateCount: 0, uniqueCount: 0 };
+	}
+
+	const lines = input.split(/\r?\n/);
+	const seen = new Set<string>();
+	const unique: string[] = [];
+	let duplicateCount = 0;
+
+	for (const line of lines) {
+		if (seen.has(line)) {
+			duplicateCount += 1;
+		} else {
+			seen.add(line);
+			unique.push(line);
+		}
+	}
+
+	return {
+		removed: unique.join('\n'),
+		duplicateCount,
+		uniqueCount: unique.length
 	};
 }
 
