@@ -1365,6 +1365,31 @@ const registryFr: Record<string, string> = {
 		'Générer des seeds SQL à partir de données de tableur pour les migrations de bases de données',
 	'tool.csv-to-sql.use_case.1':
 		'Importer rapidement des données CSV dans des bases de données SQL sans écrire de scripts personnalisés',
+	'tool.json-schema-generator.display_name': 'Générateur de schéma JSON',
+	'tool.json-schema-generator.tagline': "Inférer un schéma JSON à partir d'exemples JSON",
+	'tool.json-schema-generator.description':
+		'Générez un schéma JSON Draft 2020-12 à partir de n’importe quel document JSON. Détecte automatiquement les structures imbriquées, les tableaux, les champs requis, les types et les candidats enum.',
+	'tool.json-schema-generator.primary_keyword': 'générateur schéma json',
+	'tool.json-schema-generator.meta_title': 'Générateur de schéma JSON — fmtly.dev',
+	'tool.json-schema-generator.meta_description':
+		'Inférez un schéma JSON depuis du JSON dans votre navigateur. Détecte types imbriqués, champs required et candidats enum sans envoi de données.',
+	'tool.json-schema-generator.operation': 'Générer le schéma',
+	'tool.json-schema-generator.faq.0.question': 'Comment les champs requis sont-ils détectés ?',
+	'tool.json-schema-generator.faq.0.answer':
+		'Pour les objets, les clés présentes dans toutes les entrées observées sont marquées comme required. Les clés manquantes restent optionnelles.',
+	'tool.json-schema-generator.faq.1.question': 'Comment les enums sont-ils inférés ?',
+	'tool.json-schema-generator.faq.1.answer':
+		'Si un champ contient un petit ensemble de valeurs scalaires répétées, le générateur ajoute un enum pour représenter ces catégories.',
+	'tool.json-schema-generator.faq.2.question': 'Quelle version de JSON Schema est générée ?',
+	'tool.json-schema-generator.faq.2.answer':
+		'La sortie inclut l’URI $schema Draft 2020-12 et utilise les mots-clés standards comme type, properties, required, anyOf et items.',
+	'tool.json-schema-generator.use_case.0': 'Ébaucher des contrats API à partir de payloads réels',
+	'tool.json-schema-generator.use_case.1':
+		'Créer des schémas de validation pour fixtures et jeux de test',
+	'tool.json-schema-generator.use_case.2':
+		'Documenter rapidement des formats JSON imbriqués pour des intégrations',
+	'tool.json-schema-generator.use_case.3':
+		'Produire un schéma de base avant affinage manuel des contraintes',
 	'ui.csv.controls.table_name': 'Nom de Table',
 	'ui.csv.controls.batch_size': 'Taille de Lot'
 };

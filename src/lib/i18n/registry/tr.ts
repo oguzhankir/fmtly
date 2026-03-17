@@ -1329,6 +1329,32 @@ const registryTr: Record<string, string> = {
 		'Veritabanı migrationları için e-tablo verilerinden SQL verileri (seed) oluşturma',
 	'tool.csv-to-sql.use_case.1':
 		'Özel scriptler yazmadan CSV verilerini SQL veritabanlarına hızlıca aktarma',
+	'tool.json-schema-generator.display_name': 'JSON Şema Oluşturucu',
+	'tool.json-schema-generator.tagline': 'JSON örneklerinden JSON Şeması çıkarın',
+	'tool.json-schema-generator.description':
+		'Herhangi bir JSON belgesinden Draft 2020-12 uyumlu JSON Şeması üretin. İç içe nesneleri, dizileri, zorunlu alanları, veri tiplerini ve enum adaylarını otomatik algılar.',
+	'tool.json-schema-generator.primary_keyword': 'json şema oluşturucu',
+	'tool.json-schema-generator.meta_title': 'JSON Şema Oluşturucu — fmtly.dev',
+	'tool.json-schema-generator.meta_description':
+		'Tarayıcınızda JSON verisinden anında JSON Şeması üretin. İç içe tipleri, zorunlu alanları ve enum adaylarını otomatik algılar.',
+	'tool.json-schema-generator.operation': 'Şema Üret',
+	'tool.json-schema-generator.faq.0.question': 'Zorunlu alanlar nasıl belirleniyor?',
+	'tool.json-schema-generator.faq.0.answer':
+		'Nesnelerde, gözlemlenen tüm örneklerde bulunan anahtarlar zorunlu (required) olarak işaretlenir. Eksik kalan anahtarlar opsiyonel kabul edilir.',
+	'tool.json-schema-generator.faq.1.question': 'Enum değerleri nasıl çıkarılıyor?',
+	'tool.json-schema-generator.faq.1.answer':
+		'Bir alan küçük ve tekrar eden bir skaler değer kümesine sahipse, araç bu kategorileri enum olarak önerir.',
+	'tool.json-schema-generator.faq.2.question': 'Hangi JSON Schema sürümü üretiliyor?',
+	'tool.json-schema-generator.faq.2.answer':
+		'Çıktı, JSON Schema Draft 2020-12 $schema URI bilgisini içerir ve type, properties, required, anyOf, items gibi standart anahtarları kullanır.',
+	'tool.json-schema-generator.use_case.0':
+		'Resmi şema tasarımından önce gerçek payload örneklerinden API kontratı çıkarmak',
+	'tool.json-schema-generator.use_case.1':
+		'Test verileri ve fixture senaryoları için doğrulama şeması hazırlamak',
+	'tool.json-schema-generator.use_case.2':
+		'Entegrasyonlarda iç içe JSON event formatlarını hızlıca dokümante etmek',
+	'tool.json-schema-generator.use_case.3':
+		'Elle ince ayar yapmadan önce başlangıç şeması oluşturmak',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

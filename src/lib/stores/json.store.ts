@@ -14,6 +14,7 @@ import {
 	type FormatOptions as AdvancedFormatOptions,
 	type JsonStats as AdvancedJsonStats,
 	format as formatAdvancedJson,
+	generateJsonSchema,
 	minify as minifyAdvancedJson,
 	toMarkdownTable,
 	toToml,
@@ -138,6 +139,9 @@ async function applyToolOutput(value: string): Promise<void> {
 		case 'to-markdown':
 			await applyMarkdownOutput(value);
 			return;
+		case 'schema-generator':
+			applySchemaOutput(value);
+			return;
 		case 'validator':
 		case 'jsonpath':
 		case 'jmespath':
@@ -225,6 +229,20 @@ async function applyMarkdownOutput(value: string): Promise<void> {
 	output.set(await toMarkdownTable(value));
 	jsonAdvancedStats.set(null);
 	jsonFormatWarnings.set([]);
+}
+
+function applySchemaOutput(value: string): void {
+	try {
+		output.set(generateJsonSchema(value));
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([
+			error instanceof Error ? error.message : 'Could not generate JSON Schema'
+		]);
+	}
 }
 
 export function setFormatOptions(next: Partial<AdvancedFormatOptions>): void {

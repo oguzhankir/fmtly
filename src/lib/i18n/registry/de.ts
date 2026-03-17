@@ -1288,6 +1288,32 @@ const registryDe: Record<string, string> = {
 		'Generieren von SQL-Seeds aus Tabellenkalkulationsdaten für Datenbankmigrationen',
 	'tool.csv-to-sql.use_case.1':
 		'Schnelles Importieren von CSV-Daten in SQL-Datenbanken ohne benutzerdefinierte Skripte',
+	'tool.json-schema-generator.display_name': 'JSON-Schema-Generator',
+	'tool.json-schema-generator.tagline': 'JSON-Schema aus JSON-Beispielen ableiten',
+	'tool.json-schema-generator.description':
+		'Erzeugen Sie ein JSON-Schema nach Draft 2020-12 aus beliebigen JSON-Dokumenten. Erkennt verschachtelte Strukturen, Arrays, Pflichtfelder, Datentypen und Enum-Kandidaten automatisch.',
+	'tool.json-schema-generator.primary_keyword': 'json schema generator',
+	'tool.json-schema-generator.meta_title': 'JSON-Schema-Generator — fmtly.dev',
+	'tool.json-schema-generator.meta_description':
+		'Leiten Sie JSON-Schemata direkt im Browser aus JSON ab. Erkennt verschachtelte Typen, required-Felder und Enum-Kandidaten automatisch.',
+	'tool.json-schema-generator.operation': 'Schema generieren',
+	'tool.json-schema-generator.faq.0.question': 'Wie werden Pflichtfelder erkannt?',
+	'tool.json-schema-generator.faq.0.answer':
+		'Bei Objekten werden Schlüssel als required markiert, wenn sie in allen beobachteten Einträgen vorhanden sind. Fehlende Schlüssel gelten als optional.',
+	'tool.json-schema-generator.faq.1.question': 'Wie wird enum erkannt?',
+	'tool.json-schema-generator.faq.1.answer':
+		'Wenn ein Feld eine kleine, wiederkehrende Menge skalarer Werte hat, fügt der Generator ein enum hinzu, um diese Kategorien abzubilden.',
+	'tool.json-schema-generator.faq.2.question': 'Welche JSON-Schema-Version wird erzeugt?',
+	'tool.json-schema-generator.faq.2.answer':
+		'Die Ausgabe enthält die Draft-2020-12-$schema-URI und nutzt Standard-Schlüsselwörter wie type, properties, required, anyOf und items.',
+	'tool.json-schema-generator.use_case.0':
+		'API-Verträge aus echten Payload-Beispielen als Startpunkt ableiten',
+	'tool.json-schema-generator.use_case.1':
+		'Validierungsschemata für Testdaten und Fixtures erstellen',
+	'tool.json-schema-generator.use_case.2':
+		'Verschachtelte JSON-Eventformate für Integrationen schnell dokumentieren',
+	'tool.json-schema-generator.use_case.3':
+		'Eine Basisschema-Version vor manueller Verfeinerung erzeugen',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };
