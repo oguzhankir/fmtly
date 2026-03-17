@@ -20,6 +20,7 @@
 	import XmlQueryOutputPanel from "$components/panels/xml/XmlQueryOutputPanel.svelte";
 	import CsvValidatorPanel from "$components/panels/csv/CsvValidatorPanel.svelte";
 	import CsvOutputPanel from "$components/panels/csv/CsvOutputPanel.svelte";
+	import TextCaseConverterPanel from "$components/panels/text/TextCaseConverterPanel.svelte";
 	import TextCounterPanel from "$components/panels/text/TextCounterPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
@@ -715,6 +716,8 @@
 				</div>
 			{:else if data.tool.category === "text" && data.tool.slug === "word-counter"}
 				<TextCounterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "case"}
+				<TextCaseConverterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

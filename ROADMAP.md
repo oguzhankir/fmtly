@@ -108,10 +108,11 @@ Analyze, transform, and manipulate plain text.
 | # | Tool | Slug | Status | Description |
 |---|------|------|--------|-------------|
 | 75 | Word & Character Counter | `text/word-counter` | done | Count words, characters, sentences, paragraphs, and reading time. |
+| 84 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
 
 ### Backlog — Text & String Tools
 
-| 75 | Tool | Slug | Description |
+| 76 | Tool | Slug | Description |
 |---|------|------|-------------|
 | 76 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
 | 77 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
@@ -121,7 +122,6 @@ Analyze, transform, and manipulate plain text.
 | 81 | Markdown → HTML | `text/markdown-to-html` | Convert Markdown to HTML with live preview. Supports GFM tables and syntax highlighting. |
 | 82 | Lorem Ipsum Generator | `text/lorem` | Generate placeholder text in paragraphs, sentences, or words. |
 | 83 | Regex Tester | `text/regex` | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
-| 84 | String Case Converter | `text/case` | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
 | 85 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
 | 86 | Text Escape / Unescape | `text/escape` | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
 

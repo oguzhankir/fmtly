@@ -1435,6 +1435,34 @@ const registryTr: Record<string, string> = {
 		'Blog yazıları ve teknik dokümanlar için okuma süresi tahmini çıkarmak',
 	'tool.text-word-character-counter.use_case.3':
 		'Taslak sürümleri objektif metin uzunluğu metrikleriyle karşılaştırmak',
+	'tool.text-string-case-converter.display_name': 'Metin Harf Biçimi Dönüştürücü',
+	'tool.text-string-case-converter.tagline':
+		'camelCase, PascalCase, snake_case, kebab-case ve daha fazlasına anında dönüştür',
+	'tool.text-string-case-converter.description':
+		'Metni camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Başlık Biçimi ve Cümle biçimi arasında anında dönüştür. Hızlı, gizli ve tamamen tarayıcı içinde çalışır.',
+	'tool.text-string-case-converter.primary_keyword': 'metin harf bicimi donusturucu',
+	'tool.text-string-case-converter.meta_title': 'Metin Harf Biçimi Dönüştürücü — fmtly.dev',
+	'tool.text-string-case-converter.meta_description':
+		'Ücretsiz çevrimiçi harf biçimi dönüştürücü. camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Başlık ve Cümle biçimine çevir.',
+	'tool.text-string-case-converter.operation': 'Biçimi Dönüştür',
+	'tool.text-string-case-converter.faq.0.question': 'Hangi adlandırma biçimleri destekleniyor?',
+	'tool.text-string-case-converter.faq.0.answer':
+		'Araç tek ekranda camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Başlık Biçimi ve Cümle biçimini destekler.',
+	'tool.text-string-case-converter.faq.1.question':
+		'camelCase, alt çizgi ve tireli karışık metni de dönüştürebilir mi?',
+	'tool.text-string-case-converter.faq.1.answer':
+		'Evet. Karışık ayraçlar ve mevcut büyük-küçük harf yapısı önce çözülür, sonra her hedef biçime tutarlı şekilde dönüştürülür.',
+	'tool.text-string-case-converter.faq.2.question': 'Dönüştürme işlemi cihazımda mı çalışıyor?',
+	'tool.text-string-case-converter.faq.2.answer':
+		'Evet. Tüm harf biçimi dönüşümleri tarayıcıda çalışır, metin sunucuya gönderilmez.',
+	'tool.text-string-case-converter.use_case.0':
+		'API alan adlarını ve yapılandırma anahtarlarını farklı adlandırma kuralları arasında normalize etmek',
+	'tool.text-string-case-converter.use_case.1':
+		'UI etiketlerini hızlıca koda uygun değişken adlarına çevirmek',
+	'tool.text-string-case-converter.use_case.2':
+		'Doküman, şema ve örnek payloadlarda ekip adlandırma standardını korumak',
+	'tool.text-string-case-converter.use_case.3':
+		'TypeScript, Python, SQL ve shell scriptleri için tutarlı kimlik adları hazırlamak',
 	'ui.text_counter.words': 'Kelime',
 	'ui.text_counter.characters': 'Karakter',
 	'ui.text_counter.characters_no_spaces': 'Karakter (boşluksuz)',
@@ -1444,6 +1472,15 @@ const registryTr: Record<string, string> = {
 	'ui.text_counter.minutes': 'dk',
 	'ui.text_counter.lines': 'satır',
 	'ui.text_counter.placeholder': 'Metninizi buraya yazın veya yapıştırın...',
+	'ui.text_case.tab_label': 'Biçim',
+	'ui.text_case.placeholder': 'Biçime dönüştürmek için metin yazın veya yapıştırın...',
+	'ui.text_case.camel_case': 'camelCase',
+	'ui.text_case.pascal_case': 'PascalCase',
+	'ui.text_case.snake_case': 'snake_case',
+	'ui.text_case.kebab_case': 'kebab-case',
+	'ui.text_case.constant_case': 'CONSTANT_CASE',
+	'ui.text_case.title_case': 'Başlık Biçimi',
+	'ui.text_case.sentence_case': 'Cümle biçimi',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

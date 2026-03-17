@@ -1447,6 +1447,35 @@ const registryIt: Record<string, string> = {
 		'Stimare il tempo di lettura per post, documenti e note di rilascio',
 	'tool.text-word-character-counter.use_case.3':
 		'Confrontare bozze con metriche oggettive di lunghezza',
+	'tool.text-string-case-converter.display_name': 'Convertitore di Formato Testo',
+	'tool.text-string-case-converter.tagline':
+		'Converti testo tra camelCase, PascalCase, snake_case, kebab-case e altri formati',
+	'tool.text-string-case-converter.description':
+		'Converti istantaneamente testo tra camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case e formato frase. Veloce, privato e completamente nel browser.',
+	'tool.text-string-case-converter.primary_keyword': 'convertitore string case',
+	'tool.text-string-case-converter.meta_title': 'Convertitore di Formato Testo — fmtly.dev',
+	'tool.text-string-case-converter.meta_description':
+		'Convertitore gratuito di formato testo per camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case e formato frase.',
+	'tool.text-string-case-converter.operation': 'Converti Formato',
+	'tool.text-string-case-converter.faq.0.question': 'Quali stili di denominazione sono supportati?',
+	'tool.text-string-case-converter.faq.0.answer':
+		'Lo strumento supporta camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case e formato frase in un’unica vista.',
+	'tool.text-string-case-converter.faq.1.question':
+		'Può elaborare input misti con camelCase, underscore e trattini?',
+	'tool.text-string-case-converter.faq.1.answer':
+		'Sì. Delimitatori misti e maiuscole/minuscole esistenti vengono prima tokenizzati e poi convertiti in modo coerente in ogni stile target.',
+	'tool.text-string-case-converter.faq.2.question':
+		'La conversione avviene localmente sul mio dispositivo?',
+	'tool.text-string-case-converter.faq.2.answer':
+		'Sì. Tutta la conversione avviene nel browser senza inviare testo al server.',
+	'tool.text-string-case-converter.use_case.0':
+		'Normalizzare campi API e chiavi di configurazione tra convenzioni di naming diverse',
+	'tool.text-string-case-converter.use_case.1':
+		'Convertire etichette UI in nomi variabile pronti per il codice',
+	'tool.text-string-case-converter.use_case.2':
+		'Standardizzare i pattern di naming tra documentazione, schemi ed esempi payload',
+	'tool.text-string-case-converter.use_case.3':
+		'Preparare identificatori coerenti per TypeScript, Python, SQL e script shell',
 	'ui.text_counter.words': 'Parole',
 	'ui.text_counter.characters': 'Caratteri',
 	'ui.text_counter.characters_no_spaces': 'Caratteri (senza spazi)',
@@ -1456,6 +1485,15 @@ const registryIt: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'righe',
 	'ui.text_counter.placeholder': 'Scrivi o incolla qui il tuo testo...',
+	'ui.text_case.tab_label': 'Formato',
+	'ui.text_case.placeholder': 'Scrivi o incolla testo per convertire il formato...',
+	'ui.text_case.camel_case': 'camelCase',
+	'ui.text_case.pascal_case': 'PascalCase',
+	'ui.text_case.snake_case': 'snake_case',
+	'ui.text_case.kebab_case': 'kebab-case',
+	'ui.text_case.constant_case': 'CONSTANT_CASE',
+	'ui.text_case.title_case': 'Title Case',
+	'ui.text_case.sentence_case': 'Formato frase',
 	'ui.csv.controls.table_name': 'Nome Tabella',
 	'ui.csv.controls.batch_size': 'Dimensione Batch'
 };
