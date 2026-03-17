@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	analyzeText,
 	convertTextCases,
+	removeDuplicateLines,
 	reverseText
 } from '../../../src/lib/engines/text/text.engine.js';
 
@@ -92,5 +93,47 @@ describe('convertTextCases', () => {
 		expect(result.constantCase).toBe('');
 		expect(result.titleCase).toBe('');
 		expect(result.sentenceCase).toBe('');
+	});
+});
+
+describe('removeDuplicateLines', () => {
+	it('removes duplicate lines preserving first occurrence', () => {
+		const input = 'apple\nbanana\napple\ncherry\nbanana\ncherry\ndate';
+		const result = removeDuplicateLines(input);
+
+		expect(result.removed).toBe('apple\nbanana\ncherry\ndate');
+		expect(result.duplicateCount).toBe(3);
+		expect(result.uniqueCount).toBe(4);
+	});
+
+	it('handles empty input', () => {
+		const result = removeDuplicateLines('');
+		expect(result.removed).toBe('');
+		expect(result.duplicateCount).toBe(0);
+		expect(result.uniqueCount).toBe(0);
+	});
+
+	it('handles all unique lines', () => {
+		const input = 'a\nb\nc';
+		const result = removeDuplicateLines(input);
+		expect(result.removed).toBe(input);
+		expect(result.duplicateCount).toBe(0);
+		expect(result.uniqueCount).toBe(3);
+	});
+
+	it('handles all duplicate lines', () => {
+		const input = 'same\nsame\nsame';
+		const result = removeDuplicateLines(input);
+		expect(result.removed).toBe('same');
+		expect(result.duplicateCount).toBe(2);
+		expect(result.uniqueCount).toBe(1);
+	});
+
+	it('preserves empty lines as unique entries', () => {
+		const input = 'a\n\nb\n\na';
+		const result = removeDuplicateLines(input);
+		expect(result.removed).toBe('a\n\nb');
+		expect(result.duplicateCount).toBe(2);
+		expect(result.uniqueCount).toBe(3);
 	});
 });

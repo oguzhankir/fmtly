@@ -135,5 +135,49 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 			'tool.text-text-reverser.use_case.3'
 		],
 		sampleInput: 'line one\nline two\nline three'
+	},
+	{
+		id: 'text-duplicate-line-remover',
+		category: 'text',
+		slug: 'deduplicate',
+		displayName: 'tool.text-duplicate-line-remover.display_name',
+		tagline: 'tool.text-duplicate-line-remover.tagline',
+		description: 'tool.text-duplicate-line-remover.description',
+		primaryKeyword: 'tool.text-duplicate-line-remover.primary_keyword',
+		metaTitle: 'tool.text-duplicate-line-remover.meta_title',
+		metaDescription: 'tool.text-duplicate-line-remover.meta_description',
+		engine: 'text',
+		operation: 'tool.text-duplicate-line-remover.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'text', slug: 'reverser' },
+			{ category: 'text', slug: 'case' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-duplicate-line-remover.faq.0.question',
+				answer: 'tool.text-duplicate-line-remover.faq.0.answer'
+			},
+			{
+				question: 'tool.text-duplicate-line-remover.faq.1.question',
+				answer: 'tool.text-duplicate-line-remover.faq.1.answer'
+			},
+			{
+				question: 'tool.text-duplicate-line-remover.faq.2.question',
+				answer: 'tool.text-duplicate-line-remover.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-duplicate-line-remover.use_case.0',
+			'tool.text-duplicate-line-remover.use_case.1',
+			'tool.text-duplicate-line-remover.use_case.2',
+			'tool.text-duplicate-line-remover.use_case.3'
+		],
+		sampleInput: 'apple\nbanana\napple\ncherry\nbanana\ncherry\ndate'
 	}
 ];

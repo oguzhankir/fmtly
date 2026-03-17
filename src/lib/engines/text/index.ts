@@ -2,7 +2,9 @@ export {
 	analyzeText,
 	convertTextCases,
 	reverseText,
+	removeDuplicateLines,
+	type TextCounterMetrics,
 	type TextCaseConversions,
 	type TextReverseResults,
-	type TextCounterMetrics
+	type TextDuplicateRemovalResult
 } from './text.engine.js';

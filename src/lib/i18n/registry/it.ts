@@ -1500,7 +1500,36 @@ const registryIt: Record<string, string> = {
 		'Riordinare note multilinea invertendo rapidamente l’ordine delle righe',
 	'tool.text-text-reverser.use_case.2':
 		'Validare la logica di separazione parole con output che preserva gli spazi',
-	'tool.text-text-reverser.use_case.3': 'Creare varianti testuali per esperimenti di contenuto',
+	'tool.text-text-reverser.use_case.3':
+		'Creare varianti di testo trasformate e divertenti per esperimenti di contenuto',
+	'tool.text-duplicate-line-remover.display_name': 'Rimuovi Righe Duplicate',
+	'tool.text-duplicate-line-remover.tagline':
+		"Rimuovi righe duplicate preservando l'ordine di prima occorrenza",
+	'tool.text-duplicate-line-remover.description':
+		'Rimuovi righe duplicate dal testo preservando la prima occorrenza di ogni riga. Ideale per pulire log, deduplicare liste e preparare dataset unici nel tuo browser.',
+	'tool.text-duplicate-line-remover.primary_keyword': 'rimuovi righe duplicate',
+	'tool.text-duplicate-line-remover.meta_title': 'Rimuovi Righe Duplicate — fmtly.dev',
+	'tool.text-duplicate-line-remover.meta_description':
+		"Rimuovi righe duplicate gratuito che rimuove righe duplicate preservando l'ordine di prima occorrenza. Veloce, privato e 100% nel tuo browser.",
+	'tool.text-duplicate-line-remover.operation': 'Rimuovi Duplicati',
+	'tool.text-duplicate-line-remover.faq.0.question':
+		'Quali righe vengono mantenute come duplicati?',
+	'tool.text-duplicate-line-remover.faq.0.answer':
+		'Viene mantenuta la prima occorrenza di ogni riga; le righe identiche successive vengono rimosse come duplicati.',
+	'tool.text-duplicate-line-remover.faq.1.question': 'Le righe vuote sono trattate come duplicati?',
+	'tool.text-duplicate-line-remover.faq.1.answer':
+		'Sì. Le righe vuote sono voci uniche, quindi più righe vuote verranno deduplicate in una singola riga vuota.',
+	'tool.text-duplicate-line-remover.faq.2.question': 'Il mio testo viene elaborato localmente?',
+	'tool.text-duplicate-line-remover.faq.2.answer':
+		'Sì. Tutta la deduplicazione viene eseguita nel tuo browser; il tuo testo non lascia mai il tuo dispositivo.',
+	'tool.text-duplicate-line-remover.use_case.0':
+		'Pulire log del server e tracce di applicazione rimuovendo voci ripetute',
+	'tool.text-duplicate-line-remover.use_case.1':
+		"Deduplicare liste di URL, liste di email o record di inventario prima dell'importazione",
+	'tool.text-duplicate-line-remover.use_case.2':
+		'Preparare liste di parole uniche per testare vocabolario o modelli linguistici',
+	'tool.text-duplicate-line-remover.use_case.3':
+		"Consolidare valori di configurazione o liste di variabili d'ambiente",
 	'ui.text_counter.words': 'Parole',
 	'ui.text_counter.characters': 'Caratteri',
 	'ui.text_counter.characters_no_spaces': 'Caratteri (senza spazi)',
@@ -1525,6 +1554,12 @@ const registryIt: Record<string, string> = {
 	'ui.text_reverser.words': 'Inverti per parole',
 	'ui.text_reverser.lines': 'Inverti per righe',
 	'ui.text_reverser.lines_count': 'righe',
+	'ui.duplicate_line_remover.tab_label': 'Deduplica',
+	'ui.duplicate_line_remover.placeholder':
+		'Digita o incolla testo per rimuovere righe duplicate...',
+	'ui.duplicate_line_remover.unique_lines': 'Righe uniche',
+	'ui.duplicate_line_remover.duplicates_removed': 'Duplicati rimossi',
+	'ui.duplicate_line_remover.result': 'Risultato',
 	'ui.csv.controls.table_name': 'Nome Tabella',
 	'ui.csv.controls.batch_size': 'Dimensione Batch'
 };

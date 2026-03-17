@@ -23,6 +23,7 @@
 	import TextCaseConverterPanel from "$components/panels/text/TextCaseConverterPanel.svelte";
 	import TextCounterPanel from "$components/panels/text/TextCounterPanel.svelte";
 	import TextReverserPanel from "$components/panels/text/TextReverserPanel.svelte";
+	import DuplicateLineRemoverPanel from "$components/panels/text/DuplicateLineRemoverPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -721,6 +722,8 @@
 				<TextCaseConverterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "reverser"}
 				<TextReverserPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "deduplicate"}
+				<DuplicateLineRemoverPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

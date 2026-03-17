@@ -1507,6 +1507,34 @@ const registryEs: Record<string, string> = {
 	'tool.text-text-reverser.use_case.2':
 		'Validar lógica de separación de palabras con salida que preserva espacios',
 	'tool.text-text-reverser.use_case.3': 'Crear variantes de texto para experimentos de contenido',
+	'tool.text-duplicate-line-remover.display_name': 'Eliminador de Líneas Duplicadas',
+	'tool.text-duplicate-line-remover.tagline':
+		'Elimina líneas duplicadas preservando el orden de primera ocurrencia',
+	'tool.text-duplicate-line-remover.description':
+		'Elimina líneas duplicadas del texto mientras preserva la primera ocurrencia de cada línea. Ideal para limpiar registros, deduplicar listas y preparar conjuntos de datos únicos en tu navegador.',
+	'tool.text-duplicate-line-remover.primary_keyword': 'eliminador de líneas duplicadas',
+	'tool.text-duplicate-line-remover.meta_title': 'Eliminador de Líneas Duplicadas — fmtly.dev',
+	'tool.text-duplicate-line-remover.meta_description':
+		'Eliminador gratuito de líneas duplicadas que elimina líneas duplicadas preservando el orden de primera ocurrencia. Rápido, privado y 100% en tu navegador.',
+	'tool.text-duplicate-line-remover.operation': 'Eliminar Duplicados',
+	'tool.text-duplicate-line-remover.faq.0.question': '¿Qué líneas se mantienen como duplicados?',
+	'tool.text-duplicate-line-remover.faq.0.answer':
+		'Se mantiene la primera ocurrencia de cada línea; las líneas idénticas posteriores se eliminan como duplicados.',
+	'tool.text-duplicate-line-remover.faq.1.question':
+		'¿Las líneas vacías se tratan como duplicados?',
+	'tool.text-duplicate-line-remover.faq.1.answer':
+		'Sí. Las líneas vacías son entradas únicas, por lo que múltiples líneas vacías se deduplicarán a una sola línea vacía.',
+	'tool.text-duplicate-line-remover.faq.2.question': '¿Mi texto se procesa localmente?',
+	'tool.text-duplicate-line-remover.faq.2.answer':
+		'Sí. Toda la deduplicación se ejecuta en tu navegador; tu texto nunca deja tu dispositivo.',
+	'tool.text-duplicate-line-remover.use_case.0':
+		'Limpiar registros de servidor y trazas de aplicación eliminando entradas repetidas',
+	'tool.text-duplicate-line-remover.use_case.1':
+		'Deduplicar listas de URLs, listas de correos o registros de inventario antes de importar',
+	'tool.text-duplicate-line-remover.use_case.2':
+		'Preparar listas de palabras únicas para probar vocabulario o modelos de lenguaje',
+	'tool.text-duplicate-line-remover.use_case.3':
+		'Consolidar valores de configuración o listas de variables de entorno',
 	'ui.text_counter.words': 'Palabras',
 	'ui.text_counter.characters': 'Caracteres',
 	'ui.text_counter.characters_no_spaces': 'Caracteres (sin espacios)',
@@ -1531,6 +1559,12 @@ const registryEs: Record<string, string> = {
 	'ui.text_reverser.words': 'Invertir por palabras',
 	'ui.text_reverser.lines': 'Invertir por líneas',
 	'ui.text_reverser.lines_count': 'líneas',
+	'ui.duplicate_line_remover.tab_label': 'Deduplicar',
+	'ui.duplicate_line_remover.placeholder':
+		'Escribe o pega texto para eliminar líneas duplicadas...',
+	'ui.duplicate_line_remover.unique_lines': 'Líneas únicas',
+	'ui.duplicate_line_remover.duplicates_removed': 'Duplicados eliminados',
+	'ui.duplicate_line_remover.result': 'Resultado',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };

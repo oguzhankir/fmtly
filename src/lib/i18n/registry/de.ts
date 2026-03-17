@@ -1450,6 +1450,33 @@ const registryDe: Record<string, string> = {
 		'Word-Splitting-Logik mit Whitespace-erhaltender Ausgabe prüfen',
 	'tool.text-text-reverser.use_case.3':
 		'Spielerische Textvarianten für Content-Experimente erzeugen',
+	'tool.text-duplicate-line-remover.display_name': 'Doppelte Zeile Entferner',
+	'tool.text-duplicate-line-remover.tagline':
+		'Doppelte Zeilen entfernen und die erste Vorkommensreihenfolge beibehalten',
+	'tool.text-duplicate-line-remover.description':
+		'Doppelte Zeilen aus Text entfernen, wobei die erste Vorkommens jeder Zeile erhalten bleibt. Ideal zum Bereinigen von Protokollen, Deduplizieren von Listen und Vorbereiten eindeutiger Datensätze in Ihrem Browser.',
+	'tool.text-duplicate-line-remover.primary_keyword': 'doppelte Zeile entferner',
+	'tool.text-duplicate-line-remover.meta_title': 'Doppelte Zeile Entferner — fmtly.dev',
+	'tool.text-duplicate-line-remover.meta_description':
+		'Kostenloser Doppelte Zeile Entferner, der doppelte Zeilen entfernt und die erste Vorkommensreihenfolge beibehält. Schnell, privat und 100% in Ihrem Browser.',
+	'tool.text-duplicate-line-remover.operation': 'Duplikate entfernen',
+	'tool.text-duplicate-line-remover.faq.0.question': 'Welche Zeilen als Duplikate entfernt werden?',
+	'tool.text-duplicate-line-remover.faq.0.answer':
+		'Die erste Vorkommens jeder Zeile wird beibehalten; nachfolgende identische Zeilen werden als Duplikate entfernt.',
+	'tool.text-duplicate-line-remover.faq.1.question': 'Werden leere Zeilen als Duplikate behandelt?',
+	'tool.text-duplicate-line-remover.faq.1.answer':
+		'Ja. Leere Zeilen sind eindeutige Einträge, daher werden mehrere leere Zeilen zu einer einzigen leeren Zeile dedupliziert.',
+	'tool.text-duplicate-line-remover.faq.2.question': 'Wird mein Text lokal verarbeitet?',
+	'tool.text-duplicate-line-remover.faq.2.answer':
+		'Ja. Die gesamte Deduplizierung läuft in Ihrem Browser; Ihr Text verlässt niemals Ihr Gerät.',
+	'tool.text-duplicate-line-remover.use_case.0':
+		'Serverprotokolle und Anwendungsspuren durch Entfernen wiederholter Einträge bereinigen',
+	'tool.text-duplicate-line-remover.use_case.1':
+		'URL-Listen, E-Mail-Listen oder Inventardatensätze vor dem Import deduplizieren',
+	'tool.text-duplicate-line-remover.use_case.2':
+		'Eindeutige Wortlisten zum Testen von Vokabular oder Sprachmodellen vorbereiten',
+	'tool.text-duplicate-line-remover.use_case.3':
+		'Konfigurationswerte oder Umgebungsvariablenlisten konsolidieren',
 	'ui.text_counter.words': 'Wörter',
 	'ui.text_counter.characters': 'Zeichen',
 	'ui.text_counter.characters_no_spaces': 'Zeichen (ohne Leerzeichen)',
@@ -1474,6 +1501,12 @@ const registryDe: Record<string, string> = {
 	'ui.text_reverser.words': 'Nach Wörtern umkehren',
 	'ui.text_reverser.lines': 'Nach Zeilen umkehren',
 	'ui.text_reverser.lines_count': 'Zeilen',
+	'ui.duplicate_line_remover.tab_label': 'Deduplizieren',
+	'ui.duplicate_line_remover.placeholder':
+		'Text eingeben oder einfügen, um doppelte Zeilen zu entfernen...',
+	'ui.duplicate_line_remover.unique_lines': 'Eindeutige Zeilen',
+	'ui.duplicate_line_remover.duplicates_removed': 'Duplikate entfernt',
+	'ui.duplicate_line_remover.result': 'Ergebnis',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };
