@@ -1397,6 +1397,31 @@ const registryEs: Record<string, string> = {
 		'Documentar rápidamente formatos JSON anidados para integraciones',
 	'tool.json-schema-generator.use_case.3':
 		'Generar un esquema base antes de refinar restricciones manualmente',
+	'tool.json-schema-validate.display_name': 'Validador de JSON Schema',
+	'tool.json-schema-validate.tagline': 'Validar JSON contra un esquema proporcionado',
+	'tool.json-schema-validate.description':
+		'Valida payloads JSON contra JSON Schema Draft-07 o Draft 2020-12. Obtén errores por ruta con mapeo de línea y columna para corregir campos inválidos rápidamente.',
+	'tool.json-schema-validate.primary_keyword': 'validador json schema',
+	'tool.json-schema-validate.meta_title': 'Validador de JSON Schema — fmtly.dev',
+	'tool.json-schema-validate.meta_description':
+		'Valida JSON contra JSON Schema Draft-07 y 2020-12 en tu navegador. Incluye anotaciones de error por ruta, línea y columna.',
+	'tool.json-schema-validate.operation': 'Validar Esquema',
+	'tool.json-schema-validate.faq.0.question': '¿Qué borradores de esquema admite?',
+	'tool.json-schema-validate.faq.0.answer':
+		'Admite JSON Schema Draft-07 y Draft 2020-12. El borrador se detecta automáticamente desde la URI $schema.',
+	'tool.json-schema-validate.faq.1.question': '¿Cómo se mapean los errores al JSON de entrada?',
+	'tool.json-schema-validate.faq.1.answer':
+		'Cada error incluye una ruta JSON Pointer y se asigna a la línea y columna correspondientes dentro del JSON de entrada.',
+	'tool.json-schema-validate.faq.2.question': '¿Qué pasa si el esquema es inválido?',
+	'tool.json-schema-validate.faq.2.answer':
+		'Si el esquema no puede parsearse o compilarse, la herramienta muestra errores del esquema por separado de los errores de validación de datos.',
+	'tool.json-schema-validate.use_case.0':
+		'Validar payloads de API de entrada y salida contra esquemas de contrato',
+	'tool.json-schema-validate.use_case.1':
+		'Depurar payloads fallidos de webhooks con feedback por ruta',
+	'tool.json-schema-validate.use_case.2':
+		'Comprobar fixtures y mocks contra restricciones estrictas de esquema',
+	'tool.json-schema-validate.use_case.3': 'Verificar migraciones de Draft-07 a Draft 2020-12',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };

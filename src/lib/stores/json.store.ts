@@ -143,6 +143,7 @@ async function applyToolOutput(value: string): Promise<void> {
 			applySchemaOutput(value);
 			return;
 		case 'validator':
+		case 'schema-validate':
 		case 'jsonpath':
 		case 'jmespath':
 			jsonAdvancedStats.set(null);

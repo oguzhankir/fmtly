@@ -1340,6 +1340,31 @@ const registryDe: Record<string, string> = {
 		'Verschachtelte JSON-Eventformate für Integrationen schnell dokumentieren',
 	'tool.json-schema-generator.use_case.3':
 		'Eine Basisschema-Version vor manueller Verfeinerung erzeugen',
+	'tool.json-schema-validate.display_name': 'JSON-Schema-Validator',
+	'tool.json-schema-validate.tagline': 'JSON gegen ein bereitgestelltes Schema validieren',
+	'tool.json-schema-validate.description':
+		'Validieren Sie JSON-Payloads gegen JSON Schema Draft-07 oder Draft 2020-12. Erhalten Sie pfadbasierte Fehler mit Zeilen- und Spaltenzuordnung zur schnellen Behebung.',
+	'tool.json-schema-validate.primary_keyword': 'json schema validator',
+	'tool.json-schema-validate.meta_title': 'JSON-Schema-Validator — fmtly.dev',
+	'tool.json-schema-validate.meta_description':
+		'Validieren Sie JSON im Browser gegen Draft-07- und 2020-12-Schemata. Pfad-, Zeilen- und Spaltenbasierte Fehlerhinweise inklusive.',
+	'tool.json-schema-validate.operation': 'Schema validieren',
+	'tool.json-schema-validate.faq.0.question': 'Welche Schema-Drafts werden unterstützt?',
+	'tool.json-schema-validate.faq.0.answer':
+		'Unterstützt werden JSON Schema Draft-07 und Draft 2020-12. Der Draft wird automatisch über die $schema-URI erkannt.',
+	'tool.json-schema-validate.faq.1.question': 'Wie werden Fehler auf die Eingabe abgebildet?',
+	'tool.json-schema-validate.faq.1.answer':
+		'Jeder Fehler enthält einen JSON-Pointer-Pfad und wird auf die passende Zeile und Spalte im JSON-Eingabetext gemappt.',
+	'tool.json-schema-validate.faq.2.question': 'Was passiert bei einem ungültigen Schema?',
+	'tool.json-schema-validate.faq.2.answer':
+		'Wenn das Schema nicht geparst oder kompiliert werden kann, zeigt das Tool Schemafehler getrennt von Datenvalidierungsfehlern an.',
+	'tool.json-schema-validate.use_case.0':
+		'API-Anfragen und -Antworten gegen Vertragsschemata validieren',
+	'tool.json-schema-validate.use_case.1':
+		'Webhook-Payload-Fehler mit pfadbasiertem Feedback schneller debuggen',
+	'tool.json-schema-validate.use_case.2':
+		'Fixtures und Mock-Daten gegen strikte Schemakontrakte prüfen',
+	'tool.json-schema-validate.use_case.3': 'Migration von Draft-07 auf Draft 2020-12 verifizieren',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };

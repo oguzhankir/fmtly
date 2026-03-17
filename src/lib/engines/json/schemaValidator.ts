@@ -1,4 +1,4 @@
-import type { AnySchema } from 'ajv';
+import type { AnySchema, ErrorObject, ValidateFunction } from 'ajv';
 import { parseJSON } from './parser.js';
 import type { ParseError, SourceMap } from './types.js';
 
@@ -43,6 +43,54 @@ function getPointerLocation(
 	};
 }
 
+type JsonSchemaDraft = 'draft-07' | '2020-12';
+
+function detectSchemaDraft(schema: unknown): JsonSchemaDraft {
+	if (!schema || typeof schema !== 'object' || Array.isArray(schema)) {
+		return 'draft-07';
+	}
+	const schemaUri = (schema as Record<string, unknown>).$schema;
+	if (typeof schemaUri === 'string' && schemaUri.includes('2020-12')) {
+		return '2020-12';
+	}
+	return 'draft-07';
+}
+
+async function compileSchema(
+	schema: AnySchema,
+	draft: JsonSchemaDraft
+): Promise<ValidateFunction<unknown>> {
+	const { default: addFormats } = await import('ajv-formats');
+	if (draft === '2020-12') {
+		const { default: Ajv2020 } = await import('ajv/dist/2020');
+		const ajv = new Ajv2020({ allErrors: true, strict: false, allowUnionTypes: true });
+		addFormats(ajv);
+		return ajv.compile(schema);
+	}
+	const { default: Ajv } = await import('ajv');
+	const ajv = new Ajv({ allErrors: true, strict: false, allowUnionTypes: true });
+	addFormats(ajv);
+	return ajv.compile(schema);
+}
+
+function mapIssues(
+	errors: ErrorObject[] | null | undefined,
+	sourceMap: SourceMap
+): SchemaValidationIssue[] {
+	if (!errors || errors.length === 0) return [];
+	return errors.map((issue) => {
+		const location = getPointerLocation(sourceMap, issue.instancePath);
+		return {
+			keyword: issue.keyword,
+			instancePath: issue.instancePath || '/',
+			schemaPath: issue.schemaPath,
+			message: issue.message ?? 'Schema validation failed',
+			line: location.line,
+			column: location.column
+		};
+	});
+}
+
 export async function validateJsonSchema(
 	jsonInput: string,
 	schemaInput: string
@@ -70,13 +118,8 @@ export async function validateJsonSchema(
 	}
 
 	try {
-		const [{ default: Ajv }, { default: addFormats }] = await Promise.all([
-			import('ajv'),
-			import('ajv-formats')
-		]);
-		const ajv = new Ajv({ allErrors: true, strict: false, allowUnionTypes: true });
-		addFormats(ajv);
-		const validate = ajv.compile(parsedSchema.data as AnySchema);
+		const draft = detectSchemaDraft(parsedSchema.data);
+		const validate = await compileSchema(parsedSchema.data as AnySchema, draft);
 		const valid = validate(parsedData.data);
 		if (valid || !validate.errors || validate.errors.length === 0) {
 			return {
@@ -91,17 +134,7 @@ export async function validateJsonSchema(
 		return {
 			success: true,
 			valid: false,
-			issues: validate.errors.map((issue) => {
-				const location = getPointerLocation(parsedData.sourceMap, issue.instancePath);
-				return {
-					keyword: issue.keyword,
-					instancePath: issue.instancePath || '/',
-					schemaPath: issue.schemaPath,
-					message: issue.message ?? 'Schema validation failed',
-					line: location.line,
-					column: location.column
-				};
-			}),
+			issues: mapIssues(validate.errors, parsedData.sourceMap),
 			schemaError: null,
 			dataError: null
 		};
