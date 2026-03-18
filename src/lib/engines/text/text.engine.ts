@@ -79,6 +79,37 @@ export type LoremGenerationResult = {
 	metrics: TextCounterMetrics;
 };
 
+export type MarkdownToHtmlOptions = {
+	gfm: boolean;
+	breaks: boolean;
+	highlightCode: boolean;
+	allowRawHtml: boolean;
+	openLinksInNewTab: boolean;
+};
+
+export type MarkdownToHtmlWarningCode =
+	| 'unsafe_link_removed'
+	| 'unsafe_image_removed'
+	| 'raw_html_escaped';
+
+export type MarkdownToHtmlStats = {
+	headings: number;
+	tables: number;
+	codeBlocks: number;
+	links: number;
+	images: number;
+	listItems: number;
+	blockquotes: number;
+	words: number;
+	characters: number;
+};
+
+export type MarkdownToHtmlResult = {
+	html: string;
+	stats: MarkdownToHtmlStats;
+	warnings: MarkdownToHtmlWarningCode[];
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -211,6 +242,64 @@ const DEFAULT_LOREM_OPTIONS: LoremGenerationOptions = {
 	maxSentencesPerParagraph: 6
 };
 
+const DEFAULT_MARKDOWN_OPTIONS: MarkdownToHtmlOptions = {
+	gfm: true,
+	breaks: false,
+	highlightCode: true,
+	allowRawHtml: false,
+	openLinksInNewTab: true
+};
+
+const MARKDOWN_RELATIVE_URL_PATTERN = /^(#|\/(?!\/)|\.\.?\/|\?|$)/;
+const MARKDOWN_SCHEME_PATTERN = /^[a-zA-Z][a-zA-Z\d+.-]*:/;
+const MARKDOWN_ALLOWED_LINK_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:']);
+const MARKDOWN_ALLOWED_IMAGE_PROTOCOLS = new Set(['http:', 'https:']);
+const MARKDOWN_ALLOWED_DATA_IMAGE_PATTERN =
+	/^data:image\/(?:png|gif|jpeg|jpg|webp|svg\+xml);base64,[a-z\d+/=\s]+$/i;
+
+type HighlightLanguageModule = { default: import('highlight.js').LanguageFn };
+type HighlightCore = typeof import('highlight.js/lib/core').default;
+type MarkdownRuntime = {
+	marked: typeof import('marked').marked;
+	Renderer: typeof import('marked').Renderer;
+	hljs: HighlightCore;
+};
+
+const MARKDOWN_HIGHLIGHT_LANGUAGE_LOADERS: Record<string, () => Promise<HighlightLanguageModule>> =
+	{
+		javascript: () => import('highlight.js/lib/languages/javascript'),
+		typescript: () => import('highlight.js/lib/languages/typescript'),
+		json: () => import('highlight.js/lib/languages/json'),
+		xml: () => import('highlight.js/lib/languages/xml'),
+		yaml: () => import('highlight.js/lib/languages/yaml'),
+		markdown: () => import('highlight.js/lib/languages/markdown'),
+		bash: () => import('highlight.js/lib/languages/bash'),
+		sql: () => import('highlight.js/lib/languages/sql'),
+		css: () => import('highlight.js/lib/languages/css'),
+		ini: () => import('highlight.js/lib/languages/ini'),
+		diff: () => import('highlight.js/lib/languages/diff')
+	};
+
+const MARKDOWN_LANGUAGE_ALIASES: Record<string, string> = {
+	js: 'javascript',
+	mjs: 'javascript',
+	cjs: 'javascript',
+	ts: 'typescript',
+	tsx: 'typescript',
+	yml: 'yaml',
+	html: 'xml',
+	svg: 'xml',
+	sh: 'bash',
+	shell: 'bash',
+	zsh: 'bash',
+	md: 'markdown',
+	text: 'plaintext',
+	txt: 'plaintext'
+};
+
+const markdownRegisteredLanguages = new Set<string>();
+let markdownRuntimePromise: Promise<MarkdownRuntime> | null = null;
+
 function clampInteger(value: number, min: number, max: number): number {
 	if (!Number.isFinite(value)) return min;
 	return Math.min(max, Math.max(min, Math.floor(value)));
@@ -257,6 +346,214 @@ function escapeHtml(input: string): string {
 		.replace(/>/g, '&gt;')
 		.replace(/"/g, '&quot;')
 		.replace(/'/g, '&#39;');
+}
+
+function normalizeMarkdownLanguage(input: string): string {
+	const normalized = input.trim().toLowerCase();
+	if (normalized.length === 0) return '';
+	return MARKDOWN_LANGUAGE_ALIASES[normalized] ?? normalized;
+}
+
+function collectMarkdownFenceLanguages(input: string): Set<string> {
+	const languages = new Set<string>();
+	const matches = input.matchAll(/^```\s*([a-zA-Z\d+\-_.#]*)\s*$/gm);
+
+	for (const match of matches) {
+		const normalized = normalizeMarkdownLanguage(match[1] ?? '');
+		if (normalized.length > 0 && normalized !== 'plaintext') {
+			languages.add(normalized);
+		}
+	}
+
+	return languages;
+}
+
+function normalizeMarkdownOptions(options: Partial<MarkdownToHtmlOptions>): MarkdownToHtmlOptions {
+	return {
+		gfm: options.gfm ?? DEFAULT_MARKDOWN_OPTIONS.gfm,
+		breaks: options.breaks ?? DEFAULT_MARKDOWN_OPTIONS.breaks,
+		highlightCode: options.highlightCode ?? DEFAULT_MARKDOWN_OPTIONS.highlightCode,
+		allowRawHtml: options.allowRawHtml ?? DEFAULT_MARKDOWN_OPTIONS.allowRawHtml,
+		openLinksInNewTab: options.openLinksInNewTab ?? DEFAULT_MARKDOWN_OPTIONS.openLinksInNewTab
+	};
+}
+
+function sanitizeMarkdownUrl(url: string, allowDataImage: boolean): string | null {
+	const trimmed = url.trim();
+	if (!trimmed) return null;
+
+	if (MARKDOWN_RELATIVE_URL_PATTERN.test(trimmed)) {
+		return trimmed;
+	}
+
+	if (!MARKDOWN_SCHEME_PATTERN.test(trimmed)) {
+		return trimmed;
+	}
+
+	let parsed: URL;
+	try {
+		parsed = new URL(trimmed);
+	} catch {
+		return null;
+	}
+
+	if (allowDataImage && parsed.protocol === 'data:') {
+		return MARKDOWN_ALLOWED_DATA_IMAGE_PATTERN.test(trimmed) ? trimmed : null;
+	}
+
+	const allowedProtocols = allowDataImage
+		? MARKDOWN_ALLOWED_IMAGE_PROTOCOLS
+		: MARKDOWN_ALLOWED_LINK_PROTOCOLS;
+
+	return allowedProtocols.has(parsed.protocol) ? trimmed : null;
+}
+
+function countMatches(input: string, pattern: RegExp): number {
+	const matches = input.match(pattern);
+	return matches?.length ?? 0;
+}
+
+function htmlToPlainText(input: string): string {
+	return input
+		.replace(/<script[\s\S]*?<\/script>/gi, ' ')
+		.replace(/<style[\s\S]*?<\/style>/gi, ' ')
+		.replace(/<[^>]+>/g, ' ')
+		.replace(/&nbsp;/g, ' ')
+		.replace(/&amp;/g, '&')
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&#39;/g, "'")
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
+function computeMarkdownStats(html: string): MarkdownToHtmlStats {
+	const plainText = htmlToPlainText(html);
+	const textMetrics = analyzeText(plainText);
+
+	return {
+		headings: countMatches(html, /<h[1-6]\b/gi),
+		tables: countMatches(html, /<table\b/gi),
+		codeBlocks: countMatches(html, /<pre>\s*<code\b/gi),
+		links: countMatches(html, /<a\b/gi),
+		images: countMatches(html, /<img\b/gi),
+		listItems: countMatches(html, /<li\b/gi),
+		blockquotes: countMatches(html, /<blockquote\b/gi),
+		words: textMetrics.words,
+		characters: textMetrics.characters
+	};
+}
+
+async function loadMarkdownRuntime(languagesToRegister: Set<string>): Promise<MarkdownRuntime> {
+	if (!markdownRuntimePromise) {
+		markdownRuntimePromise = Promise.all([import('marked'), import('highlight.js/lib/core')]).then(
+			([markedModule, hljsModule]) => ({
+				marked: markedModule.marked,
+				Renderer: markedModule.Renderer,
+				hljs: hljsModule.default
+			})
+		);
+	}
+
+	const runtime = await markdownRuntimePromise;
+
+	for (const language of languagesToRegister) {
+		if (markdownRegisteredLanguages.has(language)) continue;
+
+		const loader = MARKDOWN_HIGHLIGHT_LANGUAGE_LOADERS[language];
+		if (!loader) continue;
+
+		const languageModule = await loader();
+		runtime.hljs.registerLanguage(language, languageModule.default);
+		markdownRegisteredLanguages.add(language);
+	}
+
+	return runtime;
+}
+
+export async function convertMarkdownToHtml(
+	input: string,
+	options: Partial<MarkdownToHtmlOptions> = {}
+): Promise<MarkdownToHtmlResult> {
+	const normalizedOptions = normalizeMarkdownOptions(options);
+	const fenceLanguages = normalizedOptions.highlightCode
+		? collectMarkdownFenceLanguages(input)
+		: new Set<string>();
+	const runtime = await loadMarkdownRuntime(fenceLanguages);
+	const warningsSet = new Set<MarkdownToHtmlWarningCode>();
+
+	const renderer = new runtime.Renderer();
+
+	renderer.link = (token) => {
+		const safeHref = sanitizeMarkdownUrl(token.href ?? '', false);
+		if (!safeHref) {
+			warningsSet.add('unsafe_link_removed');
+			return `<span>${escapeHtml(token.text ?? '')}</span>`;
+		}
+
+		const titleAttr = token.title ? ` title="${escapeHtml(token.title)}"` : '';
+		const externalAttrs = normalizedOptions.openLinksInNewTab
+			? ' target="_blank" rel="noopener noreferrer nofollow"'
+			: '';
+
+		return `<a href="${escapeHtml(safeHref)}"${titleAttr}${externalAttrs}>${token.text ?? ''}</a>`;
+	};
+
+	renderer.image = (token) => {
+		const safeSrc = sanitizeMarkdownUrl(token.href ?? '', true);
+		if (!safeSrc) {
+			warningsSet.add('unsafe_image_removed');
+			return '';
+		}
+
+		const alt = escapeHtml(token.text ?? '');
+		const titleAttr = token.title ? ` title="${escapeHtml(token.title)}"` : '';
+		return `<img src="${escapeHtml(safeSrc)}" alt="${alt}"${titleAttr} loading="lazy" decoding="async">`;
+	};
+
+	renderer.html = (token) => {
+		if (normalizedOptions.allowRawHtml) return token.raw;
+		warningsSet.add('raw_html_escaped');
+		return escapeHtml(token.raw);
+	};
+
+	renderer.code = (token) => {
+		const rawLanguage = normalizeMarkdownLanguage(token.lang ?? '');
+		const classNames = ['hljs'];
+
+		if (rawLanguage) {
+			classNames.push(`language-${rawLanguage}`);
+		}
+
+		if (!normalizedOptions.highlightCode) {
+			return `<pre><code class="${classNames.join(' ')}">${escapeHtml(token.text)}</code></pre>\n`;
+		}
+
+		if (rawLanguage && runtime.hljs.getLanguage(rawLanguage)) {
+			const highlighted = runtime.hljs.highlight(token.text, {
+				language: rawLanguage,
+				ignoreIllegals: true
+			}).value;
+			return `<pre><code class="${classNames.join(' ')}">${highlighted}</code></pre>\n`;
+		}
+
+		const autoHighlighted = runtime.hljs.highlightAuto(token.text).value;
+		return `<pre><code class="${classNames.join(' ')}">${autoHighlighted}</code></pre>\n`;
+	};
+
+	const html = runtime.marked.parse(input, {
+		renderer,
+		gfm: normalizedOptions.gfm,
+		breaks: normalizedOptions.breaks,
+		async: false
+	});
+
+	return {
+		html,
+		stats: computeMarkdownStats(html),
+		warnings: Array.from(warningsSet)
+	};
 }
 
 function sanitizeLoremOptions(options: Partial<LoremGenerationOptions>): LoremGenerationOptions {

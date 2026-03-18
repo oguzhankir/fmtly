@@ -1503,6 +1503,37 @@ const registryFr: Record<string, string> = {
 		'Créer des fixtures seedées reproductibles pour snapshots et tests visuels frontend',
 	'tool.text-lorem-ipsum-generator.use_case.3':
 		'Produire du contenu de remplissage en texte brut ou HTML pour des démos CMS',
+	'tool.text-markdown-to-html.display_name': 'Markdown vers HTML',
+	'tool.text-markdown-to-html.tagline':
+		'Convertissez Markdown en HTML prêt pour la production avec aperçu en direct',
+	'tool.text-markdown-to-html.description':
+		'Convertissez Markdown en HTML propre avec aperçu en direct, tableaux GFM, coloration syntaxique des blocs de code et contrôles de sécurité pour liens/images. Tout s’exécute localement dans votre navigateur.',
+	'tool.text-markdown-to-html.primary_keyword': 'convertisseur markdown vers html',
+	'tool.text-markdown-to-html.meta_title':
+		'Convertisseur Markdown vers HTML — Aperçu en direct | fmtly.dev',
+	'tool.text-markdown-to-html.meta_description':
+		'Convertissez Markdown en HTML avec aperçu en direct, support des tableaux GFM et blocs de code colorés. Rapide, privé et 100% navigateur.',
+	'tool.text-markdown-to-html.operation': 'Convertir Markdown',
+	'tool.text-markdown-to-html.faq.0.question':
+		'Ce convertisseur prend-il en charge les tableaux GitHub Flavored Markdown (GFM) ?',
+	'tool.text-markdown-to-html.faq.0.answer':
+		'Oui. La syntaxe de tableaux GFM est prise en charge et peut être activée ou désactivée dans le panneau d’options.',
+	'tool.text-markdown-to-html.faq.1.question':
+		'Les blocs de code fenced sont-ils surlignés automatiquement ?',
+	'tool.text-markdown-to-html.faq.1.answer':
+		'Oui. L’outil surligne les blocs de code fenced et conserve les classes de langue dans le HTML généré.',
+	'tool.text-markdown-to-html.faq.2.question':
+		'Comment les liens non sûrs ou le HTML brut sont-ils gérés ?',
+	'tool.text-markdown-to-html.faq.2.answer':
+		'Les protocoles de liens/images non sûrs sont supprimés. Le HTML brut est échappé par défaut et peut être autorisé via les options avancées.',
+	'tool.text-markdown-to-html.use_case.0':
+		'Préparer du contenu README et documentation pour des générateurs de sites statiques',
+	'tool.text-markdown-to-html.use_case.1':
+		'Prévisualiser la sortie Markdown avant publication de release notes ou changelogs',
+	'tool.text-markdown-to-html.use_case.2':
+		'Générer des extraits HTML assainis pour éditeurs CMS et bases de connaissances',
+	'tool.text-markdown-to-html.use_case.3':
+		'Convertir des tutoriels techniques avec code en HTML intégrable',
 	'tool.text-string-case-converter.display_name': 'Convertisseur de Casse',
 	'tool.text-string-case-converter.tagline':
 		'Convertissez du texte entre camelCase, PascalCase, snake_case, kebab-case et plus',
@@ -1701,6 +1732,32 @@ const registryFr: Record<string, string> = {
 	'ui.lorem.generated': 'Lorem Ipsum généré',
 	'ui.lorem.seed_randomized': 'Seed randomisée',
 	'ui.lorem.no_output': 'Aucune sortie générée pour le moment',
+	'ui.markdown_to_html.placeholder': 'Saisissez ou collez du Markdown ici...',
+	'ui.markdown_to_html.option.gfm': 'Activer les tableaux GFM et listes de tâches',
+	'ui.markdown_to_html.option.breaks': 'Convertir les retours à la ligne simples en <br>',
+	'ui.markdown_to_html.option.highlight_code':
+		'Appliquer la coloration syntaxique aux blocs de code fenced',
+	'ui.markdown_to_html.option.open_links_in_new_tab': 'Ouvrir les liens dans un nouvel onglet',
+	'ui.markdown_to_html.option.allow_raw_html': 'Autoriser les blocs HTML bruts (avancé)',
+	'ui.markdown_to_html.view.preview': 'Aperçu',
+	'ui.markdown_to_html.view.html': 'HTML',
+	'ui.markdown_to_html.status.converting': 'Conversion Markdown en cours...',
+	'ui.markdown_to_html.preview_aria': 'Aperçu en direct Markdown vers HTML',
+	'ui.markdown_to_html.empty_preview':
+		'L’aperçu en direct apparaîtra ici dès que vous saisirez du Markdown.',
+	'ui.markdown_to_html.empty_html': 'La sortie HTML générée apparaîtra ici.',
+	'ui.markdown_to_html.error.conversion_failed':
+		'Échec de la conversion Markdown. Vérifiez votre contenu et réessayez.',
+	'ui.markdown_to_html.toast.no_html_output': 'Aucune sortie HTML à télécharger',
+	'ui.markdown_to_html.warning.unsafe_link_removed': 'Lien non sûr supprimé',
+	'ui.markdown_to_html.warning.unsafe_image_removed': 'Image non sûre supprimée',
+	'ui.markdown_to_html.warning.raw_html_escaped': 'HTML brut échappé pour des raisons de sécurité',
+	'ui.markdown_to_html.stats.headings': 'Titres',
+	'ui.markdown_to_html.stats.tables': 'Tableaux',
+	'ui.markdown_to_html.stats.code_blocks': 'Blocs de code',
+	'ui.markdown_to_html.stats.links': 'Liens',
+	'ui.markdown_to_html.stats.images': 'Images',
+	'ui.markdown_to_html.stats.words': 'Mots',
 	'ui.text_case.tab_label': 'Casse',
 	'ui.text_case.placeholder': 'Saisissez ou collez du texte pour convertir la casse...',
 	'ui.text_case.camel_case': 'camelCase',

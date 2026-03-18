@@ -1476,6 +1476,37 @@ const registryIt: Record<string, string> = {
 		'Creare fixture seedate riproducibili per snapshot e test visivi frontend',
 	'tool.text-lorem-ipsum-generator.use_case.3':
 		'Produrre contenuto segnaposto in testo semplice o HTML per demo CMS',
+	'tool.text-markdown-to-html.display_name': 'Markdown in HTML',
+	'tool.text-markdown-to-html.tagline':
+		'Converti Markdown in HTML pronto per la produzione con anteprima live',
+	'tool.text-markdown-to-html.description':
+		'Converti Markdown in HTML pulito con anteprima live, tabelle GFM, evidenziazione sintassi nei blocchi di codice e controlli di sicurezza per link/immagini. Tutto viene eseguito localmente nel browser.',
+	'tool.text-markdown-to-html.primary_keyword': 'convertitore markdown in html',
+	'tool.text-markdown-to-html.meta_title':
+		'Convertitore Markdown in HTML — Anteprima live | fmtly.dev',
+	'tool.text-markdown-to-html.meta_description':
+		'Converti Markdown in HTML con anteprima live, supporto tabelle GFM e blocchi di codice evidenziati. Veloce, privato e 100% nel browser.',
+	'tool.text-markdown-to-html.operation': 'Converti Markdown',
+	'tool.text-markdown-to-html.faq.0.question':
+		'Questo convertitore supporta le tabelle GitHub Flavored Markdown (GFM)?',
+	'tool.text-markdown-to-html.faq.0.answer':
+		'Sì. La sintassi tabellare GFM è supportata e può essere attivata o disattivata dal pannello opzioni.',
+	'tool.text-markdown-to-html.faq.1.question':
+		'I blocchi di codice fenced vengono evidenziati automaticamente?',
+	'tool.text-markdown-to-html.faq.1.answer':
+		'Sì. Lo strumento evidenzia i blocchi di codice fenced e mantiene le classi di linguaggio nell’HTML generato.',
+	'tool.text-markdown-to-html.faq.2.question':
+		'Come vengono gestiti link non sicuri o blocchi raw HTML?',
+	'tool.text-markdown-to-html.faq.2.answer':
+		'I protocolli non sicuri per link/immagini vengono rimossi. Il raw HTML viene escaped per default e può essere abilitato dalle opzioni avanzate.',
+	'tool.text-markdown-to-html.use_case.0':
+		'Preparare contenuti README e documentazione per generatori di siti statici',
+	'tool.text-markdown-to-html.use_case.1':
+		'Controllare l’output Markdown prima di pubblicare release notes o changelog',
+	'tool.text-markdown-to-html.use_case.2':
+		'Generare snippet HTML sanitizzati per editor CMS e knowledge base',
+	'tool.text-markdown-to-html.use_case.3':
+		'Convertire tutorial tecnici con codice in HTML incorporabile',
 	'tool.text-string-case-converter.display_name': 'Convertitore di Formato Testo',
 	'tool.text-string-case-converter.tagline':
 		'Converti testo tra camelCase, PascalCase, snake_case, kebab-case e altri formati',
@@ -1669,6 +1700,30 @@ const registryIt: Record<string, string> = {
 	'ui.lorem.generated': 'Lorem Ipsum generato',
 	'ui.lorem.seed_randomized': 'Seed randomizzato',
 	'ui.lorem.no_output': 'Nessun output generato al momento',
+	'ui.markdown_to_html.placeholder': 'Scrivi o incolla Markdown qui...',
+	'ui.markdown_to_html.option.gfm': 'Abilita tabelle GFM e task list',
+	'ui.markdown_to_html.option.breaks': 'Converti i singoli a capo in <br>',
+	'ui.markdown_to_html.option.highlight_code': 'Evidenzia i blocchi di codice fenced',
+	'ui.markdown_to_html.option.open_links_in_new_tab': 'Apri i link in una nuova scheda',
+	'ui.markdown_to_html.option.allow_raw_html': 'Consenti blocchi raw HTML (avanzato)',
+	'ui.markdown_to_html.view.preview': 'Anteprima',
+	'ui.markdown_to_html.view.html': 'HTML',
+	'ui.markdown_to_html.status.converting': 'Conversione Markdown in corso...',
+	'ui.markdown_to_html.preview_aria': 'Anteprima live Markdown in HTML',
+	'ui.markdown_to_html.empty_preview': 'L’anteprima live apparirà qui appena inserisci Markdown.',
+	'ui.markdown_to_html.empty_html': 'L’output HTML generato apparirà qui.',
+	'ui.markdown_to_html.error.conversion_failed':
+		'Conversione Markdown non riuscita. Controlla il contenuto e riprova.',
+	'ui.markdown_to_html.toast.no_html_output': 'Nessun output HTML da scaricare',
+	'ui.markdown_to_html.warning.unsafe_link_removed': 'Link non sicuro rimosso',
+	'ui.markdown_to_html.warning.unsafe_image_removed': 'Immagine non sicura rimossa',
+	'ui.markdown_to_html.warning.raw_html_escaped': 'Raw HTML escaped per sicurezza',
+	'ui.markdown_to_html.stats.headings': 'Intestazioni',
+	'ui.markdown_to_html.stats.tables': 'Tabelle',
+	'ui.markdown_to_html.stats.code_blocks': 'Blocchi di codice',
+	'ui.markdown_to_html.stats.links': 'Link',
+	'ui.markdown_to_html.stats.images': 'Immagini',
+	'ui.markdown_to_html.stats.words': 'Parole',
 	'ui.text_case.tab_label': 'Formato',
 	'ui.text_case.placeholder': 'Scrivi o incolla testo per convertire il formato...',
 	'ui.text_case.camel_case': 'camelCase',

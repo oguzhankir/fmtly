@@ -1424,6 +1424,36 @@ const registryDe: Record<string, string> = {
 		'Reproduzierbare Seed-Fixtures für Frontend-Snapshots und visuelle Tests erzeugen',
 	'tool.text-lorem-ipsum-generator.use_case.3':
 		'Platzhalterinhalte als Klartext oder HTML für CMS-Demos erstellen',
+	'tool.text-markdown-to-html.display_name': 'Markdown zu HTML',
+	'tool.text-markdown-to-html.tagline':
+		'Konvertieren Sie Markdown mit Live-Vorschau in produktionsreifes HTML',
+	'tool.text-markdown-to-html.description':
+		'Wandeln Sie Markdown in sauberes HTML um – mit Live-Vorschau, GFM-Tabellen, Syntax-Highlighting für Codeblöcke und Sicherheitskontrollen für Links/Bilder. Alles läuft lokal im Browser.',
+	'tool.text-markdown-to-html.primary_keyword': 'markdown zu html konverter',
+	'tool.text-markdown-to-html.meta_title': 'Markdown zu HTML Konverter — Live-Vorschau | fmtly.dev',
+	'tool.text-markdown-to-html.meta_description':
+		'Konvertieren Sie Markdown zu HTML mit Live-Vorschau, GFM-Tabellen und syntaxhervorgehobenen Codeblöcken. Schnell, privat und browserbasiert.',
+	'tool.text-markdown-to-html.operation': 'Markdown konvertieren',
+	'tool.text-markdown-to-html.faq.0.question':
+		'Unterstützt der Konverter GitHub-Flavored-Markdown-Tabellen?',
+	'tool.text-markdown-to-html.faq.0.answer':
+		'Ja. Die GFM-Tabellensyntax wird unterstützt und kann im Optionen-Panel ein- oder ausgeschaltet werden.',
+	'tool.text-markdown-to-html.faq.1.question':
+		'Werden fenced Codeblöcke automatisch syntaxhervorgehoben?',
+	'tool.text-markdown-to-html.faq.1.answer':
+		'Ja. Der Konverter hebt fenced Codeblöcke hervor und behält Sprachklassen im erzeugten HTML für nachgelagerte Styles bei.',
+	'tool.text-markdown-to-html.faq.2.question':
+		'Wie geht das Tool mit unsicheren Links oder Raw-HTML um?',
+	'tool.text-markdown-to-html.faq.2.answer':
+		'Unsichere Link-/Bild-Protokolle werden entfernt. Raw-HTML wird standardmäßig maskiert und kann bei Bedarf in den erweiterten Optionen erlaubt werden.',
+	'tool.text-markdown-to-html.use_case.0':
+		'README- und Doku-Inhalte für statische Site-Generatoren vorbereiten',
+	'tool.text-markdown-to-html.use_case.1':
+		'Markdown-Ausgabe vor dem Veröffentlichen von Release Notes oder Changelogs prüfen',
+	'tool.text-markdown-to-html.use_case.2':
+		'Sanitisiertes HTML für CMS-Editoren und Wissensdatenbanken erzeugen',
+	'tool.text-markdown-to-html.use_case.3':
+		'Technische Tutorials mit Codeblöcken in einbettbares HTML umwandeln',
 	'tool.text-string-case-converter.display_name': 'String Case Converter',
 	'tool.text-string-case-converter.tagline':
 		'Text in camelCase, PascalCase, snake_case, kebab-case und weitere Stile umwandeln',
@@ -1616,6 +1646,31 @@ const registryDe: Record<string, string> = {
 	'ui.lorem.generated': 'Lorem Ipsum erzeugt',
 	'ui.lorem.seed_randomized': 'Seed wurde randomisiert',
 	'ui.lorem.no_output': 'Noch keine erzeugte Ausgabe',
+	'ui.markdown_to_html.placeholder': 'Markdown hier eingeben oder einfügen...',
+	'ui.markdown_to_html.option.gfm': 'GFM-Tabellen und Task-Listen aktivieren',
+	'ui.markdown_to_html.option.breaks': 'Einzelne Zeilenumbrüche in <br> umwandeln',
+	'ui.markdown_to_html.option.highlight_code': 'Fenced Codeblöcke syntaxhervorheben',
+	'ui.markdown_to_html.option.open_links_in_new_tab': 'Links in neuem Tab öffnen',
+	'ui.markdown_to_html.option.allow_raw_html': 'Raw-HTML-Blöcke erlauben (erweitert)',
+	'ui.markdown_to_html.view.preview': 'Vorschau',
+	'ui.markdown_to_html.view.html': 'HTML',
+	'ui.markdown_to_html.status.converting': 'Markdown wird konvertiert...',
+	'ui.markdown_to_html.preview_aria': 'Markdown-HTML-Live-Vorschau',
+	'ui.markdown_to_html.empty_preview':
+		'Die Live-Vorschau erscheint hier, sobald Sie Markdown eingeben.',
+	'ui.markdown_to_html.empty_html': 'Die erzeugte HTML-Ausgabe erscheint hier.',
+	'ui.markdown_to_html.error.conversion_failed':
+		'Markdown-Konvertierung fehlgeschlagen. Bitte Eingabe prüfen und erneut versuchen.',
+	'ui.markdown_to_html.toast.no_html_output': 'Keine HTML-Ausgabe zum Herunterladen',
+	'ui.markdown_to_html.warning.unsafe_link_removed': 'Unsicherer Link entfernt',
+	'ui.markdown_to_html.warning.unsafe_image_removed': 'Unsicheres Bild entfernt',
+	'ui.markdown_to_html.warning.raw_html_escaped': 'Raw-HTML aus Sicherheitsgründen maskiert',
+	'ui.markdown_to_html.stats.headings': 'Überschriften',
+	'ui.markdown_to_html.stats.tables': 'Tabellen',
+	'ui.markdown_to_html.stats.code_blocks': 'Codeblöcke',
+	'ui.markdown_to_html.stats.links': 'Links',
+	'ui.markdown_to_html.stats.images': 'Bilder',
+	'ui.markdown_to_html.stats.words': 'Wörter',
 	'ui.text_case.tab_label': 'Case',
 	'ui.text_case.placeholder': 'Text eingeben oder einfügen, um die Schreibweise zu konvertieren...',
 	'ui.text_case.camel_case': 'camelCase',

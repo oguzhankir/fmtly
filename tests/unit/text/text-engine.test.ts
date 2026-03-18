@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	analyzeText,
 	cleanWhitespace,
+	convertMarkdownToHtml,
 	convertTextCases,
 	generateLoremIpsum,
 	removeDuplicateLines,
@@ -36,6 +37,55 @@ describe('analyzeText', () => {
 		const resultLong = analyzeText(longText);
 		expect(resultLong.words).toBe(450);
 		expect(resultLong.readingTimeMinutes).toBe(3);
+	});
+});
+
+describe('convertMarkdownToHtml', () => {
+	it('renders GFM tables and tracks markdown stats', async () => {
+		const markdown = `# Metrics
+
+| name | value |
+| --- | ---: |
+| uptime | 99.9 |
+| errors | 0 |`;
+
+		const result = await convertMarkdownToHtml(markdown);
+
+		expect(result.html).toContain('<table>');
+		expect(result.html).toContain('<h1');
+		expect(result.stats.tables).toBe(1);
+		expect(result.stats.headings).toBe(1);
+		expect(result.stats.words).toBeGreaterThan(0);
+	});
+
+	it('highlights fenced code blocks with language classes', async () => {
+		const markdown = '```js\nconst answer = 42;\n```';
+		const result = await convertMarkdownToHtml(markdown);
+
+		expect(result.html).toContain('class="hljs language-javascript"');
+		expect(result.stats.codeBlocks).toBe(1);
+	});
+
+	it('removes unsafe markdown links and images', async () => {
+		const markdown = '[click](javascript:alert(1))\n\n![xss](javascript:alert(2))';
+		const result = await convertMarkdownToHtml(markdown);
+
+		expect(result.html).toContain('<span>click</span>');
+		expect(result.html).not.toContain('<img');
+		expect(result.warnings).toContain('unsafe_link_removed');
+		expect(result.warnings).toContain('unsafe_image_removed');
+	});
+
+	it('escapes raw html by default and allows it when enabled', async () => {
+		const markdown = 'Before\n\n<div data-test="raw">raw html</div>';
+
+		const escaped = await convertMarkdownToHtml(markdown);
+		expect(escaped.html).toContain('&lt;div data-test=&quot;raw&quot;&gt;raw html&lt;/div&gt;');
+		expect(escaped.warnings).toContain('raw_html_escaped');
+
+		const allowed = await convertMarkdownToHtml(markdown, { allowRawHtml: true });
+		expect(allowed.html).toContain('<div data-test="raw">raw html</div>');
+		expect(allowed.warnings).not.toContain('raw_html_escaped');
 	});
 });
 

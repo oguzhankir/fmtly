@@ -1456,6 +1456,35 @@ const registryEn: Record<string, string> = {
 		'Generate repeatable seeded fixtures for frontend snapshots and visual tests',
 	'tool.text-lorem-ipsum-generator.use_case.3':
 		'Create plain text or HTML placeholder content for CMS demos',
+	'tool.text-markdown-to-html.display_name': 'Markdown to HTML',
+	'tool.text-markdown-to-html.tagline':
+		'Convert Markdown into production-ready HTML with live preview',
+	'tool.text-markdown-to-html.description':
+		'Convert Markdown to clean HTML with live preview, GFM tables, fenced code highlighting, and link/image safety controls. Everything runs locally in your browser.',
+	'tool.text-markdown-to-html.primary_keyword': 'markdown to html converter',
+	'tool.text-markdown-to-html.meta_title': 'Markdown to HTML Converter — Live Preview | fmtly.dev',
+	'tool.text-markdown-to-html.meta_description':
+		'Convert Markdown to HTML with live preview, GFM table support, and syntax-highlighted code blocks. Fast, private, and browser-based.',
+	'tool.text-markdown-to-html.operation': 'Convert Markdown',
+	'tool.text-markdown-to-html.faq.0.question':
+		'Does this converter support GitHub-Flavored Markdown tables?',
+	'tool.text-markdown-to-html.faq.0.answer':
+		'Yes. GFM table syntax is supported and can be toggled on or off in the options panel.',
+	'tool.text-markdown-to-html.faq.1.question':
+		'Can fenced code blocks be syntax highlighted automatically?',
+	'tool.text-markdown-to-html.faq.1.answer':
+		'Yes. The converter highlights fenced code blocks and keeps language classes in the generated HTML for downstream styling.',
+	'tool.text-markdown-to-html.faq.2.question': 'How does the tool handle unsafe links or raw HTML?',
+	'tool.text-markdown-to-html.faq.2.answer':
+		'Unsafe link/image protocols are removed, and raw HTML blocks are escaped by default. Advanced users can allow raw HTML from the options panel.',
+	'tool.text-markdown-to-html.use_case.0':
+		'Prepare README and docs content for static site generators',
+	'tool.text-markdown-to-html.use_case.1':
+		'Preview Markdown output before publishing release notes or changelogs',
+	'tool.text-markdown-to-html.use_case.2':
+		'Generate sanitized HTML snippets for CMS editors and knowledge bases',
+	'tool.text-markdown-to-html.use_case.3':
+		'Convert technical tutorials with code blocks into embeddable HTML',
 	'tool.text-string-case-converter.display_name': 'String Case Converter',
 	'tool.text-string-case-converter.tagline':
 		'Convert text between camelCase, PascalCase, snake_case, kebab-case, and more',
@@ -1645,6 +1674,30 @@ const registryEn: Record<string, string> = {
 	'ui.lorem.generated': 'Lorem Ipsum generated',
 	'ui.lorem.seed_randomized': 'Seed randomized',
 	'ui.lorem.no_output': 'No generated output yet',
+	'ui.markdown_to_html.placeholder': 'Type or paste Markdown here...',
+	'ui.markdown_to_html.option.gfm': 'Enable GFM tables and task lists',
+	'ui.markdown_to_html.option.breaks': 'Convert single line breaks to <br>',
+	'ui.markdown_to_html.option.highlight_code': 'Syntax highlight fenced code blocks',
+	'ui.markdown_to_html.option.open_links_in_new_tab': 'Open links in new tab',
+	'ui.markdown_to_html.option.allow_raw_html': 'Allow raw HTML blocks (advanced)',
+	'ui.markdown_to_html.view.preview': 'Preview',
+	'ui.markdown_to_html.view.html': 'HTML',
+	'ui.markdown_to_html.status.converting': 'Converting Markdown...',
+	'ui.markdown_to_html.preview_aria': 'Markdown HTML live preview',
+	'ui.markdown_to_html.empty_preview': 'Live preview appears here once you enter Markdown.',
+	'ui.markdown_to_html.empty_html': 'Generated HTML output will appear here.',
+	'ui.markdown_to_html.error.conversion_failed':
+		'Markdown conversion failed. Please check your input and try again.',
+	'ui.markdown_to_html.toast.no_html_output': 'No HTML output to download',
+	'ui.markdown_to_html.warning.unsafe_link_removed': 'Unsafe link removed',
+	'ui.markdown_to_html.warning.unsafe_image_removed': 'Unsafe image removed',
+	'ui.markdown_to_html.warning.raw_html_escaped': 'Raw HTML escaped for safety',
+	'ui.markdown_to_html.stats.headings': 'Headings',
+	'ui.markdown_to_html.stats.tables': 'Tables',
+	'ui.markdown_to_html.stats.code_blocks': 'Code blocks',
+	'ui.markdown_to_html.stats.links': 'Links',
+	'ui.markdown_to_html.stats.images': 'Images',
+	'ui.markdown_to_html.stats.words': 'Words',
 	'ui.text_case.tab_label': 'Case',
 	'ui.text_case.placeholder': 'Type or paste text to convert case...',
 	'ui.text_case.camel_case': 'camelCase',

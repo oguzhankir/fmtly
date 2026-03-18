@@ -1482,6 +1482,37 @@ const registryEs: Record<string, string> = {
 		'Crear fixtures reproducibles con semilla para snapshots y pruebas visuales de frontend',
 	'tool.text-lorem-ipsum-generator.use_case.3':
 		'Generar contenido de relleno en texto plano o HTML para demos de CMS',
+	'tool.text-markdown-to-html.display_name': 'Markdown a HTML',
+	'tool.text-markdown-to-html.tagline':
+		'Convierte Markdown en HTML listo para producción con vista previa en vivo',
+	'tool.text-markdown-to-html.description':
+		'Convierte Markdown a HTML limpio con vista previa en vivo, tablas GFM, resaltado de código en bloques y controles de seguridad para enlaces e imágenes. Todo se ejecuta localmente en tu navegador.',
+	'tool.text-markdown-to-html.primary_keyword': 'convertidor markdown a html',
+	'tool.text-markdown-to-html.meta_title':
+		'Convertidor Markdown a HTML — Vista previa en vivo | fmtly.dev',
+	'tool.text-markdown-to-html.meta_description':
+		'Convierte Markdown a HTML con vista previa en vivo, soporte de tablas GFM y bloques de código resaltados. Rápido, privado y 100% en el navegador.',
+	'tool.text-markdown-to-html.operation': 'Convertir Markdown',
+	'tool.text-markdown-to-html.faq.0.question':
+		'¿Este conversor admite tablas de GitHub Flavored Markdown (GFM)?',
+	'tool.text-markdown-to-html.faq.0.answer':
+		'Sí. La sintaxis de tablas GFM está soportada y puedes activarla o desactivarla en el panel de opciones.',
+	'tool.text-markdown-to-html.faq.1.question':
+		'¿Se resaltan automáticamente los bloques de código fenced?',
+	'tool.text-markdown-to-html.faq.1.answer':
+		'Sí. La herramienta resalta los bloques de código fenced y conserva las clases de lenguaje en el HTML generado.',
+	'tool.text-markdown-to-html.faq.2.question':
+		'¿Cómo se manejan enlaces inseguros o bloques de HTML sin procesar?',
+	'tool.text-markdown-to-html.faq.2.answer':
+		'Se eliminan protocolos inseguros en enlaces e imágenes. El HTML sin procesar se escapa por defecto y puedes habilitarlo desde opciones avanzadas.',
+	'tool.text-markdown-to-html.use_case.0':
+		'Preparar contenido de README y documentación para generadores de sitios estáticos',
+	'tool.text-markdown-to-html.use_case.1':
+		'Revisar la salida Markdown antes de publicar release notes o changelogs',
+	'tool.text-markdown-to-html.use_case.2':
+		'Generar fragmentos HTML saneados para editores CMS y bases de conocimiento',
+	'tool.text-markdown-to-html.use_case.3':
+		'Convertir tutoriales técnicos con código en HTML embebible',
 	'tool.text-string-case-converter.display_name': 'Convertidor de Formato de Texto',
 	'tool.text-string-case-converter.tagline':
 		'Convierte texto entre camelCase, PascalCase, snake_case, kebab-case y más',
@@ -1676,6 +1707,31 @@ const registryEs: Record<string, string> = {
 	'ui.lorem.generated': 'Lorem Ipsum generado',
 	'ui.lorem.seed_randomized': 'Semilla aleatorizada',
 	'ui.lorem.no_output': 'Todavía no hay salida generada',
+	'ui.markdown_to_html.placeholder': 'Escribe o pega Markdown aquí...',
+	'ui.markdown_to_html.option.gfm': 'Activar tablas GFM y listas de tareas',
+	'ui.markdown_to_html.option.breaks': 'Convertir saltos de línea simples en <br>',
+	'ui.markdown_to_html.option.highlight_code': 'Resaltar sintaxis en bloques de código fenced',
+	'ui.markdown_to_html.option.open_links_in_new_tab': 'Abrir enlaces en una nueva pestaña',
+	'ui.markdown_to_html.option.allow_raw_html': 'Permitir bloques raw HTML (avanzado)',
+	'ui.markdown_to_html.view.preview': 'Vista previa',
+	'ui.markdown_to_html.view.html': 'HTML',
+	'ui.markdown_to_html.status.converting': 'Convirtiendo Markdown...',
+	'ui.markdown_to_html.preview_aria': 'Vista previa en vivo de Markdown a HTML',
+	'ui.markdown_to_html.empty_preview':
+		'La vista previa en vivo aparecerá aquí cuando ingreses Markdown.',
+	'ui.markdown_to_html.empty_html': 'La salida HTML generada aparecerá aquí.',
+	'ui.markdown_to_html.error.conversion_failed':
+		'La conversión de Markdown falló. Revisa el contenido e inténtalo de nuevo.',
+	'ui.markdown_to_html.toast.no_html_output': 'No hay salida HTML para descargar',
+	'ui.markdown_to_html.warning.unsafe_link_removed': 'Se eliminó un enlace inseguro',
+	'ui.markdown_to_html.warning.unsafe_image_removed': 'Se eliminó una imagen insegura',
+	'ui.markdown_to_html.warning.raw_html_escaped': 'Se escapó HTML sin procesar por seguridad',
+	'ui.markdown_to_html.stats.headings': 'Encabezados',
+	'ui.markdown_to_html.stats.tables': 'Tablas',
+	'ui.markdown_to_html.stats.code_blocks': 'Bloques de código',
+	'ui.markdown_to_html.stats.links': 'Enlaces',
+	'ui.markdown_to_html.stats.images': 'Imágenes',
+	'ui.markdown_to_html.stats.words': 'Palabras',
 	'ui.text_case.tab_label': 'Formato',
 	'ui.text_case.placeholder': 'Escribe o pega texto para convertir su formato...',
 	'ui.text_case.camel_case': 'camelCase',

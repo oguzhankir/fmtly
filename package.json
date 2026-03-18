@@ -56,6 +56,7 @@
 		"jsonrepair": "^3.13.3",
 		"lucide-svelte": "^0.469.0",
 		"lz-string": "^1.5.0",
+		"marked": "^14.0.0",
 		"papaparse": "^5.5.3",
 		"smol-toml": "^1.6.0"
 	}
