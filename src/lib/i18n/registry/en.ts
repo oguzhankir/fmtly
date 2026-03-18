@@ -1423,11 +1423,39 @@ const registryEn: Record<string, string> = {
 	'tool.text-word-character-counter.use_case.0':
 		'Check article and documentation length before publishing',
 	'tool.text-word-character-counter.use_case.1':
-		'Optimize UI copy and prompts against character limits',
+		'Optimize UI copy and prompts against character constraints',
 	'tool.text-word-character-counter.use_case.2':
 		'Estimate reading time for blog posts, docs, and release notes',
 	'tool.text-word-character-counter.use_case.3':
 		'Compare draft versions using objective text length metrics',
+	'tool.text-lorem-ipsum-generator.display_name': 'Lorem Ipsum Generator',
+	'tool.text-lorem-ipsum-generator.tagline':
+		'Generate placeholder text in paragraphs, sentences, or words with seed control',
+	'tool.text-lorem-ipsum-generator.description':
+		'Generate deterministic Lorem Ipsum text for mockups, UI previews, and content testing. Control paragraphs, sentences, words, seed value, and plain/HTML output directly in your browser.',
+	'tool.text-lorem-ipsum-generator.primary_keyword': 'lorem ipsum generator',
+	'tool.text-lorem-ipsum-generator.meta_title': 'Lorem Ipsum Generator — fmtly.dev',
+	'tool.text-lorem-ipsum-generator.meta_description':
+		'Free Lorem Ipsum generator with paragraph, sentence, and word modes, seeded output, and plain/HTML export. Fast, private, and 100% browser-based.',
+	'tool.text-lorem-ipsum-generator.operation': 'Generate Lorem Ipsum',
+	'tool.text-lorem-ipsum-generator.faq.0.question': 'Can I generate deterministic Lorem Ipsum?',
+	'tool.text-lorem-ipsum-generator.faq.0.answer':
+		'Yes. Use the seed field to reproduce the exact same output across runs with identical options.',
+	'tool.text-lorem-ipsum-generator.faq.1.question':
+		'Can I output HTML paragraphs instead of plain text?',
+	'tool.text-lorem-ipsum-generator.faq.1.answer':
+		'Yes. Switch output format to HTML to generate paragraph markup for direct use in prototypes.',
+	'tool.text-lorem-ipsum-generator.faq.2.question': 'Is generated text created locally?',
+	'tool.text-lorem-ipsum-generator.faq.2.answer':
+		'Yes. Generation runs entirely in your browser and no text is sent to a server.',
+	'tool.text-lorem-ipsum-generator.use_case.0':
+		'Fill wireframes and UI mocks with realistic placeholder copy',
+	'tool.text-lorem-ipsum-generator.use_case.1':
+		'Test typography, spacing, and overflow behaviors in responsive layouts',
+	'tool.text-lorem-ipsum-generator.use_case.2':
+		'Generate repeatable seeded fixtures for frontend snapshots and visual tests',
+	'tool.text-lorem-ipsum-generator.use_case.3':
+		'Create plain text or HTML placeholder content for CMS demos',
 	'tool.text-string-case-converter.display_name': 'String Case Converter',
 	'tool.text-string-case-converter.tagline':
 		'Convert text between camelCase, PascalCase, snake_case, kebab-case, and more',
@@ -1593,6 +1621,30 @@ const registryEn: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'lines',
 	'ui.text_counter.placeholder': 'Type or paste your text here...',
+	'ui.lorem.mode': 'Mode',
+	'ui.lorem.mode.paragraphs': 'Paragraphs',
+	'ui.lorem.mode.sentences': 'Sentences',
+	'ui.lorem.mode.words': 'Words',
+	'ui.lorem.count': 'Count',
+	'ui.lorem.seed': 'Seed',
+	'ui.lorem.random_seed': 'Randomize seed',
+	'ui.lorem.generate': 'Generate',
+	'ui.lorem.include_classic_opening': 'Include classic opening',
+	'ui.lorem.auto_generate': 'Auto-generate on changes',
+	'ui.lorem.output_format': 'Output format',
+	'ui.lorem.output_format.plain': 'Plain text',
+	'ui.lorem.output_format.html': 'HTML',
+	'ui.lorem.advanced_options': 'Advanced options',
+	'ui.lorem.min_words_per_sentence': 'Min words / sentence',
+	'ui.lorem.max_words_per_sentence': 'Max words / sentence',
+	'ui.lorem.min_sentences_per_paragraph': 'Min sentences / paragraph',
+	'ui.lorem.max_sentences_per_paragraph': 'Max sentences / paragraph',
+	'ui.lorem.source': 'Source',
+	'ui.lorem.preview': 'Preview',
+	'ui.lorem.empty_output': 'Generated output will appear here...',
+	'ui.lorem.generated': 'Lorem Ipsum generated',
+	'ui.lorem.seed_randomized': 'Seed randomized',
+	'ui.lorem.no_output': 'No generated output yet',
 	'ui.text_case.tab_label': 'Case',
 	'ui.text_case.placeholder': 'Type or paste text to convert case...',
 	'ui.text_case.camel_case': 'camelCase',

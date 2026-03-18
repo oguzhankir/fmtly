@@ -1438,20 +1438,49 @@ const registryIt: Record<string, string> = {
 	'tool.text-word-character-counter.faq.2.question':
 		'Il mio testo viene inviato fuori dal dispositivo?',
 	'tool.text-word-character-counter.faq.2.answer':
-		'No. Conteggio e analisi avvengono localmente nel browser, senza upload a server.',
+		'No. Conteggio e analisi avvengono localmente nel browser, senza invio del testo a server.',
 	'tool.text-word-character-counter.use_case.0':
-		'Controllare la lunghezza di articoli e documentazione prima della pubblicazione',
+		'Controllare lunghezza di articoli e documentazione prima della pubblicazione',
 	'tool.text-word-character-counter.use_case.1':
-		'Ottimizzare testi UI e prompt rispetto ai limiti di caratteri',
+		'Ottimizzare copy UI e prompt in base ai limiti di caratteri',
 	'tool.text-word-character-counter.use_case.2':
 		'Stimare il tempo di lettura per post, documenti e note di rilascio',
 	'tool.text-word-character-counter.use_case.3':
 		'Confrontare bozze con metriche oggettive di lunghezza',
+	'tool.text-lorem-ipsum-generator.display_name': 'Generatore Lorem Ipsum',
+	'tool.text-lorem-ipsum-generator.tagline':
+		'Genera testo segnaposto per paragrafi, frasi o parole con controllo seed',
+	'tool.text-lorem-ipsum-generator.description':
+		'Genera testo Lorem Ipsum deterministico per mockup, anteprime UI e test di contenuto. Controlla numero di paragrafi/frasi/parole, seed e output in testo semplice o HTML direttamente nel browser.',
+	'tool.text-lorem-ipsum-generator.primary_keyword': 'generatore lorem ipsum',
+	'tool.text-lorem-ipsum-generator.meta_title': 'Generatore Lorem Ipsum — fmtly.dev',
+	'tool.text-lorem-ipsum-generator.meta_description':
+		'Generatore Lorem Ipsum gratuito con modalità paragrafo, frase e parola, output seedato ed export testo semplice/HTML. Veloce, privato e 100% nel browser.',
+	'tool.text-lorem-ipsum-generator.operation': 'Genera Lorem Ipsum',
+	'tool.text-lorem-ipsum-generator.faq.0.question':
+		'Posso ottenere sempre lo stesso testo con le stesse impostazioni?',
+	'tool.text-lorem-ipsum-generator.faq.0.answer':
+		'Sì. Mantieni lo stesso seed e le stesse opzioni per riprodurre identicamente l’output.',
+	'tool.text-lorem-ipsum-generator.faq.1.question':
+		'Posso generare paragrafi HTML invece del testo semplice?',
+	'tool.text-lorem-ipsum-generator.faq.1.answer':
+		'Sì. Seleziona il formato HTML per ottenere markup pronto all’uso nei prototipi.',
+	'tool.text-lorem-ipsum-generator.faq.2.question': 'Il testo viene generato localmente?',
+	'tool.text-lorem-ipsum-generator.faq.2.answer':
+		'Sì. La generazione avviene interamente nel browser senza invio a server.',
+	'tool.text-lorem-ipsum-generator.use_case.0':
+		'Riempire wireframe e mock UI con testo segnaposto realistico',
+	'tool.text-lorem-ipsum-generator.use_case.1':
+		'Testare tipografia, spaziature e overflow in layout responsive',
+	'tool.text-lorem-ipsum-generator.use_case.2':
+		'Creare fixture seedate riproducibili per snapshot e test visivi frontend',
+	'tool.text-lorem-ipsum-generator.use_case.3':
+		'Produrre contenuto segnaposto in testo semplice o HTML per demo CMS',
 	'tool.text-string-case-converter.display_name': 'Convertitore di Formato Testo',
 	'tool.text-string-case-converter.tagline':
 		'Converti testo tra camelCase, PascalCase, snake_case, kebab-case e altri formati',
 	'tool.text-string-case-converter.description':
-		'Converti istantaneamente testo tra camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case e formato frase. Veloce, privato e completamente nel browser.',
+		'Converti testo istantaneamente tra camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case e formato frase. Veloce, privato e interamente nel browser.',
 	'tool.text-string-case-converter.primary_keyword': 'convertitore string case',
 	'tool.text-string-case-converter.meta_title': 'Convertitore di Formato Testo — fmtly.dev',
 	'tool.text-string-case-converter.meta_description':
@@ -1616,6 +1645,30 @@ const registryIt: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'righe',
 	'ui.text_counter.placeholder': 'Scrivi o incolla qui il tuo testo...',
+	'ui.lorem.mode': 'Modalità',
+	'ui.lorem.mode.paragraphs': 'Paragrafi',
+	'ui.lorem.mode.sentences': 'Frasi',
+	'ui.lorem.mode.words': 'Parole',
+	'ui.lorem.count': 'Quantità',
+	'ui.lorem.seed': 'Seed',
+	'ui.lorem.random_seed': 'Seed casuale',
+	'ui.lorem.generate': 'Genera',
+	'ui.lorem.include_classic_opening': 'Includi apertura classica',
+	'ui.lorem.auto_generate': 'Genera automaticamente alle modifiche',
+	'ui.lorem.output_format': 'Formato output',
+	'ui.lorem.output_format.plain': 'Testo semplice',
+	'ui.lorem.output_format.html': 'HTML',
+	'ui.lorem.advanced_options': 'Opzioni avanzate',
+	'ui.lorem.min_words_per_sentence': 'Min parole / frase',
+	'ui.lorem.max_words_per_sentence': 'Max parole / frase',
+	'ui.lorem.min_sentences_per_paragraph': 'Min frasi / paragrafo',
+	'ui.lorem.max_sentences_per_paragraph': 'Max frasi / paragrafo',
+	'ui.lorem.source': 'Sorgente',
+	'ui.lorem.preview': 'Anteprima',
+	'ui.lorem.empty_output': "L'output generato apparirà qui...",
+	'ui.lorem.generated': 'Lorem Ipsum generato',
+	'ui.lorem.seed_randomized': 'Seed randomizzato',
+	'ui.lorem.no_output': 'Nessun output generato al momento',
 	'ui.text_case.tab_label': 'Formato',
 	'ui.text_case.placeholder': 'Scrivi o incolla testo per convertire il formato...',
 	'ui.text_case.camel_case': 'camelCase',

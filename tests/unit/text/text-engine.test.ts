@@ -3,6 +3,7 @@ import {
 	analyzeText,
 	cleanWhitespace,
 	convertTextCases,
+	generateLoremIpsum,
 	removeDuplicateLines,
 	reverseText
 } from '../../../src/lib/engines/text/text.engine.js';
@@ -35,6 +36,93 @@ describe('analyzeText', () => {
 		const resultLong = analyzeText(longText);
 		expect(resultLong.words).toBe(450);
 		expect(resultLong.readingTimeMinutes).toBe(3);
+	});
+});
+
+describe('generateLoremIpsum', () => {
+	it('generates deterministic output for the same seed and options', () => {
+		const options = {
+			mode: 'sentences' as const,
+			count: 4,
+			seed: 1337,
+			includeClassicOpening: true,
+			outputFormat: 'plain' as const,
+			minWordsPerSentence: 6,
+			maxWordsPerSentence: 10,
+			minSentencesPerParagraph: 2,
+			maxSentencesPerParagraph: 4
+		};
+
+		const first = generateLoremIpsum(options);
+		const second = generateLoremIpsum(options);
+
+		expect(first.text).toBe(second.text);
+		expect(first.seed).toBe(1337);
+		expect(first.mode).toBe('sentences');
+		expect(first.outputFormat).toBe('plain');
+	});
+
+	it('supports word mode and includes classic opening at the beginning', () => {
+		const result = generateLoremIpsum({
+			mode: 'words',
+			count: 12,
+			seed: 42,
+			includeClassicOpening: true,
+			outputFormat: 'plain'
+		});
+
+		expect(result.text.startsWith('lorem ipsum dolor sit amet')).toBe(true);
+		expect(result.text.split(/\s+/).length).toBe(12);
+		expect(result.metrics.words).toBe(12);
+		expect(result.metrics.sentences).toBe(1);
+	});
+
+	it('generates HTML output with paragraph tags when requested', () => {
+		const result = generateLoremIpsum({
+			mode: 'paragraphs',
+			count: 2,
+			seed: 88,
+			outputFormat: 'html',
+			includeClassicOpening: true
+		});
+
+		expect(result.text.includes('<p>')).toBe(true);
+		expect(result.text.includes('</p>')).toBe(true);
+		expect(result.text.includes('\n')).toBe(true);
+		expect(result.plainText.includes('\n\n')).toBe(true);
+		expect(result.metrics.paragraphs).toBe(2);
+	});
+
+	it('clamps invalid numeric options to safe ranges', () => {
+		const result = generateLoremIpsum({
+			mode: 'paragraphs',
+			count: -10,
+			seed: -1,
+			minWordsPerSentence: 100,
+			maxWordsPerSentence: 1,
+			minSentencesPerParagraph: 30,
+			maxSentencesPerParagraph: 0
+		});
+
+		expect(result.seed).toBe(1);
+		expect(result.metrics.words).toBeGreaterThanOrEqual(2);
+		expect(result.metrics.sentences).toBeGreaterThanOrEqual(1);
+		expect(result.metrics.paragraphs).toBe(1);
+	});
+
+	it('returns plain text in text and plainText for plain output', () => {
+		const result = generateLoremIpsum({
+			mode: 'sentences',
+			count: 3,
+			seed: 777,
+			outputFormat: 'plain',
+			includeClassicOpening: false
+		});
+
+		expect(result.text).toBe(result.plainText);
+		expect(result.metrics.words).toBeGreaterThan(0);
+		expect(result.metrics.sentences).toBe(3);
+		expect(result.metrics.readingTimeMinutes).toBe(1);
 	});
 });
 
