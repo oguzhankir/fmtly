@@ -1535,6 +1535,34 @@ const registryEs: Record<string, string> = {
 		'Preparar listas de palabras únicas para probar vocabulario o modelos de lenguaje',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Consolidar valores de configuración o listas de variables de entorno',
+	'tool.text-whitespace-cleaner.display_name': 'Limpiador de Espacios en Blanco',
+	'tool.text-whitespace-cleaner.tagline':
+		'Recorta espacios finales, une múltiples espacios en blanco, normaliza finales de línea',
+	'tool.text-whitespace-cleaner.description':
+		'Limpia el formato de texto eliminando espacios finales, uniendo múltiples espacios/tabulaciones a espacios simples y normalizando finales de línea. Perfecto para preparar código, registros y contenido para control de versiones o procesamiento.',
+	'tool.text-whitespace-cleaner.primary_keyword': 'limpiador de espacios en blanco',
+	'tool.text-whitespace-cleaner.meta_title': 'Limpiador de Espacios en Blanco — fmtly.dev',
+	'tool.text-whitespace-cleaner.meta_description':
+		'Limpiador gratuito de espacios en blanco que elimina espacios finales, une múltiples espacios en blanco y normaliza finales de línea. Rápido, privado y 100% en tu navegador.',
+	'tool.text-whitespace-cleaner.operation': 'Limpiar Espacios en Blanco',
+	'tool.text-whitespace-cleaner.faq.0.question':
+		'¿Qué caracteres de espacio en blanco se eliminan?',
+	'tool.text-whitespace-cleaner.faq.0.answer':
+		'Se eliminan espacios y tabulaciones finales al final de las líneas. Múltiples espacios/tabulaciones dentro del texto se unen a espacios simples. Los finales de línea se normalizan a LF (\\n).',
+	'tool.text-whitespace-cleaner.faq.1.question': '¿Se conservan los espacios iniciales?',
+	'tool.text-whitespace-cleaner.faq.1.answer':
+		'Sí. Solo se eliminan los espacios finales. Se conserva la sangría inicial y los espacios dentro de las líneas, excepto que múltiples espacios/tabulaciones se unen a espacios simples.',
+	'tool.text-whitespace-cleaner.faq.2.question': '¿Cómo se normalizan los finales de línea?',
+	'tool.text-whitespace-cleaner.faq.2.answer':
+		'Los finales de línea de Windows (CRLF) y Mac antiguos (CR) se convierten a estilo Unix LF (\\n). Múltiples líneas vacías consecutivas se unen a saltos de línea dobles.',
+	'tool.text-whitespace-cleaner.use_case.0':
+		'Limpiar código antes de confirmar en control de versiones para eliminar espacios finales',
+	'tool.text-whitespace-cleaner.use_case.1':
+		'Normalizar texto copiado de diferentes fuentes con espaciado inconsistente',
+	'tool.text-whitespace-cleaner.use_case.2':
+		'Preparar registros y archivos de datos para procesamiento y análisis consistente',
+	'tool.text-whitespace-cleaner.use_case.3':
+		'Formatear contenido de editores de texto enriquecido a texto plano con espaciado consistente',
 	'ui.text_counter.words': 'Palabras',
 	'ui.text_counter.characters': 'Caracteres',
 	'ui.text_counter.characters_no_spaces': 'Caracteres (sin espacios)',
@@ -1565,6 +1593,28 @@ const registryEs: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Líneas únicas',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplicados eliminados',
 	'ui.duplicate_line_remover.result': 'Resultado',
+	'ui.whitespace_cleaner.tab_label': 'Espacios',
+	'ui.whitespace_cleaner.placeholder': 'Escribe o pega texto para limpiar espacios en blanco...',
+	'ui.whitespace_cleaner.trailing_spaces': 'Espacios finales',
+	'ui.whitespace_cleaner.leading_spaces': 'Espacios iniciales',
+	'ui.whitespace_cleaner.blanks_collapsed': 'Espacios unidos',
+	'ui.whitespace_cleaner.tabs_converted': 'Tabs convertidos',
+	'ui.whitespace_cleaner.spaces_converted': 'Espacios convertidos',
+	'ui.whitespace_cleaner.lines_processed': 'Líneas procesadas',
+	'ui.whitespace_cleaner.line_endings_normalized': 'Finales de línea normalizados',
+	'ui.whitespace_cleaner.result': 'Resultado',
+	'ui.whitespace_cleaner.options': 'Opciones de Limpieza',
+	'ui.whitespace_cleaner.remove_leading': 'Eliminar espacios iniciales',
+	'ui.whitespace_cleaner.remove_trailing': 'Eliminar espacios finales',
+	'ui.whitespace_cleaner.collapse_spaces': 'Unir espacios múltiples',
+	'ui.whitespace_cleaner.collapse_tabs': 'Unir tabs a espacios',
+	'ui.whitespace_cleaner.convert_tabs_to_spaces': 'Convertir tabs a espacios',
+	'ui.whitespace_cleaner.convert_spaces_to_tabs': 'Convertir espacios a tabs',
+	'ui.whitespace_cleaner.trim_lines': 'Recortar cada línea',
+	'ui.whitespace_cleaner.remove_all_spaces': 'Eliminar todos los espacios',
+	'ui.whitespace_cleaner.remove_all_line_breaks': 'Eliminar todos los saltos de línea',
+	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Preservar saltos de párrafo',
+	'ui.whitespace_cleaner.tab_size': 'Tamaño de tab',
 	'ui.csv.controls.table_name': 'Nombre de Tabla',
 	'ui.csv.controls.batch_size': 'Tamaño de Lote'
 };

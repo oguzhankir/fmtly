@@ -58,6 +58,8 @@
 				return $t('ui.text_reverser.tab_label', 'Reverse');
 			case 'deduplicate':
 				return $t('ui.duplicate_line_remover.tab_label', 'Deduplicate');
+			case 'whitespace':
+				return $t('ui.whitespace_cleaner.tab_label', 'Whitespace');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

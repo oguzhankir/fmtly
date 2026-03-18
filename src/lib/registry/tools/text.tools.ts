@@ -179,5 +179,50 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 			'tool.text-duplicate-line-remover.use_case.3'
 		],
 		sampleInput: 'apple\nbanana\napple\ncherry\nbanana\ncherry\ndate'
+	},
+	{
+		id: 'text-whitespace-cleaner',
+		category: 'text',
+		slug: 'whitespace',
+		displayName: 'tool.text-whitespace-cleaner.display_name',
+		tagline: 'tool.text-whitespace-cleaner.tagline',
+		description: 'tool.text-whitespace-cleaner.description',
+		primaryKeyword: 'tool.text-whitespace-cleaner.primary_keyword',
+		metaTitle: 'tool.text-whitespace-cleaner.meta_title',
+		metaDescription: 'tool.text-whitespace-cleaner.meta_description',
+		engine: 'text',
+		operation: 'tool.text-whitespace-cleaner.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'deduplicate' },
+			{ category: 'text', slug: 'reverser' },
+			{ category: 'text', slug: 'case' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-whitespace-cleaner.faq.0.question',
+				answer: 'tool.text-whitespace-cleaner.faq.0.answer'
+			},
+			{
+				question: 'tool.text-whitespace-cleaner.faq.1.question',
+				answer: 'tool.text-whitespace-cleaner.faq.1.answer'
+			},
+			{
+				question: 'tool.text-whitespace-cleaner.faq.2.question',
+				answer: 'tool.text-whitespace-cleaner.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-whitespace-cleaner.use_case.0',
+			'tool.text-whitespace-cleaner.use_case.1',
+			'tool.text-whitespace-cleaner.use_case.2',
+			'tool.text-whitespace-cleaner.use_case.3'
+		],
+		sampleInput:
+			'Line with trailing spaces   \t\nMixed\t\ttabs   and  spaces\n\r\nWindows line endings\r\n  \n  \nExtra blank lines'
 	}
 ];

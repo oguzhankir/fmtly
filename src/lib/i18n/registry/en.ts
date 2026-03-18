@@ -1491,6 +1491,33 @@ const registryEn: Record<string, string> = {
 		'Prepare unique word lists for testing vocabulary or language models',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Consolidate configuration values or environment variable lists',
+	'tool.text-whitespace-cleaner.display_name': 'Whitespace Cleaner',
+	'tool.text-whitespace-cleaner.tagline':
+		'Trim trailing spaces, collapse multiple blanks, normalize line endings',
+	'tool.text-whitespace-cleaner.description':
+		'Clean up text formatting by removing trailing spaces, collapsing multiple spaces/tabs to single spaces, and normalizing line endings. Perfect for preparing code, logs, and content for version control or processing.',
+	'tool.text-whitespace-cleaner.primary_keyword': 'whitespace cleaner',
+	'tool.text-whitespace-cleaner.meta_title': 'Whitespace Cleaner — fmtly.dev',
+	'tool.text-whitespace-cleaner.meta_description':
+		'Free whitespace cleaner that removes trailing spaces, collapses multiple blanks, and normalizes line endings. Fast, private, and 100% in your browser.',
+	'tool.text-whitespace-cleaner.operation': 'Clean Whitespace',
+	'tool.text-whitespace-cleaner.faq.0.question': 'Which whitespace characters are removed?',
+	'tool.text-whitespace-cleaner.faq.0.answer':
+		'Trailing spaces and tabs at end of lines are removed. Multiple spaces/tabs within text are collapsed to single spaces. Line endings are normalized to LF (\\n).',
+	'tool.text-whitespace-cleaner.faq.1.question': 'Are leading spaces preserved?',
+	'tool.text-whitespace-cleaner.faq.1.answer':
+		'Yes. Only trailing whitespace is removed. Leading indentation and spaces within lines are preserved, except multiple spaces/tabs are collapsed to single spaces.',
+	'tool.text-whitespace-cleaner.faq.2.question': 'How are line endings normalized?',
+	'tool.text-whitespace-cleaner.faq.2.answer':
+		'Windows (CRLF) and old Mac (CR) line endings are converted to Unix-style LF (\\n). Multiple consecutive blank lines are collapsed to double line breaks.',
+	'tool.text-whitespace-cleaner.use_case.0':
+		'Clean code before committing to version control to remove trailing spaces',
+	'tool.text-whitespace-cleaner.use_case.1':
+		'Normalize text copied from different sources with inconsistent spacing',
+	'tool.text-whitespace-cleaner.use_case.2':
+		'Prepare logs and data files for consistent processing and analysis',
+	'tool.text-whitespace-cleaner.use_case.3':
+		'Format content from rich text editors to plain text with consistent spacing',
 	'ui.text_counter.words': 'Words',
 	'ui.text_counter.characters': 'Characters',
 	'ui.text_counter.characters_no_spaces': 'Characters (no spaces)',
@@ -1520,6 +1547,31 @@ const registryEn: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Unique lines',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplicates removed',
 	'ui.duplicate_line_remover.result': 'Result',
+	'ui.whitespace_cleaner.tab_label': 'Whitespace',
+	'ui.whitespace_cleaner.placeholder': 'Type or paste text to clean whitespace...',
+	'ui.whitespace_cleaner.output': 'Output',
+	'ui.whitespace_cleaner.statistics': 'Statistics',
+	'ui.whitespace_cleaner.normalized': 'Normalized',
+	'ui.whitespace_cleaner.trailing_spaces': 'Trailing spaces',
+	'ui.whitespace_cleaner.leading_spaces': 'Leading spaces',
+	'ui.whitespace_cleaner.blanks_collapsed': 'Blanks collapsed',
+	'ui.whitespace_cleaner.tabs_converted': 'Tabs converted',
+	'ui.whitespace_cleaner.spaces_converted': 'Spaces converted',
+	'ui.whitespace_cleaner.lines_processed': 'Lines processed',
+	'ui.whitespace_cleaner.line_endings_normalized': 'Line endings normalized',
+	'ui.whitespace_cleaner.result': 'Result',
+	'ui.whitespace_cleaner.options': 'Cleaning Options',
+	'ui.whitespace_cleaner.remove_leading': 'Remove leading spaces',
+	'ui.whitespace_cleaner.remove_trailing': 'Remove trailing spaces',
+	'ui.whitespace_cleaner.collapse_spaces': 'Collapse multiple spaces',
+	'ui.whitespace_cleaner.collapse_tabs': 'Collapse tabs to spaces',
+	'ui.whitespace_cleaner.convert_tabs_to_spaces': 'Convert tabs to spaces',
+	'ui.whitespace_cleaner.convert_spaces_to_tabs': 'Convert spaces to tabs',
+	'ui.whitespace_cleaner.trim_lines': 'Trim each line',
+	'ui.whitespace_cleaner.remove_all_spaces': 'Remove all spaces',
+	'ui.whitespace_cleaner.remove_all_line_breaks': 'Remove all line breaks',
+	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Preserve paragraph breaks',
+	'ui.whitespace_cleaner.tab_size': 'Tab size',
 	'ui.csv.controls.table_name': 'Table Name',
 	'ui.csv.controls.batch_size': 'Batch Size'
 };

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
 	analyzeText,
+	cleanWhitespace,
 	convertTextCases,
 	removeDuplicateLines,
 	reverseText
@@ -135,5 +136,92 @@ describe('removeDuplicateLines', () => {
 		expect(result.removed).toBe('a\n\nb');
 		expect(result.duplicateCount).toBe(2);
 		expect(result.uniqueCount).toBe(3);
+	});
+});
+
+describe('cleanWhitespace', () => {
+	it('removes trailing spaces and tabs', () => {
+		const input = 'line 1   \t\nline 2\t\t  \nline 3   ';
+		const result = cleanWhitespace(input);
+
+		expect(result.cleaned).toBe('line 1\nline 2\nline 3');
+		expect(result.trailingSpacesRemoved).toBe(3);
+	});
+
+	it('collapses multiple spaces and tabs to single space', () => {
+		const input = 'text  with   multiple\t\t\t spaces';
+		const result = cleanWhitespace(input);
+
+		expect(result.cleaned).toBe('text with multiple spaces');
+		expect(result.multipleBlanksCollapsed).toBe(3);
+	});
+
+	it('normalizes line endings', () => {
+		const input = 'line 1\r\nline 2\rline 3\n';
+		const result = cleanWhitespace(input);
+
+		expect(result.cleaned).toBe('line 1\nline 2\nline 3');
+		expect(result.lineEndingsNormalized).toBe(true);
+	});
+
+	it('handles empty input', () => {
+		const result = cleanWhitespace('');
+		expect(result.cleaned).toBe('');
+		expect(result.trailingSpacesRemoved).toBe(0);
+		expect(result.leadingSpacesRemoved).toBe(0);
+		expect(result.multipleBlanksCollapsed).toBe(0);
+		expect(result.lineEndingsNormalized).toBe(false);
+	});
+
+	it('normalizes paragraph spacing', () => {
+		const input = 'para 1  \n  \n   \npara 2';
+		const result = cleanWhitespace(input);
+
+		expect(result.cleaned).toBe('para 1\n\npara 2');
+	});
+
+	it('removes leading spaces when enabled', () => {
+		const input = '  line 1\n\tline 2\n   line 3';
+		const result = cleanWhitespace(input, { removeLeading: true });
+
+		expect(result.cleaned).toBe('line 1\nline 2\nline 3');
+		expect(result.leadingSpacesRemoved).toBe(3);
+	});
+
+	it('converts tabs to spaces when enabled', () => {
+		const input = 'line\t1\n\t\tline 2';
+		const result = cleanWhitespace(input, {
+			convertTabsToSpaces: true,
+			tabSize: 2,
+			collapseSpaces: false,
+			removeTrailing: false
+		});
+
+		expect(result.cleaned).toBe('line  1\n    line 2');
+		expect(result.tabsConverted).toBe(3);
+	});
+
+	it('removes all spaces when enabled', () => {
+		const input = 'line 1 with spaces';
+		const result = cleanWhitespace(input, { removeAllSpaces: true });
+
+		expect(result.cleaned).toBe('line1withspaces');
+		expect(result.spacesConverted).toBe(3);
+	});
+
+	it('removes all line breaks when enabled', () => {
+		const input = 'line 1\nline 2\nline 3';
+		const result = cleanWhitespace(input, { removeAllLineBreaks: true });
+
+		expect(result.cleaned).toBe('line 1 line 2 line 3');
+	});
+
+	it('trims each line when enabled', () => {
+		const input = '  line 1  \n\tline 2\t\n   line 3   ';
+		const result = cleanWhitespace(input, { trimLines: true });
+
+		expect(result.cleaned).toBe('line 1\nline 2\nline 3');
+		expect(result.leadingSpacesRemoved).toBe(3);
+		expect(result.trailingSpacesRemoved).toBe(3);
 	});
 });

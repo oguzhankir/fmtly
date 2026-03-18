@@ -23,7 +23,7 @@ fmtly puts every developer tool in one place. Fast, private, and open source.
 
 ---
 
-## Tools (53 shipped)
+## Tools (54 shipped)
 
 | Category | Tools |
 |---|---|
@@ -32,7 +32,7 @@ fmtly puts every developer tool in one place. Fast, private, and open source.
 | **YAML** (10) | Formatter, Minifier, Validator, Diff, Query, → JSON, → XML, → CSV, → TOML, → HTML |
 | **CSV** (8) | Formatter, Validator, → JSON, → XML, → YAML, → HTML, → SQL |
 | **TOML** (8) | Formatter, Minifier, Validator, Diff, → JSON, → YAML, → XML, → HTML |
-| **Text** (4) | Word & Character Counter, String Case Converter, Text Reverser, Duplicate Line Remover |
+| **Text** (5) | Word & Character Counter, String Case Converter, Text Reverser, Duplicate Line Remover, Whitespace Cleaner |
 
 > **Full roadmap with 100+ planned tools across 15 categories (AI, Crypto, Encoders, Web, etc.):** see [ROADMAP.md](ROADMAP.md)
 

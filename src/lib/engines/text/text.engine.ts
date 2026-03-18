@@ -29,6 +29,31 @@ export type TextDuplicateRemovalResult = {
 	uniqueCount: number;
 };
 
+export type TextWhitespaceCleanupOptions = {
+	removeLeading: boolean;
+	removeTrailing: boolean;
+	collapseSpaces: boolean;
+	collapseTabs: boolean;
+	convertTabsToSpaces: boolean;
+	tabSize: number;
+	removeAllSpaces: boolean;
+	removeAllLineBreaks: boolean;
+	trimLines: boolean;
+	preserveParagraphBreaks: boolean;
+	convertSpacesToTabs: boolean;
+};
+
+export type TextWhitespaceCleanupResult = {
+	cleaned: string;
+	trailingSpacesRemoved: number;
+	leadingSpacesRemoved: number;
+	multipleBlanksCollapsed: number;
+	tabsConverted: number;
+	spacesConverted: number;
+	lineEndingsNormalized: boolean;
+	linesProcessed: number;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -158,6 +183,108 @@ export function removeDuplicateLines(input: string): TextDuplicateRemovalResult 
 		removed: unique.join('\n'),
 		duplicateCount,
 		uniqueCount: unique.length
+	};
+}
+
+export function cleanWhitespace(
+	input: string,
+	options: Partial<TextWhitespaceCleanupOptions> = {}
+): TextWhitespaceCleanupResult {
+	const opts: TextWhitespaceCleanupOptions = {
+		removeLeading: false,
+		removeTrailing: true,
+		collapseSpaces: true,
+		collapseTabs: true,
+		convertTabsToSpaces: false,
+		tabSize: 4,
+		removeAllSpaces: false,
+		removeAllLineBreaks: false,
+		trimLines: false,
+		preserveParagraphBreaks: true,
+		convertSpacesToTabs: false,
+		...options
+	};
+
+	let result = input;
+	let trailingSpacesRemoved = 0;
+	let leadingSpacesRemoved = 0;
+	let multipleBlanksCollapsed = 0;
+	let tabsConverted = 0;
+	let spacesConverted = 0;
+	const lineEndingsNormalized = input.includes('\r\n') || input.includes('\r');
+
+	if (opts.removeAllSpaces) {
+		result = result.replace(/ /g, '');
+		spacesConverted = (input.match(/ /g) || []).length;
+	}
+
+	// Convert tabs to spaces (do this before collapse if enabled)
+	if (opts.convertTabsToSpaces) {
+		const spaces = ' '.repeat(opts.tabSize);
+		result = result.replace(/\t/g, spaces);
+		tabsConverted = (input.match(/\t/g) || []).length;
+
+		// After converting tabs to spaces, collapse multiple spaces if needed
+		if (opts.collapseSpaces && !opts.removeAllSpaces) {
+			result = result.replace(/ {2,}/g, (match) => {
+				multipleBlanksCollapsed += 1;
+				return ' ';
+			});
+		}
+	} else if (
+		(opts.collapseTabs || opts.collapseSpaces) &&
+		!opts.convertTabsToSpaces &&
+		!opts.removeAllSpaces &&
+		!opts.convertSpacesToTabs
+	) {
+		// Use a single regex to collapse both tabs and spaces together
+		// This matches the original behavior but with the correct conditions
+		result = result.replace(/[ \t]{2,}/g, (match) => {
+			multipleBlanksCollapsed += 1;
+			return ' ';
+		});
+	}
+
+	// Remove leading/trailing spaces
+	if (opts.removeLeading || opts.trimLines) {
+		result = result.replace(/^[ \t]+/gm, (match) => {
+			leadingSpacesRemoved += 1;
+			return '';
+		});
+	}
+
+	if (opts.removeTrailing || opts.trimLines) {
+		result = result.replace(/[ \t]+$/gm, (match) => {
+			trailingSpacesRemoved += 1;
+			return '';
+		});
+	}
+
+	if (opts.removeAllLineBreaks) {
+		result = result.replace(/\r?\n/g, ' ');
+	} else {
+		result = result.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+		if (opts.preserveParagraphBreaks) {
+			result = result.replace(/\n{3,}/g, '\n\n');
+		} else {
+			result = result.replace(/\n+/g, '\n');
+		}
+
+		result = result.replace(/\n$/, '');
+	}
+
+	const linesProcessed = result.split('\n').length;
+
+	return {
+		cleaned: result,
+		trailingSpacesRemoved,
+		leadingSpacesRemoved,
+		multipleBlanksCollapsed,
+		tabsConverted,
+		spacesConverted,
+		lineEndingsNormalized,
+		linesProcessed
 	};
 }
 
