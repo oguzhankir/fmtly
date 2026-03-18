@@ -94,6 +94,51 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 	},
 	{
+		id: 'text-markdown-to-html',
+		category: 'text',
+		slug: 'markdown-to-html',
+		displayName: 'tool.text-markdown-to-html.display_name',
+		tagline: 'tool.text-markdown-to-html.tagline',
+		description: 'tool.text-markdown-to-html.description',
+		primaryKeyword: 'tool.text-markdown-to-html.primary_keyword',
+		metaTitle: 'tool.text-markdown-to-html.meta_title',
+		metaDescription: 'tool.text-markdown-to-html.meta_description',
+		engine: 'text',
+		operation: 'tool.text-markdown-to-html.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'html',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'to-markdown' },
+			{ category: 'yaml', slug: 'to-html' },
+			{ category: 'toml', slug: 'to-html' },
+			{ category: 'text', slug: 'word-counter' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-markdown-to-html.faq.0.question',
+				answer: 'tool.text-markdown-to-html.faq.0.answer'
+			},
+			{
+				question: 'tool.text-markdown-to-html.faq.1.question',
+				answer: 'tool.text-markdown-to-html.faq.1.answer'
+			},
+			{
+				question: 'tool.text-markdown-to-html.faq.2.question',
+				answer: 'tool.text-markdown-to-html.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-markdown-to-html.use_case.0',
+			'tool.text-markdown-to-html.use_case.1',
+			'tool.text-markdown-to-html.use_case.2',
+			'tool.text-markdown-to-html.use_case.3'
+		],
+		sampleInput:
+			'# Markdown -> HTML\n\nUse **Markdown** to write fast docs.\n\n## Table\n\n| Name | Role |\n| --- | --- |\n| Ada | Engineer |\n| Linus | Maintainer |\n\n## Code\n\n```javascript\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}\n```\n\n> Live preview updates as you type.'
+	},
+	{
 		id: 'text-string-case-converter',
 		category: 'text',
 		slug: 'case',

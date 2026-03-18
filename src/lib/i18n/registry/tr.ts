@@ -1483,6 +1483,37 @@ const registryTr: Record<string, string> = {
 		'Frontend snapshot ve görsel testler için tekrar üretilebilir seeded içerik hazırlamak',
 	'tool.text-lorem-ipsum-generator.use_case.3':
 		'CMS demoları için düz metin veya HTML yer tutucu içerik üretmek',
+	'tool.text-markdown-to-html.display_name': "Markdown'dan HTML'e",
+	'tool.text-markdown-to-html.tagline':
+		'Markdown metnini canlı önizleme ile üretime hazır HTML çıktısına dönüştür',
+	'tool.text-markdown-to-html.description':
+		"Markdown içeriğini canlı önizleme, GFM tablo desteği, kod bloklarında söz dizimi renklendirme ve link/görsel güvenlik kontrolleriyle temiz HTML'e dönüştür. Tüm işlem tarayıcınızda çalışır.",
+	'tool.text-markdown-to-html.primary_keyword': 'markdown dan html e',
+	'tool.text-markdown-to-html.meta_title':
+		"Markdown'dan HTML'e Çevirici — Canlı Önizleme | fmtly.dev",
+	'tool.text-markdown-to-html.meta_description':
+		"Markdown'ı canlı önizleme, GFM tablo desteği ve kod bloklarında renklendirme ile HTML'e çevirin. Hızlı, gizli ve tamamen tarayıcı tabanlı.",
+	'tool.text-markdown-to-html.operation': "Markdown'ı Dönüştür",
+	'tool.text-markdown-to-html.faq.0.question':
+		'Bu araç GitHub Flavored Markdown (GFM) tablolarını destekliyor mu?',
+	'tool.text-markdown-to-html.faq.0.answer':
+		'Evet. GFM tablo sözdizimi desteklenir ve seçenekler panelinden açılıp kapatılabilir.',
+	'tool.text-markdown-to-html.faq.1.question':
+		'Kod bloklarında syntax highlighting otomatik uygulanır mı?',
+	'tool.text-markdown-to-html.faq.1.answer':
+		'Evet. Araç fenced code bloklarını renklendirir ve üretilen HTML içinde dil sınıflarını korur.',
+	'tool.text-markdown-to-html.faq.2.question':
+		'Güvensiz linkler veya raw HTML blokları nasıl ele alınıyor?',
+	'tool.text-markdown-to-html.faq.2.answer':
+		'Güvensiz link/görsel protokolleri kaldırılır. Raw HTML blokları varsayılan olarak escape edilir; isterseniz gelişmiş seçenekten açabilirsiniz.',
+	'tool.text-markdown-to-html.use_case.0':
+		'README ve dokümantasyon içeriklerini statik site çıktısı için hazırlamak',
+	'tool.text-markdown-to-html.use_case.1':
+		'Sürüm notu veya changelog yayınlamadan önce Markdown çıktısını önizlemek',
+	'tool.text-markdown-to-html.use_case.2':
+		'CMS editörleri ve bilgi tabanları için güvenli HTML parçaları üretmek',
+	'tool.text-markdown-to-html.use_case.3':
+		'Kod bloklu teknik anlatımları gömülebilir HTML çıktısına çevirmek',
 	'tool.text-string-case-converter.display_name': 'Metin Harf Biçimi Dönüştürücü',
 	'tool.text-string-case-converter.tagline':
 		'camelCase, PascalCase, snake_case, kebab-case ve daha fazlasına anında dönüştür',
@@ -1677,6 +1708,31 @@ const registryTr: Record<string, string> = {
 	'ui.lorem.generated': 'Lorem Ipsum üretildi',
 	'ui.lorem.seed_randomized': 'Seed rastgeleleştirildi',
 	'ui.lorem.no_output': 'Henüz üretilmiş çıktı yok',
+	'ui.markdown_to_html.placeholder': 'Markdown metnini buraya yazın veya yapıştırın...',
+	'ui.markdown_to_html.option.gfm': 'GFM tablolarını ve görev listelerini etkinleştir',
+	'ui.markdown_to_html.option.breaks': 'Tek satır sonlarını <br> etiketine çevir',
+	'ui.markdown_to_html.option.highlight_code': 'Kod bloklarında söz dizimi renklendirme uygula',
+	'ui.markdown_to_html.option.open_links_in_new_tab': 'Bağlantıları yeni sekmede aç',
+	'ui.markdown_to_html.option.allow_raw_html': 'Raw HTML bloklarına izin ver (gelişmiş)',
+	'ui.markdown_to_html.view.preview': 'Önizleme',
+	'ui.markdown_to_html.view.html': 'HTML',
+	'ui.markdown_to_html.status.converting': 'Markdown dönüştürülüyor...',
+	'ui.markdown_to_html.preview_aria': 'Markdown HTML canlı önizleme',
+	'ui.markdown_to_html.empty_preview':
+		'Markdown girdisi yazdığınızda canlı önizleme burada görünecek.',
+	'ui.markdown_to_html.empty_html': 'Oluşturulan HTML çıktısı burada görünecek.',
+	'ui.markdown_to_html.error.conversion_failed':
+		'Dönüştürme sırasında hata oluştu. Lütfen girdinizi kontrol edip tekrar deneyin.',
+	'ui.markdown_to_html.toast.no_html_output': 'İndirilecek HTML çıktısı yok',
+	'ui.markdown_to_html.warning.unsafe_link_removed': 'Güvensiz bağlantı kaldırıldı',
+	'ui.markdown_to_html.warning.unsafe_image_removed': 'Güvensiz görsel kaldırıldı',
+	'ui.markdown_to_html.warning.raw_html_escaped': 'Güvenlik için raw HTML escape edildi',
+	'ui.markdown_to_html.stats.headings': 'Başlık',
+	'ui.markdown_to_html.stats.tables': 'Tablo',
+	'ui.markdown_to_html.stats.code_blocks': 'Kod bloğu',
+	'ui.markdown_to_html.stats.links': 'Bağlantı',
+	'ui.markdown_to_html.stats.images': 'Görsel',
+	'ui.markdown_to_html.stats.words': 'Kelime',
 	'ui.text_case.tab_label': 'Biçim',
 	'ui.text_case.placeholder': 'Biçime dönüştürmek için metin yazın veya yapıştırın...',
 	'ui.text_case.camel_case': 'camelCase',
