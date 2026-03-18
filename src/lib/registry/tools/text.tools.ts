@@ -315,6 +315,53 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 		sampleInput: 'Line 1\nLine 2\nLine 3\nLine 4'
 	},
 	{
+		id: 'text-regex-tester',
+		category: 'text',
+		slug: 'regex',
+		displayName: 'tool.text-regex-tester.display_name',
+		tagline: 'tool.text-regex-tester.tagline',
+		description: 'tool.text-regex-tester.description',
+		primaryKeyword: 'tool.text-regex-tester.primary_keyword',
+		metaTitle: 'tool.text-regex-tester.meta_title',
+		metaDescription: 'tool.text-regex-tester.meta_description',
+		engine: 'text',
+		operation: 'tool.text-regex-tester.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'diff' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'text', slug: 'case' },
+			{ category: 'json', slug: 'jsonpath' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-regex-tester.faq.0.question',
+				answer: 'tool.text-regex-tester.faq.0.answer'
+			},
+			{
+				question: 'tool.text-regex-tester.faq.1.question',
+				answer: 'tool.text-regex-tester.faq.1.answer'
+			},
+			{
+				question: 'tool.text-regex-tester.faq.2.question',
+				answer: 'tool.text-regex-tester.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-regex-tester.use_case.0',
+			'tool.text-regex-tester.use_case.1',
+			'tool.text-regex-tester.use_case.2',
+			'tool.text-regex-tester.use_case.3'
+		],
+		sampleInput: `INFO [auth-api] Login succeeded for user=42
+WARN [payments] Retry scheduled for charge_id=ch_9
+ERROR [auth-api] Invalid password for user=21
+INFO [search] Results cached for query=regex tester`
+	},
+	{
 		id: 'text-whitespace-cleaner',
 		category: 'text',
 		slug: 'whitespace',

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	analyzeRegexTester,
 	analyzeText,
 	cleanWhitespace,
 	convertMarkdownToHtml,
@@ -86,6 +87,67 @@ describe('convertMarkdownToHtml', () => {
 		const allowed = await convertMarkdownToHtml(markdown, { allowRawHtml: true });
 		expect(allowed.html).toContain('<div data-test="raw">raw html</div>');
 		expect(allowed.warnings).not.toContain('raw_html_escaped');
+	});
+});
+
+describe('analyzeRegexTester', () => {
+	it('finds global matches with capture and named groups', () => {
+		const pattern = '(?<level>INFO|WARN|ERROR)\\s+\\[(?<service>[a-z-]+)\\]';
+		const input = 'INFO [auth-api]\nWARN [payments]\nERROR [auth-api]';
+		const result = analyzeRegexTester(pattern, input, 'gm');
+
+		expect(result.isValid).toBe(true);
+		expect(result.error).toBeNull();
+		expect(result.totalMatches).toBe(3);
+		expect(result.matches[0]?.value).toBe('INFO [auth-api]');
+		expect(result.matches[0]?.groups[0]?.value).toBe('INFO');
+		expect(result.matches[0]?.namedGroups[0]?.name).toBe('level');
+		expect(result.matches[0]?.line).toBe(1);
+		expect(result.matches[1]?.line).toBe(2);
+		expect(result.matches[2]?.line).toBe(3);
+		expect(result.segments.some((segment) => segment.type === 'match')).toBe(true);
+	});
+
+	it('returns an empty-pattern error when pattern is blank', () => {
+		const result = analyzeRegexTester('', 'hello world', 'g');
+
+		expect(result.isValid).toBe(false);
+		expect(result.error?.code).toBe('empty_pattern');
+		expect(result.totalMatches).toBe(0);
+	});
+
+	it('returns invalid-flag and duplicate-flag errors', () => {
+		const invalidFlag = analyzeRegexTester('foo', 'foo', 'gz');
+		expect(invalidFlag.isValid).toBe(false);
+		expect(invalidFlag.error?.code).toBe('invalid_flag');
+		expect(invalidFlag.error?.detail).toBe('z');
+
+		const duplicateFlag = analyzeRegexTester('foo', 'foo', 'gg');
+		expect(duplicateFlag.isValid).toBe(false);
+		expect(duplicateFlag.error?.code).toBe('duplicate_flag');
+		expect(duplicateFlag.error?.detail).toBe('g');
+	});
+
+	it('handles zero-length global matches without infinite loops', () => {
+		const result = analyzeRegexTester('(?=a)', 'aa', 'g');
+
+		expect(result.isValid).toBe(true);
+		expect(result.totalMatches).toBe(2);
+		expect(result.matches[0]?.start).toBe(0);
+		expect(result.matches[1]?.start).toBe(1);
+	});
+
+	it('applies match limits and preview truncation options', () => {
+		const input = 'a '.repeat(2500);
+		const result = analyzeRegexTester('a', input, 'g', {
+			maxMatches: 5,
+			previewCharLimit: 2200
+		});
+
+		expect(result.isValid).toBe(true);
+		expect(result.totalMatches).toBe(5);
+		expect(result.isMatchLimitReached).toBe(true);
+		expect(result.isPreviewTruncated).toBe(true);
 	});
 });
 
