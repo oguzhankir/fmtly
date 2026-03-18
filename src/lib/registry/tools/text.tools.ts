@@ -49,6 +49,51 @@ Paste any text to instantly count words, characters, sentences, and paragraphs.
 Use the reading-time estimate to optimize content length for docs, UX copy, and technical writing.`
 	},
 	{
+		id: 'text-lorem-ipsum-generator',
+		category: 'text',
+		slug: 'lorem',
+		displayName: 'tool.text-lorem-ipsum-generator.display_name',
+		tagline: 'tool.text-lorem-ipsum-generator.tagline',
+		description: 'tool.text-lorem-ipsum-generator.description',
+		primaryKeyword: 'tool.text-lorem-ipsum-generator.primary_keyword',
+		metaTitle: 'tool.text-lorem-ipsum-generator.meta_title',
+		metaDescription: 'tool.text-lorem-ipsum-generator.meta_description',
+		engine: 'text',
+		operation: 'tool.text-lorem-ipsum-generator.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'text', slug: 'case' },
+			{ category: 'text', slug: 'whitespace' },
+			{ category: 'text', slug: 'diff' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-lorem-ipsum-generator.faq.0.question',
+				answer: 'tool.text-lorem-ipsum-generator.faq.0.answer'
+			},
+			{
+				question: 'tool.text-lorem-ipsum-generator.faq.1.question',
+				answer: 'tool.text-lorem-ipsum-generator.faq.1.answer'
+			},
+			{
+				question: 'tool.text-lorem-ipsum-generator.faq.2.question',
+				answer: 'tool.text-lorem-ipsum-generator.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-lorem-ipsum-generator.use_case.0',
+			'tool.text-lorem-ipsum-generator.use_case.1',
+			'tool.text-lorem-ipsum-generator.use_case.2',
+			'tool.text-lorem-ipsum-generator.use_case.3'
+		],
+		sampleInput:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	},
+	{
 		id: 'text-string-case-converter',
 		category: 'text',
 		slug: 'case',

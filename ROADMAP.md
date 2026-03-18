@@ -109,6 +109,7 @@ Analyze, transform, and manipulate plain text.
 | # | Tool | Slug | Status | Description |
 |---|------|------|--------|-------------|
 | 76 | Word & Character Counter | `text/word-counter` | done | Count words, characters, sentences, paragraphs, and reading time. |
+| 77 | Lorem Ipsum Generator | `text/lorem` | done | Generate placeholder text in paragraphs, sentences, or words with deterministic seeded output and plain/HTML modes. |
 | 81 | Text Reverser | `text/reverser` | done | Reverse text by characters, words, or lines. |
 | 85 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
 | 79 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
@@ -121,7 +122,6 @@ Analyze, transform, and manipulate plain text.
 | 78 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
 | 79 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
 | 80 | Markdown → HTML | `text/markdown-to-html` | Convert Markdown to HTML with live preview. Supports GFM tables and syntax highlighting. |
-| 81 | Lorem Ipsum Generator | `text/lorem` | Generate placeholder text in paragraphs, sentences, or words. |
 | 82 | Regex Tester | `text/regex` | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
 | 83 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
 | 84 | Text Escape / Unescape | `text/escape` | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |

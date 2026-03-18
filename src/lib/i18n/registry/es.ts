@@ -1453,6 +1453,35 @@ const registryEs: Record<string, string> = {
 		'Estimar tiempo de lectura para posts, docs y notas de versión',
 	'tool.text-word-character-counter.use_case.3':
 		'Comparar borradores con métricas objetivas de longitud',
+	'tool.text-lorem-ipsum-generator.display_name': 'Generador Lorem Ipsum',
+	'tool.text-lorem-ipsum-generator.tagline':
+		'Genera texto de relleno por párrafos, frases o palabras con control de semilla',
+	'tool.text-lorem-ipsum-generator.description':
+		'Genera texto Lorem Ipsum determinista para maquetas, vistas previas de UI y pruebas de contenido. Controla cantidad de párrafos/frases/palabras, semilla y salida en texto plano o HTML directamente en el navegador.',
+	'tool.text-lorem-ipsum-generator.primary_keyword': 'generador lorem ipsum',
+	'tool.text-lorem-ipsum-generator.meta_title': 'Generador Lorem Ipsum — fmtly.dev',
+	'tool.text-lorem-ipsum-generator.meta_description':
+		'Generador Lorem Ipsum gratuito con modos por párrafo, frase o palabra, salida con semilla y exportación en texto plano/HTML. Rápido, privado y 100% en el navegador.',
+	'tool.text-lorem-ipsum-generator.operation': 'Generar Lorem Ipsum',
+	'tool.text-lorem-ipsum-generator.faq.0.question':
+		'¿Puedo generar siempre el mismo texto con la misma configuración?',
+	'tool.text-lorem-ipsum-generator.faq.0.answer':
+		'Sí. Si mantienes la misma semilla y opciones, obtendrás exactamente la misma salida.',
+	'tool.text-lorem-ipsum-generator.faq.1.question':
+		'¿Puedo obtener salida HTML en lugar de texto plano?',
+	'tool.text-lorem-ipsum-generator.faq.1.answer':
+		'Sí. Cambia el formato de salida a HTML para generar párrafos listos para usar en prototipos.',
+	'tool.text-lorem-ipsum-generator.faq.2.question': '¿El texto se genera localmente?',
+	'tool.text-lorem-ipsum-generator.faq.2.answer':
+		'Sí. La generación se ejecuta completamente en tu navegador y no se envía texto al servidor.',
+	'tool.text-lorem-ipsum-generator.use_case.0':
+		'Rellenar wireframes y mocks de UI con texto de ejemplo realista',
+	'tool.text-lorem-ipsum-generator.use_case.1':
+		'Probar tipografía, espaciado y desbordes en layouts responsivos',
+	'tool.text-lorem-ipsum-generator.use_case.2':
+		'Crear fixtures reproducibles con semilla para snapshots y pruebas visuales de frontend',
+	'tool.text-lorem-ipsum-generator.use_case.3':
+		'Generar contenido de relleno en texto plano o HTML para demos de CMS',
 	'tool.text-string-case-converter.display_name': 'Convertidor de Formato de Texto',
 	'tool.text-string-case-converter.tagline':
 		'Convierte texto entre camelCase, PascalCase, snake_case, kebab-case y más',
@@ -1623,6 +1652,30 @@ const registryEs: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'líneas',
 	'ui.text_counter.placeholder': 'Escribe o pega tu texto aquí...',
+	'ui.lorem.mode': 'Modo',
+	'ui.lorem.mode.paragraphs': 'Párrafos',
+	'ui.lorem.mode.sentences': 'Frases',
+	'ui.lorem.mode.words': 'Palabras',
+	'ui.lorem.count': 'Cantidad',
+	'ui.lorem.seed': 'Semilla',
+	'ui.lorem.random_seed': 'Semilla aleatoria',
+	'ui.lorem.generate': 'Generar',
+	'ui.lorem.include_classic_opening': 'Incluir apertura clásica',
+	'ui.lorem.auto_generate': 'Generar automáticamente al cambiar',
+	'ui.lorem.output_format': 'Formato de salida',
+	'ui.lorem.output_format.plain': 'Texto plano',
+	'ui.lorem.output_format.html': 'HTML',
+	'ui.lorem.advanced_options': 'Opciones avanzadas',
+	'ui.lorem.min_words_per_sentence': 'Mín palabras / frase',
+	'ui.lorem.max_words_per_sentence': 'Máx palabras / frase',
+	'ui.lorem.min_sentences_per_paragraph': 'Mín frases / párrafo',
+	'ui.lorem.max_sentences_per_paragraph': 'Máx frases / párrafo',
+	'ui.lorem.source': 'Fuente',
+	'ui.lorem.preview': 'Vista previa',
+	'ui.lorem.empty_output': 'La salida generada aparecerá aquí...',
+	'ui.lorem.generated': 'Lorem Ipsum generado',
+	'ui.lorem.seed_randomized': 'Semilla aleatorizada',
+	'ui.lorem.no_output': 'Todavía no hay salida generada',
 	'ui.text_case.tab_label': 'Formato',
 	'ui.text_case.placeholder': 'Escribe o pega texto para convertir su formato...',
 	'ui.text_case.camel_case': 'camelCase',

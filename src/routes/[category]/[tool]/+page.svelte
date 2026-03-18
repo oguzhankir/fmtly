@@ -22,6 +22,7 @@
 	import CsvOutputPanel from "$components/panels/csv/CsvOutputPanel.svelte";
 	import TextCaseConverterPanel from "$components/panels/text/TextCaseConverterPanel.svelte";
 	import TextCounterPanel from "$components/panels/text/TextCounterPanel.svelte";
+	import LoremIpsumGeneratorPanel from "$components/panels/text/LoremIpsumGeneratorPanel.svelte";
 	import TextReverserPanel from "$components/panels/text/TextReverserPanel.svelte";
 	import DuplicateLineRemoverPanel from "$components/panels/text/DuplicateLineRemoverPanel.svelte";
 	import WhitespaceCleanerPanel from "$components/panels/text/WhitespaceCleanerPanel.svelte";
@@ -724,6 +725,8 @@
 				</div>
 			{:else if data.tool.category === "text" && data.tool.slug === "word-counter"}
 				<TextCounterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "lorem"}
+				<LoremIpsumGeneratorPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "case"}
 				<TextCaseConverterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "reverser"}

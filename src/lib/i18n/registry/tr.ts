@@ -1454,6 +1454,35 @@ const registryTr: Record<string, string> = {
 		'Blog yazıları ve teknik dokümanlar için okuma süresi tahmini çıkarmak',
 	'tool.text-word-character-counter.use_case.3':
 		'Taslak sürümleri objektif metin uzunluğu metrikleriyle karşılaştırmak',
+	'tool.text-lorem-ipsum-generator.display_name': 'Lorem Ipsum Üretici',
+	'tool.text-lorem-ipsum-generator.tagline':
+		'Paragraf, cümle veya kelime modunda seed kontrollü yer tutucu metin üret',
+	'tool.text-lorem-ipsum-generator.description':
+		'Taslak ekranlar, UI önizlemeleri ve içerik testleri için deterministik Lorem Ipsum metni üretin. Paragraf/cümle/kelime sayısını, seed değerini ve düz metin ya da HTML çıktısını tarayıcıdan yönetin.',
+	'tool.text-lorem-ipsum-generator.primary_keyword': 'lorem ipsum uretici',
+	'tool.text-lorem-ipsum-generator.meta_title': 'Lorem Ipsum Üretici — fmtly.dev',
+	'tool.text-lorem-ipsum-generator.meta_description':
+		'Paragraf, cümle ve kelime modları; seed kontrollü çıktı; düz metin/HTML desteği sunan ücretsiz Lorem Ipsum üretici. Hızlı, gizli ve tamamen tarayıcıda.',
+	'tool.text-lorem-ipsum-generator.operation': 'Lorem Ipsum Üret',
+	'tool.text-lorem-ipsum-generator.faq.0.question':
+		'Aynı ayarlarla her seferinde aynı Lorem Ipsum metnini alabilir miyim?',
+	'tool.text-lorem-ipsum-generator.faq.0.answer':
+		'Evet. Seed değerini sabit tutarsanız, aynı seçeneklerle aynı çıktıyı tekrar üretebilirsiniz.',
+	'tool.text-lorem-ipsum-generator.faq.1.question':
+		'Düz metin yerine HTML paragraf çıktısı alabilir miyim?',
+	'tool.text-lorem-ipsum-generator.faq.1.answer':
+		'Evet. Çıktı formatını HTML seçerek prototiplerde doğrudan kullanılabilecek paragraf etiketleri üretebilirsiniz.',
+	'tool.text-lorem-ipsum-generator.faq.2.question': 'Üretilen metin yerel olarak mı oluşturuluyor?',
+	'tool.text-lorem-ipsum-generator.faq.2.answer':
+		'Evet. Üretim tamamen tarayıcıda gerçekleşir, metin sunucuya gönderilmez.',
+	'tool.text-lorem-ipsum-generator.use_case.0':
+		'Wireframe ve arayüz taslaklarını gerçekçi yer tutucu metinle doldurmak',
+	'tool.text-lorem-ipsum-generator.use_case.1':
+		'Responsive düzenlerde tipografi, boşluk ve taşma davranışlarını test etmek',
+	'tool.text-lorem-ipsum-generator.use_case.2':
+		'Frontend snapshot ve görsel testler için tekrar üretilebilir seeded içerik hazırlamak',
+	'tool.text-lorem-ipsum-generator.use_case.3':
+		'CMS demoları için düz metin veya HTML yer tutucu içerik üretmek',
 	'tool.text-string-case-converter.display_name': 'Metin Harf Biçimi Dönüştürücü',
 	'tool.text-string-case-converter.tagline':
 		'camelCase, PascalCase, snake_case, kebab-case ve daha fazlasına anında dönüştür',
@@ -1624,6 +1653,30 @@ const registryTr: Record<string, string> = {
 	'ui.text_counter.minutes': 'dk',
 	'ui.text_counter.lines': 'satır',
 	'ui.text_counter.placeholder': 'Metninizi buraya yazın veya yapıştırın...',
+	'ui.lorem.mode': 'Mod',
+	'ui.lorem.mode.paragraphs': 'Paragraf',
+	'ui.lorem.mode.sentences': 'Cümle',
+	'ui.lorem.mode.words': 'Kelime',
+	'ui.lorem.count': 'Adet',
+	'ui.lorem.seed': 'Seed',
+	'ui.lorem.random_seed': 'Rastgele seed',
+	'ui.lorem.generate': 'Üret',
+	'ui.lorem.include_classic_opening': 'Klasik açılışı dahil et',
+	'ui.lorem.auto_generate': 'Değişiklikte otomatik üret',
+	'ui.lorem.output_format': 'Çıktı formatı',
+	'ui.lorem.output_format.plain': 'Düz metin',
+	'ui.lorem.output_format.html': 'HTML',
+	'ui.lorem.advanced_options': 'Gelişmiş seçenekler',
+	'ui.lorem.min_words_per_sentence': 'Cümle başına min kelime',
+	'ui.lorem.max_words_per_sentence': 'Cümle başına max kelime',
+	'ui.lorem.min_sentences_per_paragraph': 'Paragraf başına min cümle',
+	'ui.lorem.max_sentences_per_paragraph': 'Paragraf başına max cümle',
+	'ui.lorem.source': 'Kaynak',
+	'ui.lorem.preview': 'Önizleme',
+	'ui.lorem.empty_output': 'Üretilen çıktı burada görünecek...',
+	'ui.lorem.generated': 'Lorem Ipsum üretildi',
+	'ui.lorem.seed_randomized': 'Seed rastgeleleştirildi',
+	'ui.lorem.no_output': 'Henüz üretilmiş çıktı yok',
 	'ui.text_case.tab_label': 'Biçim',
 	'ui.text_case.placeholder': 'Biçime dönüştürmek için metin yazın veya yapıştırın...',
 	'ui.text_case.camel_case': 'camelCase',
