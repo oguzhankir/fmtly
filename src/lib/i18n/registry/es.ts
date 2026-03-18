@@ -1595,6 +1595,33 @@ const registryEs: Record<string, string> = {
 		'Preparar listas de palabras únicas para probar vocabulario o modelos de lenguaje',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Consolidar valores de configuración o listas de variables de entorno',
+	'tool.text-line-sorter.display_name': 'Ordenador de Líneas',
+	'tool.text-line-sorter.tagline':
+		'Ordena líneas por orden alfabético, numérico, longitud o mezcla con semilla',
+	'tool.text-line-sorter.description':
+		'Ordena líneas de texto al instante con controles avanzados de mayúsculas/minúsculas, recorte, deduplicación, eliminación de líneas vacías y mezcla determinística por semilla. Todo se ejecuta localmente en tu navegador.',
+	'tool.text-line-sorter.primary_keyword': 'ordenador de líneas',
+	'tool.text-line-sorter.meta_title': 'Ordenador de Líneas — Ordena texto rápido | fmtly.dev',
+	'tool.text-line-sorter.meta_description':
+		'Ordena líneas alfabéticamente, por número, por longitud o mezcla aleatoria. Incluye deduplicación y filtro de líneas vacías. Rápido, privado y en navegador.',
+	'tool.text-line-sorter.operation': 'Ordenar líneas',
+	'tool.text-line-sorter.faq.0.question': '¿Qué modos de ordenación incluye?',
+	'tool.text-line-sorter.faq.0.answer':
+		'Incluye orden alfabético, numérico, por longitud y mezcla aleatoria determinística. También puedes elegir orden ascendente o descendente.',
+	'tool.text-line-sorter.faq.1.question':
+		'¿Puedo quitar líneas vacías y duplicadas antes de ordenar?',
+	'tool.text-line-sorter.faq.1.answer':
+		'Sí. Activa eliminación de líneas vacías y deduplicación para normalizar la entrada antes de ordenar.',
+	'tool.text-line-sorter.faq.2.question': '¿Funciona bien con archivos grandes?',
+	'tool.text-line-sorter.faq.2.answer':
+		'Sí. Para entradas mayores de 500KB se usa un Web Worker, así la interfaz sigue fluida y los datos permanecen en tu navegador.',
+	'tool.text-line-sorter.use_case.0': 'Normalizar y ordenar logs antes de comparar entornos',
+	'tool.text-line-sorter.use_case.1':
+		'Preparar listas limpias y ordenadas de dominios, correos, IDs o etiquetas',
+	'tool.text-line-sorter.use_case.2':
+		'Ordenar notas de versión, changelogs o listas de tareas rápidamente',
+	'tool.text-line-sorter.use_case.3':
+		'Crear conjuntos de prueba mezclados de forma determinística para QA',
 	'tool.text-diff-compare.display_name': 'Diff & Comparar',
 	'tool.text-diff-compare.tagline': 'Comparar dos textos lado a lado',
 	'tool.text-diff-compare.description':
@@ -1832,6 +1859,35 @@ const registryEs: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Líneas únicas',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplicados eliminados',
 	'ui.duplicate_line_remover.result': 'Resultado',
+	'ui.line_sorter.tab_label': 'Ordenar',
+	'ui.line_sorter.placeholder': 'Escribe o pega líneas para ordenar...',
+	'ui.line_sorter.mode_label': 'Modo de ordenación',
+	'ui.line_sorter.mode.alphabetical': 'Alfabético',
+	'ui.line_sorter.mode.numeric': 'Numérico',
+	'ui.line_sorter.mode.length': 'Por longitud',
+	'ui.line_sorter.mode.random': 'Mezcla aleatoria',
+	'ui.line_sorter.direction_label': 'Dirección',
+	'ui.line_sorter.direction.asc': 'Ascendente',
+	'ui.line_sorter.direction.desc': 'Descendente',
+	'ui.line_sorter.option.case_sensitive': 'Ordenar respetando mayúsculas/minúsculas',
+	'ui.line_sorter.option.trim_before_sort': 'Recortar cada línea antes de ordenar',
+	'ui.line_sorter.option.remove_empty_lines': 'Eliminar líneas vacías',
+	'ui.line_sorter.option.deduplicate': 'Deduplicar líneas primero',
+	'ui.line_sorter.shuffle_seed': 'Semilla de mezcla',
+	'ui.line_sorter.generate_seed': 'Aleatorizar semilla',
+	'ui.line_sorter.input_lines': 'Líneas de entrada',
+	'ui.line_sorter.output_lines': 'Líneas de salida',
+	'ui.line_sorter.empty_lines_removed': 'Líneas vacías eliminadas',
+	'ui.line_sorter.duplicates_removed': 'Duplicados eliminados',
+	'ui.line_sorter.lines_moved': 'Líneas movidas',
+	'ui.line_sorter.output': 'Salida ordenada',
+	'ui.line_sorter.apply_output': 'Aplicar a la entrada',
+	'ui.line_sorter.status.processing': 'Ordenando líneas...',
+	'ui.line_sorter.status.worker': 'Modo de entrada grande (Web Worker)',
+	'ui.line_sorter.error.processing_failed':
+		'La ordenación falló. Ajusta las opciones o el contenido e inténtalo de nuevo.',
+	'ui.line_sorter.toast.applied': 'La salida ordenada se aplicó a la entrada',
+	'ui.line_sorter.no_output': 'Todavía no hay salida ordenada para mostrar',
 	'ui.whitespace_cleaner.tab_label': 'Espacios',
 	'ui.whitespace_cleaner.placeholder': 'Escribe o pega texto para limpiar espacios en blanco...',
 	'ui.whitespace_cleaner.trailing_spaces': 'Espacios finales',

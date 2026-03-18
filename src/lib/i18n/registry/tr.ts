@@ -1597,6 +1597,34 @@ const registryTr: Record<string, string> = {
 		'Vocabulary veya dil modellerini test etmek için benzersiz kelime listeleri hazırlamak',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Yapılandırma değerlerini veya ortam değişkeni listelerini birleştirmek',
+	'tool.text-line-sorter.display_name': 'Satır Sıralayıcı',
+	'tool.text-line-sorter.tagline':
+		'Satırları alfabetik, sayısal, uzunluğa göre veya seed ile karıştırarak sırala',
+	'tool.text-line-sorter.description':
+		'Gelişmiş seçeneklerle satırları anında sırala: büyük/küçük harf duyarlılığı, kırpma, tekilleştirme, boş satır temizleme ve deterministik karıştırma seed kontrolü. Tüm işlemler tarayıcıda yerel çalışır.',
+	'tool.text-line-sorter.primary_keyword': 'satır sıralayıcı',
+	'tool.text-line-sorter.meta_title': 'Satır Sıralayıcı — Metin Satırlarını Sırala | fmtly.dev',
+	'tool.text-line-sorter.meta_description':
+		'Satırları alfabetik, sayısal, uzunluğa göre veya rastgele karıştırarak sırala. Tekilleştirme ve boş satır filtreleriyle hızlı, gizli ve tamamen tarayıcı tabanlı.',
+	'tool.text-line-sorter.operation': 'Satırları Sırala',
+	'tool.text-line-sorter.faq.0.question': 'Hangi sıralama modları destekleniyor?',
+	'tool.text-line-sorter.faq.0.answer':
+		'Alfabetik, sayısal, uzunluğa göre ve deterministik rastgele karıştırma modları desteklenir. Ayrıca artan/azalan sıralama seçebilirsiniz.',
+	'tool.text-line-sorter.faq.1.question':
+		'Sıralamadan önce boş satırları ve tekrar eden satırları kaldırabilir miyim?',
+	'tool.text-line-sorter.faq.1.answer':
+		'Evet. Boş satır temizleme ve tekilleştirme seçeneklerini açarak girişi sıralamadan önce normalize edebilirsiniz.',
+	'tool.text-line-sorter.faq.2.question': 'Büyük dosyalarda performans nasıl korunuyor?',
+	'tool.text-line-sorter.faq.2.answer':
+		'500KB üzerindeki girdiler Web Worker içinde işlenir. Böylece arayüz akıcı kalır ve veriniz tarayıcı dışına çıkmaz.',
+	'tool.text-line-sorter.use_case.0':
+		'Ortamlar arası karşılaştırma öncesi log dosyalarını normalize edip sıralamak',
+	'tool.text-line-sorter.use_case.1':
+		'Domain, e-posta, kimlik veya etiket listelerini temiz ve sıralı hale getirmek',
+	'tool.text-line-sorter.use_case.2':
+		'Sürüm notları, değişiklik listeleri veya kontrol maddelerini hızlıca düzenlemek',
+	'tool.text-line-sorter.use_case.3':
+		'Test ve QA için deterministik karıştırılmış veri listeleri üretmek',
 	'tool.text-diff-compare.display_name': 'Fark & Karşılaştır',
 	'tool.text-diff-compare.tagline': 'İki metni yan yana karşılaştır',
 	'tool.text-diff-compare.description':
@@ -1831,6 +1859,35 @@ const registryTr: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Benzersiz satır',
 	'ui.duplicate_line_remover.duplicates_removed': 'Kaldırılan tekrar',
 	'ui.duplicate_line_remover.result': 'Sonuç',
+	'ui.line_sorter.tab_label': 'Sırala',
+	'ui.line_sorter.placeholder': 'Sıralamak için satırları yazın veya yapıştırın...',
+	'ui.line_sorter.mode_label': 'Sıralama modu',
+	'ui.line_sorter.mode.alphabetical': 'Alfabetik',
+	'ui.line_sorter.mode.numeric': 'Sayısal',
+	'ui.line_sorter.mode.length': 'Uzunluğa göre',
+	'ui.line_sorter.mode.random': 'Rastgele karıştır',
+	'ui.line_sorter.direction_label': 'Yön',
+	'ui.line_sorter.direction.asc': 'Artan',
+	'ui.line_sorter.direction.desc': 'Azalan',
+	'ui.line_sorter.option.case_sensitive': 'Büyük/küçük harfe duyarlı sırala',
+	'ui.line_sorter.option.trim_before_sort': 'Sıralamadan önce satırları kırp',
+	'ui.line_sorter.option.remove_empty_lines': 'Boş satırları kaldır',
+	'ui.line_sorter.option.deduplicate': 'Önce satırları tekilleştir',
+	'ui.line_sorter.shuffle_seed': 'Karıştırma seed',
+	'ui.line_sorter.generate_seed': 'Rastgele seed üret',
+	'ui.line_sorter.input_lines': 'Giriş satırı',
+	'ui.line_sorter.output_lines': 'Çıktı satırı',
+	'ui.line_sorter.empty_lines_removed': 'Kaldırılan boş satır',
+	'ui.line_sorter.duplicates_removed': 'Kaldırılan tekrar',
+	'ui.line_sorter.lines_moved': 'Yeri değişen satır',
+	'ui.line_sorter.output': 'Sıralanmış çıktı',
+	'ui.line_sorter.apply_output': 'Girdiye uygula',
+	'ui.line_sorter.status.processing': 'Satırlar sıralanıyor...',
+	'ui.line_sorter.status.worker': 'Büyük girdi modu (Web Worker)',
+	'ui.line_sorter.error.processing_failed':
+		'Sıralama başarısız oldu. Seçenekleri veya girdiyi düzenleyip tekrar deneyin.',
+	'ui.line_sorter.toast.applied': 'Sıralanmış çıktı girdiye uygulandı',
+	'ui.line_sorter.no_output': 'Henüz gösterilecek sıralanmış çıktı yok',
 	'ui.whitespace_cleaner.tab_label': 'Boşluk',
 	'ui.whitespace_cleaner.placeholder': 'Boşlukları temizlemek için metin yazın veya yapıştırın...',
 	'ui.whitespace_cleaner.output': 'Çıktı',

@@ -26,6 +26,7 @@
 	import TextMarkdownToHtmlPanel from "$components/panels/text/TextMarkdownToHtmlPanel.svelte";
 	import TextReverserPanel from "$components/panels/text/TextReverserPanel.svelte";
 	import DuplicateLineRemoverPanel from "$components/panels/text/DuplicateLineRemoverPanel.svelte";
+	import TextLineSorterPanel from "$components/panels/text/TextLineSorterPanel.svelte";
 	import WhitespaceCleanerPanel from "$components/panels/text/WhitespaceCleanerPanel.svelte";
 	import TextDiffPanel from "$components/panels/text/TextDiffPanel.svelte";
 	import TextRegexTesterPanel from "$components/panels/text/TextRegexTesterPanel.svelte";
@@ -737,6 +738,8 @@
 				<TextReverserPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "deduplicate"}
 				<DuplicateLineRemoverPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "line-sorter"}
+				<TextLineSorterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "whitespace"}
 				<WhitespaceCleanerPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "regex"}

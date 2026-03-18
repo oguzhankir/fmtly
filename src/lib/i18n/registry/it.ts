@@ -1590,6 +1590,33 @@ const registryIt: Record<string, string> = {
 		'Preparare liste di parole uniche per testare vocabolario o modelli linguistici',
 	'tool.text-duplicate-line-remover.use_case.3':
 		"Consolidare valori di configurazione o liste di variabili d'ambiente",
+	'tool.text-line-sorter.display_name': 'Ordinatore di Righe',
+	'tool.text-line-sorter.tagline':
+		'Ordina righe in ordine alfabetico, numerico, per lunghezza o shuffle con seed',
+	'tool.text-line-sorter.description':
+		'Ordina righe di testo all’istante con opzioni avanzate per maiuscole/minuscole, trim, deduplicazione, rimozione righe vuote e shuffle deterministico con seed. Tutto viene eseguito localmente nel browser.',
+	'tool.text-line-sorter.primary_keyword': 'ordinatore di righe',
+	'tool.text-line-sorter.meta_title': 'Ordinatore di Righe — Ordina testo veloce | fmtly.dev',
+	'tool.text-line-sorter.meta_description':
+		'Ordina righe in modalità alfabetica, numerica, per lunghezza o casuale. Include deduplica e filtro righe vuote. Veloce, privato e tutto nel browser.',
+	'tool.text-line-sorter.operation': 'Ordina righe',
+	'tool.text-line-sorter.faq.0.question': 'Quali modalità di ordinamento sono disponibili?',
+	'tool.text-line-sorter.faq.0.answer':
+		'Sono disponibili modalità alfabetica, numerica, per lunghezza e shuffle casuale deterministico. Puoi anche scegliere ordine crescente o decrescente.',
+	'tool.text-line-sorter.faq.1.question':
+		'Posso rimuovere righe vuote e duplicati prima di ordinare?',
+	'tool.text-line-sorter.faq.1.answer':
+		'Sì. Attiva rimozione righe vuote e deduplicazione per normalizzare il contenuto prima dell’ordinamento.',
+	'tool.text-line-sorter.faq.2.question': 'Rimane reattivo anche con input grandi?',
+	'tool.text-line-sorter.faq.2.answer':
+		'Sì. Oltre 500KB il calcolo viene spostato in un Web Worker, così l’interfaccia resta fluida e i dati rimangono locali.',
+	'tool.text-line-sorter.use_case.0':
+		'Normalizzare e ordinare log prima del confronto tra ambienti',
+	'tool.text-line-sorter.use_case.1':
+		'Preparare liste pulite e ordinate di domini, email, ID o tag',
+	'tool.text-line-sorter.use_case.2': 'Ordinare rapidamente release note, changelog o checklist',
+	'tool.text-line-sorter.use_case.3':
+		'Creare dataset mescolati in modo deterministico per test e QA',
 	'tool.text-diff-compare.display_name': 'Diff & Confronta',
 	'tool.text-diff-compare.tagline': 'Confronta due testi affiancati',
 	'tool.text-diff-compare.description':
@@ -1822,6 +1849,35 @@ const registryIt: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Righe uniche',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplicati rimossi',
 	'ui.duplicate_line_remover.result': 'Risultato',
+	'ui.line_sorter.tab_label': 'Ordina',
+	'ui.line_sorter.placeholder': 'Scrivi o incolla righe da ordinare...',
+	'ui.line_sorter.mode_label': 'Modalità ordinamento',
+	'ui.line_sorter.mode.alphabetical': 'Alfabetico',
+	'ui.line_sorter.mode.numeric': 'Numerico',
+	'ui.line_sorter.mode.length': 'Per lunghezza',
+	'ui.line_sorter.mode.random': 'Shuffle casuale',
+	'ui.line_sorter.direction_label': 'Direzione',
+	'ui.line_sorter.direction.asc': 'Crescente',
+	'ui.line_sorter.direction.desc': 'Decrescente',
+	'ui.line_sorter.option.case_sensitive': 'Ordina con distinzione maiuscole/minuscole',
+	'ui.line_sorter.option.trim_before_sort': 'Rimuovi spazi iniziali/finali prima di ordinare',
+	'ui.line_sorter.option.remove_empty_lines': 'Rimuovi righe vuote',
+	'ui.line_sorter.option.deduplicate': 'Deduplica righe prima di ordinare',
+	'ui.line_sorter.shuffle_seed': 'Seed shuffle',
+	'ui.line_sorter.generate_seed': 'Randomizza seed',
+	'ui.line_sorter.input_lines': 'Righe in input',
+	'ui.line_sorter.output_lines': 'Righe in output',
+	'ui.line_sorter.empty_lines_removed': 'Righe vuote rimosse',
+	'ui.line_sorter.duplicates_removed': 'Duplicati rimossi',
+	'ui.line_sorter.lines_moved': 'Righe spostate',
+	'ui.line_sorter.output': 'Output ordinato',
+	'ui.line_sorter.apply_output': 'Applica all’input',
+	'ui.line_sorter.status.processing': 'Ordinamento righe in corso...',
+	'ui.line_sorter.status.worker': 'Modalità input grande (Web Worker)',
+	'ui.line_sorter.error.processing_failed':
+		'Ordinamento non riuscito. Modifica opzioni o contenuto e riprova.',
+	'ui.line_sorter.toast.applied': 'Output ordinato applicato all’input',
+	'ui.line_sorter.no_output': 'Nessun output ordinato da mostrare al momento',
 	'ui.whitespace_cleaner.tab_label': 'Spazi',
 	'ui.whitespace_cleaner.placeholder': 'Digita o incolla testo per pulire gli spazi...',
 	'ui.whitespace_cleaner.trailing_spaces': 'Spazi finali',
