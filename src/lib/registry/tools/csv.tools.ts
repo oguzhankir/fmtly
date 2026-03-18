@@ -266,5 +266,38 @@ Diana,28,Tokyo,true`
 		useCases: ['tool.csv-to-sql.use_case.0', 'tool.csv-to-sql.use_case.1'],
 		sampleInput:
 			'id,name,age,active,joined_at\n1,Alice,30,true,2023-01-15\n2,Bob,25,false,2023-02-20\n3,Charlie,,true,2023-03-10'
+	},
+	{
+		id: 'csv-diff',
+		category: 'csv',
+		slug: 'diff',
+		displayName: 'tool.csv-diff.display_name',
+		tagline: 'tool.csv-diff.tagline',
+		description: 'tool.csv-diff.description',
+		primaryKeyword: 'tool.csv-diff.primary_keyword',
+		metaTitle: 'tool.csv-diff.meta_title',
+		metaDescription: 'tool.csv-diff.meta_description',
+		engine: 'diff',
+		operation: 'tool.csv-diff.operation',
+		layoutVariant: 'triple',
+		inputLanguage: 'csv',
+		outputLanguage: 'csv',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'csv', slug: 'validator' }
+		],
+		faqs: [
+			{
+				question: 'tool.csv-diff.faq.0.question',
+				answer: 'tool.csv-diff.faq.0.answer'
+			},
+			{
+				question: 'tool.csv-diff.faq.1.question',
+				answer: 'tool.csv-diff.faq.1.answer'
+			}
+		],
+		useCases: ['tool.csv-diff.use_case.0', 'tool.csv-diff.use_case.1'],
+		sampleInput: ''
 	}
 ];

@@ -68,22 +68,47 @@ function isValidXml(input: string): boolean {
 	return !doc.querySelector('parsererror');
 }
 
-export function computeXMLDiff(left: string, right: string, options: DiffOptions): DiffResult {
+export async function computeXMLDiff(
+	left: string,
+	right: string,
+	options: DiffOptions
+): Promise<DiffResult> {
 	try {
 		const leftTrimmed = options.ignoreWhitespace ? left.trim() : left;
 		const rightTrimmed = options.ignoreWhitespace ? right.trim() : right;
+
 		if (!isValidXml(leftTrimmed)) {
 			return { entries: [], error: 'Invalid XML in left (Original) input' };
 		}
 		if (!isValidXml(rightTrimmed)) {
 			return { entries: [], error: 'Invalid XML in right (Modified) input' };
 		}
-		const entries = computeTextDiff(leftTrimmed, rightTrimmed, options);
 
-		return {
-			entries,
-			error: null
-		};
+		const { XMLParser } = await import('fast-xml-parser');
+		const parser = new XMLParser({
+			ignoreAttributes: false,
+			attributeNamePrefix: '@_',
+			trimValues: options.ignoreWhitespace,
+			parseTagValue: true,
+			parseAttributeValue: true
+		});
+
+		let leftData: unknown;
+		let rightData: unknown;
+
+		try {
+			leftData = parser.parse(leftTrimmed);
+		} catch {
+			return { entries: [], error: 'Invalid XML in left input' };
+		}
+		try {
+			rightData = parser.parse(rightTrimmed);
+		} catch {
+			return { entries: [], error: 'Invalid XML in right input' };
+		}
+
+		const { computeStructuredDiff } = await import('../json/diff.js');
+		return computeStructuredDiff(leftData, rightData, options);
 	} catch (error) {
 		return {
 			entries: [],

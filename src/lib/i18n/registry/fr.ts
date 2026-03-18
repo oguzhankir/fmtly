@@ -1559,6 +1559,58 @@ const registryFr: Record<string, string> = {
 		'Préparer des listes de mots uniques pour tester le vocabulaire ou les modèles de langue',
 	'tool.text-duplicate-line-remover.use_case.3':
 		"Consolider les valeurs de configuration ou les listes de variables d'environnement",
+	'tool.text-diff-compare.display_name': 'Diff & Comparer',
+	'tool.text-diff-compare.tagline': 'Comparer deux textes côte à côte',
+	'tool.text-diff-compare.description':
+		'Diff unifié ou côte à côte de deux entrées de texte brut avec mise en évidence des changements au niveau de la ligne et du mot.',
+	'tool.text-diff-compare.primary_keyword': 'diff texte comparer',
+	'tool.text-diff-compare.meta_title':
+		'Outil de Diff et Comparaison de Textes - Comparaison Côte à Côte',
+	'tool.text-diff-compare.meta_description':
+		'Comparez deux entrées de texte avec une vue diff côte à côte ou unifiée. Mettez en évidence les changements au niveau de la ligne et du mot.',
+	'tool.text-diff-compare.operation': 'Comparer deux textes et montrer les différences',
+	'tool.text-diff-compare.faq.0.question': 'Quels algorithmes de diff sont pris en charge ?',
+	'tool.text-diff-compare.faq.0.answer':
+		'Nous prenons en charge les algorithmes Myers, Patience et Histogram. Myers est celui par défaut et fonctionne bien pour la plupart des cas. Patience est meilleur pour les changements structurés, Histogram est plus rapide pour les grands fichiers.',
+	'tool.text-diff-compare.faq.1.question':
+		'Puis-je ignorer les espaces ou les différences de casse ?',
+	'tool.text-diff-compare.faq.1.answer':
+		"Oui, vous pouvez configurer le diff pour ignorer les changements d'espaces, les différences de casse et les lignes vides en utilisant le panneau d'options.",
+	'tool.text-diff-compare.faq.2.question': 'Quels formats de sortie sont disponibles ?',
+	'tool.text-diff-compare.faq.2.answer':
+		"Vous pouvez afficher les diffs en mode côte à côte, format unifié ou inline avec l'éditeur Monaco. Le diff unifié peut être téléchargé comme un fichier .diff.",
+	'tool.text-diff-compare.use_case.0': 'Comparer les versions de code avant de commiter',
+	'tool.text-diff-compare.use_case.1': 'Réviser les changements et modifications de documents',
+	'tool.text-diff-compare.use_case.2': 'Analyser les modifications de fichiers de configuration',
+	'tool.text-diff-compare.use_case.3':
+		'Suivre les changements dans les logs ou exportations de données',
+	'ui.diff_compare.statistics': 'Statistiques de Comparaison',
+	'ui.diff_compare.added_lines': 'Lignes ajoutées',
+	'ui.diff_compare.removed_lines': 'Lignes supprimées',
+	'ui.diff_compare.unchanged_lines': 'Lignes inchangées',
+	'ui.diff_compare.total_lines': 'Total des lignes',
+	'ui.diff_compare.similarity': 'Similarité',
+	'ui.diff_compare.hunks': 'Hunks',
+	'ui.diff_compare.side_by_side': 'Côte à Côte',
+	'ui.diff_compare.unified': 'Unifié',
+	'ui.diff_compare.inline': 'Inline',
+	'ui.diff_compare.swap': 'Échanger',
+	'ui.diff_compare.diff_options': 'Options de Diff',
+	'ui.diff_compare.ignore_whitespace': 'Ignorer les espaces',
+	'ui.diff_compare.ignore_case': 'Ignorer la casse',
+	'ui.diff_compare.ignore_empty_lines': 'Ignorer les lignes vides',
+	'ui.diff_compare.show_inline': 'Montrer les changements inline',
+	'ui.diff_compare.context_lines': 'Lignes de contexte',
+	'ui.diff_compare.algorithm': 'Algorithme',
+	'ui.diff_compare.original': 'Original',
+	'ui.diff_compare.modified': 'Modifié',
+	'ui.diff_compare.placeholder_left': 'Collez le texte original ici...',
+	'ui.diff_compare.placeholder_right': 'Collez le texte modifié ici...',
+	'ui.diff_compare.unified_diff': 'Diff Unifié',
+	'ui.diff_compare.add_content': 'Ajoutez du contenu des deux côtés pour voir le diff',
+	'ui.diff_compare.no_content': 'Aucun contenu à comparer',
+	'ui.diff_compare.swapped': 'Entrées échangées',
+	'ui.toast.download_success': 'Téléchargé avec succès',
 	'tool.text-whitespace-cleaner.display_name': "Nettoyeur d'Espaces",
 	'tool.text-whitespace-cleaner.tagline':
 		'Rogner les espaces finaux, fusionner les espaces multiples, normaliser les fins de ligne',
