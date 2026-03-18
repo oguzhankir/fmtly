@@ -362,6 +362,53 @@ ERROR [auth-api] Invalid password for user=21
 INFO [search] Results cached for query=regex tester`
 	},
 	{
+		id: 'text-escape-unescape',
+		category: 'text',
+		slug: 'escape',
+		displayName: 'tool.text-escape-unescape.display_name',
+		tagline: 'tool.text-escape-unescape.tagline',
+		description: 'tool.text-escape-unescape.description',
+		primaryKeyword: 'tool.text-escape-unescape.primary_keyword',
+		metaTitle: 'tool.text-escape-unescape.meta_title',
+		metaDescription: 'tool.text-escape-unescape.meta_description',
+		engine: 'text',
+		operation: 'tool.text-escape-unescape.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'regex' },
+			{ category: 'text', slug: 'markdown-to-html' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'xml', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-escape-unescape.faq.0.question',
+				answer: 'tool.text-escape-unescape.faq.0.answer'
+			},
+			{
+				question: 'tool.text-escape-unescape.faq.1.question',
+				answer: 'tool.text-escape-unescape.faq.1.answer'
+			},
+			{
+				question: 'tool.text-escape-unescape.faq.2.question',
+				answer: 'tool.text-escape-unescape.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-escape-unescape.use_case.0',
+			'tool.text-escape-unescape.use_case.1',
+			'tool.text-escape-unescape.use_case.2',
+			'tool.text-escape-unescape.use_case.3'
+		],
+		sampleInput: `Line 1: "Hello <world> & everyone"
+Path: /api/v1/search?q=hello world&lang=en
+Regex: ^(test|prod)+$
+SQL owner: O'Reilly`
+	},
+	{
 		id: 'text-whitespace-cleaner',
 		category: 'text',
 		slug: 'whitespace',

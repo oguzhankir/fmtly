@@ -1649,6 +1649,64 @@ const registryEs: Record<string, string> = {
 		'Prototipar reglas de búsqueda y extracción para scripts, ETL y automatización',
 	'tool.text-regex-tester.use_case.3':
 		'Aprender y enseñar regex con feedback visual inmediato de coincidencias',
+	'tool.text-escape-unescape.display_name': 'Escape / Unescape de Texto',
+	'tool.text-escape-unescape.tagline':
+		'Escapa o desescapa texto para JSON, HTML, XML, URL, SQL y regex',
+	'tool.text-escape-unescape.description':
+		'Convierte cadenas entre formato escapado y texto legible para JSON, entidades HTML, entidades XML, codificación URL, literales SQL y patrones regex. Incluye procesamiento en Web Worker para entradas grandes.',
+	'tool.text-escape-unescape.primary_keyword': 'escape unescape texto',
+	'tool.text-escape-unescape.meta_title':
+		'Escape/Unescape Texto — JSON, HTML, URL, SQL | fmtly.dev',
+	'tool.text-escape-unescape.meta_description':
+		'Escapa y desescapa texto al instante para JSON, HTML, XML, URL, SQL y regex. Todo en el navegador, rápido con textos grandes y sin subir datos.',
+	'tool.text-escape-unescape.operation': 'Escapar / Desescapar Texto',
+	'tool.text-escape-unescape.faq.0.question':
+		'¿Qué formatos admite esta herramienta para escape y unescape?',
+	'tool.text-escape-unescape.faq.0.answer':
+		'Admite cadenas JSON, entidades HTML, entidades XML, codificación URL, literales de cadena SQL y caracteres especiales de regex en ambos sentidos.',
+	'tool.text-escape-unescape.faq.1.question':
+		'¿En qué se diferencia de un codificador URL o HTML básico?',
+	'tool.text-escape-unescape.faq.1.answer':
+		'Reúne varios estándares de escape en una sola interfaz, permite cambiar la dirección al instante y añade opciones específicas como manejo de + en URL o comillas para SQL.',
+	'tool.text-escape-unescape.faq.2.question':
+		'¿Mantiene rendimiento y privacidad con textos grandes?',
+	'tool.text-escape-unescape.faq.2.answer':
+		'Sí. Todo se procesa localmente en tu navegador. Para entradas superiores a 500KB, usa un Web Worker para mantener la interfaz fluida.',
+	'tool.text-escape-unescape.use_case.0':
+		'Preparar entrada de usuario de forma segura para payloads JSON, query strings y SQL',
+	'tool.text-escape-unescape.use_case.1':
+		'Decodificar logs o muestras de API escapadas a texto legible',
+	'tool.text-escape-unescape.use_case.2':
+		'Construir y depurar patrones regex escapando o desescapando metacaracteres',
+	'tool.text-escape-unescape.use_case.3':
+		'Normalizar contenido mezclado escapado sin salir del navegador',
+	'ui.text_escape.format_label': 'Formato',
+	'ui.text_escape.action_label': 'Acción',
+	'ui.text_escape.action.escape': 'Escapar',
+	'ui.text_escape.action.unescape': 'Desescapar',
+	'ui.text_escape.format.json': 'Cadena JSON',
+	'ui.text_escape.format.html': 'Entidades HTML',
+	'ui.text_escape.format.xml': 'Entidades XML',
+	'ui.text_escape.format.url': 'Componente URL',
+	'ui.text_escape.format.sql': 'Cadena SQL',
+	'ui.text_escape.format.regex': 'Patrón Regex',
+	'ui.text_escape.input_label': 'Entrada',
+	'ui.text_escape.output_label': 'Salida',
+	'ui.text_escape.input_placeholder': 'Escribe o pega texto para procesar...',
+	'ui.text_escape.output_placeholder': 'La salida escapada o desescapada aparecerá aquí...',
+	'ui.text_escape.option.url_encode_plus': 'Codificar espacios como +',
+	'ui.text_escape.option.url_decode_plus': 'Decodificar + como espacio',
+	'ui.text_escape.option.sql_wrap_quotes': 'Envolver con comillas simples',
+	'ui.text_escape.button.swap_action': 'Cambiar acción',
+	'ui.text_escape.worker_active':
+		'Entrada grande detectada (>{size}). El procesamiento se ejecuta en un Web Worker.',
+	'ui.text_escape.worker_failed':
+		'Falló el procesamiento en Worker. Se aplica procesamiento en hilo principal.',
+	'ui.text_escape.warning.no_changes':
+		'No se detectaron cambios para el formato y la acción seleccionados.',
+	'ui.text_escape.error.invalid_json_escape': 'Secuencia de escape JSON inválida: {detail}',
+	'ui.text_escape.error.invalid_url_encoding': 'Entrada URL codificada inválida: {detail}',
+	'ui.text_escape.error.detail': 'El procesamiento falló: {detail}',
 	'ui.diff_compare.statistics': 'Estadísticas de Comparación',
 	'ui.diff_compare.added_lines': 'Líneas añadidas',
 	'ui.diff_compare.removed_lines': 'Líneas eliminadas',

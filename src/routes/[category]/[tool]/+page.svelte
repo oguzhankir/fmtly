@@ -29,6 +29,7 @@
 	import WhitespaceCleanerPanel from "$components/panels/text/WhitespaceCleanerPanel.svelte";
 	import TextDiffPanel from "$components/panels/text/TextDiffPanel.svelte";
 	import TextRegexTesterPanel from "$components/panels/text/TextRegexTesterPanel.svelte";
+	import TextEscapeUnescapePanel from "$components/panels/text/TextEscapeUnescapePanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -741,6 +742,8 @@
 				<WhitespaceCleanerPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "regex"}
 				<TextRegexTesterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "escape"}
+				<TextEscapeUnescapePanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "diff"}
 				<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else}

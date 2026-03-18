@@ -1616,6 +1616,61 @@ const registryEn: Record<string, string> = {
 		'Prototype search and extraction rules for scripts, ETL, and automation tasks',
 	'tool.text-regex-tester.use_case.3':
 		'Teach and learn regex fundamentals with instant visual match feedback',
+	'tool.text-escape-unescape.display_name': 'Text Escape / Unescape',
+	'tool.text-escape-unescape.tagline':
+		'Escape or unescape text for JSON, HTML, XML, URL, SQL, and regex contexts',
+	'tool.text-escape-unescape.description':
+		'Convert strings safely between escaped and plain forms for JSON, HTML entities, XML entities, URL encoding, SQL literals, and regular expressions. Includes large-input worker processing for responsive UX.',
+	'tool.text-escape-unescape.primary_keyword': 'text escape unescape',
+	'tool.text-escape-unescape.meta_title': 'Text Escape/Unescape — JSON, HTML, URL, SQL | fmtly.dev',
+	'tool.text-escape-unescape.meta_description':
+		'Escape and unescape text instantly for JSON, HTML, XML, URL, SQL, and regex. Browser-only processing with fast large-text performance and zero uploads.',
+	'tool.text-escape-unescape.operation': 'Escape / Unescape Text',
+	'tool.text-escape-unescape.faq.0.question':
+		'Which formats can I escape and unescape with this tool?',
+	'tool.text-escape-unescape.faq.0.answer':
+		'You can process JSON strings, HTML entities, XML entities, URL encoding, SQL string literals, and regex-special characters in both escape and unescape directions.',
+	'tool.text-escape-unescape.faq.1.question':
+		'How does this differ from a basic URL or HTML encoder?',
+	'tool.text-escape-unescape.faq.1.answer':
+		'It combines multiple escape standards in one workspace, supports direction switching, and includes format-specific options like URL plus handling and SQL quote wrapping.',
+	'tool.text-escape-unescape.faq.2.question': 'Does large text stay fast and private?',
+	'tool.text-escape-unescape.faq.2.answer':
+		'Yes. Processing stays in your browser, and inputs above 500KB are handled in a Web Worker to keep the UI responsive without uploading data.',
+	'tool.text-escape-unescape.use_case.0':
+		'Prepare user input safely for JSON payloads, query strings, and SQL statements',
+	'tool.text-escape-unescape.use_case.1':
+		'Decode escaped logs or API samples back to readable plain text',
+	'tool.text-escape-unescape.use_case.2':
+		'Build and debug regex patterns by escaping or unescaping metacharacters',
+	'tool.text-escape-unescape.use_case.3':
+		'Normalize mixed escaped content while preserving browser-only privacy guarantees',
+	'ui.text_escape.format_label': 'Format',
+	'ui.text_escape.action_label': 'Action',
+	'ui.text_escape.action.escape': 'Escape',
+	'ui.text_escape.action.unescape': 'Unescape',
+	'ui.text_escape.format.json': 'JSON String',
+	'ui.text_escape.format.html': 'HTML Entities',
+	'ui.text_escape.format.xml': 'XML Entities',
+	'ui.text_escape.format.url': 'URL Component',
+	'ui.text_escape.format.sql': 'SQL String',
+	'ui.text_escape.format.regex': 'Regex Pattern',
+	'ui.text_escape.input_label': 'Input',
+	'ui.text_escape.output_label': 'Output',
+	'ui.text_escape.input_placeholder': 'Type or paste text to process...',
+	'ui.text_escape.output_placeholder': 'Escaped or unescaped output appears here...',
+	'ui.text_escape.option.url_encode_plus': 'Encode spaces as +',
+	'ui.text_escape.option.url_decode_plus': 'Decode + as space',
+	'ui.text_escape.option.sql_wrap_quotes': 'Wrap with single quotes',
+	'ui.text_escape.button.swap_action': 'Swap action',
+	'ui.text_escape.worker_active':
+		'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.text_escape.worker_failed':
+		'Worker processing failed. Falling back to main thread processing.',
+	'ui.text_escape.warning.no_changes': 'No changes detected for the selected format and action.',
+	'ui.text_escape.error.invalid_json_escape': 'Invalid JSON escape sequence: {detail}',
+	'ui.text_escape.error.invalid_url_encoding': 'Invalid URL-encoded input: {detail}',
+	'ui.text_escape.error.detail': 'Processing failed: {detail}',
 	'ui.diff_compare.statistics': 'Comparison Statistics',
 	'ui.diff_compare.added_lines': 'Added lines',
 	'ui.diff_compare.removed_lines': 'Removed lines',

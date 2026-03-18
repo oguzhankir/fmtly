@@ -181,6 +181,52 @@ export type RegexTesterResult = {
 	previewCharLimit: number;
 };
 
+export type TextEscapeFormat = 'json' | 'html' | 'xml' | 'url' | 'sql' | 'regex';
+
+export type TextEscapeAction = 'escape' | 'unescape';
+
+export type TextEscapeWarningCode = 'no_changes_detected';
+
+export type TextEscapeErrorCode = 'invalid_json_escape' | 'invalid_url_encoding';
+
+export type TextEscapeError = {
+	code: TextEscapeErrorCode;
+	detail: string;
+};
+
+export type TextEscapeOptions = {
+	urlEncodeSpacesAsPlus: boolean;
+	urlDecodePlusAsSpace: boolean;
+	sqlWrapWithQuotes: boolean;
+};
+
+export type TextEscapeResult = {
+	format: TextEscapeFormat;
+	action: TextEscapeAction;
+	input: string;
+	output: string;
+	changed: boolean;
+	warnings: TextEscapeWarningCode[];
+	error: TextEscapeError | null;
+	inputBytes: number;
+	outputBytes: number;
+	durationMs: number;
+};
+
+export type TextEscapeWorkerRequest = {
+	id: number;
+	input: string;
+	format: TextEscapeFormat;
+	action: TextEscapeAction;
+	options?: Partial<TextEscapeOptions>;
+};
+
+export type TextEscapeWorkerResponse = {
+	id: number;
+	result?: TextEscapeResult;
+	error?: string;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -373,6 +419,32 @@ export const REGEX_TESTER_FLAG_ORDER: RegexTesterFlag[] = ['g', 'i', 'm', 's', '
 const DEFAULT_REGEX_TESTER_OPTIONS: RegexTesterAnalyzeOptions = {
 	maxMatches: 5000,
 	previewCharLimit: 120000
+};
+
+export const TEXT_ESCAPE_WORKER_THRESHOLD_BYTES = 500 * 1024;
+
+const DEFAULT_TEXT_ESCAPE_OPTIONS: TextEscapeOptions = {
+	urlEncodeSpacesAsPlus: false,
+	urlDecodePlusAsSpace: true,
+	sqlWrapWithQuotes: false
+};
+
+const HTML_ENTITY_DECODE_MAP: Record<string, string> = {
+	amp: '&',
+	lt: '<',
+	gt: '>',
+	quot: '"',
+	apos: "'",
+	'#39': "'",
+	nbsp: '\u00a0'
+};
+
+const XML_ENTITY_DECODE_MAP: Record<string, string> = {
+	amp: '&',
+	lt: '<',
+	gt: '>',
+	quot: '"',
+	apos: "'"
 };
 
 type RegexExecWithIndices = RegExpExecArray & {
@@ -847,6 +919,261 @@ function escapeHtml(input: string): string {
 		.replace(/>/g, '&gt;')
 		.replace(/"/g, '&quot;')
 		.replace(/'/g, '&#39;');
+}
+
+function byteSizeOfString(input: string): number {
+	return new TextEncoder().encode(input).length;
+}
+
+function normalizeTextEscapeOptions(options: Partial<TextEscapeOptions>): TextEscapeOptions {
+	return {
+		urlEncodeSpacesAsPlus:
+			options.urlEncodeSpacesAsPlus ?? DEFAULT_TEXT_ESCAPE_OPTIONS.urlEncodeSpacesAsPlus,
+		urlDecodePlusAsSpace:
+			options.urlDecodePlusAsSpace ?? DEFAULT_TEXT_ESCAPE_OPTIONS.urlDecodePlusAsSpace,
+		sqlWrapWithQuotes: options.sqlWrapWithQuotes ?? DEFAULT_TEXT_ESCAPE_OPTIONS.sqlWrapWithQuotes
+	};
+}
+
+function decodeHtmlOrXmlEntity(entity: string, namedMap: Record<string, string>): string | null {
+	const normalizedEntity = entity.toLowerCase();
+	const namedValue = namedMap[normalizedEntity];
+
+	if (namedValue !== undefined) {
+		return namedValue;
+	}
+
+	if (normalizedEntity.startsWith('#x')) {
+		const codePoint = Number.parseInt(normalizedEntity.slice(2), 16);
+		if (!Number.isFinite(codePoint) || codePoint < 0) return null;
+
+		try {
+			return String.fromCodePoint(codePoint);
+		} catch {
+			return null;
+		}
+	}
+
+	if (normalizedEntity.startsWith('#')) {
+		const codePoint = Number.parseInt(normalizedEntity.slice(1), 10);
+		if (!Number.isFinite(codePoint) || codePoint < 0) return null;
+
+		try {
+			return String.fromCodePoint(codePoint);
+		} catch {
+			return null;
+		}
+	}
+
+	return null;
+}
+
+function unescapeEntities(input: string, namedMap: Record<string, string>): string {
+	return input.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z][\w-]*);/g, (match, entity: string) => {
+		const decoded = decodeHtmlOrXmlEntity(entity, namedMap);
+		return decoded ?? match;
+	});
+}
+
+function escapeJsonString(input: string): string {
+	let output = '';
+
+	for (let index = 0; index < input.length; index += 1) {
+		const char = input[index];
+		const charCode = char.charCodeAt(0);
+
+		switch (char) {
+			case '\\':
+				output += '\\\\';
+				continue;
+			case '"':
+				output += '\\"';
+				continue;
+			case '\b':
+				output += '\\b';
+				continue;
+			case '\f':
+				output += '\\f';
+				continue;
+			case '\n':
+				output += '\\n';
+				continue;
+			case '\r':
+				output += '\\r';
+				continue;
+			case '\t':
+				output += '\\t';
+				continue;
+		}
+
+		if (charCode <= 0x1f || charCode === 0x2028 || charCode === 0x2029) {
+			output += `\\u${charCode.toString(16).padStart(4, '0')}`;
+			continue;
+		}
+
+		output += char;
+	}
+
+	return output;
+}
+
+function unescapeJsonString(input: string): { output: string; errorDetail: string | null } {
+	const source =
+		input.length >= 2 && input.startsWith('"') && input.endsWith('"') ? input.slice(1, -1) : input;
+
+	let output = '';
+	let index = 0;
+
+	while (index < source.length) {
+		const char = source[index];
+
+		if (char !== '\\') {
+			output += char;
+			index += 1;
+			continue;
+		}
+
+		if (index + 1 >= source.length) {
+			return {
+				output: '',
+				errorDetail: 'Trailing escape sequence'
+			};
+		}
+
+		const escapeToken = source[index + 1];
+
+		switch (escapeToken) {
+			case '"':
+				output += '"';
+				index += 2;
+				break;
+			case '\\':
+				output += '\\';
+				index += 2;
+				break;
+			case '/':
+				output += '/';
+				index += 2;
+				break;
+			case 'b':
+				output += '\b';
+				index += 2;
+				break;
+			case 'f':
+				output += '\f';
+				index += 2;
+				break;
+			case 'n':
+				output += '\n';
+				index += 2;
+				break;
+			case 'r':
+				output += '\r';
+				index += 2;
+				break;
+			case 't':
+				output += '\t';
+				index += 2;
+				break;
+			case 'u': {
+				const hex = source.slice(index + 2, index + 6);
+
+				if (!/^[0-9a-fA-F]{4}$/.test(hex)) {
+					return {
+						output: '',
+						errorDetail: `Invalid unicode escape: \\u${hex}`
+					};
+				}
+
+				output += String.fromCharCode(Number.parseInt(hex, 16));
+				index += 6;
+				break;
+			}
+			default:
+				return {
+					output: '',
+					errorDetail: `Invalid escape token: \\${escapeToken}`
+				};
+		}
+	}
+
+	return {
+		output,
+		errorDetail: null
+	};
+}
+
+function escapeRegexString(input: string): string {
+	return input.replace(/[\\^$.*+?()[\]{}|/]/g, '\\$&');
+}
+
+function unescapeRegexString(input: string): string {
+	return input.replace(/\\([\\^$.*+?()[\]{}|/])/g, '$1');
+}
+
+function escapeSqlString(input: string, wrapWithQuotes: boolean): string {
+	const escaped = input.replace(/'/g, "''");
+	if (!wrapWithQuotes) return escaped;
+	return `'${escaped}'`;
+}
+
+function unescapeSqlString(input: string, unwrapQuotes: boolean): string {
+	let normalizedInput = input;
+
+	if (unwrapQuotes && normalizedInput.length >= 2) {
+		if (normalizedInput.startsWith("'") && normalizedInput.endsWith("'")) {
+			normalizedInput = normalizedInput.slice(1, -1);
+		}
+	}
+
+	return normalizedInput.replace(/''/g, "'");
+}
+
+function createTextEscapeResult(
+	input: string,
+	output: string,
+	format: TextEscapeFormat,
+	action: TextEscapeAction,
+	durationMs: number
+): TextEscapeResult {
+	const inputBytes = byteSizeOfString(input);
+	const outputBytes = byteSizeOfString(output);
+
+	return {
+		format,
+		action,
+		input,
+		output,
+		changed: output !== input,
+		warnings: output === input ? ['no_changes_detected'] : [],
+		error: null,
+		inputBytes,
+		outputBytes,
+		durationMs
+	};
+}
+
+function createTextEscapeErrorResult(
+	input: string,
+	format: TextEscapeFormat,
+	action: TextEscapeAction,
+	error: TextEscapeError,
+	durationMs: number
+): TextEscapeResult {
+	const inputBytes = byteSizeOfString(input);
+
+	return {
+		format,
+		action,
+		input,
+		output: '',
+		changed: false,
+		warnings: [],
+		error,
+		inputBytes,
+		outputBytes: 0,
+		durationMs
+	};
 }
 
 function normalizeMarkdownLanguage(input: string): string {
@@ -1457,6 +1784,133 @@ export function cleanWhitespace(
 		lineEndingsNormalized,
 		linesProcessed
 	};
+}
+
+export function shouldUseTextEscapeWorker(input: string): boolean {
+	return byteSizeOfString(input) > TEXT_ESCAPE_WORKER_THRESHOLD_BYTES;
+}
+
+export function processTextEscape(
+	input: string,
+	format: TextEscapeFormat,
+	action: TextEscapeAction,
+	options: Partial<TextEscapeOptions> = {}
+): TextEscapeResult {
+	const startedAt = nowMs();
+	const normalizedOptions = normalizeTextEscapeOptions(options);
+
+	const runDuration = (): number => nowMs() - startedAt;
+
+	if (input.length === 0) {
+		return createTextEscapeResult(input, '', format, action, runDuration());
+	}
+
+	if (format === 'json') {
+		if (action === 'escape') {
+			return createTextEscapeResult(input, escapeJsonString(input), format, action, runDuration());
+		}
+
+		const jsonUnescaped = unescapeJsonString(input);
+		if (jsonUnescaped.errorDetail) {
+			return createTextEscapeErrorResult(
+				input,
+				format,
+				action,
+				{
+					code: 'invalid_json_escape',
+					detail: jsonUnescaped.errorDetail
+				},
+				runDuration()
+			);
+		}
+
+		return createTextEscapeResult(input, jsonUnescaped.output, format, action, runDuration());
+	}
+
+	if (format === 'html') {
+		if (action === 'escape') {
+			return createTextEscapeResult(input, escapeHtml(input), format, action, runDuration());
+		}
+
+		return createTextEscapeResult(
+			input,
+			unescapeEntities(input, HTML_ENTITY_DECODE_MAP),
+			format,
+			action,
+			runDuration()
+		);
+	}
+
+	if (format === 'xml') {
+		if (action === 'escape') {
+			const xmlEscaped = input
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&apos;');
+
+			return createTextEscapeResult(input, xmlEscaped, format, action, runDuration());
+		}
+
+		return createTextEscapeResult(
+			input,
+			unescapeEntities(input, XML_ENTITY_DECODE_MAP),
+			format,
+			action,
+			runDuration()
+		);
+	}
+
+	if (format === 'url') {
+		if (action === 'escape') {
+			let escapedUrl = encodeURIComponent(input);
+
+			if (normalizedOptions.urlEncodeSpacesAsPlus) {
+				escapedUrl = escapedUrl.replace(/%20/g, '+');
+			}
+
+			return createTextEscapeResult(input, escapedUrl, format, action, runDuration());
+		}
+
+		try {
+			const normalizedInput = normalizedOptions.urlDecodePlusAsSpace
+				? input.replace(/\+/g, '%20')
+				: input;
+
+			return createTextEscapeResult(
+				input,
+				decodeURIComponent(normalizedInput),
+				format,
+				action,
+				runDuration()
+			);
+		} catch (error) {
+			return createTextEscapeErrorResult(
+				input,
+				format,
+				action,
+				{
+					code: 'invalid_url_encoding',
+					detail: error instanceof Error ? error.message : 'Malformed URI sequence'
+				},
+				runDuration()
+			);
+		}
+	}
+
+	if (format === 'sql') {
+		const sqlOutput =
+			action === 'escape'
+				? escapeSqlString(input, normalizedOptions.sqlWrapWithQuotes)
+				: unescapeSqlString(input, normalizedOptions.sqlWrapWithQuotes);
+
+		return createTextEscapeResult(input, sqlOutput, format, action, runDuration());
+	}
+
+	const regexOutput = action === 'escape' ? escapeRegexString(input) : unescapeRegexString(input);
+
+	return createTextEscapeResult(input, regexOutput, format, action, runDuration());
 }
 
 export function analyzeText(input: string): TextCounterMetrics {

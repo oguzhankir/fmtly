@@ -1588,6 +1588,62 @@ const registryDe: Record<string, string> = {
 		'Such- und Extraktionsregeln für Skripte, ETL und Automationen prototypen',
 	'tool.text-regex-tester.use_case.3':
 		'RegEx-Grundlagen mit sofortigem visuellem Match-Feedback lernen und lehren',
+	'tool.text-escape-unescape.display_name': 'Text Escape / Unescape',
+	'tool.text-escape-unescape.tagline':
+		'Text für JSON, HTML, XML, URL, SQL und Regex sicher escapen oder unescapen',
+	'tool.text-escape-unescape.description':
+		'Wandeln Sie Strings sicher zwischen escaped und Klartext für JSON, HTML-Entities, XML-Entities, URL-Encoding, SQL-Strings und Regex-Muster. Große Eingaben werden per Web Worker verarbeitet.',
+	'tool.text-escape-unescape.primary_keyword': 'text escape unescape tool',
+	'tool.text-escape-unescape.meta_title': 'Text Escape/Unescape — JSON, HTML, URL, SQL | fmtly.dev',
+	'tool.text-escape-unescape.meta_description':
+		'Text sofort für JSON, HTML, XML, URL, SQL und Regex escapen oder unescapen. Browserbasiert, schnell bei großen Texten und ohne Upload.',
+	'tool.text-escape-unescape.operation': 'Text escapen / unescapen',
+	'tool.text-escape-unescape.faq.0.question':
+		'Welche Formate unterstützt das Tool für Escape und Unescape?',
+	'tool.text-escape-unescape.faq.0.answer':
+		'Unterstützt werden JSON-Strings, HTML-Entities, XML-Entities, URL-Encoding, SQL-String-Literale und Regex-Sonderzeichen in beide Richtungen.',
+	'tool.text-escape-unescape.faq.1.question':
+		'Was ist der Vorteil gegenüber einem einfachen URL- oder HTML-Encoder?',
+	'tool.text-escape-unescape.faq.1.answer':
+		'Sie erhalten mehrere Escape-Standards in einer Oberfläche, können die Richtung sofort wechseln und format-spezifische Optionen wie Plus-Handling oder SQL-Quote-Wrapping nutzen.',
+	'tool.text-escape-unescape.faq.2.question':
+		'Bleiben Leistung und Datenschutz auch bei großen Eingaben erhalten?',
+	'tool.text-escape-unescape.faq.2.answer':
+		'Ja. Alles läuft lokal im Browser. Eingaben über 500KB werden in einem Web Worker verarbeitet, damit die Oberfläche reaktionsschnell bleibt.',
+	'tool.text-escape-unescape.use_case.0':
+		'Benutzereingaben sicher für JSON-Payloads, Query-Strings und SQL vorbereiten',
+	'tool.text-escape-unescape.use_case.1':
+		'Escapte Logs oder API-Beispiele wieder in lesbaren Klartext zurückwandeln',
+	'tool.text-escape-unescape.use_case.2':
+		'Regex-Muster durch gezieltes Escapen/Unescapen von Sonderzeichen aufbauen',
+	'tool.text-escape-unescape.use_case.3':
+		'Gemischte escaped Inhalte im Browser datenschutzfreundlich normalisieren',
+	'ui.text_escape.format_label': 'Format',
+	'ui.text_escape.action_label': 'Aktion',
+	'ui.text_escape.action.escape': 'Escape',
+	'ui.text_escape.action.unescape': 'Unescape',
+	'ui.text_escape.format.json': 'JSON-String',
+	'ui.text_escape.format.html': 'HTML-Entities',
+	'ui.text_escape.format.xml': 'XML-Entities',
+	'ui.text_escape.format.url': 'URL-Komponente',
+	'ui.text_escape.format.sql': 'SQL-String',
+	'ui.text_escape.format.regex': 'Regex-Muster',
+	'ui.text_escape.input_label': 'Eingabe',
+	'ui.text_escape.output_label': 'Ausgabe',
+	'ui.text_escape.input_placeholder': 'Text zum Verarbeiten eingeben oder einfügen...',
+	'ui.text_escape.output_placeholder': 'Escapte oder unescapte Ausgabe erscheint hier...',
+	'ui.text_escape.option.url_encode_plus': 'Leerzeichen als + kodieren',
+	'ui.text_escape.option.url_decode_plus': '+ als Leerzeichen dekodieren',
+	'ui.text_escape.option.sql_wrap_quotes': 'Mit einfachen Anführungszeichen umschließen',
+	'ui.text_escape.button.swap_action': 'Aktion wechseln',
+	'ui.text_escape.worker_active':
+		'Große Eingabe erkannt (>{size}). Verarbeitung läuft im Web Worker.',
+	'ui.text_escape.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Haupt-Thread.',
+	'ui.text_escape.warning.no_changes':
+		'Für das gewählte Format und die Aktion wurden keine Änderungen erkannt.',
+	'ui.text_escape.error.invalid_json_escape': 'Ungültige JSON-Escape-Sequenz: {detail}',
+	'ui.text_escape.error.invalid_url_encoding': 'Ungültige URL-kodierte Eingabe: {detail}',
+	'ui.text_escape.error.detail': 'Verarbeitung fehlgeschlagen: {detail}',
 	'ui.diff_compare.statistics': 'Vergleichsstatistiken',
 	'ui.diff_compare.added_lines': 'Hinzugefügte Zeilen',
 	'ui.diff_compare.removed_lines': 'Entfernte Zeilen',

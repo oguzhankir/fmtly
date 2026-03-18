@@ -6,8 +6,10 @@ import {
 	convertMarkdownToHtml,
 	convertTextCases,
 	generateLoremIpsum,
+	processTextEscape,
 	removeDuplicateLines,
-	reverseText
+	reverseText,
+	shouldUseTextEscapeWorker
 } from '../../../src/lib/engines/text/text.engine.js';
 
 describe('analyzeText', () => {
@@ -148,6 +150,69 @@ describe('analyzeRegexTester', () => {
 		expect(result.totalMatches).toBe(5);
 		expect(result.isMatchLimitReached).toBe(true);
 		expect(result.isPreviewTruncated).toBe(true);
+	});
+});
+
+describe('processTextEscape', () => {
+	it('escapes and unescapes JSON text', () => {
+		const escaped = processTextEscape('Line 1\n"Line 2"', 'json', 'escape');
+		expect(escaped.error).toBeNull();
+		expect(escaped.output).toBe('Line 1\\n\\"Line 2\\"');
+
+		const unescaped = processTextEscape(escaped.output, 'json', 'unescape');
+		expect(unescaped.error).toBeNull();
+		expect(unescaped.output).toBe('Line 1\n"Line 2"');
+	});
+
+	it('returns an error for invalid JSON escape sequences', () => {
+		const result = processTextEscape('\\u12X4', 'json', 'unescape');
+
+		expect(result.error?.code).toBe('invalid_json_escape');
+		expect(result.output).toBe('');
+	});
+
+	it('escapes and unescapes HTML entities', () => {
+		const escaped = processTextEscape('<div data-x="1">Tom & Jerry</div>', 'html', 'escape');
+		expect(escaped.output).toBe('&lt;div data-x=&quot;1&quot;&gt;Tom &amp; Jerry&lt;/div&gt;');
+
+		const unescaped = processTextEscape(escaped.output, 'html', 'unescape');
+		expect(unescaped.output).toBe('<div data-x="1">Tom & Jerry</div>');
+	});
+
+	it('supports URL encoding options and reports invalid URL decoding', () => {
+		const escapedWithPlus = processTextEscape('hello world', 'url', 'escape', {
+			urlEncodeSpacesAsPlus: true
+		});
+		expect(escapedWithPlus.output).toBe('hello+world');
+
+		const decodedWithPlus = processTextEscape('hello+world', 'url', 'unescape', {
+			urlDecodePlusAsSpace: true
+		});
+		expect(decodedWithPlus.output).toBe('hello world');
+
+		const invalid = processTextEscape('%E0%A4%A', 'url', 'unescape');
+		expect(invalid.error?.code).toBe('invalid_url_encoding');
+	});
+
+	it('escapes SQL literals and regex special characters', () => {
+		const sql = processTextEscape("O'Reilly", 'sql', 'escape', { sqlWrapWithQuotes: true });
+		expect(sql.output).toBe("'O''Reilly'");
+
+		const regex = processTextEscape('a+b?(test)', 'regex', 'escape');
+		expect(regex.output).toBe('a\\+b\\?\\(test\\)');
+	});
+
+	it('warns when conversion does not change output', () => {
+		const result = processTextEscape('plain-text', 'regex', 'unescape');
+		expect(result.changed).toBe(false);
+		expect(result.warnings).toContain('no_changes_detected');
+	});
+});
+
+describe('shouldUseTextEscapeWorker', () => {
+	it('returns true only for inputs above 500KB', () => {
+		expect(shouldUseTextEscapeWorker('a'.repeat(50 * 1024))).toBe(false);
+		expect(shouldUseTextEscapeWorker('a'.repeat(600 * 1024))).toBe(true);
 	});
 });
 
