@@ -1905,6 +1905,98 @@ const registryEs: Record<string, string> = {
 	'ui.regex.flags.d.label': 'Índices',
 	'ui.regex.flags.d.description':
 		'Muestra índices de inicio y fin de grupos cuando el entorno lo permite',
+	'tool.text-readability-analyzer.display_name': 'Analizador de legibilidad',
+	'tool.text-readability-analyzer.tagline':
+		'Mide qué tan fácil es leer tu texto con fórmulas de legibilidad reconocidas',
+	'tool.text-readability-analyzer.description':
+		'Analiza la legibilidad del texto con Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, Coleman-Liau y SMOG. Obtén al instante métricas de complejidad de frases y edad de lectura, directamente en tu navegador.',
+	'tool.text-readability-analyzer.primary_keyword': 'analizador de legibilidad',
+	'tool.text-readability-analyzer.meta_title':
+		'Analizador de legibilidad — métricas Flesch, Fog y SMOG | fmtly.dev',
+	'tool.text-readability-analyzer.meta_description':
+		'Analizador de legibilidad gratuito con métricas Flesch, Flesch-Kincaid, Gunning Fog, Coleman-Liau y SMOG. Rápido, privado y 100% en el navegador.',
+	'tool.text-readability-analyzer.operation': 'Analizar legibilidad',
+	'tool.text-readability-analyzer.faq.0.question':
+		'¿Qué fórmulas de legibilidad incluye este analizador?',
+	'tool.text-readability-analyzer.faq.0.answer':
+		'Incluye Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, Coleman-Liau y SMOG, además de métricas complementarias de complejidad textual.',
+	'tool.text-readability-analyzer.faq.1.question':
+		'¿Por qué la puntuación SMOG puede no estar disponible en textos cortos?',
+	'tool.text-readability-analyzer.faq.1.answer':
+		'SMOG es más fiable estadísticamente con al menos 3 oraciones. En textos más cortos, la herramienta muestra una advertencia en lugar de una puntuación inestable.',
+	'tool.text-readability-analyzer.faq.2.question':
+		'¿El análisis de legibilidad se hace localmente o en un servidor?',
+	'tool.text-readability-analyzer.faq.2.answer':
+		'Todo se procesa localmente en tu navegador. Tu texto no se envía a ningún servidor.',
+	'tool.text-readability-analyzer.use_case.0':
+		'Revisar documentación, onboarding y artículos de ayuda antes de publicarlos',
+	'tool.text-readability-analyzer.use_case.1':
+		'Comparar varias versiones de un borrador y elegir la más clara',
+	'tool.text-readability-analyzer.use_case.2':
+		'Optimizar microcopy de producto y mensajes en la app para audiencias más amplias',
+	'tool.text-readability-analyzer.use_case.3':
+		'Detectar secciones densas en documentación técnica y simplificarlas',
+	'ui.readability.unavailable': '—',
+	'ui.readability.input_label': 'Texto de entrada',
+	'ui.readability.input_placeholder': 'Pega o escribe texto para analizar la legibilidad...',
+	'ui.readability.output_title': 'Análisis de legibilidad',
+	'ui.readability.processing': 'Analizando...',
+	'ui.readability.copy_report': 'Copiar informe',
+	'ui.readability.worker_active':
+		'Se detectó una entrada grande (>{size}). El análisis se ejecuta en un Web Worker.',
+	'ui.readability.worker_failed':
+		'Falló el procesamiento en Worker. Se usa análisis en el hilo principal.',
+	'ui.readability.level_label': 'Legibilidad general',
+	'ui.readability.level.very_easy': 'Muy fácil',
+	'ui.readability.level.easy': 'Fácil',
+	'ui.readability.level.fairly_easy': 'Bastante fácil',
+	'ui.readability.level.standard': 'Estándar',
+	'ui.readability.level.fairly_difficult': 'Algo difícil',
+	'ui.readability.level.difficult': 'Difícil',
+	'ui.readability.level.very_difficult': 'Muy difícil',
+	'ui.readability.level_desc.very_easy': 'Adecuado para audiencias amplias y lectura rápida.',
+	'ui.readability.level_desc.easy': 'Lenguaje claro con baja carga cognitiva.',
+	'ui.readability.level_desc.fairly_easy':
+		'Buen nivel para documentación de producto, guías y contenido web general.',
+	'ui.readability.level_desc.standard':
+		'Legibilidad equilibrada para lectores técnicos y no técnicos.',
+	'ui.readability.level_desc.fairly_difficult':
+		'Hay partes densas: conviene simplificar oraciones largas.',
+	'ui.readability.level_desc.difficult':
+		'Requiere lectura concentrada. Ayudan frases más cortas y vocabulario más simple.',
+	'ui.readability.level_desc.very_difficult':
+		'Texto muy denso. Conviene reescribirlo para mayor claridad.',
+	'ui.readability.metric.words': 'Palabras',
+	'ui.readability.metric.sentences': 'Oraciones',
+	'ui.readability.metric.syllables': 'Sílabas',
+	'ui.readability.metric.reading_age': 'Edad de lectura',
+	'ui.readability.metric.reading_time': 'Tiempo de lectura',
+	'ui.readability.metric.paragraphs': 'Párrafos',
+	'ui.readability.metric.complex_words': 'Palabras complejas',
+	'ui.readability.stat.avg_words_per_sentence': 'Prom. palabras/oración',
+	'ui.readability.stat.avg_syllables_per_word': 'Prom. sílabas/palabra',
+	'ui.readability.stat.characters': 'Caracteres',
+	'ui.readability.stat.letters': 'Letras',
+	'ui.readability.scores_title': 'Fórmulas de legibilidad',
+	'ui.readability.score.flesch_ease': 'Flesch Reading Ease',
+	'ui.readability.score.flesch_kincaid': 'Flesch-Kincaid Grade',
+	'ui.readability.score.gunning_fog': 'Gunning Fog',
+	'ui.readability.score.coleman_liau': 'Índice Coleman-Liau',
+	'ui.readability.score.smog': 'SMOG',
+	'ui.readability.score_desc.flesch_ease': 'Cuanto más alto, más fácil de leer.',
+	'ui.readability.score_desc.flesch_kincaid':
+		'Nivel escolar estimado según el sistema educativo de EE. UU.',
+	'ui.readability.score_desc.gunning_fog':
+		'Complejidad basada en longitud de frases y dificultad de palabras.',
+	'ui.readability.score_desc.coleman_liau':
+		'Legibilidad calculada con densidad de letras y oraciones.',
+	'ui.readability.score_desc.smog':
+		'Estimación del nivel de lectura basada en palabras polisilábicas.',
+	'ui.readability.warning.insufficient_sentences_for_smog':
+		'SMOG necesita al menos 3 oraciones para una estimación estable.',
+	'ui.readability.report_title': 'Informe de legibilidad',
+	'ui.readability.report_level': 'Nivel',
+	'ui.readability.report_reading_age': 'Edad de lectura estimada',
 	'ui.text_reverser.tab_label': 'Invertir',
 	'ui.text_reverser.placeholder': 'Escribe o pega texto para invertirlo...',
 	'ui.text_reverser.characters': 'Invertir por caracteres',

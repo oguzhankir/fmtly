@@ -15,6 +15,9 @@ export {
 	processTextEscape,
 	shouldUseTextEscapeWorker,
 	TEXT_ESCAPE_WORKER_THRESHOLD_BYTES,
+	analyzeTextReadability,
+	shouldUseTextReadabilityWorker,
+	TEXT_READABILITY_WORKER_THRESHOLD_BYTES,
 	type TextCounterMetrics,
 	type TextCaseConversions,
 	type MarkdownToHtmlOptions,
@@ -51,7 +54,12 @@ export {
 	type TextEscapeOptions,
 	type TextEscapeResult,
 	type TextEscapeWorkerRequest,
-	type TextEscapeWorkerResponse
+	type TextEscapeWorkerResponse,
+	type TextReadabilityWarningCode,
+	type TextReadabilityLevel,
+	type TextReadabilityResult,
+	type TextReadabilityWorkerRequest,
+	type TextReadabilityWorkerResponse
 } from './text.engine.js';
 
 export {

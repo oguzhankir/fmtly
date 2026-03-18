@@ -1862,6 +1862,91 @@ const registryEn: Record<string, string> = {
 	'ui.regex.flags.y.description': 'Match strictly from the current lastIndex',
 	'ui.regex.flags.d.label': 'Indices',
 	'ui.regex.flags.d.description': 'Expose start/end indexes for groups when supported',
+	'tool.text-readability-analyzer.display_name': 'Readability Analyzer',
+	'tool.text-readability-analyzer.tagline':
+		'Measure how easy your text is to read with trusted readability formulas',
+	'tool.text-readability-analyzer.description':
+		'Analyze text readability with Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, Coleman-Liau, and SMOG. Get sentence complexity and reading-age insights instantly in your browser.',
+	'tool.text-readability-analyzer.primary_keyword': 'readability analyzer',
+	'tool.text-readability-analyzer.meta_title':
+		'Readability Analyzer — Flesch, Fog, SMOG Scores | fmtly.dev',
+	'tool.text-readability-analyzer.meta_description':
+		'Free readability analyzer with Flesch, Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG metrics. Fast, private, and fully browser-based.',
+	'tool.text-readability-analyzer.operation': 'Analyze Readability',
+	'tool.text-readability-analyzer.faq.0.question':
+		'Which readability formulas are included in this analyzer?',
+	'tool.text-readability-analyzer.faq.0.answer':
+		'The analyzer includes Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, Coleman-Liau, and SMOG, along with supporting text complexity metrics.',
+	'tool.text-readability-analyzer.faq.1.question':
+		'Why can the SMOG score be unavailable for short texts?',
+	'tool.text-readability-analyzer.faq.1.answer':
+		'SMOG is statistically more reliable with at least 3 sentences. For shorter inputs, the tool shows a warning instead of an unstable score.',
+	'tool.text-readability-analyzer.faq.2.question':
+		'Does readability analysis run locally or on a server?',
+	'tool.text-readability-analyzer.faq.2.answer':
+		'Everything runs locally in your browser. Your text is never uploaded to any server.',
+	'tool.text-readability-analyzer.use_case.0':
+		'Assess docs, onboarding flows, and help center articles before publishing',
+	'tool.text-readability-analyzer.use_case.1':
+		'Compare multiple draft versions and pick the clearest copy',
+	'tool.text-readability-analyzer.use_case.2':
+		'Optimize product microcopy and in-app guidance for broader audiences',
+	'tool.text-readability-analyzer.use_case.3':
+		'Spot dense sections in technical documentation and simplify them',
+	'ui.readability.unavailable': '—',
+	'ui.readability.input_label': 'Input text',
+	'ui.readability.input_placeholder': 'Paste or type text to analyze readability...',
+	'ui.readability.output_title': 'Readability analysis',
+	'ui.readability.processing': 'Analyzing...',
+	'ui.readability.copy_report': 'Copy report',
+	'ui.readability.worker_active': 'Large input detected (>{size}). Analysis runs in a Web Worker.',
+	'ui.readability.worker_failed': 'Worker processing failed. Falling back to main thread analysis.',
+	'ui.readability.level_label': 'Overall readability',
+	'ui.readability.level.very_easy': 'Very Easy',
+	'ui.readability.level.easy': 'Easy',
+	'ui.readability.level.fairly_easy': 'Fairly Easy',
+	'ui.readability.level.standard': 'Standard',
+	'ui.readability.level.fairly_difficult': 'Fairly Difficult',
+	'ui.readability.level.difficult': 'Difficult',
+	'ui.readability.level.very_difficult': 'Very Difficult',
+	'ui.readability.level_desc.very_easy': 'Suitable for broad audiences and quick scanning.',
+	'ui.readability.level_desc.easy': 'Clear language with minimal cognitive load.',
+	'ui.readability.level_desc.fairly_easy': 'Good for product docs, guides, and general web copy.',
+	'ui.readability.level_desc.standard':
+		'Balanced readability for mixed technical and non-technical readers.',
+	'ui.readability.level_desc.fairly_difficult':
+		'Dense in parts — simplify long sentences where possible.',
+	'ui.readability.level_desc.difficult':
+		'Requires focused reading. Consider shorter sentences and simpler wording.',
+	'ui.readability.level_desc.very_difficult':
+		'Highly dense text. Rewrite for clarity before publishing widely.',
+	'ui.readability.metric.words': 'Words',
+	'ui.readability.metric.sentences': 'Sentences',
+	'ui.readability.metric.syllables': 'Syllables',
+	'ui.readability.metric.reading_age': 'Reading age',
+	'ui.readability.metric.reading_time': 'Reading time',
+	'ui.readability.metric.paragraphs': 'Paragraphs',
+	'ui.readability.metric.complex_words': 'Complex words',
+	'ui.readability.stat.avg_words_per_sentence': 'Avg words/sentence',
+	'ui.readability.stat.avg_syllables_per_word': 'Avg syllables/word',
+	'ui.readability.stat.characters': 'Characters',
+	'ui.readability.stat.letters': 'Letters',
+	'ui.readability.scores_title': 'Readability formulas',
+	'ui.readability.score.flesch_ease': 'Flesch Reading Ease',
+	'ui.readability.score.flesch_kincaid': 'Flesch-Kincaid Grade',
+	'ui.readability.score.gunning_fog': 'Gunning Fog',
+	'ui.readability.score.coleman_liau': 'Coleman-Liau Index',
+	'ui.readability.score.smog': 'SMOG',
+	'ui.readability.score_desc.flesch_ease': 'Higher is easier to read.',
+	'ui.readability.score_desc.flesch_kincaid': 'Estimated U.S. school grade level.',
+	'ui.readability.score_desc.gunning_fog': 'Complexity based on sentence and word difficulty.',
+	'ui.readability.score_desc.coleman_liau': 'Readability from characters and sentence density.',
+	'ui.readability.score_desc.smog': 'Reading grade estimate from polysyllabic words.',
+	'ui.readability.warning.insufficient_sentences_for_smog':
+		'SMOG needs at least 3 sentences for a stable estimate.',
+	'ui.readability.report_title': 'Readability Report',
+	'ui.readability.report_level': 'Level',
+	'ui.readability.report_reading_age': 'Estimated reading age',
 	'ui.text_reverser.tab_label': 'Reverse',
 	'ui.text_reverser.placeholder': 'Type or paste text to reverse...',
 	'ui.text_reverser.characters': 'Reverse by characters',

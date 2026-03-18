@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	analyzeRegexTester,
 	analyzeText,
+	analyzeTextReadability,
 	cleanWhitespace,
 	convertMarkdownToHtml,
 	convertTextCases,
@@ -10,6 +11,7 @@ import {
 	removeDuplicateLines,
 	reverseText,
 	shouldUseTextEscapeWorker,
+	shouldUseTextReadabilityWorker,
 	sortTextLines
 } from '../../../src/lib/engines/text/text.engine.js';
 
@@ -214,6 +216,56 @@ describe('shouldUseTextEscapeWorker', () => {
 	it('returns true only for inputs above 500KB', () => {
 		expect(shouldUseTextEscapeWorker('a'.repeat(50 * 1024))).toBe(false);
 		expect(shouldUseTextEscapeWorker('a'.repeat(600 * 1024))).toBe(true);
+	});
+});
+
+describe('analyzeTextReadability', () => {
+	it('computes readability metrics and scores for regular prose', () => {
+		const input =
+			'This tool helps writers improve clarity. It measures sentence complexity and word difficulty. The results guide editing decisions.';
+		const result = analyzeTextReadability(input);
+
+		expect(result.words).toBeGreaterThan(10);
+		expect(result.sentences).toBe(3);
+		expect(result.syllables).toBeGreaterThan(0);
+		expect(result.fleschReadingEase).toBeGreaterThan(0);
+		expect(result.fleschKincaidGrade).toBeGreaterThanOrEqual(0);
+		expect(result.gunningFog).toBeGreaterThanOrEqual(0);
+		expect(result.colemanLiau).toBeGreaterThanOrEqual(0);
+		expect(result.smog).not.toBeNull();
+		expect(result.averageGradeLevel).toBeGreaterThanOrEqual(0);
+		expect(result.readingTimeMinutes).toBe(1);
+		expect(result.warnings).toHaveLength(0);
+	});
+
+	it('flags short text for SMOG and returns null smog score', () => {
+		const input = 'Short sentence. Another sentence.';
+		const result = analyzeTextReadability(input);
+
+		expect(result.sentences).toBe(2);
+		expect(result.smog).toBeNull();
+		expect(result.warnings).toContain('insufficient_sentences_for_smog');
+	});
+
+	it('handles empty input safely', () => {
+		const result = analyzeTextReadability('');
+
+		expect(result.words).toBe(0);
+		expect(result.sentences).toBe(0);
+		expect(result.fleschReadingEase).toBe(0);
+		expect(result.fleschKincaidGrade).toBe(0);
+		expect(result.gunningFog).toBe(0);
+		expect(result.colemanLiau).toBe(0);
+		expect(result.smog).toBeNull();
+		expect(result.readingTimeMinutes).toBe(0);
+		expect(result.durationMs).toBeGreaterThanOrEqual(0);
+	});
+});
+
+describe('shouldUseTextReadabilityWorker', () => {
+	it('returns true only for inputs above 500KB', () => {
+		expect(shouldUseTextReadabilityWorker('a'.repeat(50 * 1024))).toBe(false);
+		expect(shouldUseTextReadabilityWorker('a'.repeat(600 * 1024))).toBe(true);
 	});
 });
 
