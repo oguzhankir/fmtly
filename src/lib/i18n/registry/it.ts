@@ -1530,6 +1530,33 @@ const registryIt: Record<string, string> = {
 		'Preparare liste di parole uniche per testare vocabolario o modelli linguistici',
 	'tool.text-duplicate-line-remover.use_case.3':
 		"Consolidare valori di configurazione o liste di variabili d'ambiente",
+	'tool.text-whitespace-cleaner.display_name': 'Pulitore Spazi',
+	'tool.text-whitespace-cleaner.tagline':
+		'Taglia spazi finali, unisce spazi multipli, normalizza fine riga',
+	'tool.text-whitespace-cleaner.description':
+		'Pulisci la formattazione del testo rimuovendo spazi finali, unendo spazi/tab multipli in spazi singoli e normalizzando fine riga. Perfetto per preparare codice, log e contenuti per controllo versione o elaborazione.',
+	'tool.text-whitespace-cleaner.primary_keyword': 'pulitore spazi',
+	'tool.text-whitespace-cleaner.meta_title': 'Pulitore Spazi — fmtly.dev',
+	'tool.text-whitespace-cleaner.meta_description':
+		'Pulitore spazi gratuito che rimuove spazi finali, unisce spazi multipli e normalizza fine riga. Veloce, privato e 100% nel tuo browser.',
+	'tool.text-whitespace-cleaner.operation': 'Pulisci Spazi',
+	'tool.text-whitespace-cleaner.faq.0.question': 'Quali caratteri di spazio vengono rimossi?',
+	'tool.text-whitespace-cleaner.faq.0.answer':
+		'Spazi e tab finali alla fine delle righe vengono rimossi. Spazi/tab multipli nel testo vengono uniti in spazi singoli. Fine riga vengono normalizzati a LF (\\n).',
+	'tool.text-whitespace-cleaner.faq.1.question': 'Gli spazi iniziali vengono conservati?',
+	'tool.text-whitespace-cleaner.faq.1.answer':
+		"Sì. Solo gli spazi finali vengono rimossi. Indentazione iniziale e spazi all'interno delle righe vengono conservati, eccetto spazi/tab multipli che vengono uniti in spazi singoli.",
+	'tool.text-whitespace-cleaner.faq.2.question': 'Come vengono normalizzati fine riga?',
+	'tool.text-whitespace-cleaner.faq.2.answer':
+		'Fine riga Windows (CRLF) e Mac vecchi (CR) vengono convertiti in stile Unix LF (\\n). Righe vuote consecutive multiple vengono unite in doppi a capo.',
+	'tool.text-whitespace-cleaner.use_case.0':
+		'Pulisci codice prima del commit in controllo versione per rimuovere spazi finali',
+	'tool.text-whitespace-cleaner.use_case.1':
+		'Normalizza testo copiato da fonti diverse con spaziatura inconsistente',
+	'tool.text-whitespace-cleaner.use_case.2':
+		'Prepara log e file dati per elaborazione e analisi consistente',
+	'tool.text-whitespace-cleaner.use_case.3':
+		'Formatta contenuti da editor di testo ricco a testo normale con spaziatura consistente',
 	'ui.text_counter.words': 'Parole',
 	'ui.text_counter.characters': 'Caratteri',
 	'ui.text_counter.characters_no_spaces': 'Caratteri (senza spazi)',
@@ -1560,6 +1587,28 @@ const registryIt: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Righe uniche',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplicati rimossi',
 	'ui.duplicate_line_remover.result': 'Risultato',
+	'ui.whitespace_cleaner.tab_label': 'Spazi',
+	'ui.whitespace_cleaner.placeholder': 'Digita o incolla testo per pulire gli spazi...',
+	'ui.whitespace_cleaner.trailing_spaces': 'Spazi finali',
+	'ui.whitespace_cleaner.leading_spaces': 'Spazi iniziali',
+	'ui.whitespace_cleaner.blanks_collapsed': 'Spazi uniti',
+	'ui.whitespace_cleaner.tabs_converted': 'Tab convertite',
+	'ui.whitespace_cleaner.spaces_converted': 'Spazi convertiti',
+	'ui.whitespace_cleaner.lines_processed': 'Righe processate',
+	'ui.whitespace_cleaner.line_endings_normalized': 'Fine riga normalizzate',
+	'ui.whitespace_cleaner.result': 'Risultato',
+	'ui.whitespace_cleaner.options': 'Opzioni Pulizia',
+	'ui.whitespace_cleaner.remove_leading': 'Rimuovi spazi iniziali',
+	'ui.whitespace_cleaner.remove_trailing': 'Rimuovi spazi finali',
+	'ui.whitespace_cleaner.collapse_spaces': 'Unisci spazi multipli',
+	'ui.whitespace_cleaner.collapse_tabs': 'Unisci tab in spazi',
+	'ui.whitespace_cleaner.convert_tabs_to_spaces': 'Converti tab in spazi',
+	'ui.whitespace_cleaner.convert_spaces_to_tabs': 'Converti spazi in tab',
+	'ui.whitespace_cleaner.trim_lines': 'Taglia ogni riga',
+	'ui.whitespace_cleaner.remove_all_spaces': 'Rimuovi tutti gli spazi',
+	'ui.whitespace_cleaner.remove_all_line_breaks': 'Rimuovi tutti gli a capo',
+	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Preserva interruzioni paragrafo',
+	'ui.whitespace_cleaner.tab_size': 'Dimensione tab',
 	'ui.csv.controls.table_name': 'Nome Tabella',
 	'ui.csv.controls.batch_size': 'Dimensione Batch'
 };

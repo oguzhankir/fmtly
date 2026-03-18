@@ -1518,6 +1518,33 @@ const registryTr: Record<string, string> = {
 		'Vocabulary veya dil modellerini test etmek için benzersiz kelime listeleri hazırlamak',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Yapılandırma değerlerini veya ortam değişkeni listelerini birleştirmek',
+	'tool.text-whitespace-cleaner.display_name': 'Boşluk Temizleyici',
+	'tool.text-whitespace-cleaner.tagline':
+		'Sondaki boşlukları kırp, çoklu boşlukları birleştir, satır sonlarını normalize et',
+	'tool.text-whitespace-cleaner.description':
+		'Metin biçimlendirmesini sondaki boşlukları kaldırarak, çoklu boşlukları/sekme tek boşluğa indirgeyerek ve satır sonlarını normalize ederek temizle. Kod, log ve içerikleri versiyon kontrolü veya işleme için hazırlamak için mükemmel.',
+	'tool.text-whitespace-cleaner.primary_keyword': 'boşluk temizleyici',
+	'tool.text-whitespace-cleaner.meta_title': 'Boşluk Temizleyici — fmtly.dev',
+	'tool.text-whitespace-cleaner.meta_description':
+		'Ücretsiz boşluk temizleyici: sondaki boşlukları kaldırır, çoklu boşlukları birleştirir ve satır sonlarını normalize eder. Hızlı, gizli ve tamamen tarayıcı tabanlı.',
+	'tool.text-whitespace-cleaner.operation': 'Boşlukları Temizle',
+	'tool.text-whitespace-cleaner.faq.0.question': 'Hangi boşluk karakterleri kaldırılır?',
+	'tool.text-whitespace-cleaner.faq.0.answer':
+		'Satır sonlarındaki boşluklar ve sekmeler kaldırılır. Metin içindeki çoklu boşluklar/sekme tek boşluğa indirgenir. Satır sonları LF (\\n) olarak normalize edilir.',
+	'tool.text-whitespace-cleaner.faq.1.question': 'Baştaki boşluklar korunur mu?',
+	'tool.text-whitespace-cleaner.faq.1.answer':
+		'Evet. Sadece sondaki boşluklar kaldırılır. Baştaki girinti ve satır içindeki boşluklar korunur, ancak çoklu boşluklar/sekme tek boşluğa indirgenir.',
+	'tool.text-whitespace-cleaner.faq.2.question': 'Satır sonları nasıl normalize edilir?',
+	'tool.text-whitespace-cleaner.faq.2.answer':
+		'Windows (CRLF) ve eski Mac (CR) satır sonları Unix tarzı LF (\\n) olarak dönüştürülür. Ardışık çoklu boş satırlar çift satır sonlarına indirgenir.',
+	'tool.text-whitespace-cleaner.use_case.0':
+		'Versiyon kontrolüne commit etmeden önce sondaki boşlukları kaldırmak için kod temizleme',
+	'tool.text-whitespace-cleaner.use_case.1':
+		'Farklı kaynaklardan kopyalanan tutarsız boşluklu metni normalize etme',
+	'tool.text-whitespace-cleaner.use_case.2':
+		'Tutarlı işleme ve analiz için log ve veri dosyalarını hazırlama',
+	'tool.text-whitespace-cleaner.use_case.3':
+		'Zengin metin editörlerinden tutarlı boşluklu düz metin biçimlendirme',
 	'ui.text_counter.words': 'Kelime',
 	'ui.text_counter.characters': 'Karakter',
 	'ui.text_counter.characters_no_spaces': 'Karakter (boşluksuz)',
@@ -1548,6 +1575,31 @@ const registryTr: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Benzersiz satır',
 	'ui.duplicate_line_remover.duplicates_removed': 'Kaldırılan tekrar',
 	'ui.duplicate_line_remover.result': 'Sonuç',
+	'ui.whitespace_cleaner.tab_label': 'Boşluk',
+	'ui.whitespace_cleaner.placeholder': 'Boşlukları temizlemek için metin yazın veya yapıştırın...',
+	'ui.whitespace_cleaner.output': 'Çıktı',
+	'ui.whitespace_cleaner.statistics': 'İstatistikler',
+	'ui.whitespace_cleaner.normalized': 'Normalize edildi',
+	'ui.whitespace_cleaner.trailing_spaces': 'Sondaki boşluklar',
+	'ui.whitespace_cleaner.leading_spaces': 'Baştaki boşluklar',
+	'ui.whitespace_cleaner.blanks_collapsed': 'Boşluklar birleştirildi',
+	'ui.whitespace_cleaner.tabs_converted': 'Sekmeler dönüştürüldü',
+	'ui.whitespace_cleaner.spaces_converted': 'Boşluklar dönüştürüldü',
+	'ui.whitespace_cleaner.lines_processed': 'İşlenen satırlar',
+	'ui.whitespace_cleaner.line_endings_normalized': 'Satır sonları normalize edildi',
+	'ui.whitespace_cleaner.result': 'Sonuç',
+	'ui.whitespace_cleaner.options': 'Temizleme Seçenekleri',
+	'ui.whitespace_cleaner.remove_leading': 'Baştaki boşlukları kaldır',
+	'ui.whitespace_cleaner.remove_trailing': 'Sondaki boşlukları kaldır',
+	'ui.whitespace_cleaner.collapse_spaces': 'Birden fazla boşluğu daralt',
+	'ui.whitespace_cleaner.collapse_tabs': 'Sekmeleri boşluğa daralt',
+	'ui.whitespace_cleaner.convert_tabs_to_spaces': 'Sekmeleri boşluğa dönüştür',
+	'ui.whitespace_cleaner.convert_spaces_to_tabs': 'Boşlukları sekme yap',
+	'ui.whitespace_cleaner.trim_lines': 'Her satırı kırp',
+	'ui.whitespace_cleaner.remove_all_spaces': 'Tüm boşlukları kaldır',
+	'ui.whitespace_cleaner.remove_all_line_breaks': 'Tüm satır sonlarını kaldır',
+	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Paragraf sonlarını koru',
+	'ui.whitespace_cleaner.tab_size': 'Sekme boyutu',
 	'ui.csv.controls.table_name': 'Tablo Adı',
 	'ui.csv.controls.batch_size': 'Batch Boyutu'
 };

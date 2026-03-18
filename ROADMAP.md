@@ -111,6 +111,7 @@ Analyze, transform, and manipulate plain text.
 | 80 | Text Reverser | `text/reverser` | done | Reverse text by characters, words, or lines. |
 | 84 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
 | 78 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
+| 79 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
 
 ### Backlog — Text & String Tools
 
@@ -118,7 +119,6 @@ Analyze, transform, and manipulate plain text.
 |---|------|------|-------------|
 | 76 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
 | 77 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
-| 79 | Whitespace Cleaner | `text/whitespace` | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
 | 81 | Markdown → HTML | `text/markdown-to-html` | Convert Markdown to HTML with live preview. Supports GFM tables and syntax highlighting. |
 | 82 | Lorem Ipsum Generator | `text/lorem` | Generate placeholder text in paragraphs, sentences, or words. |
 | 83 | Regex Tester | `text/regex` | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |

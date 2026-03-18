@@ -1477,6 +1477,33 @@ const registryDe: Record<string, string> = {
 		'Eindeutige Wortlisten zum Testen von Vokabular oder Sprachmodellen vorbereiten',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Konfigurationswerte oder Umgebungsvariablenlisten konsolidieren',
+	'tool.text-whitespace-cleaner.display_name': 'Leerzeichen Bereiniger',
+	'tool.text-whitespace-cleaner.tagline':
+		'Nachgestellte Leerzeichen kürzen, mehrere Leerzeichen zusammenfassen, Zeilenenden normalisieren',
+	'tool.text-whitespace-cleaner.description':
+		'Textformatierung bereinigen durch Entfernen nachgestellter Leerzeichen, Zusammenfassen mehrerer Leerzeichen/Tabulatoren zu einzelnen Leerzeichen und Normalisieren von Zeilenenden. Perfekt für die Vorbereitung von Code, Protokollen und Inhalten für Versionskontrolle oder Verarbeitung.',
+	'tool.text-whitespace-cleaner.primary_keyword': 'leerzeichen bereiniger',
+	'tool.text-whitespace-cleaner.meta_title': 'Leerzeichen Bereiniger — fmtly.dev',
+	'tool.text-whitespace-cleaner.meta_description':
+		'Kostenloser Leerzeichen Bereiniger, der nachgestellte Leerzeichen entfernt, mehrere Leerzeichen zusammenfasst und Zeilenenden normalisiert. Schnell, privat und 100% in Ihrem Browser.',
+	'tool.text-whitespace-cleaner.operation': 'Leerzeichen bereinigen',
+	'tool.text-whitespace-cleaner.faq.0.question': 'Welche Leerzeichen werden entfernt?',
+	'tool.text-whitespace-cleaner.faq.0.answer':
+		'Nachgestellte Leerzeichen und Tabulatoren am Zeilenende werden entfernt. Mehrere Leerzeichen/Tabulatoren im Text werden zu einzelnen Leerzeichen zusammengefasst. Zeilenenden werden zu LF (\\n) normalisiert.',
+	'tool.text-whitespace-cleaner.faq.1.question': 'Werden führende Leerzeichen beibehalten?',
+	'tool.text-whitespace-cleaner.faq.1.answer':
+		'Ja. Nur nachgestellte Leerzeichen werden entfernt. Führende Einrückung und Leerzeichen innerhalb von Zeilen werden beibehalten, außer mehrere Leerzeichen/Tabulatoren werden zu einzelnen Leerzeichen zusammengefasst.',
+	'tool.text-whitespace-cleaner.faq.2.question': 'Wie werden Zeilenenden normalisiert?',
+	'tool.text-whitespace-cleaner.faq.2.answer':
+		'Windows (CRLF) und alte Mac (CR) Zeilenenden werden zu Unix-Stil LF (\\n) konvertiert. Mehrere aufeinanderfolgende leere Zeilen werden zu doppelten Zeilenumbrüchen zusammengefasst.',
+	'tool.text-whitespace-cleaner.use_case.0':
+		'Code vor der Versionskontrolle bereinigen, um nachgestellte Leerzeichen zu entfernen',
+	'tool.text-whitespace-cleaner.use_case.1':
+		'Text aus verschiedenen Quellen mit inkonsistenter Abstandsnutzung normalisieren',
+	'tool.text-whitespace-cleaner.use_case.2':
+		'Protokolle und Datendateien für konsistente Verarbeitung und Analyse vorbereiten',
+	'tool.text-whitespace-cleaner.use_case.3':
+		'Inhalte von Rich-Text-Editoren zu klarem Text mit konsistenter Abstandsnutzung formatieren',
 	'ui.text_counter.words': 'Wörter',
 	'ui.text_counter.characters': 'Zeichen',
 	'ui.text_counter.characters_no_spaces': 'Zeichen (ohne Leerzeichen)',
@@ -1507,6 +1534,29 @@ const registryDe: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Eindeutige Zeilen',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplikate entfernt',
 	'ui.duplicate_line_remover.result': 'Ergebnis',
+	'ui.whitespace_cleaner.tab_label': 'Leerzeichen',
+	'ui.whitespace_cleaner.placeholder':
+		'Text eingeben oder einfügen, um Leerzeichen zu bereinigen...',
+	'ui.whitespace_cleaner.trailing_spaces': 'Nachgestellte Leerzeichen',
+	'ui.whitespace_cleaner.leading_spaces': 'Führende Leerzeichen',
+	'ui.whitespace_cleaner.blanks_collapsed': 'Leerzeichen zusammengefasst',
+	'ui.whitespace_cleaner.tabs_converted': 'Tabs konvertiert',
+	'ui.whitespace_cleaner.spaces_converted': 'Leerzeichen konvertiert',
+	'ui.whitespace_cleaner.lines_processed': 'Verarbeitete Zeilen',
+	'ui.whitespace_cleaner.line_endings_normalized': 'Zeilenenden normalisiert',
+	'ui.whitespace_cleaner.result': 'Ergebnis',
+	'ui.whitespace_cleaner.options': 'Bereinigungsoptionen',
+	'ui.whitespace_cleaner.remove_leading': 'Führende Leerzeichen entfernen',
+	'ui.whitespace_cleaner.remove_trailing': 'Nachgestellte Leerzeichen entfernen',
+	'ui.whitespace_cleaner.collapse_spaces': 'Mehrfache Leerzeichen zusammenfassen',
+	'ui.whitespace_cleaner.collapse_tabs': 'Tabs zu Leerzeichen zusammenfassen',
+	'ui.whitespace_cleaner.convert_tabs_to_spaces': 'Tabs in Leerzeichen umwandeln',
+	'ui.whitespace_cleaner.convert_spaces_to_tabs': 'Leerzeichen in Tabs umwandeln',
+	'ui.whitespace_cleaner.trim_lines': 'Jede Zeile kürzen',
+	'ui.whitespace_cleaner.remove_all_spaces': 'Alle Leerzeichen entfernen',
+	'ui.whitespace_cleaner.remove_all_line_breaks': 'Alle Zeilenumbrüche entfernen',
+	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Absatzumbrüche erhalten',
+	'ui.whitespace_cleaner.tab_size': 'Tab-Größe',
 	'ui.csv.controls.table_name': 'Tabellenname',
 	'ui.csv.controls.batch_size': 'Stapelgröße'
 };

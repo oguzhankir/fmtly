@@ -1559,6 +1559,34 @@ const registryFr: Record<string, string> = {
 		'Préparer des listes de mots uniques pour tester le vocabulaire ou les modèles de langue',
 	'tool.text-duplicate-line-remover.use_case.3':
 		"Consolider les valeurs de configuration ou les listes de variables d'environnement",
+	'tool.text-whitespace-cleaner.display_name': "Nettoyeur d'Espaces",
+	'tool.text-whitespace-cleaner.tagline':
+		'Rogner les espaces finaux, fusionner les espaces multiples, normaliser les fins de ligne',
+	'tool.text-whitespace-cleaner.description':
+		'Nettoyez le formatage du texte en supprimant les espaces finaux, en fusionnant plusieurs espaces/tabulations en espaces uniques et en normalisant les fins de ligne. Parfait pour préparer le code, les journaux et le contenu pour le contrôle de version ou le traitement.',
+	'tool.text-whitespace-cleaner.primary_keyword': "nettoyeur d'espaces",
+	'tool.text-whitespace-cleaner.meta_title': "Nettoyeur d'Espaces — fmtly.dev",
+	'tool.text-whitespace-cleaner.meta_description':
+		"Nettoyeur d'espaces gratuit qui supprime les espaces finaux, fusionne les espaces multiples et normalise les fins de ligne. Rapide, privé et 100% dans votre navigateur.",
+	'tool.text-whitespace-cleaner.operation': 'Nettoyer les Espaces',
+	'tool.text-whitespace-cleaner.faq.0.question': "Quels caractères d'espace sont supprimés ?",
+	'tool.text-whitespace-cleaner.faq.0.answer':
+		'Les espaces et tabulations finaux à la fin des lignes sont supprimés. Plusieurs espaces/tabulations dans le texte sont fusionnés en espaces uniques. Les fins de ligne sont normalisées en LF (\\n).',
+	'tool.text-whitespace-cleaner.faq.1.question': 'Les espaces de début sont-ils conservés ?',
+	'tool.text-whitespace-cleaner.faq.1.answer':
+		"Oui. Seuls les espaces finaux sont supprimés. L'indentation de début et les espaces dans les lignes sont conservés, sauf que plusieurs espaces/tabulations sont fusionnés en espaces uniques.",
+	'tool.text-whitespace-cleaner.faq.2.question':
+		'Comment les fins de ligne sont-elles normalisées ?',
+	'tool.text-whitespace-cleaner.faq.2.answer':
+		'Les fins de ligne Windows (CRLF) et Mac anciennes (CR) sont converties en style Unix LF (\\n). Plusieurs lignes vides consécutives sont fusionnées en sauts de ligne doubles.',
+	'tool.text-whitespace-cleaner.use_case.0':
+		'Nettoyer le code avant de valider en contrôle de version pour supprimer les espaces finaux',
+	'tool.text-whitespace-cleaner.use_case.1':
+		'Normaliser le texte copié de différentes sources avec un espacement incohérent',
+	'tool.text-whitespace-cleaner.use_case.2':
+		'Préparer les journaux et fichiers de données pour un traitement et une analyse cohérents',
+	'tool.text-whitespace-cleaner.use_case.3':
+		'Formater le contenu des éditeurs de texte riche en texte brut avec un espacement cohérent',
 	'ui.text_counter.words': 'Mots',
 	'ui.text_counter.characters': 'Caractères',
 	'ui.text_counter.characters_no_spaces': 'Caractères (sans espaces)',
@@ -1589,6 +1617,28 @@ const registryFr: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Lignes uniques',
 	'ui.duplicate_line_remover.duplicates_removed': 'Doublons supprimés',
 	'ui.duplicate_line_remover.result': 'Résultat',
+	'ui.whitespace_cleaner.tab_label': 'Espaces',
+	'ui.whitespace_cleaner.placeholder': 'Tapez ou collez du texte pour nettoyer les espaces...',
+	'ui.whitespace_cleaner.trailing_spaces': 'Espaces finaux',
+	'ui.whitespace_cleaner.leading_spaces': 'Espaces de début',
+	'ui.whitespace_cleaner.blanks_collapsed': 'Espaces fusionnés',
+	'ui.whitespace_cleaner.tabs_converted': 'Tabulations converties',
+	'ui.whitespace_cleaner.spaces_converted': 'Espaces convertis',
+	'ui.whitespace_cleaner.lines_processed': 'Lignes traitées',
+	'ui.whitespace_cleaner.line_endings_normalized': 'Fins de ligne normalisées',
+	'ui.whitespace_cleaner.result': 'Résultat',
+	'ui.whitespace_cleaner.options': 'Options de Nettoyage',
+	'ui.whitespace_cleaner.remove_leading': 'Supprimer les espaces de début',
+	'ui.whitespace_cleaner.remove_trailing': 'Supprimer les espaces finaux',
+	'ui.whitespace_cleaner.collapse_spaces': 'Fusionner les espaces multiples',
+	'ui.whitespace_cleaner.collapse_tabs': 'Fusionner les tabulations en espaces',
+	'ui.whitespace_cleaner.convert_tabs_to_spaces': 'Convertir les tabulations en espaces',
+	'ui.whitespace_cleaner.convert_spaces_to_tabs': 'Convertir les espaces en tabulations',
+	'ui.whitespace_cleaner.trim_lines': 'Rogner chaque ligne',
+	'ui.whitespace_cleaner.remove_all_spaces': 'Supprimer tous les espaces',
+	'ui.whitespace_cleaner.remove_all_line_breaks': 'Supprimer tous les sauts de ligne',
+	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Préserver les sauts de paragraphe',
+	'ui.whitespace_cleaner.tab_size': 'Taille de tabulation',
 	'ui.csv.controls.table_name': 'Nom de Table',
 	'ui.csv.controls.batch_size': 'Taille de Lot'
 };
