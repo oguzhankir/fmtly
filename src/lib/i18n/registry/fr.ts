@@ -1644,6 +1644,37 @@ const registryFr: Record<string, string> = {
 	'tool.text-diff-compare.use_case.2': 'Analyser les modifications de fichiers de configuration',
 	'tool.text-diff-compare.use_case.3':
 		'Suivre les changements dans les logs ou exportations de données',
+	'tool.text-regex-tester.display_name': 'Testeur Regex',
+	'tool.text-regex-tester.tagline':
+		'Testez des expressions régulières avec surlignage en direct, groupes de capture et flags',
+	'tool.text-regex-tester.description':
+		'Testez des motifs regex JavaScript sur du texte réel avec surlignage en temps réel, contrôle complet des flags, inspection des groupes de capture et métriques détaillées des correspondances. Tout s’exécute localement dans votre navigateur.',
+	'tool.text-regex-tester.primary_keyword': 'testeur regex',
+	'tool.text-regex-tester.meta_title':
+		'Testeur Regex — Surlignage en direct & groupes de capture | fmtly.dev',
+	'tool.text-regex-tester.meta_description':
+		'Testez des expressions régulières en ligne avec surlignage en direct, groupes de capture et flags regex. Rapide, privé et 100% navigateur.',
+	'tool.text-regex-tester.operation': 'Tester Regex',
+	'tool.text-regex-tester.faq.0.question':
+		'Cet outil prend-il en charge les flags JavaScript comme g, i, m, s, u, y et d ?',
+	'tool.text-regex-tester.faq.0.answer':
+		'Oui. Vous pouvez activer ou désactiver chaque flag pris en charge et voir immédiatement son impact sur les correspondances.',
+	'tool.text-regex-tester.faq.1.question':
+		'Puis-je inspecter les groupes de capture numérotés et nommés pour chaque correspondance ?',
+	'tool.text-regex-tester.faq.1.answer':
+		'Oui. Chaque correspondance affiche les groupes numérotés et nommés, avec leurs valeurs et positions quand disponibles.',
+	'tool.text-regex-tester.faq.2.question':
+		'Le motif et le texte de test sont-ils envoyés vers un serveur ?',
+	'tool.text-regex-tester.faq.2.answer':
+		'Non. Le matching regex s’exécute localement dans votre navigateur, sans upload de données.',
+	'tool.text-regex-tester.use_case.0':
+		'Valider des motifs de parsing de logs avant mise en production',
+	'tool.text-regex-tester.use_case.1':
+		'Tester des règles de validation de formulaires avec du texte réel et des cas limites',
+	'tool.text-regex-tester.use_case.2':
+		'Prototyper des règles de recherche et d’extraction pour scripts, ETL et automatisation',
+	'tool.text-regex-tester.use_case.3':
+		'Apprendre et enseigner les bases des regex avec un feedback visuel instantané',
 	'ui.diff_compare.statistics': 'Statistiques de Comparaison',
 	'ui.diff_compare.added_lines': 'Lignes ajoutées',
 	'ui.diff_compare.removed_lines': 'Lignes supprimées',
@@ -1767,6 +1798,57 @@ const registryFr: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Title Case',
 	'ui.text_case.sentence_case': 'Casse de phrase',
+	'ui.regex.pattern_label': 'Motif',
+	'ui.regex.pattern_placeholder': 'ex. (?<name>\\w+)',
+	'ui.regex.flags_label': 'Flags',
+	'ui.regex.test_text_label': 'Texte de test',
+	'ui.regex.test_text_placeholder': 'Saisissez ou collez du texte pour tester votre motif...',
+	'ui.regex.copy_regex': 'Copier la regex',
+	'ui.regex.global_hint':
+		'Activez g pour itérer toutes les correspondances. Sans g, seule la première est renvoyée.',
+	'ui.regex.stats.matches': 'Correspondances',
+	'ui.regex.stats.unique_matches': 'Uniques',
+	'ui.regex.stats.lines_with_matches': 'Lignes',
+	'ui.regex.stats.coverage': 'Couverture',
+	'ui.regex.stats.duration': 'Durée',
+	'ui.regex.highlight_title': 'Surlignage en direct',
+	'ui.regex.preview_truncated': 'Aperçu limité à {limit} caractères',
+	'ui.regex.no_highlight': 'Les correspondances seront surlignées ici.',
+	'ui.regex.matches_title': 'Correspondances',
+	'ui.regex.match_limit_reached': 'Limite de correspondances atteinte',
+	'ui.regex.no_matches': 'Aucune correspondance trouvée.',
+	'ui.regex.match_label': 'Correspondance #{index}',
+	'ui.regex.match_position': 'Ligne {line}, Colonne {column}',
+	'ui.regex.match_range': 'Plage : {range}',
+	'ui.regex.capture_groups': 'Groupes de capture',
+	'ui.regex.no_capture_groups': 'Aucun groupe de capture',
+	'ui.regex.named_capture_groups': 'Groupes nommés',
+	'ui.regex.no_named_capture_groups': 'Aucun groupe nommé',
+	'ui.regex.group_label': 'Groupe {index}',
+	'ui.regex.group_unmatched': 'Aucune correspondance',
+	'ui.regex.error.empty_pattern': 'Saisissez un motif regex pour commencer le test.',
+	'ui.regex.error.invalid_flag': 'Flag regex invalide : {flag}',
+	'ui.regex.error.duplicate_flag': 'Flag regex en double : {flag}',
+	'ui.regex.error.unsupported_flag':
+		'Ce flag regex n’est pas pris en charge dans cet environnement : {flag}',
+	'ui.regex.error.syntax_error': 'Erreur de syntaxe du motif : {detail}',
+	'ui.regex.flags.g.label': 'Global',
+	'ui.regex.flags.g.description': 'Trouve toutes les correspondances, pas seulement la première',
+	'ui.regex.flags.i.label': 'Ignore case',
+	'ui.regex.flags.i.description': 'Ignore la casse dans les correspondances de lettres',
+	'ui.regex.flags.m.label': 'Multiline',
+	'ui.regex.flags.m.description': 'Fait fonctionner ^ et $ ligne par ligne',
+	'ui.regex.flags.s.label': 'Dotall',
+	'ui.regex.flags.s.description':
+		'Permet au point (.) de correspondre aussi aux retours à la ligne',
+	'ui.regex.flags.u.label': 'Unicode',
+	'ui.regex.flags.u.description': 'Active le mode Unicode complet',
+	'ui.regex.flags.y.label': 'Sticky',
+	'ui.regex.flags.y.description':
+		'Correspond strictement à partir de la position lastIndex courante',
+	'ui.regex.flags.d.label': 'Indices',
+	'ui.regex.flags.d.description':
+		'Expose les indices début/fin des groupes lorsque c’est pris en charge',
 	'ui.text_reverser.tab_label': 'Inverser',
 	'ui.text_reverser.placeholder': 'Saisissez ou collez du texte à inverser...',
 	'ui.text_reverser.characters': 'Inverser par caractères',

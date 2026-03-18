@@ -6,6 +6,10 @@ export {
 	reverseText,
 	removeDuplicateLines,
 	cleanWhitespace,
+	analyzeRegexTester,
+	stringifyRegexTesterFlags,
+	getRegexTesterFlagSupport,
+	REGEX_TESTER_FLAG_ORDER,
 	type TextCounterMetrics,
 	type TextCaseConversions,
 	type MarkdownToHtmlOptions,
@@ -19,7 +23,17 @@ export {
 	type TextReverseResults,
 	type TextDuplicateRemovalResult,
 	type TextWhitespaceCleanupResult,
-	type TextWhitespaceCleanupOptions
+	type TextWhitespaceCleanupOptions,
+	type RegexTesterFlag,
+	type RegexTesterFlags,
+	type RegexTesterErrorCode,
+	type RegexTesterError,
+	type RegexTesterCaptureGroup,
+	type RegexTesterNamedCaptureGroup,
+	type RegexTesterMatch,
+	type RegexTesterTextSegment,
+	type RegexTesterAnalyzeOptions,
+	type RegexTesterResult
 } from './text.engine.js';
 
 export {

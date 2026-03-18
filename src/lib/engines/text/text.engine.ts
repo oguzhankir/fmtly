@@ -110,6 +110,77 @@ export type MarkdownToHtmlResult = {
 	warnings: MarkdownToHtmlWarningCode[];
 };
 
+export type RegexTesterFlag = 'g' | 'i' | 'm' | 's' | 'u' | 'y' | 'd';
+
+export type RegexTesterFlags = Record<RegexTesterFlag, boolean>;
+
+export type RegexTesterErrorCode =
+	| 'empty_pattern'
+	| 'invalid_flag'
+	| 'duplicate_flag'
+	| 'unsupported_flag'
+	| 'syntax_error';
+
+export type RegexTesterError = {
+	code: RegexTesterErrorCode;
+	detail: string;
+};
+
+export type RegexTesterCaptureGroup = {
+	index: number;
+	value: string | null;
+	start: number | null;
+	end: number | null;
+};
+
+export type RegexTesterNamedCaptureGroup = {
+	name: string;
+	value: string | null;
+	start: number | null;
+	end: number | null;
+};
+
+export type RegexTesterMatch = {
+	index: number;
+	value: string;
+	start: number;
+	end: number;
+	line: number;
+	column: number;
+	groups: RegexTesterCaptureGroup[];
+	namedGroups: RegexTesterNamedCaptureGroup[];
+};
+
+export type RegexTesterTextSegment = {
+	type: 'text' | 'match';
+	value: string;
+	matchIndex: number | null;
+};
+
+export type RegexTesterAnalyzeOptions = {
+	maxMatches: number;
+	previewCharLimit: number;
+};
+
+export type RegexTesterResult = {
+	pattern: string;
+	flags: string;
+	normalizedFlags: string;
+	isValid: boolean;
+	error: RegexTesterError | null;
+	matches: RegexTesterMatch[];
+	segments: RegexTesterTextSegment[];
+	totalMatches: number;
+	uniqueMatchCount: number;
+	linesWithMatches: number;
+	coverageRatio: number;
+	durationMs: number;
+	hasGlobal: boolean;
+	isMatchLimitReached: boolean;
+	isPreviewTruncated: boolean;
+	previewCharLimit: number;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -297,8 +368,438 @@ const MARKDOWN_LANGUAGE_ALIASES: Record<string, string> = {
 	txt: 'plaintext'
 };
 
+export const REGEX_TESTER_FLAG_ORDER: RegexTesterFlag[] = ['g', 'i', 'm', 's', 'u', 'y', 'd'];
+
+const DEFAULT_REGEX_TESTER_OPTIONS: RegexTesterAnalyzeOptions = {
+	maxMatches: 5000,
+	previewCharLimit: 120000
+};
+
+type RegexExecWithIndices = RegExpExecArray & {
+	groups?: Record<string, string>;
+	indices?: Array<[number, number] | undefined> & {
+		groups?: Record<string, [number, number] | undefined>;
+	};
+};
+
+const REGEX_TESTER_FLAG_SUPPORT: Record<RegexTesterFlag, boolean> = {
+	g: isRegexFlagSupported('g'),
+	i: isRegexFlagSupported('i'),
+	m: isRegexFlagSupported('m'),
+	s: isRegexFlagSupported('s'),
+	u: isRegexFlagSupported('u'),
+	y: isRegexFlagSupported('y'),
+	d: isRegexFlagSupported('d')
+};
+
 const markdownRegisteredLanguages = new Set<string>();
 let markdownRuntimePromise: Promise<MarkdownRuntime> | null = null;
+
+function isRegexFlagSupported(flag: string): boolean {
+	try {
+		new RegExp('', flag);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+function nowMs(): number {
+	if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+		return performance.now();
+	}
+
+	return Date.now();
+}
+
+function normalizeRegexTesterFlags(flags: string): {
+	normalizedFlags: string;
+	error: RegexTesterError | null;
+} {
+	const seen = new Set<RegexTesterFlag>();
+
+	for (const flag of flags) {
+		if (!REGEX_TESTER_FLAG_ORDER.includes(flag as RegexTesterFlag)) {
+			return {
+				normalizedFlags: '',
+				error: {
+					code: 'invalid_flag',
+					detail: flag
+				}
+			};
+		}
+
+		const typedFlag = flag as RegexTesterFlag;
+
+		if (seen.has(typedFlag)) {
+			return {
+				normalizedFlags: '',
+				error: {
+					code: 'duplicate_flag',
+					detail: typedFlag
+				}
+			};
+		}
+
+		if (!REGEX_TESTER_FLAG_SUPPORT[typedFlag]) {
+			return {
+				normalizedFlags: '',
+				error: {
+					code: 'unsupported_flag',
+					detail: typedFlag
+				}
+			};
+		}
+
+		seen.add(typedFlag);
+	}
+
+	const normalizedFlags = REGEX_TESTER_FLAG_ORDER.filter((flag) => seen.has(flag)).join('');
+
+	return {
+		normalizedFlags,
+		error: null
+	};
+}
+
+function buildLineStartIndexes(input: string): number[] {
+	const lineStarts = [0];
+
+	for (let index = 0; index < input.length; index += 1) {
+		if (input[index] === '\n') {
+			lineStarts.push(index + 1);
+		}
+	}
+
+	return lineStarts;
+}
+
+function getLineAndColumn(lineStarts: number[], index: number): { line: number; column: number } {
+	let low = 0;
+	let high = lineStarts.length - 1;
+
+	while (low <= high) {
+		const mid = Math.floor((low + high) / 2);
+		const lineStart = lineStarts[mid];
+
+		if (lineStart <= index) {
+			low = mid + 1;
+		} else {
+			high = mid - 1;
+		}
+	}
+
+	const lineIndex = Math.max(0, low - 1);
+	const lineStart = lineStarts[lineIndex] ?? 0;
+
+	return {
+		line: lineIndex + 1,
+		column: index - lineStart + 1
+	};
+}
+
+function advanceRegexIndex(input: string, index: number, unicode: boolean): number {
+	if (index >= input.length) return index + 1;
+	if (!unicode) return index + 1;
+
+	const codePoint = input.codePointAt(index);
+	if (codePoint === undefined) return index + 1;
+
+	return index + (codePoint > 0xffff ? 2 : 1);
+}
+
+function extractRegexGroups(match: RegexExecWithIndices): {
+	groups: RegexTesterCaptureGroup[];
+	namedGroups: RegexTesterNamedCaptureGroup[];
+} {
+	const groups: RegexTesterCaptureGroup[] = [];
+
+	for (let index = 1; index < match.length; index += 1) {
+		const captureValue = match[index] ?? null;
+		const captureIndexes = match.indices?.[index];
+
+		groups.push({
+			index,
+			value: captureValue,
+			start: captureIndexes?.[0] ?? null,
+			end: captureIndexes?.[1] ?? null
+		});
+	}
+
+	const namedGroups: RegexTesterNamedCaptureGroup[] = [];
+	const namedCaptureValues = match.groups ?? {};
+	const namedCaptureIndexes = match.indices?.groups ?? {};
+
+	for (const [name, value] of Object.entries(namedCaptureValues)) {
+		const indexes = namedCaptureIndexes[name];
+
+		namedGroups.push({
+			name,
+			value: value ?? null,
+			start: indexes?.[0] ?? null,
+			end: indexes?.[1] ?? null
+		});
+	}
+
+	return {
+		groups,
+		namedGroups
+	};
+}
+
+function buildRegexSegments(
+	input: string,
+	matches: RegexTesterMatch[],
+	previewCharLimit: number
+): { segments: RegexTesterTextSegment[]; isPreviewTruncated: boolean } {
+	const isPreviewTruncated = input.length > previewCharLimit;
+	const preview = isPreviewTruncated ? input.slice(0, previewCharLimit) : input;
+
+	if (preview.length === 0) {
+		return {
+			segments: [],
+			isPreviewTruncated
+		};
+	}
+
+	const relevantMatches = matches.filter(
+		(match) => match.start < preview.length && match.end > match.start
+	);
+	const segments: RegexTesterTextSegment[] = [];
+	let cursor = 0;
+
+	for (const match of relevantMatches) {
+		const boundedStart = Math.max(cursor, match.start);
+		const boundedEnd = Math.min(preview.length, match.end);
+
+		if (boundedStart > cursor) {
+			segments.push({
+				type: 'text',
+				value: preview.slice(cursor, boundedStart),
+				matchIndex: null
+			});
+		}
+
+		if (boundedEnd > boundedStart) {
+			segments.push({
+				type: 'match',
+				value: preview.slice(boundedStart, boundedEnd),
+				matchIndex: match.index
+			});
+		}
+
+		cursor = Math.max(cursor, boundedEnd);
+		if (cursor >= preview.length) break;
+	}
+
+	if (cursor < preview.length) {
+		segments.push({
+			type: 'text',
+			value: preview.slice(cursor),
+			matchIndex: null
+		});
+	}
+
+	return {
+		segments,
+		isPreviewTruncated
+	};
+}
+
+function createRegexErrorResult(
+	pattern: string,
+	flags: string,
+	normalizedFlags: string,
+	error: RegexTesterError,
+	durationMs: number,
+	previewCharLimit: number
+): RegexTesterResult {
+	return {
+		pattern,
+		flags,
+		normalizedFlags,
+		isValid: false,
+		error,
+		matches: [],
+		segments: [],
+		totalMatches: 0,
+		uniqueMatchCount: 0,
+		linesWithMatches: 0,
+		coverageRatio: 0,
+		durationMs,
+		hasGlobal: normalizedFlags.includes('g'),
+		isMatchLimitReached: false,
+		isPreviewTruncated: false,
+		previewCharLimit
+	};
+}
+
+export function stringifyRegexTesterFlags(flags: Partial<RegexTesterFlags>): string {
+	return REGEX_TESTER_FLAG_ORDER.filter((flag) => flags[flag] === true).join('');
+}
+
+export function getRegexTesterFlagSupport(): Record<RegexTesterFlag, boolean> {
+	return { ...REGEX_TESTER_FLAG_SUPPORT };
+}
+
+export function analyzeRegexTester(
+	pattern: string,
+	input: string,
+	flags: string,
+	options: Partial<RegexTesterAnalyzeOptions> = {}
+): RegexTesterResult {
+	const startedAt = nowMs();
+	const normalizedOptions: RegexTesterAnalyzeOptions = {
+		maxMatches: clampInteger(
+			options.maxMatches ?? DEFAULT_REGEX_TESTER_OPTIONS.maxMatches,
+			1,
+			50000
+		),
+		previewCharLimit: clampInteger(
+			options.previewCharLimit ?? DEFAULT_REGEX_TESTER_OPTIONS.previewCharLimit,
+			2000,
+			500000
+		)
+	};
+
+	if (pattern.length === 0) {
+		return createRegexErrorResult(
+			pattern,
+			flags,
+			'',
+			{ code: 'empty_pattern', detail: '' },
+			nowMs() - startedAt,
+			normalizedOptions.previewCharLimit
+		);
+	}
+
+	const normalizedFlagResult = normalizeRegexTesterFlags(flags);
+	if (normalizedFlagResult.error) {
+		return createRegexErrorResult(
+			pattern,
+			flags,
+			normalizedFlagResult.normalizedFlags,
+			normalizedFlagResult.error,
+			nowMs() - startedAt,
+			normalizedOptions.previewCharLimit
+		);
+	}
+
+	const normalizedFlags = normalizedFlagResult.normalizedFlags;
+	const executionFlags =
+		REGEX_TESTER_FLAG_SUPPORT.d && !normalizedFlags.includes('d')
+			? `${normalizedFlags}d`
+			: normalizedFlags;
+
+	let matcher: RegExp;
+
+	try {
+		matcher = new RegExp(pattern, executionFlags);
+	} catch (error) {
+		return createRegexErrorResult(
+			pattern,
+			flags,
+			normalizedFlags,
+			{
+				code: 'syntax_error',
+				detail: error instanceof Error ? error.message : 'Invalid regular expression'
+			},
+			nowMs() - startedAt,
+			normalizedOptions.previewCharLimit
+		);
+	}
+
+	const lineStarts = buildLineStartIndexes(input);
+	const matches: RegexTesterMatch[] = [];
+	let totalMatchedLength = 0;
+	let isMatchLimitReached = false;
+	const iterateMatches = normalizedFlags.includes('g') || normalizedFlags.includes('y');
+
+	if (iterateMatches) {
+		while (true) {
+			const rawMatch = matcher.exec(input) as RegexExecWithIndices | null;
+			if (!rawMatch) break;
+
+			const start = rawMatch.index;
+			const value = rawMatch[0] ?? '';
+			const end = start + value.length;
+			const location = getLineAndColumn(lineStarts, start);
+			const captureGroups = extractRegexGroups(rawMatch);
+
+			matches.push({
+				index: matches.length,
+				value,
+				start,
+				end,
+				line: location.line,
+				column: location.column,
+				groups: captureGroups.groups,
+				namedGroups: captureGroups.namedGroups
+			});
+
+			totalMatchedLength += value.length;
+
+			if (matches.length >= normalizedOptions.maxMatches) {
+				isMatchLimitReached = true;
+				break;
+			}
+
+			if (value.length === 0) {
+				matcher.lastIndex = advanceRegexIndex(
+					input,
+					matcher.lastIndex,
+					normalizedFlags.includes('u')
+				);
+			}
+		}
+	} else {
+		const rawMatch = matcher.exec(input) as RegexExecWithIndices | null;
+
+		if (rawMatch) {
+			const start = rawMatch.index;
+			const value = rawMatch[0] ?? '';
+			const end = start + value.length;
+			const location = getLineAndColumn(lineStarts, start);
+			const captureGroups = extractRegexGroups(rawMatch);
+
+			matches.push({
+				index: 0,
+				value,
+				start,
+				end,
+				line: location.line,
+				column: location.column,
+				groups: captureGroups.groups,
+				namedGroups: captureGroups.namedGroups
+			});
+
+			totalMatchedLength += value.length;
+		}
+	}
+
+	const matchLineSet = new Set<number>(matches.map((match) => match.line));
+	const uniqueMatches = new Set<string>(matches.map((match) => match.value));
+	const preview = buildRegexSegments(input, matches, normalizedOptions.previewCharLimit);
+
+	return {
+		pattern,
+		flags,
+		normalizedFlags,
+		isValid: true,
+		error: null,
+		matches,
+		segments: preview.segments,
+		totalMatches: matches.length,
+		uniqueMatchCount: uniqueMatches.size,
+		linesWithMatches: matchLineSet.size,
+		coverageRatio: input.length === 0 ? 0 : Math.min(1, totalMatchedLength / input.length),
+		durationMs: nowMs() - startedAt,
+		hasGlobal: normalizedFlags.includes('g'),
+		isMatchLimitReached,
+		isPreviewTruncated: preview.isPreviewTruncated,
+		previewCharLimit: normalizedOptions.previewCharLimit
+	};
+}
 
 function clampInteger(value: number, min: number, max: number): number {
 	if (!Number.isFinite(value)) return min;

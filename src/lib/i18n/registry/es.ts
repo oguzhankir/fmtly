@@ -1619,6 +1619,36 @@ const registryEs: Record<string, string> = {
 	'tool.text-diff-compare.use_case.1': 'Revisar cambios y ediciones de documentos',
 	'tool.text-diff-compare.use_case.2': 'Analizar modificaciones de archivos de configuración',
 	'tool.text-diff-compare.use_case.3': 'Rastrear cambios en logs o exportaciones de datos',
+	'tool.text-regex-tester.display_name': 'Probador de Regex',
+	'tool.text-regex-tester.tagline':
+		'Prueba expresiones regulares con resaltado en vivo, grupos de captura y flags',
+	'tool.text-regex-tester.description':
+		'Prueba patrones regex de JavaScript sobre texto real con resaltado en tiempo real, control total de flags, inspección de grupos de captura y métricas detalladas de coincidencias. Todo se ejecuta localmente en tu navegador.',
+	'tool.text-regex-tester.primary_keyword': 'probador de regex',
+	'tool.text-regex-tester.meta_title':
+		'Probador de Regex — Resaltado en vivo y grupos de captura | fmtly.dev',
+	'tool.text-regex-tester.meta_description':
+		'Prueba expresiones regulares online con resaltado en vivo, grupos de captura y flags regex. Rápido, privado y totalmente en el navegador.',
+	'tool.text-regex-tester.operation': 'Probar Regex',
+	'tool.text-regex-tester.faq.0.question':
+		'¿Esta herramienta soporta flags de JavaScript como g, i, m, s, u, y y d?',
+	'tool.text-regex-tester.faq.0.answer':
+		'Sí. Puedes activar o desactivar cada flag soportado y ver al instante cómo cambia el resultado.',
+	'tool.text-regex-tester.faq.1.question':
+		'¿Puedo inspeccionar grupos de captura numerados y con nombre por coincidencia?',
+	'tool.text-regex-tester.faq.1.answer':
+		'Sí. Cada coincidencia muestra grupos numerados y grupos con nombre, con valores y posiciones cuando están disponibles.',
+	'tool.text-regex-tester.faq.2.question': '¿Mi patrón y texto de prueba se envían a un servidor?',
+	'tool.text-regex-tester.faq.2.answer':
+		'No. El análisis regex ocurre localmente en tu navegador y no se suben datos.',
+	'tool.text-regex-tester.use_case.0':
+		'Validar patrones de parsing de logs antes de usarlos en producción',
+	'tool.text-regex-tester.use_case.1':
+		'Probar reglas de validación de formularios con texto real y casos límite',
+	'tool.text-regex-tester.use_case.2':
+		'Prototipar reglas de búsqueda y extracción para scripts, ETL y automatización',
+	'tool.text-regex-tester.use_case.3':
+		'Aprender y enseñar regex con feedback visual inmediato de coincidencias',
 	'ui.diff_compare.statistics': 'Estadísticas de Comparación',
 	'ui.diff_compare.added_lines': 'Líneas añadidas',
 	'ui.diff_compare.removed_lines': 'Líneas eliminadas',
@@ -1741,6 +1771,55 @@ const registryEs: Record<string, string> = {
 	'ui.text_case.constant_case': 'CONSTANT_CASE',
 	'ui.text_case.title_case': 'Title Case',
 	'ui.text_case.sentence_case': 'Formato de oración',
+	'ui.regex.pattern_label': 'Patrón',
+	'ui.regex.pattern_placeholder': 'p. ej. (?<name>\\w+)',
+	'ui.regex.flags_label': 'Flags',
+	'ui.regex.test_text_label': 'Texto de prueba',
+	'ui.regex.test_text_placeholder': 'Escribe o pega texto para probar tu patrón...',
+	'ui.regex.copy_regex': 'Copiar Regex',
+	'ui.regex.global_hint':
+		'Activa g para iterar todas las coincidencias. Sin g, solo se devuelve la primera.',
+	'ui.regex.stats.matches': 'Coincidencias',
+	'ui.regex.stats.unique_matches': 'Únicas',
+	'ui.regex.stats.lines_with_matches': 'Líneas',
+	'ui.regex.stats.coverage': 'Cobertura',
+	'ui.regex.stats.duration': 'Tiempo',
+	'ui.regex.highlight_title': 'Resaltado en vivo',
+	'ui.regex.preview_truncated': 'Vista previa limitada a {limit} caracteres',
+	'ui.regex.no_highlight': 'Las coincidencias se resaltarán aquí.',
+	'ui.regex.matches_title': 'Coincidencias',
+	'ui.regex.match_limit_reached': 'Se alcanzó el límite de coincidencias',
+	'ui.regex.no_matches': 'No se encontraron coincidencias.',
+	'ui.regex.match_label': 'Coincidencia #{index}',
+	'ui.regex.match_position': 'Línea {line}, Columna {column}',
+	'ui.regex.match_range': 'Rango: {range}',
+	'ui.regex.capture_groups': 'Grupos de captura',
+	'ui.regex.no_capture_groups': 'Sin grupos de captura',
+	'ui.regex.named_capture_groups': 'Grupos con nombre',
+	'ui.regex.no_named_capture_groups': 'Sin grupos con nombre',
+	'ui.regex.group_label': 'Grupo {index}',
+	'ui.regex.group_unmatched': 'Sin coincidencia',
+	'ui.regex.error.empty_pattern':
+		'Introduce un patrón de expresión regular para empezar la prueba.',
+	'ui.regex.error.invalid_flag': 'Flag regex no válido: {flag}',
+	'ui.regex.error.duplicate_flag': 'Flag regex duplicado: {flag}',
+	'ui.regex.error.unsupported_flag': 'Este entorno no soporta el flag regex: {flag}',
+	'ui.regex.error.syntax_error': 'Error de sintaxis en el patrón: {detail}',
+	'ui.regex.flags.g.label': 'Global',
+	'ui.regex.flags.g.description': 'Busca todas las coincidencias, no solo la primera',
+	'ui.regex.flags.i.label': 'Ignorar mayúsculas',
+	'ui.regex.flags.i.description': 'No distingue entre mayúsculas y minúsculas',
+	'ui.regex.flags.m.label': 'Multilínea',
+	'ui.regex.flags.m.description': 'Hace que ^ y $ funcionen por línea',
+	'ui.regex.flags.s.label': 'Dotall',
+	'ui.regex.flags.s.description': 'Permite que el punto (.) también coincida con saltos de línea',
+	'ui.regex.flags.u.label': 'Unicode',
+	'ui.regex.flags.u.description': 'Activa el modo Unicode completo',
+	'ui.regex.flags.y.label': 'Sticky',
+	'ui.regex.flags.y.description': 'Coincide estrictamente desde la posición actual de lastIndex',
+	'ui.regex.flags.d.label': 'Índices',
+	'ui.regex.flags.d.description':
+		'Muestra índices de inicio y fin de grupos cuando el entorno lo permite',
 	'ui.text_reverser.tab_label': 'Invertir',
 	'ui.text_reverser.placeholder': 'Escribe o pega texto para invertirlo...',
 	'ui.text_reverser.characters': 'Invertir por caracteres',
