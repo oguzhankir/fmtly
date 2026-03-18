@@ -8,9 +8,11 @@ import {
 	convertTextCases,
 	generateLoremIpsum,
 	processTextEscape,
+	processTextMorse,
 	removeDuplicateLines,
 	reverseText,
 	shouldUseTextEscapeWorker,
+	shouldUseTextMorseWorker,
 	shouldUseTextReadabilityWorker,
 	sortTextLines
 } from '../../../src/lib/engines/text/text.engine.js';
@@ -266,6 +268,56 @@ describe('shouldUseTextReadabilityWorker', () => {
 	it('returns true only for inputs above 500KB', () => {
 		expect(shouldUseTextReadabilityWorker('a'.repeat(50 * 1024))).toBe(false);
 		expect(shouldUseTextReadabilityWorker('a'.repeat(600 * 1024))).toBe(true);
+	});
+});
+
+describe('processTextMorse', () => {
+	it('encodes plain text into Morse code', () => {
+		const result = processTextMorse('SOS 42', 'encode');
+
+		expect(result.output).toBe('... --- ... / ....- ..---');
+		expect(result.symbolCount).toBe(5);
+		expect(result.wordCount).toBe(2);
+		expect(result.warnings).toHaveLength(0);
+	});
+
+	it('decodes Morse code to uppercase text', () => {
+		const result = processTextMorse('.... . .-.. .-.. --- / .-- --- .-. .-.. -..', 'decode');
+
+		expect(result.output).toBe('HELLO WORLD');
+		expect(result.symbolCount).toBe(10);
+		expect(result.wordCount).toBe(2);
+		expect(result.warnings).toHaveLength(0);
+	});
+
+	it('normalizes accented Latin letters while encoding', () => {
+		const result = processTextMorse('Çağrı', 'encode');
+
+		expect(result.output).toBe('-.-. .- --. .-. ..');
+		expect(result.unsupportedCount).toBe(0);
+	});
+
+	it('reports unknown Morse tokens when decoding', () => {
+		const result = processTextMorse('... --- ... ..-.-', 'decode');
+
+		expect(result.output).toBe('SOS?');
+		expect(result.unknownTokenCount).toBe(1);
+		expect(result.warnings).toContain('unknown_morse_tokens');
+	});
+
+	it('drops unsupported input characters when preserveUnsupported is false', () => {
+		const result = processTextMorse('hello 🙂', 'encode', { preserveUnsupported: false });
+
+		expect(result.output).toBe('.... . .-.. .-.. ---');
+		expect(result.unsupportedCount).toBe(1);
+		expect(result.warnings).toContain('unsupported_input_characters');
+	});
+});
+
+describe('shouldUseTextMorseWorker', () => {
+	it('returns true only for inputs above 500KB', () => {
+		expect(shouldUseTextMorseWorker('a'.repeat(50 * 1024))).toBe(false);
+		expect(shouldUseTextMorseWorker('a'.repeat(600 * 1024))).toBe(true);
 	});
 });
 

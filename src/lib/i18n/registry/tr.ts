@@ -1934,6 +1934,63 @@ const registryTr: Record<string, string> = {
 		'Ürün mikro metinlerini ve uygulama içi yönlendirmeleri daha geniş kitleler için iyileştirmek',
 	'tool.text-readability-analyzer.use_case.3':
 		'Teknik dokümandaki yoğun bölümleri tespit edip sadeleştirmek',
+	'tool.text-morse-code-translator.display_name': 'Mors Kodu Çevirici',
+	'tool.text-morse-code-translator.tagline':
+		'Düz metni Mors koduna çevirin, Mors kodunu tekrar okunur metne dönüştürün',
+	'tool.text-morse-code-translator.description':
+		'Metni Uluslararası Mors koduna çevirin veya Mors dizilerini anında düz metne dönüştürün. Harf, sayı ve yaygın noktalama işaretlerini destekler; büyük girdilerde Web Worker ile akıcı çalışır ve veriler tarayıcıdan çıkmaz.',
+	'tool.text-morse-code-translator.primary_keyword': 'mors kodu çevirici',
+	'tool.text-morse-code-translator.meta_title': 'Mors Kodu Çevirici — Metin ↔ Mors | fmtly.dev',
+	'tool.text-morse-code-translator.meta_description':
+		'Metni Mors koduna çevirin, Mors kodunu düz metne geri dönüştürün. Hızlı, gizli ve tamamen tarayıcı içinde çalışan ücretsiz Mors aracı.',
+	'tool.text-morse-code-translator.operation': 'Mors Kodunu Çevir',
+	'tool.text-morse-code-translator.faq.0.question': 'Bu araç hangi Mors standardını kullanıyor?',
+	'tool.text-morse-code-translator.faq.0.answer':
+		'Latin harfleri, rakamlar ve yaygın noktalama işaretleri için Uluslararası Mors standardını kullanır.',
+	'tool.text-morse-code-translator.faq.1.question':
+		'Çözümlemede bilinmeyen Mors tokenları nasıl ele alınıyor?',
+	'tool.text-morse-code-translator.faq.1.answer':
+		'Bilinmeyen tokenlar işaretlenir; isterseniz yer tutucu karakterle değiştirip kısmi sonucu incelemeye devam edebilirsiniz.',
+	'tool.text-morse-code-translator.faq.2.question':
+		'Uzun metinleri ve büyük logları işleyebilir miyim?',
+	'tool.text-morse-code-translator.faq.2.answer':
+		'Evet. 500KB üzerindeki girdiler Web Worker üzerinde işlenir, böylece arayüz akıcı kalır.',
+	'tool.text-morse-code-translator.use_case.0':
+		'Çağrı kodlarını, uyarıları veya eğitim metinlerini hızlıca Mors koduna çevirmek',
+	'tool.text-morse-code-translator.use_case.1':
+		'Log, transkript veya alıştırmalardaki Mors parçalarını metne geri çevirmek',
+	'tool.text-morse-code-translator.use_case.2':
+		'Anlık encode/decode geri bildirimiyle Mors temellerini öğretmek',
+	'tool.text-morse-code-translator.use_case.3':
+		'Araçlara entegre etmeden önce noktalama ve boşluk davranışını doğrulamak',
+	'ui.morse.mode_label': 'Mod',
+	'ui.morse.mode.encode': 'Metin → Mors',
+	'ui.morse.mode.decode': 'Mors → Metin',
+	'ui.morse.separator_label': 'Kelime ayırıcı',
+	'ui.morse.separator.slash': '/ eğik çizgi',
+	'ui.morse.separator.pipe': '| dik çizgi',
+	'ui.morse.separator.newline': 'Yeni satır',
+	'ui.morse.option.preserve_unsupported_encode': 'Desteklenmeyen karakterleri çıktıda koru',
+	'ui.morse.option.preserve_unsupported_decode': 'Bilinmeyen Mors tokenları için yer tutucu ekle',
+	'ui.morse.option.unknown_placeholder': 'Bilinmeyen yer tutucu',
+	'ui.morse.input_label': 'Girdi',
+	'ui.morse.output_label': 'Çıktı',
+	'ui.morse.input_placeholder.encode': 'Mors koduna çevirmek için metin yazın veya yapıştırın...',
+	'ui.morse.input_placeholder.decode': 'Çözümlemek için Mors kodu (., -, /, |) yapıştırın...',
+	'ui.morse.output_placeholder.encode': 'Mors çıktısı burada görünür...',
+	'ui.morse.output_placeholder.decode': 'Çözümlenmiş metin burada görünür...',
+	'ui.morse.button.swap_mode': 'Modu değiştir ve çıktıyı kullan',
+	'ui.morse.worker_active':
+		'Büyük girdi algılandı (>{size}). İşlem Web Worker üzerinde çalıştırılıyor.',
+	'ui.morse.worker_failed': 'Worker işlemi başarısız oldu. Ana iş parçacığında devam edildi.',
+	'ui.morse.warning.unsupported_input_characters':
+		'Bazı giriş karakterleri desteklenen Mors eşleştirmesinde bulunmuyor.',
+	'ui.morse.warning.unknown_morse_tokens': 'Bazı Mors tokenları çözümlenemedi.',
+	'ui.morse.warning.no_changes': 'Seçilen mod için değişiklik tespit edilmedi.',
+	'ui.morse.stat.symbols': 'Simge',
+	'ui.morse.stat.words': 'Kelime',
+	'ui.morse.stat.unsupported': 'Desteklenmeyen',
+	'ui.morse.stat.unknown_tokens': 'Bilinmeyen token',
 	'ui.readability.unavailable': '—',
 	'ui.readability.input_label': 'Girdi metni',
 	'ui.readability.input_placeholder':

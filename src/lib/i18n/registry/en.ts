@@ -1893,6 +1893,60 @@ const registryEn: Record<string, string> = {
 		'Optimize product microcopy and in-app guidance for broader audiences',
 	'tool.text-readability-analyzer.use_case.3':
 		'Spot dense sections in technical documentation and simplify them',
+	'tool.text-morse-code-translator.display_name': 'Morse Code Translator',
+	'tool.text-morse-code-translator.tagline':
+		'Translate plain text to Morse code and decode Morse back to readable text',
+	'tool.text-morse-code-translator.description':
+		'Convert text to International Morse code and decode Morse sequences back instantly. Supports letters, numbers, punctuation, large-input worker processing, and browser-only privacy.',
+	'tool.text-morse-code-translator.primary_keyword': 'morse code translator',
+	'tool.text-morse-code-translator.meta_title': 'Morse Code Translator — Text ↔ Morse | fmtly.dev',
+	'tool.text-morse-code-translator.meta_description':
+		'Translate text to Morse code and decode Morse back to plain text instantly. Fast, private, and fully browser-based with large-input worker support.',
+	'tool.text-morse-code-translator.operation': 'Translate Morse Code',
+	'tool.text-morse-code-translator.faq.0.question': 'Which Morse variant does this translator use?',
+	'tool.text-morse-code-translator.faq.0.answer':
+		'It uses standard International Morse code for Latin letters, numbers, and common punctuation.',
+	'tool.text-morse-code-translator.faq.1.question': 'How does decoding treat unknown Morse tokens?',
+	'tool.text-morse-code-translator.faq.1.answer':
+		'Unknown tokens are flagged and can be replaced with a configurable placeholder so you can keep reviewing partial results.',
+	'tool.text-morse-code-translator.faq.2.question': 'Can I process large logs or long payloads?',
+	'tool.text-morse-code-translator.faq.2.answer':
+		'Yes. Inputs above 500KB are processed in a Web Worker to keep typing and UI interactions responsive.',
+	'tool.text-morse-code-translator.use_case.0':
+		'Encode call signs, alerts, or training phrases into Morse code quickly',
+	'tool.text-morse-code-translator.use_case.1':
+		'Decode captured Morse snippets from logs, transcripts, or exercises',
+	'tool.text-morse-code-translator.use_case.2':
+		'Teach Morse fundamentals with instant encode/decode feedback',
+	'tool.text-morse-code-translator.use_case.3':
+		'Verify punctuation and spacing behavior before using Morse in tooling',
+	'ui.morse.mode_label': 'Mode',
+	'ui.morse.mode.encode': 'Text → Morse',
+	'ui.morse.mode.decode': 'Morse → Text',
+	'ui.morse.separator_label': 'Word separator',
+	'ui.morse.separator.slash': '/ slash',
+	'ui.morse.separator.pipe': '| pipe',
+	'ui.morse.separator.newline': 'New line',
+	'ui.morse.option.preserve_unsupported_encode': 'Keep unsupported input characters in output',
+	'ui.morse.option.preserve_unsupported_decode': 'Insert placeholder for unknown Morse tokens',
+	'ui.morse.option.unknown_placeholder': 'Unknown placeholder',
+	'ui.morse.input_label': 'Input',
+	'ui.morse.output_label': 'Output',
+	'ui.morse.input_placeholder.encode': 'Type or paste text to convert into Morse code...',
+	'ui.morse.input_placeholder.decode': 'Paste Morse code (., -, /, |) to decode...',
+	'ui.morse.output_placeholder.encode': 'Morse output appears here...',
+	'ui.morse.output_placeholder.decode': 'Decoded text appears here...',
+	'ui.morse.button.swap_mode': 'Swap mode & use output',
+	'ui.morse.worker_active': 'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.morse.worker_failed': 'Worker processing failed. Falling back to main thread processing.',
+	'ui.morse.warning.unsupported_input_characters':
+		'Some input characters are not part of supported Morse mappings.',
+	'ui.morse.warning.unknown_morse_tokens': 'Some Morse tokens could not be decoded.',
+	'ui.morse.warning.no_changes': 'No changes detected for the selected mode.',
+	'ui.morse.stat.symbols': 'Symbols',
+	'ui.morse.stat.words': 'Words',
+	'ui.morse.stat.unsupported': 'Unsupported',
+	'ui.morse.stat.unknown_tokens': 'Unknown tokens',
 	'ui.readability.unavailable': '—',
 	'ui.readability.input_label': 'Input text',
 	'ui.readability.input_placeholder': 'Paste or type text to analyze readability...',
