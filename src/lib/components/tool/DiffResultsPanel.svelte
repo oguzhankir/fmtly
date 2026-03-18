@@ -5,22 +5,28 @@
 	import { computeXMLDiff, computeDiffSummary } from '$engines/xml/diff.js';
 	import { computeYAMLDiff } from '$engines/yaml/diff.js';
 	import { computeTOMLDiff } from '$engines/toml/diff.js';
+	import { computeCSVDiff } from '$engines/csv/diff.js';
 	import type { DiffEntry, DiffOptions, DiffResult } from '$engines/json/diff.js';
 	import { t } from '$lib/stores/language.js';
 	import type MonacoDiffViewType from '$components/editor/MonacoDiffView.svelte';
+	import InlineDiff from './InlineDiff.svelte';
 
 	let {
 		leftInput = '',
 		rightInput = '',
 		language = 'json',
 		onswap,
-		onsample
+		onsample,
+		onchangeLeft,
+		onchangeRight
 	}: {
 		leftInput?: string;
 		rightInput?: string;
 		language?: string;
 		onswap?: () => void;
 		onsample?: (left: string, right: string) => void;
+		onchangeLeft?: (val: string) => void;
+		onchangeRight?: (val: string) => void;
 	} = $props();
 
 	let ignoreArrayOrder = $state(false);
@@ -54,8 +60,9 @@
 	let isYamlDiff = $derived(language === 'yaml');
 	let isTomlDiff = $derived(language === 'toml');
 	let isJsonDiff = $derived(language === 'json');
+	let isCsvDiff = $derived(language === 'csv');
 	let languageLabel = $derived(
-		isXmlDiff ? 'XML' : isYamlDiff ? 'YAML' : isTomlDiff ? 'TOML' : 'JSON'
+		isXmlDiff ? 'XML' : isYamlDiff ? 'YAML' : isTomlDiff ? 'TOML' : isCsvDiff ? 'CSV' : 'JSON'
 	);
 
 	let yamlResult = $state<DiffResult | null>(null);
@@ -64,6 +71,12 @@
 	let tomlResult = $state<DiffResult | null>(null);
 	let tomlDiffLoading = $state(false);
 	let tomlDiffToken = 0;
+	let csvResult = $state<DiffResult | null>(null);
+	let csvDiffLoading = $state(false);
+	let csvDiffToken = 0;
+	let xmlResult = $state<DiffResult | null>(null);
+	let xmlDiffLoading = $state(false);
+	let xmlDiffToken = 0;
 
 	$effect(() => {
 		if (!isYamlDiff) {
@@ -107,24 +120,62 @@
 		});
 	});
 
+	$effect(() => {
+		if (!isCsvDiff) {
+			csvResult = null;
+			csvDiffLoading = false;
+			return;
+		}
+		if (!leftInput.trim() || !rightInput.trim()) {
+			csvResult = null;
+			csvDiffLoading = false;
+			return;
+		}
+
+		const nextToken = ++csvDiffToken;
+		csvDiffLoading = true;
+		void computeCSVDiff(leftInput, rightInput, options).then((nextResult) => {
+			if (nextToken !== csvDiffToken) return;
+			csvResult = nextResult;
+			csvDiffLoading = false;
+		});
+	});
+
+	$effect(() => {
+		if (!isXmlDiff) {
+			xmlResult = null;
+			xmlDiffLoading = false;
+			return;
+		}
+		if (!leftInput.trim() || !rightInput.trim()) {
+			xmlResult = null;
+			xmlDiffLoading = false;
+			return;
+		}
+
+		const nextToken = ++xmlDiffToken;
+		xmlDiffLoading = true;
+		void computeXMLDiff(leftInput, rightInput, options).then((nextResult) => {
+			if (nextToken !== xmlDiffToken) return;
+			xmlResult = nextResult;
+			xmlDiffLoading = false;
+		});
+	});
+
 	let result = $derived(
-		isYamlDiff
-			? yamlResult
-			: isTomlDiff
-				? tomlResult
-			: leftInput.trim() && rightInput.trim()
-				? isXmlDiff
-					? computeXMLDiff(leftInput, rightInput, options)
-					: computeJSONDiff(leftInput, rightInput, options)
-				: null
+		isYamlDiff ? yamlResult
+		: isTomlDiff ? tomlResult
+		: isCsvDiff ? csvResult
+		: isXmlDiff ? xmlResult
+		: (leftInput.trim() && rightInput.trim()) ? computeJSONDiff(leftInput, rightInput, options)
+		: null
 	);
 
 	let diffEntries = $derived(result?.entries ?? []);
-	let summary = $derived(
-		isXmlDiff || isYamlDiff || isTomlDiff
-			? computeDiffSummary(diffEntries)
-			: summarizeJSONDiff(diffEntries)
-	);
+	let summary = $derived.by(() => {
+		// All structural engines now use computeDiffSummary safely 
+		return isJsonDiff ? summarizeJSONDiff(diffEntries) : computeDiffSummary(diffEntries);
+	});
 	let diffCount = $derived(summary.added + summary.removed + summary.modified);
 	let errorLabel = $derived.by(() => {
 		if (!result?.error) return null;
@@ -184,7 +235,10 @@ host = "localhost"
 port = 8080
 
 [features]
-analytics = false` : JSON.stringify({
+analytics = false` : language === 'csv' ? `id,name,role,status
+1,Alice,Admin,active
+2,Bob,Editor,offline
+3,Charlie,Viewer,active` : JSON.stringify({
 		name: "Alice",
 		age: 30,
 		roles: ["admin", "editor"],
@@ -231,7 +285,10 @@ port = 9090
 analytics = true
 
 [database]
-pool = 10` : JSON.stringify({
+pool = 10` : language === 'csv' ? `id,name,role,status
+1,Alice,Admin,active
+2,Bob,Manager,online
+4,Diana,Viewer,active` : JSON.stringify({
 		name: "Alice",
 		age: 31,
 		roles: ["admin", "viewer"],
@@ -325,18 +382,51 @@ pool = 10` : JSON.stringify({
 		if (!type) return '';
 		return type.charAt(0).toUpperCase() + type.slice(1);
 	}
+
+	let monacoMinimap = $state(false);
+
+	async function formatBoth(): Promise<void> {
+		if (!leftInput.trim() || !rightInput.trim()) return;
+		try {
+			if (isJsonDiff) {
+				const { format } = await import('$engines/json/json.engine.js');
+				onchangeLeft?.(format(leftInput).formatted);
+				onchangeRight?.(format(rightInput).formatted);
+			} else if (isYamlDiff) {
+				const jsYaml = await import('js-yaml');
+				onchangeLeft?.(jsYaml.dump(jsYaml.load(leftInput), { indent: 2 }));
+				onchangeRight?.(jsYaml.dump(jsYaml.load(rightInput), { indent: 2 }));
+			} else if (isTomlDiff) {
+				const toml = await import('smol-toml');
+				onchangeLeft?.(toml.stringify(toml.parse(leftInput)));
+				onchangeRight?.(toml.stringify(toml.parse(rightInput)));
+			} else if (isCsvDiff) {
+				const { format } = await import('$engines/csv/csv.engine.js');
+				onchangeLeft?.(await format(leftInput));
+				onchangeRight?.(await format(rightInput));
+			} else if (isXmlDiff) {
+				const { XMLParser, XMLBuilder } = await import('fast-xml-parser');
+				const opts = { ignoreAttributes: false };
+				const parser = new XMLParser(opts);
+				const builder = new XMLBuilder({ ...opts, format: true });
+				onchangeLeft?.(builder.build(parser.parse(leftInput)));
+				onchangeRight?.(builder.build(parser.parse(rightInput)));
+			}
+			addToast('success', $t('ui.toast.format_success', 'Formatted successfully'));
+		} catch (e) {
+			addToast('error', $t('ui.toast.format_error', 'Format failed - Please fix syntax errors first'));
+		}
+	}
 </script>
 
 <div class="diff-panel">
 	<!-- Controls bar -->
 	<div class="diff-controls">
 		<div class="diff-controls-left">
-			{#if isJsonDiff}
 				<label class="diff-toggle">
 					<input type="checkbox" bind:checked={ignoreArrayOrder} />
 					<span>{$t('ui.diff.controls.ignore_order', 'Ignore array order')}</span>
 				</label>
-			{/if}
 			<label class="diff-toggle">
 				<input type="checkbox" bind:checked={showOnlyDiffs} />
 				<span>{$t('ui.diff.controls.only_diffs', 'Show only diffs')}</span>
@@ -345,7 +435,6 @@ pool = 10` : JSON.stringify({
 				<input type="checkbox" bind:checked={caseSensitive} />
 				<span>{$t('ui.diff.controls.case_sensitive', 'Case sensitive')}</span>
 			</label>
-			{#if isJsonDiff}
 				<div class="diff-ignore-keys">
 					<input
 						type="text"
@@ -354,9 +443,13 @@ pool = 10` : JSON.stringify({
 						class="diff-keys-input"
 					/>
 				</div>
-			{/if}
 		</div>
 		<div class="diff-controls-right">
+			<button class="diff-action-btn diff-btn-format" onclick={formatBoth} title={$t('ui.diff.controls.format', 'Format both documents')}>
+				<List size={12} />
+				{$t('ui.diff.controls.format', 'Beautify')}
+			</button>
+
 			{#if onswap}
 				<button class="diff-action-btn" onclick={onswap} title={$t('ui.diff.controls.swap', 'Swap panels')}>
 					<ArrowLeftRight size={12} />
@@ -394,6 +487,14 @@ pool = 10` : JSON.stringify({
 						title={$t('ui.diff.view.inline_toggle', 'Toggle inline/side-by-side')}
 					>
 						<span style="font-size:9px;font-weight:700;">{monacoInline ? '1' : '2'}</span>
+					</button>
+					<button
+						class="diff-view-btn"
+						class:diff-view-btn--active={monacoMinimap}
+						onclick={() => { monacoMinimap = !monacoMinimap; }}
+						title={$t('ui.diff.view.minimap', 'Toggle Minimap')}
+					>
+						<span style="font-size:9px;font-weight:700;">M</span>
 					</button>
 				{/if}
 			</div>
@@ -504,9 +605,13 @@ pool = 10` : JSON.stringify({
 
 						{#if entry.type === 'modified'}
 							<div class="diff-values">
-								<span class="diff-value diff-value--old">{expanded ? formatValue(entry.leftValue) : truncateValue(entry.leftValue)}</span>
+								<span class="diff-value diff-value--old">
+									<InlineDiff oldStr={entry.leftValue} newStr={entry.rightValue} type="old" {expanded} />
+								</span>
 								<span class="diff-arrow">→</span>
-								<span class="diff-value diff-value--new">{expanded ? formatValue(entry.rightValue) : truncateValue(entry.rightValue)}</span>
+								<span class="diff-value diff-value--new">
+									<InlineDiff oldStr={entry.leftValue} newStr={entry.rightValue} type="new" {expanded} />
+								</span>
 							</div>
 						{:else if entry.type === 'added'}
 							<div class="diff-values">
@@ -544,7 +649,15 @@ pool = 10` : JSON.stringify({
 		{/if}
 	{:else if viewMode === 'monaco' && MonacoDiffView}
 		<div class="diff-monaco-view">
-			<MonacoDiffView original={leftInput} modified={rightInput} inline={monacoInline} />
+			<MonacoDiffView 
+				original={leftInput} 
+				modified={rightInput} 
+				inline={monacoInline}
+				ignoreTrimWhitespace={options.ignoreWhitespace}
+				minimap={monacoMinimap}
+				onchangeOriginal={onchangeLeft}
+				onchangeModified={onchangeRight}
+			/>
 		</div>
 	{/if}
 </div>

@@ -25,6 +25,7 @@
 	import TextReverserPanel from "$components/panels/text/TextReverserPanel.svelte";
 	import DuplicateLineRemoverPanel from "$components/panels/text/DuplicateLineRemoverPanel.svelte";
 	import WhitespaceCleanerPanel from "$components/panels/text/WhitespaceCleanerPanel.svelte";
+	import TextDiffPanel from "$components/panels/text/TextDiffPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -541,7 +542,9 @@
 
 <SeoHead metadata={seo} />
 
-{#if isDiffTool}
+{#if data.tool.category === "text" && data.tool.slug === "diff"}
+	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+{:else if isDiffTool}
 	<ToolLayout tool={localizedTool}>
 			{#snippet inputPanel()}
 				<div class="flex h-full w-full flex-col">
@@ -615,6 +618,8 @@
 					language={data.tool.inputLanguage}
 					onswap={swapDiffPanels}
 					onsample={loadDiffSample}
+					onchangeLeft={(v) => diffLeft = v}
+					onchangeRight={(v) => diffRight = v}
 				/>
 			{/snippet}
 	</ToolLayout>
@@ -727,6 +732,8 @@
 				<DuplicateLineRemoverPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "whitespace"}
 				<WhitespaceCleanerPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "text" && data.tool.slug === "diff"}
+				<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

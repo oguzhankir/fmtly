@@ -41,8 +41,12 @@
 
 	let result = $derived(cleanWhitespace($input, options));
 	let lineCount = $derived($input.length === 0 ? 0 : $input.split(/\r?\n/).length);
+	let cleanedLineCount = $derived(result.cleaned.length === 0 ? 0 : result.cleaned.split(/\r?\n/).length);
 	let statusLine = $derived(
 		`${formatByteSize($inputByteSize)} · ${lineCount.toLocaleString()} ${$t('ui.text_reverser.lines_count', 'lines')}`
+	);
+	let outputStatusLine = $derived(
+		`${formatByteSize(result.cleaned.length)} · ${cleanedLineCount.toLocaleString()} ${$t('ui.text_reverser.lines_count', 'lines')}`
 	);
 
 	onMount(() => {
@@ -179,9 +183,9 @@
 	{/if}
 
 	<div class="grid h-full min-h-0 grid-cols-1 lg:grid-cols-2">
-		<div class="flex min-h-0 flex-col border-r border-[var(--border-default)] bg-[var(--bg-base)] lg:border-r-0 lg:border-b">
-			<div class="flex items-center justify-between border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
-				<span>{statusLine}</span>
+		<div class="flex min-h-0 flex-col border-b border-[var(--border-default)] bg-[var(--bg-base)] lg:border-b-0 lg:border-r">
+			<div class="flex h-8 shrink-0 items-center justify-between border-b border-[var(--border-default)] px-[var(--space-3)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
+				<span class="whitespace-nowrap">{statusLine}</span>
 				<div class="flex items-center gap-[var(--space-2)]">
 					<button
 						type="button"
@@ -340,8 +344,8 @@
 		</div>
 
 		<div class="flex min-h-0 flex-col bg-[var(--bg-base)]">
-			<div class="flex items-center justify-between border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
-				<span>{$t('ui.whitespace_cleaner.output', 'Output')}</span>
+			<div class="flex h-8 shrink-0 items-center justify-between border-b border-[var(--border-default)] px-[var(--space-3)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
+				<span class="whitespace-nowrap">{$t('ui.whitespace_cleaner.output', 'Output')} · {outputStatusLine}</span>
 				<div class="flex items-center gap-[var(--space-2)]">
 					{#if result.lineEndingsNormalized}
 						<div class="flex items-center gap-[var(--space-1)]">

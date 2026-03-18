@@ -535,6 +535,25 @@ const registryTr: Record<string, string> = {
 	'tool.csv-validator.use_case.1':
 		'Paylaşılan veri kümelerinde başlık ve satır genişliği tutarlılığını doğrulama',
 
+	'tool.csv-diff.display_name': 'CSV Karşılaştır (Diff)',
+	'tool.csv-diff.tagline': 'İki CSV dosyasını yan yana karşılaştırın',
+	'tool.csv-diff.description':
+		'İki CSV dosyasını yapısal olarak karşılaştırın. Sütunları ve satırları algılayarak doğru sekmesel karşılaştırma yapar.',
+	'tool.csv-diff.primary_keyword': 'csv diff',
+	'tool.csv-diff.meta_title': 'CSV Karşılaştırma Aracı — fmtly.dev',
+	'tool.csv-diff.meta_description':
+		'Tarayıcınızda iki CSV dosyasını karşılaştırın. Eklenen, silinen ve değişen satır ve sütunları vurgular. Veriler yüklenmez.',
+	'tool.csv-diff.operation': 'Karşılaştır',
+	'tool.csv-diff.faq.0.question': 'CSV Diff basit bir metin karşılaştırması mıdır?',
+	'tool.csv-diff.faq.0.answer':
+		'Her iki CSV girdisini tablo verisi olarak ayrıştırır ve yapısal farklılıkları ile hücre değişikliklerini doğru tespit etmek için eşleştirir.',
+	'tool.csv-diff.faq.1.question': 'Geçersiz CSV dosyalarını karşılaştırabilir miyim?',
+	'tool.csv-diff.faq.1.answer':
+		'Hayır. İki tarafın da geçerli CSV olması gerekir. Eğer ayrıştırılamazsa hata gösterilir.',
+	'tool.csv-diff.use_case.0': 'İki e-tablo dışa aktarım dosyası arasındaki farkları inceleme',
+	'tool.csv-diff.use_case.1':
+		'Tablo verilerindeki değişiklikleri veritabanına aktarmadan önce inceleme',
+
 	// ── TOML araçları ────────────────────────────────────────────────────────
 	'tool.toml-formatter.display_name': 'TOML Biçimlendirici',
 	'tool.toml-formatter.tagline': 'TOML yapılandırma dosyalarını biçimlendir ve doğrula',
@@ -1518,6 +1537,57 @@ const registryTr: Record<string, string> = {
 		'Vocabulary veya dil modellerini test etmek için benzersiz kelime listeleri hazırlamak',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Yapılandırma değerlerini veya ortam değişkeni listelerini birleştirmek',
+	'tool.text-diff-compare.display_name': 'Fark & Karşılaştır',
+	'tool.text-diff-compare.tagline': 'İki metni yan yana karşılaştır',
+	'tool.text-diff-compare.description':
+		'İki düz metin girdisini satır ve kelime seviyesinde değişiklik vurgulamasıyla yan yana veya birleşik diff gösterimi.',
+	'tool.text-diff-compare.primary_keyword': 'metin fark karşılaştır',
+	'tool.text-diff-compare.meta_title': 'Metin Fark & Karşılaştırma Aracı - Yan yana Karşılaştırma',
+	'tool.text-diff-compare.meta_description':
+		'İki metni yan yana veya birleşik diff görünümünde karşılaştırın. Satır ve kelime seviyesinde değişiklikleri vurgulayın.',
+	'tool.text-diff-compare.operation': 'İki metni karşılaştır ve farkları göster',
+	'tool.text-diff-compare.faq.0.question': 'Hangi diff algoritmaları destekleniyor?',
+	'tool.text-diff-compare.faq.0.answer':
+		'Myers, Patience ve Histogram algoritmalarını destekliyoruz. Myers varsayılanıdır ve çoğu durumda iyi çalışır. Patience yapılandırılmış değişiklikler için daha iyidir, Histogram ise büyük dosyalar için daha hızlıdır.',
+	'tool.text-diff-compare.faq.1.question':
+		'Boşluk veya büyük/küçük harf farklarını yok sayabilir miyim?',
+	'tool.text-diff-compare.faq.1.answer':
+		"Evet, seçenekler panelini kullanarak diff'in boşluk değişikliklerini, büyük/küçük harf farklarını ve boş satırları yok sayacak şekilde yapılandırabilirsiniz.",
+	'tool.text-diff-compare.faq.2.question': 'Hangi çıktı formatları mevcut?',
+	'tool.text-diff-compare.faq.2.answer':
+		"Diff'leri yan yana modda, birleşik formatta veya Monaco editör ile inline olarak görüntüleyebilirsiniz. Birleşik diff .diff dosyası olarak indirilebilir.",
+	'tool.text-diff-compare.use_case.0': 'Commit yapmadan önce kod sürümlerini karşılaştır',
+	'tool.text-diff-compare.use_case.1': 'Belge değişikliklerini ve düzenlemelerini gözden geçir',
+	'tool.text-diff-compare.use_case.2': 'Yapılandırma dosyası değişikliklerini analiz et',
+	'tool.text-diff-compare.use_case.3':
+		'Loglardaki veya veri dışa aktarımlarındaki değişiklikleri takip et',
+	'ui.diff_compare.statistics': 'Karşılaştırma İstatistikleri',
+	'ui.diff_compare.added_lines': 'Eklenen satırlar',
+	'ui.diff_compare.removed_lines': 'Kaldırılan satırlar',
+	'ui.diff_compare.unchanged_lines': 'Değişmeyen satırlar',
+	'ui.diff_compare.total_lines': 'Toplam satırlar',
+	'ui.diff_compare.similarity': 'Benzerlik',
+	'ui.diff_compare.hunks': 'Parçalar',
+	'ui.diff_compare.side_by_side': 'Yan Yana',
+	'ui.diff_compare.unified': 'Birleşik',
+	'ui.diff_compare.inline': 'Satır İçi',
+	'ui.diff_compare.swap': 'Değiştir',
+	'ui.diff_compare.diff_options': 'Diff Seçenekleri',
+	'ui.diff_compare.ignore_whitespace': 'Boşlukları yoksay',
+	'ui.diff_compare.ignore_case': 'Büyük/küçük harf yoksay',
+	'ui.diff_compare.ignore_empty_lines': 'Boş satırları yoksay',
+	'ui.diff_compare.show_inline': 'Satır içi değişiklikleri göster',
+	'ui.diff_compare.context_lines': 'Bağlam satırları',
+	'ui.diff_compare.algorithm': 'Algoritma',
+	'ui.diff_compare.original': 'Orijinal',
+	'ui.diff_compare.modified': 'Değiştirilmiş',
+	'ui.diff_compare.placeholder_left': 'Orijinal metni buraya yapıştırın...',
+	'ui.diff_compare.placeholder_right': 'Değiştirilmiş metni buraya yapıştırın...',
+	'ui.diff_compare.unified_diff': 'Birleşik Diff',
+	'ui.diff_compare.add_content': 'Farkı görmek için her iki tarafa da içerik ekleyin',
+	'ui.diff_compare.no_content': 'Karşılaştırılacak içerik yok',
+	'ui.diff_compare.swapped': 'Girdiler değiştirildi',
+	'ui.toast.download_success': 'Başarıyla indirildi',
 	'tool.text-whitespace-cleaner.display_name': 'Boşluk Temizleyici',
 	'tool.text-whitespace-cleaner.tagline':
 		'Sondaki boşlukları kırp, çoklu boşlukları birleştir, satır sonlarını normalize et',

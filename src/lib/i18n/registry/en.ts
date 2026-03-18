@@ -526,6 +526,24 @@ const registryEn: Record<string, string> = {
 	'tool.csv-validator.use_case.0': 'Catch malformed CSV before import or conversion',
 	'tool.csv-validator.use_case.1': 'Verify header consistency and row width across shared datasets',
 
+	'tool.csv-diff.display_name': 'CSV Diff',
+	'tool.csv-diff.tagline': 'Compare two CSV files side by side',
+	'tool.csv-diff.description':
+		'Compare two CSV files structurally. Understands columns and rows for accurate tabular comparison.',
+	'tool.csv-diff.primary_keyword': 'csv diff',
+	'tool.csv-diff.meta_title': 'CSV Diff Tool — fmtly.dev',
+	'tool.csv-diff.meta_description':
+		'Compare two CSV files in your browser. Highlights added, deleted, and changed rows and columns. No data uploaded.',
+	'tool.csv-diff.operation': 'Compare',
+	'tool.csv-diff.faq.0.question': 'Is CSV Diff a plain text diff?',
+	'tool.csv-diff.faq.0.answer':
+		'It parses both CSV inputs as tabular data first, mapping each row structurally to detect structural additions and cell modifications accurately.',
+	'tool.csv-diff.faq.1.question': 'Can I compare invalid CSV files?',
+	'tool.csv-diff.faq.1.answer':
+		'Both sides need to be valid CSV data. If one side cannot be parsed, the tool will indicate an error.',
+	'tool.csv-diff.use_case.0': 'Inspect the difference between two spreadsheet exports',
+	'tool.csv-diff.use_case.1': 'Review tabular data modifications before importing to database',
+
 	// ── TOML tools ────────────────────────────────────────────────────────────
 	'tool.toml-formatter.display_name': 'TOML Formatter',
 	'tool.toml-formatter.tagline': 'Format and validate TOML configuration files',
@@ -1489,8 +1507,56 @@ const registryEn: Record<string, string> = {
 		'Deduplicate URL lists, email lists, or inventory records before import',
 	'tool.text-duplicate-line-remover.use_case.2':
 		'Prepare unique word lists for testing vocabulary or language models',
-	'tool.text-duplicate-line-remover.use_case.3':
-		'Consolidate configuration values or environment variable lists',
+	'tool.text-duplicate-line-remover.use_case.3': 'Deduplicate configuration files',
+	'tool.text-diff-compare.display_name': 'Diff & Compare',
+	'tool.text-diff-compare.tagline': 'Compare two text inputs side-by-side',
+	'tool.text-diff-compare.description':
+		'Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting.',
+	'tool.text-diff-compare.primary_keyword': 'text diff compare',
+	'tool.text-diff-compare.meta_title': 'Text Diff & Compare Tool - Side-by-side Comparison',
+	'tool.text-diff-compare.meta_description':
+		'Compare two text inputs with side-by-side or unified diff view. Highlight line and word-level changes.',
+	'tool.text-diff-compare.operation': 'Compare two texts and show differences',
+	'tool.text-diff-compare.faq.0.question': 'What diff algorithms are supported?',
+	'tool.text-diff-compare.faq.0.answer':
+		'We support Myers, Patience, and Histogram algorithms. Myers is the default and works well for most cases. Patience is better for structured changes, and Histogram is faster for large files.',
+	'tool.text-diff-compare.faq.1.question': 'Can I ignore whitespace or case differences?',
+	'tool.text-diff-compare.faq.1.answer':
+		'Yes, you can configure the diff to ignore whitespace changes, case differences, and empty lines using the options panel.',
+	'tool.text-diff-compare.faq.2.question': 'What output formats are available?',
+	'tool.text-diff-compare.faq.2.answer':
+		'You can view diffs in side-by-side mode, unified format, or inline with Monaco editor. The unified diff can be downloaded as a .diff file.',
+	'tool.text-diff-compare.use_case.0': 'Compare code versions before committing',
+	'tool.text-diff-compare.use_case.1': 'Review document changes and edits',
+	'tool.text-diff-compare.use_case.2': 'Analyze configuration file modifications',
+	'tool.text-diff-compare.use_case.3': 'Track changes in logs or data exports',
+	'ui.diff_compare.statistics': 'Comparison Statistics',
+	'ui.diff_compare.added_lines': 'Added lines',
+	'ui.diff_compare.removed_lines': 'Removed lines',
+	'ui.diff_compare.unchanged_lines': 'Unchanged lines',
+	'ui.diff_compare.total_lines': 'Total lines',
+	'ui.diff_compare.similarity': 'Similarity',
+	'ui.diff_compare.hunks': 'Hunks',
+	'ui.diff_compare.side_by_side': 'Side by Side',
+	'ui.diff_compare.unified': 'Unified',
+	'ui.diff_compare.inline': 'Inline',
+	'ui.diff_compare.swap': 'Swap',
+	'ui.diff_compare.diff_options': 'Diff Options',
+	'ui.diff_compare.ignore_whitespace': 'Ignore whitespace',
+	'ui.diff_compare.ignore_case': 'Ignore case',
+	'ui.diff_compare.ignore_empty_lines': 'Ignore empty lines',
+	'ui.diff_compare.show_inline': 'Show inline changes',
+	'ui.diff_compare.context_lines': 'Context lines',
+	'ui.diff_compare.algorithm': 'Algorithm',
+	'ui.diff_compare.original': 'Original',
+	'ui.diff_compare.modified': 'Modified',
+	'ui.diff_compare.placeholder_left': 'Paste original text here...',
+	'ui.diff_compare.placeholder_right': 'Paste modified text here...',
+	'ui.diff_compare.unified_diff': 'Unified Diff',
+	'ui.diff_compare.add_content': 'Add content to both sides to see diff',
+	'ui.diff_compare.no_content': 'No content to diff',
+	'ui.diff_compare.swapped': 'Inputs swapped',
+	'ui.toast.download_success': 'Downloaded successfully',
 	'tool.text-whitespace-cleaner.display_name': 'Whitespace Cleaner',
 	'tool.text-whitespace-cleaner.tagline':
 		'Trim trailing spaces, collapse multiple blanks, normalize line endings',

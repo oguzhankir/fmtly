@@ -181,6 +181,50 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 		sampleInput: 'apple\nbanana\napple\ncherry\nbanana\ncherry\ndate'
 	},
 	{
+		id: 'text-diff-compare',
+		category: 'text',
+		slug: 'diff',
+		displayName: 'tool.text-diff-compare.display_name',
+		tagline: 'tool.text-diff-compare.tagline',
+		description: 'tool.text-diff-compare.description',
+		primaryKeyword: 'tool.text-diff-compare.primary_keyword',
+		metaTitle: 'tool.text-diff-compare.meta_title',
+		metaDescription: 'tool.text-diff-compare.meta_description',
+		engine: 'text',
+		operation: 'tool.text-diff-compare.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'txt',
+		outputLanguage: 'diff',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'whitespace' },
+			{ category: 'json', slug: 'diff' },
+			{ category: 'xml', slug: 'diff' },
+			{ category: 'yaml', slug: 'diff' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-diff-compare.faq.0.question',
+				answer: 'tool.text-diff-compare.faq.0.answer'
+			},
+			{
+				question: 'tool.text-diff-compare.faq.1.question',
+				answer: 'tool.text-diff-compare.faq.1.answer'
+			},
+			{
+				question: 'tool.text-diff-compare.faq.2.question',
+				answer: 'tool.text-diff-compare.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-diff-compare.use_case.0',
+			'tool.text-diff-compare.use_case.1',
+			'tool.text-diff-compare.use_case.2',
+			'tool.text-diff-compare.use_case.3'
+		],
+		sampleInput: 'Line 1\nLine 2\nLine 3\nLine 4'
+	},
+	{
 		id: 'text-whitespace-cleaner',
 		category: 'text',
 		slug: 'whitespace',

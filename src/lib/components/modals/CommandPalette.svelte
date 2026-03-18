@@ -147,10 +147,8 @@
 						onclick={() => openTool(tool)}
 						onmouseenter={() => { selectedIndex = i; }}
 					>
-						<div class="palette-result-left">
-							<span class="palette-result-badge">{tool.category.toUpperCase()}</span>
-							<span class="palette-result-name">{tool.displayName}</span>
-						</div>
+						<span class="palette-result-badge">{tool.category.toUpperCase()}</span>
+						<span class="palette-result-name">{tool.displayName}</span>
 						<span class="palette-result-category">{tool.tagline}</span>
 					</button>
 				{:else}
@@ -248,9 +246,10 @@
 	}
 
 	.palette-result {
-		display: flex;
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) 200px;
+		column-gap: 12px;
 		align-items: center;
-		justify-content: space-between;
 		width: 100%;
 		height: 40px;
 		padding: 0 12px;
@@ -268,14 +267,6 @@
 		background: var(--bg-hover);
 	}
 
-	.palette-result-left {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		min-width: 0;
-		flex: 1;
-	}
-
 	.palette-result-badge {
 		display: inline-block;
 		padding: 1px 6px;
@@ -286,6 +277,7 @@
 		color: var(--accent);
 		background: var(--accent-dim);
 		flex-shrink: 0;
+		justify-self: start;
 	}
 
 	.palette-result-name {
@@ -295,6 +287,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		min-width: 0;
 	}
 
 	.palette-result-category {
@@ -303,9 +296,8 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		max-width: 200px;
-		flex-shrink: 0;
-		margin-left: 8px;
+		width: 100%;
+		text-align: left;
 	}
 
 	.no-results {

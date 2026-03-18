@@ -49,35 +49,36 @@ Core category — format, validate, convert, diff, and query structured data.
 | 36 | CSV → YAML | `csv/to-yaml` | done | Convert CSV to YAML sequences. |
 | 37 | CSV → HTML | `csv/to-html` | done | Render CSV as an HTML table with thead/tbody. |
 | 38 | CSV → SQL | `csv/to-sql` | done | Generate SQL INSERT statements from CSV data with type inference and table name config. |
-| 39 | TOML Formatter | `toml/formatter` | done | Format TOML with taplo. |
-| 40 | TOML Minifier | `toml/minifier` | done | Compact TOML by removing blank lines and comments. |
-| 41 | TOML Validator | `toml/validator` | done | Validate against TOML v1.0 spec with precise error messages. |
-| 42 | TOML → JSON | `toml/to-json` | done | Convert TOML to JSON. |
-| 43 | TOML → YAML | `toml/to-yaml` | done | Convert TOML to YAML. |
-| 44 | TOML → XML | `toml/to-xml` | done | Convert TOML to XML. |
-| 45 | TOML → HTML | `toml/to-html` | done | Render TOML as a nested HTML table. |
-| 46 | TOML Diff | `toml/diff` | done | Side-by-side diff of two TOML documents. |
-| 47 | JSON Schema Generator | `json/schema-generator` | done | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
-| 48 | XML → JSON Schema | `xml/to-json-schema` | done | Infer a JSON Schema from XML by analyzing element structure and cardinality. |
-| 49 | JSON ↔ JSON Schema Validator | `json/schema-validate` | done | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
+| 39 | CSV Diff | `csv/diff` | done | Side-by-side diff of two CSV documents with row-level change detection. |
+| 40 | TOML Formatter | `toml/formatter` | done | Format TOML with taplo. |
+| 41 | TOML Minifier | `toml/minifier` | done | Compact TOML by removing blank lines and comments. |
+| 42 | TOML Validator | `toml/validator` | done | Validate against TOML v1.0 spec with precise error messages. |
+| 43 | TOML → JSON | `toml/to-json` | done | Convert TOML to JSON. |
+| 44 | TOML → YAML | `toml/to-yaml` | done | Convert TOML to YAML. |
+| 45 | TOML → XML | `toml/to-xml` | done | Convert TOML to XML. |
+| 46 | TOML → HTML | `toml/to-html` | done | Render TOML as a nested HTML table. |
+| 47 | TOML Diff | `toml/diff` | done | Side-by-side diff of two TOML documents. |
+| 48 | JSON Schema Generator | `json/schema-generator` | done | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
+| 49 | XML → JSON Schema | `xml/to-json-schema` | done | Infer a JSON Schema from XML by analyzing element structure and cardinality. |
+| 50 | JSON ↔ JSON Schema Validator | `json/schema-validate` | done | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
 
 ### Backlog — Data Formats
 
-| 50 | Tool | Slug | Description |
+| 51 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 51 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
-| 52 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
-| 53 | JSON → TypeScript Types | `json/to-typescript` | Infer TypeScript interfaces/types from any JSON sample using quicktype. |
-| 54 | JSON → Go Structs | `json/to-go` | Generate Go struct definitions from JSON. |
-| 55 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
-| 56 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
-| 57 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
-| 58 | YAML Anchor Resolver | `yaml/resolve-anchors` | Resolve all YAML anchors and aliases into their expanded form. |
-| 59 | YAML Multi-Doc Splitter | `yaml/split` | Split a multi-document YAML file (---) into individual documents. |
-| 60 | XSD Validator | `xml/xsd-validate` | Validate XML against an XSD schema. |
-| 61 | CSV Column Reorder / Drop | `csv/columns` | Visually reorder, rename, or drop CSV columns via drag-and-drop. |
-| 62 | CSV Deduplicator | `csv/deduplicate` | Remove duplicate rows from CSV, with configurable key columns. |
-| 63 | Protocol Buffers → JSON | `json/from-protobuf` | Parse .proto files and generate sample JSON messages. |
+| 52 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
+| 53 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
+| 54 | JSON → TypeScript Types | `json/to-typescript` | Infer TypeScript interfaces/types from any JSON sample using quicktype. |
+| 55 | JSON → Go Structs | `json/to-go` | Generate Go struct definitions from JSON. |
+| 56 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
+| 57 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
+| 58 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
+| 59 | YAML Anchor Resolver | `yaml/resolve-anchors` | Resolve all YAML anchors and aliases into their expanded form. |
+| 60 | YAML Multi-Doc Splitter | `yaml/split` | Split a multi-document YAML file (---) into individual documents. |
+| 61 | XSD Validator | `xml/xsd-validate` | Validate XML against an XSD schema. |
+| 62 | CSV Column Reorder / Drop | `csv/columns` | Visually reorder, rename, or drop CSV columns via drag-and-drop. |
+| 63 | CSV Deduplicator | `csv/deduplicate` | Remove duplicate rows from CSV, with configurable key columns. |
+| 64 | Protocol Buffers → JSON | `json/from-protobuf` | Parse .proto files and generate sample JSON messages. |
 
 ---
 
@@ -85,17 +86,17 @@ Core category — format, validate, convert, diff, and query structured data.
 
 Encode, decode, hash, and escape strings across common formats.
 
-| 64 | Tool | Slug | Description |
+| 65 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 65 | Base64 Encode / Decode | `encode/base64` | Encode and decode Base64 strings. Supports standard and URL-safe variants. |
-| 66 | URL Encode / Decode | `encode/url` | Percent-encode and decode URL components (RFC 3986). |
-| 67 | HTML Entity Encode / Decode | `encode/html-entities` | Convert special characters to HTML entities and back (`&amp;`, `&lt;`, etc.). |
-| 68 | Unicode Inspector | `encode/unicode` | Show codepoint, UTF-8 bytes, category, and glyph name for each character. |
-| 69 | JWT Decoder | `encode/jwt` | Decode JWT tokens — display header, payload, and signature. Validate expiry. No verification of secrets. |
-| 70 | Hex ↔ ASCII / UTF-8 | `encode/hex` | Convert between hexadecimal and text. Supports ASCII and UTF-8. |
-| 71 | ROT13 / Caesar Cipher | `encode/rot13` | Apply ROT13 or arbitrary Caesar shift. Useful for spoiler text and simple obfuscation. |
-| 72 | Punycode Encode / Decode | `encode/punycode` | Convert internationalized domain names (IDN) to Punycode and back. |
-| 73 | Morse Code Translator | `encode/morse` | Convert text to Morse code (audio beeps + visual dots/dashes) and back. |
+| 66 | Base64 Encode / Decode | `encode/base64` | Encode and decode Base64 strings. Supports standard and URL-safe variants. |
+| 67 | URL Encode / Decode | `encode/url` | Percent-encode and decode URL components (RFC 3986). |
+| 68 | HTML Entity Encode / Decode | `encode/html-entities` | Convert special characters to HTML entities and back (`&amp;`, `&lt;`, etc.). |
+| 69 | Unicode Inspector | `encode/unicode` | Show codepoint, UTF-8 bytes, category, and glyph name for each character. |
+| 70 | JWT Decoder | `encode/jwt` | Decode JWT tokens — display header, payload, and signature. Validate expiry. No verification of secrets. |
+| 71 | Hex ↔ ASCII / UTF-8 | `encode/hex` | Convert between hexadecimal and text. Supports ASCII and UTF-8. |
+| 72 | ROT13 / Caesar Cipher | `encode/rot13` | Apply ROT13 or arbitrary Caesar shift. Useful for spoiler text and simple obfuscation. |
+| 73 | Punycode Encode / Decode | `encode/punycode` | Convert internationalized domain names (IDN) to Punycode and back. |
+| 74 | Morse Code Translator | `encode/morse` | Convert text to Morse code (audio beeps + visual dots/dashes) and back. |
 
 ---
 
@@ -107,23 +108,23 @@ Analyze, transform, and manipulate plain text.
 
 | # | Tool | Slug | Status | Description |
 |---|------|------|--------|-------------|
-| 75 | Word & Character Counter | `text/word-counter` | done | Count words, characters, sentences, paragraphs, and reading time. |
-| 80 | Text Reverser | `text/reverser` | done | Reverse text by characters, words, or lines. |
-| 84 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
-| 78 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
-| 79 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
+| 76 | Word & Character Counter | `text/word-counter` | done | Count words, characters, sentences, paragraphs, and reading time. |
+| 81 | Text Reverser | `text/reverser` | done | Reverse text by characters, words, or lines. |
+| 85 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
+| 79 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
+| 80 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
 
 ### Backlog — Text & String Tools
 
-| 76 | Tool | Slug | Description |
+| 77 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 76 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
-| 77 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
-| 81 | Markdown → HTML | `text/markdown-to-html` | Convert Markdown to HTML with live preview. Supports GFM tables and syntax highlighting. |
-| 82 | Lorem Ipsum Generator | `text/lorem` | Generate placeholder text in paragraphs, sentences, or words. |
-| 83 | Regex Tester | `text/regex` | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
-| 85 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
-| 86 | Text Escape / Unescape | `text/escape` | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
+| 78 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
+| 79 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
+| 80 | Markdown → HTML | `text/markdown-to-html` | Convert Markdown to HTML with live preview. Supports GFM tables and syntax highlighting. |
+| 81 | Lorem Ipsum Generator | `text/lorem` | Generate placeholder text in paragraphs, sentences, or words. |
+| 82 | Regex Tester | `text/regex` | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
+| 83 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
+| 84 | Text Escape / Unescape | `text/escape` | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
 
 ---
 
@@ -131,23 +132,23 @@ Analyze, transform, and manipulate plain text.
 
 Format, lint, convert, and generate code.
 
-| 87 | Tool | Slug | Description |
+| 88 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 88 | CSS Formatter | `code/css-formatter` | Beautify CSS with Prettier. Configurable print width and single-quote options. |
-| 89 | CSS Minifier | `code/css-minifier` | Minify CSS by stripping comments, whitespace, and shortening values. |
-| 90 | SCSS / LESS Formatter | `code/scss-formatter` | Format SCSS and LESS with Prettier. |
-| 91 | HTML Formatter | `code/html-formatter` | Pretty-print HTML with proper indentation and attribute formatting. |
-| 92 | HTML Minifier | `code/html-minifier` | Minify HTML — collapse whitespace, remove comments, shorten booleans. |
-| 93 | JavaScript Formatter | `code/js-formatter` | Format JavaScript with Prettier. ESM and CJS support. |
-| 94 | TypeScript Formatter | `code/ts-formatter` | Format TypeScript with Prettier. |
-| 95 | GraphQL Formatter | `code/graphql-formatter` | Format GraphQL queries and schemas. |
-| 96 | SQL Formatter | `code/sql-formatter` | Format SQL with dialect support (PostgreSQL, MySQL, SQLite, T-SQL). |
-| 97 | cURL → fetch() | `code/curl-to-fetch` | Convert cURL commands into browser-native fetch() calls. |
-| 98 | cURL → Axios | `code/curl-to-axios` | Convert cURL commands into Axios request code. |
-| 99 | Cron Expression Parser | `code/cron` | Parse and explain cron expressions in human-readable form. Show next N execution times. |
-| 100 | .env Validator | `code/env-validator` | Validate `.env` files — detect duplicate keys, missing values, unquoted special chars. |
-| 101 | Markdown Table Generator | `code/markdown-table` | Create Markdown tables visually with drag-and-drop column reordering. |
-| 102 | Prettier Playground | `code/prettier` | Run Prettier on any supported language with full config control (printWidth, tabWidth, semi, etc.). |
+| 89 | CSS Formatter | `code/css-formatter` | Beautify CSS with Prettier. Configurable print width and single-quote options. |
+| 90 | CSS Minifier | `code/css-minifier` | Minify CSS by stripping comments, whitespace, and shortening values. |
+| 91 | SCSS / LESS Formatter | `code/scss-formatter` | Format SCSS and LESS with Prettier. |
+| 92 | HTML Formatter | `code/html-formatter` | Pretty-print HTML with proper indentation and attribute formatting. |
+| 93 | HTML Minifier | `code/html-minifier` | Minify HTML — collapse whitespace, remove comments, shorten booleans. |
+| 94 | JavaScript Formatter | `code/js-formatter` | Format JavaScript with Prettier. ESM and CJS support. |
+| 95 | TypeScript Formatter | `code/ts-formatter` | Format TypeScript with Prettier. |
+| 96 | GraphQL Formatter | `code/graphql-formatter` | Format GraphQL queries and schemas. |
+| 97 | SQL Formatter | `code/sql-formatter` | Format SQL with dialect support (PostgreSQL, MySQL, SQLite, T-SQL). |
+| 98 | cURL → fetch() | `code/curl-to-fetch` | Convert cURL commands into browser-native fetch() calls. |
+| 99 | cURL → Axios | `code/curl-to-axios` | Convert cURL commands into Axios request code. |
+| 100 | Cron Expression Parser | `code/cron` | Parse and explain cron expressions in human-readable form. Show next N execution times. |
+| 101 | .env Validator | `code/env-validator` | Validate `.env` files — detect duplicate keys, missing values, unquoted special chars. |
+| 102 | Markdown Table Generator | `code/markdown-table` | Create Markdown tables visually with drag-and-drop column reordering. |
+| 103 | Prettier Playground | `code/prettier` | Run Prettier on any supported language with full config control (printWidth, tabWidth, semi, etc.). |
 
 ---
 
@@ -155,18 +156,18 @@ Format, lint, convert, and generate code.
 
 Purpose-built for developers working with large language models, prompt engineering, and AI pipelines.
 
-| 103 | Tool | Slug | Description |
+| 104 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 104 | LLM Token Counter | `ai/token-counter` | Count tokens for GPT-4o, Claude, Llama 3, Gemini, and Mistral. Paste text or upload files. Show token-per-word ratio and cost estimate. |
-| 105 | Prompt Token Optimizer | `ai/token-optimizer` | Shorten a prompt while preserving meaning — strip filler words, compress whitespace, abbreviate known patterns. Show before/after token count and savings percentage. |
-| 106 | System Prompt Builder | `ai/system-prompt` | Guided wizard to compose effective system prompts. Templates for code assistant, data analyst, translator, customer support. Export as plain text or JSON message array. |
-| 107 | Function Calling Schema Builder | `ai/function-schema` | Visually build OpenAI-compatible function/tool schemas. Drag-and-drop parameter builder, type picker, enum editor. Export as JSON. |
-| 108 | MCP Server Manifest Generator | `ai/mcp-manifest` | Generate Model Context Protocol server manifests. Define tools, resources, and prompts with a form-based UI. Export valid MCP JSON. |
-| 109 | RAG Text Chunker | `ai/rag-chunker` | Split documents into chunks for retrieval-augmented generation. Configurable strategies: fixed-size, sentence-boundary, recursive character splitting, semantic (heading-aware). Preview chunk boundaries. |
-| 110 | Embedding Visualizer | `ai/embeddings` | Paste embedding vectors, visualize with t-SNE/UMAP 2D projection. Color-code by label. Useful for debugging retrieval pipelines. |
-| 111 | Prompt Diff | `ai/prompt-diff` | Compare two prompt versions side-by-side. Highlight structural changes (system/user/assistant blocks). Show token delta. |
-| 112 | JSON → OpenAI Messages | `ai/json-to-messages` | Convert JSON conversations into OpenAI Chat API message format. Validate role/content structure. |
-| 113 | JSONL Dataset Viewer | `ai/jsonl-viewer` | View and validate JSONL fine-tuning datasets. Show row count, token stats per row, schema consistency. |
+| 105 | LLM Token Counter | `ai/token-counter` | Count tokens for GPT-4o, Claude, Llama 3, Gemini, and Mistral. Paste text or upload files. Show token-per-word ratio and cost estimate. |
+| 106 | Prompt Token Optimizer | `ai/token-optimizer` | Shorten a prompt while preserving meaning — strip filler words, compress whitespace, abbreviate known patterns. Show before/after token count and savings percentage. |
+| 107 | System Prompt Builder | `ai/system-prompt` | Guided wizard to compose effective system prompts. Templates for code assistant, data analyst, translator, customer support. Export as plain text or JSON message array. |
+| 108 | Function Calling Schema Builder | `ai/function-schema` | Visually build OpenAI-compatible function/tool schemas. Drag-and-drop parameter builder, type picker, enum editor. Export as JSON. |
+| 109 | MCP Server Manifest Generator | `ai/mcp-manifest` | Generate Model Context Protocol server manifests. Define tools, resources, and prompts with a form-based UI. Export valid MCP JSON. |
+| 110 | RAG Text Chunker | `ai/rag-chunker` | Split documents into chunks for retrieval-augmented generation. Configurable strategies: fixed-size, sentence-boundary, recursive character splitting, semantic (heading-aware). Preview chunk boundaries. |
+| 111 | Embedding Visualizer | `ai/embeddings` | Paste embedding vectors, visualize with t-SNE/UMAP 2D projection. Color-code by label. Useful for debugging retrieval pipelines. |
+| 112 | Prompt Diff | `ai/prompt-diff` | Compare two prompt versions side-by-side. Highlight structural changes (system/user/assistant blocks). Show token delta. |
+| 113 | JSON → OpenAI Messages | `ai/json-to-messages` | Convert JSON conversations into OpenAI Chat API message format. Validate role/content structure. |
+| 114 | JSONL Dataset Viewer | `ai/jsonl-viewer` | View and validate JSONL fine-tuning datasets. Show row count, token stats per row, schema consistency. |
 
 ---
 
@@ -174,17 +175,17 @@ Purpose-built for developers working with large language models, prompt engineer
 
 Hashing, encoding, password tools, and key generation — all client-side.
 
-| 114 | Tool | Slug | Description |
+| 115 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 115 | Hash Generator (SHA/MD5) | `crypto/hash` | Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes of text input. |
-| 116 | HMAC Generator | `crypto/hmac` | Compute HMAC signatures with configurable algorithm and secret key. |
-| 117 | File Hash Calculator | `crypto/file-hash` | Drag-and-drop file hashing. Calculate SHA-256, MD5, CRC32 of any file without uploading. |
-| 118 | Password Strength Meter | `crypto/password-strength` | Analyze password entropy, estimate crack time, flag common patterns and breached passwords (via k-anonymity). |
-| 119 | Random String Generator | `crypto/random-string` | Generate cryptographically secure random strings with configurable charset, length, and count. |
-| 120 | UUID / ULID Generator | `crypto/uuid` | Generate UUID v4, UUID v7, and ULID with batch generation and timestamp decoding. |
-| 121 | RSA/EC Key Pair Generator | `crypto/keypair` | Generate RSA or ECDSA key pairs in PEM format using Web Crypto API. |
-| 122 | Certificate Decoder | `crypto/cert-decoder` | Parse PEM-encoded X.509 certificates. Show subject, issuer, validity, SANs, and key info. |
-| 123 | TOTP Generator | `crypto/totp` | Generate time-based one-time passwords (RFC 6238). Configure period, digits, and algorithm. |
+| 116 | Hash Generator (SHA/MD5) | `crypto/hash` | Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes of text input. |
+| 117 | HMAC Generator | `crypto/hmac` | Compute HMAC signatures with configurable algorithm and secret key. |
+| 118 | File Hash Calculator | `crypto/file-hash` | Drag-and-drop file hashing. Calculate SHA-256, MD5, CRC32 of any file without uploading. |
+| 119 | Password Strength Meter | `crypto/password-strength` | Analyze password entropy, estimate crack time, flag common patterns and breached passwords (via k-anonymity). |
+| 120 | Random String Generator | `crypto/random-string` | Generate cryptographically secure random strings with configurable charset, length, and count. |
+| 121 | UUID / ULID Generator | `crypto/uuid` | Generate UUID v4, UUID v7, and ULID with batch generation and timestamp decoding. |
+| 122 | RSA/EC Key Pair Generator | `crypto/keypair` | Generate RSA or ECDSA key pairs in PEM format using Web Crypto API. |
+| 123 | Certificate Decoder | `crypto/cert-decoder` | Parse PEM-encoded X.509 certificates. Show subject, issuer, validity, SANs, and key info. |
+| 124 | TOTP Generator | `crypto/totp` | Generate time-based one-time passwords (RFC 6238). Configure period, digits, and algorithm. |
 
 ---
 
@@ -192,18 +193,18 @@ Hashing, encoding, password tools, and key generation — all client-side.
 
 Inspect, parse, and debug web protocols and network resources.
 
-| 124 | Tool | Slug | Description |
+| 125 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 125 | URL Parser | `web/url-parser` | Decompose URLs into protocol, host, port, path, query params, and fragment. |
-| 126 | User-Agent Parser | `web/user-agent` | Decode User-Agent strings — identify browser, OS, device type, and bot classification. |
-| 127 | CORS Header Tester | `web/cors` | Test CORS preflight requests against any URL. Show allowed origins, methods, and headers. |
-| 128 | MIME Type Lookup | `web/mime-types` | Search file extensions ↔ MIME types bidirectionally. |
-| 129 | IP Geolocation | `web/ip-lookup` | Look up the geolocation, ASN, and ISP of any IP address. Proxied via Cloudflare Worker. |
-| 130 | DNS Lookup | `web/dns-lookup` | Query A, AAAA, MX, TXT, NS, CNAME, SOA records for any domain. Proxied via Cloudflare Worker. |
-| 131 | SSL Certificate Checker | `web/ssl-checker` | Check SSL certificate expiry, chain, and configuration for any domain. Proxied via Cloudflare Worker. |
-| 132 | HTTP Header Inspector | `web/headers` | Send a HEAD request to any URL and display all response headers with explanations. |
-| 133 | Webhook Tester | `web/webhook` | Generate a temporary webhook URL, receive and display incoming requests in real-time. |
-| 134 | Open Graph Preview | `web/og-preview` | Fetch and preview Open Graph / Twitter Card metadata for any URL. Show how links appear on social platforms. |
+| 126 | URL Parser | `web/url-parser` | Decompose URLs into protocol, host, port, path, query params, and fragment. |
+| 127 | User-Agent Parser | `web/user-agent` | Decode User-Agent strings — identify browser, OS, device type, and bot classification. |
+| 128 | CORS Header Tester | `web/cors` | Test CORS preflight requests against any URL. Show allowed origins, methods, and headers. |
+| 129 | MIME Type Lookup | `web/mime-types` | Search file extensions ↔ MIME types bidirectionally. |
+| 130 | IP Geolocation | `web/ip-lookup` | Look up the geolocation, ASN, and ISP of any IP address. Proxied via Cloudflare Worker. |
+| 131 | DNS Lookup | `web/dns-lookup` | Query A, AAAA, MX, TXT, NS, CNAME, SOA records for any domain. Proxied via Cloudflare Worker. |
+| 132 | SSL Certificate Checker | `web/ssl-checker` | Check SSL certificate expiry, chain, and configuration for any domain. Proxied via Cloudflare Worker. |
+| 133 | HTTP Header Inspector | `web/headers` | Send a HEAD request to any URL and display all response headers with explanations. |
+| 134 | Webhook Tester | `web/webhook` | Generate a temporary webhook URL, receive and display incoming requests in real-time. |
+| 135 | Open Graph Preview | `web/og-preview` | Fetch and preview Open Graph / Twitter Card metadata for any URL. Show how links appear on social platforms. |
 
 ---
 
@@ -211,17 +212,17 @@ Inspect, parse, and debug web protocols and network resources.
 
 Process images entirely in the browser.
 
-| 135 | Tool | Slug | Description |
+| 136 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 136 | Image Resizer | `image/resize` | Resize images with locked aspect ratio, custom dimensions, or percentage scale. |
-| 137 | Image Format Converter | `image/convert` | Convert between PNG, JPEG, WebP, AVIF, and GIF. |
-| 138 | Image Compressor | `image/compress` | Reduce file size with configurable quality. Real-time before/after preview. |
-| 139 | SVG Optimizer | `image/svg-optimizer` | Optimize SVG files with SVGO — remove metadata, simplify paths, collapse groups. |
-| 140 | Image → Base64 | `image/to-base64` | Convert images to Base64 data URI strings. |
-| 141 | Base64 → Image | `image/from-base64` | Decode Base64 strings back to downloadable images. |
-| 142 | Image EXIF Viewer | `image/exif` | Read and display EXIF metadata — camera, GPS, date, orientation. Option to strip EXIF before download. |
-| 143 | Favicon Generator | `image/favicon` | Upload an image and generate a complete favicon set (ICO, PNG 16-512, Apple Touch, SVG). |
-| 144 | Image Color Picker | `image/color-picker` | Upload an image and pick individual pixel colors. Extract dominant color palette. |
+| 137 | Image Resizer | `image/resize` | Resize images with locked aspect ratio, custom dimensions, or percentage scale. |
+| 138 | Image Format Converter | `image/convert` | Convert between PNG, JPEG, WebP, AVIF, and GIF. |
+| 139 | Image Compressor | `image/compress` | Reduce file size with configurable quality. Real-time before/after preview. |
+| 140 | SVG Optimizer | `image/svg-optimizer` | Optimize SVG files with SVGO — remove metadata, simplify paths, collapse groups. |
+| 141 | Image → Base64 | `image/to-base64` | Convert images to Base64 data URI strings. |
+| 142 | Base64 → Image | `image/from-base64` | Decode Base64 strings back to downloadable images. |
+| 143 | Image EXIF Viewer | `image/exif` | Read and display EXIF metadata — camera, GPS, date, orientation. Option to strip EXIF before download. |
+| 144 | Favicon Generator | `image/favicon` | Upload an image and generate a complete favicon set (ICO, PNG 16-512, Apple Touch, SVG). |
+| 145 | Image Color Picker | `image/color-picker` | Upload an image and pick individual pixel colors. Extract dominant color palette. |
 
 ---
 
@@ -229,14 +230,14 @@ Process images entirely in the browser.
 
 Tools for designers and front-end developers.
 
-| 145 | Tool | Slug | Description |
+| 146 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 146 | Contrast Checker | `color/contrast` | Check WCAG 2.1 AA/AAA contrast ratios between foreground and background colors. |
-| 147 | Palette Generator | `color/palette` | Generate harmonious color palettes — complementary, analogous, triadic, split-complementary. Export as CSS, Tailwind, or SCSS variables. |
-| 148 | Gradient Generator | `color/gradient` | Build CSS linear, radial, and conic gradients visually. Copy CSS output. |
-| 149 | Color Blindness Simulator | `color/blindness` | Simulate protanopia, deuteranopia, tritanopia, and achromatopsia on any uploaded image or color palette. |
-| 150 | Color Format Converter | `color/converter` | Convert between HEX, RGB, HSL, HSB, OKLCH, and CMYK. |
-| 151 | Tailwind Color Finder | `color/tailwind` | Paste any color and find the closest Tailwind CSS palette match. |
+| 147 | Contrast Checker | `color/contrast` | Check WCAG 2.1 AA/AAA contrast ratios between foreground and background colors. |
+| 148 | Palette Generator | `color/palette` | Generate harmonious color palettes — complementary, analogous, triadic, split-complementary. Export as CSS, Tailwind, or SCSS variables. |
+| 149 | Gradient Generator | `color/gradient` | Build CSS linear, radial, and conic gradients visually. Copy CSS output. |
+| 150 | Color Blindness Simulator | `color/blindness` | Simulate protanopia, deuteranopia, tritanopia, and achromatopsia on any uploaded image or color palette. |
+| 151 | Color Format Converter | `color/converter` | Convert between HEX, RGB, HSL, HSB, OKLCH, and CMYK. |
+| 152 | Tailwind Color Finder | `color/tailwind` | Paste any color and find the closest Tailwind CSS palette match. |
 
 ---
 
@@ -244,14 +245,14 @@ Tools for designers and front-end developers.
 
 Format, convert, and calculate numbers.
 
-| 152 | Tool | Slug | Description |
+| 153 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 153 | Number Formatter | `number/formatter` | Format numbers with locale-aware thousand separators, decimal places, and notation (standard, scientific, compact). |
-| 154 | Percentage Calculator | `number/percentage` | Calculate "X% of Y", "X is what % of Y", and "% change from X to Y". |
-| 155 | Base Converter | `number/base-converter` | Convert between binary, octal, decimal, and hexadecimal. Supports arbitrary bases up to 36. |
-| 156 | Unit Converter | `number/unit-converter` | Convert between length, weight, temperature, speed, data size, and time units. |
-| 157 | Unix Timestamp Converter | `number/timestamp` | Convert Unix timestamps ↔ human-readable dates. Support seconds and milliseconds. Show relative time. |
-| 158 | Byte Size Calculator | `number/bytes` | Convert between B, KB, MB, GB, TB. Toggle between binary (KiB) and decimal (KB) units. |
+| 154 | Number Formatter | `number/formatter` | Format numbers with locale-aware thousand separators, decimal places, and notation (standard, scientific, compact). |
+| 155 | Percentage Calculator | `number/percentage` | Calculate "X% of Y", "X is what % of Y", and "% change from X to Y". |
+| 156 | Base Converter | `number/base-converter` | Convert between binary, octal, decimal, and hexadecimal. Supports arbitrary bases up to 36. |
+| 157 | Unit Converter | `number/unit-converter` | Convert between length, weight, temperature, speed, data size, and time units. |
+| 158 | Unix Timestamp Converter | `number/timestamp` | Convert Unix timestamps ↔ human-readable dates. Support seconds and milliseconds. Show relative time. |
+| 159 | Byte Size Calculator | `number/bytes` | Convert between B, KB, MB, GB, TB. Toggle between binary (KiB) and decimal (KB) units. |
 
 ---
 
@@ -259,14 +260,14 @@ Format, convert, and calculate numbers.
 
 View, extract, merge, and split PDFs — all in-browser.
 
-| 159 | Tool | Slug | Description |
+| 160 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 160 | PDF Viewer | `pdf/viewer` | Render and navigate PDF files in the browser with page thumbnails and zoom. |
-| 161 | PDF → Text | `pdf/to-text` | Extract raw text from PDF pages with page-by-page output. |
-| 162 | PDF Merge | `pdf/merge` | Combine multiple PDF files into one. Drag-and-drop reordering. |
-| 163 | PDF Split | `pdf/split` | Split a PDF into individual pages or custom page ranges. |
-| 164 | PDF Page Extractor | `pdf/extract-pages` | Extract specific pages from a PDF into a new document. |
-| 165 | PDF Metadata Viewer | `pdf/metadata` | Display PDF metadata — title, author, creator, creation date, page count, file size. |
+| 161 | PDF Viewer | `pdf/viewer` | Render and navigate PDF files in the browser with page thumbnails and zoom. |
+| 162 | PDF → Text | `pdf/to-text` | Extract raw text from PDF pages with page-by-page output. |
+| 163 | PDF Merge | `pdf/merge` | Combine multiple PDF files into one. Drag-and-drop reordering. |
+| 164 | PDF Split | `pdf/split` | Split a PDF into individual pages or custom page ranges. |
+| 165 | PDF Page Extractor | `pdf/extract-pages` | Extract specific pages from a PDF into a new document. |
+| 166 | PDF Metadata Viewer | `pdf/metadata` | Display PDF metadata — title, author, creator, creation date, page count, file size. |
 
 ---
 
@@ -274,13 +275,13 @@ View, extract, merge, and split PDFs — all in-browser.
 
 Work with files, archives, and data exchange formats.
 
-| 166 | Tool | Slug | Description |
+| 167 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 167 | ZIP Creator | `file/zip` | Select multiple files and compress them into a ZIP archive in-browser. |
-| 168 | ZIP Extractor | `file/unzip` | Extract contents of a ZIP file. Preview files before downloading. |
-| 169 | Excel → JSON | `file/excel-to-json` | Convert XLSX/XLS sheets to JSON arrays with header mapping. |
-| 170 | JSON → Excel | `file/json-to-excel` | Convert JSON arrays-of-objects into downloadable XLSX files. |
-| 171 | File Diff | `file/diff` | Compare two files byte-by-byte. Show hexdump diff for binary files, text diff for text files. |
+| 168 | ZIP Creator | `file/zip` | Select multiple files and compress them into a ZIP archive in-browser. |
+| 169 | ZIP Extractor | `file/unzip` | Extract contents of a ZIP file. Preview files before downloading. |
+| 170 | Excel → JSON | `file/excel-to-json` | Convert XLSX/XLS sheets to JSON arrays with header mapping. |
+| 171 | JSON → Excel | `file/json-to-excel` | Convert JSON arrays-of-objects into downloadable XLSX files. |
+| 172 | File Diff | `file/diff` | Compare two files byte-by-byte. Show hexdump diff for binary files, text diff for text files. |
 
 ---
 
@@ -288,11 +289,11 @@ Work with files, archives, and data exchange formats.
 
 Generate and read QR codes and barcodes.
 
-| 172 | Tool | Slug | Description |
+| 173 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 173 | QR Code Generator | `qr/generator` | Generate QR codes with customizable size, error correction, foreground/background colors, and logo overlay. |
-| 174 | QR Code Reader | `qr/reader` | Read QR codes from uploaded images or camera capture. |
-| 175 | Barcode Generator | `qr/barcode` | Generate Code 128, EAN-13, UPC-A, and other 1D barcodes. |
+| 174 | QR Code Generator | `qr/generator` | Generate QR codes with customizable size, error correction, foreground/background colors, and logo overlay. |
+| 175 | QR Code Reader | `qr/reader` | Read QR codes from uploaded images or camera capture. |
+| 176 | Barcode Generator | `qr/barcode` | Generate Code 128, EAN-13, UPC-A, and other 1D barcodes. |
 
 ---
 
@@ -300,13 +301,13 @@ Generate and read QR codes and barcodes.
 
 Generate test data, IDs, and code scaffolding.
 
-| 176 | Tool | Slug | Description |
+| 177 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 177 | Fake Data Generator | `generate/fake-data` | Generate realistic test data — names, emails, addresses, phone numbers, dates. Configurable locale and count. Export as JSON, CSV, or SQL. |
-| 178 | UUID Batch Generator | `generate/uuid-batch` | Generate batches of UUID v4 or v7 with copy-all and download. |
-| 179 | Password Generator | `generate/password` | Generate secure passwords with configurable length, charset, and memorability options. |
-| 180 | .gitignore Builder | `generate/gitignore` | Select frameworks and languages to generate a `.gitignore` file. Powered by gitignore.io templates. |
-| 181 | README Template | `generate/readme` | Generate a README.md skeleton from project metadata — title, description, install, usage, license. |
+| 178 | Fake Data Generator | `generate/fake-data` | Generate realistic test data — names, emails, addresses, phone numbers, dates. Configurable locale and count. Export as JSON, CSV, or SQL. |
+| 179 | UUID Batch Generator | `generate/uuid-batch` | Generate batches of UUID v4 or v7 with copy-all and download. |
+| 180 | Password Generator | `generate/password` | Generate secure passwords with configurable length, charset, and memorability options. |
+| 181 | .gitignore Builder | `generate/gitignore` | Select frameworks and languages to generate a `.gitignore` file. Powered by gitignore.io templates. |
+| 182 | README Template | `generate/readme` | Generate a README.md skeleton from project metadata — title, description, install, usage, license. |
 
 ---
 
@@ -314,12 +315,12 @@ Generate test data, IDs, and code scaffolding.
 
 Ensure designs and content meet accessibility standards.
 
-| 182 | Tool | Slug | Description |
+| 183 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 183 | WCAG Contrast Checker | `a11y/contrast` | Check color contrast ratios against WCAG 2.1 AA and AAA criteria for normal and large text. |
-| 184 | Font Size Calculator | `a11y/font-size` | Check if font sizes meet WCAG minimum requirements at given viewing distances. |
-| 185 | Color Blindness Previewer | `a11y/color-blindness` | Upload a screenshot or enter colors to see how they appear under various color vision deficiencies. |
-| 186 | Alt Text Evaluator | `a11y/alt-text` | Paste image alt text and get suggestions for improvement based on WCAG guidelines. |
+| 184 | WCAG Contrast Checker | `a11y/contrast` | Check color contrast ratios against WCAG 2.1 AA and AAA criteria for normal and large text. |
+| 185 | Font Size Calculator | `a11y/font-size` | Check if font sizes meet WCAG minimum requirements at given viewing distances. |
+| 186 | Color Blindness Previewer | `a11y/color-blindness` | Upload a screenshot or enter colors to see how they appear under various color vision deficiencies. |
+| 187 | Alt Text Evaluator | `a11y/alt-text` | Paste image alt text and get suggestions for improvement based on WCAG guidelines. |
 
 ---
 
