@@ -271,6 +271,50 @@ Use the reading-time estimate to optimize content length for docs, UX copy, and 
 		sampleInput: 'apple\nbanana\napple\ncherry\nbanana\ncherry\ndate'
 	},
 	{
+		id: 'text-line-sorter',
+		category: 'text',
+		slug: 'line-sorter',
+		displayName: 'tool.text-line-sorter.display_name',
+		tagline: 'tool.text-line-sorter.tagline',
+		description: 'tool.text-line-sorter.description',
+		primaryKeyword: 'tool.text-line-sorter.primary_keyword',
+		metaTitle: 'tool.text-line-sorter.meta_title',
+		metaDescription: 'tool.text-line-sorter.meta_description',
+		engine: 'text',
+		operation: 'tool.text-line-sorter.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'deduplicate' },
+			{ category: 'text', slug: 'whitespace' },
+			{ category: 'text', slug: 'diff' },
+			{ category: 'text', slug: 'regex' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-line-sorter.faq.0.question',
+				answer: 'tool.text-line-sorter.faq.0.answer'
+			},
+			{
+				question: 'tool.text-line-sorter.faq.1.question',
+				answer: 'tool.text-line-sorter.faq.1.answer'
+			},
+			{
+				question: 'tool.text-line-sorter.faq.2.question',
+				answer: 'tool.text-line-sorter.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-line-sorter.use_case.0',
+			'tool.text-line-sorter.use_case.1',
+			'tool.text-line-sorter.use_case.2',
+			'tool.text-line-sorter.use_case.3'
+		],
+		sampleInput: 'zebra\n10\napple\n2\nBanana\n\n42\ncherry'
+	},
+	{
 		id: 'text-diff-compare',
 		category: 'text',
 		slug: 'diff',

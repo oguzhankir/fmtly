@@ -1619,6 +1619,33 @@ const registryFr: Record<string, string> = {
 		'Préparer des listes de mots uniques pour tester le vocabulaire ou les modèles de langue',
 	'tool.text-duplicate-line-remover.use_case.3':
 		"Consolider les valeurs de configuration ou les listes de variables d'environnement",
+	'tool.text-line-sorter.display_name': 'Trieur de Lignes',
+	'tool.text-line-sorter.tagline':
+		'Triez les lignes par ordre alphabétique, numérique, longueur ou mélange avec seed',
+	'tool.text-line-sorter.description':
+		'Triez des lignes de texte instantanément avec des options avancées de casse, trim, déduplication, suppression des lignes vides et mélange déterministe par seed. Tout s’exécute localement dans votre navigateur.',
+	'tool.text-line-sorter.primary_keyword': 'trieur de lignes',
+	'tool.text-line-sorter.meta_title': 'Trieur de Lignes — Trier du texte vite | fmtly.dev',
+	'tool.text-line-sorter.meta_description':
+		'Triez des lignes en mode alphabétique, numérique, par longueur ou aléatoire. Déduplication et filtre des lignes vides inclus. Rapide, privé et 100% navigateur.',
+	'tool.text-line-sorter.operation': 'Trier les lignes',
+	'tool.text-line-sorter.faq.0.question': 'Quels modes de tri sont disponibles ?',
+	'tool.text-line-sorter.faq.0.answer':
+		'Les modes alphabétique, numérique, par longueur et mélange aléatoire déterministe sont disponibles. Vous pouvez aussi choisir l’ordre croissant ou décroissant.',
+	'tool.text-line-sorter.faq.1.question':
+		'Puis-je supprimer les lignes vides et les doublons avant le tri ?',
+	'tool.text-line-sorter.faq.1.answer':
+		'Oui. Activez la suppression des lignes vides et la déduplication pour normaliser le contenu avant tri, utile pour logs et listes.',
+	'tool.text-line-sorter.faq.2.question': 'Reste-t-il fluide sur de gros volumes ?',
+	'tool.text-line-sorter.faq.2.answer':
+		'Oui. Au-delà de 500KB, le traitement passe dans un Web Worker pour garder une interface réactive tout en conservant vos données localement.',
+	'tool.text-line-sorter.use_case.0':
+		'Normaliser et trier des logs avant comparaison entre environnements',
+	'tool.text-line-sorter.use_case.1':
+		'Préparer des listes propres et triées de domaines, e-mails, IDs ou tags',
+	'tool.text-line-sorter.use_case.2': 'Trier rapidement notes de version, changelogs ou checklists',
+	'tool.text-line-sorter.use_case.3':
+		'Créer des jeux de données mélangés de façon déterministe pour la QA',
 	'tool.text-diff-compare.display_name': 'Diff & Comparer',
 	'tool.text-diff-compare.tagline': 'Comparer deux textes côte à côte',
 	'tool.text-diff-compare.description':
@@ -1861,6 +1888,35 @@ const registryFr: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Lignes uniques',
 	'ui.duplicate_line_remover.duplicates_removed': 'Doublons supprimés',
 	'ui.duplicate_line_remover.result': 'Résultat',
+	'ui.line_sorter.tab_label': 'Trier',
+	'ui.line_sorter.placeholder': 'Saisissez ou collez des lignes à trier...',
+	'ui.line_sorter.mode_label': 'Mode de tri',
+	'ui.line_sorter.mode.alphabetical': 'Alphabétique',
+	'ui.line_sorter.mode.numeric': 'Numérique',
+	'ui.line_sorter.mode.length': 'Par longueur',
+	'ui.line_sorter.mode.random': 'Mélange aléatoire',
+	'ui.line_sorter.direction_label': 'Sens',
+	'ui.line_sorter.direction.asc': 'Croissant',
+	'ui.line_sorter.direction.desc': 'Décroissant',
+	'ui.line_sorter.option.case_sensitive': 'Tri sensible à la casse',
+	'ui.line_sorter.option.trim_before_sort': 'Rogner chaque ligne avant tri',
+	'ui.line_sorter.option.remove_empty_lines': 'Supprimer les lignes vides',
+	'ui.line_sorter.option.deduplicate': 'Dédupliquer les lignes avant tri',
+	'ui.line_sorter.shuffle_seed': 'Seed de mélange',
+	'ui.line_sorter.generate_seed': 'Randomiser la seed',
+	'ui.line_sorter.input_lines': 'Lignes en entrée',
+	'ui.line_sorter.output_lines': 'Lignes en sortie',
+	'ui.line_sorter.empty_lines_removed': 'Lignes vides supprimées',
+	'ui.line_sorter.duplicates_removed': 'Doublons supprimés',
+	'ui.line_sorter.lines_moved': 'Lignes déplacées',
+	'ui.line_sorter.output': 'Sortie triée',
+	'ui.line_sorter.apply_output': 'Appliquer à l’entrée',
+	'ui.line_sorter.status.processing': 'Tri des lignes en cours...',
+	'ui.line_sorter.status.worker': 'Mode grande entrée (Web Worker)',
+	'ui.line_sorter.error.processing_failed':
+		'Échec du tri. Ajustez les options ou le contenu puis réessayez.',
+	'ui.line_sorter.toast.applied': 'La sortie triée a été appliquée à l’entrée',
+	'ui.line_sorter.no_output': 'Aucune sortie triée à afficher pour le moment',
 	'ui.whitespace_cleaner.tab_label': 'Espaces',
 	'ui.whitespace_cleaner.placeholder': 'Tapez ou collez du texte pour nettoyer les espaces...',
 	'ui.whitespace_cleaner.trailing_spaces': 'Espaces finaux',

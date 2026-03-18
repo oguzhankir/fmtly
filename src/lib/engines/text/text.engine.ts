@@ -29,6 +29,29 @@ export type TextDuplicateRemovalResult = {
 	uniqueCount: number;
 };
 
+export type TextLineSortMode = 'alphabetical' | 'numeric' | 'length' | 'random';
+
+export type TextLineSortDirection = 'asc' | 'desc';
+
+export type TextLineSortOptions = {
+	mode: TextLineSortMode;
+	direction: TextLineSortDirection;
+	caseSensitive: boolean;
+	trimBeforeSort: boolean;
+	removeEmptyLines: boolean;
+	deduplicate: boolean;
+	shuffleSeed: number;
+};
+
+export type TextLineSortResult = {
+	sorted: string;
+	inputLineCount: number;
+	outputLineCount: number;
+	removedEmptyLines: number;
+	removedDuplicateLines: number;
+	movedLineCount: number;
+};
+
 export type TextWhitespaceCleanupOptions = {
 	removeLeading: boolean;
 	removeTrailing: boolean;
@@ -1208,6 +1231,204 @@ function reverseWords(input: string): string {
 function reverseLines(input: string): string {
 	if (!input) return '';
 	return input.split(/\r?\n/).reverse().join('\n');
+}
+
+export const DEFAULT_TEXT_LINE_SORT_OPTIONS: TextLineSortOptions = {
+	mode: 'alphabetical',
+	direction: 'asc',
+	caseSensitive: false,
+	trimBeforeSort: false,
+	removeEmptyLines: false,
+	deduplicate: false,
+	shuffleSeed: 42
+};
+
+type SortableTextLine = {
+	line: string;
+	originalIndex: number;
+	sortKey: string;
+	numericValue: number | null;
+};
+
+function normalizeTextLineSortOptions(options: Partial<TextLineSortOptions>): TextLineSortOptions {
+	const providedSeed = options.shuffleSeed;
+	const shuffleSeed =
+		typeof providedSeed === 'number' && Number.isFinite(providedSeed)
+			? Math.trunc(providedSeed)
+			: DEFAULT_TEXT_LINE_SORT_OPTIONS.shuffleSeed;
+
+	return {
+		mode: options.mode ?? DEFAULT_TEXT_LINE_SORT_OPTIONS.mode,
+		direction: options.direction ?? DEFAULT_TEXT_LINE_SORT_OPTIONS.direction,
+		caseSensitive: options.caseSensitive ?? DEFAULT_TEXT_LINE_SORT_OPTIONS.caseSensitive,
+		trimBeforeSort: options.trimBeforeSort ?? DEFAULT_TEXT_LINE_SORT_OPTIONS.trimBeforeSort,
+		removeEmptyLines: options.removeEmptyLines ?? DEFAULT_TEXT_LINE_SORT_OPTIONS.removeEmptyLines,
+		deduplicate: options.deduplicate ?? DEFAULT_TEXT_LINE_SORT_OPTIONS.deduplicate,
+		shuffleSeed: shuffleSeed === 0 ? 1 : shuffleSeed
+	};
+}
+
+function createShuffleRandom(seed: number): () => number {
+	let state = seed | 0;
+
+	return (): number => {
+		state ^= state << 13;
+		state ^= state >>> 17;
+		state ^= state << 5;
+		const normalized = (state >>> 0) / 4294967296;
+		return normalized;
+	};
+}
+
+function shuffleLines(lines: string[], seed: number): string[] {
+	const random = createShuffleRandom(seed);
+	const shuffled = [...lines];
+
+	for (let index = shuffled.length - 1; index > 0; index -= 1) {
+		const targetIndex = Math.floor(random() * (index + 1));
+		const tmp = shuffled[index];
+		shuffled[index] = shuffled[targetIndex];
+		shuffled[targetIndex] = tmp;
+	}
+
+	return shuffled;
+}
+
+function compareAlphabetical(left: SortableTextLine, right: SortableTextLine): number {
+	if (left.sortKey === right.sortKey) return left.originalIndex - right.originalIndex;
+	return left.sortKey < right.sortKey ? -1 : 1;
+}
+
+function compareNumeric(left: SortableTextLine, right: SortableTextLine): number {
+	if (left.numericValue !== null && right.numericValue !== null) {
+		if (left.numericValue === right.numericValue) {
+			return compareAlphabetical(left, right);
+		}
+
+		return left.numericValue - right.numericValue;
+	}
+
+	if (left.numericValue !== null) return -1;
+	if (right.numericValue !== null) return 1;
+
+	return compareAlphabetical(left, right);
+}
+
+function compareLength(left: SortableTextLine, right: SortableTextLine): number {
+	const lengthDiff = left.sortKey.length - right.sortKey.length;
+	if (lengthDiff !== 0) return lengthDiff;
+	return compareAlphabetical(left, right);
+}
+
+function countMovedLines(before: string[], after: string[]): number {
+	let movedLineCount = 0;
+	const maxLength = Math.max(before.length, after.length);
+
+	for (let index = 0; index < maxLength; index += 1) {
+		if ((before[index] ?? null) !== (after[index] ?? null)) {
+			movedLineCount += 1;
+		}
+	}
+
+	return movedLineCount;
+}
+
+export function sortTextLines(
+	input: string,
+	options: Partial<TextLineSortOptions> = {}
+): TextLineSortResult {
+	if (!input) {
+		return {
+			sorted: '',
+			inputLineCount: 0,
+			outputLineCount: 0,
+			removedEmptyLines: 0,
+			removedDuplicateLines: 0,
+			movedLineCount: 0
+		};
+	}
+
+	const normalizedOptions = normalizeTextLineSortOptions(options);
+	const inputLines = input.split(/\r?\n/);
+	let removedEmptyLines = 0;
+	let removedDuplicateLines = 0;
+
+	let lines = [...inputLines];
+
+	if (normalizedOptions.removeEmptyLines) {
+		const filteredLines: string[] = [];
+
+		for (const line of lines) {
+			if (line.trim().length === 0) {
+				removedEmptyLines += 1;
+				continue;
+			}
+
+			filteredLines.push(line);
+		}
+
+		lines = filteredLines;
+	}
+
+	if (normalizedOptions.deduplicate) {
+		const seen = new Set<string>();
+		const uniqueLines: string[] = [];
+
+		for (const line of lines) {
+			const key = normalizedOptions.trimBeforeSort ? line.trim() : line;
+			if (seen.has(key)) {
+				removedDuplicateLines += 1;
+				continue;
+			}
+
+			seen.add(key);
+			uniqueLines.push(line);
+		}
+
+		lines = uniqueLines;
+	}
+
+	const sortables: SortableTextLine[] = lines.map((line, index) => {
+		const baseValue = normalizedOptions.trimBeforeSort ? line.trim() : line;
+		const sortKey = normalizedOptions.caseSensitive ? baseValue : baseValue.toLocaleLowerCase();
+		const numericValue = Number(baseValue);
+
+		return {
+			line,
+			originalIndex: index,
+			sortKey,
+			numericValue: Number.isFinite(numericValue) ? numericValue : null
+		};
+	});
+
+	let sortedLines: string[];
+
+	if (normalizedOptions.mode === 'random') {
+		sortedLines = shuffleLines(lines, normalizedOptions.shuffleSeed);
+	} else {
+		const comparator =
+			normalizedOptions.mode === 'numeric'
+				? compareNumeric
+				: normalizedOptions.mode === 'length'
+					? compareLength
+					: compareAlphabetical;
+
+		const sortedEntries = [...sortables].sort(comparator);
+		sortedLines = sortedEntries.map((entry) => entry.line);
+	}
+
+	if (normalizedOptions.direction === 'desc') {
+		sortedLines.reverse();
+	}
+
+	return {
+		sorted: sortedLines.join('\n'),
+		inputLineCount: inputLines.length,
+		outputLineCount: sortedLines.length,
+		removedEmptyLines,
+		removedDuplicateLines,
+		movedLineCount: countMovedLines(lines, sortedLines)
+	};
 }
 
 export function convertTextCases(input: string): TextCaseConversions {

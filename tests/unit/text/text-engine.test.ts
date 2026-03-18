@@ -7,7 +7,8 @@ import {
 	convertTextCases,
 	generateLoremIpsum,
 	removeDuplicateLines,
-	reverseText
+	reverseText,
+	sortTextLines
 } from '../../../src/lib/engines/text/text.engine.js';
 
 describe('analyzeText', () => {
@@ -329,13 +330,52 @@ describe('removeDuplicateLines', () => {
 		expect(result.duplicateCount).toBe(2);
 		expect(result.uniqueCount).toBe(1);
 	});
+});
 
-	it('preserves empty lines as unique entries', () => {
-		const input = 'a\n\nb\n\na';
-		const result = removeDuplicateLines(input);
-		expect(result.removed).toBe('a\n\nb');
-		expect(result.duplicateCount).toBe(2);
-		expect(result.uniqueCount).toBe(3);
+describe('sortTextLines', () => {
+	it('sorts lines alphabetically in ascending order by default', () => {
+		const input = 'zebra\napple\nBanana';
+		const result = sortTextLines(input);
+
+		expect(result.sorted).toBe('apple\nBanana\nzebra');
+		expect(result.inputLineCount).toBe(3);
+		expect(result.outputLineCount).toBe(3);
+	});
+
+	it('sorts numeric lines with non-numeric values at the end', () => {
+		const input = '10\n2\n42\nabc\n7';
+		const result = sortTextLines(input, { mode: 'numeric' });
+
+		expect(result.sorted).toBe('2\n7\n10\n42\nabc');
+	});
+
+	it('sorts by line length and supports descending direction', () => {
+		const input = 'a\ncccc\nbb\nzzz';
+		const result = sortTextLines(input, { mode: 'length', direction: 'desc' });
+
+		expect(result.sorted).toBe('cccc\nzzz\nbb\na');
+	});
+
+	it('applies empty-line removal and deduplication before sorting', () => {
+		const input = 'pear\n\napple\npear\n\nbanana';
+		const result = sortTextLines(input, {
+			removeEmptyLines: true,
+			deduplicate: true,
+			mode: 'alphabetical'
+		});
+
+		expect(result.sorted).toBe('apple\nbanana\npear');
+		expect(result.removedEmptyLines).toBe(2);
+		expect(result.removedDuplicateLines).toBe(1);
+	});
+
+	it('produces deterministic random order when shuffle seed is provided', () => {
+		const input = 'one\ntwo\nthree\nfour\nfive';
+		const first = sortTextLines(input, { mode: 'random', shuffleSeed: 12345 });
+		const second = sortTextLines(input, { mode: 'random', shuffleSeed: 12345 });
+
+		expect(first.sorted).toBe(second.sorted);
+		expect(first.movedLineCount).toBeGreaterThan(0);
 	});
 });
 

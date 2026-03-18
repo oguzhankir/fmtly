@@ -66,6 +66,7 @@ export function generateToolSEO(
 		'@context': 'https://schema.org',
 		'@type': 'WebApplication',
 		name: tool.displayName,
+		keywords: tool.primaryKeyword,
 		applicationCategory: 'DeveloperApplication',
 		operatingSystem: 'Any',
 		offers: {
@@ -90,6 +91,7 @@ export function generateToolSEO(
 		twitterTitle: tool.metaTitle,
 		twitterDescription: tool.metaDescription,
 		twitterImage: ogImage,
+		siteName: 'fmtly.dev',
 		alternates,
 		structuredData: JSON.stringify(structuredData)
 	};
