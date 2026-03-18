@@ -113,6 +113,7 @@ Analyze, transform, and manipulate plain text.
 | 81 | Text Reverser | `text/reverser` | done | Reverse text by characters, words, or lines. |
 | 85 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
 | 79 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
+| 79 | Line Sorter | `text/line-sorter` | done | Sort lines alphabetically, numerically, by length, or with deterministic random shuffle. |
 | 80 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
 | 80 | Markdown → HTML | `text/markdown-to-html` | done | Convert Markdown to HTML with live preview, GFM table support, and syntax-highlighted code blocks. |
 | 82 | Regex Tester | `text/regex` | done | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
@@ -123,7 +124,6 @@ Analyze, transform, and manipulate plain text.
 | 77 | Tool | Slug | Description |
 |---|------|------|-------------|
 | 78 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
-| 79 | Line Sorter | `text/line-sorter` | Sort lines alphabetically, numerically, by length, or shuffle randomly. |
 | 83 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
 
 ---

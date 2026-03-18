@@ -1536,6 +1536,34 @@ const registryDe: Record<string, string> = {
 		'Eindeutige Wortlisten zum Testen von Vokabular oder Sprachmodellen vorbereiten',
 	'tool.text-duplicate-line-remover.use_case.3':
 		'Konfigurationswerte oder Umgebungsvariablenlisten konsolidieren',
+	'tool.text-line-sorter.display_name': 'Zeilen-Sortierer',
+	'tool.text-line-sorter.tagline':
+		'Zeilen alphabetisch, numerisch, nach Länge oder per Seed-Shuffle sortieren',
+	'tool.text-line-sorter.description':
+		'Sortieren Sie Textzeilen sofort mit erweiterten Optionen für Groß-/Kleinschreibung, Trimmen, Deduplizierung, Leere-Zeilen-Entfernung und deterministische Shuffle-Seeds. Alles läuft lokal im Browser.',
+	'tool.text-line-sorter.primary_keyword': 'zeilen sortierer',
+	'tool.text-line-sorter.meta_title': 'Zeilen-Sortierer — Textzeilen sortieren | fmtly.dev',
+	'tool.text-line-sorter.meta_description':
+		'Zeilen alphabetisch, numerisch, nach Länge oder zufällig sortieren. Mit Deduplizierung und Leerzeilen-Filter – schnell, privat und komplett im Browser.',
+	'tool.text-line-sorter.operation': 'Zeilen sortieren',
+	'tool.text-line-sorter.faq.0.question': 'Welche Sortiermodi werden unterstützt?',
+	'tool.text-line-sorter.faq.0.answer':
+		'Alphabetisch, numerisch, nach Länge und deterministisches Zufallsshuffle sind verfügbar. Zusätzlich können Sie aufsteigend oder absteigend sortieren.',
+	'tool.text-line-sorter.faq.1.question':
+		'Kann ich leere Zeilen und Duplikate vor dem Sortieren entfernen?',
+	'tool.text-line-sorter.faq.1.answer':
+		'Ja. Aktivieren Sie Leere-Zeilen-Entfernung und Deduplizierung, um Eingaben vor dem Sortieren zu bereinigen – ideal für Logs und Listen.',
+	'tool.text-line-sorter.faq.2.question':
+		'Bleibt die Oberfläche bei großen Eingaben reaktionsschnell?',
+	'tool.text-line-sorter.faq.2.answer':
+		'Ja. Eingaben über 500KB werden in einem Web Worker verarbeitet. Dadurch bleibt die UI flüssig und Ihre Daten bleiben lokal.',
+	'tool.text-line-sorter.use_case.0':
+		'Logdateien normalisieren und sortieren, bevor Umgebungen verglichen werden',
+	'tool.text-line-sorter.use_case.1':
+		'Sauber sortierte Listen von Domains, E-Mails, IDs oder Tags erstellen',
+	'tool.text-line-sorter.use_case.2':
+		'Release Notes, Changelog-Einträge oder Checklisten schnell ordnen',
+	'tool.text-line-sorter.use_case.3': 'Deterministisch gemischte Testdatensätze für QA erzeugen',
 	'tool.text-diff-compare.display_name': 'Diff & Vergleichen',
 	'tool.text-diff-compare.tagline': 'Zwei Texte nebeneinander vergleichen',
 	'tool.text-diff-compare.description':
@@ -1824,6 +1852,35 @@ const registryDe: Record<string, string> = {
 	'ui.duplicate_line_remover.unique_lines': 'Eindeutige Zeilen',
 	'ui.duplicate_line_remover.duplicates_removed': 'Duplikate entfernt',
 	'ui.duplicate_line_remover.result': 'Ergebnis',
+	'ui.line_sorter.tab_label': 'Sortieren',
+	'ui.line_sorter.placeholder': 'Zeilen zum Sortieren eingeben oder einfügen...',
+	'ui.line_sorter.mode_label': 'Sortiermodus',
+	'ui.line_sorter.mode.alphabetical': 'Alphabetisch',
+	'ui.line_sorter.mode.numeric': 'Numerisch',
+	'ui.line_sorter.mode.length': 'Nach Länge',
+	'ui.line_sorter.mode.random': 'Zufällig mischen',
+	'ui.line_sorter.direction_label': 'Richtung',
+	'ui.line_sorter.direction.asc': 'Aufsteigend',
+	'ui.line_sorter.direction.desc': 'Absteigend',
+	'ui.line_sorter.option.case_sensitive': 'Groß-/Kleinschreibung beachten',
+	'ui.line_sorter.option.trim_before_sort': 'Zeilen vor dem Sortieren trimmen',
+	'ui.line_sorter.option.remove_empty_lines': 'Leere Zeilen entfernen',
+	'ui.line_sorter.option.deduplicate': 'Zeilen vorher deduplizieren',
+	'ui.line_sorter.shuffle_seed': 'Shuffle-Seed',
+	'ui.line_sorter.generate_seed': 'Seed randomisieren',
+	'ui.line_sorter.input_lines': 'Eingabezeilen',
+	'ui.line_sorter.output_lines': 'Ausgabezeilen',
+	'ui.line_sorter.empty_lines_removed': 'Leere Zeilen entfernt',
+	'ui.line_sorter.duplicates_removed': 'Duplikate entfernt',
+	'ui.line_sorter.lines_moved': 'Verschobene Zeilen',
+	'ui.line_sorter.output': 'Sortierte Ausgabe',
+	'ui.line_sorter.apply_output': 'Auf Eingabe anwenden',
+	'ui.line_sorter.status.processing': 'Zeilen werden sortiert...',
+	'ui.line_sorter.status.worker': 'Großeingabe-Modus (Web Worker)',
+	'ui.line_sorter.error.processing_failed':
+		'Sortierung fehlgeschlagen. Bitte Optionen oder Eingabe anpassen und erneut versuchen.',
+	'ui.line_sorter.toast.applied': 'Sortierte Ausgabe auf Eingabe angewendet',
+	'ui.line_sorter.no_output': 'Noch keine sortierte Ausgabe vorhanden',
 	'ui.whitespace_cleaner.tab_label': 'Leerzeichen',
 	'ui.whitespace_cleaner.placeholder':
 		'Text eingeben oder einfügen, um Leerzeichen zu bereinigen...',
