@@ -406,6 +406,54 @@ ERROR [auth-api] Invalid password for user=21
 INFO [search] Results cached for query=regex tester`
 	},
 	{
+		id: 'text-readability-analyzer',
+		category: 'text',
+		slug: 'readability',
+		displayName: 'tool.text-readability-analyzer.display_name',
+		tagline: 'tool.text-readability-analyzer.tagline',
+		description: 'tool.text-readability-analyzer.description',
+		primaryKeyword: 'tool.text-readability-analyzer.primary_keyword',
+		metaTitle: 'tool.text-readability-analyzer.meta_title',
+		metaDescription: 'tool.text-readability-analyzer.meta_description',
+		engine: 'text',
+		operation: 'tool.text-readability-analyzer.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'text', slug: 'markdown-to-html' },
+			{ category: 'text', slug: 'regex' },
+			{ category: 'text', slug: 'diff' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-readability-analyzer.faq.0.question',
+				answer: 'tool.text-readability-analyzer.faq.0.answer'
+			},
+			{
+				question: 'tool.text-readability-analyzer.faq.1.question',
+				answer: 'tool.text-readability-analyzer.faq.1.answer'
+			},
+			{
+				question: 'tool.text-readability-analyzer.faq.2.question',
+				answer: 'tool.text-readability-analyzer.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-readability-analyzer.use_case.0',
+			'tool.text-readability-analyzer.use_case.1',
+			'tool.text-readability-analyzer.use_case.2',
+			'tool.text-readability-analyzer.use_case.3'
+		],
+		sampleInput: `The readability analyzer helps technical teams assess how easy text is to understand.
+
+Use short, direct sentences for instructions. Prefer concrete verbs over abstract phrasing. Replace stacked clauses with simple sentence structures so readers can scan quickly.
+
+Before publishing docs, check readability scores to identify dense sections and improve clarity.`
+	},
+	{
 		id: 'text-escape-unescape',
 		category: 'text',
 		slug: 'escape',

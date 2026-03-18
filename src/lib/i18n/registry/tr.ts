@@ -1903,6 +1903,98 @@ const registryTr: Record<string, string> = {
 	'ui.regex.flags.y.description': 'Yalnızca mevcut lastIndex konumundan eşleştirir',
 	'ui.regex.flags.d.label': 'İndeks',
 	'ui.regex.flags.d.description': 'Destekleniyorsa group başlangıç/bitiş indekslerini verir',
+	'tool.text-readability-analyzer.display_name': 'Okunabilirlik Analizi',
+	'tool.text-readability-analyzer.tagline':
+		'Metninizin ne kadar kolay okunduğunu güvenilir okunabilirlik formülleriyle ölçün',
+	'tool.text-readability-analyzer.description':
+		'Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, Coleman-Liau ve SMOG metrikleriyle metin okunabilirliğini analiz edin. Cümle karmaşıklığı ve tahmini okuma yaşı içgörülerini anında tarayıcınızda görün.',
+	'tool.text-readability-analyzer.primary_keyword': 'okunabilirlik analizi',
+	'tool.text-readability-analyzer.meta_title':
+		'Okunabilirlik Analizi — Flesch, Fog, SMOG Skorları | fmtly.dev',
+	'tool.text-readability-analyzer.meta_description':
+		'Flesch, Flesch-Kincaid, Gunning Fog, Coleman-Liau ve SMOG metrikleriyle ücretsiz okunabilirlik analizi. Hızlı, gizli ve tamamen tarayıcıda.',
+	'tool.text-readability-analyzer.operation': 'Okunabilirliği Analiz Et',
+	'tool.text-readability-analyzer.faq.0.question':
+		'Bu araç hangi okunabilirlik formüllerini içeriyor?',
+	'tool.text-readability-analyzer.faq.0.answer':
+		'Araç Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, Coleman-Liau ve SMOG skorlarını, ayrıca metin karmaşıklığını destekleyen ek ölçümleri sunar.',
+	'tool.text-readability-analyzer.faq.1.question':
+		'SMOG skoru neden kısa metinlerde görünmeyebilir?',
+	'tool.text-readability-analyzer.faq.1.answer':
+		'SMOG en az 3 cümlede daha güvenilir sonuç verir. Daha kısa metinlerde araç dengesiz bir skor yerine uyarı gösterir.',
+	'tool.text-readability-analyzer.faq.2.question':
+		'Okunabilirlik analizi yerelde mi çalışıyor, sunucuya mı gidiyor?',
+	'tool.text-readability-analyzer.faq.2.answer':
+		'Tüm analiz tarayıcınızda yerel olarak çalışır. Metniniz hiçbir sunucuya gönderilmez.',
+	'tool.text-readability-analyzer.use_case.0':
+		'Dokümantasyon, onboarding akışları ve yardım içeriklerini yayına almadan önce değerlendirmek',
+	'tool.text-readability-analyzer.use_case.1':
+		'Farklı taslak sürümlerini karşılaştırıp en anlaşılır metni seçmek',
+	'tool.text-readability-analyzer.use_case.2':
+		'Ürün mikro metinlerini ve uygulama içi yönlendirmeleri daha geniş kitleler için iyileştirmek',
+	'tool.text-readability-analyzer.use_case.3':
+		'Teknik dokümandaki yoğun bölümleri tespit edip sadeleştirmek',
+	'ui.readability.unavailable': '—',
+	'ui.readability.input_label': 'Girdi metni',
+	'ui.readability.input_placeholder':
+		'Okunabilirliği analiz etmek için metni yapıştırın veya yazın...',
+	'ui.readability.output_title': 'Okunabilirlik analizi',
+	'ui.readability.processing': 'Analiz ediliyor...',
+	'ui.readability.copy_report': 'Raporu kopyala',
+	'ui.readability.worker_active':
+		'Büyük metin algılandı (>{size}). Analiz Web Worker üzerinde çalıştırılıyor.',
+	'ui.readability.worker_failed':
+		'Worker işlemi başarısız oldu. Ana iş parçacığında analizle devam edildi.',
+	'ui.readability.level_label': 'Genel okunabilirlik',
+	'ui.readability.level.very_easy': 'Çok kolay',
+	'ui.readability.level.easy': 'Kolay',
+	'ui.readability.level.fairly_easy': 'Oldukça kolay',
+	'ui.readability.level.standard': 'Standart',
+	'ui.readability.level.fairly_difficult': 'Biraz zor',
+	'ui.readability.level.difficult': 'Zor',
+	'ui.readability.level.very_difficult': 'Çok zor',
+	'ui.readability.level_desc.very_easy': 'Geniş kitleler ve hızlı tarama için uygundur.',
+	'ui.readability.level_desc.easy': 'Düşük bilişsel yükle net bir dil sunar.',
+	'ui.readability.level_desc.fairly_easy':
+		'Ürün dokümanları, rehberler ve genel web metinleri için uygundur.',
+	'ui.readability.level_desc.standard':
+		'Teknik ve teknik olmayan okuyucular için dengeli bir seviyedir.',
+	'ui.readability.level_desc.fairly_difficult':
+		'Metnin bazı bölümleri yoğun; uzun cümleleri sadeleştirmek faydalı olur.',
+	'ui.readability.level_desc.difficult':
+		'Dikkatli okuma gerektirir. Daha kısa cümleler ve daha sade kelimeler önerilir.',
+	'ui.readability.level_desc.very_difficult':
+		'Metin oldukça yoğun. Yayın öncesi netlik için yeniden yazılması önerilir.',
+	'ui.readability.metric.words': 'Kelime',
+	'ui.readability.metric.sentences': 'Cümle',
+	'ui.readability.metric.syllables': 'Hece',
+	'ui.readability.metric.reading_age': 'Okuma yaşı',
+	'ui.readability.metric.reading_time': 'Okuma süresi',
+	'ui.readability.metric.paragraphs': 'Paragraf',
+	'ui.readability.metric.complex_words': 'Karmaşık kelime',
+	'ui.readability.stat.avg_words_per_sentence': 'Ort. kelime/cümle',
+	'ui.readability.stat.avg_syllables_per_word': 'Ort. hece/kelime',
+	'ui.readability.stat.characters': 'Karakter',
+	'ui.readability.stat.letters': 'Harf',
+	'ui.readability.scores_title': 'Okunabilirlik formülleri',
+	'ui.readability.score.flesch_ease': 'Flesch Reading Ease',
+	'ui.readability.score.flesch_kincaid': 'Flesch-Kincaid Grade',
+	'ui.readability.score.gunning_fog': 'Gunning Fog',
+	'ui.readability.score.coleman_liau': 'Coleman-Liau İndeksi',
+	'ui.readability.score.smog': 'SMOG',
+	'ui.readability.score_desc.flesch_ease': 'Skor yükseldikçe metin daha kolay okunur.',
+	'ui.readability.score_desc.flesch_kincaid':
+		'ABD eğitim düzeyi karşılığına göre tahmini sınıf seviyesi.',
+	'ui.readability.score_desc.gunning_fog':
+		'Cümle uzunluğu ve kelime zorluğuna göre metin karmaşıklığı.',
+	'ui.readability.score_desc.coleman_liau':
+		'Harf yoğunluğu ve cümle sıklığına göre okunabilirlik tahmini.',
+	'ui.readability.score_desc.smog': 'Çok heceli kelimelere göre tahmini okuma seviyesi.',
+	'ui.readability.warning.insufficient_sentences_for_smog':
+		'SMOG için daha sağlıklı bir tahmin adına en az 3 cümle gerekir.',
+	'ui.readability.report_title': 'Okunabilirlik Raporu',
+	'ui.readability.report_level': 'Seviye',
+	'ui.readability.report_reading_age': 'Tahmini okuma yaşı',
 	'ui.text_reverser.tab_label': 'Ters Çevir',
 	'ui.text_reverser.placeholder': 'Ters çevirmek için metin yazın veya yapıştırın...',
 	'ui.text_reverser.characters': 'Karaktere göre ters çevir',

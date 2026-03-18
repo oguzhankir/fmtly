@@ -250,6 +250,56 @@ export type TextEscapeWorkerResponse = {
 	error?: string;
 };
 
+export type TextReadabilityWarningCode = 'insufficient_sentences_for_smog';
+
+export type TextReadabilityLevel =
+	| 'very_easy'
+	| 'easy'
+	| 'fairly_easy'
+	| 'standard'
+	| 'fairly_difficult'
+	| 'difficult'
+	| 'very_difficult';
+
+export type TextReadabilityResult = {
+	input: string;
+	characters: number;
+	charactersNoSpaces: number;
+	letters: number;
+	words: number;
+	sentences: number;
+	paragraphs: number;
+	syllables: number;
+	complexWords: number;
+	polysyllables: number;
+	averageWordsPerSentence: number;
+	averageSyllablesPerWord: number;
+	averageLettersPerWord: number;
+	fleschReadingEase: number;
+	fleschKincaidGrade: number;
+	gunningFog: number;
+	colemanLiau: number;
+	smog: number | null;
+	averageGradeLevel: number;
+	estimatedReadingAgeMin: number;
+	estimatedReadingAgeMax: number;
+	readingTimeMinutes: number;
+	level: TextReadabilityLevel;
+	warnings: TextReadabilityWarningCode[];
+	durationMs: number;
+};
+
+export type TextReadabilityWorkerRequest = {
+	id: number;
+	input: string;
+};
+
+export type TextReadabilityWorkerResponse = {
+	id: number;
+	result?: TextReadabilityResult;
+	error?: string;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -445,6 +495,7 @@ const DEFAULT_REGEX_TESTER_OPTIONS: RegexTesterAnalyzeOptions = {
 };
 
 export const TEXT_ESCAPE_WORKER_THRESHOLD_BYTES = 500 * 1024;
+export const TEXT_READABILITY_WORKER_THRESHOLD_BYTES = 500 * 1024;
 
 const DEFAULT_TEXT_ESCAPE_OPTIONS: TextEscapeOptions = {
 	urlEncodeSpacesAsPlus: false,
@@ -1516,6 +1567,74 @@ function countParagraphs(input: string): number {
 	return normalized.split(/\n\s*\n/).filter((part) => part.trim().length > 0).length;
 }
 
+function roundTo(value: number, precision = 2): number {
+	const multiplier = 10 ** precision;
+	return Math.round(value * multiplier) / multiplier;
+}
+
+function safeDivide(dividend: number, divisor: number): number {
+	if (divisor === 0) return 0;
+	return dividend / divisor;
+}
+
+function countLetters(input: string): number {
+	return input.match(/\p{L}/gu)?.length ?? 0;
+}
+
+function extractReadabilityWords(input: string): string[] {
+	return input.match(WORD_PATTERN) ?? [];
+}
+
+function normalizeWordForSyllableCount(word: string): string {
+	return word.toLowerCase().replace(/[^a-z]/g, '');
+}
+
+function countSyllablesInWord(word: string): number {
+	const normalizedWord = normalizeWordForSyllableCount(word);
+	if (!normalizedWord) return 1;
+	if (normalizedWord.length <= 3) return 1;
+
+	const normalizedForHeuristic = normalizedWord
+		.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/i, '')
+		.replace(/^y/i, '');
+
+	const syllableMatches = normalizedForHeuristic.match(/[aeiouy]{1,2}/g);
+	const syllableCount = syllableMatches?.length ?? 1;
+
+	return Math.max(1, syllableCount);
+}
+
+function isLexicalWord(word: string): boolean {
+	return /\p{L}/u.test(word);
+}
+
+function toReadabilityLevel(fleschReadingEase: number): TextReadabilityLevel {
+	if (fleschReadingEase >= 90) return 'very_easy';
+	if (fleschReadingEase >= 80) return 'easy';
+	if (fleschReadingEase >= 70) return 'fairly_easy';
+	if (fleschReadingEase >= 60) return 'standard';
+	if (fleschReadingEase >= 50) return 'fairly_difficult';
+	if (fleschReadingEase >= 30) return 'difficult';
+	return 'very_difficult';
+}
+
+function average(values: number[]): number {
+	if (values.length === 0) return 0;
+	const total = values.reduce((sum, value) => sum + value, 0);
+	return total / values.length;
+}
+
+function estimateReadingAgeRange(gradeLevel: number): { min: number; max: number } {
+	if (!Number.isFinite(gradeLevel) || gradeLevel <= 0) {
+		return { min: 6, max: 8 };
+	}
+
+	const min = Math.max(6, Math.floor(gradeLevel + 5));
+	const max = Math.max(min + 1, Math.ceil(gradeLevel + 7));
+
+	return { min, max };
+}
+
 function capitalizeWord(value: string): string {
 	if (value.length === 0) return '';
 	return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
@@ -2011,6 +2130,10 @@ export function shouldUseTextEscapeWorker(input: string): boolean {
 	return byteSizeOfString(input) > TEXT_ESCAPE_WORKER_THRESHOLD_BYTES;
 }
 
+export function shouldUseTextReadabilityWorker(input: string): boolean {
+	return byteSizeOfString(input) > TEXT_READABILITY_WORKER_THRESHOLD_BYTES;
+}
+
 export function processTextEscape(
 	input: string,
 	format: TextEscapeFormat,
@@ -2149,5 +2272,95 @@ export function analyzeText(input: string): TextCounterMetrics {
 		sentences,
 		paragraphs,
 		readingTimeMinutes
+	};
+}
+
+export function analyzeTextReadability(input: string): TextReadabilityResult {
+	const startedAt = nowMs();
+	const characters = input.length;
+	const charactersNoSpaces = input.replace(/\s/g, '').length;
+	const wordsList = extractReadabilityWords(input);
+	const lexicalWords = wordsList.filter((word) => isLexicalWord(word));
+	const words = lexicalWords.length;
+	const sentences = countSentences(input);
+	const paragraphs = countParagraphs(input);
+	const letters = countLetters(input);
+
+	let syllables = 0;
+	let complexWords = 0;
+
+	for (const word of lexicalWords) {
+		const syllableCount = countSyllablesInWord(word);
+		syllables += syllableCount;
+		if (syllableCount >= 3) {
+			complexWords += 1;
+		}
+	}
+
+	const polysyllables = complexWords;
+	const warnings: TextReadabilityWarningCode[] = [];
+
+	const wordsPerSentence = safeDivide(words, sentences);
+	const syllablesPerWord = safeDivide(syllables, words);
+	const lettersPerWord = safeDivide(letters, words);
+
+	const fleschReadingEase =
+		words === 0 || sentences === 0
+			? 0
+			: 206.835 - 1.015 * wordsPerSentence - 84.6 * syllablesPerWord;
+	const fleschKincaidGrade =
+		words === 0 || sentences === 0 ? 0 : 0.39 * wordsPerSentence + 11.8 * syllablesPerWord - 15.59;
+	const gunningFog =
+		words === 0 || sentences === 0
+			? 0
+			: 0.4 * (wordsPerSentence + 100 * safeDivide(complexWords, words));
+	const colemanLiau =
+		words === 0
+			? 0
+			: 0.0588 * (safeDivide(letters, words) * 100) -
+				0.296 * (safeDivide(sentences, words) * 100) -
+				15.8;
+
+	const smog =
+		sentences >= 3 ? 1.043 * Math.sqrt(polysyllables * safeDivide(30, sentences)) + 3.1291 : null;
+
+	if (sentences > 0 && sentences < 3) {
+		warnings.push('insufficient_sentences_for_smog');
+	}
+
+	const gradeLevels = [fleschKincaidGrade, gunningFog, colemanLiau];
+	if (smog !== null) {
+		gradeLevels.push(smog);
+	}
+
+	const averageGradeLevel = average(gradeLevels.filter((value) => Number.isFinite(value)));
+	const estimatedReadingAge = estimateReadingAgeRange(averageGradeLevel);
+
+	return {
+		input,
+		characters,
+		charactersNoSpaces,
+		letters,
+		words,
+		sentences,
+		paragraphs,
+		syllables,
+		complexWords,
+		polysyllables,
+		averageWordsPerSentence: roundTo(wordsPerSentence),
+		averageSyllablesPerWord: roundTo(syllablesPerWord),
+		averageLettersPerWord: roundTo(lettersPerWord),
+		fleschReadingEase: roundTo(fleschReadingEase),
+		fleschKincaidGrade: roundTo(fleschKincaidGrade),
+		gunningFog: roundTo(gunningFog),
+		colemanLiau: roundTo(colemanLiau),
+		smog: smog === null ? null : roundTo(smog),
+		averageGradeLevel: roundTo(averageGradeLevel),
+		estimatedReadingAgeMin: estimatedReadingAge.min,
+		estimatedReadingAgeMax: estimatedReadingAge.max,
+		readingTimeMinutes: clampReadingMinutes(words),
+		level: toReadabilityLevel(fleschReadingEase),
+		warnings,
+		durationMs: roundTo(nowMs() - startedAt, 3)
 	};
 }
