@@ -1679,6 +1679,62 @@ const registryTr: Record<string, string> = {
 		'Script, ETL ve otomasyon işleri için arama/çıkarma kurallarını prototiplemek',
 	'tool.text-regex-tester.use_case.3':
 		'Anlık görsel eşleşme geri bildirimiyle regex mantığını öğrenmek ve öğretmek',
+	'tool.text-escape-unescape.display_name': 'Metin Escape / Unescape',
+	'tool.text-escape-unescape.tagline':
+		'JSON, HTML, XML, URL, SQL ve regex için metni kaçır veya çöz',
+	'tool.text-escape-unescape.description':
+		'Metinleri JSON, HTML entity, XML entity, URL kodlama, SQL dizesi ve regex bağlamları için güvenli şekilde escape veya unescape et. 500KB üzeri girdilerde arayüz akıcılığı için Web Worker kullanır.',
+	'tool.text-escape-unescape.primary_keyword': 'metin escape unescape araci',
+	'tool.text-escape-unescape.meta_title':
+		'Metin Escape/Unescape — JSON, HTML, URL, SQL | fmtly.dev',
+	'tool.text-escape-unescape.meta_description':
+		'JSON, HTML, XML, URL, SQL ve regex için metni anında escape/unescape et. Tamamen tarayıcıda çalışır, büyük metinlerde hızlıdır, veri yüklemez.',
+	'tool.text-escape-unescape.operation': 'Metni Escape / Unescape Et',
+	'tool.text-escape-unescape.faq.0.question':
+		'Bu araçta hangi formatlarda escape ve unescape yapılabilir?',
+	'tool.text-escape-unescape.faq.0.answer':
+		'JSON dizesi, HTML entity, XML entity, URL kodlama, SQL string literal ve regex özel karakterleri için iki yönde de işlem yapabilirsiniz.',
+	'tool.text-escape-unescape.faq.1.question':
+		'Basit bir URL ya da HTML encoder aracından farkı nedir?',
+	'tool.text-escape-unescape.faq.1.answer':
+		'Tek bir ekranda birden fazla escape standardını birleştirir, yönü anında değiştirmenizi sağlar ve URL plus çözümü veya SQL tırnaklama gibi formata özel seçenekler sunar.',
+	'tool.text-escape-unescape.faq.2.question':
+		'Büyük metinlerde performans ve gizlilik korunuyor mu?',
+	'tool.text-escape-unescape.faq.2.answer':
+		'Evet. İşlem tamamen tarayıcıda çalışır. 500KB üzeri girdiler Web Worker üzerinde işlendiği için arayüz akıcı kalır ve veriler sunucuya gönderilmez.',
+	'tool.text-escape-unescape.use_case.0':
+		'Kullanıcı girdilerini JSON payload, query string ve SQL sorguları için güvenli hale getirmek',
+	'tool.text-escape-unescape.use_case.1':
+		'Escape edilmiş log veya API örneklerini okunabilir düz metne çevirmek',
+	'tool.text-escape-unescape.use_case.2':
+		'Özel karakterleri kaçırıp çözerek regex desenlerini güvenli şekilde oluşturmak',
+	'tool.text-escape-unescape.use_case.3':
+		'Karışık escaped içerikleri tarayıcı içinde gizliliği koruyarak normalize etmek',
+	'ui.text_escape.format_label': 'Format',
+	'ui.text_escape.action_label': 'İşlem',
+	'ui.text_escape.action.escape': 'Escape',
+	'ui.text_escape.action.unescape': 'Unescape',
+	'ui.text_escape.format.json': 'JSON Dizesi',
+	'ui.text_escape.format.html': 'HTML Entity',
+	'ui.text_escape.format.xml': 'XML Entity',
+	'ui.text_escape.format.url': 'URL Bileşeni',
+	'ui.text_escape.format.sql': 'SQL Dizesi',
+	'ui.text_escape.format.regex': 'Regex Deseni',
+	'ui.text_escape.input_label': 'Girdi',
+	'ui.text_escape.output_label': 'Çıktı',
+	'ui.text_escape.input_placeholder': 'İşlemek istediğiniz metni yazın veya yapıştırın...',
+	'ui.text_escape.output_placeholder': 'Escape veya unescape çıktısı burada görünür...',
+	'ui.text_escape.option.url_encode_plus': 'Boşlukları + olarak kodla',
+	'ui.text_escape.option.url_decode_plus': '+ işaretini boşluk olarak çöz',
+	'ui.text_escape.option.sql_wrap_quotes': 'Tek tırnakla sar',
+	'ui.text_escape.button.swap_action': 'İşlemi tersine çevir',
+	'ui.text_escape.worker_active':
+		'Büyük girdi algılandı (>{size}). İşlem Web Worker üzerinde çalışıyor.',
+	'ui.text_escape.worker_failed': 'Worker işleminde hata oluştu. Ana iş parçacığına geri dönüldü.',
+	'ui.text_escape.warning.no_changes': 'Seçilen format ve işlem için değişiklik oluşmadı.',
+	'ui.text_escape.error.invalid_json_escape': 'Geçersiz JSON escape dizisi: {detail}',
+	'ui.text_escape.error.invalid_url_encoding': 'Geçersiz URL kodlu girdi: {detail}',
+	'ui.text_escape.error.detail': 'İşlem başarısız: {detail}',
 	'ui.diff_compare.statistics': 'Karşılaştırma İstatistikleri',
 	'ui.diff_compare.added_lines': 'Eklenen satırlar',
 	'ui.diff_compare.removed_lines': 'Kaldırılan satırlar',

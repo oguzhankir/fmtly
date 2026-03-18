@@ -117,6 +117,7 @@ Analyze, transform, and manipulate plain text.
 | 80 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
 | 80 | Markdown → HTML | `text/markdown-to-html` | done | Convert Markdown to HTML with live preview, GFM table support, and syntax-highlighted code blocks. |
 | 82 | Regex Tester | `text/regex` | done | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
+| 84 | Text Escape / Unescape | `text/escape` | done | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
 
 ### Backlog — Text & String Tools
 
@@ -124,7 +125,6 @@ Analyze, transform, and manipulate plain text.
 |---|------|------|-------------|
 | 78 | Readability Analyzer | `text/readability` | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
 | 83 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
-| 84 | Text Escape / Unescape | `text/escape` | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
 
 ---
 

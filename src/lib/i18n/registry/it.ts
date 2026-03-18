@@ -1670,6 +1670,63 @@ const registryIt: Record<string, string> = {
 		'Prototipare regole di ricerca ed estrazione per script, ETL e automazioni',
 	'tool.text-regex-tester.use_case.3':
 		'Imparare e insegnare le basi delle regex con feedback visivo immediato',
+	'tool.text-escape-unescape.display_name': 'Escape / Unescape Testo',
+	'tool.text-escape-unescape.tagline':
+		'Escape o unescape testo per JSON, HTML, XML, URL, SQL e regex',
+	'tool.text-escape-unescape.description':
+		'Converti stringhe tra forma escaped e testo leggibile per JSON, entità HTML/XML, codifica URL, letterali SQL e pattern regex. Input grandi vengono elaborati via Web Worker.',
+	'tool.text-escape-unescape.primary_keyword': 'escape unescape testo',
+	'tool.text-escape-unescape.meta_title':
+		'Escape/Unescape Testo — JSON, HTML, URL, SQL | fmtly.dev',
+	'tool.text-escape-unescape.meta_description':
+		'Escape e unescape testo istantaneo per JSON, HTML, XML, URL, SQL e regex. 100% browser, veloce su volumi grandi, nessun upload.',
+	'tool.text-escape-unescape.operation': 'Escape / Unescape Testo',
+	'tool.text-escape-unescape.faq.0.question':
+		'Quali formati sono supportati per escape e unescape?',
+	'tool.text-escape-unescape.faq.0.answer':
+		'Puoi elaborare stringhe JSON, entità HTML/XML, codifica URL, letterali SQL e caratteri speciali regex in entrambe le direzioni.',
+	'tool.text-escape-unescape.faq.1.question':
+		'Qual è la differenza da un semplice encoder URL o HTML?',
+	'tool.text-escape-unescape.faq.1.answer':
+		'Raggruppa più standard di escape in un unico spazio, ti permette di cambiare subito direzione di conversione e offre opzioni dedicate come + URL o wrapping SQL.',
+	'tool.text-escape-unescape.faq.2.question':
+		'Prestazioni e privacy sono garantite per testi grandi?',
+	'tool.text-escape-unescape.faq.2.answer':
+		'Sì. Tutto viene eseguito localmente nel tuo browser. Oltre 500KB, un Web Worker mantiene l’interfaccia fluida.',
+	'tool.text-escape-unescape.use_case.0':
+		'Preparare input utente in modo sicuro per payload JSON, query string e SQL',
+	'tool.text-escape-unescape.use_case.1':
+		'Riconvertire log o estratti API escaped in testo leggibile',
+	'tool.text-escape-unescape.use_case.2':
+		'Costruire e debug pattern regex gestendo correttamente i metacaratteri',
+	'tool.text-escape-unescape.use_case.3':
+		'Normalizzare contenuto escaped eterogeneo senza uscire dal browser',
+	'ui.text_escape.format_label': 'Formato',
+	'ui.text_escape.action_label': 'Azione',
+	'ui.text_escape.action.escape': 'Escape',
+	'ui.text_escape.action.unescape': 'Unescape',
+	'ui.text_escape.format.json': 'Stringa JSON',
+	'ui.text_escape.format.html': 'Entità HTML',
+	'ui.text_escape.format.xml': 'Entità XML',
+	'ui.text_escape.format.url': 'Componente URL',
+	'ui.text_escape.format.sql': 'Stringa SQL',
+	'ui.text_escape.format.regex': 'Pattern regex',
+	'ui.text_escape.input_label': 'Input',
+	'ui.text_escape.output_label': 'Output',
+	'ui.text_escape.input_placeholder': 'Digita o incolla il testo da elaborare...',
+	'ui.text_escape.output_placeholder': 'L’output escaped o unescaped appare qui...',
+	'ui.text_escape.option.url_encode_plus': 'Codifica spazi come +',
+	'ui.text_escape.option.url_decode_plus': 'Decodifica + come spazio',
+	'ui.text_escape.option.sql_wrap_quotes': 'Avvolgi con virgolette singole',
+	'ui.text_escape.button.swap_action': 'Inverti azione',
+	'ui.text_escape.worker_active':
+		'Input grande rilevato (>{size}). L’elaborazione è in esecuzione in un Web Worker.',
+	'ui.text_escape.worker_failed': 'Elaborazione Worker fallita. Ritorno al thread principale.',
+	'ui.text_escape.warning.no_changes':
+		'Nessuna modifica rilevata per il formato e azione selezionati.',
+	'ui.text_escape.error.invalid_json_escape': 'Sequenza di escape JSON non valida: {detail}',
+	'ui.text_escape.error.invalid_url_encoding': 'Input URL codificato non valido: {detail}',
+	'ui.text_escape.error.detail': 'Elaborazione fallita: {detail}',
 	'ui.diff_compare.statistics': 'Statistiche di Confronto',
 	'ui.diff_compare.added_lines': 'Righe aggiunte',
 	'ui.diff_compare.removed_lines': 'Righe rimosse',

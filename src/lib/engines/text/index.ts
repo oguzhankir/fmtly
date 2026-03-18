@@ -12,6 +12,9 @@ export {
 	getRegexTesterFlagSupport,
 	REGEX_TESTER_FLAG_ORDER,
 	DEFAULT_TEXT_LINE_SORT_OPTIONS,
+	processTextEscape,
+	shouldUseTextEscapeWorker,
+	TEXT_ESCAPE_WORKER_THRESHOLD_BYTES,
 	type TextCounterMetrics,
 	type TextCaseConversions,
 	type MarkdownToHtmlOptions,
@@ -39,7 +42,16 @@ export {
 	type RegexTesterMatch,
 	type RegexTesterTextSegment,
 	type RegexTesterAnalyzeOptions,
-	type RegexTesterResult
+	type RegexTesterResult,
+	type TextEscapeFormat,
+	type TextEscapeAction,
+	type TextEscapeWarningCode,
+	type TextEscapeErrorCode,
+	type TextEscapeError,
+	type TextEscapeOptions,
+	type TextEscapeResult,
+	type TextEscapeWorkerRequest,
+	type TextEscapeWorkerResponse
 } from './text.engine.js';
 
 export {

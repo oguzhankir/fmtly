@@ -1702,6 +1702,63 @@ const registryFr: Record<string, string> = {
 		'Prototyper des règles de recherche et d’extraction pour scripts, ETL et automatisation',
 	'tool.text-regex-tester.use_case.3':
 		'Apprendre et enseigner les bases des regex avec un feedback visuel instantané',
+	'tool.text-escape-unescape.display_name': 'Échappement / Déséchappement de Texte',
+	'tool.text-escape-unescape.tagline':
+		'Échapper ou déséchapper du texte pour JSON, HTML, XML, URL, SQL et regex',
+	'tool.text-escape-unescape.description':
+		'Convertissez des chaînes entre forme échappée et texte lisible pour JSON, entités HTML, entités XML, encodage URL, littéraux SQL et motifs regex. Les grandes entrées sont traitées via Web Worker.',
+	'tool.text-escape-unescape.primary_keyword': 'echappement desechappement texte',
+	'tool.text-escape-unescape.meta_title':
+		'Échappement/Déséchappement Texte — JSON, HTML, URL, SQL | fmtly.dev',
+	'tool.text-escape-unescape.meta_description':
+		'Échappez et déséchappez du texte instantanément pour JSON, HTML, XML, URL, SQL et regex. Traitement 100% navigateur, rapide sur gros volumes, sans upload.',
+	'tool.text-escape-unescape.operation': 'Échapper / Déséchapper le texte',
+	'tool.text-escape-unescape.faq.0.question':
+		'Quels formats sont pris en charge pour l’échappement et le déséchappement ?',
+	'tool.text-escape-unescape.faq.0.answer':
+		'Vous pouvez traiter les chaînes JSON, les entités HTML et XML, l’encodage URL, les littéraux SQL et les caractères spéciaux regex dans les deux sens.',
+	'tool.text-escape-unescape.faq.1.question':
+		'Quelle différence avec un simple encodeur URL ou HTML ?',
+	'tool.text-escape-unescape.faq.1.answer':
+		'L’outil réunit plusieurs standards d’échappement dans un seul espace, permet de basculer immédiatement le sens de conversion et propose des options dédiées comme le + URL ou l’encadrement SQL.',
+	'tool.text-escape-unescape.faq.2.question':
+		'Les performances et la confidentialité restent-elles garanties pour de gros textes ?',
+	'tool.text-escape-unescape.faq.2.answer':
+		'Oui. Tout s’exécute localement dans votre navigateur. Au-delà de 500KB, un Web Worker prend le relais pour garder une interface fluide.',
+	'tool.text-escape-unescape.use_case.0':
+		'Préparer des entrées utilisateur en toute sécurité pour payloads JSON, query strings et SQL',
+	'tool.text-escape-unescape.use_case.1':
+		'Reconvertir des logs ou extraits API échappés en texte lisible',
+	'tool.text-escape-unescape.use_case.2':
+		'Construire et déboguer des motifs regex en gérant correctement les métacaractères',
+	'tool.text-escape-unescape.use_case.3':
+		'Normaliser du contenu échappé hétérogène sans quitter le navigateur',
+	'ui.text_escape.format_label': 'Format',
+	'ui.text_escape.action_label': 'Action',
+	'ui.text_escape.action.escape': 'Échapper',
+	'ui.text_escape.action.unescape': 'Déséchapper',
+	'ui.text_escape.format.json': 'Chaîne JSON',
+	'ui.text_escape.format.html': 'Entités HTML',
+	'ui.text_escape.format.xml': 'Entités XML',
+	'ui.text_escape.format.url': 'Composant URL',
+	'ui.text_escape.format.sql': 'Chaîne SQL',
+	'ui.text_escape.format.regex': 'Motif regex',
+	'ui.text_escape.input_label': 'Entrée',
+	'ui.text_escape.output_label': 'Sortie',
+	'ui.text_escape.input_placeholder': 'Saisissez ou collez le texte à traiter...',
+	'ui.text_escape.output_placeholder': 'La sortie échappée ou déséchappée apparaît ici...',
+	'ui.text_escape.option.url_encode_plus': 'Encoder les espaces en +',
+	'ui.text_escape.option.url_decode_plus': 'Décoder + comme espace',
+	'ui.text_escape.option.sql_wrap_quotes': 'Entourer de quotes simples',
+	'ui.text_escape.button.swap_action': 'Inverser l’action',
+	'ui.text_escape.worker_active':
+		'Grande entrée détectée (>{size}). Le traitement s’exécute dans un Web Worker.',
+	'ui.text_escape.worker_failed': 'Échec du traitement Worker. Bascule sur le thread principal.',
+	'ui.text_escape.warning.no_changes':
+		'Aucun changement détecté pour le format et l’action sélectionnés.',
+	'ui.text_escape.error.invalid_json_escape': 'Séquence d’échappement JSON invalide : {detail}',
+	'ui.text_escape.error.invalid_url_encoding': 'Entrée URL encodée invalide : {detail}',
+	'ui.text_escape.error.detail': 'Le traitement a échoué : {detail}',
 	'ui.diff_compare.statistics': 'Statistiques de Comparaison',
 	'ui.diff_compare.added_lines': 'Lignes ajoutées',
 	'ui.diff_compare.removed_lines': 'Lignes supprimées',
