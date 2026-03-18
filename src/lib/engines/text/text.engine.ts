@@ -300,6 +300,49 @@ export type TextReadabilityWorkerResponse = {
 	error?: string;
 };
 
+export type TextMorseMode = 'encode' | 'decode';
+
+export type TextMorseWordSeparator = 'slash' | 'pipe' | 'newline';
+
+export type TextMorseWarningCode =
+	| 'unsupported_input_characters'
+	| 'unknown_morse_tokens'
+	| 'no_changes_detected';
+
+export type TextMorseOptions = {
+	preserveUnsupported: boolean;
+	wordSeparator: TextMorseWordSeparator;
+	unknownPlaceholder: string;
+};
+
+export type TextMorseResult = {
+	mode: TextMorseMode;
+	input: string;
+	output: string;
+	changed: boolean;
+	warnings: TextMorseWarningCode[];
+	unsupportedCount: number;
+	unknownTokenCount: number;
+	symbolCount: number;
+	wordCount: number;
+	inputBytes: number;
+	outputBytes: number;
+	durationMs: number;
+};
+
+export type TextMorseWorkerRequest = {
+	id: number;
+	input: string;
+	mode: TextMorseMode;
+	options?: Partial<TextMorseOptions>;
+};
+
+export type TextMorseWorkerResponse = {
+	id: number;
+	result?: TextMorseResult;
+	error?: string;
+};
+
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 const SENTENCE_PATTERN = /[^.!?\n]+[.!?]+(?=\s|$)|[^\n]+$/g;
 
@@ -496,11 +539,18 @@ const DEFAULT_REGEX_TESTER_OPTIONS: RegexTesterAnalyzeOptions = {
 
 export const TEXT_ESCAPE_WORKER_THRESHOLD_BYTES = 500 * 1024;
 export const TEXT_READABILITY_WORKER_THRESHOLD_BYTES = 500 * 1024;
+export const TEXT_MORSE_WORKER_THRESHOLD_BYTES = 500 * 1024;
 
 const DEFAULT_TEXT_ESCAPE_OPTIONS: TextEscapeOptions = {
 	urlEncodeSpacesAsPlus: false,
 	urlDecodePlusAsSpace: true,
 	sqlWrapWithQuotes: false
+};
+
+const DEFAULT_TEXT_MORSE_OPTIONS: TextMorseOptions = {
+	preserveUnsupported: true,
+	wordSeparator: 'slash',
+	unknownPlaceholder: '?'
 };
 
 const HTML_ENTITY_DECODE_MAP: Record<string, string> = {
@@ -519,6 +569,73 @@ const XML_ENTITY_DECODE_MAP: Record<string, string> = {
 	gt: '>',
 	quot: '"',
 	apos: "'"
+};
+
+const MORSE_CHARACTER_TO_CODE: Record<string, string> = {
+	A: '.-',
+	B: '-...',
+	C: '-.-.',
+	D: '-..',
+	E: '.',
+	F: '..-.',
+	G: '--.',
+	H: '....',
+	I: '..',
+	J: '.---',
+	K: '-.-',
+	L: '.-..',
+	M: '--',
+	N: '-.',
+	O: '---',
+	P: '.--.',
+	Q: '--.-',
+	R: '.-.',
+	S: '...',
+	T: '-',
+	U: '..-',
+	V: '...-',
+	W: '.--',
+	X: '-..-',
+	Y: '-.--',
+	Z: '--..',
+	0: '-----',
+	1: '.----',
+	2: '..---',
+	3: '...--',
+	4: '....-',
+	5: '.....',
+	6: '-....',
+	7: '--...',
+	8: '---..',
+	9: '----.',
+	'.': '.-.-.-',
+	',': '--..--',
+	'?': '..--..',
+	"'": '.----.',
+	'!': '-.-.--',
+	'/': '-..-.',
+	'(': '-.--.',
+	')': '-.--.-',
+	'&': '.-...',
+	':': '---...',
+	';': '-.-.-.',
+	'=': '-...-',
+	'+': '.-.-.',
+	'-': '-....-',
+	_: '..--.-',
+	'"': '.-..-.',
+	$: '...-..-',
+	'@': '.--.-.'
+};
+
+const MORSE_CODE_TO_CHARACTER: Record<string, string> = Object.fromEntries(
+	Object.entries(MORSE_CHARACTER_TO_CODE).map(([character, morseCode]) => [morseCode, character])
+);
+
+const MORSE_WORD_SEPARATOR_VALUE_MAP: Record<TextMorseWordSeparator, string> = {
+	slash: ' / ',
+	pipe: ' | ',
+	newline: '\n'
 };
 
 type RegexExecWithIndices = RegExpExecArray & {
@@ -1009,6 +1126,55 @@ function normalizeTextEscapeOptions(options: Partial<TextEscapeOptions>): TextEs
 	};
 }
 
+function isTextMorseWordSeparator(value: string): value is TextMorseWordSeparator {
+	return value === 'slash' || value === 'pipe' || value === 'newline';
+}
+
+function normalizeTextMorseOptions(options: Partial<TextMorseOptions>): TextMorseOptions {
+	const normalizedPlaceholder =
+		typeof options.unknownPlaceholder === 'string' && options.unknownPlaceholder.length > 0
+			? options.unknownPlaceholder.slice(0, 5)
+			: DEFAULT_TEXT_MORSE_OPTIONS.unknownPlaceholder;
+
+	return {
+		preserveUnsupported:
+			options.preserveUnsupported ?? DEFAULT_TEXT_MORSE_OPTIONS.preserveUnsupported,
+		wordSeparator:
+			typeof options.wordSeparator === 'string' && isTextMorseWordSeparator(options.wordSeparator)
+				? options.wordSeparator
+				: DEFAULT_TEXT_MORSE_OPTIONS.wordSeparator,
+		unknownPlaceholder: normalizedPlaceholder
+	};
+}
+
+function getMorseWordSeparator(wordSeparator: TextMorseWordSeparator): string {
+	return MORSE_WORD_SEPARATOR_VALUE_MAP[wordSeparator] ?? MORSE_WORD_SEPARATOR_VALUE_MAP.slash;
+}
+
+function normalizeMorseCharacter(input: string): string {
+	const uppercase = input.toUpperCase();
+	if (MORSE_CHARACTER_TO_CODE[uppercase]) {
+		return uppercase;
+	}
+
+	const asciiFallback = uppercase.normalize('NFD').replace(/\p{M}/gu, '');
+	if (MORSE_CHARACTER_TO_CODE[asciiFallback]) {
+		return asciiFallback;
+	}
+
+	return uppercase;
+}
+
+function splitMorseWords(input: string): string[] {
+	return input
+		.replace(/\r\n/g, '\n')
+		.replace(/\r/g, '\n')
+		.trim()
+		.split(/(?:\s*[/|]\s*|\n+|\s{3,})/)
+		.map((segment) => segment.trim())
+		.filter((segment) => segment.length > 0);
+}
+
 function decodeHtmlOrXmlEntity(entity: string, namedMap: Record<string, string>): string | null {
 	const normalizedEntity = entity.toLowerCase();
 	const namedValue = namedMap[normalizedEntity];
@@ -1223,6 +1389,46 @@ function createTextEscapeResult(
 		error: null,
 		inputBytes,
 		outputBytes,
+		durationMs
+	};
+}
+
+function createTextMorseResult(
+	input: string,
+	output: string,
+	mode: TextMorseMode,
+	unsupportedCount: number,
+	unknownTokenCount: number,
+	symbolCount: number,
+	wordCount: number,
+	durationMs: number
+): TextMorseResult {
+	const warnings: TextMorseWarningCode[] = [];
+
+	if (unsupportedCount > 0) {
+		warnings.push('unsupported_input_characters');
+	}
+
+	if (unknownTokenCount > 0) {
+		warnings.push('unknown_morse_tokens');
+	}
+
+	if (output === input) {
+		warnings.push('no_changes_detected');
+	}
+
+	return {
+		mode,
+		input,
+		output,
+		changed: output !== input,
+		warnings,
+		unsupportedCount,
+		unknownTokenCount,
+		symbolCount,
+		wordCount,
+		inputBytes: byteSizeOfString(input),
+		outputBytes: byteSizeOfString(output),
 		durationMs
 	};
 }
@@ -2132,6 +2338,120 @@ export function shouldUseTextEscapeWorker(input: string): boolean {
 
 export function shouldUseTextReadabilityWorker(input: string): boolean {
 	return byteSizeOfString(input) > TEXT_READABILITY_WORKER_THRESHOLD_BYTES;
+}
+
+export function shouldUseTextMorseWorker(input: string): boolean {
+	return byteSizeOfString(input) > TEXT_MORSE_WORKER_THRESHOLD_BYTES;
+}
+
+export function processTextMorse(
+	input: string,
+	mode: TextMorseMode,
+	options: Partial<TextMorseOptions> = {}
+): TextMorseResult {
+	const startedAt = nowMs();
+	const normalizedOptions = normalizeTextMorseOptions(options);
+
+	const runDuration = (): number => nowMs() - startedAt;
+
+	if (input.length === 0) {
+		return createTextMorseResult(input, '', mode, 0, 0, 0, 0, runDuration());
+	}
+
+	if (mode === 'encode') {
+		const words = input
+			.replace(/\r\n/g, '\n')
+			.replace(/\r/g, '\n')
+			.trim()
+			.split(/\s+/u)
+			.filter((word) => word.length > 0);
+
+		const encodedWords: string[] = [];
+		let unsupportedCount = 0;
+		let symbolCount = 0;
+
+		for (const word of words) {
+			const encodedSymbols: string[] = [];
+
+			for (const rawCharacter of Array.from(word)) {
+				const normalizedCharacter = normalizeMorseCharacter(rawCharacter);
+				const morseCode = MORSE_CHARACTER_TO_CODE[normalizedCharacter];
+
+				if (morseCode) {
+					encodedSymbols.push(morseCode);
+					symbolCount += 1;
+					continue;
+				}
+
+				unsupportedCount += 1;
+
+				if (normalizedOptions.preserveUnsupported) {
+					encodedSymbols.push(rawCharacter);
+				}
+			}
+
+			if (encodedSymbols.length > 0) {
+				encodedWords.push(encodedSymbols.join(' '));
+			}
+		}
+
+		const output = encodedWords.join(getMorseWordSeparator(normalizedOptions.wordSeparator));
+
+		return createTextMorseResult(
+			input,
+			output,
+			mode,
+			unsupportedCount,
+			0,
+			symbolCount,
+			encodedWords.length,
+			runDuration()
+		);
+	}
+
+	const morseWords = splitMorseWords(input);
+	const decodedWords: string[] = [];
+	let unknownTokenCount = 0;
+	let symbolCount = 0;
+
+	for (const morseWord of morseWords) {
+		const tokens = morseWord.split(/\s+/).filter((token) => token.length > 0);
+		const decodedCharacters: string[] = [];
+
+		for (const token of tokens) {
+			const normalizedToken = token.trim();
+			const decodedCharacter = MORSE_CODE_TO_CHARACTER[normalizedToken];
+
+			if (decodedCharacter) {
+				decodedCharacters.push(decodedCharacter);
+				symbolCount += 1;
+				continue;
+			}
+
+			unknownTokenCount += 1;
+
+			if (normalizedOptions.preserveUnsupported) {
+				decodedCharacters.push(normalizedOptions.unknownPlaceholder);
+			}
+		}
+
+		if (decodedCharacters.length > 0) {
+			decodedWords.push(decodedCharacters.join(''));
+		}
+	}
+
+	const output = decodedWords.join(' ');
+
+	return createTextMorseResult(
+		input,
+		output,
+		mode,
+		0,
+		unknownTokenCount,
+		symbolCount,
+		decodedWords.length,
+		runDuration()
+	);
 }
 
 export function processTextEscape(

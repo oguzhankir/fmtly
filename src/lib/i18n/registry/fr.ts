@@ -1963,6 +1963,66 @@ const registryFr: Record<string, string> = {
 		'Optimiser la microcopy produit et les messages in-app pour un public plus large',
 	'tool.text-readability-analyzer.use_case.3':
 		'Repérer les passages denses dans la documentation technique et les simplifier',
+	'tool.text-morse-code-translator.display_name': 'Traducteur Morse',
+	'tool.text-morse-code-translator.tagline':
+		'Convertissez du texte en Morse et décodez le Morse en texte lisible',
+	'tool.text-morse-code-translator.description':
+		'Traduisez du texte en code Morse international et décodez des séquences Morse instantanément. Prend en charge lettres, chiffres et ponctuation courante, avec traitement Web Worker pour les gros volumes.',
+	'tool.text-morse-code-translator.primary_keyword': 'traducteur morse',
+	'tool.text-morse-code-translator.meta_title': 'Traducteur Morse — Texte ↔ Morse | fmtly.dev',
+	'tool.text-morse-code-translator.meta_description':
+		'Convertissez du texte en Morse et du Morse en texte clair instantanément. Rapide, privé et 100% dans le navigateur.',
+	'tool.text-morse-code-translator.operation': 'Traduire en Morse',
+	'tool.text-morse-code-translator.faq.0.question':
+		'Quelle variante de Morse ce traducteur utilise-t-il ?',
+	'tool.text-morse-code-translator.faq.0.answer':
+		'Il utilise le code Morse international pour les lettres latines, les chiffres et la ponctuation la plus courante.',
+	'tool.text-morse-code-translator.faq.1.question':
+		'Comment sont gérés les tokens Morse inconnus au décodage ?',
+	'tool.text-morse-code-translator.faq.1.answer':
+		'Les tokens inconnus sont signalés et peuvent être remplacés par un caractère de substitution configurable pour conserver une sortie exploitable.',
+	'tool.text-morse-code-translator.faq.2.question':
+		'Peut-on traiter de gros logs ou de longs contenus ?',
+	'tool.text-morse-code-translator.faq.2.answer':
+		'Oui. Au-delà de 500KB, le traitement passe en Web Worker pour garder une interface fluide.',
+	'tool.text-morse-code-translator.use_case.0':
+		'Encoder rapidement des indicatifs, alertes ou phrases d’entraînement en Morse',
+	'tool.text-morse-code-translator.use_case.1':
+		'Décoder des extraits Morse capturés dans des logs, transcriptions ou exercices',
+	'tool.text-morse-code-translator.use_case.2':
+		'Enseigner les bases du Morse avec un retour immédiat en encodage/décodage',
+	'tool.text-morse-code-translator.use_case.3':
+		'Valider ponctuation et séparation avant intégration dans vos outils',
+	'ui.morse.mode_label': 'Mode',
+	'ui.morse.mode.encode': 'Texte → Morse',
+	'ui.morse.mode.decode': 'Morse → Texte',
+	'ui.morse.separator_label': 'Séparateur de mots',
+	'ui.morse.separator.slash': '/ slash',
+	'ui.morse.separator.pipe': '| pipe',
+	'ui.morse.separator.newline': 'Nouvelle ligne',
+	'ui.morse.option.preserve_unsupported_encode':
+		'Conserver les caractères non pris en charge dans la sortie',
+	'ui.morse.option.preserve_unsupported_decode':
+		'Insérer un remplacement pour les tokens Morse inconnus',
+	'ui.morse.option.unknown_placeholder': 'Remplacement inconnu',
+	'ui.morse.input_label': 'Entrée',
+	'ui.morse.output_label': 'Sortie',
+	'ui.morse.input_placeholder.encode': 'Saisissez ou collez du texte à convertir en Morse...',
+	'ui.morse.input_placeholder.decode': 'Collez du Morse (., -, /, |) pour le décoder...',
+	'ui.morse.output_placeholder.encode': 'La sortie Morse s’affiche ici...',
+	'ui.morse.output_placeholder.decode': 'Le texte décodé s’affiche ici...',
+	'ui.morse.button.swap_mode': 'Changer de mode et réutiliser la sortie',
+	'ui.morse.worker_active':
+		'Entrée volumineuse détectée (>{size}). Le traitement s’exécute dans un Web Worker.',
+	'ui.morse.worker_failed': 'Échec du traitement Worker. Repli sur le thread principal.',
+	'ui.morse.warning.unsupported_input_characters':
+		'Certains caractères d’entrée ne figurent pas dans le mapping Morse pris en charge.',
+	'ui.morse.warning.unknown_morse_tokens': 'Certains tokens Morse n’ont pas pu être décodés.',
+	'ui.morse.warning.no_changes': 'Aucun changement détecté pour le mode sélectionné.',
+	'ui.morse.stat.symbols': 'Symboles',
+	'ui.morse.stat.words': 'Mots',
+	'ui.morse.stat.unsupported': 'Non pris en charge',
+	'ui.morse.stat.unknown_tokens': 'Tokens inconnus',
 	'ui.readability.unavailable': '—',
 	'ui.readability.input_label': 'Texte d’entrée',
 	'ui.readability.input_placeholder': 'Collez ou saisissez du texte pour analyser sa lisibilité...',

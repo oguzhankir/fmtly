@@ -501,6 +501,51 @@ Regex: ^(test|prod)+$
 SQL owner: O'Reilly`
 	},
 	{
+		id: 'text-morse-code-translator',
+		category: 'text',
+		slug: 'morse',
+		displayName: 'tool.text-morse-code-translator.display_name',
+		tagline: 'tool.text-morse-code-translator.tagline',
+		description: 'tool.text-morse-code-translator.description',
+		primaryKeyword: 'tool.text-morse-code-translator.primary_keyword',
+		metaTitle: 'tool.text-morse-code-translator.meta_title',
+		metaDescription: 'tool.text-morse-code-translator.meta_description',
+		engine: 'text',
+		operation: 'tool.text-morse-code-translator.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'text', slug: 'escape' },
+			{ category: 'text', slug: 'regex' },
+			{ category: 'text', slug: 'word-counter' },
+			{ category: 'text', slug: 'diff' }
+		],
+		faqs: [
+			{
+				question: 'tool.text-morse-code-translator.faq.0.question',
+				answer: 'tool.text-morse-code-translator.faq.0.answer'
+			},
+			{
+				question: 'tool.text-morse-code-translator.faq.1.question',
+				answer: 'tool.text-morse-code-translator.faq.1.answer'
+			},
+			{
+				question: 'tool.text-morse-code-translator.faq.2.question',
+				answer: 'tool.text-morse-code-translator.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.text-morse-code-translator.use_case.0',
+			'tool.text-morse-code-translator.use_case.1',
+			'tool.text-morse-code-translator.use_case.2',
+			'tool.text-morse-code-translator.use_case.3'
+		],
+		sampleInput: `Deploy API v2 at 09:30!
+Check logs, then page on-call.`
+	},
+	{
 		id: 'text-whitespace-cleaner',
 		category: 'text',
 		slug: 'whitespace',

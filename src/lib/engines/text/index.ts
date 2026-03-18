@@ -18,6 +18,9 @@ export {
 	analyzeTextReadability,
 	shouldUseTextReadabilityWorker,
 	TEXT_READABILITY_WORKER_THRESHOLD_BYTES,
+	processTextMorse,
+	shouldUseTextMorseWorker,
+	TEXT_MORSE_WORKER_THRESHOLD_BYTES,
 	type TextCounterMetrics,
 	type TextCaseConversions,
 	type MarkdownToHtmlOptions,
@@ -59,7 +62,14 @@ export {
 	type TextReadabilityLevel,
 	type TextReadabilityResult,
 	type TextReadabilityWorkerRequest,
-	type TextReadabilityWorkerResponse
+	type TextReadabilityWorkerResponse,
+	type TextMorseMode,
+	type TextMorseWordSeparator,
+	type TextMorseWarningCode,
+	type TextMorseOptions,
+	type TextMorseResult,
+	type TextMorseWorkerRequest,
+	type TextMorseWorkerResponse
 } from './text.engine.js';
 
 export {

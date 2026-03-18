@@ -96,7 +96,7 @@ Encode, decode, hash, and escape strings across common formats.
 | 71 | Hex ↔ ASCII / UTF-8 | `encode/hex` | Convert between hexadecimal and text. Supports ASCII and UTF-8. |
 | 72 | ROT13 / Caesar Cipher | `encode/rot13` | Apply ROT13 or arbitrary Caesar shift. Useful for spoiler text and simple obfuscation. |
 | 73 | Punycode Encode / Decode | `encode/punycode` | Convert internationalized domain names (IDN) to Punycode and back. |
-| 74 | Morse Code Translator | `encode/morse` | Convert text to Morse code (audio beeps + visual dots/dashes) and back. |
+| 74 | Morse Code Translator ✅ | `text/morse` | done — Convert text to Morse code and decode Morse back to plain text. |
 
 ---
 
@@ -119,6 +119,7 @@ Analyze, transform, and manipulate plain text.
 | 82 | Regex Tester | `text/regex` | done | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
 | 78 | Readability Analyzer | `text/readability` | done | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
 | 84 | Text Escape / Unescape | `text/escape` | done | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
+| 86 | Morse Code Translator | `text/morse` | done | Convert text to Morse code and decode Morse back to plain text with large-input worker support. |
 
 ### Backlog — Text & String Tools
 
