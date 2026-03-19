@@ -10,7 +10,7 @@ import {
 	validateJSON
 } from '$engines/json/index.js';
 import type { FormatOptions, WorkerRequest, WorkerResponse } from '$engines/json/index.js';
-import { toGoStructs } from '$engines/json/json.engine.js';
+import { toGoStructs, toTypeScriptTypes } from '$engines/json/json.engine.js';
 
 const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>> = {
 	parseJSON: (input: unknown) => parseJSON(input as string),
@@ -23,7 +23,8 @@ const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>
 	computeJSONStats: (data: unknown) => computeJSONStats(data),
 	buildJSONTree: (data: unknown) => buildJSONTree(data),
 	validateJSON: (input: unknown) => validateJSON(input as string),
-	toGoStructs: (input: unknown) => toGoStructs(input as string)
+	toGoStructs: (input: unknown) => toGoStructs(input as string),
+	toTypeScriptTypes: (input: unknown) => toTypeScriptTypes(input as string)
 };
 
 let initialized = false;

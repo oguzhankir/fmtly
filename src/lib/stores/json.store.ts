@@ -26,6 +26,7 @@ import {
 	toGoStructs,
 	toMarkdownTable,
 	toToml,
+	toTypeScriptTypes,
 	toYaml
 } from '$engines/json/json.engine.js';
 import { jsonToXML } from '$engines/xml/index.js';
@@ -164,6 +165,9 @@ async function applyToolOutput(value: string): Promise<void> {
 		case 'to-go':
 			await applyGoStructOutput(value);
 			return;
+		case 'to-typescript':
+			await applyTypeScriptOutput(value);
+			return;
 		case 'validator':
 		case 'schema-validate':
 		case 'jsonpath':
@@ -286,6 +290,28 @@ async function applyGoStructOutput(value: string): Promise<void> {
 		jsonAdvancedStats.set(null);
 		jsonFormatWarnings.set([
 			error instanceof Error ? error.message : 'Could not generate Go structs'
+		]);
+	}
+}
+
+async function applyTypeScriptOutput(value: string): Promise<void> {
+	try {
+		const generated = shouldUseWorker(value)
+			? await callJsonWorkerMethod('toTypeScriptTypes', [value])
+			: toTypeScriptTypes(value);
+
+		if (typeof generated !== 'string') {
+			throw new Error('TypeScript generation returned an invalid result');
+		}
+
+		output.set(generated);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([
+			error instanceof Error ? error.message : 'Could not generate TypeScript types'
 		]);
 	}
 }

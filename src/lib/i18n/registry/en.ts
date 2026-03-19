@@ -1401,6 +1401,35 @@ const registryEn: Record<string, string> = {
 		'Replace manual model writing when exploring unfamiliar JSON schemas',
 	'tool.json-to-go.use_case.3':
 		'Speed up backend prototyping with production-ready Go type scaffolding',
+	'tool.json-to-typescript.display_name': 'JSON to TypeScript Types',
+	'tool.json-to-typescript.tagline':
+		'Generate precise TypeScript interfaces and types from JSON instantly',
+	'tool.json-to-typescript.description':
+		'Convert JSON samples into clean TypeScript interfaces and union types with nested inference, optional-field detection, and null-safe typing. Fast, private, and browser-based.',
+	'tool.json-to-typescript.primary_keyword': 'json to typescript types',
+	'tool.json-to-typescript.meta_title': 'JSON to TypeScript Types Generator — fmtly.dev',
+	'tool.json-to-typescript.meta_description':
+		'Generate TypeScript interfaces and types from JSON in your browser. Supports nested objects, arrays, unions, and optional fields. No data leaves your device.',
+	'tool.json-to-typescript.operation': 'Convert',
+	'tool.json-to-typescript.faq.0.question':
+		'How does the tool map JSON values to TypeScript types?',
+	'tool.json-to-typescript.faq.0.answer':
+		'Strings become string, numbers become number, booleans become boolean, arrays become typed arrays, and nested objects become generated interfaces. Mixed values are represented as union types.',
+	'tool.json-to-typescript.faq.1.question': 'How are optional and nullable fields handled?',
+	'tool.json-to-typescript.faq.1.answer':
+		'If a key is missing in part of the sample set, it is marked optional with ?. If a value can be null, the generated type includes a null union.',
+	'tool.json-to-typescript.faq.2.question':
+		'Can I use the generated output directly in production code?',
+	'tool.json-to-typescript.faq.2.answer':
+		'Yes. The output is designed as a practical starting point for app and API models. You can paste it directly into your codebase and refine naming conventions if needed.',
+	'tool.json-to-typescript.use_case.0':
+		'Bootstrap frontend and backend models from real API payloads',
+	'tool.json-to-typescript.use_case.1':
+		'Generate typed contracts for SDKs and webhook integrations',
+	'tool.json-to-typescript.use_case.2':
+		'Replace manual interface drafting for deeply nested JSON data',
+	'tool.json-to-typescript.use_case.3':
+		'Accelerate refactors by deriving strict types from existing sample data',
 	'tool.json-schema-validate.display_name': 'JSON Schema Validator',
 	'tool.json-schema-validate.tagline': 'Validate JSON against a user-supplied schema',
 	'tool.json-schema-validate.description':
