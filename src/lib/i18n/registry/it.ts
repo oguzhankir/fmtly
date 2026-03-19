@@ -1420,6 +1420,33 @@ const registryIt: Record<string, string> = {
 		'Ridurre la scrittura manuale dei modelli su schemi JSON sconosciuti',
 	'tool.json-to-go.use_case.3':
 		'Accelerare il prototyping backend con scaffolding di tipi Go pronto per la produzione',
+	'tool.json-to-typescript.display_name': 'JSON in tipi TypeScript',
+	'tool.json-to-typescript.tagline': 'Genera interfacce e tipi TypeScript precisi partendo da JSON',
+	'tool.json-to-typescript.description':
+		'Converti esempi JSON in interfacce e union type TypeScript puliti, con inferenza annidata, rilevamento dei campi opzionali e tipizzazione sicura con null. Veloce, privato e 100% nel browser.',
+	'tool.json-to-typescript.primary_keyword': 'json in tipi typescript',
+	'tool.json-to-typescript.meta_title': 'Generatore JSON in tipi TypeScript — fmtly.dev',
+	'tool.json-to-typescript.meta_description':
+		'Genera interfacce e tipi TypeScript da JSON direttamente nel browser. Supporta oggetti annidati, array, union e campi opzionali. I dati restano sul tuo dispositivo.',
+	'tool.json-to-typescript.operation': 'Converti',
+	'tool.json-to-typescript.faq.0.question':
+		'Come mappa lo strumento i valori JSON nei tipi TypeScript?',
+	'tool.json-to-typescript.faq.0.answer':
+		'Le stringhe diventano string, i numeri number, i booleani boolean, gli array diventano array tipizzati e gli oggetti annidati diventano interfacce generate. I valori misti vengono rappresentati con union type.',
+	'tool.json-to-typescript.faq.1.question': 'Come vengono gestiti i campi opzionali e nullable?',
+	'tool.json-to-typescript.faq.1.answer':
+		'Se una chiave manca in parte dei campioni, il campo viene marcato opzionale con ?. Se un valore può essere null, il tipo generato include una union con null.',
+	'tool.json-to-typescript.faq.2.question':
+		'Posso usare l’output generato direttamente nel mio progetto?',
+	'tool.json-to-typescript.faq.2.answer':
+		'Sì. L’output è pensato come base pratica per modelli applicativi e API. Puoi incollarlo direttamente nella codebase e rifinire le convenzioni di naming quando serve.',
+	'tool.json-to-typescript.use_case.0': 'Avviare modelli frontend e backend da payload API reali',
+	'tool.json-to-typescript.use_case.1':
+		'Generare contratti tipizzati per SDK e integrazioni webhook',
+	'tool.json-to-typescript.use_case.2':
+		'Ridurre la scrittura manuale di interfacce su JSON profondamente annidati',
+	'tool.json-to-typescript.use_case.3':
+		'Accelerare i refactor derivando tipi rigorosi da dati di esempio',
 	'tool.json-schema-validate.display_name': 'Validatore JSON Schema',
 	'tool.json-schema-validate.tagline': 'Valida JSON rispetto a uno schema fornito',
 	'tool.json-schema-validate.description':
@@ -2204,7 +2231,35 @@ const registryIt: Record<string, string> = {
 	'ui.jwt.copy_payload': 'Copia',
 	'ui.jwt.copy_signature': 'Copia',
 	'ui.jwt.worker_active': 'Input grande (>{size}) elaborato nel Worker.',
-	'ui.jwt.worker_failed': 'Elaborazione Worker fallita. Ripiego sul thread principale.'
+	'ui.jwt.worker_failed': 'Elaborazione Worker fallita. Ripiego sul thread principale.',
+
+	// Missing keys from English
+	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',
+	'tool.csv-diff.tagline': 'tool.csv-diff.tagline',
+	'tool.csv-diff.description': 'tool.csv-diff.description',
+	'tool.csv-diff.primary_keyword': 'tool.csv-diff.primary_keyword',
+	'tool.csv-diff.meta_title': 'tool.csv-diff.meta_title',
+	'tool.csv-diff.meta_description': 'tool.csv-diff.meta_description',
+	'tool.csv-diff.operation': 'tool.csv-diff.operation',
+	'tool.csv-diff.faq.0.question': 'tool.csv-diff.faq.0.question',
+	'tool.csv-diff.faq.0.answer': 'tool.csv-diff.faq.0.answer',
+	'tool.csv-diff.faq.1.question': 'tool.csv-diff.faq.1.question',
+	'tool.csv-diff.faq.1.answer': 'tool.csv-diff.faq.1.answer',
+	'tool.csv-diff.use_case.0': 'tool.csv-diff.use_case.0',
+	'tool.csv-diff.use_case.1': 'tool.csv-diff.use_case.1',
+	'ui.validator.mode': 'ui.validator.mode',
+	'ui.validator.paste_yaml': 'ui.validator.paste_yaml',
+	'ui.validator.yaml_paste_schema': 'ui.validator.yaml_paste_schema',
+	'ui.validator.yaml_validating_schema': 'ui.validator.yaml_validating_schema',
+	'ui.validator.yaml_matches_schema': 'ui.validator.yaml_matches_schema',
+	'ui.validator.yaml_matches_current_schema': 'ui.validator.yaml_matches_current_schema',
+	'ui.validator.yaml_schema_title': 'ui.validator.yaml_schema_title',
+	'ui.validator.yaml_schema_standard': 'ui.validator.yaml_schema_standard',
+	'ui.validator.yaml_paste_schema_placeholder': 'ui.validator.yaml_paste_schema_placeholder',
+	'ui.validator.yaml_schema_validation_desc': 'ui.validator.yaml_schema_validation_desc',
+	'ui.whitespace_cleaner.output': 'ui.whitespace_cleaner.output',
+	'ui.whitespace_cleaner.statistics': 'ui.whitespace_cleaner.statistics',
+	'ui.whitespace_cleaner.normalized': 'ui.whitespace_cleaner.normalized'
 };
 
 export default registryIt;

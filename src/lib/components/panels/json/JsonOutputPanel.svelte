@@ -42,7 +42,16 @@
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isMinifier = $derived(toolSlug === 'minifier');
 	let isConverter = $derived(
-		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown', 'schema-generator', 'to-go'].includes(
+		[
+			'to-yaml',
+			'to-csv',
+			'to-xml',
+			'to-toml',
+			'to-markdown',
+			'schema-generator',
+			'to-go',
+			'to-typescript'
+		].includes(
 			toolSlug
 		)
 	);
@@ -57,7 +66,8 @@
 			'to-toml',
 			'to-markdown',
 			'schema-generator',
-			'to-go'
+			'to-go',
+			'to-typescript'
 		].includes(toolSlug)
 	);
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
@@ -90,7 +100,8 @@
 			json: () => import('highlight.js/lib/languages/json'),
 			xml: () => import('highlight.js/lib/languages/xml'),
 			yaml: () => import('highlight.js/lib/languages/yaml'),
-			go: () => import('highlight.js/lib/languages/go')
+			go: () => import('highlight.js/lib/languages/go'),
+			typescript: () => import('highlight.js/lib/languages/typescript')
 		};
 
 		const loader = langLoaders[outputLanguage];
@@ -216,7 +227,8 @@
 			toml: '.toml',
 			csv: '.csv',
 			markdown: '.md',
-			go: '.go'
+			go: '.go',
+			typescript: '.ts'
 		};
 
 		const ext = extMap[outputLanguage] ?? '.txt';

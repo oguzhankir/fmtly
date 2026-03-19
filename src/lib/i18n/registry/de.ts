@@ -1370,6 +1370,35 @@ const registryDe: Record<string, string> = {
 		'Manuelles Modellieren bei unbekannten JSON-Schemata deutlich reduzieren',
 	'tool.json-to-go.use_case.3':
 		'Backend-Prototyping mit produktionsnahen Go-Typgerüsten beschleunigen',
+	'tool.json-to-typescript.display_name': 'JSON zu TypeScript-Typen',
+	'tool.json-to-typescript.tagline':
+		'Erzeugen Sie präzise TypeScript-Interfaces und -Typen aus JSON',
+	'tool.json-to-typescript.description':
+		'Konvertieren Sie JSON-Beispiele in saubere TypeScript-Interfaces und Union-Typen mit verschachtelter Typinferenz, Optional-Feld-Erkennung und null-sicherer Typisierung. Schnell, privat und vollständig im Browser.',
+	'tool.json-to-typescript.primary_keyword': 'json zu typescript typen',
+	'tool.json-to-typescript.meta_title': 'JSON zu TypeScript-Typen Generator — fmtly.dev',
+	'tool.json-to-typescript.meta_description':
+		'Generieren Sie TypeScript-Interfaces und -Typen aus JSON direkt im Browser. Unterstützt verschachtelte Objekte, Arrays, Union-Typen und optionale Felder. Keine Daten verlassen Ihr Gerät.',
+	'tool.json-to-typescript.operation': 'Konvertieren',
+	'tool.json-to-typescript.faq.0.question':
+		'Wie werden JSON-Werte auf TypeScript-Typen abgebildet?',
+	'tool.json-to-typescript.faq.0.answer':
+		'Strings werden zu string, Zahlen zu number, Booleans zu boolean, Arrays zu typisierten Arrays und verschachtelte Objekte zu generierten Interfaces. Gemischte Inhalte werden als Union-Typen dargestellt.',
+	'tool.json-to-typescript.faq.1.question': 'Wie werden optionale und nullable Felder behandelt?',
+	'tool.json-to-typescript.faq.1.answer':
+		'Wenn ein Schlüssel nur in einem Teil der Beispiele vorkommt, wird das Feld mit ? als optional markiert. Kann ein Wert null sein, wird der Typ um eine null-Union erweitert.',
+	'tool.json-to-typescript.faq.2.question':
+		'Kann ich die generierte Ausgabe direkt im Projekt verwenden?',
+	'tool.json-to-typescript.faq.2.answer':
+		'Ja. Die Ausgabe ist als praktischer Startpunkt für App- und API-Modelle gedacht. Sie können den Code direkt übernehmen und bei Bedarf an Ihre Namenskonventionen anpassen.',
+	'tool.json-to-typescript.use_case.0':
+		'Frontend- und Backend-Modelle aus realen API-Payloads ableiten',
+	'tool.json-to-typescript.use_case.1':
+		'Typisierte Verträge für SDKs und Webhook-Integrationen erzeugen',
+	'tool.json-to-typescript.use_case.2':
+		'Manuelles Interface-Schreiben bei tief verschachtelten JSON-Daten reduzieren',
+	'tool.json-to-typescript.use_case.3':
+		'Refactorings beschleunigen, indem strikte Typen aus Beispieldaten abgeleitet werden',
 	'tool.json-schema-validate.display_name': 'JSON-Schema-Validator',
 	'tool.json-schema-validate.tagline': 'JSON gegen ein bereitgestelltes Schema validieren',
 	'tool.json-schema-validate.description':
@@ -2153,7 +2182,28 @@ const registryDe: Record<string, string> = {
 	'ui.jwt.worker_active': 'Große Eingabe (>{size}) wird im Worker verarbeitet.',
 	'ui.jwt.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Hauptthread.',
 	'ui.jwt.error.invalid_signature': 'Ungültige JWT-Signatur',
-	'ui.jwt.errors.invalid_base64': 'Ungültige Base64-URL-Kodierung in JWT-Segmenten'
+	'ui.jwt.errors.invalid_base64': 'Ungültige Base64-URL-Kodierung in JWT-Segmenten',
+
+	// Missing keys from English
+	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',
+	'tool.csv-diff.tagline': 'tool.csv-diff.tagline',
+	'tool.csv-diff.description': 'tool.csv-diff.description',
+	'tool.csv-diff.primary_keyword': 'tool.csv-diff.primary_keyword',
+	'tool.csv-diff.meta_title': 'tool.csv-diff.meta_title',
+	'tool.csv-diff.meta_description': 'tool.csv-diff.meta_description',
+	'tool.csv-diff.operation': 'tool.csv-diff.operation',
+	'tool.csv-diff.faq.0.question': 'tool.csv-diff.faq.0.question',
+	'tool.csv-diff.faq.0.answer': 'tool.csv-diff.faq.0.answer',
+	'tool.csv-diff.faq.1.question': 'tool.csv-diff.faq.1.question',
+	'tool.csv-diff.faq.1.answer': 'tool.csv-diff.faq.1.answer',
+	'tool.csv-diff.use_case.0': 'tool.csv-diff.use_case.0',
+	'tool.csv-diff.use_case.1': 'tool.csv-diff.use_case.1',
+	'ui.validator.schema': 'ui.validator.schema',
+	'ui.validator.warnings': 'ui.validator.warnings',
+	'ui.toast.file_loaded': 'ui.toast.file_loaded',
+	'ui.whitespace_cleaner.output': 'ui.whitespace_cleaner.output',
+	'ui.whitespace_cleaner.statistics': 'ui.whitespace_cleaner.statistics',
+	'ui.whitespace_cleaner.normalized': 'ui.whitespace_cleaner.normalized'
 };
 
 export default registryDe;

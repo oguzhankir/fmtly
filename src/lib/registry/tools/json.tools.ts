@@ -435,6 +435,76 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
+		id: 'json-to-typescript',
+		category: 'json',
+		slug: 'to-typescript',
+		displayName: 'tool.json-to-typescript.display_name',
+		tagline: 'tool.json-to-typescript.tagline',
+		description: 'tool.json-to-typescript.description',
+		primaryKeyword: 'tool.json-to-typescript.primary_keyword',
+		metaTitle: 'tool.json-to-typescript.meta_title',
+		metaDescription: 'tool.json-to-typescript.meta_description',
+		engine: 'json',
+		operation: 'tool.json-to-typescript.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'json',
+		outputLanguage: 'typescript',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'to-go' },
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'to-toml' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-to-typescript.faq.0.question',
+				answer: 'tool.json-to-typescript.faq.0.answer'
+			},
+			{
+				question: 'tool.json-to-typescript.faq.1.question',
+				answer: 'tool.json-to-typescript.faq.1.answer'
+			},
+			{
+				question: 'tool.json-to-typescript.faq.2.question',
+				answer: 'tool.json-to-typescript.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-to-typescript.use_case.0',
+			'tool.json-to-typescript.use_case.1',
+			'tool.json-to-typescript.use_case.2',
+			'tool.json-to-typescript.use_case.3'
+		],
+		sampleInput: `{
+  "workspace": {
+    "id": "ws_42",
+    "name": "fmtly",
+    "createdAt": "2026-03-19T16:30:00Z"
+  },
+  "members": [
+    {
+      "id": "u_1",
+      "email": "ada@example.com",
+      "role": "owner",
+      "active": true,
+      "lastSeenAt": null
+    },
+    {
+      "id": "u_2",
+      "email": "grace@example.com",
+      "role": "editor",
+      "active": false,
+      "lastSeenAt": "2026-03-18T10:00:00Z"
+    }
+  ],
+  "limits": {
+    "maxProjects": 25,
+    "maxRequestsPerMinute": 600
+  }
+}`
+	},
+	{
 		id: 'json-schema-validate',
 		category: 'json',
 		slug: 'schema-validate',

@@ -1428,6 +1428,33 @@ const registryTr: Record<string, string> = {
 		'Bilinmeyen JSON şemalarını incelerken manuel model yazımını azaltmak',
 	'tool.json-to-go.use_case.3':
 		'Üretime yakın Go tip iskeletleriyle backend prototiplemeyi hızlandırmak',
+	'tool.json-to-typescript.display_name': "JSON'dan TypeScript Tiplerine",
+	'tool.json-to-typescript.tagline':
+		'JSON verisinden doğru TypeScript arayüz ve tipleri anında üret',
+	'tool.json-to-typescript.description':
+		'JSON örneklerini; iç içe tip çıkarımı, opsiyonel alan tespiti ve null uyumlu tiplerle temiz TypeScript interface/type çıktısına dönüştür. Hızlı, gizli ve tamamen tarayıcı tabanlıdır.',
+	'tool.json-to-typescript.primary_keyword': "json'dan typescript tiplerine",
+	'tool.json-to-typescript.meta_title': "JSON'dan TypeScript Tiplerine Dönüştürücü — fmtly.dev",
+	'tool.json-to-typescript.meta_description':
+		'Tarayıcıda JSON verisinden anında TypeScript interface ve type üret. İç içe nesneleri, dizileri, union tiplerini ve opsiyonel alanları destekler. Veriler cihazından çıkmaz.',
+	'tool.json-to-typescript.operation': 'Dönüştür',
+	'tool.json-to-typescript.faq.0.question': 'JSON değerleri TypeScript tiplerine nasıl eşleniyor?',
+	'tool.json-to-typescript.faq.0.answer':
+		'Metinler string, sayılar number, boolean değerler boolean olur. Diziler tipli array olarak, iç içe nesneler ise otomatik üretilen interface yapıları olarak çıkarılır. Karışık içerikler union tipe dönüştürülür.',
+	'tool.json-to-typescript.faq.1.question': 'Opsiyonel ve null alanlar nasıl ele alınıyor?',
+	'tool.json-to-typescript.faq.1.answer':
+		'Bir anahtar bazı örneklerde yoksa alan ? ile opsiyonel işaretlenir. Değer null olabiliyorsa ilgili tip null union ile üretilir.',
+	'tool.json-to-typescript.faq.2.question': 'Üretilen çıktıyı projede doğrudan kullanabilir miyim?',
+	'tool.json-to-typescript.faq.2.answer':
+		'Evet. Çıktı, uygulama ve API modelleri için pratik bir başlangıç olacak şekilde hazırlanır. Kod tabanına doğrudan ekleyip isimlendirme kurallarına göre düzenleyebilirsin.',
+	'tool.json-to-typescript.use_case.0':
+		'Gerçek API payloadlarından frontend ve backend modellerini hızla başlatmak',
+	'tool.json-to-typescript.use_case.1':
+		'SDK ve webhook entegrasyonları için tipli sözleşmeler üretmek',
+	'tool.json-to-typescript.use_case.2':
+		'Derin iç içe JSON verilerinde manuel interface yazımını azaltmak',
+	'tool.json-to-typescript.use_case.3':
+		'Mevcut örnek verilerden sıkı tipler türeterek refactor sürecini hızlandırmak',
 	'tool.json-schema-validate.display_name': 'JSON Şema Doğrulayıcı',
 	'tool.json-schema-validate.tagline': 'JSON verisini sağlanan şemaya karşı doğrula',
 	'tool.json-schema-validate.description':
@@ -2214,7 +2241,11 @@ const registryTr: Record<string, string> = {
 	'ui.jwt.copy_payload': 'Kopyala',
 	'ui.jwt.copy_signature': 'Kopyala',
 	'ui.jwt.worker_active': "Büyük girdi (>{size}) Worker'da işleniyor.",
-	'ui.jwt.worker_failed': "Worker işlemi başarısız. Ana thread'e geri dönülüyor."
+	'ui.jwt.worker_failed': "Worker işlemi başarısız. Ana thread'e geri dönülüyor.",
+
+	// Missing keys from English
+	'ui.validator.warnings': 'ui.validator.warnings',
+	'ui.validator.first_issue': 'ui.validator.first_issue'
 };
 
 export default registryTr;
