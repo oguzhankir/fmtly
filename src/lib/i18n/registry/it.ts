@@ -2232,6 +2232,74 @@ const registryIt: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Copia',
 	'ui.jwt.worker_active': 'Input grande (>{size}) elaborato nel Worker.',
 	'ui.jwt.worker_failed': 'Elaborazione Worker fallita. Ripiego sul thread principale.',
+	// ── Codifica / Decodifica Base64 ─────────────────────────────────────────
+	'tool.encode-base64-encode-decode.display_name': 'Base64 Codifica / Decodifica',
+	'tool.encode-base64-encode-decode.tagline':
+		'Codifica o decodifica testo Base64 con varianti standard e URL-safe',
+	'tool.encode-base64-encode-decode.description':
+		'Codifica testo semplice in Base64 o decodifica Base64 in testo UTF-8 direttamente nel browser. Passa tra variante standard e URL-safe, controlla il padding, ignora gli spazi durante la decodifica e gestisci input grandi con Web Worker.',
+	'tool.encode-base64-encode-decode.primary_keyword': 'base64 codifica decodifica',
+	'tool.encode-base64-encode-decode.meta_title':
+		'Base64 Codifica / Decodifica — Standard e URL-safe | fmtly.dev',
+	'tool.encode-base64-encode-decode.meta_description':
+		'Codifica o decodifica Base64 subito nel browser. Include varianti standard/URL-safe, opzioni di padding, decodifica tollerante agli spazi e Web Worker per input di grandi dimensioni.',
+	'tool.encode-base64-encode-decode.operation': 'Base64 Codifica / Decodifica',
+	'tool.encode-base64-encode-decode.faq.0.question':
+		'I miei dati Base64 vengono inviati a un server?',
+	'tool.encode-base64-encode-decode.faq.0.answer':
+		'No. Tutta la codifica e decodifica Base64 avviene interamente nel browser. I tuoi dati restano sul dispositivo.',
+	'tool.encode-base64-encode-decode.faq.1.question':
+		'Qual è la differenza tra Base64 standard e Base64 URL-safe?',
+	'tool.encode-base64-encode-decode.faq.1.answer':
+		'Il Base64 standard usa + e /, mentre il Base64 URL-safe usa - e _. La variante URL-safe è ideale per JWT, parametri query e nomi file con caratteri riservati nelle URL.',
+	'tool.encode-base64-encode-decode.faq.2.question':
+		'Può decodificare Base64 con padding mancante o a capo?',
+	'tool.encode-base64-encode-decode.faq.2.answer':
+		'Sì. Il decoder può ignorare gli spazi e ripristinare automaticamente il padding mancante quando possibile, utile per valori copiati da log e token.',
+	'tool.encode-base64-encode-decode.faq.3.question': 'Può gestire payload Base64 molto grandi?',
+	'tool.encode-base64-encode-decode.faq.3.answer':
+		'Sì. Gli input superiori a 500KB vengono elaborati automaticamente in un Web Worker per mantenere l’interfaccia reattiva.',
+	'tool.encode-base64-encode-decode.use_case.0':
+		'Codificare credenziali API o payload di test in Base64 durante lo sviluppo',
+	'tool.encode-base64-encode-decode.use_case.1':
+		'Decodificare frammenti Base64 copiati da log, header o strumenti di debug',
+	'tool.encode-base64-encode-decode.use_case.2':
+		'Passare rapidamente tra Base64 standard e URL-safe',
+	'tool.encode-base64-encode-decode.use_case.3':
+		'Normalizzare input Base64 disordinati con spazi e padding mancante',
+	// ── Codifica / Decodifica Base64 — stringhe interfaccia ──────────────────
+	'ui.base64.tab_label': 'Base64',
+	'ui.base64.action_label': 'Azione',
+	'ui.base64.action.encode': 'Codifica',
+	'ui.base64.action.decode': 'Decodifica',
+	'ui.base64.variant_label': 'Variante',
+	'ui.base64.variant.standard': 'Standard',
+	'ui.base64.variant.url_safe': 'URL-safe',
+	'ui.base64.input_label': 'Input',
+	'ui.base64.output_label': 'Output',
+	'ui.base64.input_placeholder': 'Incolla testo semplice o contenuto Base64...',
+	'ui.base64.output_placeholder': 'L’output codificato o decodificato appare qui...',
+	'ui.base64.option.omit_padding': 'Rimuovi il padding finale =',
+	'ui.base64.option.ignore_whitespace': 'Ignora a capo e spazi durante la decodifica',
+	'ui.base64.worker_active':
+		'Input grande rilevato (>{size}). L’elaborazione avviene in un Web Worker.',
+	'ui.base64.worker_failed': 'Elaborazione Worker non riuscita. Ripiego sul thread principale.',
+	'ui.base64.worker_badge': 'Worker',
+	'ui.base64.warning.no_changes': 'Nessuna modifica rilevata per modalità e azione selezionate.',
+	'ui.base64.warning.whitespace_ignored':
+		'I caratteri di spazio sono stati rimossi prima della decodifica.',
+	'ui.base64.warning.padding_auto_added':
+		'Il padding mancante è stato aggiunto automaticamente prima della decodifica.',
+	'ui.base64.warning.alphabet_normalized':
+		'I caratteri URL-safe sono stati normalizzati in Base64 standard per la decodifica.',
+	'ui.base64.error.invalid_base64_characters': 'Input Base64 non valido: {detail}',
+	'ui.base64.error.invalid_base64_length': 'Lunghezza Base64 non valida: {detail}',
+	'ui.base64.error.invalid_utf8_output':
+		'I byte decodificati non formano testo UTF-8 valido: {detail}',
+	'ui.base64.button.swap_direction': 'Inverti direzione',
+	'ui.base64.button.apply_output': 'Applica output all’input',
+	'ui.base64.toast.applied': 'Output applicato all’input',
+	'ui.base64.characters': 'caratteri',
 	// ── Codifica / Decodifica URL ────────────────────────────────────────────
 	'tool.encode-url-encode-decode.display_name': 'Codifica / Decodifica URL',
 	'tool.encode-url-encode-decode.tagline':

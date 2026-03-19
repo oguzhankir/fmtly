@@ -62,6 +62,8 @@
 				return $t('ui.whitespace_cleaner.tab_label', 'Whitespace');
 			case 'url':
 				return $t('ui.encode_url.tab_label', 'URL');
+			case 'base64':
+				return $t('ui.base64.tab_label', 'Base64');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

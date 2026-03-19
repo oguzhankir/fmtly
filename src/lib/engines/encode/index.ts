@@ -1,4 +1,20 @@
 export {
+	processBase64,
+	shouldUseBase64Worker,
+	BASE64_WORKER_THRESHOLD_BYTES,
+	type Base64Action,
+	type Base64Variant,
+	type Base64Options,
+	type Base64WarningCode,
+	type Base64ErrorCode,
+	type Base64Error,
+	type Base64Metrics,
+	type Base64Result,
+	type Base64WorkerRequest,
+	type Base64WorkerResponse
+} from './base64.js';
+
+export {
 	decodeJWT,
 	shouldUseJWTWorker,
 	JWT_WORKER_THRESHOLD_BYTES,

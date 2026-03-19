@@ -2190,6 +2190,70 @@ const registryEn: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Copy',
 	'ui.jwt.worker_active': 'Large input (>{size}) runs in Worker.',
 	'ui.jwt.worker_failed': 'Worker processing failed. Falling back to main thread.',
+	// ── Base64 Encode / Decode tool ──────────────────────────────────────────
+	'tool.encode-base64-encode-decode.display_name': 'Base64 Encode / Decode',
+	'tool.encode-base64-encode-decode.tagline':
+		'Encode or decode Base64 text with standard and URL-safe variants',
+	'tool.encode-base64-encode-decode.description':
+		'Encode plain text to Base64 or decode Base64 back to UTF-8 text instantly in your browser. Switch between standard and URL-safe variants, control padding behavior, ignore whitespace during decode, and process large input in a Web Worker.',
+	'tool.encode-base64-encode-decode.primary_keyword': 'base64 encode decode',
+	'tool.encode-base64-encode-decode.meta_title':
+		'Base64 Encode / Decode — Standard + URL-Safe | fmtly.dev',
+	'tool.encode-base64-encode-decode.meta_description':
+		'Encode or decode Base64 in your browser with standard and URL-safe variants, padding controls, and Worker support. No data leaves your device.',
+	'tool.encode-base64-encode-decode.operation': 'Encode / Decode Base64',
+	'tool.encode-base64-encode-decode.faq.0.question': 'Is my Base64 input sent to a server?',
+	'tool.encode-base64-encode-decode.faq.0.answer':
+		'No. All Base64 encoding and decoding runs entirely in your browser. Your data never leaves your device.',
+	'tool.encode-base64-encode-decode.faq.1.question':
+		'What is the difference between standard and URL-safe Base64?',
+	'tool.encode-base64-encode-decode.faq.1.answer':
+		'Standard Base64 uses + and /, while URL-safe Base64 uses - and _. URL-safe output is preferred in JWTs, query parameters, and filenames where reserved URL characters can cause issues.',
+	'tool.encode-base64-encode-decode.faq.2.question':
+		'Can this tool decode Base64 with missing padding or line breaks?',
+	'tool.encode-base64-encode-decode.faq.2.answer':
+		'Yes. The decoder can ignore whitespace and automatically restore missing padding when possible, making it easier to handle copied payloads from logs and tokens.',
+	'tool.encode-base64-encode-decode.faq.3.question': 'Can it handle large Base64 payloads?',
+	'tool.encode-base64-encode-decode.faq.3.answer':
+		'Yes. Inputs larger than 500KB are automatically processed in a Web Worker to keep the interface responsive.',
+	'tool.encode-base64-encode-decode.use_case.0':
+		'Encode API credentials or test payloads to Base64 during development',
+	'tool.encode-base64-encode-decode.use_case.1':
+		'Decode Base64 snippets copied from logs, headers, or debugging tools',
+	'tool.encode-base64-encode-decode.use_case.2':
+		'Switch quickly between standard and URL-safe Base64 variants',
+	'tool.encode-base64-encode-decode.use_case.3':
+		'Normalize messy Base64 input with whitespace and missing padding',
+	// ── Base64 Encode / Decode UI strings ────────────────────────────────────
+	'ui.base64.tab_label': 'Base64',
+	'ui.base64.action_label': 'Action',
+	'ui.base64.action.encode': 'Encode',
+	'ui.base64.action.decode': 'Decode',
+	'ui.base64.variant_label': 'Variant',
+	'ui.base64.variant.standard': 'Standard',
+	'ui.base64.variant.url_safe': 'URL-safe',
+	'ui.base64.input_label': 'Input',
+	'ui.base64.output_label': 'Output',
+	'ui.base64.input_placeholder': 'Paste plain text or Base64 content...',
+	'ui.base64.output_placeholder': 'Encoded or decoded output appears here...',
+	'ui.base64.option.omit_padding': 'Remove trailing = padding',
+	'ui.base64.option.ignore_whitespace': 'Ignore line breaks and spaces while decoding',
+	'ui.base64.worker_active': 'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.base64.worker_failed': 'Worker processing failed. Falling back to main thread processing.',
+	'ui.base64.worker_badge': 'Worker',
+	'ui.base64.warning.no_changes': 'No changes detected for the selected mode and action.',
+	'ui.base64.warning.whitespace_ignored': 'Whitespace characters were removed before decoding.',
+	'ui.base64.warning.padding_auto_added':
+		'Missing padding was added automatically before decoding.',
+	'ui.base64.warning.alphabet_normalized':
+		'URL-safe characters were normalized to standard Base64 for decoding.',
+	'ui.base64.error.invalid_base64_characters': 'Invalid Base64 input: {detail}',
+	'ui.base64.error.invalid_base64_length': 'Invalid Base64 length: {detail}',
+	'ui.base64.error.invalid_utf8_output': 'Decoded bytes are not valid UTF-8 text: {detail}',
+	'ui.base64.button.swap_direction': 'Swap direction',
+	'ui.base64.button.apply_output': 'Apply output to input',
+	'ui.base64.toast.applied': 'Output applied to input',
+	'ui.base64.characters': 'chars',
 	// ── URL Encode / Decode tool ─────────────────────────────────────────────
 	'tool.encode-url-encode-decode.display_name': 'URL Encode / Decode',
 	'tool.encode-url-encode-decode.tagline':

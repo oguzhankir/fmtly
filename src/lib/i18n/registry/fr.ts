@@ -2277,6 +2277,76 @@ const registryFr: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Copier',
 	'ui.jwt.worker_active': 'Grande entrée (>{size}) traitée dans un Worker.',
 	'ui.jwt.worker_failed': 'Échec du traitement Worker. Repli sur le thread principal.',
+	// ── Encoder / Décoder Base64 ─────────────────────────────────────────────
+	'tool.encode-base64-encode-decode.display_name': 'Encoder / Décoder Base64',
+	'tool.encode-base64-encode-decode.tagline':
+		'Encodez ou décodez du texte Base64 en variantes standard et URL-safe',
+	'tool.encode-base64-encode-decode.description':
+		'Encodez du texte brut en Base64 ou décodez du Base64 en texte UTF-8 instantanément dans votre navigateur. Basculez entre variante standard et URL-safe, contrôlez le padding, ignorez les espaces lors du décodage et traitez les grosses entrées via Web Worker.',
+	'tool.encode-base64-encode-decode.primary_keyword': 'encoder decoder base64',
+	'tool.encode-base64-encode-decode.meta_title':
+		'Encoder / Décoder Base64 — Standard et URL-safe | fmtly.dev',
+	'tool.encode-base64-encode-decode.meta_description':
+		'Encodez ou décodez du Base64 instantanément dans votre navigateur. Variantes standard/URL-safe, options de padding, décodage tolérant aux espaces et Web Worker pour les grosses entrées.',
+	'tool.encode-base64-encode-decode.operation': 'Encoder / Décoder Base64',
+	'tool.encode-base64-encode-decode.faq.0.question':
+		'Mes données Base64 sont-elles envoyées à un serveur ?',
+	'tool.encode-base64-encode-decode.faq.0.answer':
+		"Non. Tout le traitement Base64 s'effectue entièrement dans votre navigateur. Vos données restent sur votre appareil.",
+	'tool.encode-base64-encode-decode.faq.1.question':
+		'Quelle différence entre Base64 standard et Base64 URL-safe ?',
+	'tool.encode-base64-encode-decode.faq.1.answer':
+		'Le Base64 standard utilise + et /, alors que le Base64 URL-safe utilise - et _. La variante URL-safe est préférable pour les JWT, paramètres de requête et noms de fichiers contenant des caractères réservés en URL.',
+	'tool.encode-base64-encode-decode.faq.2.question':
+		'Peut-on décoder du Base64 avec padding manquant ou retours à la ligne ?',
+	'tool.encode-base64-encode-decode.faq.2.answer':
+		"Oui. Le décodeur peut ignorer les espaces et rétablir automatiquement le padding manquant quand c'est possible, pratique pour les valeurs copiées depuis des logs ou des tokens.",
+	'tool.encode-base64-encode-decode.faq.3.question': "L'outil gère-t-il de gros payloads Base64 ?",
+	'tool.encode-base64-encode-decode.faq.3.answer':
+		'Oui. Les entrées de plus de 500Ko sont automatiquement traitées dans un Web Worker pour garder une interface fluide.',
+	'tool.encode-base64-encode-decode.use_case.0':
+		'Encoder des identifiants API ou payloads de test en Base64 pendant le développement',
+	'tool.encode-base64-encode-decode.use_case.1':
+		'Décoder des extraits Base64 copiés depuis des logs, en-têtes ou outils de debug',
+	'tool.encode-base64-encode-decode.use_case.2':
+		'Basculer rapidement entre Base64 standard et Base64 URL-safe',
+	'tool.encode-base64-encode-decode.use_case.3':
+		'Normaliser des entrées Base64 désordonnées avec espaces et padding manquant',
+	// ── Encoder / Décoder Base64 — chaînes d’interface ───────────────────────
+	'ui.base64.tab_label': 'Base64',
+	'ui.base64.action_label': 'Action',
+	'ui.base64.action.encode': 'Encoder',
+	'ui.base64.action.decode': 'Décoder',
+	'ui.base64.variant_label': 'Variante',
+	'ui.base64.variant.standard': 'Standard',
+	'ui.base64.variant.url_safe': 'URL-safe',
+	'ui.base64.input_label': 'Entrée',
+	'ui.base64.output_label': 'Sortie',
+	'ui.base64.input_placeholder': 'Collez du texte brut ou du contenu Base64...',
+	'ui.base64.output_placeholder': 'La sortie encodée ou décodée s’affiche ici...',
+	'ui.base64.option.omit_padding': 'Supprimer le padding final =',
+	'ui.base64.option.ignore_whitespace':
+		'Ignorer les retours à la ligne et espaces lors du décodage',
+	'ui.base64.worker_active':
+		'Entrée volumineuse détectée (>{size}). Le traitement s’exécute dans un Web Worker.',
+	'ui.base64.worker_failed': 'Échec du traitement Worker. Repli sur le thread principal.',
+	'ui.base64.worker_badge': 'Worker',
+	'ui.base64.warning.no_changes':
+		'Aucune modification détectée pour le mode et l’action sélectionnés.',
+	'ui.base64.warning.whitespace_ignored':
+		"Les caractères d'espacement ont été supprimés avant le décodage.",
+	'ui.base64.warning.padding_auto_added':
+		'Le padding manquant a été ajouté automatiquement avant le décodage.',
+	'ui.base64.warning.alphabet_normalized':
+		'Les caractères URL-safe ont été normalisés en Base64 standard pour le décodage.',
+	'ui.base64.error.invalid_base64_characters': 'Entrée Base64 invalide : {detail}',
+	'ui.base64.error.invalid_base64_length': 'Longueur Base64 invalide : {detail}',
+	'ui.base64.error.invalid_utf8_output':
+		'Les octets décodés ne forment pas un texte UTF-8 valide : {detail}',
+	'ui.base64.button.swap_direction': 'Inverser le sens',
+	'ui.base64.button.apply_output': 'Appliquer la sortie à l’entrée',
+	'ui.base64.toast.applied': 'La sortie a été appliquée à l’entrée',
+	'ui.base64.characters': 'caractères',
 	// ── Encoder / Décoder URL ────────────────────────────────────────────────
 	'tool.encode-url-encode-decode.display_name': 'Encoder / Décoder URL',
 	'tool.encode-url-encode-decode.tagline':

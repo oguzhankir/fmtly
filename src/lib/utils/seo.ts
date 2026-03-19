@@ -72,7 +72,16 @@ export function generateToolSEO(
 		applicationSubCategory: `${tool.category} ${tool.operation}`,
 		featureList: [tool.tagline],
 		isAccessibleForFree: true,
+		browserRequirements: 'Requires JavaScript; works in modern browsers.',
 		operatingSystem: 'Any',
+		creator: {
+			'@type': 'Organization',
+			name: 'fmtly.dev'
+		},
+		potentialAction: {
+			'@type': 'UseAction',
+			target: canonical
+		},
 		offers: {
 			'@type': 'Offer',
 			price: '0',

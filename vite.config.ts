@@ -8,6 +8,9 @@ export default defineConfig({
 	worker: {
 		format: 'es'
 	},
+	optimizeDeps: {
+		exclude: ['lucide-svelte']
+	},
 	resolve: {
 		alias: {
 			$lib: resolve('./src/lib'),

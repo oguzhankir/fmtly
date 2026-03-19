@@ -2242,6 +2242,69 @@ const registryTr: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Kopyala',
 	'ui.jwt.worker_active': "Büyük girdi (>{size}) Worker'da işleniyor.",
 	'ui.jwt.worker_failed': "Worker işlemi başarısız. Ana thread'e geri dönülüyor.",
+	// ── Base64 Kodla / Çöz ───────────────────────────────────────────────────
+	'tool.encode-base64-encode-decode.display_name': 'Base64 Kodla / Çöz',
+	'tool.encode-base64-encode-decode.tagline':
+		'Base64 metnini standart ve URL-güvenli varyantlarla kodlayın veya çözün',
+	'tool.encode-base64-encode-decode.description':
+		"Düz metni Base64'e kodlayın veya Base64'ü tarayıcınızda anında UTF-8 metne çözün. Standart ve URL-güvenli varyantlar arasında geçiş yapın, dolgu davranışını yönetin, çözümleme sırasında boşlukları yok sayın ve büyük girdileri Web Worker ile işleyin.",
+	'tool.encode-base64-encode-decode.primary_keyword': 'base64 kodla çöz',
+	'tool.encode-base64-encode-decode.meta_title':
+		'Base64 Kodla / Çöz — Standart ve URL-Güvenli Dönüştürücü | fmtly.dev',
+	'tool.encode-base64-encode-decode.meta_description':
+		'Base64 verisini tarayıcınızda anında kodlayın veya çözün. Standart ve URL-güvenli varyantlar, dolgu seçenekleri, boşluk toleranslı çözümleme ve büyük girdiler için Web Worker desteği sunar.',
+	'tool.encode-base64-encode-decode.operation': 'Base64 Kodla / Çöz',
+	'tool.encode-base64-encode-decode.faq.0.question': 'Base64 girdim sunucuya gönderilir mi?',
+	'tool.encode-base64-encode-decode.faq.0.answer':
+		'Hayır. Tüm Base64 kodlama ve çözme işlemleri tamamen tarayıcınızda çalışır. Veriniz cihazınızı terk etmez.',
+	'tool.encode-base64-encode-decode.faq.1.question':
+		'Standart Base64 ile URL-güvenli Base64 arasındaki fark nedir?',
+	'tool.encode-base64-encode-decode.faq.1.answer':
+		"Standart Base64 + ve / kullanır; URL-güvenli Base64 ise - ve _ kullanır. URL-güvenli çıktı, JWT, sorgu parametresi ve dosya adı gibi URL'de sorun çıkarabilecek karakterleri önlemek için tercih edilir.",
+	'tool.encode-base64-encode-decode.faq.2.question':
+		'Eksik dolgu veya satır sonu içeren Base64 metnini çözebilir mi?',
+	'tool.encode-base64-encode-decode.faq.2.answer':
+		'Evet. Çözücü, boşlukları yok sayabilir ve mümkün olduğunda eksik dolguyu otomatik tamamlayabilir; böylece log veya tokenlardan kopyalanan metinleri daha kolay işlersiniz.',
+	'tool.encode-base64-encode-decode.faq.3.question': 'Büyük Base64 payloadlarını işleyebilir mi?',
+	'tool.encode-base64-encode-decode.faq.3.answer':
+		'Evet. 500KB üzerindeki girdiler arayüzün akıcı kalması için otomatik olarak Web Worker üzerinde işlenir.',
+	'tool.encode-base64-encode-decode.use_case.0':
+		"Geliştirme sırasında API kimlik bilgilerini veya test payloadlarını Base64'e kodlamak",
+	'tool.encode-base64-encode-decode.use_case.1':
+		"Loglardan, header'lardan veya hata ayıklama araçlarından kopyalanan Base64 parçalarını çözmek",
+	'tool.encode-base64-encode-decode.use_case.2':
+		'Standart ve URL-güvenli Base64 varyantları arasında hızlı geçiş yapmak',
+	'tool.encode-base64-encode-decode.use_case.3':
+		'Boşluklu veya eksik dolgulu dağınık Base64 girdilerini normalize etmek',
+	// ── Base64 Kodla / Çöz — arayüz metinleri ────────────────────────────────
+	'ui.base64.tab_label': 'Base64',
+	'ui.base64.action_label': 'İşlem',
+	'ui.base64.action.encode': 'Kodla',
+	'ui.base64.action.decode': 'Çöz',
+	'ui.base64.variant_label': 'Varyant',
+	'ui.base64.variant.standard': 'Standart',
+	'ui.base64.variant.url_safe': 'URL-güvenli',
+	'ui.base64.input_label': 'Girdi',
+	'ui.base64.output_label': 'Çıktı',
+	'ui.base64.input_placeholder': 'Düz metin veya Base64 içerik yapıştırın...',
+	'ui.base64.output_placeholder': 'Kodlanmış ya da çözülmüş çıktı burada görünür...',
+	'ui.base64.option.omit_padding': 'Sondaki = dolgusunu kaldır',
+	'ui.base64.option.ignore_whitespace': 'Çözümleme sırasında satır sonu ve boşlukları yok say',
+	'ui.base64.worker_active': 'Büyük girdi algılandı (>{size}). İşlem Web Worker üzerinde çalışır.',
+	'ui.base64.worker_failed': 'Worker işlemi başarısız oldu. Ana thread işlemine dönülüyor.',
+	'ui.base64.worker_badge': 'Worker',
+	'ui.base64.warning.no_changes': 'Seçilen mod ve işlem için değişiklik tespit edilmedi.',
+	'ui.base64.warning.whitespace_ignored': 'Çözümlemeden önce boşluk karakterleri kaldırıldı.',
+	'ui.base64.warning.padding_auto_added': 'Eksik dolgu çözümlemeden önce otomatik eklendi.',
+	'ui.base64.warning.alphabet_normalized':
+		"URL-güvenli karakterler çözümleme için standart Base64'e dönüştürüldü.",
+	'ui.base64.error.invalid_base64_characters': 'Geçersiz Base64 girdisi: {detail}',
+	'ui.base64.error.invalid_base64_length': 'Geçersiz Base64 uzunluğu: {detail}',
+	'ui.base64.error.invalid_utf8_output': 'Çözümlenen baytlar geçerli UTF-8 metin değil: {detail}',
+	'ui.base64.button.swap_direction': 'Yönü değiştir',
+	'ui.base64.button.apply_output': 'Çıktıyı girdiye uygula',
+	'ui.base64.toast.applied': 'Çıktı girdiye uygulandı',
+	'ui.base64.characters': 'karakter',
 	// ── URL Kodla / Çöz ──────────────────────────────────────────────────────
 	'tool.encode-url-encode-decode.display_name': 'URL Kodla / Çöz',
 	'tool.encode-url-encode-decode.tagline':

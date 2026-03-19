@@ -88,7 +88,7 @@ Encode, decode, hash, and escape strings across common formats.
 
 | 65 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 66 | Base64 Encode / Decode | `encode/base64` | Encode and decode Base64 strings. Supports standard and URL-safe variants. |
+| 66 | Base64 Encode / Decode ✅ | `encode/base64` | done — Encode and decode Base64 strings with standard and URL-safe variants, padding controls, and large-input worker support. |
 | 67 | URL Encode / Decode ✅ | `encode/url` | done — Percent-encode and decode URL text with component/full URL modes, plus-space handling, and large-input worker support. |
 | 68 | HTML Entity Encode / Decode | `encode/html-entities` | Convert special characters to HTML entities and back (`&amp;`, `&lt;`, etc.). |
 | 69 | Unicode Inspector | `encode/unicode` | Show codepoint, UTF-8 bytes, category, and glyph name for each character. |
@@ -111,21 +111,21 @@ Analyze, transform, and manipulate plain text.
 | 76 | Word & Character Counter | `text/word-counter` | done | Count words, characters, sentences, paragraphs, and reading time. |
 | 77 | Lorem Ipsum Generator | `text/lorem` | done | Generate placeholder text in paragraphs, sentences, or words with deterministic seeded output and plain/HTML modes. |
 | 81 | Text Reverser | `text/reverser` | done | Reverse text by characters, words, or lines. |
-| 85 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
-| 79 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
-| 79 | Line Sorter | `text/line-sorter` | done | Sort lines alphabetically, numerically, by length, or with deterministic random shuffle. |
-| 80 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
-| 80 | Markdown → HTML | `text/markdown-to-html` | done | Convert Markdown to HTML with live preview, GFM table support, and syntax-highlighted code blocks. |
-| 82 | Regex Tester | `text/regex` | done | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
-| 78 | Readability Analyzer | `text/readability` | done | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
-| 84 | Text Escape / Unescape | `text/escape` | done | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
-| 86 | Morse Code Translator | `text/morse` | done | Convert text to Morse code and decode Morse back to plain text with large-input worker support. |
+| 86 | String Case Converter | `text/case` | done | Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. |
+| 87 | Duplicate Line Remover | `text/deduplicate` | done | Remove duplicate lines preserving first occurrence order. |
+| 88 | Line Sorter | `text/line-sorter` | done | Sort lines alphabetically, numerically, by length, or with deterministic random shuffle. |
+| 89 | Whitespace Cleaner | `text/whitespace` | done | Trim trailing spaces, collapse multiple blanks, normalize line endings. |
+| 90 | Markdown → HTML | `text/markdown-to-html` | done | Convert Markdown to HTML with live preview, GFM table support, and syntax-highlighted code blocks. |
+| 91 | Regex Tester | `text/regex` | done | Test regular expressions against sample text with real-time match highlighting, capture groups, and flag toggles. |
+| 92 | Readability Analyzer | `text/readability` | done | Calculate Flesch-Kincaid, Gunning Fog, Coleman-Liau, and SMOG readability scores. |
+| 93 | Text Escape / Unescape | `text/escape` | done | Escape and unescape strings for JSON, HTML, XML, URLs, SQL, and regex. |
+| 94 | Morse Code Translator | `text/morse` | done | Convert text to Morse code and decode Morse back to plain text with large-input worker support. |
+| 95 | Diff & Compare (Text) | `text/diff` | done | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
 
 ### Backlog — Text & String Tools
 
-| 77 | Tool | Slug | Description |
+| # | Tool | Slug | Description |
 |---|------|------|-------------|
-| 83 | Diff & Compare (Text) | `text/diff` | Side-by-side or unified diff of two plain text inputs with line-level and word-level change highlighting. |
 
 ---
 

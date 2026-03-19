@@ -2,6 +2,54 @@ import type { ToolDefinition } from '../types.js';
 
 export const encodeTools: ToolDefinition[] = [
 	{
+		id: 'encode-base64-encode-decode',
+		category: 'encode',
+		slug: 'base64',
+		displayName: 'tool.encode-base64-encode-decode.display_name',
+		tagline: 'tool.encode-base64-encode-decode.tagline',
+		description: 'tool.encode-base64-encode-decode.description',
+		primaryKeyword: 'tool.encode-base64-encode-decode.primary_keyword',
+		metaTitle: 'tool.encode-base64-encode-decode.meta_title',
+		metaDescription: 'tool.encode-base64-encode-decode.meta_description',
+		engine: 'encode',
+		operation: 'tool.encode-base64-encode-decode.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'encode', slug: 'url' },
+			{ category: 'encode', slug: 'jwt' },
+			{ category: 'text', slug: 'escape' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.encode-base64-encode-decode.faq.0.question',
+				answer: 'tool.encode-base64-encode-decode.faq.0.answer'
+			},
+			{
+				question: 'tool.encode-base64-encode-decode.faq.1.question',
+				answer: 'tool.encode-base64-encode-decode.faq.1.answer'
+			},
+			{
+				question: 'tool.encode-base64-encode-decode.faq.2.question',
+				answer: 'tool.encode-base64-encode-decode.faq.2.answer'
+			},
+			{
+				question: 'tool.encode-base64-encode-decode.faq.3.question',
+				answer: 'tool.encode-base64-encode-decode.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.encode-base64-encode-decode.use_case.0',
+			'tool.encode-base64-encode-decode.use_case.1',
+			'tool.encode-base64-encode-decode.use_case.2',
+			'tool.encode-base64-encode-decode.use_case.3'
+		],
+		sampleInput: 'Hello fmtly 👋 — Encode me safely!'
+	},
+	{
 		id: 'encode-url-encode-decode',
 		category: 'encode',
 		slug: 'url',

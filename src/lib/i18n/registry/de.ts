@@ -2183,6 +2183,75 @@ const registryDe: Record<string, string> = {
 	'ui.jwt.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Hauptthread.',
 	'ui.jwt.error.invalid_signature': 'Ungültige JWT-Signatur',
 	'ui.jwt.errors.invalid_base64': 'Ungültige Base64-URL-Kodierung in JWT-Segmenten',
+	// ── Base64 Kodieren / Dekodieren ─────────────────────────────────────────
+	'tool.encode-base64-encode-decode.display_name': 'Base64 Kodieren / Dekodieren',
+	'tool.encode-base64-encode-decode.tagline':
+		'Base64-Text im Standard- oder URL-sicheren Modus kodieren und dekodieren',
+	'tool.encode-base64-encode-decode.description':
+		'Kodiere Klartext zu Base64 oder dekodiere Base64 direkt im Browser zurück zu UTF-8-Text. Wechsle zwischen Standard- und URL-sicherer Variante, steuere das Padding, ignoriere Leerzeichen beim Dekodieren und verarbeite große Eingaben per Web Worker.',
+	'tool.encode-base64-encode-decode.primary_keyword': 'base64 kodieren dekodieren',
+	'tool.encode-base64-encode-decode.meta_title':
+		'Base64 Kodieren / Dekodieren — Standard & URL-sicher | fmtly.dev',
+	'tool.encode-base64-encode-decode.meta_description':
+		'Base64 im Browser sofort kodieren oder dekodieren. Mit Standard- und URL-sicherer Variante, Padding-Optionen, whitespace-tolerantem Dekodieren und Web-Worker-Verarbeitung für große Eingaben.',
+	'tool.encode-base64-encode-decode.operation': 'Base64 kodieren / dekodieren',
+	'tool.encode-base64-encode-decode.faq.0.question':
+		'Werden meine Base64-Daten an einen Server gesendet?',
+	'tool.encode-base64-encode-decode.faq.0.answer':
+		'Nein. Die gesamte Base64-Kodierung und -Dekodierung findet vollständig im Browser statt. Deine Daten bleiben auf deinem Gerät.',
+	'tool.encode-base64-encode-decode.faq.1.question':
+		'Was ist der Unterschied zwischen Standard- und URL-sicherem Base64?',
+	'tool.encode-base64-encode-decode.faq.1.answer':
+		'Standard-Base64 verwendet + und /, URL-sicheres Base64 verwendet - und _. Die URL-sichere Variante eignet sich besser für JWTs, Query-Parameter und Dateinamen mit URL-reservierten Zeichen.',
+	'tool.encode-base64-encode-decode.faq.2.question':
+		'Kann das Tool Base64 mit fehlendem Padding oder Zeilenumbrüchen dekodieren?',
+	'tool.encode-base64-encode-decode.faq.2.answer':
+		'Ja. Der Decoder kann Leerzeichen ignorieren und fehlendes Padding automatisch ergänzen, wenn möglich. Das hilft bei kopierten Werten aus Logs und Tokens.',
+	'tool.encode-base64-encode-decode.faq.3.question':
+		'Kann das Tool große Base64-Payloads verarbeiten?',
+	'tool.encode-base64-encode-decode.faq.3.answer':
+		'Ja. Eingaben über 500KB werden automatisch in einem Web Worker verarbeitet, damit die Oberfläche reaktionsschnell bleibt.',
+	'tool.encode-base64-encode-decode.use_case.0':
+		'API-Zugangsdaten oder Test-Payloads während der Entwicklung in Base64 kodieren',
+	'tool.encode-base64-encode-decode.use_case.1':
+		'Base64-Snippets aus Logs, Headern oder Debugging-Tools dekodieren',
+	'tool.encode-base64-encode-decode.use_case.2':
+		'Schnell zwischen Standard- und URL-sicherer Base64-Variante wechseln',
+	'tool.encode-base64-encode-decode.use_case.3':
+		'Unsaubere Base64-Eingaben mit Leerzeichen und fehlendem Padding normalisieren',
+	// ── Base64 Kodieren / Dekodieren — UI-Texte ──────────────────────────────
+	'ui.base64.tab_label': 'Base64',
+	'ui.base64.action_label': 'Aktion',
+	'ui.base64.action.encode': 'Kodieren',
+	'ui.base64.action.decode': 'Dekodieren',
+	'ui.base64.variant_label': 'Variante',
+	'ui.base64.variant.standard': 'Standard',
+	'ui.base64.variant.url_safe': 'URL-sicher',
+	'ui.base64.input_label': 'Eingabe',
+	'ui.base64.output_label': 'Ausgabe',
+	'ui.base64.input_placeholder': 'Klartext oder Base64-Inhalt einfügen...',
+	'ui.base64.output_placeholder': 'Kodierte oder dekodierte Ausgabe erscheint hier...',
+	'ui.base64.option.omit_padding': 'Abschließendes = Padding entfernen',
+	'ui.base64.option.ignore_whitespace': 'Zeilenumbrüche und Leerzeichen beim Dekodieren ignorieren',
+	'ui.base64.worker_active':
+		'Große Eingabe erkannt (>{size}). Die Verarbeitung läuft in einem Web Worker.',
+	'ui.base64.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Es wird auf den Hauptthread zurückgefallen.',
+	'ui.base64.worker_badge': 'Worker',
+	'ui.base64.warning.no_changes':
+		'Für den gewählten Modus und die Aktion wurden keine Änderungen erkannt.',
+	'ui.base64.warning.whitespace_ignored': 'Leerzeichenzeichen wurden vor der Dekodierung entfernt.',
+	'ui.base64.warning.padding_auto_added':
+		'Fehlendes Padding wurde vor der Dekodierung automatisch ergänzt.',
+	'ui.base64.warning.alphabet_normalized':
+		'URL-sichere Zeichen wurden für die Dekodierung in Standard-Base64 umgewandelt.',
+	'ui.base64.error.invalid_base64_characters': 'Ungültige Base64-Eingabe: {detail}',
+	'ui.base64.error.invalid_base64_length': 'Ungültige Base64-Länge: {detail}',
+	'ui.base64.error.invalid_utf8_output': 'Dekodierte Bytes sind kein gültiger UTF-8-Text: {detail}',
+	'ui.base64.button.swap_direction': 'Richtung wechseln',
+	'ui.base64.button.apply_output': 'Ausgabe als Eingabe übernehmen',
+	'ui.base64.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
+	'ui.base64.characters': 'Zeichen',
 	// ── URL Kodieren / Dekodieren ────────────────────────────────────────────
 	'tool.encode-url-encode-decode.display_name': 'URL Kodieren / Dekodieren',
 	'tool.encode-url-encode-decode.tagline':
