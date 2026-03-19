@@ -7,15 +7,23 @@ import {
 	minifyJSON,
 	parseJSON,
 	repairJSON,
+	shouldUseWorker,
 	sortJSONKeys
 } from '$engines/json/index.js';
-import type { JSONStats, ParseError, TreeNode } from '$engines/json/index.js';
+import type {
+	JSONStats,
+	ParseError,
+	TreeNode,
+	WorkerRequest,
+	WorkerResponse
+} from '$engines/json/index.js';
 import {
 	type FormatOptions as AdvancedFormatOptions,
 	type JsonStats as AdvancedJsonStats,
 	format as formatAdvancedJson,
 	generateJsonSchema,
 	minify as minifyAdvancedJson,
+	toGoStructs,
 	toMarkdownTable,
 	toToml,
 	toYaml
@@ -48,6 +56,16 @@ let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 let parserInitialized = false;
 let activeJsonToolSlug = 'formatter';
 let unsubscribeInput: (() => void) | undefined;
+let jsonWorker: Worker | null = null;
+let jsonWorkerPromise: Promise<Worker> | null = null;
+let jsonWorkerRequestCounter = 0;
+const pendingWorkerRequests = new Map<
+	string,
+	{
+		resolve: (value: unknown) => void;
+		reject: (reason?: unknown) => void;
+	}
+>();
 
 async function ensureParser(): Promise<void> {
 	if (!parserInitialized) {
@@ -87,6 +105,7 @@ export function destroyJSONStore(): void {
 
 	unsubscribeInput?.();
 	unsubscribeInput = undefined;
+	disposeJsonWorker();
 }
 
 async function processInput(value: string): Promise<void> {
@@ -141,6 +160,9 @@ async function applyToolOutput(value: string): Promise<void> {
 			return;
 		case 'schema-generator':
 			applySchemaOutput(value);
+			return;
+		case 'to-go':
+			await applyGoStructOutput(value);
 			return;
 		case 'validator':
 		case 'schema-validate':
@@ -244,6 +266,111 @@ function applySchemaOutput(value: string): void {
 			error instanceof Error ? error.message : 'Could not generate JSON Schema'
 		]);
 	}
+}
+
+async function applyGoStructOutput(value: string): Promise<void> {
+	try {
+		const generated = shouldUseWorker(value)
+			? await callJsonWorkerMethod('toGoStructs', [value])
+			: toGoStructs(value);
+
+		if (typeof generated !== 'string') {
+			throw new Error('Go struct generation returned an invalid result');
+		}
+
+		output.set(generated);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([
+			error instanceof Error ? error.message : 'Could not generate Go structs'
+		]);
+	}
+}
+
+async function getJsonWorker(): Promise<Worker> {
+	if (jsonWorker) {
+		return jsonWorker;
+	}
+
+	if (jsonWorkerPromise) {
+		return jsonWorkerPromise;
+	}
+
+	jsonWorkerPromise = import('../workers/json.worker?worker')
+		.then((workerModule) => {
+			const WorkerConstructor = workerModule.default;
+			jsonWorker = new WorkerConstructor();
+
+			jsonWorker.onmessage = (event: MessageEvent<WorkerResponse>) => {
+				const { id, result, error } = event.data;
+				const request = pendingWorkerRequests.get(id);
+				if (!request) {
+					return;
+				}
+
+				pendingWorkerRequests.delete(id);
+				if (error) {
+					request.reject(new Error(error));
+					return;
+				}
+
+				request.resolve(result);
+			};
+
+			jsonWorker.onerror = () => {
+				rejectAllPendingWorkerRequests(new Error('JSON worker crashed'));
+				disposeJsonWorker();
+			};
+
+			return jsonWorker;
+		})
+		.finally(() => {
+			jsonWorkerPromise = null;
+		});
+
+	return jsonWorkerPromise;
+}
+
+function rejectAllPendingWorkerRequests(reason: unknown): void {
+	for (const [, request] of pendingWorkerRequests) {
+		request.reject(reason);
+	}
+	pendingWorkerRequests.clear();
+}
+
+function disposeJsonWorker(): void {
+	jsonWorkerPromise = null;
+	if (!jsonWorker) {
+		return;
+	}
+
+	jsonWorker.terminate();
+	jsonWorker = null;
+	rejectAllPendingWorkerRequests(new Error('JSON worker terminated'));
+}
+
+function callJsonWorkerMethod(method: string, args: unknown[]): Promise<unknown> {
+	return new Promise((resolve, reject) => {
+		void getJsonWorker()
+			.then((worker) => {
+				const id = `json-worker-${Date.now()}-${jsonWorkerRequestCounter++}`;
+				pendingWorkerRequests.set(id, { resolve, reject });
+
+				const request: WorkerRequest = {
+					id,
+					method,
+					args
+				};
+
+				worker.postMessage(request);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+	});
 }
 
 export function setFormatOptions(next: Partial<AdvancedFormatOptions>): void {

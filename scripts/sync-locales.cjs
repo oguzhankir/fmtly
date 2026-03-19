@@ -1,8 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
+const projectRoot = path.resolve(__dirname, '..');
+const localesDir = path.join(projectRoot, 'src/lib/i18n/registry');
+
 // Read English locale as reference
-const enPath = path.join(__dirname, 'src/lib/i18n/registry/en.ts');
+const enPath = path.join(localesDir, 'en.ts');
 const enContent = fs.readFileSync(enPath, 'utf8');
 
 // Extract all keys from English
@@ -15,29 +18,17 @@ while ((match = keyRegex.exec(enContent)) !== null) {
 
 console.log(`Found ${Object.keys(enKeys).length} keys in English locale`);
 
-// List of all locale files
-const locales = [
-	'ar',
-	'bn',
-	'de',
-	'es',
-	'fr',
-	'hi',
-	'it',
-	'ja',
-	'ko',
-	'pt',
-	'ru',
-	'tr',
-	'ur',
-	'zh'
-];
+// List available locale files dynamically
+const locales = fs
+	.readdirSync(localesDir)
+	.filter((fileName) => fileName.endsWith('.ts') && fileName !== 'index.ts')
+	.map((fileName) => fileName.replace(/\.ts$/u, ''));
 
 // Process each locale
 locales.forEach((locale) => {
 	if (locale === 'en') return; // Skip English
 
-	const localePath = path.join(__dirname, `src/lib/i18n/registry/${locale}.ts`);
+	const localePath = path.join(localesDir, `${locale}.ts`);
 	const localeContent = fs.readFileSync(localePath, 'utf8');
 
 	// Extract existing keys

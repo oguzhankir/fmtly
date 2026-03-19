@@ -1401,6 +1401,32 @@ const registryEs: Record<string, string> = {
 		'Documentar rápidamente formatos JSON anidados para integraciones',
 	'tool.json-schema-generator.use_case.3':
 		'Generar un esquema base antes de refinar restricciones manualmente',
+	'tool.json-to-go.display_name': 'JSON a Structs de Go',
+	'tool.json-to-go.tagline': 'Genera structs de Go limpios a partir de JSON',
+	'tool.json-to-go.description':
+		'Convierte cualquier payload JSON en definiciones de structs de Go con inferencia de tipos anidados, etiquetas json y manejo de campos opcionales. Rápido, privado y 100% en el navegador.',
+	'tool.json-to-go.primary_keyword': 'json a structs go',
+	'tool.json-to-go.meta_title': 'Generador JSON a Structs de Go — fmtly.dev',
+	'tool.json-to-go.meta_description':
+		'Genera structs de Go desde JSON en tu navegador al instante. Incluye structs anidados, etiquetas json e inferencia de campos opcionales. Tus datos no salen del dispositivo.',
+	'tool.json-to-go.operation': 'Convertir',
+	'tool.json-to-go.faq.0.question': '¿Cómo se mapean los tipos JSON a tipos de Go?',
+	'tool.json-to-go.faq.0.answer':
+		'Las cadenas se convierten en string, los booleanos en bool, los enteros en int64, los decimales en float64, los arrays en slices y los objetos anidados en structs generados.',
+	'tool.json-to-go.faq.1.question': '¿Añade automáticamente etiquetas json y omitempty?',
+	'tool.json-to-go.faq.1.answer':
+		'Sí. Los campos incluyen etiquetas json, y cuando un campo parece opcional o nullable en la muestra, la salida puede usar omitempty y tipos puntero adecuados.',
+	'tool.json-to-go.faq.2.question': '¿Puedo usar el resultado directamente en proyectos Go?',
+	'tool.json-to-go.faq.2.answer':
+		'Sí. El código generado está pensado para usarse directamente en bases de código Go, especialmente para clientes API, payloads de webhooks y modelos de configuración.',
+	'tool.json-to-go.use_case.0':
+		'Arrancar modelos de API en Go desde payloads reales de entrada y salida',
+	'tool.json-to-go.use_case.1':
+		'Generar tipos estructurados para integraciones por eventos y webhooks',
+	'tool.json-to-go.use_case.2':
+		'Reducir escritura manual de modelos al explorar esquemas JSON desconocidos',
+	'tool.json-to-go.use_case.3':
+		'Acelerar prototipos backend con andamiaje de tipos Go listo para producción',
 	'tool.json-schema-validate.display_name': 'Validador de JSON Schema',
 	'tool.json-schema-validate.tagline': 'Validar JSON contra un esquema proporcionado',
 	'tool.json-schema-validate.description':
@@ -2190,7 +2216,9 @@ const registryEs: Record<string, string> = {
 	'ui.jwt.copy_payload': 'Copiar',
 	'ui.jwt.copy_signature': 'Copiar',
 	'ui.jwt.worker_active': 'Entrada grande (>{size}) procesándose en Worker.',
-	'ui.jwt.worker_failed': 'Error en el Worker. Usando el hilo principal como alternativa.'
+	'ui.jwt.worker_failed': 'Error en el Worker. Usando el hilo principal como alternativa.',
+	'ui.jwt.errors.invalid_signature': 'Firma JWT inválida',
+	'ui.jwt.errors.invalid_base64': 'Codificación Base64URL inválida en segmentos JWT'
 };
 
 export default registryEs;

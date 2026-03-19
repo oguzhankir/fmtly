@@ -1403,6 +1403,31 @@ const registryTr: Record<string, string> = {
 		'Entegrasyonlarda iç içe JSON event formatlarını hızlıca dokümante etmek',
 	'tool.json-schema-generator.use_case.3':
 		'Elle ince ayar yapmadan önce başlangıç şeması oluşturmak',
+	'tool.json-to-go.display_name': "JSON'dan Go Struct'a",
+	'tool.json-to-go.tagline': 'JSON verisinden temiz Go struct tanımları üret',
+	'tool.json-to-go.description':
+		'Herhangi bir JSON payloadunu, iç içe tip çıkarımı, json etiketleri ve opsiyonel alan yönetimiyle Go struct tanımlarına dönüştür. Hızlı, gizli ve tamamen tarayıcı tabanlıdır.',
+	'tool.json-to-go.primary_keyword': "json'dan go struct'a",
+	'tool.json-to-go.meta_title': "JSON'dan Go Struct'a Dönüştürücü — fmtly.dev",
+	'tool.json-to-go.meta_description':
+		'JSON verisinden tarayıcıda anında Go struct üret. İç içe yapılar, json etiketleri ve opsiyonel alan çıkarımı dahildir. Veriler cihazından çıkmaz.',
+	'tool.json-to-go.operation': 'Dönüştür',
+	'tool.json-to-go.faq.0.question': 'JSON tipleri Go tiplerine nasıl eşleniyor?',
+	'tool.json-to-go.faq.0.answer':
+		'Metin alanları string, boolean alanlar bool, tam sayılar int64, ondalık sayılar float64 olur. Diziler slice olarak, iç içe nesneler de ayrı struct olarak üretilir.',
+	'tool.json-to-go.faq.1.question': 'json tag ve omitempty otomatik ekleniyor mu?',
+	'tool.json-to-go.faq.1.answer':
+		'Evet. Alanlara json etiketleri eklenir; örnek veride opsiyonel veya null görünen alanlar için uygun olduğunda omitempty ve pointer tipleri kullanılır.',
+	'tool.json-to-go.faq.2.question': 'Üretilen çıktıyı Go projelerinde doğrudan kullanabilir miyim?',
+	'tool.json-to-go.faq.2.answer':
+		'Evet. Çıktı Go kod tabanlarına hızlıca eklenebilecek şekilde üretilir ve API istemcileri, webhook payloadları ile config modelleri için uygundur.',
+	'tool.json-to-go.use_case.0':
+		'Gerçek istek/yanıt payloadlarından Go API modellerini hızla başlatmak',
+	'tool.json-to-go.use_case.1': 'Webhook ve event tabanlı entegrasyonlar için tipli struct üretmek',
+	'tool.json-to-go.use_case.2':
+		'Bilinmeyen JSON şemalarını incelerken manuel model yazımını azaltmak',
+	'tool.json-to-go.use_case.3':
+		'Üretime yakın Go tip iskeletleriyle backend prototiplemeyi hızlandırmak',
 	'tool.json-schema-validate.display_name': 'JSON Şema Doğrulayıcı',
 	'tool.json-schema-validate.tagline': 'JSON verisini sağlanan şemaya karşı doğrula',
 	'tool.json-schema-validate.description':

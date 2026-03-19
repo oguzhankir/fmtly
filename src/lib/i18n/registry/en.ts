@@ -1377,6 +1377,30 @@ const registryEn: Record<string, string> = {
 		'Quickly document nested JSON event formats for integrations',
 	'tool.json-schema-generator.use_case.3':
 		'Prepare a baseline schema before refining constraints manually',
+	'tool.json-to-go.display_name': 'JSON to Go Structs',
+	'tool.json-to-go.tagline': 'Generate clean Go structs from JSON payloads instantly',
+	'tool.json-to-go.description':
+		'Convert any JSON payload into idiomatic Go struct definitions with nested type inference, json tags, and optional-field handling. Fast, private, and browser-based.',
+	'tool.json-to-go.primary_keyword': 'json to go structs',
+	'tool.json-to-go.meta_title': 'JSON to Go Structs Generator — fmtly.dev',
+	'tool.json-to-go.meta_description':
+		'Generate Go struct definitions from JSON instantly in your browser. Includes nested structs, json tags, and optional-field inference. No data leaves your device.',
+	'tool.json-to-go.operation': 'Convert',
+	'tool.json-to-go.faq.0.question': 'How does the tool map JSON types to Go types?',
+	'tool.json-to-go.faq.0.answer':
+		'Strings map to string, booleans to bool, integers to int64, decimals to float64, arrays to slices, and nested objects to generated struct types.',
+	'tool.json-to-go.faq.1.question': 'Does it add json tags and omitempty automatically?',
+	'tool.json-to-go.faq.1.answer':
+		'Yes. Generated fields include json tags, and fields that appear optional or nullable in the sample can be emitted with omitempty and pointer types where appropriate.',
+	'tool.json-to-go.faq.2.question': 'Can I use this output directly in Go projects?',
+	'tool.json-to-go.faq.2.answer':
+		'Yes. The output is designed to be drop-in ready for Go codebases and works well for API clients, webhook payloads, and config models.',
+	'tool.json-to-go.use_case.0': 'Bootstrap Go API models from real request and response payloads',
+	'tool.json-to-go.use_case.1': 'Generate typed structs for webhook and event-driven integrations',
+	'tool.json-to-go.use_case.2':
+		'Replace manual model writing when exploring unfamiliar JSON schemas',
+	'tool.json-to-go.use_case.3':
+		'Speed up backend prototyping with production-ready Go type scaffolding',
 	'tool.json-schema-validate.display_name': 'JSON Schema Validator',
 	'tool.json-schema-validate.tagline': 'Validate JSON against a user-supplied schema',
 	'tool.json-schema-validate.description':

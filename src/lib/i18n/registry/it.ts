@@ -1394,6 +1394,32 @@ const registryIt: Record<string, string> = {
 		'Documentare velocemente formati JSON annidati per integrazioni',
 	'tool.json-schema-generator.use_case.3':
 		'Generare uno schema di base prima di rifinire i vincoli manualmente',
+	'tool.json-to-go.display_name': 'JSON in struct Go',
+	'tool.json-to-go.tagline': 'Genera struct Go pulite partendo da JSON',
+	'tool.json-to-go.description':
+		'Converti qualsiasi payload JSON in definizioni di struct Go idiomatiche con inferenza dei tipi annidati, tag json e gestione dei campi opzionali. Veloce, privato e 100% nel browser.',
+	'tool.json-to-go.primary_keyword': 'json in struct go',
+	'tool.json-to-go.meta_title': 'Generatore JSON in struct Go — fmtly.dev',
+	'tool.json-to-go.meta_description':
+		'Genera definizioni di struct Go da JSON direttamente nel browser. Include struct annidate, tag json e inferenza dei campi opzionali. I dati restano sul tuo dispositivo.',
+	'tool.json-to-go.operation': 'Converti',
+	'tool.json-to-go.faq.0.question': 'Come vengono mappati i tipi JSON nei tipi Go?',
+	'tool.json-to-go.faq.0.answer':
+		'Le stringhe diventano string, i booleani bool, gli interi int64, i decimali float64, gli array diventano slice e gli oggetti annidati diventano struct generate.',
+	'tool.json-to-go.faq.1.question': 'Aggiunge automaticamente tag json e omitempty?',
+	'tool.json-to-go.faq.1.answer':
+		'Sì. I campi includono tag json e, quando un campo appare opzionale o nullable nel campione, l’output può usare omitempty e tipi puntatore appropriati.',
+	'tool.json-to-go.faq.2.question': 'Posso usare l’output direttamente nei progetti Go?',
+	'tool.json-to-go.faq.2.answer':
+		'Sì. L’output è pensato per l’uso diretto in codebase Go ed è adatto a client API, payload webhook e modelli di configurazione.',
+	'tool.json-to-go.use_case.0':
+		'Avviare rapidamente modelli API Go da payload reali di richiesta e risposta',
+	'tool.json-to-go.use_case.1':
+		'Generare tipi strutturati per integrazioni webhook ed event-driven',
+	'tool.json-to-go.use_case.2':
+		'Ridurre la scrittura manuale dei modelli su schemi JSON sconosciuti',
+	'tool.json-to-go.use_case.3':
+		'Accelerare il prototyping backend con scaffolding di tipi Go pronto per la produzione',
 	'tool.json-schema-validate.display_name': 'Validatore JSON Schema',
 	'tool.json-schema-validate.tagline': 'Valida JSON rispetto a uno schema fornito',
 	'tool.json-schema-validate.description':

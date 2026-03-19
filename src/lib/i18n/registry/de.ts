@@ -1344,6 +1344,32 @@ const registryDe: Record<string, string> = {
 		'Verschachtelte JSON-Eventformate für Integrationen schnell dokumentieren',
 	'tool.json-schema-generator.use_case.3':
 		'Eine Basisschema-Version vor manueller Verfeinerung erzeugen',
+	'tool.json-to-go.display_name': 'JSON zu Go-Structs',
+	'tool.json-to-go.tagline': 'Erzeugen Sie saubere Go-Structs aus JSON-Payloads',
+	'tool.json-to-go.description':
+		'Konvertieren Sie beliebige JSON-Payloads in idiomatische Go-Struct-Definitionen mit Typinferenz für verschachtelte Daten, json-Tags und optionalen Feldern. Schnell, privat und vollständig im Browser.',
+	'tool.json-to-go.primary_keyword': 'json zu go structs',
+	'tool.json-to-go.meta_title': 'JSON zu Go-Structs Generator — fmtly.dev',
+	'tool.json-to-go.meta_description':
+		'Generieren Sie Go-Struct-Definitionen aus JSON direkt im Browser. Mit verschachtelten Structs, json-Tags und Optional-Feld-Erkennung. Keine Daten verlassen Ihr Gerät.',
+	'tool.json-to-go.operation': 'Konvertieren',
+	'tool.json-to-go.faq.0.question': 'Wie werden JSON-Typen auf Go-Typen abgebildet?',
+	'tool.json-to-go.faq.0.answer':
+		'Strings werden zu string, Booleans zu bool, Ganzzahlen zu int64, Dezimalzahlen zu float64, Arrays zu Slices und verschachtelte Objekte zu eigenen Struct-Typen.',
+	'tool.json-to-go.faq.1.question': 'Werden json-Tags und omitempty automatisch gesetzt?',
+	'tool.json-to-go.faq.1.answer':
+		'Ja. Felder erhalten json-Tags, und bei optionalen oder nullbaren Beispielwerten kann die Ausgabe omitempty sowie passende Pointer-Typen verwenden.',
+	'tool.json-to-go.faq.2.question': 'Kann ich den erzeugten Code direkt in Go-Projekten nutzen?',
+	'tool.json-to-go.faq.2.answer':
+		'Ja. Die Ausgabe ist für den direkten Einsatz in Go-Codebasen gedacht und eignet sich für API-Clients, Webhook-Payloads und Konfigurationsmodelle.',
+	'tool.json-to-go.use_case.0':
+		'Go-API-Modelle schnell aus echten Request- und Response-Payloads ableiten',
+	'tool.json-to-go.use_case.1':
+		'Strukturierte Typen für Webhook- und Event-Integrationen generieren',
+	'tool.json-to-go.use_case.2':
+		'Manuelles Modellieren bei unbekannten JSON-Schemata deutlich reduzieren',
+	'tool.json-to-go.use_case.3':
+		'Backend-Prototyping mit produktionsnahen Go-Typgerüsten beschleunigen',
 	'tool.json-schema-validate.display_name': 'JSON-Schema-Validator',
 	'tool.json-schema-validate.tagline': 'JSON gegen ein bereitgestelltes Schema validieren',
 	'tool.json-schema-validate.description':
@@ -2125,7 +2151,9 @@ const registryDe: Record<string, string> = {
 	'ui.jwt.copy_payload': 'Kopieren',
 	'ui.jwt.copy_signature': 'Kopieren',
 	'ui.jwt.worker_active': 'Große Eingabe (>{size}) wird im Worker verarbeitet.',
-	'ui.jwt.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Hauptthread.'
+	'ui.jwt.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Hauptthread.',
+	'ui.jwt.error.invalid_signature': 'Ungültige JWT-Signatur',
+	'ui.jwt.errors.invalid_base64': 'Ungültige Base64-URL-Kodierung in JWT-Segmenten'
 };
 
 export default registryDe;

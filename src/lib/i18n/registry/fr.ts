@@ -1421,6 +1421,32 @@ const registryFr: Record<string, string> = {
 		'Documenter rapidement des formats JSON imbriqués pour des intégrations',
 	'tool.json-schema-generator.use_case.3':
 		'Produire un schéma de base avant affinage manuel des contraintes',
+	'tool.json-to-go.display_name': 'JSON vers structs Go',
+	'tool.json-to-go.tagline': 'Générez des structs Go propres à partir de JSON',
+	'tool.json-to-go.description':
+		'Convertissez n’importe quel payload JSON en définitions de structs Go idiomatiques avec inférence des types imbriqués, tags json et gestion des champs optionnels. Rapide, privé et 100% navigateur.',
+	'tool.json-to-go.primary_keyword': 'json vers structs go',
+	'tool.json-to-go.meta_title': 'Générateur JSON vers structs Go — fmtly.dev',
+	'tool.json-to-go.meta_description':
+		'Générez des définitions de structs Go depuis JSON directement dans votre navigateur. Inclut structs imbriqués, tags json et inférence des champs optionnels. Aucune donnée ne quitte votre appareil.',
+	'tool.json-to-go.operation': 'Convertir',
+	'tool.json-to-go.faq.0.question': 'Comment les types JSON sont-ils mappés vers Go ?',
+	'tool.json-to-go.faq.0.answer':
+		'Les chaînes deviennent string, les booléens bool, les entiers int64, les décimaux float64, les tableaux des slices, et les objets imbriqués des types struct générés.',
+	'tool.json-to-go.faq.1.question': 'Les tags json et omitempty sont-ils ajoutés automatiquement ?',
+	'tool.json-to-go.faq.1.answer':
+		'Oui. Les champs incluent des tags json, et lorsqu’un champ semble optionnel ou nullable dans l’échantillon, la sortie peut utiliser omitempty et des types pointeur adaptés.',
+	'tool.json-to-go.faq.2.question': 'Puis-je utiliser directement le résultat dans un projet Go ?',
+	'tool.json-to-go.faq.2.answer':
+		'Oui. La sortie est conçue pour être intégrée directement dans des codebases Go, notamment pour des clients API, payloads webhook et modèles de configuration.',
+	'tool.json-to-go.use_case.0':
+		'Initialiser des modèles d’API Go à partir de payloads réels de requête/réponse',
+	'tool.json-to-go.use_case.1':
+		'Générer des types structurés pour des intégrations webhook et événementielles',
+	'tool.json-to-go.use_case.2':
+		'Réduire l’écriture manuelle de modèles sur des schémas JSON inconnus',
+	'tool.json-to-go.use_case.3':
+		'Accélérer le prototypage backend avec un squelette de types Go prêt à la prod',
 	'tool.json-schema-validate.display_name': 'Validateur de schéma JSON',
 	'tool.json-schema-validate.tagline': 'Valider un JSON contre un schéma fourni',
 	'tool.json-schema-validate.description':
