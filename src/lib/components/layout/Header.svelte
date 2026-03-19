@@ -22,7 +22,8 @@
 		'yaml',
 		'csv',
 		'toml',
-		'text'
+		'text',
+		'encode'
 	];
 	const faviconUrl: string = '/favicon.svg';
 

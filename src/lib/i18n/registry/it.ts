@@ -2108,7 +2108,77 @@ const registryIt: Record<string, string> = {
 	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Preserva interruzioni paragrafo',
 	'ui.whitespace_cleaner.tab_size': 'Dimensione tab',
 	'ui.csv.controls.table_name': 'Nome Tabella',
-	'ui.csv.controls.batch_size': 'Dimensione Batch'
+	'ui.csv.controls.batch_size': 'Dimensione Batch',
+	// ── Categoria Encode ──────────────────────────────────────────────────────
+	'category.encode.display_name': 'Codifica / Decodifica',
+	'category.encode.description':
+		'Codifica e decodifica dati nei formati più comuni — JWT, Base64, URL, entità HTML e altro. Tutti gli strumenti funzionano interamente nel tuo browser.',
+	'category.encode.primary_keyword': 'strumenti codifica decodifica',
+	// ── JWT Decoder ───────────────────────────────────────────────────────────
+	'tool.encode-jwt-decoder.display_name': 'Decodificatore JWT',
+	'tool.encode-jwt-decoder.tagline': 'Decodifica token JWT e ispeziona claim, scadenza e algoritmo',
+	'tool.encode-jwt-decoder.description':
+		"Decodifica istantaneamente i JSON Web Token — ispeziona l'algoritmo dell'intestazione, i claim del payload, i timestamp di scadenza e la firma raw in Base64URL. Tutta l'elaborazione avviene nel browser; nulla viene mai inviato a un server.",
+	'tool.encode-jwt-decoder.primary_keyword': 'decodificatore jwt',
+	'tool.encode-jwt-decoder.meta_title':
+		'Decodificatore JWT — Ispeziona intestazione, payload e claim | fmtly.dev',
+	'tool.encode-jwt-decoder.meta_description':
+		'Decodifica e ispeziona token JWT nel tuo browser. Visualizza intestazione, claim del payload, stato di scadenza e firma. Veloce, privato e gratuito — nessun dato lascia il tuo dispositivo.',
+	'tool.encode-jwt-decoder.operation': 'Decodifica JWT',
+	'tool.encode-jwt-decoder.faq.0.question': 'Il mio JWT viene inviato a un server?',
+	'tool.encode-jwt-decoder.faq.0.answer':
+		'No. Tutta la decodifica avviene interamente nel browser. Il token non lascia mai il tuo dispositivo, rendendo questo strumento sicuro anche con token di autenticazione reali.',
+	'tool.encode-jwt-decoder.faq.1.question': 'Questo strumento verifica la firma?',
+	'tool.encode-jwt-decoder.faq.1.answer':
+		"No. La verifica della firma richiede la chiave segreta o pubblica. Questo strumento decodifica e mostra solo il payload — usa la tua libreria lato server per verificare l'autenticità.",
+	'tool.encode-jwt-decoder.faq.2.question': 'Quali algoritmi JWT sono supportati?',
+	'tool.encode-jwt-decoder.faq.2.answer':
+		"Il decodificatore gestisce qualsiasi JWT standard in tre parti indipendentemente dall'algoritmo (HS256, RS256, ES256, ecc.), poiché decodifica solo il contenuto codificato in Base64URL senza verificare la firma.",
+	'tool.encode-jwt-decoder.faq.3.question':
+		'Posso decodificare JWT di grandi dimensioni o batch di token?',
+	'tool.encode-jwt-decoder.faq.3.answer':
+		"Gli input superiori a 500KB vengono automaticamente elaborati in un Web Worker, mantenendo reattiva l'interfaccia anche per token insolitamente grandi o payload di test.",
+	'tool.encode-jwt-decoder.use_case.0':
+		'Ispezionare token di autenticazione durante lo sviluppo e il debug di API in locale',
+	'tool.encode-jwt-decoder.use_case.1':
+		"Verificare la scadenza del token e i valori dei claim standard (iss, sub, aud) a colpo d'occhio",
+	'tool.encode-jwt-decoder.use_case.2':
+		'Insegnare la struttura JWT e il ruolo delle sezioni intestazione, payload e firma',
+	'tool.encode-jwt-decoder.use_case.3':
+		'Risolvere i problemi di autorizzazione esaminando i claim personalizzati nel payload',
+	// ── JWT Decoder — stringhe interfaccia ───────────────────────────────────
+	'ui.jwt.input_placeholder': 'Incolla qui il tuo token JWT (eyJ…)',
+	'ui.jwt.section.header': 'Intestazione',
+	'ui.jwt.section.payload': 'Payload',
+	'ui.jwt.section.signature': 'Firma',
+	'ui.jwt.standard_claims': 'Claim standard',
+	'ui.jwt.all_claims': 'Tutti i claim',
+	'ui.jwt.signature_note':
+		"Le firme non vengono verificate. Usa la tua libreria lato server per verificare l'autenticità del token.",
+	'ui.jwt.status.valid': 'Valido',
+	'ui.jwt.status.expired': 'Scaduto',
+	'ui.jwt.status.not_yet_valid': 'Non ancora valido',
+	'ui.jwt.status.no_expiry': 'Nessuna scadenza',
+	'ui.jwt.expires_in': 'Scade in {time}',
+	'ui.jwt.expired_ago': 'Scaduto {time} fa',
+	'ui.jwt.claim.iss': 'Emittente',
+	'ui.jwt.claim.sub': 'Soggetto',
+	'ui.jwt.claim.aud': 'Destinatario',
+	'ui.jwt.claim.exp': 'Scade',
+	'ui.jwt.claim.nbf': 'Non prima di',
+	'ui.jwt.claim.iat': 'Emesso il',
+	'ui.jwt.claim.jti': 'ID JWT',
+	'ui.jwt.error.empty': 'Incolla un token JWT sopra per decodificarlo.',
+	'ui.jwt.error.invalid_format': 'Formato JWT non valido: attese 3 parti separate da punti.',
+	'ui.jwt.error.invalid_base64': 'Decodifica Base64URL non riuscita.',
+	'ui.jwt.error.invalid_json': 'Il contenuto decodificato non è JSON valido.',
+	'ui.jwt.clear': 'Cancella',
+	'ui.jwt.copy_jwt': 'Copia token',
+	'ui.jwt.copy_header': 'Copia',
+	'ui.jwt.copy_payload': 'Copia',
+	'ui.jwt.copy_signature': 'Copia',
+	'ui.jwt.worker_active': 'Input grande (>{size}) elaborato nel Worker.',
+	'ui.jwt.worker_failed': 'Elaborazione Worker fallita. Ripiego sul thread principale.'
 };
 
 export default registryIt;
