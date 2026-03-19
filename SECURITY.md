@@ -133,19 +133,20 @@ We provide security updates for:
 
 ### Responsible Disclosure Process
 
-1. **Email:** Send a detailed report to **oguzhankir@gmail.com**
+1. **Email:** Send a detailed report to **oguzhankir17
+2. @gmail.com**
    - Include a clear description of the vulnerability
    - Steps to reproduce (if applicable)
    - Potential impact assessment
    - Proof-of-concept (optional but helpful)
 
-2. **Response Timeline:**
+3. **Response Timeline:**
    - **Initial response:** Within 48 hours
    - **Confirmation:** We'll acknowledge receipt and provide a timeline
    - **Fix deployment:** Critical issues within 7 days, high within 14 days
    - **Public disclosure:** We'll coordinate timing with you after a fix is deployed
 
-3. **Credit & Attribution:**
+4. **Credit & Attribution:**
    - We'll credit you in the release notes (unless you prefer anonymity)
    - A CVE will be requested if the vulnerability is widely exploitable
 
