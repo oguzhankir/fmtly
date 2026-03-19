@@ -1,0 +1,125 @@
+name: Tool proposal
+description: Propose a brand-new tool for fmtly
+title: "[Tool]: "
+labels:
+  - tool-proposal
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a new tool with implementation-level detail.
+
+        Keep in mind:
+        - Browser-only processing is the default
+        - No server-side handling of user content
+        - Full i18n and tests are required for shipped tools
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched for existing issues and ROADMAP entries
+          required: true
+        - label: This can run in the browser without sending user data to a backend
+          required: true
+        - label: I can help validate sample input/output and UX copy
+          required: false
+
+  - type: input
+    id: tool_name
+    attributes:
+      label: Proposed tool name
+      placeholder: URL Query Builder
+    validations:
+      required: true
+
+  - type: input
+    id: suggested_slug
+    attributes:
+      label: Suggested slug
+      description: Format `category/slug`
+      placeholder: web/url-query-builder
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - json
+        - yaml
+        - xml
+        - csv
+        - toml
+        - text
+        - encode
+        - code
+        - ai
+        - crypto
+        - web
+        - network
+        - number
+        - color
+        - image
+        - file
+        - qr
+        - generate
+        - a11y
+        - new category
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Primary use cases
+      description: Who needs this and why?
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: input_output
+    attributes:
+      label: Input/output examples
+      description: Include realistic sample input and expected output
+      render: txt
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Functional requirements
+      description: Behavior, options, edge cases, validation rules
+      placeholder: |
+        - Supports ...
+        - Handles ...
+        - Rejects ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: performance
+    attributes:
+      label: Performance and worker strategy
+      description: Mention heavy operations and expected worker usage for >500KB inputs
+
+  - type: textarea
+    id: seo
+    attributes:
+      label: SEO angle
+      description: Target keyword(s), search intent, and how this tool differs from competitors
+
+  - type: textarea
+    id: related_tools
+    attributes:
+      label: Related existing tools
+      description: Which current tools should cross-link to this one?
+      placeholder: encode/url, text/escape

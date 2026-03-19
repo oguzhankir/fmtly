@@ -1,0 +1,44 @@
+name: Documentation improvement
+description: Report unclear docs or propose improvements
+title: "[Docs]: "
+labels:
+  - documentation
+  - triage
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I checked existing docs/README/CONTRIBUTING first
+          required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Affected page/file
+      placeholder: README.md, CONTRIBUTING.md, SECURITY.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current issue
+      description: What is confusing, outdated, or missing?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested change
+      description: What should the updated content say?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Links/screenshots/examples

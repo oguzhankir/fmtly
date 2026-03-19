@@ -2242,6 +2242,63 @@ const registryTr: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Kopyala',
 	'ui.jwt.worker_active': "Büyük girdi (>{size}) Worker'da işleniyor.",
 	'ui.jwt.worker_failed': "Worker işlemi başarısız. Ana thread'e geri dönülüyor.",
+	// ── URL Kodla / Çöz ──────────────────────────────────────────────────────
+	'tool.encode-url-encode-decode.display_name': 'URL Kodla / Çöz',
+	'tool.encode-url-encode-decode.tagline':
+		'URL metnini bileşen veya tam URL modunda yüzde kodlayın ya da çözün',
+	'tool.encode-url-encode-decode.description':
+		'URL metinlerini tarayıcınızda anında kodlayın veya çözün. Bileşen modu (encodeURIComponent/decodeURIComponent) ile tam URL modu (encodeURI/decodeURI) arasında geçiş yapın, form verilerindeki + işaretini boşluk olarak yönetin ve büyük girdileri Web Worker ile akıcı şekilde işleyin.',
+	'tool.encode-url-encode-decode.primary_keyword': 'url kodla çöz',
+	'tool.encode-url-encode-decode.meta_title':
+		'URL Kodla / Çöz — URL Yüzde Kodlama Aracı | fmtly.dev',
+	'tool.encode-url-encode-decode.meta_description':
+		'URL metinlerini tarayıcınızda anında kodlayın veya çözün. Bileşen/tam URL modu, artı-boşluk yönetimi ve büyük girdiler için Web Worker desteği sunar.',
+	'tool.encode-url-encode-decode.operation': 'URL Kodla / Çöz',
+	'tool.encode-url-encode-decode.faq.0.question': 'URL verim bir sunucuya gönderilir mi?',
+	'tool.encode-url-encode-decode.faq.0.answer':
+		'Hayır. Tüm kodlama ve çözme işlemleri tamamen tarayıcınızda gerçekleşir. Girdiniz cihazınızı terk etmez.',
+	'tool.encode-url-encode-decode.faq.1.question':
+		'Bileşen modu ile tam URL modu arasındaki fark nedir?',
+	'tool.encode-url-encode-decode.faq.1.answer':
+		'Bileşen modu, sorgu parametresi değeri veya yol parçası gibi tekil parçalar içindir; ?, &, = gibi ayraçları da kodlar. Tam URL modu ise URL yapısındaki ayraçları korur ve yalnızca güvensiz karakterleri kodlar.',
+	'tool.encode-url-encode-decode.faq.2.question': '+ işareti neden bazen boşluk olarak çözülür?',
+	'tool.encode-url-encode-decode.faq.2.answer':
+		'application/x-www-form-urlencoded verilerde boşluklar çoğu zaman + ile temsil edilir. Form tarzı verilerde çözme yaparken artıdan boşluğa seçeneğini açın.',
+	'tool.encode-url-encode-decode.faq.3.question': 'Bu araç büyük URL girdilerini işleyebilir mi?',
+	'tool.encode-url-encode-decode.faq.3.answer':
+		'Evet. 500KB üzerindeki girdiler arayüzü akıcı tutmak için otomatik olarak Web Worker üzerinde işlenir.',
+	'tool.encode-url-encode-decode.use_case.0':
+		'API isteklerinden önce sorgu parametrelerini güvenli şekilde kodlamak',
+	'tool.encode-url-encode-decode.use_case.1':
+		'Yönlendirme sorunlarını ayıklarken loglardan alınan URL parçalarını çözmek',
+	'tool.encode-url-encode-decode.use_case.2':
+		'Form-urlencoded örneklerinde artı-boşluk davranışını doğrulamak',
+	'tool.encode-url-encode-decode.use_case.3':
+		'Redirect sorunlarında kodlanmış ve çözülmüş URL çıktısını karşılaştırmak',
+	// ── URL Kodla / Çöz — arayüz metinleri ───────────────────────────────────
+	'ui.encode_url.tab_label': 'URL',
+	'ui.encode_url.action_label': 'İşlem',
+	'ui.encode_url.action.encode': 'Kodla',
+	'ui.encode_url.action.decode': 'Çöz',
+	'ui.encode_url.mode_label': 'Mod',
+	'ui.encode_url.mode.component': 'URL bileşeni',
+	'ui.encode_url.mode.full_url': 'Tam URL',
+	'ui.encode_url.input_label': 'Girdi',
+	'ui.encode_url.output_label': 'Çıktı',
+	'ui.encode_url.input_placeholder': 'Metin, sorgu parametresi veya tam URL yapıştırın...',
+	'ui.encode_url.output_placeholder': 'Kodlanmış ya da çözülmüş çıktı burada görünür...',
+	'ui.encode_url.option.encode_spaces_as_plus': 'Boşlukları + olarak kodla',
+	'ui.encode_url.option.decode_plus_as_space': '+ işaretini boşluk olarak çöz',
+	'ui.encode_url.worker_active':
+		'Büyük girdi algılandı (>{size}). İşlem Web Worker üzerinde çalışır.',
+	'ui.encode_url.worker_failed': 'Worker işlemi başarısız oldu. Ana thread işlemine dönülüyor.',
+	'ui.encode_url.worker_badge': 'Worker',
+	'ui.encode_url.warning.no_changes': 'Seçilen mod ve işlem için değişiklik tespit edilmedi.',
+	'ui.encode_url.error.invalid_url_encoding': 'Geçersiz URL girdisi: {detail}',
+	'ui.encode_url.button.swap_direction': 'Yönü değiştir',
+	'ui.encode_url.button.apply_output': 'Çıktıyı girdiye uygula',
+	'ui.encode_url.toast.applied': 'Çıktı girdiye uygulandı',
+	'ui.encode_url.characters': 'karakter',
 
 	// Missing keys from English
 	'ui.validator.warnings': 'ui.validator.warnings',

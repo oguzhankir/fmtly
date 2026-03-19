@@ -2232,6 +2232,65 @@ const registryIt: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Copia',
 	'ui.jwt.worker_active': 'Input grande (>{size}) elaborato nel Worker.',
 	'ui.jwt.worker_failed': 'Elaborazione Worker fallita. Ripiego sul thread principale.',
+	// ── Codifica / Decodifica URL ────────────────────────────────────────────
+	'tool.encode-url-encode-decode.display_name': 'Codifica / Decodifica URL',
+	'tool.encode-url-encode-decode.tagline':
+		'Codifica percentuale o decodifica testo URL in modalità componente o URL completa',
+	'tool.encode-url-encode-decode.description':
+		'Codifica o decodifica stringhe URL istantaneamente nel browser. Passa dalla modalità componente (encodeURIComponent/decodeURIComponent) alla modalità URL completa (encodeURI/decodeURI), gestisci + come spazio nei dati form e processa input grandi con Web Worker.',
+	'tool.encode-url-encode-decode.primary_keyword': 'codifica decodifica url',
+	'tool.encode-url-encode-decode.meta_title':
+		'Codifica / Decodifica URL — Codifica percentuale online | fmtly.dev',
+	'tool.encode-url-encode-decode.meta_description':
+		'Codifica o decodifica URL nel browser. Con modalità componente/URL completa, gestione + e spazio, e supporto Web Worker per input di grandi dimensioni.',
+	'tool.encode-url-encode-decode.operation': 'Codifica / Decodifica URL',
+	'tool.encode-url-encode-decode.faq.0.question': 'I miei dati URL vengono inviati a un server?',
+	'tool.encode-url-encode-decode.faq.0.answer':
+		'No. Tutta la codifica e la decodifica avvengono completamente nel browser. I dati restano sul tuo dispositivo.',
+	'tool.encode-url-encode-decode.faq.1.question':
+		'Qual è la differenza tra modalità componente e modalità URL completa?',
+	'tool.encode-url-encode-decode.faq.1.answer':
+		'La modalità componente è pensata per frammenti singoli come valori query o segmenti path, quindi codifica anche delimitatori come ?, & e =. La modalità URL completa mantiene questi delimitatori strutturali e codifica solo i caratteri non sicuri.',
+	'tool.encode-url-encode-decode.faq.2.question':
+		'Perché + a volte viene decodificato come spazio?',
+	'tool.encode-url-encode-decode.faq.2.answer':
+		'Nei payload application/x-www-form-urlencoded gli spazi sono spesso rappresentati come +. Attiva l’opzione dedicata in fase di decodifica quando lavori con dati di form.',
+	'tool.encode-url-encode-decode.faq.3.question': 'Può gestire payload URL molto grandi?',
+	'tool.encode-url-encode-decode.faq.3.answer':
+		'Sì. Gli input oltre 500KB vengono elaborati automaticamente in un Web Worker per mantenere l’interfaccia reattiva.',
+	'tool.encode-url-encode-decode.use_case.0':
+		'Codificare in modo sicuro i valori query prima di inviare richieste API',
+	'tool.encode-url-encode-decode.use_case.1':
+		'Decodificare frammenti URL copiati dai log durante il debug del routing',
+	'tool.encode-url-encode-decode.use_case.2':
+		'Validare il comportamento +/spazio in esempi form-urlencoded',
+	'tool.encode-url-encode-decode.use_case.3':
+		'Confrontare URL codificate e decodificate durante l’analisi di redirect',
+	// ── Codifica / Decodifica URL — stringhe interfaccia ─────────────────────
+	'ui.encode_url.tab_label': 'URL',
+	'ui.encode_url.action_label': 'Azione',
+	'ui.encode_url.action.encode': 'Codifica',
+	'ui.encode_url.action.decode': 'Decodifica',
+	'ui.encode_url.mode_label': 'Modalità',
+	'ui.encode_url.mode.component': 'Componente URL',
+	'ui.encode_url.mode.full_url': 'URL completa',
+	'ui.encode_url.input_label': 'Input',
+	'ui.encode_url.output_label': 'Output',
+	'ui.encode_url.input_placeholder': 'Incolla testo, parametri query o una URL completa...',
+	'ui.encode_url.output_placeholder': 'L’output codificato o decodificato appare qui...',
+	'ui.encode_url.option.encode_spaces_as_plus': 'Codifica gli spazi come +',
+	'ui.encode_url.option.decode_plus_as_space': 'Decodifica + come spazio',
+	'ui.encode_url.worker_active':
+		'Input grande rilevato (>{size}). L’elaborazione avviene in un Web Worker.',
+	'ui.encode_url.worker_failed': 'Elaborazione Worker non riuscita. Ripiego sul thread principale.',
+	'ui.encode_url.worker_badge': 'Worker',
+	'ui.encode_url.warning.no_changes':
+		'Nessuna modifica rilevata per modalità e azione selezionate.',
+	'ui.encode_url.error.invalid_url_encoding': 'Input URL non valido: {detail}',
+	'ui.encode_url.button.swap_direction': 'Inverti direzione',
+	'ui.encode_url.button.apply_output': 'Applica output all’input',
+	'ui.encode_url.toast.applied': 'Output applicato all’input',
+	'ui.encode_url.characters': 'caratteri',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',

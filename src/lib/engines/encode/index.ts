@@ -11,3 +11,19 @@ export {
 	type JWTWorkerRequest,
 	type JWTWorkerResponse
 } from './jwt.js';
+
+export {
+	processURLEncode,
+	shouldUseURLWorker,
+	URL_WORKER_THRESHOLD_BYTES,
+	type URLEncodeAction,
+	type URLEncodeMode,
+	type URLEncodeOptions,
+	type URLEncodeWarningCode,
+	type URLEncodeErrorCode,
+	type URLEncodeError,
+	type URLEncodeMetrics,
+	type URLEncodeResult,
+	type URLEncodeWorkerRequest,
+	type URLEncodeWorkerResponse
+} from './url.js';

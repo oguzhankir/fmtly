@@ -1,0 +1,126 @@
+name: Bug report
+description: Report a reproducible bug in fmtly
+title: "[Bug]: "
+labels:
+  - bug
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        Before submitting:
+        - Search existing issues to avoid duplicates
+        - Reproduce on the latest `main`
+        - Remove sensitive data from examples
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I searched for existing issues
+          required: true
+        - label: I can reproduce this on the latest main branch
+          required: true
+        - label: I did not include secrets, tokens, or private data
+          required: true
+
+  - type: dropdown
+    id: affected_area
+    attributes:
+      label: Affected area
+      description: Which part is impacted?
+      options:
+        - JSON
+        - YAML
+        - XML
+        - CSV
+        - TOML
+        - Text
+        - Encode/Decode
+        - Shared UI
+        - Build/CI
+        - Docs
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: tool_path
+    attributes:
+      label: Tool path
+      description: Example `json/formatter`, `encode/url`
+      placeholder: encode/url
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug summary
+      description: What is broken?
+      placeholder: A clear and concise description of the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide exact, ordered steps
+      placeholder: |
+        1. Go to ...
+        2. Paste ...
+        3. Click ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What should happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      placeholder: What happens currently?
+    validations:
+      required: true
+
+  - type: textarea
+    id: sample_input
+    attributes:
+      label: Minimal sample input
+      description: If relevant, provide the smallest input that reproduces the issue
+      render: txt
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console errors / stack traces
+      description: Paste browser console output or CI logs if available
+      render: shell
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser + OS + device
+      placeholder: Chrome 123, macOS 14.6, Desktop
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Low (minor UX issue)
+        - Medium (feature is degraded)
+        - High (feature is unusable)
+        - Critical (security/data loss)
+    validations:
+      required: true

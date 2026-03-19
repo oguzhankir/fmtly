@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Istanbul"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      svelte-ecosystem:
+        patterns:
+          - "@sveltejs/*"
+          - "svelte"
+      testing-stack:
+        patterns:
+          - "vitest"
+          - "@playwright/*"
+          - "happy-dom"
+      linting-formatting:
+        patterns:
+          - "@biomejs/*"
+          - "typescript"
+          - "tailwindcss"
+          - "@tailwindcss/*"
+    ignore:
+      - dependency-name: "node"
