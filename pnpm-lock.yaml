@@ -12,8 +12,8 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0
       '@tanstack/svelte-virtual':
-        specifier: ^3.13.21
-        version: 3.13.21(svelte@5.54.0)
+        specifier: ^3.13.23
+        version: 3.13.23(svelte@5.54.0)
       ajv:
         specifier: ^8.18.0
         version: 8.18.0
@@ -1305,13 +1305,13 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
 
-  '@tanstack/svelte-virtual@3.13.21':
-    resolution: {integrity: sha512-qCRc2xcWuJEWs/fVq9SKaiy1LfCExAaLgU9FNMP3XsibuT8o55C5UWQmAFGxkE9hfQ8I0JfRA8yIUQ64WZ1m8A==}
+  '@tanstack/svelte-virtual@3.13.23':
+    resolution: {integrity: sha512-kUFdKtevYPhuv9bN2/NhE8zCr6pO3lP2a4xYwyzwqvNZim0EMHdq9nKMFgS4rMHE9Iacdj4+PwMYDfRZ45a/+Q==}
     peerDependencies:
       svelte: ^3.48.0 || ^4.0.0 || ^5.0.0
 
-  '@tanstack/virtual-core@3.13.21':
-    resolution: {integrity: sha512-ww+fmLHyCbPSf7JNbWZP3g7wl6SdNo3ah5Aiw+0e9FDErkVHLKprYUrwTm7dF646FtEkN/KkAKPYezxpmvOjxw==}
+  '@tanstack/virtual-core@3.13.23':
+    resolution: {integrity: sha512-zSz2Z2HNyLjCplANTDyl3BcdQJc2k1+yyFoKhNRmCr7V7dY8o8q5m8uFTI1/Pg1kL+Hgrz6u3Xo6eFUB7l66cg==}
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -4129,12 +4129,12 @@ snapshots:
       tailwindcss: 4.2.1
       vite: 6.4.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2)
 
-  '@tanstack/svelte-virtual@3.13.21(svelte@5.54.0)':
+  '@tanstack/svelte-virtual@3.13.23(svelte@5.54.0)':
     dependencies:
-      '@tanstack/virtual-core': 3.13.21
+      '@tanstack/virtual-core': 3.13.23
       svelte: 5.54.0
 
-  '@tanstack/virtual-core@3.13.21': {}
+  '@tanstack/virtual-core@3.13.23': {}
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 

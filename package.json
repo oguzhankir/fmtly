@@ -43,7 +43,7 @@
 	},
 	"dependencies": {
 		"@monaco-editor/loader": "^1.7.0",
-		"@tanstack/svelte-virtual": "^3.13.21",
+		"@tanstack/svelte-virtual": "^3.13.23",
 		"ajv": "^8.18.0",
 		"ajv-formats": "^3.0.1",
 		"bits-ui": "^2.16.3",
