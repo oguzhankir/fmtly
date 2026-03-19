@@ -55,7 +55,7 @@
 		"json-source-map": "^0.6.1",
 		"jsonpath-plus": "^10.4.0",
 		"jsonrepair": "^3.13.3",
-		"lucide-svelte": "^0.469.0",
+		"lucide-svelte": "^0.577.0",
 		"lz-string": "^1.5.0",
 		"marked": "^14.0.0",
 		"papaparse": "^5.5.3",
