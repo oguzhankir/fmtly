@@ -46,7 +46,7 @@
 		"@tanstack/svelte-virtual": "^3.13.21",
 		"ajv": "^8.18.0",
 		"ajv-formats": "^3.0.1",
-		"bits-ui": "^1.0.0",
+		"bits-ui": "^2.16.3",
 		"diff-match-patch": "^1.0.5",
 		"fast-xml-parser": "^5.5.7",
 		"highlight.js": "^11.11.1",
