@@ -2055,7 +2055,77 @@ const registryDe: Record<string, string> = {
 	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Absatzumbrüche erhalten',
 	'ui.whitespace_cleaner.tab_size': 'Tab-Größe',
 	'ui.csv.controls.table_name': 'Tabellenname',
-	'ui.csv.controls.batch_size': 'Stapelgröße'
+	'ui.csv.controls.batch_size': 'Stapelgröße',
+	// ── Encode-Kategorie ──────────────────────────────────────────────────────
+	'category.encode.display_name': 'Kodieren / Dekodieren',
+	'category.encode.description':
+		'Daten in gängigen Formaten kodieren und dekodieren — JWT, Base64, URL, HTML-Entities und mehr. Alle Werkzeuge laufen vollständig im Browser.',
+	'category.encode.primary_keyword': 'kodieren dekodieren tools',
+	// ── JWT Decoder ───────────────────────────────────────────────────────────
+	'tool.encode-jwt-decoder.display_name': 'JWT Decoder',
+	'tool.encode-jwt-decoder.tagline':
+		'JWT-Token dekodieren und Claims, Ablaufzeit sowie Algorithmus prüfen',
+	'tool.encode-jwt-decoder.description':
+		'Dekodiere JSON Web Tokens sofort – prüfe den Header-Algorithmus, Payload-Claims, Ablaufzeitstempel und die rohe Base64URL-Signatur. Alle Verarbeitungsschritte finden im Browser statt; nichts wird an einen Server gesendet.',
+	'tool.encode-jwt-decoder.primary_keyword': 'jwt decoder',
+	'tool.encode-jwt-decoder.meta_title': 'JWT Decoder — Header, Payload & Claims prüfen | fmtly.dev',
+	'tool.encode-jwt-decoder.meta_description':
+		'JWT-Token im Browser dekodieren und prüfen. Header, Payload-Claims, Ablaufstatus und Signatur ansehen. Schnell, privat und kostenlos — keine Daten verlassen dein Gerät.',
+	'tool.encode-jwt-decoder.operation': 'JWT dekodieren',
+	'tool.encode-jwt-decoder.faq.0.question': 'Wird mein JWT an einen Server gesendet?',
+	'tool.encode-jwt-decoder.faq.0.answer':
+		'Nein. Die gesamte Dekodierung findet ausschließlich im Browser statt. Dein Token verlässt nie dein Gerät, sodass dieses Werkzeug auch mit echten Authentifizierungs-Tokens sicher verwendet werden kann.',
+	'tool.encode-jwt-decoder.faq.1.question': 'Verifiziert dieses Tool die Signatur?',
+	'tool.encode-jwt-decoder.faq.1.answer':
+		'Nein. Die Signaturverifizierung erfordert den geheimen oder öffentlichen Schlüssel. Dieses Tool dekodiert und zeigt nur den Payload – verwende deine serverseitige Bibliothek, um die Echtheit zu prüfen.',
+	'tool.encode-jwt-decoder.faq.2.question': 'Welche JWT-Algorithmen werden unterstützt?',
+	'tool.encode-jwt-decoder.faq.2.answer':
+		'Der Decoder verarbeitet jeden Standard-JWT mit drei Teilen, unabhängig vom Algorithmus (HS256, RS256, ES256 usw.), da er lediglich den Base64URL-kodierten Inhalt ohne Signaturprüfung dekodiert.',
+	'tool.encode-jwt-decoder.faq.3.question': 'Kann ich große JWTs oder Token-Mengen dekodieren?',
+	'tool.encode-jwt-decoder.faq.3.answer':
+		'Eingaben über 500KB werden automatisch an einen Web Worker ausgelagert, sodass der UI-Thread auch bei ungewöhnlich großen Tokens oder Test-Payloads reaktionsschnell bleibt.',
+	'tool.encode-jwt-decoder.use_case.0':
+		'Authentifizierungs-Token beim lokalen API-Entwickeln und Debuggen prüfen',
+	'tool.encode-jwt-decoder.use_case.1':
+		'Ablaufzeit und Standard-Claims (iss, sub, aud) auf einen Blick kontrollieren',
+	'tool.encode-jwt-decoder.use_case.2':
+		'JWT-Struktur und die Rolle von Header, Payload und Signatur vermitteln',
+	'tool.encode-jwt-decoder.use_case.3':
+		'Autorisierungsfehler durch Analyse benutzerdefinierter Claims im Payload beheben',
+	// ── JWT Decoder UI-Texte ──────────────────────────────────────────────────
+	'ui.jwt.input_placeholder': 'JWT-Token hier einfügen (eyJ…)',
+	'ui.jwt.section.header': 'Header',
+	'ui.jwt.section.payload': 'Payload',
+	'ui.jwt.section.signature': 'Signatur',
+	'ui.jwt.standard_claims': 'Standardmäßige Claims',
+	'ui.jwt.all_claims': 'Alle Claims',
+	'ui.jwt.signature_note':
+		'Signaturen werden nicht verifiziert. Verwende deine serverseitige Bibliothek, um die Token-Echtheit zu prüfen.',
+	'ui.jwt.status.valid': 'Gültig',
+	'ui.jwt.status.expired': 'Abgelaufen',
+	'ui.jwt.status.not_yet_valid': 'Noch nicht gültig',
+	'ui.jwt.status.no_expiry': 'Kein Ablaufdatum',
+	'ui.jwt.expires_in': 'Läuft ab in {time}',
+	'ui.jwt.expired_ago': 'Abgelaufen vor {time}',
+	'ui.jwt.claim.iss': 'Aussteller',
+	'ui.jwt.claim.sub': 'Betreff',
+	'ui.jwt.claim.aud': 'Zielgruppe',
+	'ui.jwt.claim.exp': 'Läuft ab',
+	'ui.jwt.claim.nbf': 'Nicht vor',
+	'ui.jwt.claim.iat': 'Ausgestellt am',
+	'ui.jwt.claim.jti': 'JWT-ID',
+	'ui.jwt.error.empty': 'Oben ein JWT-Token einfügen, um es zu dekodieren.',
+	'ui.jwt.error.invalid_format':
+		'Ungültiges JWT-Format: drei durch Punkte getrennte Teile erwartet.',
+	'ui.jwt.error.invalid_base64': 'Base64URL-Dekodierung fehlgeschlagen.',
+	'ui.jwt.error.invalid_json': 'Dekodierter Inhalt ist kein gültiges JSON.',
+	'ui.jwt.clear': 'Löschen',
+	'ui.jwt.copy_jwt': 'Token kopieren',
+	'ui.jwt.copy_header': 'Kopieren',
+	'ui.jwt.copy_payload': 'Kopieren',
+	'ui.jwt.copy_signature': 'Kopieren',
+	'ui.jwt.worker_active': 'Große Eingabe (>{size}) wird im Worker verarbeitet.',
+	'ui.jwt.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Hauptthread.'
 };
 
 export default registryDe;

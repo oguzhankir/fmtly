@@ -2119,7 +2119,77 @@ const registryTr: Record<string, string> = {
 	'ui.whitespace_cleaner.preserve_paragraph_breaks': 'Paragraf sonlarını koru',
 	'ui.whitespace_cleaner.tab_size': 'Sekme boyutu',
 	'ui.csv.controls.table_name': 'Tablo Adı',
-	'ui.csv.controls.batch_size': 'Batch Boyutu'
+	'ui.csv.controls.batch_size': 'Batch Boyutu',
+	// ── Encode Kategorisi ─────────────────────────────────────────────────────
+	'category.encode.display_name': 'Kodlama / Çözme',
+	'category.encode.description':
+		'Yaygın formatlarda verileri kodlayın ve çözün — JWT, Base64, URL, HTML varlıkları ve daha fazlası. Tüm araçlar tamamen tarayıcınızda çalışır.',
+	'category.encode.primary_keyword': 'kodlama çözme araçları',
+	// ── JWT Decoder ───────────────────────────────────────────────────────────
+	'tool.encode-jwt-decoder.display_name': 'JWT Çözücü',
+	'tool.encode-jwt-decoder.tagline':
+		"JWT tokenlerini çözün, claim'leri, son kullanma tarihini ve algoritmayı inceleyin",
+	'tool.encode-jwt-decoder.description':
+		"JSON Web Token'larını anında çözün — başlık algoritmasını, payload claim'lerini, son kullanma zaman damgalarını ve ham Base64URL imzasını inceleyin. Tüm işlemler tarayıcınızda gerçekleşir; hiçbir şey sunucuya gönderilmez.",
+	'tool.encode-jwt-decoder.primary_keyword': 'jwt çözücü',
+	'tool.encode-jwt-decoder.meta_title':
+		"JWT Çözücü — Başlık, Payload ve Claim'leri İnceleyin | fmtly.dev",
+	'tool.encode-jwt-decoder.meta_description':
+		"JWT tokenlerini tarayıcınızda çözün ve inceleyin. Başlık, payload claim'leri, son kullanma durumu ve imzayı görüntüleyin. Hızlı, gizli ve ücretsiz — hiçbir veri cihazınızı terk etmez.",
+	'tool.encode-jwt-decoder.operation': 'JWT Çöz',
+	'tool.encode-jwt-decoder.faq.0.question': "JWT'im bir sunucuya gönderilir mi?",
+	'tool.encode-jwt-decoder.faq.0.answer':
+		"Hayır. Tüm çözme işlemleri tamamen tarayıcınızda gerçekleşir. Token'ınız hiçbir zaman cihazınızı terk etmez, bu da aracı gerçek kimlik doğrulama tokenleri ile güvenle kullanmanıza olanak tanır.",
+	'tool.encode-jwt-decoder.faq.1.question': 'Bu araç imzayı doğruluyor mu?',
+	'tool.encode-jwt-decoder.faq.1.answer':
+		"Hayır. İmza doğrulaması gizli veya genel anahtar gerektirir. Bu araç yalnızca payload'ı çözer ve gösterir — özgünlüğü doğrulamak için sunucu tarafı kütüphanenizi kullanın.",
+	'tool.encode-jwt-decoder.faq.2.question': 'Hangi JWT algoritmaları destekleniyor?',
+	'tool.encode-jwt-decoder.faq.2.answer':
+		"Çözücü, imzayı doğrulamadan yalnızca Base64URL kodlu içeriği çözdüğünden, algoritması ne olursa olsun (HS256, RS256, ES256 vb.) standart üç parçalı her JWT'yi işler.",
+	'tool.encode-jwt-decoder.faq.3.question': "Büyük JWT'leri veya token gruplarını çözebilir miyim?",
+	'tool.encode-jwt-decoder.faq.3.answer':
+		"500KB'ı aşan girdiler, olağandışı büyük tokenler veya test payload'ları için bile arayüzü duyarlı tutmak amacıyla otomatik olarak bir Web Worker'a aktarılır.",
+	'tool.encode-jwt-decoder.use_case.0':
+		'Yerel API geliştirme ve hata ayıklama sırasında kimlik doğrulama tokenlerini inceleme',
+	'tool.encode-jwt-decoder.use_case.1':
+		'Token son kullanma tarihini ve standart claim değerlerini (iss, sub, aud) tek bakışta kontrol etme',
+	'tool.encode-jwt-decoder.use_case.2':
+		'JWT yapısını ve başlık, payload ile imza bölümlerinin rolünü öğretme',
+	'tool.encode-jwt-decoder.use_case.3':
+		"Payload'daki özel claim'leri inceleyerek yetkilendirme hatalarını giderme",
+	// ── JWT Decoder — arayüz metinleri ───────────────────────────────────────
+	'ui.jwt.input_placeholder': "JWT token'ınızı buraya yapıştırın (eyJ…)",
+	'ui.jwt.section.header': 'Başlık',
+	'ui.jwt.section.payload': 'Payload',
+	'ui.jwt.section.signature': 'İmza',
+	'ui.jwt.standard_claims': "Standart Claim'ler",
+	'ui.jwt.all_claims': "Tüm Claim'ler",
+	'ui.jwt.signature_note':
+		'İmzalar doğrulanmaz. Token özgünlüğünü doğrulamak için sunucu tarafı kütüphanenizi kullanın.',
+	'ui.jwt.status.valid': 'Geçerli',
+	'ui.jwt.status.expired': 'Süresi Dolmuş',
+	'ui.jwt.status.not_yet_valid': 'Henüz Geçerli Değil',
+	'ui.jwt.status.no_expiry': 'Son Kullanma Tarihi Yok',
+	'ui.jwt.expires_in': '{time} içinde sona eriyor',
+	'ui.jwt.expired_ago': '{time} önce sona erdi',
+	'ui.jwt.claim.iss': 'Düzenleyen',
+	'ui.jwt.claim.sub': 'Konu',
+	'ui.jwt.claim.aud': 'Hedef Kitle',
+	'ui.jwt.claim.exp': 'Son Kullanma',
+	'ui.jwt.claim.nbf': 'Başlangıç',
+	'ui.jwt.claim.iat': 'Düzenleme Tarihi',
+	'ui.jwt.claim.jti': 'JWT Kimliği',
+	'ui.jwt.error.empty': 'Çözmek için yukarıya bir JWT token yapıştırın.',
+	'ui.jwt.error.invalid_format': 'Geçersiz JWT biçimi: nokta ile ayrılmış 3 parça bekleniyor.',
+	'ui.jwt.error.invalid_base64': 'Base64URL kodlaması çözümlenemedi.',
+	'ui.jwt.error.invalid_json': 'Çözümlenen içerik geçerli JSON değil.',
+	'ui.jwt.clear': 'Temizle',
+	'ui.jwt.copy_jwt': "Token'ı Kopyala",
+	'ui.jwt.copy_header': 'Kopyala',
+	'ui.jwt.copy_payload': 'Kopyala',
+	'ui.jwt.copy_signature': 'Kopyala',
+	'ui.jwt.worker_active': "Büyük girdi (>{size}) Worker'da işleniyor.",
+	'ui.jwt.worker_failed': "Worker işlemi başarısız. Ana thread'e geri dönülüyor."
 };
 
 export default registryTr;

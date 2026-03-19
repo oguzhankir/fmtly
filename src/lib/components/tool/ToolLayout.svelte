@@ -19,6 +19,7 @@
 		outputPanel,
 		treePanel,
 		diffPanel,
+		workspaceTabs,
 		onprocess = undefined,
 		onshare = undefined
 	}: {
@@ -27,6 +28,7 @@
 		outputPanel?: Snippet;
 		treePanel?: Snippet;
 		diffPanel?: Snippet;
+		workspaceTabs?: Snippet;
 		onprocess?: () => void;
 		onshare?: () => void;
 	} = $props();
@@ -108,6 +110,11 @@
 			onhistory={() => { historyOpen = !historyOpen; }}
 		/>
 	</div>
+
+	<!-- Workspace tabs — full-width, above all panels -->
+	{#if workspaceTabs}
+		{@render workspaceTabs()}
+	{/if}
 
 	<!-- Panel area -->
 	{#if tool.layoutVariant === 'split' || tool.layoutVariant === 'bidirectional' || tool.layoutVariant === 'dual-input'}

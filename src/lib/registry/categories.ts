@@ -41,6 +41,12 @@ const categoryMetaList: CategoryMeta[] = [
 		displayName: 'category.text.display_name',
 		description: 'category.text.description',
 		primaryKeyword: 'category.text.primary_keyword'
+	},
+	{
+		slug: 'encode',
+		displayName: 'category.encode.display_name',
+		description: 'category.encode.description',
+		primaryKeyword: 'category.encode.primary_keyword'
 	}
 ];
 

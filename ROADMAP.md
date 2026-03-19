@@ -92,7 +92,7 @@ Encode, decode, hash, and escape strings across common formats.
 | 67 | URL Encode / Decode | `encode/url` | Percent-encode and decode URL components (RFC 3986). |
 | 68 | HTML Entity Encode / Decode | `encode/html-entities` | Convert special characters to HTML entities and back (`&amp;`, `&lt;`, etc.). |
 | 69 | Unicode Inspector | `encode/unicode` | Show codepoint, UTF-8 bytes, category, and glyph name for each character. |
-| 70 | JWT Decoder | `encode/jwt` | Decode JWT tokens — display header, payload, and signature. Validate expiry. No verification of secrets. |
+| 70 | JWT Decoder ✅ | `encode/jwt` | done — Decode JWT tokens — display header, payload, and signature. Validate expiry. No verification of secrets. |
 | 71 | Hex ↔ ASCII / UTF-8 | `encode/hex` | Convert between hexadecimal and text. Supports ASCII and UTF-8. |
 | 72 | ROT13 / Caesar Cipher | `encode/rot13` | Apply ROT13 or arbitrary Caesar shift. Useful for spoiler text and simple obfuscation. |
 | 73 | Punycode Encode / Decode | `encode/punycode` | Convert internationalized domain names (IDN) to Punycode and back. |

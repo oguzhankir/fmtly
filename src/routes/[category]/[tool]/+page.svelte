@@ -33,6 +33,7 @@
 	import TextEscapeUnescapePanel from "$components/panels/text/TextEscapeUnescapePanel.svelte";
 	import TextReadabilityAnalyzerPanel from "$components/panels/text/TextReadabilityAnalyzerPanel.svelte";
 	import TextMorseCodeTranslatorPanel from "$components/panels/text/TextMorseCodeTranslatorPanel.svelte";
+	import EncodeJwtDecoderPanel from "$components/panels/encode/EncodeJwtDecoderPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -121,6 +122,11 @@
 	let textWorkspaceTools = $derived(
 		data.tool.category === "text"
 			? localizeToolDefinitions(getToolsByCategory("text"), $t)
+			: []
+	);
+	let encodeWorkspaceTools = $derived(
+		data.tool.category === "encode"
+			? localizeToolDefinitions(getToolsByCategory("encode"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -553,55 +559,33 @@
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 {:else if isDiffTool}
 	<ToolLayout tool={localizedTool}>
-			{#snippet inputPanel()}
-				<div class="flex h-full w-full flex-col">
-					{#if data.tool.category === "json" && jsonWorkspaceTools.length > 0}
-						<WorkspaceTabs 
-							tools={jsonWorkspaceTools} 
-							activeSlug={data.tool.slug} 
-							category="json" 
-							locale={currentLocale} 
-						/>
-					{:else if data.tool.category === "xml" && xmlWorkspaceTools.length > 0}
-						<WorkspaceTabs 
-							tools={xmlWorkspaceTools} 
-							activeSlug={data.tool.slug} 
-							category="xml" 
-							locale={currentLocale} 
-						/>
-					{:else if data.tool.category === "yaml" && yamlWorkspaceTools.length > 0}
-						<WorkspaceTabs
-							tools={yamlWorkspaceTools}
-							activeSlug={data.tool.slug}
-							category="yaml"
-							locale={currentLocale}
-						/>
-					{:else if data.tool.category === "toml" && tomlWorkspaceTools.length > 0}
-						<WorkspaceTabs
-							tools={tomlWorkspaceTools}
-							activeSlug={data.tool.slug}
-							category="toml"
-							locale={currentLocale}
-						/>
-					{/if}
-					<div class="flex-1 overflow-hidden">
-						<DiffInputPanel
-							value={diffLeft}
-							onchange={(v) => {
-								diffLeft = v;
-							}}
-							language={data.tool.inputLanguage}
-							placeholder={data.tool.category === 'xml'
-								? $t('ui.placeholder.original_xml', 'Paste original XML here…')
-								: data.tool.category === 'yaml'
-									? $t('ui.placeholder.original_yaml', 'Paste original YAML here…')
-									: data.tool.category === 'toml'
-										? $t('ui.paste_language_here', { language: 'TOML' }, 'Paste TOML here…')
-									: $t('ui.placeholder.original_json', 'Paste original JSON here…')}
-						/>
-					</div>
-				</div>
-			{/snippet}
+		{#snippet workspaceTabs()}
+			{#if data.tool.category === 'json' && jsonWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={jsonWorkspaceTools} activeSlug={data.tool.slug} category="json" locale={currentLocale} />
+			{:else if data.tool.category === 'xml' && xmlWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={xmlWorkspaceTools} activeSlug={data.tool.slug} category="xml" locale={currentLocale} />
+			{:else if data.tool.category === 'yaml' && yamlWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={yamlWorkspaceTools} activeSlug={data.tool.slug} category="yaml" locale={currentLocale} />
+			{:else if data.tool.category === 'toml' && tomlWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={tomlWorkspaceTools} activeSlug={data.tool.slug} category="toml" locale={currentLocale} />
+			{/if}
+		{/snippet}
+		{#snippet inputPanel()}
+				<DiffInputPanel
+					value={diffLeft}
+					onchange={(v) => {
+						diffLeft = v;
+					}}
+					language={data.tool.inputLanguage}
+					placeholder={data.tool.category === 'xml'
+						? $t('ui.placeholder.original_xml', 'Paste original XML here…')
+						: data.tool.category === 'yaml'
+							? $t('ui.placeholder.original_yaml', 'Paste original YAML here…')
+							: data.tool.category === 'toml'
+								? $t('ui.paste_language_here', { language: 'TOML' }, 'Paste TOML here…')
+							: $t('ui.placeholder.original_json', 'Paste original JSON here…')}
+				/>
+		{/snippet}
 		{#snippet outputPanel()}
 			<DiffInputPanel
 				value={diffRight}
@@ -642,93 +626,70 @@
 		}}
 		onshare={() => { shareModalOpen = true; }}
 	>
+		{#snippet workspaceTabs()}
+			{#if data.tool.category === 'json' && jsonWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={jsonWorkspaceTools} activeSlug={data.tool.slug} category="json" locale={currentLocale} />
+			{:else if data.tool.category === 'xml' && xmlWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={xmlWorkspaceTools} activeSlug={data.tool.slug} category="xml" locale={currentLocale} />
+			{:else if data.tool.category === 'yaml' && yamlWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={yamlWorkspaceTools} activeSlug={data.tool.slug} category="yaml" locale={currentLocale} />
+			{:else if data.tool.category === 'csv' && csvWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={csvWorkspaceTools} activeSlug={data.tool.slug} category="csv" locale={currentLocale} />
+			{:else if data.tool.category === 'toml' && tomlWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={tomlWorkspaceTools} activeSlug={data.tool.slug} category="toml" locale={currentLocale} />
+			{/if}
+		{/snippet}
 		{#snippet inputPanel()}
 			{#if data.tool.category === "xml" && data.tool.slug === "validator"}
-				<XmlValidatorPanel toolSlug={data.tool.slug} workspaceTools={xmlWorkspaceTools} />
+				<XmlValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "xml" && data.tool.slug !== "validator"}
 				<XmlInputPanel
 					toolSlug={data.tool.slug}
 					sampleInput={data.tool.sampleInput ?? ""}
-					workspaceTools={xmlWorkspaceTools}
+					workspaceTools={[]}
 				/>
 			{:else if data.tool.category === "json" && ["validator", "schema-validate"].includes(data.tool.slug)}
-				<JsonValidatorPanel toolSlug={data.tool.slug} workspaceTools={jsonWorkspaceTools} />
+				<JsonValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "json" && !["validator", "schema-validate"].includes(data.tool.slug)}
 				<JsonInputPanel
 					toolSlug={data.tool.slug}
 					inputLanguage={data.tool.inputLanguage}
 					sampleInput={data.tool.sampleInput ?? ""}
-					workspaceTools={jsonWorkspaceTools}
+					workspaceTools={[]}
 				/>
 			{:else if data.tool.category === "yaml" && data.tool.slug === "validator"}
-				<YamlValidatorPanel toolSlug={data.tool.slug} workspaceTools={yamlWorkspaceTools} />
+				<YamlValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "yaml"}
-				<div class="flex h-full w-full flex-col">
-					{#if yamlWorkspaceTools.length > 0}
-						<WorkspaceTabs
-							tools={yamlWorkspaceTools}
-							activeSlug={data.tool.slug}
-							category="yaml"
-							locale={currentLocale}
-						/>
-					{/if}
-					<div class="flex-1 overflow-hidden">
-						<InputPanel
-							toolSlug="yaml-workspace"
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-							enableRemoteActions={true}
-							remoteInputKind="yaml"
-						/>
-					</div>
-				</div>
+				<InputPanel
+					toolSlug="yaml-workspace"
+					inputLanguage={data.tool.inputLanguage}
+					acceptedExtensions={acceptedExts}
+					sampleInput={data.tool.sampleInput}
+					enableRemoteActions={true}
+					remoteInputKind="yaml"
+				/>
 			{:else if data.tool.category === "csv" && data.tool.slug === "validator"}
-				<CsvValidatorPanel toolSlug={data.tool.slug} workspaceTools={csvWorkspaceTools} />
+				<CsvValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "csv"}
-				<div class="flex h-full w-full flex-col">
-					{#if csvWorkspaceTools.length > 0}
-						<WorkspaceTabs
-							tools={csvWorkspaceTools}
-							activeSlug={data.tool.slug}
-							category="csv"
-							locale={currentLocale}
-						/>
-					{/if}
-					<div class="flex-1 overflow-hidden">
-						<InputPanel
-							toolSlug="csv-workspace"
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-							enableRemoteActions={true}
-							remoteInputKind="csv"
-						/>
-					</div>
-				</div>
+				<InputPanel
+					toolSlug="csv-workspace"
+					inputLanguage={data.tool.inputLanguage}
+					acceptedExtensions={acceptedExts}
+					sampleInput={data.tool.sampleInput}
+					enableRemoteActions={true}
+					remoteInputKind="csv"
+				/>
 			{:else if data.tool.category === "toml" && data.tool.slug === "validator"}
-				<TomlValidatorPanel toolSlug={data.tool.slug} workspaceTools={tomlWorkspaceTools} />
+				<TomlValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "toml"}
-				<div class="flex h-full w-full flex-col">
-					{#if tomlWorkspaceTools.length > 0}
-						<WorkspaceTabs
-							tools={tomlWorkspaceTools}
-							activeSlug={data.tool.slug}
-							category="toml"
-							locale={currentLocale}
-						/>
-					{/if}
-					<div class="flex-1 overflow-hidden">
-						<InputPanel
-							toolSlug="toml-workspace"
-							inputLanguage={data.tool.inputLanguage}
-							acceptedExtensions={acceptedExts}
-							sampleInput={data.tool.sampleInput}
-							enableRemoteActions={true}
-							remoteInputKind="toml"
-						/>
-					</div>
-				</div>
+				<InputPanel
+					toolSlug="toml-workspace"
+					inputLanguage={data.tool.inputLanguage}
+					acceptedExtensions={acceptedExts}
+					sampleInput={data.tool.sampleInput}
+					enableRemoteActions={true}
+					remoteInputKind="toml"
+				/>
 			{:else if data.tool.category === "text" && data.tool.slug === "word-counter"}
 				<TextCounterPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "lorem"}
@@ -755,6 +716,8 @@
 				<TextMorseCodeTranslatorPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "diff"}
 				<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "encode" && data.tool.slug === "jwt"}
+				<EncodeJwtDecoderPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}
