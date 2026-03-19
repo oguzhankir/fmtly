@@ -66,8 +66,12 @@ export function generateToolSEO(
 		'@context': 'https://schema.org',
 		'@type': 'WebApplication',
 		name: tool.displayName,
+		headline: tool.tagline,
 		keywords: tool.primaryKeyword,
 		applicationCategory: 'DeveloperApplication',
+		applicationSubCategory: `${tool.category} ${tool.operation}`,
+		featureList: [tool.tagline],
+		isAccessibleForFree: true,
 		operatingSystem: 'Any',
 		offers: {
 			'@type': 'Offer',

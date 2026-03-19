@@ -61,6 +61,7 @@ Core category — format, validate, convert, diff, and query structured data.
 | 48 | JSON Schema Generator | `json/schema-generator` | done | Infer a JSON Schema from any JSON document. Auto-detect types, required fields, enums, and nested structures. |
 | 49 | XML → JSON Schema | `xml/to-json-schema` | done | Infer a JSON Schema from XML by analyzing element structure and cardinality. |
 | 50 | JSON ↔ JSON Schema Validator | `json/schema-validate` | done | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
+| 51 | JSON → Go Structs | `json/to-go` | done | Generate idiomatic Go struct definitions from JSON with nested type inference, json tags, and optional-field handling. |
 
 ### Backlog — Data Formats
 
@@ -69,7 +70,6 @@ Core category — format, validate, convert, diff, and query structured data.
 | 52 | JSON Flattener / Unflattener | `json/flatten` | Convert deeply nested JSON to flat dot-notation keys and back. Useful for config files and i18n. |
 | 53 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
 | 54 | JSON → TypeScript Types | `json/to-typescript` | Infer TypeScript interfaces/types from any JSON sample using quicktype. |
-| 55 | JSON → Go Structs | `json/to-go` | Generate Go struct definitions from JSON. |
 | 56 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
 | 57 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
 | 58 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |

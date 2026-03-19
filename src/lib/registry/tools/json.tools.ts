@@ -376,6 +376,65 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
+		id: 'json-to-go',
+		category: 'json',
+		slug: 'to-go',
+		displayName: 'tool.json-to-go.display_name',
+		tagline: 'tool.json-to-go.tagline',
+		description: 'tool.json-to-go.description',
+		primaryKeyword: 'tool.json-to-go.primary_keyword',
+		metaTitle: 'tool.json-to-go.meta_title',
+		metaDescription: 'tool.json-to-go.meta_description',
+		engine: 'json',
+		operation: 'tool.json-to-go.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'json',
+		outputLanguage: 'go',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'json', slug: 'to-toml' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-to-go.faq.0.question',
+				answer: 'tool.json-to-go.faq.0.answer'
+			},
+			{
+				question: 'tool.json-to-go.faq.1.question',
+				answer: 'tool.json-to-go.faq.1.answer'
+			},
+			{
+				question: 'tool.json-to-go.faq.2.question',
+				answer: 'tool.json-to-go.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-to-go.use_case.0',
+			'tool.json-to-go.use_case.1',
+			'tool.json-to-go.use_case.2',
+			'tool.json-to-go.use_case.3'
+		],
+		sampleInput: `{
+  "id": "evt_109",
+  "createdAt": "2026-03-19T16:30:00Z",
+  "active": true,
+  "score": 98.7,
+  "profile": {
+    "firstName": "Ada",
+    "lastName": "Lovelace",
+    "nickname": null
+  },
+  "tags": ["vip", "beta"],
+  "sessions": [
+    { "ip": "192.168.0.12", "durationSeconds": 180, "success": true },
+    { "ip": "192.168.0.15", "durationSeconds": 92, "success": false }
+  ]
+}`
+	},
+	{
 		id: 'json-schema-validate',
 		category: 'json',
 		slug: 'schema-validate',

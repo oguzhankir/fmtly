@@ -42,7 +42,7 @@
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isMinifier = $derived(toolSlug === 'minifier');
 	let isConverter = $derived(
-		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown', 'schema-generator'].includes(
+		['to-yaml', 'to-csv', 'to-xml', 'to-toml', 'to-markdown', 'schema-generator', 'to-go'].includes(
 			toolSlug
 		)
 	);
@@ -56,7 +56,8 @@
 			'to-xml',
 			'to-toml',
 			'to-markdown',
-			'schema-generator'
+			'schema-generator',
+			'to-go'
 		].includes(toolSlug)
 	);
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
@@ -88,7 +89,8 @@
 		const langLoaders: Record<string, () => Promise<{ default: import('highlight.js').LanguageFn }>> = {
 			json: () => import('highlight.js/lib/languages/json'),
 			xml: () => import('highlight.js/lib/languages/xml'),
-			yaml: () => import('highlight.js/lib/languages/yaml')
+			yaml: () => import('highlight.js/lib/languages/yaml'),
+			go: () => import('highlight.js/lib/languages/go')
 		};
 
 		const loader = langLoaders[outputLanguage];
@@ -213,7 +215,8 @@
 			yaml: '.yaml',
 			toml: '.toml',
 			csv: '.csv',
-			markdown: '.md'
+			markdown: '.md',
+			go: '.go'
 		};
 
 		const ext = extMap[outputLanguage] ?? '.txt';

@@ -10,6 +10,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"lint": "biome check .",
 		"format": "biome format --write .",
+		"sync-locales": "node scripts/sync-locales.cjs",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"test:e2e": "playwright test"

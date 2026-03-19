@@ -10,6 +10,7 @@ import {
 	validateJSON
 } from '$engines/json/index.js';
 import type { FormatOptions, WorkerRequest, WorkerResponse } from '$engines/json/index.js';
+import { toGoStructs } from '$engines/json/json.engine.js';
 
 const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>> = {
 	parseJSON: (input: unknown) => parseJSON(input as string),
@@ -21,7 +22,8 @@ const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>
 		sortJSONKeys(input as string, direction as 'asc' | 'desc'),
 	computeJSONStats: (data: unknown) => computeJSONStats(data),
 	buildJSONTree: (data: unknown) => buildJSONTree(data),
-	validateJSON: (input: unknown) => validateJSON(input as string)
+	validateJSON: (input: unknown) => validateJSON(input as string),
+	toGoStructs: (input: unknown) => toGoStructs(input as string)
 };
 
 let initialized = false;
