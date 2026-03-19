@@ -33,6 +33,7 @@
 	import TextEscapeUnescapePanel from "$components/panels/text/TextEscapeUnescapePanel.svelte";
 	import TextReadabilityAnalyzerPanel from "$components/panels/text/TextReadabilityAnalyzerPanel.svelte";
 	import TextMorseCodeTranslatorPanel from "$components/panels/text/TextMorseCodeTranslatorPanel.svelte";
+	import EncodeUrlPanel from "$components/panels/encode/EncodeUrlPanel.svelte";
 	import EncodeJwtDecoderPanel from "$components/panels/encode/EncodeJwtDecoderPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
@@ -716,6 +717,8 @@
 				<TextMorseCodeTranslatorPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 			{:else if data.tool.category === "text" && data.tool.slug === "diff"}
 				<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+			{:else if data.tool.category === "encode" && data.tool.slug === "url"}
+				<EncodeUrlPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else if data.tool.category === "encode" && data.tool.slug === "jwt"}
 				<EncodeJwtDecoderPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else}

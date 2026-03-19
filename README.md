@@ -106,6 +106,15 @@ pnpm test:e2e    # Playwright end-to-end tests
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 
+Contribution entry points:
+- Bug report: [.github/ISSUE_TEMPLATE/bug_report.yml](.github/ISSUE_TEMPLATE/bug_report.yml)
+- Feature request: [.github/ISSUE_TEMPLATE/feature_request.yml](.github/ISSUE_TEMPLATE/feature_request.yml)
+- New tool proposal: [.github/ISSUE_TEMPLATE/tool_proposal.yml](.github/ISSUE_TEMPLATE/tool_proposal.yml)
+- Documentation improvement: [.github/ISSUE_TEMPLATE/documentation.yml](.github/ISSUE_TEMPLATE/documentation.yml)
+- Pull request checklist: [.github/pull_request_template.md](.github/pull_request_template.md)
+- Support channels: [SUPPORT.md](SUPPORT.md)
+- Security reporting: [SECURITY.md](SECURITY.md)
+
 Good first contributions:
 - Add a new tool from the [ROADMAP.md](ROADMAP.md) backlog
 - Improve tool content (description, use cases, FAQ)

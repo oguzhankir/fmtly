@@ -1,0 +1,9 @@
+# Default owner for all files in this repository
+* @oguzhankir
+
+# Optional ownership by area
+/src/lib/engines/ @oguzhankir
+/src/lib/components/ @oguzhankir
+/src/lib/i18n/ @oguzhankir
+/tests/ @oguzhankir
+/.github/ @oguzhankir

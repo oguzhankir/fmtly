@@ -2189,7 +2189,64 @@ const registryEn: Record<string, string> = {
 	'ui.jwt.copy_payload': 'Copy',
 	'ui.jwt.copy_signature': 'Copy',
 	'ui.jwt.worker_active': 'Large input (>{size}) runs in Worker.',
-	'ui.jwt.worker_failed': 'Worker processing failed. Falling back to main thread.'
+	'ui.jwt.worker_failed': 'Worker processing failed. Falling back to main thread.',
+	// ── URL Encode / Decode tool ─────────────────────────────────────────────
+	'tool.encode-url-encode-decode.display_name': 'URL Encode / Decode',
+	'tool.encode-url-encode-decode.tagline':
+		'Percent-encode or decode URL text with component and full-URL modes',
+	'tool.encode-url-encode-decode.description':
+		'Encode or decode URL strings instantly in your browser. Switch between component mode (encodeURIComponent/decodeURIComponent) and full URL mode (encodeURI/decodeURI), handle + as spaces for form-style payloads, and process large input in a Web Worker.',
+	'tool.encode-url-encode-decode.primary_keyword': 'url encode decode',
+	'tool.encode-url-encode-decode.meta_title':
+		'URL Encode / Decode — Percent Encode URLs Online | fmtly.dev',
+	'tool.encode-url-encode-decode.meta_description':
+		'Encode or decode URL strings instantly in your browser. Supports component/full URL modes, plus-space handling, and large-input Web Worker processing.',
+	'tool.encode-url-encode-decode.operation': 'Encode / Decode URL',
+	'tool.encode-url-encode-decode.faq.0.question': 'Is my URL data uploaded to a server?',
+	'tool.encode-url-encode-decode.faq.0.answer':
+		'No. All encoding and decoding happens entirely in your browser. Your input stays on your device.',
+	'tool.encode-url-encode-decode.faq.1.question':
+		'What is the difference between component mode and full URL mode?',
+	'tool.encode-url-encode-decode.faq.1.answer':
+		'Component mode is for single fragments like query values and path segments, so it escapes delimiters such as ?, &, and =. Full URL mode keeps URL structure delimiters intact and encodes only unsafe characters.',
+	'tool.encode-url-encode-decode.faq.2.question': 'Why does + sometimes decode to a space?',
+	'tool.encode-url-encode-decode.faq.2.answer':
+		'In application/x-www-form-urlencoded payloads, spaces are often represented as +. Enable the plus-to-space option during decode when you work with form-style data.',
+	'tool.encode-url-encode-decode.faq.3.question': 'Can this handle large URL payloads?',
+	'tool.encode-url-encode-decode.faq.3.answer':
+		'Yes. Inputs above 500KB are automatically processed in a Web Worker to keep the UI responsive.',
+	'tool.encode-url-encode-decode.use_case.0':
+		'Encode query parameter values safely before sending API requests',
+	'tool.encode-url-encode-decode.use_case.1':
+		'Decode copied URL fragments from logs while debugging routing issues',
+	'tool.encode-url-encode-decode.use_case.2':
+		'Validate plus-space behavior in form-urlencoded payload samples',
+	'tool.encode-url-encode-decode.use_case.3':
+		'Compare encoded and decoded URLs when troubleshooting redirects',
+	// ── URL Encode / Decode UI strings ───────────────────────────────────────
+	'ui.encode_url.tab_label': 'URL',
+	'ui.encode_url.action_label': 'Action',
+	'ui.encode_url.action.encode': 'Encode',
+	'ui.encode_url.action.decode': 'Decode',
+	'ui.encode_url.mode_label': 'Mode',
+	'ui.encode_url.mode.component': 'URL component',
+	'ui.encode_url.mode.full_url': 'Full URL',
+	'ui.encode_url.input_label': 'Input',
+	'ui.encode_url.output_label': 'Output',
+	'ui.encode_url.input_placeholder': 'Paste text, query params, or a full URL...',
+	'ui.encode_url.output_placeholder': 'Encoded or decoded output appears here...',
+	'ui.encode_url.option.encode_spaces_as_plus': 'Encode spaces as +',
+	'ui.encode_url.option.decode_plus_as_space': 'Decode + as space',
+	'ui.encode_url.worker_active': 'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.encode_url.worker_failed':
+		'Worker processing failed. Falling back to main thread processing.',
+	'ui.encode_url.worker_badge': 'Worker',
+	'ui.encode_url.warning.no_changes': 'No changes detected for the selected mode and action.',
+	'ui.encode_url.error.invalid_url_encoding': 'Invalid URL input: {detail}',
+	'ui.encode_url.button.swap_direction': 'Swap direction',
+	'ui.encode_url.button.apply_output': 'Apply output to input',
+	'ui.encode_url.toast.applied': 'Output applied to input',
+	'ui.encode_url.characters': 'chars'
 };
 
 export default registryEn;

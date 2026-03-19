@@ -29,6 +29,19 @@ Do not open a PR until all 10 steps pass.
 
 **Performance:** Include Lighthouse data in the issue before starting.
 
+Issue templates:
+- Bug report: `.github/ISSUE_TEMPLATE/bug_report.yml`
+- Feature request: `.github/ISSUE_TEMPLATE/feature_request.yml`
+- Tool proposal: `.github/ISSUE_TEMPLATE/tool_proposal.yml`
+- Documentation: `.github/ISSUE_TEMPLATE/documentation.yml`
+
+PR template:
+- `.github/pull_request_template.md`
+
+Support and escalation:
+- General support: `SUPPORT.md`
+- Security reports (private): `SECURITY.md`
+
 ---
 
 ## Setup

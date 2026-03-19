@@ -60,6 +60,8 @@
 				return $t('ui.duplicate_line_remover.tab_label', 'Deduplicate');
 			case 'whitespace':
 				return $t('ui.whitespace_cleaner.tab_label', 'Whitespace');
+			case 'url':
+				return $t('ui.encode_url.tab_label', 'URL');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

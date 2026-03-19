@@ -2183,6 +2183,68 @@ const registryDe: Record<string, string> = {
 	'ui.jwt.worker_failed': 'Worker-Verarbeitung fehlgeschlagen. Fallback auf Hauptthread.',
 	'ui.jwt.error.invalid_signature': 'Ungültige JWT-Signatur',
 	'ui.jwt.errors.invalid_base64': 'Ungültige Base64-URL-Kodierung in JWT-Segmenten',
+	// ── URL Kodieren / Dekodieren ────────────────────────────────────────────
+	'tool.encode-url-encode-decode.display_name': 'URL Kodieren / Dekodieren',
+	'tool.encode-url-encode-decode.tagline':
+		'URL-Text prozentkodieren oder dekodieren – im Komponenten- oder Voll-URL-Modus',
+	'tool.encode-url-encode-decode.description':
+		'URL-Texte direkt im Browser kodieren oder dekodieren. Wechsle zwischen Komponentenmodus (encodeURIComponent/decodeURIComponent) und Voll-URL-Modus (encodeURI/decodeURI), behandle + bei Formulardaten als Leerzeichen und verarbeite große Eingaben per Web Worker.',
+	'tool.encode-url-encode-decode.primary_keyword': 'url kodieren dekodieren',
+	'tool.encode-url-encode-decode.meta_title':
+		'URL Kodieren / Dekodieren — URL-Prozentkodierung online | fmtly.dev',
+	'tool.encode-url-encode-decode.meta_description':
+		'URL-Texte im Browser sofort kodieren oder dekodieren. Mit Komponenten-/Voll-URL-Modus, Plus-Leerzeichen-Option und Web-Worker-Verarbeitung für große Eingaben.',
+	'tool.encode-url-encode-decode.operation': 'URL kodieren / dekodieren',
+	'tool.encode-url-encode-decode.faq.0.question':
+		'Werden meine URL-Daten an einen Server gesendet?',
+	'tool.encode-url-encode-decode.faq.0.answer':
+		'Nein. Die gesamte Kodierung und Dekodierung läuft vollständig im Browser. Deine Eingaben bleiben auf deinem Gerät.',
+	'tool.encode-url-encode-decode.faq.1.question':
+		'Was ist der Unterschied zwischen Komponentenmodus und Voll-URL-Modus?',
+	'tool.encode-url-encode-decode.faq.1.answer':
+		'Der Komponentenmodus ist für einzelne Fragmente wie Query-Werte oder Pfadsegmente und kodiert dabei auch Trenner wie ?, & und =. Der Voll-URL-Modus lässt URL-Strukturtrenner intakt und kodiert nur unsichere Zeichen.',
+	'tool.encode-url-encode-decode.faq.2.question':
+		'Warum wird + manchmal als Leerzeichen dekodiert?',
+	'tool.encode-url-encode-decode.faq.2.answer':
+		'In application/x-www-form-urlencoded Payloads werden Leerzeichen häufig als + dargestellt. Aktiviere beim Dekodieren die Option „Plus als Leerzeichen“, wenn du mit Formulardaten arbeitest.',
+	'tool.encode-url-encode-decode.faq.3.question':
+		'Kann dieses Tool große URL-Payloads verarbeiten?',
+	'tool.encode-url-encode-decode.faq.3.answer':
+		'Ja. Eingaben über 500KB werden automatisch in einem Web Worker verarbeitet, damit die Oberfläche reaktionsschnell bleibt.',
+	'tool.encode-url-encode-decode.use_case.0':
+		'Query-Parameterwerte vor API-Requests sicher kodieren',
+	'tool.encode-url-encode-decode.use_case.1':
+		'Kopierte URL-Fragmente aus Logs beim Routing-Debugging dekodieren',
+	'tool.encode-url-encode-decode.use_case.2':
+		'Plus-Leerzeichen-Verhalten in form-urlencoded Beispielen prüfen',
+	'tool.encode-url-encode-decode.use_case.3':
+		'Kodierte und dekodierte URLs bei Redirect-Problemen vergleichen',
+	// ── URL Kodieren / Dekodieren — UI-Texte ─────────────────────────────────
+	'ui.encode_url.tab_label': 'URL',
+	'ui.encode_url.action_label': 'Aktion',
+	'ui.encode_url.action.encode': 'Kodieren',
+	'ui.encode_url.action.decode': 'Dekodieren',
+	'ui.encode_url.mode_label': 'Modus',
+	'ui.encode_url.mode.component': 'URL-Komponente',
+	'ui.encode_url.mode.full_url': 'Vollständige URL',
+	'ui.encode_url.input_label': 'Eingabe',
+	'ui.encode_url.output_label': 'Ausgabe',
+	'ui.encode_url.input_placeholder': 'Text, Query-Parameter oder vollständige URL einfügen...',
+	'ui.encode_url.output_placeholder': 'Kodierte oder dekodierte Ausgabe erscheint hier...',
+	'ui.encode_url.option.encode_spaces_as_plus': 'Leerzeichen als + kodieren',
+	'ui.encode_url.option.decode_plus_as_space': '+ als Leerzeichen dekodieren',
+	'ui.encode_url.worker_active':
+		'Große Eingabe erkannt (>{size}). Die Verarbeitung läuft in einem Web Worker.',
+	'ui.encode_url.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Es wird auf den Hauptthread zurückgefallen.',
+	'ui.encode_url.worker_badge': 'Worker',
+	'ui.encode_url.warning.no_changes':
+		'Für den gewählten Modus und die Aktion wurden keine Änderungen erkannt.',
+	'ui.encode_url.error.invalid_url_encoding': 'Ungültige URL-Eingabe: {detail}',
+	'ui.encode_url.button.swap_direction': 'Richtung wechseln',
+	'ui.encode_url.button.apply_output': 'Ausgabe als Eingabe übernehmen',
+	'ui.encode_url.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
+	'ui.encode_url.characters': 'Zeichen',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',

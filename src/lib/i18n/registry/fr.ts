@@ -2277,6 +2277,66 @@ const registryFr: Record<string, string> = {
 	'ui.jwt.copy_signature': 'Copier',
 	'ui.jwt.worker_active': 'Grande entrée (>{size}) traitée dans un Worker.',
 	'ui.jwt.worker_failed': 'Échec du traitement Worker. Repli sur le thread principal.',
+	// ── Encoder / Décoder URL ────────────────────────────────────────────────
+	'tool.encode-url-encode-decode.display_name': 'Encoder / Décoder URL',
+	'tool.encode-url-encode-decode.tagline':
+		'Encodez en pourcentage ou décodez du texte URL en mode composant ou URL complète',
+	'tool.encode-url-encode-decode.description':
+		'Encodez ou décodez des chaînes URL instantanément dans votre navigateur. Basculez entre le mode composant (encodeURIComponent/decodeURIComponent) et le mode URL complète (encodeURI/decodeURI), gérez + comme espace pour les données de formulaire et traitez les entrées volumineuses via Web Worker.',
+	'tool.encode-url-encode-decode.primary_keyword': 'encoder decoder url',
+	'tool.encode-url-encode-decode.meta_title':
+		'Encoder / Décoder URL — Encodage pourcentage en ligne | fmtly.dev',
+	'tool.encode-url-encode-decode.meta_description':
+		'Encodez ou décodez des URLs dans votre navigateur. Avec mode composant/URL complète, gestion + et espace, et traitement Web Worker pour les gros volumes.',
+	'tool.encode-url-encode-decode.operation': 'Encoder / Décoder URL',
+	'tool.encode-url-encode-decode.faq.0.question':
+		'Mes données URL sont-elles envoyées à un serveur ?',
+	'tool.encode-url-encode-decode.faq.0.answer':
+		'Non. Tout le traitement se fait entièrement dans votre navigateur. Vos données restent sur votre appareil.',
+	'tool.encode-url-encode-decode.faq.1.question':
+		'Quelle différence entre le mode composant et le mode URL complète ?',
+	'tool.encode-url-encode-decode.faq.1.answer':
+		'Le mode composant sert aux fragments isolés (valeurs de query, segments de chemin) et encode aussi des délimiteurs comme ?, & et =. Le mode URL complète conserve ces délimiteurs de structure et encode uniquement les caractères non sûrs.',
+	'tool.encode-url-encode-decode.faq.2.question': 'Pourquoi + est-il parfois décodé en espace ?',
+	'tool.encode-url-encode-decode.faq.2.answer':
+		'Dans les payloads application/x-www-form-urlencoded, les espaces sont souvent représentés par +. Activez l’option correspondante au décodage pour les données de formulaire.',
+	'tool.encode-url-encode-decode.faq.3.question':
+		'Cet outil gère-t-il de très grosses entrées URL ?',
+	'tool.encode-url-encode-decode.faq.3.answer':
+		'Oui. Les entrées supérieures à 500Ko sont automatiquement traitées dans un Web Worker pour garder une interface fluide.',
+	'tool.encode-url-encode-decode.use_case.0':
+		'Encoder des valeurs de paramètres query avant des appels API',
+	'tool.encode-url-encode-decode.use_case.1':
+		'Décoder des fragments URL copiés depuis les logs pendant le debug de routing',
+	'tool.encode-url-encode-decode.use_case.2':
+		'Valider le comportement + / espace dans des exemples form-urlencoded',
+	'tool.encode-url-encode-decode.use_case.3':
+		'Comparer URL encodées et décodées lors d’analyses de redirections',
+	// ── Encoder / Décoder URL — chaînes d’interface ──────────────────────────
+	'ui.encode_url.tab_label': 'URL',
+	'ui.encode_url.action_label': 'Action',
+	'ui.encode_url.action.encode': 'Encoder',
+	'ui.encode_url.action.decode': 'Décoder',
+	'ui.encode_url.mode_label': 'Mode',
+	'ui.encode_url.mode.component': 'Composant URL',
+	'ui.encode_url.mode.full_url': 'URL complète',
+	'ui.encode_url.input_label': 'Entrée',
+	'ui.encode_url.output_label': 'Sortie',
+	'ui.encode_url.input_placeholder': 'Collez du texte, des paramètres query ou une URL complète...',
+	'ui.encode_url.output_placeholder': 'La sortie encodée ou décodée s’affiche ici...',
+	'ui.encode_url.option.encode_spaces_as_plus': 'Encoder les espaces en +',
+	'ui.encode_url.option.decode_plus_as_space': 'Décoder + comme espace',
+	'ui.encode_url.worker_active':
+		'Entrée volumineuse détectée (>{size}). Le traitement s’exécute dans un Web Worker.',
+	'ui.encode_url.worker_failed': 'Échec du traitement Worker. Repli sur le thread principal.',
+	'ui.encode_url.worker_badge': 'Worker',
+	'ui.encode_url.warning.no_changes':
+		'Aucune modification détectée pour le mode et l’action sélectionnés.',
+	'ui.encode_url.error.invalid_url_encoding': 'Entrée URL invalide : {detail}',
+	'ui.encode_url.button.swap_direction': 'Inverser le sens',
+	'ui.encode_url.button.apply_output': 'Appliquer la sortie à l’entrée',
+	'ui.encode_url.toast.applied': 'La sortie a été appliquée à l’entrée',
+	'ui.encode_url.characters': 'caractères',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',
