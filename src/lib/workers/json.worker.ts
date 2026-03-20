@@ -10,7 +10,12 @@ import {
 	validateJSON
 } from '$engines/json/index.js';
 import type { FormatOptions, WorkerRequest, WorkerResponse } from '$engines/json/index.js';
-import { toGoStructs, toTypeScriptTypes } from '$engines/json/json.engine.js';
+import {
+	flattenJson,
+	toGoStructs,
+	toTypeScriptTypes,
+	unflattenJson
+} from '$engines/json/json.engine.js';
 
 const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>> = {
 	parseJSON: (input: unknown) => parseJSON(input as string),
@@ -24,7 +29,11 @@ const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>
 	buildJSONTree: (data: unknown) => buildJSONTree(data),
 	validateJSON: (input: unknown) => validateJSON(input as string),
 	toGoStructs: (input: unknown) => toGoStructs(input as string),
-	toTypeScriptTypes: (input: unknown) => toTypeScriptTypes(input as string)
+	toTypeScriptTypes: (input: unknown) => toTypeScriptTypes(input as string),
+	flattenJson: (input: unknown, options: unknown) =>
+		flattenJson(input as string, options as Parameters<typeof flattenJson>[1]),
+	unflattenJson: (input: unknown, options: unknown) =>
+		unflattenJson(input as string, options as Parameters<typeof unflattenJson>[1])
 };
 
 let initialized = false;

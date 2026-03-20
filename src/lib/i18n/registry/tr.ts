@@ -1061,6 +1061,27 @@ const registryTr: Record<string, string> = {
 	'ui.output.controls.clean_arrays': 'Boş dizileri kaldır',
 	'ui.output.controls.clean_objects': 'Boş nesneleri kaldır',
 	'ui.output.controls.apply': 'Uygula',
+	'ui.json_flatten.tab_label': 'Düzleştir',
+	'ui.json_flatten.mode_label': 'Mod',
+	'ui.json_flatten.mode.flatten': 'Düzleştir',
+	'ui.json_flatten.mode.unflatten': 'Geri Aç',
+	'ui.json_flatten.separator': 'Ayırıcı',
+	'ui.json_flatten.separator_placeholder': '.',
+	'ui.json_flatten.error.generic': 'Geçerli düzleştirme ayarlarıyla JSON dönüştürülemedi.',
+	'ui.json_flatten.error.empty_separator': 'Ayırıcı boş olamaz.',
+	'ui.json_flatten.error.invalid_result': 'Dönüştürme başarısız: geçersiz çıktı üretildi.',
+	'ui.json_flatten.error.invalid_flat_object':
+		'Geri açma girdisi düzleştirilmiş yollar içeren bir JSON nesnesi olmalıdır.',
+	'ui.json_flatten.error.root_conflict':
+		'Kök anahtar, diğer düzleştirilmiş yollarla birlikte kullanılamaz.',
+	'ui.json_flatten.error.invalid_path': 'Bir veya daha fazla düzleştirilmiş yol geçersiz.',
+	'ui.json_flatten.error.invalid_escape': 'Bir yol içinde geçersiz kaçış dizisi var.',
+	'ui.json_flatten.error.invalid_array_index':
+		'Düzleştirilmiş yollardaki dizi indeksleri negatif olmayan tam sayı olmalıdır.',
+	'ui.json_flatten.error.path_conflict':
+		'Düzleştirilmiş yollar çakışıyor; güvenli şekilde birleştirilemiyor.',
+	'ui.json_flatten.error.unsafe_key':
+		'Yol içinde güvensiz bir anahtar var (__proto__, constructor veya prototype).',
 
 	// ── Araç SSS\'leri ve Kullanım Durumları ────────────────────────────
 	'tool.json-formatter.faq.0.question': 'JSON biçimlendirmesi nedir?',
@@ -1455,6 +1476,34 @@ const registryTr: Record<string, string> = {
 		'Derin iç içe JSON verilerinde manuel interface yazımını azaltmak',
 	'tool.json-to-typescript.use_case.3':
 		'Mevcut örnek verilerden sıkı tipler türeterek refactor sürecini hızlandırmak',
+	'tool.json-flatten.display_name': 'JSON Düzleştirici / Geri Açıcı',
+	'tool.json-flatten.tagline': 'İç içe JSON yollarını düzleştir ve anında geri aç',
+	'tool.json-flatten.description':
+		'Derin iç içe JSON verisini düz yol tabanlı nesnelere dönüştür ve aynı araçta yeniden iç içe hale getir. Dizileri, kaçışlı anahtarları ve özel ayırıcıları destekler.',
+	'tool.json-flatten.primary_keyword': 'json düzleştirici geri açıcı',
+	'tool.json-flatten.meta_title': 'JSON Düzleştirici / Geri Açıcı — fmtly.dev',
+	'tool.json-flatten.meta_description':
+		'İç içe JSON verisini yol tabanlı anahtar haritalarına düzleştir, sonra özgün yapısına geri aç. Dizi ve özel ayırıcı desteğiyle tamamen tarayıcıda çalışır.',
+	'tool.json-flatten.operation': 'Düzleştir / Geri Aç',
+	'tool.json-flatten.faq.0.question': 'Diziler düzleştirilmiş çıktıda nasıl gösterilir?',
+	'tool.json-flatten.faq.0.answer':
+		'Dizi öğeleri users[0].email veya matrix[2][1] gibi köşeli parantezli indekslerle yazılır; böylece yapı kayıpsız biçimde geri açılabilir.',
+	'tool.json-flatten.faq.1.question':
+		'Anahtarlarda zaten nokta veya köşeli parantez varsa ne olur?',
+	'tool.json-flatten.faq.1.answer':
+		'Anahtardaki özel karakterler düzleştirme sırasında kaçışlanır. Geri açma modu bu kaçışları okuyarak özgün anahtarları güvenli biçimde yeniden oluşturur.',
+	'tool.json-flatten.faq.2.question':
+		'Aynı araçta düzleştirme ve geri açma arasında geçiş yapabilir miyim?',
+	'tool.json-flatten.faq.2.answer':
+		'Evet. Mod anahtarıyla iç içe JSON’u düzleştirebilir veya düz yol haritalarını yeniden iç içe JSON’a çevirebilirsin.',
+	'tool.json-flatten.use_case.0':
+		'i18n sözlüklerini ve yapılandırma verilerini düz anahtar haritaları olarak hazırlamak',
+	'tool.json-flatten.use_case.1':
+		'İç içe API fixture verilerini tablo benzeri düzenleme için normalize etmek',
+	'tool.json-flatten.use_case.2':
+		'Ortam değişkeni benzeri yol anahtarlarından iç içe yapıları yeniden üretmek',
+	'tool.json-flatten.use_case.3':
+		'Büyük JSON belgelerinde dağıtımdan önce yol seviyesinde değişiklikleri ayıklamak',
 	'tool.json-schema-validate.display_name': 'JSON Şema Doğrulayıcı',
 	'tool.json-schema-validate.tagline': 'JSON verisini sağlanan şemaya karşı doğrula',
 	'tool.json-schema-validate.description':

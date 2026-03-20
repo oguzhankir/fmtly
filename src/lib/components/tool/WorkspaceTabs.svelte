@@ -48,6 +48,8 @@
 				return $t('ui.convert.to_html', '→ HTML').replace(/^→\s*/, '');
 			case 'to-markdown':
 				return $t('ui.convert.to_markdown', '→ MD').replace(/^→\s*/, '');
+			case 'flatten':
+				return $t('ui.json_flatten.tab_label', 'Flatten');
 			case 'schema-validate':
 				return $t('ui.validator.schema', 'Schema');
 			case 'to-sql':

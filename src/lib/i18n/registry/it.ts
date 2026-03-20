@@ -1036,6 +1036,30 @@ const registryIt: Record<string, string> = {
 	'ui.output.controls.clean_arrays': 'Rimuovi array vuoti',
 	'ui.output.controls.clean_objects': 'Rimuovi oggetti vuoti',
 	'ui.output.controls.apply': 'Applica',
+	'ui.json_flatten.tab_label': 'Appiattisci',
+	'ui.json_flatten.mode_label': 'Modalità',
+	'ui.json_flatten.mode.flatten': 'Appiattisci',
+	'ui.json_flatten.mode.unflatten': 'Ripristina',
+	'ui.json_flatten.separator': 'Separatore',
+	'ui.json_flatten.separator_placeholder': '.',
+	'ui.json_flatten.error.generic':
+		'Impossibile trasformare il JSON con le impostazioni di appiattimento correnti.',
+	'ui.json_flatten.error.empty_separator': 'Il separatore non può essere vuoto.',
+	'ui.json_flatten.error.invalid_result':
+		'Trasformazione non riuscita: output generato non valido.',
+	'ui.json_flatten.error.invalid_flat_object':
+		"L'input per il ripristino deve essere un oggetto JSON con percorsi appiattiti.",
+	'ui.json_flatten.error.root_conflict':
+		'La chiave radice non può essere usata insieme ad altri percorsi appiattiti.',
+	'ui.json_flatten.error.invalid_path': 'Uno o più percorsi appiattiti non sono validi.',
+	'ui.json_flatten.error.invalid_escape':
+		'Un percorso appiattito contiene una sequenza di escape non valida.',
+	'ui.json_flatten.error.invalid_array_index':
+		'Gli indici array nei percorsi appiattiti devono essere interi non negativi.',
+	'ui.json_flatten.error.path_conflict':
+		'I percorsi appiattiti sono in conflitto e non possono essere fusi in sicurezza.',
+	'ui.json_flatten.error.unsafe_key':
+		'Il percorso contiene una chiave non sicura (__proto__, constructor o prototype).',
 
 	// ── FAQ e Casi d\'Uso degli Strumenti ────────────────────────────────────
 	'tool.json-formatter.faq.0.question': "Che cos'è la formattazione JSON?",
@@ -1447,6 +1471,35 @@ const registryIt: Record<string, string> = {
 		'Ridurre la scrittura manuale di interfacce su JSON profondamente annidati',
 	'tool.json-to-typescript.use_case.3':
 		'Accelerare i refactor derivando tipi rigorosi da dati di esempio',
+	'tool.json-flatten.display_name': 'Appiattitore / Ripristino JSON',
+	'tool.json-flatten.tagline': 'Appiattisci percorsi JSON annidati e ricostruiscili all’istante',
+	'tool.json-flatten.description':
+		'Converti JSON profondamente annidato in oggetti piatti basati su percorsi e ricostruiscilo nello stesso strumento. Supporta array, chiavi con escape e separatori personalizzati.',
+	'tool.json-flatten.primary_keyword': 'appiattitore json ripristino',
+	'tool.json-flatten.meta_title': 'Appiattitore / Ripristino JSON — fmtly.dev',
+	'tool.json-flatten.meta_description':
+		'Appiattisci JSON annidato in mappe di chiavi per percorso e ripristinalo alla struttura originale. Supporto per array e separatori personalizzati. 100% nel browser.',
+	'tool.json-flatten.operation': 'Appiattisci e Ripristina',
+	'tool.json-flatten.faq.0.question':
+		'Come vengono rappresentati gli array nell’output appiattito?',
+	'tool.json-flatten.faq.0.answer':
+		'Gli elementi array usano indici tra parentesi quadre nel percorso, ad esempio users[0].email o matrix[2][1], così la struttura può essere ricostruita in modo deterministico.',
+	'tool.json-flatten.faq.1.question':
+		'Cosa succede se le chiavi contengono già punti o parentesi quadre?',
+	'tool.json-flatten.faq.1.answer':
+		'Durante l’appiattimento i caratteri speciali nelle chiavi vengono escapati. La modalità di ripristino interpreta questi escape e ricrea in sicurezza le chiavi originali.',
+	'tool.json-flatten.faq.2.question':
+		'Posso passare da appiattisci a ripristina nello stesso strumento?',
+	'tool.json-flatten.faq.2.answer':
+		'Sì. Con il selettore modalità puoi appiattire JSON annidato oppure ricostruire JSON annidato da mappe di percorsi piatti.',
+	'tool.json-flatten.use_case.0':
+		'Preparare dizionari i18n e configurazioni come mappe di chiavi piatte',
+	'tool.json-flatten.use_case.1':
+		'Normalizzare fixture API annidate per editing in stile foglio di calcolo',
+	'tool.json-flatten.use_case.2':
+		'Ricostruire strutture annidate da chiavi stile variabili d’ambiente',
+	'tool.json-flatten.use_case.3':
+		'Analizzare modifiche per percorso su JSON grandi prima del deploy',
 	'tool.json-schema-validate.display_name': 'Validatore JSON Schema',
 	'tool.json-schema-validate.tagline': 'Valida JSON rispetto a uno schema fornito',
 	'tool.json-schema-validate.description':

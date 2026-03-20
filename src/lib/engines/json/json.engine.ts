@@ -136,6 +136,22 @@ interface TypeScriptGenerationContext {
 	interfaceOrder: string[];
 }
 
+type JsonFlatPathSegment = string | number;
+
+export type JsonFlattenMode = 'flatten' | 'unflatten';
+
+export interface JsonFlattenOptions {
+	mode: JsonFlattenMode;
+	separator: string;
+	rootKey: string;
+}
+
+interface ResolvedJsonFlattenOptions {
+	mode: JsonFlattenMode;
+	separator: string;
+	rootKey: string;
+}
+
 const DEFAULT_FORMAT_OPTIONS: FormatOptions = {
 	indent: 2,
 	sortKeys: false,
@@ -162,6 +178,14 @@ const DEFAULT_TYPESCRIPT_TYPE_OPTIONS: TypeScriptTypeOptions = {
 	exportNamedTypes: true,
 	useSemicolons: true
 };
+
+const DEFAULT_JSON_FLATTEN_OPTIONS: ResolvedJsonFlattenOptions = {
+	mode: 'flatten',
+	separator: '.',
+	rootKey: '$'
+};
+
+const PROTOTYPE_POLLUTION_KEYS = new Set(['__proto__', 'prototype', 'constructor']);
 
 const TYPESCRIPT_RESERVED_IDENTIFIERS = new Set([
 	'any',
@@ -436,6 +460,74 @@ export function toTypeScriptTypes(
 	return outputSections.join('\n\n');
 }
 
+export function flattenJson(json: string, options: Partial<JsonFlattenOptions> = {}): string {
+	const parsed = parseJSON(json);
+	if (!parsed.success) {
+		throw new Error(parsed.error.plainLanguageExplanation);
+	}
+
+	const resolved = resolveJsonFlattenOptions(options, 'flatten');
+	const flattenedEntries = new Map<string, unknown>();
+	flattenIntoEntries(parsed.data, [], resolved, flattenedEntries);
+
+	const orderedOutput: Record<string, unknown> = {};
+	for (const [path, value] of Array.from(flattenedEntries.entries()).sort(([left], [right]) =>
+		left.localeCompare(right)
+	)) {
+		orderedOutput[path] = value;
+	}
+
+	return JSON.stringify(orderedOutput, null, 2);
+}
+
+export function unflattenJson(json: string, options: Partial<JsonFlattenOptions> = {}): string {
+	const parsed = parseJSON(json);
+	if (!parsed.success) {
+		throw new Error(parsed.error.plainLanguageExplanation);
+	}
+
+	const resolved = resolveJsonFlattenOptions(options, 'unflatten');
+
+	if (!isRecordObject(parsed.data)) {
+		throw new Error('ui.json_flatten.error.invalid_flat_object');
+	}
+
+	const entries = Object.entries(parsed.data);
+	if (entries.length === 0) {
+		return '{}';
+	}
+
+	if (Object.prototype.hasOwnProperty.call(parsed.data, resolved.rootKey) && entries.length > 1) {
+		throw new Error('ui.json_flatten.error.root_conflict');
+	}
+
+	if (entries.length === 1 && entries[0]?.[0] === resolved.rootKey) {
+		return JSON.stringify(entries[0][1], null, 2);
+	}
+
+	let rootContainer: unknown = undefined;
+
+	for (const [path, value] of entries.sort(([left], [right]) => left.localeCompare(right))) {
+		const tokens = parseFlatPath(path, resolved);
+		if (tokens.length === 0) {
+			rootContainer = value;
+			continue;
+		}
+
+		if (rootContainer === undefined) {
+			rootContainer = typeof tokens[0] === 'number' ? [] : {};
+		}
+
+		assignFlatValue(rootContainer, tokens, value);
+	}
+
+	if (rootContainer === undefined) {
+		rootContainer = {};
+	}
+
+	return JSON.stringify(rootContainer, null, 2);
+}
+
 export function generateJsonSchema(json: string): string {
 	const parsed = parseJSON(json);
 	if (!parsed.success) {
@@ -474,6 +566,304 @@ function formatMarkdownCell(value: unknown): string {
 	}
 
 	return String(value).replaceAll('|', '\\|').replaceAll('\n', '<br>');
+}
+
+function flattenIntoEntries(
+	value: unknown,
+	segments: JsonFlatPathSegment[],
+	options: ResolvedJsonFlattenOptions,
+	output: Map<string, unknown>
+): void {
+	if (isFlattenLeaf(value)) {
+		output.set(buildFlatPath(segments, options), value);
+		return;
+	}
+
+	if (Array.isArray(value)) {
+		if (value.length === 0) {
+			output.set(buildFlatPath(segments, options), []);
+			return;
+		}
+
+		for (const [index, entry] of value.entries()) {
+			flattenIntoEntries(entry, [...segments, index], options, output);
+		}
+		return;
+	}
+
+	if (isRecordObject(value)) {
+		const entries = Object.entries(value);
+		if (entries.length === 0) {
+			output.set(buildFlatPath(segments, options), {});
+			return;
+		}
+
+		for (const [key, entry] of entries) {
+			flattenIntoEntries(entry, [...segments, key], options, output);
+		}
+		return;
+	}
+
+	output.set(buildFlatPath(segments, options), value);
+}
+
+function resolveJsonFlattenOptions(
+	options: Partial<JsonFlattenOptions>,
+	fallbackMode: JsonFlattenMode
+): ResolvedJsonFlattenOptions {
+	const mode = options.mode ?? fallbackMode;
+	const separator = options.separator ?? DEFAULT_JSON_FLATTEN_OPTIONS.separator;
+	if (separator.length === 0) {
+		throw new Error('ui.json_flatten.error.empty_separator');
+	}
+
+	const rootKey = options.rootKey?.trim() || DEFAULT_JSON_FLATTEN_OPTIONS.rootKey;
+
+	return {
+		mode,
+		separator,
+		rootKey
+	};
+}
+
+function buildFlatPath(
+	segments: JsonFlatPathSegment[],
+	options: ResolvedJsonFlattenOptions
+): string {
+	if (segments.length === 0) {
+		return options.rootKey;
+	}
+
+	let path = '';
+	for (const segment of segments) {
+		if (typeof segment === 'number') {
+			path += `[${segment}]`;
+			continue;
+		}
+
+		const escaped = escapePathKey(segment, options.separator);
+		path = path.length === 0 ? escaped : `${path}${options.separator}${escaped}`;
+	}
+
+	return path.length > 0 ? path : options.rootKey;
+}
+
+function escapePathKey(value: string, separator: string): string {
+	let escaped = value.replaceAll('\\', '\\\\').replaceAll('[', '\\[').replaceAll(']', '\\]');
+
+	if (separator.length > 0) {
+		escaped = escaped.split(separator).join(`\\${separator}`);
+	}
+
+	return escaped;
+}
+
+function parseFlatPath(path: string, options: ResolvedJsonFlattenOptions): JsonFlatPathSegment[] {
+	if (path === options.rootKey) {
+		return [];
+	}
+
+	if (path.length === 0) {
+		throw new Error('ui.json_flatten.error.invalid_path');
+	}
+
+	const rawSegments = splitPathSegments(path, options.separator);
+	const tokens: JsonFlatPathSegment[] = [];
+
+	for (const segment of rawSegments) {
+		if (segment.length === 0) {
+			throw new Error('ui.json_flatten.error.invalid_path');
+		}
+		tokens.push(...parseFlatPathSegment(segment));
+	}
+
+	if (tokens.length === 0) {
+		throw new Error('ui.json_flatten.error.invalid_path');
+	}
+
+	return tokens;
+}
+
+function splitPathSegments(path: string, separator: string): string[] {
+	const segments: string[] = [];
+	let current = '';
+	let cursor = 0;
+
+	while (cursor < path.length) {
+		const char = path[cursor];
+		if (char === '\\') {
+			if (cursor + 1 >= path.length) {
+				throw new Error('ui.json_flatten.error.invalid_escape');
+			}
+			current += path.slice(cursor, cursor + 2);
+			cursor += 2;
+			continue;
+		}
+
+		if (path.startsWith(separator, cursor)) {
+			segments.push(current);
+			current = '';
+			cursor += separator.length;
+			continue;
+		}
+
+		current += char;
+		cursor += 1;
+	}
+
+	segments.push(current);
+	return segments;
+}
+
+function parseFlatPathSegment(segment: string): JsonFlatPathSegment[] {
+	const tokens: JsonFlatPathSegment[] = [];
+	let keyBuffer = '';
+	let cursor = 0;
+
+	while (cursor < segment.length) {
+		const char = segment[cursor];
+
+		if (char === '\\') {
+			if (cursor + 1 >= segment.length) {
+				throw new Error('ui.json_flatten.error.invalid_escape');
+			}
+			keyBuffer += segment[cursor + 1];
+			cursor += 2;
+			continue;
+		}
+
+		if (char === '[') {
+			if (keyBuffer.length > 0) {
+				tokens.push(keyBuffer);
+				keyBuffer = '';
+			}
+
+			const closeIndex = segment.indexOf(']', cursor + 1);
+			if (closeIndex < 0) {
+				throw new Error('ui.json_flatten.error.invalid_path');
+			}
+
+			const indexToken = segment.slice(cursor + 1, closeIndex);
+			if (!/^\d+$/.test(indexToken)) {
+				throw new Error('ui.json_flatten.error.invalid_array_index');
+			}
+
+			if (closeIndex + 1 < segment.length && segment[closeIndex + 1] !== '[') {
+				throw new Error('ui.json_flatten.error.invalid_path');
+			}
+
+			tokens.push(Number(indexToken));
+			cursor = closeIndex + 1;
+			continue;
+		}
+
+		if (char === ']') {
+			throw new Error('ui.json_flatten.error.invalid_path');
+		}
+
+		keyBuffer += char;
+		cursor += 1;
+	}
+
+	if (keyBuffer.length > 0) {
+		tokens.push(keyBuffer);
+	}
+
+	return tokens;
+}
+
+function assignFlatValue(
+	rootContainer: unknown,
+	segments: JsonFlatPathSegment[],
+	value: unknown
+): void {
+	let current: unknown = rootContainer;
+
+	for (let index = 0; index < segments.length; index += 1) {
+		const segment = segments[index];
+		const isLast = index === segments.length - 1;
+		const nextSegment = segments[index + 1];
+
+		if (typeof segment === 'number') {
+			if (!Array.isArray(current)) {
+				throw new Error('ui.json_flatten.error.path_conflict');
+			}
+
+			ensureArrayIndex(current, segment);
+
+			if (isLast) {
+				if (segment in current) {
+					throw new Error('ui.json_flatten.error.path_conflict');
+				}
+				current[segment] = value;
+				return;
+			}
+
+			if (!(segment in current)) {
+				current[segment] = typeof nextSegment === 'number' ? [] : {};
+			} else if (!isTraversableContainer(current[segment])) {
+				throw new Error('ui.json_flatten.error.path_conflict');
+			}
+
+			current = current[segment];
+			continue;
+		}
+
+		assertSafeObjectKey(segment);
+
+		if (!isRecordObject(current)) {
+			throw new Error('ui.json_flatten.error.path_conflict');
+		}
+
+		if (isLast) {
+			if (Object.prototype.hasOwnProperty.call(current, segment)) {
+				throw new Error('ui.json_flatten.error.path_conflict');
+			}
+			current[segment] = value;
+			return;
+		}
+
+		if (!Object.prototype.hasOwnProperty.call(current, segment)) {
+			current[segment] = typeof nextSegment === 'number' ? [] : {};
+		} else if (!isTraversableContainer(current[segment])) {
+			throw new Error('ui.json_flatten.error.path_conflict');
+		}
+
+		current = current[segment];
+	}
+}
+
+function ensureArrayIndex(target: unknown[], index: number): void {
+	if (!Number.isInteger(index) || index < 0) {
+		throw new Error('ui.json_flatten.error.invalid_array_index');
+	}
+
+	while (target.length < index) {
+		target.push(null);
+	}
+}
+
+function assertSafeObjectKey(key: string): void {
+	if (PROTOTYPE_POLLUTION_KEYS.has(key)) {
+		throw new Error('ui.json_flatten.error.unsafe_key');
+	}
+}
+
+function isFlattenLeaf(value: unknown): boolean {
+	return (
+		value === null ||
+		typeof value === 'string' ||
+		typeof value === 'number' ||
+		typeof value === 'boolean'
+	);
+}
+
+function isRecordObject(value: unknown): value is Record<string, unknown> {
+	return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function isTraversableContainer(value: unknown): value is Record<string, unknown> | unknown[] {
+	return Array.isArray(value) || isRecordObject(value);
 }
 
 function inferSchemaFromValues(values: JsonValue[]): JsonSchema {

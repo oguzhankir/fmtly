@@ -1040,6 +1040,30 @@ const registryEs: Record<string, string> = {
 	'ui.output.controls.clean_arrays': 'Eliminar arrays vacíos',
 	'ui.output.controls.clean_objects': 'Eliminar objetos vacíos',
 	'ui.output.controls.apply': 'Aplicar',
+	'ui.json_flatten.tab_label': 'Aplanar',
+	'ui.json_flatten.mode_label': 'Modo',
+	'ui.json_flatten.mode.flatten': 'Aplanar',
+	'ui.json_flatten.mode.unflatten': 'Desaplanar',
+	'ui.json_flatten.separator': 'Separador',
+	'ui.json_flatten.separator_placeholder': '.',
+	'ui.json_flatten.error.generic':
+		'No se pudo transformar el JSON con la configuración de aplanado actual.',
+	'ui.json_flatten.error.empty_separator': 'El separador no puede estar vacío.',
+	'ui.json_flatten.error.invalid_result':
+		'La transformación falló porque la salida generada es inválida.',
+	'ui.json_flatten.error.invalid_flat_object':
+		'La entrada para desaplanar debe ser un objeto JSON con rutas planas.',
+	'ui.json_flatten.error.root_conflict':
+		'La clave raíz no puede usarse junto con otras rutas aplanadas.',
+	'ui.json_flatten.error.invalid_path': 'Una o más rutas aplanadas no son válidas.',
+	'ui.json_flatten.error.invalid_escape':
+		'Una ruta aplanada contiene una secuencia de escape inválida.',
+	'ui.json_flatten.error.invalid_array_index':
+		'Los índices de array en rutas aplanadas deben ser enteros no negativos.',
+	'ui.json_flatten.error.path_conflict':
+		'Las rutas aplanadas entran en conflicto y no pueden fusionarse con seguridad.',
+	'ui.json_flatten.error.unsafe_key':
+		'La ruta contiene una clave insegura (__proto__, constructor o prototype).',
 
 	// ── FAQs de Herramientas y Casos de Uso ──────────────────────────────
 	'tool.json-formatter.faq.0.question': '¿Qué es el formateo de JSON?',
@@ -1456,6 +1480,32 @@ const registryEs: Record<string, string> = {
 		'Reducir redacción manual de interfaces en JSON profundamente anidados',
 	'tool.json-to-typescript.use_case.3':
 		'Acelerar refactors derivando tipos estrictos desde datos de ejemplo',
+	'tool.json-flatten.display_name': 'Aplanador / Desaplanador JSON',
+	'tool.json-flatten.tagline': 'Aplana rutas JSON anidadas y restáuralas al instante',
+	'tool.json-flatten.description':
+		'Convierte JSON profundamente anidado en objetos planos basados en rutas y vuelve a reconstruirlo en la misma herramienta. Soporta arrays, claves escapadas y separadores personalizados.',
+	'tool.json-flatten.primary_keyword': 'aplanador json desaplanador',
+	'tool.json-flatten.meta_title': 'Aplanador / Desaplanador JSON — fmtly.dev',
+	'tool.json-flatten.meta_description':
+		'Aplana JSON anidado en mapas de claves por ruta y desaplánalo de vuelta a su estructura original. Compatible con arrays y separadores personalizados. 100% en el navegador.',
+	'tool.json-flatten.operation': 'Aplanar y Desaplanar',
+	'tool.json-flatten.faq.0.question': '¿Cómo se representan los arrays en la salida aplanada?',
+	'tool.json-flatten.faq.0.answer':
+		'Los elementos de arrays usan índices entre corchetes en la ruta, por ejemplo users[0].email o matrix[2][1], para poder reconstruir la estructura sin ambigüedad.',
+	'tool.json-flatten.faq.1.question': '¿Qué pasa si las claves ya contienen puntos o corchetes?',
+	'tool.json-flatten.faq.1.answer':
+		'Los caracteres especiales de las claves se escapan al aplanar. El modo desaplanar interpreta esos escapes y recupera las claves originales de forma segura.',
+	'tool.json-flatten.faq.2.question':
+		'¿Puedo alternar entre aplanar y desaplanar en la misma herramienta?',
+	'tool.json-flatten.faq.2.answer':
+		'Sí. Con el selector de modo puedes aplanar JSON anidado o revertir mapas de rutas planas a JSON anidado.',
+	'tool.json-flatten.use_case.0':
+		'Preparar diccionarios i18n y configuraciones como mapas de claves planas',
+	'tool.json-flatten.use_case.1':
+		'Normalizar fixtures de API anidados para edición tipo hoja de cálculo',
+	'tool.json-flatten.use_case.2':
+		'Reconstruir estructuras anidadas desde claves estilo variables de entorno',
+	'tool.json-flatten.use_case.3': 'Analizar cambios por ruta en JSON grandes antes de desplegar',
 	'tool.json-schema-validate.display_name': 'Validador de JSON Schema',
 	'tool.json-schema-validate.tagline': 'Validar JSON contra un esquema proporcionado',
 	'tool.json-schema-validate.description':

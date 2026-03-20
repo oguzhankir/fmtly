@@ -1051,6 +1051,30 @@ const registryFr: Record<string, string> = {
 	'ui.output.controls.clean_arrays': 'Supprimer tableaux vides',
 	'ui.output.controls.clean_objects': 'Supprimer objets vides',
 	'ui.output.controls.apply': 'Appliquer',
+	'ui.json_flatten.tab_label': 'Aplatir',
+	'ui.json_flatten.mode_label': 'Mode',
+	'ui.json_flatten.mode.flatten': 'Aplatir',
+	'ui.json_flatten.mode.unflatten': 'Désaplatir',
+	'ui.json_flatten.separator': 'Séparateur',
+	'ui.json_flatten.separator_placeholder': '.',
+	'ui.json_flatten.error.generic':
+		'Impossible de transformer le JSON avec les réglages d’aplatissement actuels.',
+	'ui.json_flatten.error.empty_separator': 'Le séparateur ne peut pas être vide.',
+	'ui.json_flatten.error.invalid_result':
+		'La transformation a échoué car la sortie générée est invalide.',
+	'ui.json_flatten.error.invalid_flat_object':
+		'L’entrée de désaplatissement doit être un objet JSON avec des chemins à plat.',
+	'ui.json_flatten.error.root_conflict':
+		'La clé racine ne peut pas être utilisée avec d’autres chemins aplatis.',
+	'ui.json_flatten.error.invalid_path': 'Un ou plusieurs chemins aplatis sont invalides.',
+	'ui.json_flatten.error.invalid_escape':
+		'Un chemin aplati contient une séquence d’échappement invalide.',
+	'ui.json_flatten.error.invalid_array_index':
+		'Les index de tableau dans les chemins aplatis doivent être des entiers positifs ou nuls.',
+	'ui.json_flatten.error.path_conflict':
+		'Les chemins aplatis entrent en conflit et ne peuvent pas être fusionnés en sécurité.',
+	'ui.json_flatten.error.unsafe_key':
+		'Le chemin contient une clé non sûre (__proto__, constructor ou prototype).',
 
 	// ── Tool FAQs and Use Cases ──────────────────────────────────────────
 	'tool.json-formatter.faq.0.question': "Qu'est-ce que le formatage JSON ?",
@@ -1477,6 +1501,36 @@ const registryFr: Record<string, string> = {
 		'Réduire l’écriture manuelle d’interfaces pour du JSON profondément imbriqué',
 	'tool.json-to-typescript.use_case.3':
 		'Accélérer les refactors en dérivant des types stricts depuis des données d’exemple',
+	'tool.json-flatten.display_name': 'Aplatiseur / Désaplatiseur JSON',
+	'tool.json-flatten.tagline':
+		'Aplatissez des chemins JSON imbriqués et restaurez-les instantanément',
+	'tool.json-flatten.description':
+		'Convertissez un JSON fortement imbriqué en objets plats basés sur des chemins, puis reconstruisez la structure dans le même outil. Prend en charge les tableaux, les clés échappées et les séparateurs personnalisés.',
+	'tool.json-flatten.primary_keyword': 'aplatiseur desaplatiseur json',
+	'tool.json-flatten.meta_title': 'Aplatiseur / Désaplatiseur JSON — fmtly.dev',
+	'tool.json-flatten.meta_description':
+		'Aplatissez un JSON imbriqué en cartes de clés par chemin, puis désaplatissez-le vers la structure d’origine. Support des tableaux et séparateurs personnalisés. 100% navigateur.',
+	'tool.json-flatten.operation': 'Aplatir & Désaplatir',
+	'tool.json-flatten.faq.0.question':
+		'Comment les valeurs de tableau sont-elles représentées dans la sortie aplatie ?',
+	'tool.json-flatten.faq.0.answer':
+		'Les éléments de tableau utilisent des index entre crochets dans les chemins, par exemple users[0].email ou matrix[2][1], afin de permettre une reconstruction déterministe.',
+	'tool.json-flatten.faq.1.question':
+		'Que se passe-t-il si des clés contiennent déjà des points ou des crochets ?',
+	'tool.json-flatten.faq.1.answer':
+		'Les caractères spéciaux des clés sont échappés pendant l’aplatissement. Le mode désaplatissement interprète ces échappements et restaure les clés d’origine en toute sécurité.',
+	'tool.json-flatten.faq.2.question':
+		'Puis-je basculer entre aplatir et désaplatir dans le même outil ?',
+	'tool.json-flatten.faq.2.answer':
+		'Oui. Le sélecteur de mode permet soit d’aplatir un JSON imbriqué, soit de reconstruire un JSON imbriqué à partir de cartes de chemins plats.',
+	'tool.json-flatten.use_case.0':
+		'Préparer des dictionnaires i18n et des configurations sous forme de clés plates',
+	'tool.json-flatten.use_case.1':
+		'Normaliser des fixtures API imbriquées pour une édition type tableur',
+	'tool.json-flatten.use_case.2':
+		'Reconstruire des structures imbriquées à partir de clés de type variables d’environnement',
+	'tool.json-flatten.use_case.3':
+		'Analyser des changements par chemin dans de gros JSON avant déploiement',
 	'tool.json-schema-validate.display_name': 'Validateur de schéma JSON',
 	'tool.json-schema-validate.tagline': 'Valider un JSON contre un schéma fourni',
 	'tool.json-schema-validate.description':

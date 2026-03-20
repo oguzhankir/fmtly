@@ -20,6 +20,9 @@ import type {
 import {
 	type FormatOptions as AdvancedFormatOptions,
 	type JsonStats as AdvancedJsonStats,
+	type JsonFlattenMode,
+	type JsonFlattenOptions,
+	flattenJson,
 	format as formatAdvancedJson,
 	generateJsonSchema,
 	minify as minifyAdvancedJson,
@@ -27,7 +30,8 @@ import {
 	toMarkdownTable,
 	toToml,
 	toTypeScriptTypes,
-	toYaml
+	toYaml,
+	unflattenJson
 } from '$engines/json/json.engine.js';
 import { jsonToXML } from '$engines/xml/index.js';
 import { input } from '$stores/input.store';
@@ -51,6 +55,11 @@ export const jsonFormatOptions = writable<AdvancedFormatOptions>({
 	removeEmptyStrings: false,
 	removeEmptyArrays: false,
 	removeEmptyObjects: false
+});
+export const jsonFlattenOptions = writable<JsonFlattenOptions>({
+	mode: 'flatten',
+	separator: '.',
+	rootKey: '$'
 });
 
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
@@ -167,6 +176,9 @@ async function applyToolOutput(value: string): Promise<void> {
 			return;
 		case 'to-typescript':
 			await applyTypeScriptOutput(value);
+			return;
+		case 'flatten':
+			await applyFlattenOutput(value);
 			return;
 		case 'validator':
 		case 'schema-validate':
@@ -316,6 +328,44 @@ async function applyTypeScriptOutput(value: string): Promise<void> {
 	}
 }
 
+async function applyFlattenOutput(value: string): Promise<void> {
+	try {
+		const options = get(jsonFlattenOptions);
+		const workerMethod = options.mode === 'flatten' ? 'flattenJson' : 'unflattenJson';
+		const transformed = shouldUseWorker(value)
+			? await callJsonWorkerMethod(workerMethod, [value, options])
+			: transformWithFlattenOptions(value, options);
+
+		if (typeof transformed !== 'string') {
+			throw new Error('ui.json_flatten.error.invalid_result');
+		}
+
+		output.set(transformed);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([toFlattenWarningMessage(error)]);
+	}
+}
+
+function transformWithFlattenOptions(value: string, options: JsonFlattenOptions): string {
+	return options.mode === 'flatten' ? flattenJson(value, options) : unflattenJson(value, options);
+}
+
+function toFlattenWarningMessage(error: unknown): string {
+	if (!(error instanceof Error)) {
+		return 'ui.json_flatten.error.generic';
+	}
+
+	if (error.message.startsWith('ui.json_flatten.error.')) {
+		return error.message;
+	}
+
+	return error.message || 'ui.json_flatten.error.generic';
+}
+
 async function getJsonWorker(): Promise<Worker> {
 	if (jsonWorker) {
 		return jsonWorker;
@@ -405,6 +455,31 @@ export function setFormatOptions(next: Partial<AdvancedFormatOptions>): void {
 	if (value.trim()) {
 		applyAdvancedFormatOutput(value);
 	}
+}
+
+export function setJsonFlattenOptions(next: Partial<JsonFlattenOptions>): void {
+	jsonFlattenOptions.update((current) => {
+		const mode: JsonFlattenMode = next.mode ?? current.mode;
+		const separator = next.separator ?? current.separator;
+		const rootKey = next.rootKey ?? current.rootKey;
+
+		return {
+			mode,
+			separator,
+			rootKey
+		};
+	});
+
+	if (activeJsonToolSlug !== 'flatten') {
+		return;
+	}
+
+	const value = get(input);
+	if (!value.trim()) {
+		return;
+	}
+
+	void processInput(value);
 }
 
 export async function format(

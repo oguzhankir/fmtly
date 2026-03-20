@@ -1047,6 +1047,26 @@ const registryEn: Record<string, string> = {
 	'ui.output.controls.clean_arrays': 'Remove empty arrays',
 	'ui.output.controls.clean_objects': 'Remove empty objects',
 	'ui.output.controls.apply': 'Apply',
+	'ui.json_flatten.tab_label': 'Flatten',
+	'ui.json_flatten.mode_label': 'Mode',
+	'ui.json_flatten.mode.flatten': 'Flatten',
+	'ui.json_flatten.mode.unflatten': 'Unflatten',
+	'ui.json_flatten.separator': 'Separator',
+	'ui.json_flatten.separator_placeholder': '.',
+	'ui.json_flatten.error.generic': 'Could not transform JSON with the current flatten settings.',
+	'ui.json_flatten.error.empty_separator': 'Separator cannot be empty.',
+	'ui.json_flatten.error.invalid_result': 'Transformation failed because output was invalid.',
+	'ui.json_flatten.error.invalid_flat_object':
+		'Unflatten input must be a JSON object with flattened paths.',
+	'ui.json_flatten.error.root_conflict':
+		'Root key cannot be used together with other flattened paths.',
+	'ui.json_flatten.error.invalid_path': 'One or more flattened paths are invalid.',
+	'ui.json_flatten.error.invalid_escape': 'A flattened path contains an invalid escape sequence.',
+	'ui.json_flatten.error.invalid_array_index':
+		'Array indices in flattened paths must be non-negative integers.',
+	'ui.json_flatten.error.path_conflict': 'Flattened paths conflict and cannot be merged safely.',
+	'ui.json_flatten.error.unsafe_key':
+		'Path contains an unsafe key (__proto__, constructor, or prototype).',
 
 	// ── Tool FAQs and Use Cases ──────────────────────────────────────────
 	'tool.json-formatter.faq.0.question': 'What is JSON formatting?',
@@ -1430,6 +1450,30 @@ const registryEn: Record<string, string> = {
 		'Replace manual interface drafting for deeply nested JSON data',
 	'tool.json-to-typescript.use_case.3':
 		'Accelerate refactors by deriving strict types from existing sample data',
+	'tool.json-flatten.display_name': 'JSON Flattener / Unflattener',
+	'tool.json-flatten.tagline': 'Flatten nested JSON paths and restore them instantly',
+	'tool.json-flatten.description':
+		'Convert deeply nested JSON into flat path-based objects and unflatten it back without leaving your browser. Supports arrays, escaped keys, and custom separators.',
+	'tool.json-flatten.primary_keyword': 'json flattener unflattener',
+	'tool.json-flatten.meta_title': 'JSON Flattener / Unflattener — fmtly.dev',
+	'tool.json-flatten.meta_description':
+		'Flatten nested JSON into path-based key maps and unflatten back to original structure. Supports arrays and custom separators. 100% browser-based.',
+	'tool.json-flatten.operation': 'Flatten & Unflatten',
+	'tool.json-flatten.faq.0.question': 'How are array values represented in flattened output?',
+	'tool.json-flatten.faq.0.answer':
+		'Array items use bracket indices in generated paths, such as users[0].email or matrix[2][1], so structures can be restored deterministically.',
+	'tool.json-flatten.faq.1.question': 'What if keys already contain dots or brackets?',
+	'tool.json-flatten.faq.1.answer':
+		'Special characters in keys are escaped during flattening. Unflatten mode understands these escapes and recreates original keys safely.',
+	'tool.json-flatten.faq.2.question':
+		'Can I switch between flatten and unflatten in the same tool?',
+	'tool.json-flatten.faq.2.answer':
+		'Yes. Use the mode toggle to flatten nested JSON or reverse flattened path maps back into nested JSON.',
+	'tool.json-flatten.use_case.0': 'Prepare i18n dictionaries and config payloads as flat key maps',
+	'tool.json-flatten.use_case.1': 'Normalize nested API fixtures for spreadsheet-style editing',
+	'tool.json-flatten.use_case.2': 'Rebuild nested structures from environment-style key paths',
+	'tool.json-flatten.use_case.3':
+		'Debug path-level changes in large JSON documents before deployment',
 	'tool.json-schema-validate.display_name': 'JSON Schema Validator',
 	'tool.json-schema-validate.tagline': 'Validate JSON against a user-supplied schema',
 	'tool.json-schema-validate.description':

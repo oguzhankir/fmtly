@@ -505,6 +505,78 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
+		id: 'json-flatten',
+		category: 'json',
+		slug: 'flatten',
+		displayName: 'tool.json-flatten.display_name',
+		tagline: 'tool.json-flatten.tagline',
+		description: 'tool.json-flatten.description',
+		primaryKeyword: 'tool.json-flatten.primary_keyword',
+		metaTitle: 'tool.json-flatten.meta_title',
+		metaDescription: 'tool.json-flatten.meta_description',
+		engine: 'json',
+		operation: 'tool.json-flatten.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'json',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'to-csv' },
+			{ category: 'json', slug: 'to-yaml' },
+			{ category: 'json', slug: 'to-typescript' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-flatten.faq.0.question',
+				answer: 'tool.json-flatten.faq.0.answer'
+			},
+			{
+				question: 'tool.json-flatten.faq.1.question',
+				answer: 'tool.json-flatten.faq.1.answer'
+			},
+			{
+				question: 'tool.json-flatten.faq.2.question',
+				answer: 'tool.json-flatten.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-flatten.use_case.0',
+			'tool.json-flatten.use_case.1',
+			'tool.json-flatten.use_case.2',
+			'tool.json-flatten.use_case.3'
+		],
+		sampleInput: `{
+  "app": {
+    "name": "fmtly",
+    "locales": ["en", "tr", "de"],
+    "flags": {
+      "beta.enabled": true,
+      "rollout": {
+        "percentage": 25,
+        "regions": ["eu", "us"]
+      }
+    }
+  },
+  "users": [
+    {
+      "id": 1,
+      "profile": {
+        "firstName": "Ada",
+        "lastName": "Lovelace"
+      }
+    },
+    {
+      "id": 2,
+      "profile": {
+        "firstName": "Grace",
+        "lastName": "Hopper"
+      }
+    }
+  ]
+}`
+	},
+	{
 		id: 'json-schema-validate',
 		category: 'json',
 		slug: 'schema-validate',

@@ -7,9 +7,11 @@
 	import {
 		jsonError,
 		jsonAdvancedStats,
+		jsonFlattenOptions,
 		jsonFormatOptions,
 		jsonFormatWarnings,
-		setFormatOptions
+		setFormatOptions,
+		setJsonFlattenOptions
 	} from '$stores/json.store';
 	import {
 		AlertTriangle,
@@ -40,6 +42,7 @@
 	let showCompare = $state(false);
 	let showCleanMenu = $state(false);
 	let isFormatter = $derived(toolSlug === 'formatter');
+	let isFlattenTool = $derived(toolSlug === 'flatten');
 	let isMinifier = $derived(toolSlug === 'minifier');
 	let isConverter = $derived(
 		[
@@ -50,7 +53,8 @@
 			'to-markdown',
 			'schema-generator',
 			'to-go',
-			'to-typescript'
+			'to-typescript',
+			'flatten'
 		].includes(
 			toolSlug
 		)
@@ -67,7 +71,8 @@
 			'to-markdown',
 			'schema-generator',
 			'to-go',
-			'to-typescript'
+			'to-typescript',
+			'flatten'
 		].includes(toolSlug)
 	);
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
@@ -277,6 +282,27 @@
 			[key]: !$jsonFormatOptions[key]
 		});
 	}
+
+	function flattenToNestedMode(): void {
+		setJsonFlattenOptions({ mode: 'flatten' });
+	}
+
+	function unflattenToNestedMode(): void {
+		setJsonFlattenOptions({ mode: 'unflatten' });
+	}
+
+	function updateFlattenSeparator(event: Event): void {
+		const input = event.currentTarget as HTMLInputElement;
+		setJsonFlattenOptions({ separator: input.value });
+	}
+
+	function resolveWarningText(warning: string): string {
+		if (warning.startsWith('ui.')) {
+			return $t(warning, warning);
+		}
+
+		return warning;
+	}
 </script>
 
 <div class="json-output" role="region" aria-label="JSON output panel">
@@ -309,7 +335,7 @@
 	{#if $jsonFormatWarnings.length > 0}
 		<div class="json-output-warnings">
 			{#each $jsonFormatWarnings as warning}
-				<span>{warning}</span>
+				<span>{resolveWarningText(warning)}</span>
 			{/each}
 		</div>
 	{/if}
@@ -416,6 +442,47 @@
 							</div>
 						{/if}
 					</div>
+				</div>
+			</div>
+		{/if}
+
+		{#if isFlattenTool}
+			<div class="json-output-controls">
+				<div class="json-output-controls__group">
+					<span class="json-output-controls__label">
+						{$t('ui.json_flatten.mode_label', 'Mode')}
+					</span>
+					<button
+						type="button"
+						class="json-output-chip"
+						class:json-output-chip--active={$jsonFlattenOptions.mode === 'flatten'}
+						onclick={flattenToNestedMode}
+					>
+						{$t('ui.json_flatten.mode.flatten', 'Flatten')}
+					</button>
+					<button
+						type="button"
+						class="json-output-chip"
+						class:json-output-chip--active={$jsonFlattenOptions.mode === 'unflatten'}
+						onclick={unflattenToNestedMode}
+					>
+						{$t('ui.json_flatten.mode.unflatten', 'Unflatten')}
+					</button>
+				</div>
+				<div class="json-output-controls__group">
+					<label class="json-output-controls__label" for="json-flatten-separator">
+						{$t('ui.json_flatten.separator', 'Separator')}
+					</label>
+					<input
+						id="json-flatten-separator"
+						type="text"
+						class="json-output-input"
+						value={$jsonFlattenOptions.separator}
+						oninput={updateFlattenSeparator}
+						placeholder={$t('ui.json_flatten.separator_placeholder', '.')}
+						autocomplete="off"
+						spellcheck="false"
+					/>
 				</div>
 			</div>
 		{/if}
@@ -639,6 +706,7 @@
 	}
 
 	.json-output-btn,
+	.json-output-input,
 	.json-output-select,
 	.json-output-chip {
 		height: 28px;
@@ -650,6 +718,10 @@
 		font-family: var(--font-ui);
 		font-size: 12px;
 		font-weight: 500;
+	}
+
+	.json-output-input {
+		width: 92px;
 	}
 
 	.json-output-btn,

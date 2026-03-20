@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { formatJSON, minifyJSON } from '../../../src/lib/engines/json/formatter.js';
 import {
+	flattenJson,
 	generateJsonSchema,
 	toGoStructs,
 	toMarkdownTable,
 	toToml,
 	toTypeScriptTypes,
-	toYaml
+	toYaml,
+	unflattenJson
 } from '../../../src/lib/engines/json/json.engine.js';
 import { parseJSON } from '../../../src/lib/engines/json/parser.js';
 import { repairJSON } from '../../../src/lib/engines/json/repairer.js';
@@ -258,6 +260,70 @@ describe('advanced json conversions', () => {
 		const result = await toMarkdownTable('[{"name":"fmtly","type":"tool"}]');
 		expect(result).toContain('| name | type |');
 		expect(result).toContain('| fmtly | tool |');
+	});
+});
+
+describe('flattenJson and unflattenJson', () => {
+	it('flattens nested objects and arrays into deterministic paths', () => {
+		const flattened = JSON.parse(
+			flattenJson('{"user":{"name":"Ada","roles":["admin","editor"]},"meta":{"active":true}}')
+		) as Record<string, unknown>;
+
+		expect(flattened).toEqual({
+			'meta.active': true,
+			'user.name': 'Ada',
+			'user.roles[0]': 'admin',
+			'user.roles[1]': 'editor'
+		});
+	});
+
+	it('rebuilds nested JSON from flattened paths', () => {
+		const nested = JSON.parse(
+			unflattenJson(
+				'{"meta.active":true,"user.name":"Ada","user.roles[0]":"admin","user.roles[1]":"editor"}'
+			)
+		) as Record<string, unknown>;
+
+		expect(nested).toEqual({
+			meta: { active: true },
+			user: { name: 'Ada', roles: ['admin', 'editor'] }
+		});
+	});
+
+	it('supports escaped keys and custom separators', () => {
+		const source = '{"api/v1":{"x[y]":2}}';
+		const flattened = JSON.parse(flattenJson(source, { separator: '/' })) as Record<
+			string,
+			unknown
+		>;
+
+		expect(flattened['api\\/v1/x\\[y\\]']).toBe(2);
+
+		const rebuilt = JSON.parse(
+			unflattenJson(JSON.stringify(flattened), { separator: '/' })
+		) as Record<string, unknown>;
+
+		expect(rebuilt).toEqual(JSON.parse(source));
+	});
+
+	it('wraps primitive roots with the default root key', () => {
+		const flattened = JSON.parse(flattenJson('42')) as Record<string, unknown>;
+		expect(flattened).toEqual({ $: 42 });
+
+		const rebuilt = JSON.parse(unflattenJson('{"$":42}')) as unknown;
+		expect(rebuilt).toBe(42);
+	});
+
+	it('throws when paths conflict during unflatten', () => {
+		expect(() => unflattenJson('{"user":"Ada","user.name":"Ada"}')).toThrow(
+			'ui.json_flatten.error.path_conflict'
+		);
+	});
+
+	it('rejects invalid flatten options', () => {
+		expect(() => flattenJson('{"a":1}', { separator: '' })).toThrow(
+			'ui.json_flatten.error.empty_separator'
+		);
 	});
 });
 

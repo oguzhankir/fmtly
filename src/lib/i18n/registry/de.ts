@@ -1040,6 +1040,28 @@ const registryDe: Record<string, string> = {
 	'ui.output.controls.clean_arrays': 'Leere Arrays entfernen',
 	'ui.output.controls.clean_objects': 'Leere Objekte entfernen',
 	'ui.output.controls.apply': 'Anwenden',
+	'ui.json_flatten.tab_label': 'Flatten',
+	'ui.json_flatten.mode_label': 'Modus',
+	'ui.json_flatten.mode.flatten': 'Abflachen',
+	'ui.json_flatten.mode.unflatten': 'Entfalten',
+	'ui.json_flatten.separator': 'Trennzeichen',
+	'ui.json_flatten.separator_placeholder': '.',
+	'ui.json_flatten.error.generic':
+		'JSON konnte mit den aktuellen Flatten-Einstellungen nicht umgewandelt werden.',
+	'ui.json_flatten.error.empty_separator': 'Trennzeichen darf nicht leer sein.',
+	'ui.json_flatten.error.invalid_result': 'Umwandlung fehlgeschlagen: ungültige Ausgabe.',
+	'ui.json_flatten.error.invalid_flat_object':
+		'Die Entfalten-Eingabe muss ein JSON-Objekt mit flachen Pfaden sein.',
+	'ui.json_flatten.error.root_conflict':
+		'Der Root-Schlüssel darf nicht zusammen mit anderen flachen Pfaden verwendet werden.',
+	'ui.json_flatten.error.invalid_path': 'Mindestens ein flacher Pfad ist ungültig.',
+	'ui.json_flatten.error.invalid_escape': 'Ein flacher Pfad enthält eine ungültige Escape-Sequenz.',
+	'ui.json_flatten.error.invalid_array_index':
+		'Array-Indizes in flachen Pfaden müssen nicht-negative Ganzzahlen sein.',
+	'ui.json_flatten.error.path_conflict':
+		'Flache Pfade stehen im Konflikt und können nicht sicher zusammengeführt werden.',
+	'ui.json_flatten.error.unsafe_key':
+		'Der Pfad enthält einen unsicheren Schlüssel (__proto__, constructor oder prototype).',
 
 	// ── FAQ & Use Cases ──────────────────────────────────────────
 	'tool.json-formatter.faq.0.question': 'Was ist JSON-Formatierung?',
@@ -1399,6 +1421,35 @@ const registryDe: Record<string, string> = {
 		'Manuelles Interface-Schreiben bei tief verschachtelten JSON-Daten reduzieren',
 	'tool.json-to-typescript.use_case.3':
 		'Refactorings beschleunigen, indem strikte Typen aus Beispieldaten abgeleitet werden',
+	'tool.json-flatten.display_name': 'JSON Abflacher / Entfalter',
+	'tool.json-flatten.tagline': 'Verschachtelte JSON-Pfade abflachen und sofort zurückwandeln',
+	'tool.json-flatten.description':
+		'Wandeln Sie tief verschachteltes JSON in flache pfadbasierte Objekte um und entfalten Sie es wieder zurück. Unterstützt Arrays, escapte Schlüssel und eigene Trennzeichen.',
+	'tool.json-flatten.primary_keyword': 'json abflacher entfalter',
+	'tool.json-flatten.meta_title': 'JSON Abflacher / Entfalter — fmtly.dev',
+	'tool.json-flatten.meta_description':
+		'JSON in pfadbasierte Schlüssel-Maps abflachen und wieder in die Originalstruktur entfalten. Unterstützt Arrays und benutzerdefinierte Trennzeichen. 100% im Browser.',
+	'tool.json-flatten.operation': 'Abflachen & Entfalten',
+	'tool.json-flatten.faq.0.question':
+		'Wie werden Array-Werte in der abgeflachten Ausgabe dargestellt?',
+	'tool.json-flatten.faq.0.answer':
+		'Array-Elemente werden mit Klammer-Indizes dargestellt, z. B. users[0].email oder matrix[2][1], damit sich die Struktur eindeutig zurückwandeln lässt.',
+	'tool.json-flatten.faq.1.question':
+		'Was passiert, wenn Schlüssel bereits Punkte oder Klammern enthalten?',
+	'tool.json-flatten.faq.1.answer':
+		'Sonderzeichen in Schlüsseln werden beim Abflachen escaped. Der Entfalten-Modus versteht diese Escapes und stellt die ursprünglichen Schlüssel sicher wieder her.',
+	'tool.json-flatten.faq.2.question':
+		'Kann ich im selben Tool zwischen Abflachen und Entfalten wechseln?',
+	'tool.json-flatten.faq.2.answer':
+		'Ja. Mit dem Modus-Schalter können Sie verschachteltes JSON abflachen oder flache Pfad-Maps wieder in verschachteltes JSON zurückwandeln.',
+	'tool.json-flatten.use_case.0':
+		'i18n-Wörterbücher und Konfigurationsdaten als flache Key-Maps vorbereiten',
+	'tool.json-flatten.use_case.1':
+		'Verschachtelte API-Fixtures für tabellarische Bearbeitung normalisieren',
+	'tool.json-flatten.use_case.2':
+		'Verschachtelte Strukturen aus Environment-ähnlichen Pfadschlüsseln rekonstruieren',
+	'tool.json-flatten.use_case.3':
+		'Pfadbasierte Änderungen in großen JSON-Dokumenten vor Deployments analysieren',
 	'tool.json-schema-validate.display_name': 'JSON-Schema-Validator',
 	'tool.json-schema-validate.tagline': 'JSON gegen ein bereitgestelltes Schema validieren',
 	'tool.json-schema-validate.description':
