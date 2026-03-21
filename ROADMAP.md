@@ -95,7 +95,7 @@ Encode, decode, hash, and escape strings across common formats.
 | 70 | JWT Decoder ✅ | `encode/jwt` | done — Decode JWT tokens — display header, payload, and signature. Validate expiry. No verification of secrets. |
 | 71 | Hex ↔ ASCII / UTF-8 ✅ | `encode/hex` | done — Convert text to hex or hex to UTF-8 text with delimiter, case, and line-wrap options; permissive decode (0x, commas, whitespace); Web Worker for inputs >500KB. |
 | 72 | ROT13 / Caesar Cipher ✅ | `encode/rot13` | done — ROT13 (self-inverse on A–Z/a–z) or Caesar with shift 1–25, encrypt/decrypt, presets, slider + Web Worker for inputs >500KB. |
-| 73 | Punycode Encode / Decode | `encode/punycode` | Convert internationalized domain names (IDN) to Punycode and back. |
+| 73 | Punycode Encode / Decode ✅ | `encode/punycode` | done — IDN toASCII / toUnicode for domains and emails (RFC 5891-style), dynamic punycode.js load, Web Worker for inputs >500KB. |
 | 74 | Morse Code Translator ✅ | `text/morse` | done — Convert text to Morse code and decode Morse back to plain text. |
 
 ---

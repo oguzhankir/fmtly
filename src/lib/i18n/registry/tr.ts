@@ -2731,6 +2731,61 @@ const registryTr: Record<string, string> = {
 	'ui.rot13.output_placeholder': 'Dönüştürülmüş metin burada görünür…',
 	'ui.rot13.characters': 'karakter',
 	'ui.rot13.toast.applied': 'Çıktı girdiye uygulandı',
+	// ── Punycode / IDN tool ───────────────────────────────────────────────────
+	'tool.encode-punycode-encode-decode.display_name': 'Punycode / IDN',
+	'tool.encode-punycode-encode-decode.tagline':
+		'Uluslararasılaştırılmış alan adlarını ve e-postaları Unicode ile ASCII (xn--) arasında dönüştürün',
+	'tool.encode-punycode-encode-decode.description':
+		'ASCII dışı etiketli alan adlarını ve e-posta adreslerini Punycode’a (xn-- önekli ASCII) ve tersine çevirin. Birden fazla etiketi ve @ öncesi yerel kısmı korur. İşlem tarayıcıda; büyük girdiler Web Worker’da çalışır.',
+	'tool.encode-punycode-encode-decode.primary_keyword': 'punycode idn çevirici online',
+	'tool.encode-punycode-encode-decode.meta_title': 'Punycode ve IDN — Kodla / Çöz — fmtly.dev',
+	'tool.encode-punycode-encode-decode.meta_description':
+		'Unicode alan ve e-postaları Punycode (xn--) yapın ve geri çözün. Özel, anında, yalnızca tarayıcıda; büyük metinler için Worker.',
+	'tool.encode-punycode-encode-decode.operation': 'Punycode / IDN',
+	'tool.encode-punycode-encode-decode.faq.0.question': 'Alan adım veya e-postam sunucuya gider mi?',
+	'tool.encode-punycode-encode-decode.faq.0.answer':
+		'Hayır. Dönüşüm Punycode kütüphanesiyle yalnızca tarayıcınızda çalışır. Metinleriniz cihazınızdan çıkmaz.',
+	'tool.encode-punycode-encode-decode.faq.1.question': 'Burada «kodla» ne yapar?',
+	'tool.encode-punycode-encode-decode.faq.1.answer':
+		'Kodlama IDNA toASCII uygular: ASCII olmayan her etiket xn-- önekli ASCII olur. Yalnızca ASCII etiketler aynı kalır.',
+	'tool.encode-punycode-encode-decode.faq.2.question': 'Gerçek DNS kayıt kurallarını doğrular mı?',
+	'tool.encode-punycode-encode-decode.faq.2.answer':
+		'RFC 3492 / 5891 tarzı Punycode dönüşümü uygular. Tam UTS #46 kayıt doğrulaması bu aracın kapsamı dışındadır.',
+	'tool.encode-punycode-encode-decode.faq.3.question': 'Büyük girdi neden Web Worker kullanır?',
+	'tool.encode-punycode-encode-decode.faq.3.answer':
+		'500 KB üzeri girdiler arayüzü akıcı tutmak için ana iş parçacığı dışında işlenir.',
+	'tool.encode-punycode-encode-decode.use_case.0':
+		'Bir Unicode ana makine veya e-posta alanının DNS’te (xn-- biçimi) nasıl görüneceğini önizleme',
+	'tool.encode-punycode-encode-decode.use_case.1':
+		'Günlüklerden, sertifikalardan veya geliştirici araçlarından xn-- ana makineleri Unicode’a çözme',
+	'tool.encode-punycode-encode-decode.use_case.2':
+		'Belge veya destek kayıtlarında IDN örneklerini toplu dönüştürme',
+	'tool.encode-punycode-encode-decode.use_case.3':
+		'ASCII ve uluslararası etiketlerin karıştığı URL ve e-postaları hata ayıklama',
+	// ── Punycode / IDN UI ─────────────────────────────────────────────────────
+	'ui.punycode.tab_label': 'Punycode',
+	'ui.punycode.action_label': 'İşlem',
+	'ui.punycode.action.encode': 'Unicode → ASCII (IDN)',
+	'ui.punycode.action.decode': 'ASCII → Unicode',
+	'ui.punycode.hint':
+		'Uluslararasılaştırılmış alan adları ve e-postalar: Unicode etiketleri xn-- ile ASCII olur; çözme işlemi tersine çevirir.',
+	'ui.punycode.loading_library': 'Punycode yükleniyor…',
+	'ui.punycode.library_load_failed': 'Punycode kitaplığı yüklenemedi.',
+	'ui.punycode.worker_active': 'Büyük girdi (>{size}). İşlem Web Worker’da.',
+	'ui.punycode.worker_failed': 'Worker başarısız. Ana iş parçacığına dönülüyor.',
+	'ui.punycode.worker_badge': 'Worker',
+	'ui.punycode.button.swap_direction': 'Yönü değiştir',
+	'ui.punycode.button.apply_output': 'Çıktıyı girdiye uygula',
+	'ui.punycode.input_label': 'Girdi',
+	'ui.punycode.output_label': 'Çıktı',
+	'ui.punycode.input_placeholder':
+		'Unicode etiketli alan veya e-posta, ya da xn-- segmentli ASCII…',
+	'ui.punycode.output_placeholder': 'ASCII IDN veya çözülmüş Unicode burada görünür…',
+	'ui.punycode.characters': 'karakter',
+	'ui.punycode.toast.applied': 'Çıktı girdiye uygulandı',
+	'ui.punycode.error.invalid_punycode':
+		'Geçersiz Punycode veya alan girdisi. Etiketleri ve xn-- öneklerini kontrol edin.',
+	'ui.punycode.error.processing': 'Dönüşüm başarısız: {detail}',
 	// ── URL Kodla / Çöz — arayüz metinleri ───────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'İşlem',

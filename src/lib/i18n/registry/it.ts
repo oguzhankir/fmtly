@@ -2744,6 +2744,63 @@ const registryIt: Record<string, string> = {
 	'ui.rot13.output_placeholder': 'Il testo trasformato appare qui…',
 	'ui.rot13.characters': 'caratteri',
 	'ui.rot13.toast.applied': 'Output applicato all’input',
+	// ── Punycode / IDN tool ───────────────────────────────────────────────────
+	'tool.encode-punycode-encode-decode.display_name': 'Punycode / IDN',
+	'tool.encode-punycode-encode-decode.tagline':
+		'Converti domini ed e-mail internazionalizzati tra Unicode e ASCII con prefisso xn--',
+	'tool.encode-punycode-encode-decode.description':
+		'Converti nomi di dominio e indirizzi con etichette non ASCII in Punycode (ASCII con prefisso xn--) e viceversa. Gestisce più etichette e la parte locale prima di @. Tutto nel browser; input grandi in un Web Worker.',
+	'tool.encode-punycode-encode-decode.primary_keyword': 'punycode idn codifica online',
+	'tool.encode-punycode-encode-decode.meta_title':
+		'Punycode e IDN — Codifica / Decodifica — fmtly.dev',
+	'tool.encode-punycode-encode-decode.meta_description':
+		'Da Unicode a Punycode (xn--) per domini ed e-mail e ritorno. Privato, istantaneo, solo browser; Worker per testi grandi.',
+	'tool.encode-punycode-encode-decode.operation': 'Punycode / IDN',
+	'tool.encode-punycode-encode-decode.faq.0.question':
+		'Il mio dominio o e-mail viene inviato a un server?',
+	'tool.encode-punycode-encode-decode.faq.0.answer':
+		'No. La conversione usa la libreria Punycode solo nel browser. Le stringhe non lasciano il dispositivo.',
+	'tool.encode-punycode-encode-decode.faq.1.question': 'Cosa fa «codifica» qui?',
+	'tool.encode-punycode-encode-decode.faq.1.answer':
+		'Codifica applica IDNA toASCII: ogni etichetta non ASCII diventa ASCII con prefisso xn--. Le etichette solo ASCII restano invariate.',
+	'tool.encode-punycode-encode-decode.faq.2.question':
+		'Valida le regole reali di registrazione DNS?',
+	'tool.encode-punycode-encode-decode.faq.2.answer':
+		'Applica la conversione Punycode in stile RFC 3492 / 5891. I controlli UTS #46 completi per la registrazione esulano da questo strumento.',
+	'tool.encode-punycode-encode-decode.faq.3.question': 'Perché un Web Worker con input grandi?',
+	'tool.encode-punycode-encode-decode.faq.3.answer':
+		'Oltre 500 KB l’elaborazione avviene fuori dal thread principale per mantenere l’interfaccia reattiva.',
+	'tool.encode-punycode-encode-decode.use_case.0':
+		'Anteprima di come un host o dominio e-mail Unicode apparirà nel DNS (forma xn--)',
+	'tool.encode-punycode-encode-decode.use_case.1':
+		'Decodificare hostname xn-- da log, certificati o strumenti di sviluppo',
+	'tool.encode-punycode-encode-decode.use_case.2':
+		'Convertire esempi IDN in documentazione o ticket di supporto',
+	'tool.encode-punycode-encode-decode.use_case.3':
+		'Debug di URL ed e-mail che mescolano etichette ASCII e internazionalizzate',
+	// ── Punycode / IDN UI ─────────────────────────────────────────────────────
+	'ui.punycode.tab_label': 'Punycode',
+	'ui.punycode.action_label': 'Azione',
+	'ui.punycode.action.encode': 'Unicode → ASCII (IDN)',
+	'ui.punycode.action.decode': 'ASCII → Unicode',
+	'ui.punycode.hint':
+		'Domini ed e-mail internazionalizzati: le etichette Unicode diventano ASCII con xn--; decodifica inverte l’operazione.',
+	'ui.punycode.loading_library': 'Caricamento Punycode…',
+	'ui.punycode.library_load_failed': 'Impossibile caricare la libreria Punycode.',
+	'ui.punycode.worker_active': 'Input grande (>{size}). Elaborazione in Web Worker.',
+	'ui.punycode.worker_failed': 'Worker fallito. Ripiego sul thread principale.',
+	'ui.punycode.worker_badge': 'Worker',
+	'ui.punycode.button.swap_direction': 'Inverti direzione',
+	'ui.punycode.button.apply_output': 'Applica output all’input',
+	'ui.punycode.input_label': 'Input',
+	'ui.punycode.output_label': 'Output',
+	'ui.punycode.input_placeholder': 'Dominio o e-mail con Unicode, o ASCII con segmenti xn--…',
+	'ui.punycode.output_placeholder': 'IDN ASCII o Unicode decodificato compare qui…',
+	'ui.punycode.characters': 'caratteri',
+	'ui.punycode.toast.applied': 'Output applicato all’input',
+	'ui.punycode.error.invalid_punycode':
+		'Punycode o dominio non valido. Controlla etichette e prefissi xn--.',
+	'ui.punycode.error.processing': 'Conversione non riuscita: {detail}',
 	// ── Codifica / Decodifica URL — stringhe interfaccia ─────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Azione',

@@ -2701,6 +2701,62 @@ const registryDe: Record<string, string> = {
 	'ui.rot13.output_placeholder': 'Der transformierte Text erscheint hier…',
 	'ui.rot13.characters': 'Zeichen',
 	'ui.rot13.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
+	// ── Punycode / IDN tool ───────────────────────────────────────────────────
+	'tool.encode-punycode-encode-decode.display_name': 'Punycode / IDN',
+	'tool.encode-punycode-encode-decode.tagline':
+		'Internationalisierte Domainnamen und E-Mails zwischen Unicode und ASCII (xn--) konvertieren',
+	'tool.encode-punycode-encode-decode.description':
+		'Wandle Domainnamen und E-Mail-Adressen mit Nicht-ASCII-Labels in Punycode (ASCII mit xn--Präfix) und zurück um. Mehrere Labels und lokale Teile vor @ bleiben erhalten. Die Verarbeitung erfolgt im Browser; große Eingaben laufen in einem Web Worker.',
+	'tool.encode-punycode-encode-decode.primary_keyword': 'punycode idn online konvertieren',
+	'tool.encode-punycode-encode-decode.meta_title':
+		'Punycode & IDN — Kodieren / Dekodieren — fmtly.dev',
+	'tool.encode-punycode-encode-decode.meta_description':
+		'Unicode-Domains und E-Mails in Punycode (xn--) wandeln und zurückdekodieren. Schnell, privat, nur im Browser; Worker für große Texte.',
+	'tool.encode-punycode-encode-decode.operation': 'Punycode / IDN',
+	'tool.encode-punycode-encode-decode.faq.0.question':
+		'Werden meine Domains oder E-Mails hochgeladen?',
+	'tool.encode-punycode-encode-decode.faq.0.answer':
+		'Nein. Die Konvertierung läuft vollständig in Ihrem Browser mit der Punycode-Bibliothek. Ihre Zeichenketten verlassen das Gerät nicht.',
+	'tool.encode-punycode-encode-decode.faq.1.question': 'Was macht „Kodieren“ hier?',
+	'tool.encode-punycode-encode-decode.faq.1.answer':
+		'Kodieren entspricht IDNA toASCII: Labels mit Nicht-ASCII werden als ASCII mit xn--Präfix dargestellt. Reine ASCII-Labels bleiben unverändert.',
+	'tool.encode-punycode-encode-decode.faq.2.question': 'Prüft das echte DNS-Registrierungsregeln?',
+	'tool.encode-punycode-encode-decode.faq.2.answer':
+		'Es wendet Punycode-Konvertierung nach RFC 3492 / 5891 an. Vollständige UTS-#46-Registrierungsprüfungen sind nicht enthalten — dafür Registrar oder spezialisierte Bibliotheken nutzen.',
+	'tool.encode-punycode-encode-decode.faq.3.question': 'Warum ein Web Worker bei großen Eingaben?',
+	'tool.encode-punycode-encode-decode.faq.3.answer':
+		'Eingaben über 500 KB werden außerhalb des Hauptthreads verarbeitet, damit Eingabe und UI flüssig bleiben.',
+	'tool.encode-punycode-encode-decode.use_case.0':
+		'Vorschau, wie ein Unicode-Hostname oder E-Mail-Domain in DNS (xn--) aussieht',
+	'tool.encode-punycode-encode-decode.use_case.1':
+		'xn--Hostnamen aus Logs, Zertifikaten oder DevTools zurück in lesbares Unicode dekodieren',
+	'tool.encode-punycode-encode-decode.use_case.2':
+		'IDN-Beispiele in Dokumentation, Folien oder Tickets stapelweise konvertieren',
+	'tool.encode-punycode-encode-decode.use_case.3':
+		'Fehlersuche bei URLs und E-Mails mit gemischten ASCII- und internationalisierten Labels',
+	// ── Punycode / IDN UI ─────────────────────────────────────────────────────
+	'ui.punycode.tab_label': 'Punycode',
+	'ui.punycode.action_label': 'Aktion',
+	'ui.punycode.action.encode': 'Unicode → ASCII (IDN)',
+	'ui.punycode.action.decode': 'ASCII → Unicode',
+	'ui.punycode.hint':
+		'Internationalisierte Domainnamen und E-Mails: Unicode-Labels werden zu ASCII mit xn--; Dekodieren macht das rückgängig.',
+	'ui.punycode.loading_library': 'Punycode wird geladen…',
+	'ui.punycode.library_load_failed': 'Punycode-Bibliothek konnte nicht geladen werden.',
+	'ui.punycode.worker_active': 'Große Eingabe (>{size}). Verarbeitung im Web Worker.',
+	'ui.punycode.worker_failed': 'Worker fehlgeschlagen. Es wird auf den Hauptthread zurückgefallen.',
+	'ui.punycode.worker_badge': 'Worker',
+	'ui.punycode.button.swap_direction': 'Richtung tauschen',
+	'ui.punycode.button.apply_output': 'Ausgabe als Eingabe übernehmen',
+	'ui.punycode.input_label': 'Eingabe',
+	'ui.punycode.output_label': 'Ausgabe',
+	'ui.punycode.input_placeholder': 'Domain oder E-Mail mit Unicode-Labels oder ASCII mit xn--…',
+	'ui.punycode.output_placeholder': 'ASCII-IDN oder dekodiertes Unicode erscheint hier…',
+	'ui.punycode.characters': 'Zeichen',
+	'ui.punycode.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
+	'ui.punycode.error.invalid_punycode':
+		'Ungültiger Punycode oder Domaineingabe. Labels und xn--Präfixe prüfen.',
+	'ui.punycode.error.processing': 'Konvertierung fehlgeschlagen: {detail}',
 	// ── URL Kodieren / Dekodieren — UI-Texte ─────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Aktion',

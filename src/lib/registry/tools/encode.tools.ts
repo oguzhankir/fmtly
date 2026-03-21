@@ -292,6 +292,54 @@ export const encodeTools: ToolDefinition[] = [
 			'Hello from fmtly! Use ROT13 or Caesar shift (1–25) on A–Z and a–z; emoji like 👋 stay as-is.'
 	},
 	{
+		id: 'encode-punycode-encode-decode',
+		category: 'encode',
+		slug: 'punycode',
+		displayName: 'tool.encode-punycode-encode-decode.display_name',
+		tagline: 'tool.encode-punycode-encode-decode.tagline',
+		description: 'tool.encode-punycode-encode-decode.description',
+		primaryKeyword: 'tool.encode-punycode-encode-decode.primary_keyword',
+		metaTitle: 'tool.encode-punycode-encode-decode.meta_title',
+		metaDescription: 'tool.encode-punycode-encode-decode.meta_description',
+		engine: 'encode',
+		operation: 'tool.encode-punycode-encode-decode.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'encode', slug: 'url' },
+			{ category: 'encode', slug: 'unicode' },
+			{ category: 'encode', slug: 'hex' },
+			{ category: 'encode', slug: 'base64' }
+		],
+		faqs: [
+			{
+				question: 'tool.encode-punycode-encode-decode.faq.0.question',
+				answer: 'tool.encode-punycode-encode-decode.faq.0.answer'
+			},
+			{
+				question: 'tool.encode-punycode-encode-decode.faq.1.question',
+				answer: 'tool.encode-punycode-encode-decode.faq.1.answer'
+			},
+			{
+				question: 'tool.encode-punycode-encode-decode.faq.2.question',
+				answer: 'tool.encode-punycode-encode-decode.faq.2.answer'
+			},
+			{
+				question: 'tool.encode-punycode-encode-decode.faq.3.question',
+				answer: 'tool.encode-punycode-encode-decode.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.encode-punycode-encode-decode.use_case.0',
+			'tool.encode-punycode-encode-decode.use_case.1',
+			'tool.encode-punycode-encode-decode.use_case.2',
+			'tool.encode-punycode-encode-decode.use_case.3'
+		],
+		sampleInput: 'münchen.de\nuser@münchen.de\nxn--mnchen-3ya.de'
+	},
+	{
 		id: 'encode-jwt-decoder',
 		category: 'encode',
 		slug: 'jwt',

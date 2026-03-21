@@ -110,3 +110,17 @@ export {
 	type Rot13CaesarWorkerRequest,
 	type Rot13CaesarWorkerResponse
 } from './rot13-caesar.js';
+
+export {
+	processPunycodeIdn,
+	shouldUsePunycodeIdnWorker,
+	PUNYCODE_IDN_WORKER_THRESHOLD_BYTES,
+	type PunycodeIdnAction,
+	type PunycodeIdnLib,
+	type PunycodeIdnErrorCode,
+	type PunycodeIdnError,
+	type PunycodeIdnMetrics,
+	type PunycodeIdnResult,
+	type PunycodeIdnWorkerRequest,
+	type PunycodeIdnWorkerResponse
+} from './punycode-idn.js';
