@@ -8,10 +8,12 @@
 
 	let {
 		node,
+		wrapContent = true,
 		searchMatchIds = new Set<string>(),
 		currentMatchId = ''
 	}: {
 		node: TreeNode;
+		wrapContent?: boolean;
 		searchMatchIds?: Set<string>;
 		currentMatchId?: string;
 	} = $props();
@@ -158,7 +160,6 @@
 	function formatValue(value: unknown): string {
 		if (value === null) return 'null';
 		if (typeof value === 'string') {
-			if (value.length > 500) return `"${value.slice(0, 500)}…"`;
 			return `"${value}"`;
 		}
 		if (typeof value === 'boolean' || typeof value === 'number') return String(value);
@@ -167,7 +168,6 @@
 
 	function fullValueTooltip(value: unknown): string {
 		if (typeof value === 'string' && value.length > 500) {
-			if (value.length > 2000) return `"${value.slice(0, 2000)}… (truncated)"`;
 			return `"${value}"`;
 		}
 		return '';
@@ -196,6 +196,7 @@
 		class="tree-row group"
 		class:tree-row--match={isMatch}
 		class:tree-row--current={isCurrentMatch}
+		data-node-id={node.id}
 		style="padding-left: {node.depth * 16}px"
 		onclick={copyPath}
 		onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyPath(); } }}
@@ -224,23 +225,25 @@
 		{/if}
 
 		<!-- Key -->
-		{#if node.key !== '(root)'}
-			<span class="tree-key">{node.key}</span>
-			<span class="tree-colon">:</span>
-		{/if}
+		<div class="tree-row__content">
+			{#if node.key !== '(root)'}
+				<span class="tree-key" class:tree-key--wrap={wrapContent}>{node.key}</span>
+				<span class="tree-colon">:</span>
+			{/if}
 
-		<!-- Value or badge -->
-		{#if hasChildren}
-			<span class="tree-badge">{badge()}</span>
-		{:else}
-			<span
-				class="tree-value"
-				style="color: {typeColor(node.type)}; white-space: pre-wrap; word-break: break-all;"
-				title={fullValueTooltip(node.value)}
-			>
-				{formatValue(node.value)}
-			</span>
-		{/if}
+			{#if hasChildren}
+				<span class="tree-badge" class:tree-badge--wrap={wrapContent}>{badge()}</span>
+			{:else}
+				<span
+					class="tree-value"
+					class:tree-value--wrap={wrapContent}
+					style={`color: ${typeColor(node.type)};`}
+					title={fullValueTooltip(node.value)}
+				>
+					{formatValue(node.value)}
+				</span>
+			{/if}
+		</div>
 
 		<div class="tree-actions">
 			<button
@@ -310,19 +313,21 @@
 	.tree-node {
 		font-family: var(--font-mono);
 		font-size: var(--text-xs);
-		line-height: 1;
+		line-height: 1.45;
 	}
 
 	.tree-row {
 		display: flex;
-		align-items: center;
-		height: 26px;
+		align-items: flex-start;
+		min-height: 26px;
+		padding-top: 3px;
+		padding-bottom: 3px;
 		padding-right: 8px;
 		cursor: pointer;
 		user-select: none;
 		border-radius: 2px;
 		transition: background-color 100ms;
-		gap: 2px;
+		gap: 4px;
 	}
 
 	.tree-row:hover {
@@ -367,14 +372,32 @@
 		flex-shrink: 0;
 	}
 
+	.tree-row__content {
+		display: flex;
+		align-items: flex-start;
+		flex: 1;
+		min-width: 0;
+		gap: 2px;
+		padding-top: 1px;
+	}
+
 	.tree-key {
 		color: var(--syntax-key);
 		white-space: nowrap;
+		min-width: 0;
+		flex-shrink: 1;
+	}
+
+	.tree-key--wrap {
+		white-space: normal;
+		overflow-wrap: anywhere;
+		word-break: break-word;
 	}
 
 	.tree-colon {
 		color: var(--text-tertiary);
 		margin-right: 4px;
+		flex-shrink: 0;
 	}
 
 	.tree-value {
@@ -382,6 +405,17 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		max-width: 400px;
+		min-width: 0;
+		flex: 1;
+	}
+
+	.tree-value--wrap {
+		white-space: pre-wrap;
+		overflow: visible;
+		text-overflow: clip;
+		max-width: none;
+		overflow-wrap: anywhere;
+		word-break: break-word;
 	}
 
 	.tree-badge {
@@ -390,11 +424,18 @@
 		white-space: nowrap;
 	}
 
+	.tree-badge--wrap {
+		white-space: normal;
+		overflow-wrap: anywhere;
+	}
+
 	.tree-actions {
 		margin-left: auto;
 		display: flex;
 		align-items: center;
 		gap: 2px;
+		flex-shrink: 0;
+		align-self: flex-start;
 		opacity: 0;
 		transition: opacity 100ms;
 	}

@@ -83,6 +83,13 @@
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
 	let supportsCompare = $derived(toolSlug === 'formatter' || toolSlug === 'minifier');
 	let lines = $derived(highlightedHtml ? highlightedHtml.split('\n') : []);
+
+	$effect(() => {
+		if (isFormatter && !wrapLines) {
+			wrapLines = true;
+		}
+	});
+
 	let outputMeta = $derived.by(() => {
 		if (!$output) return '';
 		const lineCount = $output.length === 0 ? 0 : $output.split('\n').length;
@@ -803,6 +810,7 @@
 
 	.json-output-code--wrap .json-output-line__code {
 		white-space: pre-wrap;
+		overflow-wrap: anywhere;
 		word-break: break-word;
 	}
 

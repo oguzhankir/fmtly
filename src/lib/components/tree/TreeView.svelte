@@ -176,10 +176,16 @@
 
 	$effect(() => {
 		if (!currentMatchId) return;
-		const nextIndex = flattenedNodes.findIndex((node) => node.id === currentMatchId);
-		if (nextIndex >= 0) {
-			$rowVirtualizer.scrollToIndex(nextIndex, { align: 'center' });
+		if (isLargeFile) {
+			const nextIndex = flattenedNodes.findIndex((node) => node.id === currentMatchId);
+			if (nextIndex >= 0) {
+				$rowVirtualizer.scrollToIndex(nextIndex, { align: 'center' });
+			}
+			return;
 		}
+
+		const currentElement = scrollElement?.querySelector<HTMLElement>(`[data-node-id="${currentMatchId}"]`);
+		currentElement?.scrollIntoView({ block: 'center' });
 	});
 </script>
 
@@ -243,7 +249,7 @@
 
 	<!-- Tree content -->
 	<div class="tree-content" bind:this={scrollElement}>
-		{#if flattenedNodes.length > 0}
+		{#if isLargeFile && flattenedNodes.length > 0}
 			<div
 				class="tree-content__inner"
 				style={`height: ${$rowVirtualizer.getTotalSize()}px; position: relative; width: 100%;`}
@@ -257,18 +263,21 @@
 							node={flattenedNodes[virtualRow.index]}
 							{searchMatchIds}
 							{currentMatchId}
+							wrapContent={false}
 						/>
 					</div>
+				{/each}
+			</div>
+		{:else if flattenedNodes.length > 0}
+			<div class="tree-content__list">
+				{#each flattenedNodes as node (node.id)}
+					<TreeNodeComponent {node} {searchMatchIds} {currentMatchId} wrapContent={true} />
 				{/each}
 			</div>
 		{:else if filterActive}
 			<div class="tree-content__empty">{$t('ui.tree.empty', 'No matches found.')}</div>
 		{:else if nodes.length === 0}
 			<div class="tree-content__empty"></div>
-		{:else}
-			{#each visibleNodes as node (node.id)}
-				<TreeNodeComponent {node} {searchMatchIds} {currentMatchId} />
-			{/each}
 		{/if}
 	</div>
 </div>
@@ -386,6 +395,10 @@
 	}
 
 	.tree-content__inner {
+		min-width: 100%;
+	}
+
+	.tree-content__list {
 		min-width: 100%;
 	}
 
