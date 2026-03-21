@@ -2518,6 +2518,101 @@ const registryFr: Record<string, string> = {
 	'ui.encode_url.button.apply_output': 'Appliquer la sortie à l’entrée',
 	'ui.encode_url.toast.applied': 'La sortie a été appliquée à l’entrée',
 	'ui.encode_url.characters': 'caractères',
+	'category.qr.display_name': 'QR',
+	'category.qr.description':
+		'Générez des QR codes dans votre navigateur avec export SVG/PNG, logo centré, contrôles de couleurs et niveaux de correction pensés pour un scan fiable.',
+	'category.qr.primary_keyword': 'outils qr',
+	'tool.qr-code-generator.display_name': 'Générateur de QR Code',
+	'tool.qr-code-generator.tagline':
+		'Générez des QR codes de marque avec aperçu en direct, export SVG/PNG, couleurs, marge et logo centré',
+	'tool.qr-code-generator.description':
+		'Créez des QR codes faciles à scanner directement dans votre navigateur. Ajustez la taille, la zone de silence, les couleurs, le fond transparent, le niveau de correction et le logo centré, puis exportez des SVG ou PNG prêts pour la production sans envoyer de données à un serveur.',
+	'tool.qr-code-generator.primary_keyword': 'generateur qr code',
+	'tool.qr-code-generator.meta_title':
+		'Générateur de QR Code — SVG, PNG, Couleurs et Logo | fmtly.dev',
+	'tool.qr-code-generator.meta_description':
+		'Générez des QR codes en ligne avec aperçu en direct, export SVG/PNG, couleurs personnalisées, zone de silence, fond transparent et logo. Privé et 100% navigateur.',
+	'tool.qr-code-generator.operation': 'Générer un QR Code',
+	'tool.qr-code-generator.faq.0.question': 'Mon contenu QR est-il envoyé à un serveur ?',
+	'tool.qr-code-generator.faq.0.answer':
+		'Non. La génération du QR se fait entièrement dans votre navigateur. Le texte, l’URL, le payload Wi-Fi ou tout autre contenu reste sur votre appareil.',
+	'tool.qr-code-generator.faq.1.question': 'Quels formats d’export sont pris en charge ?',
+	'tool.qr-code-generator.faq.1.answer':
+		'L’outil exporte à la fois en SVG et en PNG. Le SVG est idéal pour l’impression, les design systems et la mise à l’échelle sans perte, tandis que le PNG est pratique pour le partage rapide et les visuels sociaux.',
+	'tool.qr-code-generator.faq.2.question': 'À quoi sert la correction d’erreur ?',
+	'tool.qr-code-generator.faq.2.answer':
+		'Un niveau de correction plus élevé rend le QR code plus résistant aux dégâts, à la compression et aux logos centraux, mais réduit la quantité de contenu qu’un seul code peut contenir.',
+	'tool.qr-code-generator.faq.3.question': 'Pourquoi un texte très long peut-il échouer ?',
+	'tool.qr-code-generator.faq.3.answer':
+		'Un QR code a une capacité de données limitée. Si votre contenu est trop volumineux pour le niveau de correction choisi, réduisez le payload ou utilisez une URL de redirection plus courte.',
+	'tool.qr-code-generator.use_case.0':
+		'Générer des QR codes pour des landing pages, installations d’apps ou URLs de campagne',
+	'tool.qr-code-generator.use_case.1':
+		'Créer des QR codes de marque avec logo centré pour affiches, packaging et supports imprimés',
+	'tool.qr-code-generator.use_case.2':
+		'Exporter des ressources SVG nettes pour Figma, design systems ou documentation technique',
+	'tool.qr-code-generator.use_case.3':
+		'Tester l’impact de la marge, des couleurs et de la correction sur la fiabilité du scan avant publication',
+	'ui.qr.tab_label': 'QR',
+	'ui.qr.characters': 'caractères',
+	'ui.qr.output_empty': 'Générez un QR code pour le prévisualiser et l’exporter.',
+	'ui.qr.preview_alt': 'Aperçu du QR code généré',
+	'ui.qr.worker_active':
+		'Entrée volumineuse détectée (>{size}). La génération du QR s’exécute dans un Web Worker.',
+	'ui.qr.worker_failed': 'Échec du Worker. Retour à la génération sur le thread principal.',
+	'ui.qr.worker_badge': 'Worker',
+	'ui.qr.content_label': 'Contenu QR',
+	'ui.qr.encoding_hint': 'Texte, URLs, payloads Wi-Fi, vCards ou deep links applicatifs',
+	'ui.qr.input_placeholder':
+		'Collez ici une URL, du texte brut, un payload Wi-Fi ou tout contenu compatible QR...',
+	'ui.qr.preview_label': 'Aperçu en direct',
+	'ui.qr.copy_svg': 'Copier le SVG',
+	'ui.qr.download_svg': 'Télécharger le SVG',
+	'ui.qr.download_png': 'Télécharger le PNG',
+	'ui.qr.empty_state':
+		'Saisissez un contenu pour générer un aperçu QR avec sortie SVG et PNG prête à exporter.',
+	'ui.qr.metric.version': 'Version',
+	'ui.qr.metric.modules': 'Modules',
+	'ui.qr.metric.mask': 'Masque',
+	'ui.qr.metric.segments': 'Segments',
+	'ui.qr.scan_readiness_label': 'Préparation au scan',
+	'ui.qr.scan_readiness.excellent': 'Excellente fiabilité de scan',
+	'ui.qr.scan_readiness.excellent_hint':
+		'Ces réglages sont bien équilibrés pour des scans fiables à l’écran comme à l’impression.',
+	'ui.qr.scan_readiness.balanced': 'Configuration équilibrée',
+	'ui.qr.scan_readiness.balanced_hint':
+		'Ce QR devrait bien se scanner, mais une correction plus forte ou une plus grande zone de silence peuvent améliorer la robustesse.',
+	'ui.qr.scan_readiness.risky': 'Risque pour le scan',
+	'ui.qr.scan_readiness.risky_hint':
+		'Les réglages actuels peuvent réduire la fiabilité du scan. Augmentez la zone de silence ou la correction, surtout avec un logo.',
+	'ui.qr.section.reliability': 'Fiabilité',
+	'ui.qr.section.appearance': 'Apparence',
+	'ui.qr.section.logo': 'Logo centré (optionnel)',
+	'ui.qr.error_correction_hint':
+		'Une correction plus forte résiste mieux aux dégâts, rayures et logos, mais réduit légèrement la capacité totale.',
+	'ui.qr.size_label': 'Taille',
+	'ui.qr.margin_label': 'Zone de silence',
+	'ui.qr.dark_color_label': 'Premier plan',
+	'ui.qr.light_color_label': 'Arrière-plan',
+	'ui.qr.transparent': 'Transparent',
+	'ui.qr.transparent_background_label': 'Arrière-plan transparent',
+	'ui.qr.logo_hint':
+		'Ajoute un petit logo au centre du QR code pour des affiches, menus, packagings ou supports imprimés de marque. Laissez vide pour le scan le plus fiable.',
+	'ui.qr.upload_logo': 'Téléverser un logo',
+	'ui.qr.logo_preview_alt': 'Aperçu du logo téléversé',
+	'ui.qr.logo_scale_label': 'Taille du logo',
+	'ui.qr.remove_logo': 'Retirer le logo',
+	'ui.qr.logo_empty':
+		'Aucun logo sélectionné. Cette option est facultative et utile seulement si vous voulez afficher votre marque au centre du QR code. Laissez vide pour des scans plus simples et plus fiables.',
+	'ui.qr.error.invalid_logo': 'Veuillez téléverser une image valide pour le logo.',
+	'ui.qr.error.input_too_long':
+		'Ce texte est trop volumineux pour tenir dans un seul QR code. Raccourcissez le contenu ou supprimez une partie des données.',
+	'ui.qr.error.generation_failed': 'La génération du QR a échoué : {detail}',
+	'ui.qr.error.png_export_failed': 'L’export PNG a échoué pour ce QR code.',
+	'ui.qr.warning.logo_overlay_low_error_correction':
+		'Un logo centré avec une correction L ou M peut réduire la fiabilité du scan. Préférez Q ou H.',
+	'ui.qr.toast.logo_added': 'Logo ajouté au QR',
+	'ui.qr.toast.logo_removed': 'Logo retiré du QR',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',

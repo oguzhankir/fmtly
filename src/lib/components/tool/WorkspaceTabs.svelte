@@ -68,6 +68,8 @@
 				return $t('ui.encode_url.tab_label', 'URL');
 			case 'base64':
 				return $t('ui.base64.tab_label', 'Base64');
+			case 'generator':
+				return $t('ui.qr.tab_label', 'QR');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

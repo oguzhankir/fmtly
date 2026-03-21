@@ -292,7 +292,7 @@ Generate and read QR codes and barcodes.
 
 | 173 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 174 | QR Code Generator | `qr/generator` | Generate QR codes with customizable size, error correction, foreground/background colors, and logo overlay. |
+| 174 | QR Code Generator ✅ | `qr/generator` | done — Generate QR codes with customizable size, error correction, foreground/background colors, and logo overlay. |
 | 175 | QR Code Reader | `qr/reader` | Read QR codes from uploaded images or camera capture. |
 | 176 | Barcode Generator | `qr/barcode` | Generate Code 128, EAN-13, UPC-A, and other 1D barcodes. |
 

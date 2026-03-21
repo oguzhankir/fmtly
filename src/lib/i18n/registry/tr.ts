@@ -2463,6 +2463,101 @@ const registryTr: Record<string, string> = {
 	'ui.encode_url.button.apply_output': 'Çıktıyı girdiye uygula',
 	'ui.encode_url.toast.applied': 'Çıktı girdiye uygulandı',
 	'ui.encode_url.characters': 'karakter',
+	'category.qr.display_name': 'QR',
+	'category.qr.description':
+		'Tarayıcınızda SVG ve PNG çıktısı, logo katmanı, renk kontrolleri ve tarama dostu hata düzeltme seviyeleriyle QR kodları üretin.',
+	'category.qr.primary_keyword': 'qr kod araçları',
+	'tool.qr-code-generator.display_name': 'QR Kod Oluşturucu',
+	'tool.qr-code-generator.tagline':
+		'Canlı önizleme, SVG/PNG dışa aktarma, renk, boşluk ve logo katmanı ile markalı QR kodlar üretin',
+	'tool.qr-code-generator.description':
+		'Tarayıcınızda anında taranabilir QR kodlar oluşturun. Boyutu, sessiz alanı, renkleri, şeffaf arka planı, hata düzeltme seviyesini ve ortalanmış logo katmanını özelleştirin; ardından veriyi sunucuya göndermeden üretime hazır SVG veya PNG dışa aktarın.',
+	'tool.qr-code-generator.primary_keyword': 'qr kod oluşturucu',
+	'tool.qr-code-generator.meta_title':
+		'QR Kod Oluşturucu — SVG, PNG, Renk ve Logo Katmanı | fmtly.dev',
+	'tool.qr-code-generator.meta_description':
+		'Canlı önizleme, SVG ve PNG dışa aktarma, özel renkler, sessiz alan ayarı, şeffaf arka plan ve logo katmanı ile online QR kod üretin. Tarayıcı içinde ve gizli.',
+	'tool.qr-code-generator.operation': 'QR Kod Oluştur',
+	'tool.qr-code-generator.faq.0.question': 'QR içeriğim bir sunucuya yükleniyor mu?',
+	'tool.qr-code-generator.faq.0.answer':
+		'Hayır. QR üretimi tamamen tarayıcınızda gerçekleşir. Metin, URL, Wi-Fi payload veya diğer içerikler cihazınızda kalır.',
+	'tool.qr-code-generator.faq.1.question': 'Hangi dışa aktarma formatları destekleniyor?',
+	'tool.qr-code-generator.faq.1.answer':
+		'SVG ve PNG dışa aktarma desteklenir. SVG baskı, tasarım sistemi ve kalite kaybı olmadan ölçekleme için idealdir; PNG ise hızlı paylaşım ve sosyal görseller için pratiktir.',
+	'tool.qr-code-generator.faq.2.question': 'Hata düzeltme neyi etkiler?',
+	'tool.qr-code-generator.faq.2.answer':
+		'Daha yüksek hata düzeltme, QR kodu hasar, sıkıştırma ve merkez logoya karşı daha dayanıklı hale getirir; ancak tek bir koda sığabilecek içerik miktarını azaltır.',
+	'tool.qr-code-generator.faq.3.question': 'Neden çok uzun metinlerde üretim başarısız olabilir?',
+	'tool.qr-code-generator.faq.3.answer':
+		'Bir QR kodun veri kapasitesi sınırlıdır. İçerik seçilen hata düzeltme seviyesi için çok büyükse payloadı kısaltın veya daha kısa bir yönlendirme URL’si kullanın.',
+	'tool.qr-code-generator.use_case.0':
+		'Açılış sayfaları, uygulama kurulumları veya kampanya URL’leri için pazarlama QR kodları üretmek',
+	'tool.qr-code-generator.use_case.1':
+		'Afiş, ambalaj ve baskı materyalleri için ortasında logo bulunan markalı QR kodlar oluşturmak',
+	'tool.qr-code-generator.use_case.2':
+		'Figma, tasarım sistemleri veya geliştirici dokümantasyonu için net SVG QR varlıkları dışa aktarmak',
+	'tool.qr-code-generator.use_case.3':
+		'Yayınlamadan önce boşluk, renk ve hata düzeltmenin tarama güvenilirliğini nasıl etkilediğini test etmek',
+	'ui.qr.tab_label': 'QR',
+	'ui.qr.characters': 'karakter',
+	'ui.qr.output_empty': 'Önizlemek ve dışa aktarmak için bir QR kod oluşturun.',
+	'ui.qr.preview_alt': 'Üretilen QR kod önizlemesi',
+	'ui.qr.worker_active':
+		'Büyük girdi algılandı (>{size}). QR üretimi Web Worker üzerinde çalışıyor.',
+	'ui.qr.worker_failed': 'Worker işlemi başarısız oldu. Ana thread üretimine dönülüyor.',
+	'ui.qr.worker_badge': 'Worker',
+	'ui.qr.content_label': 'QR içeriği',
+	'ui.qr.encoding_hint': 'Metin, URL, Wi-Fi payload, vCard veya uygulama deep linkleri',
+	'ui.qr.input_placeholder':
+		'URL, düz metin, Wi-Fi payload veya QR’a uygun herhangi bir içeriği buraya yapıştırın...',
+	'ui.qr.preview_label': 'Canlı önizleme',
+	'ui.qr.copy_svg': 'SVG Kopyala',
+	'ui.qr.download_svg': 'SVG İndir',
+	'ui.qr.download_png': 'PNG İndir',
+	'ui.qr.empty_state':
+		'SVG ve PNG dışa aktarmaya hazır bir QR kod önizlemesi oluşturmak için içerik girin.',
+	'ui.qr.metric.version': 'Versiyon',
+	'ui.qr.metric.modules': 'Modül',
+	'ui.qr.metric.mask': 'Maske',
+	'ui.qr.metric.segments': 'Segment',
+	'ui.qr.scan_readiness_label': 'Tarama hazırlığı',
+	'ui.qr.scan_readiness.excellent': 'Tarama için çok uygun',
+	'ui.qr.scan_readiness.excellent_hint':
+		'Bu ayarlar hem ekranda hem baskıda güvenilir tarama için iyi dengelenmiştir.',
+	'ui.qr.scan_readiness.balanced': 'Dengeli kurulum',
+	'ui.qr.scan_readiness.balanced_hint':
+		'Bu QR büyük olasılıkla iyi taranır; ancak daha güçlü düzeltme veya daha geniş sessiz alan dayanıklılığı artırabilir.',
+	'ui.qr.scan_readiness.risky': 'Tarama için riskli',
+	'ui.qr.scan_readiness.risky_hint':
+		'Geçerli ayarlar tarama güvenilirliğini azaltabilir. Özellikle logo kullanıyorsanız sessiz alanı veya hata düzeltmeyi artırın.',
+	'ui.qr.section.reliability': 'Güvenilirlik',
+	'ui.qr.section.appearance': 'Görünüm',
+	'ui.qr.section.logo': 'Orta logo (isteğe bağlı)',
+	'ui.qr.error_correction_hint':
+		'Daha yüksek düzeltme, hasar, çizik ve logo katmanına karşı daha dayanıklıdır; ancak toplam kapasiteyi biraz azaltır.',
+	'ui.qr.size_label': 'Boyut',
+	'ui.qr.margin_label': 'Sessiz alan',
+	'ui.qr.dark_color_label': 'Ön plan',
+	'ui.qr.light_color_label': 'Arka plan',
+	'ui.qr.transparent': 'Şeffaf',
+	'ui.qr.transparent_background_label': 'Şeffaf arka plan',
+	'ui.qr.logo_hint':
+		'Afiş, menü, ambalaj veya baskı işleriniz için QR kodun ortasına küçük bir logo ekler. En güvenilir tarama için boş bırakabilirsiniz.',
+	'ui.qr.upload_logo': 'Logo Yükle',
+	'ui.qr.logo_preview_alt': 'Yüklenen logo önizlemesi',
+	'ui.qr.logo_scale_label': 'Logo boyutu',
+	'ui.qr.remove_logo': 'Logoyu Kaldır',
+	'ui.qr.logo_empty':
+		'Logo seçilmedi. Bu alan isteğe bağlıdır; yalnızca QR kodun ortasında marka logonuz görünsün istiyorsanız kullanın. En basit ve güvenilir tarama için boş bırakın.',
+	'ui.qr.error.invalid_logo': 'Logo için lütfen geçerli bir görsel dosyası yükleyin.',
+	'ui.qr.error.input_too_long':
+		'Bu metin tek bir QR koda sığmayacak kadar büyük. İçeriği kısaltın veya bazı verileri çıkarın.',
+	'ui.qr.error.generation_failed': 'QR üretimi başarısız oldu: {detail}',
+	'ui.qr.error.png_export_failed': 'Bu QR kod için PNG dışa aktarma başarısız oldu.',
+	'ui.qr.warning.logo_overlay_low_error_correction':
+		'Merkez logo ile L veya M düzeltme kullanmak tarama güvenilirliğini azaltabilir. Q veya H tercih edin.',
+	'ui.qr.toast.logo_added': 'Logo katmanı eklendi',
+	'ui.qr.toast.logo_removed': 'Logo katmanı kaldırıldı',
 
 	// Missing keys from English
 	'ui.validator.warnings': 'ui.validator.warnings',

@@ -26,7 +26,8 @@
 		xml: '</>',
 		yaml: '~',
 		csv: '\u229E',
-		toml: '\u2261'
+		toml: '\u2261',
+		qr: '\u25A6\u25A3'
 	};
 
 	let searchQuery = $state('');

@@ -2422,6 +2422,102 @@ const registryDe: Record<string, string> = {
 	'ui.encode_url.button.apply_output': 'Ausgabe als Eingabe übernehmen',
 	'ui.encode_url.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
 	'ui.encode_url.characters': 'Zeichen',
+	'category.qr.display_name': 'QR',
+	'category.qr.description':
+		'QR-Codes direkt im Browser erzeugen – mit SVG/PNG-Export, Logo-Overlay, Farbanpassung und scanfreundlichen Fehlerkorrektur-Stufen.',
+	'category.qr.primary_keyword': 'qr code tools',
+	'tool.qr-code-generator.display_name': 'QR-Code-Generator',
+	'tool.qr-code-generator.tagline':
+		'Markenfähige QR-Codes mit Live-Vorschau, SVG/PNG-Export, Farben, Rand und Logo-Overlay erzeugen',
+	'tool.qr-code-generator.description':
+		'Erzeuge scanfreundliche QR-Codes direkt im Browser. Passe Größe, Ruhezone, Farben, transparenten Hintergrund, Fehlerkorrektur und zentrierte Logo-Overlays an und exportiere anschließend produktionsreife SVG- oder PNG-Dateien, ohne Daten an einen Server zu senden.',
+	'tool.qr-code-generator.primary_keyword': 'qr code generator',
+	'tool.qr-code-generator.meta_title':
+		'QR-Code-Generator — SVG, PNG, Farben & Logo-Overlay | fmtly.dev',
+	'tool.qr-code-generator.meta_description':
+		'QR-Codes online mit Live-Vorschau, SVG- und PNG-Export, benutzerdefinierten Farben, Ruhezone, transparentem Hintergrund und Logo-Overlay erzeugen. Browser-only und privat.',
+	'tool.qr-code-generator.operation': 'QR-Code erzeugen',
+	'tool.qr-code-generator.faq.0.question': 'Wird mein QR-Inhalt an einen Server hochgeladen?',
+	'tool.qr-code-generator.faq.0.answer':
+		'Nein. Die QR-Erzeugung findet vollständig im Browser statt. Text, URL, WLAN-Payload oder sonstige Inhalte bleiben auf deinem Gerät.',
+	'tool.qr-code-generator.faq.1.question': 'Welche Exportformate werden unterstützt?',
+	'tool.qr-code-generator.faq.1.answer':
+		'Das Tool exportiert sowohl SVG als auch PNG. SVG eignet sich ideal für Druck, Design-Systeme und verlustfreies Skalieren, während PNG praktisch für schnelles Teilen und Social-Grafiken ist.',
+	'tool.qr-code-generator.faq.2.question': 'Worauf wirkt sich die Fehlerkorrektur aus?',
+	'tool.qr-code-generator.faq.2.answer':
+		'Eine höhere Fehlerkorrektur macht den QR-Code widerstandsfähiger gegen Beschädigungen, Kompression und zentrierte Logos, reduziert aber die Datenmenge, die in einen einzelnen Code passt.',
+	'tool.qr-code-generator.faq.3.question': 'Warum kann sehr langer Text nicht erzeugt werden?',
+	'tool.qr-code-generator.faq.3.answer':
+		'Ein QR-Code hat eine begrenzte Datenkapazität. Ist der Inhalt für die gewählte Fehlerkorrekturstufe zu groß, kürze den Payload oder verwende eine kürzere Redirect-URL.',
+	'tool.qr-code-generator.use_case.0':
+		'QR-Codes für Landingpages, App-Installationen oder Kampagnen-URLs erzeugen',
+	'tool.qr-code-generator.use_case.1':
+		'Gebrandete QR-Codes mit zentriertem Logo für Poster, Verpackungen und Print erzeugen',
+	'tool.qr-code-generator.use_case.2':
+		'Scharfe SVG-QR-Assets für Figma, Design-Systeme oder Entwicklerdokumentation exportieren',
+	'tool.qr-code-generator.use_case.3':
+		'Testen, wie Rand, Farben und Fehlerkorrektur die Scan-Zuverlässigkeit vor der Veröffentlichung beeinflussen',
+	'ui.qr.tab_label': 'QR',
+	'ui.qr.characters': 'Zeichen',
+	'ui.qr.output_empty': 'Erzeuge einen QR-Code, um ihn anzuzeigen und zu exportieren.',
+	'ui.qr.preview_alt': 'Vorschau des erzeugten QR-Codes',
+	'ui.qr.worker_active':
+		'Große Eingabe erkannt (>{size}). Die QR-Erzeugung läuft in einem Web Worker.',
+	'ui.qr.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Fallback auf Erzeugung im Hauptthread.',
+	'ui.qr.worker_badge': 'Worker',
+	'ui.qr.content_label': 'QR-Inhalt',
+	'ui.qr.encoding_hint': 'Text, URLs, WLAN-Payloads, vCards oder App-Deep-Links',
+	'ui.qr.input_placeholder':
+		'URL, Klartext, WLAN-Payload oder beliebige QR-fähige Inhalte hier einfügen...',
+	'ui.qr.preview_label': 'Live-Vorschau',
+	'ui.qr.copy_svg': 'SVG kopieren',
+	'ui.qr.download_svg': 'SVG herunterladen',
+	'ui.qr.download_png': 'PNG herunterladen',
+	'ui.qr.empty_state':
+		'Gib Inhalte ein, um eine QR-Vorschau mit exportfähiger SVG- und PNG-Ausgabe zu erzeugen.',
+	'ui.qr.metric.version': 'Version',
+	'ui.qr.metric.modules': 'Module',
+	'ui.qr.metric.mask': 'Maske',
+	'ui.qr.metric.segments': 'Segmente',
+	'ui.qr.scan_readiness_label': 'Scan-Bereitschaft',
+	'ui.qr.scan_readiness.excellent': 'Sehr gute Scan-Bereitschaft',
+	'ui.qr.scan_readiness.excellent_hint':
+		'Diese Einstellungen sind gut für zuverlässige Scans auf dem Bildschirm und im Druck ausbalanciert.',
+	'ui.qr.scan_readiness.balanced': 'Ausgewogene Konfiguration',
+	'ui.qr.scan_readiness.balanced_hint':
+		'Dieser QR-Code sollte gut scanbar sein, aber stärkere Korrektur oder mehr Ruhezone verbessern die Robustheit.',
+	'ui.qr.scan_readiness.risky': 'Riskant beim Scannen',
+	'ui.qr.scan_readiness.risky_hint':
+		'Die aktuellen Einstellungen können die Scan-Zuverlässigkeit verringern. Erhöhe Ruhezone oder Fehlerkorrektur, besonders bei einem Logo.',
+	'ui.qr.section.reliability': 'Zuverlässigkeit',
+	'ui.qr.section.appearance': 'Optik',
+	'ui.qr.section.logo': 'Mittiges Logo (optional)',
+	'ui.qr.error_correction_hint':
+		'Höhere Korrektur übersteht mehr Schäden, Kratzer und Logo-Overlays, reduziert aber die Gesamtkapazität leicht.',
+	'ui.qr.size_label': 'Größe',
+	'ui.qr.margin_label': 'Ruhezone',
+	'ui.qr.dark_color_label': 'Vordergrund',
+	'ui.qr.light_color_label': 'Hintergrund',
+	'ui.qr.transparent': 'Transparent',
+	'ui.qr.transparent_background_label': 'Transparenter Hintergrund',
+	'ui.qr.logo_hint':
+		'Fügt ein kleines Logo in die Mitte des QR-Codes ein – praktisch für Poster, Menüs, Verpackungen oder Print. Für die zuverlässigsten Scans kannst du es leer lassen.',
+	'ui.qr.upload_logo': 'Logo hochladen',
+	'ui.qr.logo_preview_alt': 'Vorschau des hochgeladenen Logos',
+	'ui.qr.logo_scale_label': 'Logo-Größe',
+	'ui.qr.remove_logo': 'Logo entfernen',
+	'ui.qr.logo_empty':
+		'Kein Logo ausgewählt. Diese Option ist nur nötig, wenn dein Markenlogo in der Mitte des QR-Codes erscheinen soll. Für die einfachsten und zuverlässigsten Scans kannst du das Feld leer lassen.',
+	'ui.qr.error.invalid_logo': 'Bitte lade eine gültige Bilddatei für das Logo hoch.',
+	'ui.qr.error.input_too_long':
+		'Dieser Text ist zu groß für einen einzelnen QR-Code. Kürze den Inhalt oder entferne einige Daten.',
+	'ui.qr.error.generation_failed': 'QR-Erzeugung fehlgeschlagen: {detail}',
+	'ui.qr.error.png_export_failed': 'PNG-Export für diesen QR-Code fehlgeschlagen.',
+	'ui.qr.warning.logo_overlay_low_error_correction':
+		'Ein zentriertes Logo mit L- oder M-Korrektur kann die Scan-Zuverlässigkeit verschlechtern. Bevorzuge Q oder H.',
+	'ui.qr.toast.logo_added': 'Logo-Overlay hinzugefügt',
+	'ui.qr.toast.logo_removed': 'Logo-Overlay entfernt',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',

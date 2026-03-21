@@ -37,6 +37,7 @@
 	import EncodeBase64Panel from "$components/panels/encode/EncodeBase64Panel.svelte";
 	import EncodeUrlPanel from "$components/panels/encode/EncodeUrlPanel.svelte";
 	import EncodeJwtDecoderPanel from "$components/panels/encode/EncodeJwtDecoderPanel.svelte";
+	import QrCodeGeneratorPanel from "$components/panels/qr/QrCodeGeneratorPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -130,6 +131,11 @@
 	let encodeWorkspaceTools = $derived(
 		data.tool.category === "encode"
 			? localizeToolDefinitions(getToolsByCategory("encode"), $t)
+			: []
+	);
+	let qrWorkspaceTools = $derived(
+		data.tool.category === "qr"
+			? localizeToolDefinitions(getToolsByCategory("qr"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -571,6 +577,8 @@
 				<WorkspaceTabs tools={yamlWorkspaceTools} activeSlug={data.tool.slug} category="yaml" locale={currentLocale} />
 			{:else if data.tool.category === 'toml' && tomlWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={tomlWorkspaceTools} activeSlug={data.tool.slug} category="toml" locale={currentLocale} />
+			{:else if data.tool.category === 'qr' && qrWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={qrWorkspaceTools} activeSlug={data.tool.slug} category="qr" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -640,6 +648,8 @@
 				<WorkspaceTabs tools={csvWorkspaceTools} activeSlug={data.tool.slug} category="csv" locale={currentLocale} />
 			{:else if data.tool.category === 'toml' && tomlWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={tomlWorkspaceTools} activeSlug={data.tool.slug} category="toml" locale={currentLocale} />
+			{:else if data.tool.category === 'qr' && qrWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={qrWorkspaceTools} activeSlug={data.tool.slug} category="qr" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -727,6 +737,8 @@
 				<EncodeUrlPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else if data.tool.category === "encode" && data.tool.slug === "jwt"}
 				<EncodeJwtDecoderPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
+			{:else if data.tool.category === "qr" && data.tool.slug === "generator"}
+				<QrCodeGeneratorPanel toolSlug={data.tool.slug} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}
