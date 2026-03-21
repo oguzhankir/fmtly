@@ -2839,8 +2839,39 @@ const registryEn: Record<string, string> = {
 	'tool.qr-code-reader.use_case.2': 'Decode a QR from a screenshot without installing a mobile app',
 	'tool.qr-code-reader.use_case.3':
 		'Recover plain text or vCard payloads from conference badge photos',
+	'tool.barcode-generator.display_name': 'Barcode Generator',
+	'tool.barcode-generator.tagline':
+		'Create Code 128, EAN-13, UPC-A, ITF-14, and more as crisp SVG or PNG — tuned for print and scanners',
+	'tool.barcode-generator.description':
+		'Generate professional 1D barcodes in your browser with live preview. Pick a symbology, tune bar width, height, quiet zone, and colors, then export SVG or PNG. Large payloads can render in a Web Worker so the UI stays responsive — nothing leaves your device.',
+	'tool.barcode-generator.primary_keyword': 'barcode generator online',
+	'tool.barcode-generator.meta_title': 'Barcode Generator — Code 128, EAN-13, UPC | fmtly',
+	'tool.barcode-generator.meta_description':
+		'Free browser barcode maker for Code 128, EAN-13, UPC-A, ITF-14, Codabar, MSI, Pharmacode, and more. Custom colors, quiet zone, vector SVG and PNG export. Private Web Worker mode for huge payloads.',
+	'tool.barcode-generator.operation': 'Generate Barcode',
+	'tool.barcode-generator.faq.0.question': 'Is my barcode data sent to a server?',
+	'tool.barcode-generator.faq.0.answer':
+		'No. Rendering uses JavaScript in your browser. Large inputs can be processed in a Web Worker on your device.',
+	'tool.barcode-generator.faq.1.question': 'Which symbology should I use for retail products?',
+	'tool.barcode-generator.faq.1.answer':
+		'Use EAN-13 or UPC-A for POS scanning in most retail environments. Use ITF-14 for carton logistics. Code 128 is a strong general-purpose choice when you need flexible alphanumeric data.',
+	'tool.barcode-generator.faq.2.question': 'Why would SVG export matter?',
+	'tool.barcode-generator.faq.2.answer':
+		'SVG stays sharp at any print size and is ideal for packaging, InDesign, and web assets. PNG is convenient for quick previews and raster workflows.',
+	'tool.barcode-generator.faq.3.question': 'When does the tool use a Web Worker?',
+	'tool.barcode-generator.faq.3.answer':
+		'When the encoded payload exceeds about 500 KB of UTF-8 text, generation moves to a Web Worker so the page stays interactive.',
+	'tool.barcode-generator.use_case.0':
+		'Produce ITF-14 and Code 128 symbols for warehouse labels and shipping cartons',
+	'tool.barcode-generator.use_case.1':
+		'Generate EAN-13 or UPC-A artwork for packaging mockups before sending to print',
+	'tool.barcode-generator.use_case.2':
+		'Export vector SVG barcodes for brand guidelines, slides, or documentation',
+	'tool.barcode-generator.use_case.3':
+		'Create Codabar or MSI symbols for legacy systems and internal tooling',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Read',
+	'ui.qr.tab_barcode': 'Barcode',
 	'ui.qr.characters': 'chars',
 	'ui.qr.output_empty': 'Generate a QR code to preview and export it.',
 	'ui.qr.preview_alt': 'Generated QR code preview',
@@ -2919,7 +2950,58 @@ const registryEn: Record<string, string> = {
 	'ui.qr.reader.worker_active':
 		'Large image ({size}). Decoding runs in a Web Worker to keep the UI responsive.',
 	'ui.qr.reader.worker_badge': 'Worker',
-	'ui.qr.reader.worker_failed': 'Worker decoding failed. Retrying on the main thread.'
+	'ui.qr.reader.worker_failed': 'Worker decoding failed. Retrying on the main thread.',
+	'ui.barcode.characters': 'chars',
+	'ui.barcode.content_label': 'Barcode data',
+	'ui.barcode.input_placeholder': 'Type or paste the payload for the selected symbology…',
+	'ui.barcode.format_label': 'Symbology',
+	'ui.barcode.format_hint': 'Retail GTINs use EAN/UPC; logistics often uses Code 128 or ITF-14.',
+	'ui.barcode.preview_label': 'Preview',
+	'ui.barcode.preview_alt': 'Barcode preview',
+	'ui.barcode.output_empty': 'Generate a barcode to preview and export it.',
+	'ui.barcode.raster_only': 'PNG only (worker)',
+	'ui.barcode.empty_preview': 'Adjust data and options to render a vector or raster preview.',
+	'ui.barcode.copy_svg': 'Copy SVG',
+	'ui.barcode.copy_png': 'Copy PNG data URL',
+	'ui.barcode.copy_svg_unavailable': 'SVG is not available for this preview.',
+	'ui.barcode.download_svg': 'SVG',
+	'ui.barcode.download_png': 'PNG',
+	'ui.barcode.section.appearance': 'Appearance',
+	'ui.barcode.display_value': 'Show human-readable text',
+	'ui.barcode.bar_width': 'Bar width',
+	'ui.barcode.bar_height': 'Bar height',
+	'ui.barcode.font_size': 'Label size',
+	'ui.barcode.quiet_zone': 'Quiet zone',
+	'ui.barcode.line_color': 'Bars',
+	'ui.barcode.background': 'Background',
+	'ui.barcode.worker_active': 'Large payload ({size}). Barcode generation runs in a Web Worker.',
+	'ui.barcode.worker_badge': 'Worker',
+	'ui.barcode.worker_failed': 'Worker failed. Retrying on the main thread.',
+	'ui.barcode.error.empty': 'Enter a value to encode.',
+	'ui.barcode.error.invalid_value': 'This value does not match the selected format.',
+	'ui.barcode.error.generation_failed': 'Could not generate barcode: {detail}',
+	'ui.barcode.error.ean13': 'EAN-13 requires 12 or 13 digits.',
+	'ui.barcode.error.ean8': 'EAN-8 requires 7 or 8 digits.',
+	'ui.barcode.error.upc': 'UPC-A requires 11 or 12 digits.',
+	'ui.barcode.error.itf14': 'ITF-14 requires 13 or 14 digits.',
+	'ui.barcode.error.itf': 'ITF requires an even number of digits (at least two).',
+	'ui.barcode.error.msi': 'MSI encodes digits only.',
+	'ui.barcode.error.pharmacode': 'Pharmacode must be an integer from 1 to 131070.',
+	'ui.barcode.format.CODE128': 'Code 128',
+	'ui.barcode.format.CODE39': 'Code 39',
+	'ui.barcode.format.CODE93': 'Code 93',
+	'ui.barcode.format.codabar': 'Codabar',
+	'ui.barcode.format.EAN13': 'EAN-13',
+	'ui.barcode.format.EAN8': 'EAN-8',
+	'ui.barcode.format.UPC': 'UPC-A',
+	'ui.barcode.format.ITF14': 'ITF-14',
+	'ui.barcode.format.ITF': 'ITF (interleaved)',
+	'ui.barcode.format.MSI': 'MSI',
+	'ui.barcode.format.MSI10': 'MSI (mod 10)',
+	'ui.barcode.format.MSI11': 'MSI (mod 11)',
+	'ui.barcode.format.MSI1010': 'MSI (mod 1010)',
+	'ui.barcode.format.MSI1110': 'MSI (mod 1110)',
+	'ui.barcode.format.pharmacode': 'Pharmacode'
 };
 
 export default registryEn;

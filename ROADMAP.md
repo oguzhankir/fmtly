@@ -294,7 +294,7 @@ Generate and read QR codes and barcodes.
 |---|------|------|-------------|
 | 174 | QR Code Generator ✅ | `qr/generator` | done — Generate QR codes with customizable size, error correction, foreground/background colors, and logo overlay. |
 | 175 | QR Code Reader ✅ | `qr/reader` | done — Read QR codes from uploaded images, camera capture, or clipboard paste; Web Worker offload for large rasters. |
-| 176 | Barcode Generator | `qr/barcode` | Generate Code 128, EAN-13, UPC-A, and other 1D barcodes. |
+| 176 | Barcode Generator ✅ | `qr/barcode` | done — Code 128, EAN-13, UPC-A, ITF-14, Codabar, MSI, Pharmacode; SVG/PNG export; Web Worker for payloads >500KB UTF-8. |
 
 ---
 

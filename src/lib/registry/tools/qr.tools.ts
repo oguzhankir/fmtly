@@ -96,5 +96,53 @@ export const qrTools: ToolDefinition[] = [
 			'tool.qr-code-reader.use_case.3'
 		],
 		sampleInput: ''
+	},
+	{
+		id: 'barcode-generator',
+		category: 'qr',
+		slug: 'barcode',
+		displayName: 'tool.barcode-generator.display_name',
+		tagline: 'tool.barcode-generator.tagline',
+		description: 'tool.barcode-generator.description',
+		primaryKeyword: 'tool.barcode-generator.primary_keyword',
+		metaTitle: 'tool.barcode-generator.meta_title',
+		metaDescription: 'tool.barcode-generator.meta_description',
+		engine: 'qr',
+		operation: 'tool.barcode-generator.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'svg',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'qr', slug: 'generator' },
+			{ category: 'qr', slug: 'reader' },
+			{ category: 'encode', slug: 'base64' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.barcode-generator.faq.0.question',
+				answer: 'tool.barcode-generator.faq.0.answer'
+			},
+			{
+				question: 'tool.barcode-generator.faq.1.question',
+				answer: 'tool.barcode-generator.faq.1.answer'
+			},
+			{
+				question: 'tool.barcode-generator.faq.2.question',
+				answer: 'tool.barcode-generator.faq.2.answer'
+			},
+			{
+				question: 'tool.barcode-generator.faq.3.question',
+				answer: 'tool.barcode-generator.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.barcode-generator.use_case.0',
+			'tool.barcode-generator.use_case.1',
+			'tool.barcode-generator.use_case.2',
+			'tool.barcode-generator.use_case.3'
+		],
+		sampleInput: 'FMTLY-CODE128-DEMO'
 	}
 ];

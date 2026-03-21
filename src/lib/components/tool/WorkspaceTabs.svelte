@@ -84,6 +84,8 @@
 				return $t('ui.qr.tab_label', 'QR');
 			case 'reader':
 				return $t('ui.qr.tab_reader', 'Read');
+			case 'barcode':
+				return $t('ui.qr.tab_barcode', 'Barcode');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

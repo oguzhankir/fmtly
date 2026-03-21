@@ -29,3 +29,23 @@ export {
 	type QRReadWorkerResponse,
 	type QrReadImageBuffer
 } from './qr-read.js';
+export {
+	BARCODE_WORKER_THRESHOLD_BYTES,
+	DEFAULT_BARCODE_GENERATOR_OPTIONS,
+	createEmptyBarcodeResult,
+	generateBarcodeInWorkerCanvas,
+	generateBarcodeMainThread,
+	getBarcodeInputByteSize,
+	normalizeBarcodeOptions,
+	shouldUseBarcodeWorker,
+	validateBarcodeValue,
+	type BarcodeFormatId,
+	type BarcodeGeneratorError,
+	type BarcodeGeneratorErrorCode,
+	type BarcodeGeneratorMetrics,
+	type BarcodeGeneratorOptions,
+	type BarcodeGeneratorOutput,
+	type BarcodeGeneratorResult,
+	type BarcodeGeneratorWorkerRequest,
+	type BarcodeGeneratorWorkerResponse
+} from './barcode.js';

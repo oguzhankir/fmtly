@@ -2932,8 +2932,40 @@ const registryEs: Record<string, string> = {
 	'tool.qr-code-reader.use_case.2': 'Decodificar un QR desde una captura sin instalar una app',
 	'tool.qr-code-reader.use_case.3':
 		'Recuperar texto plano o vCard desde fotos de credenciales de conferencia',
+	'tool.barcode-generator.display_name': 'Generador de códigos de barras',
+	'tool.barcode-generator.tagline':
+		'Crea Code 128, EAN-13, UPC-A, ITF-14 y más en SVG o PNG nítidos — listo para impresión y escáneres',
+	'tool.barcode-generator.description':
+		'Genera códigos de barras 1D profesionales en el navegador con vista previa en vivo. Elige la simbología, ajusta anchura, altura, zona silenciosa y colores, y exporta SVG o PNG. Las cargas muy grandes pueden renderizarse en un Web Worker para mantener la interfaz fluida; nada sale de tu dispositivo.',
+	'tool.barcode-generator.primary_keyword': 'generador codigo barras online',
+	'tool.barcode-generator.meta_title':
+		'Generador códigos de barras — Code 128, EAN-13, UPC | fmtly',
+	'tool.barcode-generator.meta_description':
+		'Creador de códigos de barras en el navegador: Code 128, EAN-13, UPC-A, ITF-14, Codabar, MSI, Pharmacode y más. Colores, zona silenciosa, exportación SVG y PNG. Modo Web Worker privado para cargas enormes.',
+	'tool.barcode-generator.operation': 'Generar código de barras',
+	'tool.barcode-generator.faq.0.question': '¿Se envían mis datos a un servidor?',
+	'tool.barcode-generator.faq.0.answer':
+		'No. El renderizado se hace con JavaScript en tu navegador. Las entradas grandes pueden procesarse en un Web Worker en tu dispositivo.',
+	'tool.barcode-generator.faq.1.question': '¿Qué simbología uso para productos retail?',
+	'tool.barcode-generator.faq.1.answer':
+		'Para el punto de venta, EAN-13 o UPC-A. Para logística de cajas, ITF-14. Code 128 es una opción flexible para datos alfanuméricos.',
+	'tool.barcode-generator.faq.2.question': '¿Por qué exportar SVG?',
+	'tool.barcode-generator.faq.2.answer':
+		'El SVG se mantiene nítido a cualquier tamaño de impresión y encaja en packaging y diseño. El PNG es práctico para vistas previas rápidas.',
+	'tool.barcode-generator.faq.3.question': '¿Cuándo se usa un Web Worker?',
+	'tool.barcode-generator.faq.3.answer':
+		'Cuando la carga útil supera unos 500 KB de texto UTF-8, la generación se ejecuta en un Web Worker para mantener la página fluida.',
+	'tool.barcode-generator.use_case.0':
+		'Producir símbolos ITF-14 y Code 128 para etiquetas de almacén y cartones',
+	'tool.barcode-generator.use_case.1':
+		'Generar arte EAN-13 o UPC-A para maquetas de packaging antes de imprimir',
+	'tool.barcode-generator.use_case.2':
+		'Exportar códigos de barras SVG para guías de marca o documentación',
+	'tool.barcode-generator.use_case.3':
+		'Crear Codabar o MSI para sistemas heredados y herramientas internas',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Leer',
+	'ui.qr.tab_barcode': 'Barras',
 	'ui.qr.characters': 'caracteres',
 	'ui.qr.output_empty': 'Genera un código QR para previsualizarlo y exportarlo.',
 	'ui.qr.preview_alt': 'Vista previa del código QR generado',
@@ -3016,6 +3048,59 @@ const registryEs: Record<string, string> = {
 	'ui.qr.reader.worker_badge': 'Worker',
 	'ui.qr.reader.worker_failed':
 		'Falló la decodificación en el Worker. Reintentando en el hilo principal.',
+	'ui.barcode.characters': 'caracteres',
+	'ui.barcode.content_label': 'Datos del código',
+	'ui.barcode.input_placeholder': 'Escribe o pega la carga útil para la simbología elegida…',
+	'ui.barcode.format_label': 'Simbología',
+	'ui.barcode.format_hint':
+		'Los GTIN retail usan EAN/UPC; en logística suele usarse Code 128 o ITF-14.',
+	'ui.barcode.preview_label': 'Vista previa',
+	'ui.barcode.preview_alt': 'Vista previa del código de barras',
+	'ui.barcode.output_empty': 'Genera un código de barras para previsualizarlo y exportarlo.',
+	'ui.barcode.raster_only': 'Solo PNG (worker)',
+	'ui.barcode.empty_preview':
+		'Ajusta datos y opciones para ver una vista previa vectorial o raster.',
+	'ui.barcode.copy_svg': 'Copiar SVG',
+	'ui.barcode.copy_png': 'Copiar data URL PNG',
+	'ui.barcode.copy_svg_unavailable': 'No hay SVG disponible para esta vista previa.',
+	'ui.barcode.download_svg': 'SVG',
+	'ui.barcode.download_png': 'PNG',
+	'ui.barcode.section.appearance': 'Apariencia',
+	'ui.barcode.display_value': 'Mostrar texto legible',
+	'ui.barcode.bar_width': 'Ancho de barra',
+	'ui.barcode.bar_height': 'Altura de barra',
+	'ui.barcode.font_size': 'Tamaño de etiqueta',
+	'ui.barcode.quiet_zone': 'Zona silenciosa',
+	'ui.barcode.line_color': 'Barras',
+	'ui.barcode.background': 'Fondo',
+	'ui.barcode.worker_active': 'Carga grande ({size}). La generación se ejecuta en un Web Worker.',
+	'ui.barcode.worker_badge': 'Worker',
+	'ui.barcode.worker_failed': 'Falló el Worker. Reintentando en el hilo principal.',
+	'ui.barcode.error.empty': 'Introduce un valor para codificar.',
+	'ui.barcode.error.invalid_value': 'Este valor no coincide con el formato seleccionado.',
+	'ui.barcode.error.generation_failed': 'No se pudo generar el código de barras: {detail}',
+	'ui.barcode.error.ean13': 'EAN-13 requiere 12 o 13 dígitos.',
+	'ui.barcode.error.ean8': 'EAN-8 requiere 7 u 8 dígitos.',
+	'ui.barcode.error.upc': 'UPC-A requiere 11 o 12 dígitos.',
+	'ui.barcode.error.itf14': 'ITF-14 requiere 13 o 14 dígitos.',
+	'ui.barcode.error.itf': 'ITF requiere un número par de dígitos (al menos dos).',
+	'ui.barcode.error.msi': 'MSI solo codifica dígitos.',
+	'ui.barcode.error.pharmacode': 'Pharmacode debe ser un entero entre 1 y 131070.',
+	'ui.barcode.format.CODE128': 'Code 128',
+	'ui.barcode.format.CODE39': 'Code 39',
+	'ui.barcode.format.CODE93': 'Code 93',
+	'ui.barcode.format.codabar': 'Codabar',
+	'ui.barcode.format.EAN13': 'EAN-13',
+	'ui.barcode.format.EAN8': 'EAN-8',
+	'ui.barcode.format.UPC': 'UPC-A',
+	'ui.barcode.format.ITF14': 'ITF-14',
+	'ui.barcode.format.ITF': 'ITF (entrelazado)',
+	'ui.barcode.format.MSI': 'MSI',
+	'ui.barcode.format.MSI10': 'MSI (mod 10)',
+	'ui.barcode.format.MSI11': 'MSI (mod 11)',
+	'ui.barcode.format.MSI1010': 'MSI (mod 1010)',
+	'ui.barcode.format.MSI1110': 'MSI (mod 1110)',
+	'ui.barcode.format.pharmacode': 'Pharmacode',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',
