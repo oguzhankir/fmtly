@@ -50,6 +50,8 @@
 				return $t('ui.convert.to_markdown', '→ MD').replace(/^→\s*/, '');
 			case 'flatten':
 				return $t('ui.json_flatten.tab_label', 'Flatten');
+			case 'to-rust':
+				return $t('ui.json_to_rust.tab_label', 'Rust');
 			case 'patch':
 				return $t('ui.json_patch.tab_label', 'Patch');
 			case 'schema-validate':

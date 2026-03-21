@@ -32,6 +32,7 @@ import {
 	minify as minifyAdvancedJson,
 	toGoStructs,
 	toMarkdownTable,
+	toRustSerdeStructs,
 	toToml,
 	toTypeScriptTypes,
 	toYaml,
@@ -216,6 +217,9 @@ async function applyToolOutput(value: string): Promise<void> {
 		case 'to-typescript':
 			await applyTypeScriptOutput(value);
 			return;
+		case 'to-rust':
+			await applyRustSerdeOutput(value);
+			return;
 		case 'flatten':
 			await applyFlattenOutput(value);
 			return;
@@ -366,6 +370,28 @@ async function applyTypeScriptOutput(value: string): Promise<void> {
 		jsonAdvancedStats.set(null);
 		jsonFormatWarnings.set([
 			error instanceof Error ? error.message : 'Could not generate TypeScript types'
+		]);
+	}
+}
+
+async function applyRustSerdeOutput(value: string): Promise<void> {
+	try {
+		const generated = shouldUseWorker(value)
+			? await callJsonWorkerMethod('toRustSerdeStructs', [value])
+			: toRustSerdeStructs(value);
+
+		if (typeof generated !== 'string') {
+			throw new Error('Rust serde generation returned an invalid result');
+		}
+
+		output.set(generated);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([
+			error instanceof Error ? error.message : 'Could not generate Rust serde structs'
 		]);
 	}
 }

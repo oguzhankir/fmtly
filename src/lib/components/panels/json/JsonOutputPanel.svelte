@@ -57,6 +57,7 @@
 			'schema-generator',
 			'to-go',
 			'to-typescript',
+			'to-rust',
 			'flatten',
 			'patch'
 		].includes(
@@ -76,6 +77,7 @@
 			'schema-generator',
 			'to-go',
 			'to-typescript',
+			'to-rust',
 			'flatten',
 			'patch'
 		].includes(toolSlug)
@@ -118,6 +120,7 @@
 			xml: () => import('highlight.js/lib/languages/xml'),
 			yaml: () => import('highlight.js/lib/languages/yaml'),
 			go: () => import('highlight.js/lib/languages/go'),
+			rust: () => import('highlight.js/lib/languages/rust'),
 			typescript: () => import('highlight.js/lib/languages/typescript')
 		};
 
@@ -564,7 +567,7 @@
 		<div class="json-output-actions">
 			<button type="button" class="json-output-btn" onclick={() => (wrapLines = !wrapLines)}>
 				<WrapText size={13} />
-				{$t('ui.output.actions.wrap', 'Wrap')}
+				<span>{$t('ui.output.actions.wrap', 'Wrap')}</span>
 			</button>
 			{#if supportsCompare}
 				<button type="button" class="json-output-btn" onclick={() => (showCompare = !showCompare)}>
@@ -758,6 +761,20 @@
 		color: var(--text-secondary);
 		font-family: var(--font-ui);
 		font-size: 12px;
+	}
+
+	.json-output-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.json-output-btn :global(svg) {
+		display: block;
+		flex-shrink: 0;
 	}
 
 	.json-output-textarea {

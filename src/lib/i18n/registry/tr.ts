@@ -1503,6 +1503,33 @@ const registryTr: Record<string, string> = {
 		'Derin iç içe JSON verilerinde manuel interface yazımını azaltmak',
 	'tool.json-to-typescript.use_case.3':
 		'Mevcut örnek verilerden sıkı tipler türeterek refactor sürecini hızlandırmak',
+	'tool.json-to-rust-serde.display_name': "JSON'dan Rust Serde'ye",
+	'tool.json-to-rust-serde.tagline':
+		"JSON'dan serde(rename) ve Option ile Serde uyumlu Rust struct'ları üretin",
+	'tool.json-to-rust-serde.description':
+		'JSON örneklerini Serde derive, JSON anahtar yeniden adlandırma, isteğe bağlı/null alanlar için Option, diziler için Vec ve heterojen veri için serde_json::Value içeren Rust struct’larına dönüştürün. İç içe yapılar Go üreticideki gibi tekilleştirilir. Büyük girdiler Web Worker’da; her şey tarayıcıda kalır.',
+	'tool.json-to-rust-serde.primary_keyword': "json'dan rust serde struct",
+	'tool.json-to-rust-serde.meta_title': "JSON'dan Rust Serde struct — fmtly.dev",
+	'tool.json-to-rust-serde.meta_description':
+		"Tarayıcıda JSON'dan serde ile Rust struct üretin. rename, Option, Vec, iç içe yapı. Özel, hızlı, büyük JSON için Worker.",
+	'tool.json-to-rust-serde.operation': 'Dönüştür',
+	'tool.json-to-rust-serde.faq.0.question': 'JSON tipleri Rust’a nasıl eşleniyor?',
+	'tool.json-to-rust-serde.faq.0.answer':
+		'Dizeler String, boole bool, tamsayılar i64, kayan nokta f64, diziler Vec, nesneler üretilen struct’lar ve karışık bilinmeyen şekiller serde_json::Value olur.',
+	'tool.json-to-rust-serde.faq.1.question': 'Her alanda neden serde(rename)?',
+	'tool.json-to-rust-serde.faq.1.answer':
+		'Rust’ta alan adları genelde snake_case, JSON ise çoğunlukla camelCase. Açık rename, serde’yi orijinal anahtarlara bağlar; genel bir yeniden adlandırma kuralı sınır durumlarda hata yapabilir.',
+	'tool.json-to-rust-serde.faq.2.question': 'Cargo.toml’da serde ve serde_json gerekli mi?',
+	'tool.json-to-rust-serde.faq.2.answer':
+		'Evet. derive özelliğiyle serde ve Value için serde_json ekleyin; örn. serde = { version = "1", features = ["derive"] } ve serde_json = "1".',
+	'tool.json-to-rust-serde.use_case.0':
+		'Gerçek JSON istek ve yanıt gövdelerinden Rust API modellerine başlamak',
+	'tool.json-to-rust-serde.use_case.1':
+		'Webhook, kuyruk ve CLI’lar için örnek yüklerden serde modelleri üretmek',
+	'tool.json-to-rust-serde.use_case.2':
+		'Aynı JSON için fmtly’de Go veya TypeScript çıktısıyla karşılaştırmak',
+	'tool.json-to-rust-serde.use_case.3': 'Elle struct yazmadan önce serde şemalarını denemek',
+	'ui.json_to_rust.tab_label': 'Rust',
 	'tool.json-flatten.display_name': 'JSON Düzleştirici / Geri Açıcı',
 	'tool.json-flatten.tagline': 'İç içe JSON yollarını düzleştir ve anında geri aç',
 	'tool.json-flatten.description':

@@ -1504,6 +1504,33 @@ const registryIt: Record<string, string> = {
 		'Ridurre la scrittura manuale di interfacce su JSON profondamente annidati',
 	'tool.json-to-typescript.use_case.3':
 		'Accelerare i refactor derivando tipi rigorosi da dati di esempio',
+	'tool.json-to-rust-serde.display_name': 'JSON in Rust (Serde)',
+	'tool.json-to-rust-serde.tagline':
+		'Genera struct Rust pronte per serde con serde(rename) e Option da JSON',
+	'tool.json-to-rust-serde.description':
+		'Trasforma campioni JSON in struct Rust con derive Serde, rinomina delle chiavi JSON, Option per campi opzionali o null, Vec per gli array e serde_json::Value per dati eterogenei. Le forme annidate sono deduplicate come nel generatore Go. Input grandi nel Web Worker; tutto nel browser.',
+	'tool.json-to-rust-serde.primary_keyword': 'json in rust serde struct',
+	'tool.json-to-rust-serde.meta_title': 'JSON in struct Rust Serde — fmtly.dev',
+	'tool.json-to-rust-serde.meta_description':
+		'Genera struct Rust con serde da JSON nel browser. rename, Option, Vec, annidamento. Privato, veloce, Worker per JSON grandi.',
+	'tool.json-to-rust-serde.operation': 'Converti',
+	'tool.json-to-rust-serde.faq.0.question': 'Come vengono mappati i tipi JSON su Rust?',
+	'tool.json-to-rust-serde.faq.0.answer':
+		'Stringhe in String, booleani in bool, interi in i64, float in f64, array in Vec, oggetti in struct generate e forme miste in serde_json::Value.',
+	'tool.json-to-rust-serde.faq.1.question': 'Perché serde(rename) su ogni campo?',
+	'tool.json-to-rust-serde.faq.1.answer':
+		'I campi usano snake_case idiomatico in Rust mentre il JSON spesso è camelCase. Il rename esplicito allinea serde alle chiavi originali senza regole globali rischiate.',
+	'tool.json-to-rust-serde.faq.2.question': 'Servono serde e serde_json in Cargo.toml?',
+	'tool.json-to-rust-serde.faq.2.answer':
+		'Sì. Aggiungi serde con feature derive e serde_json per Value, ad es. serde = { version = "1", features = ["derive"] } e serde_json = "1".',
+	'tool.json-to-rust-serde.use_case.0':
+		'Avviare modelli API Rust da payload JSON reali di richiesta e risposta',
+	'tool.json-to-rust-serde.use_case.1':
+		'Creare modelli serde per webhook, code e CLI da payload di esempio',
+	'tool.json-to-rust-serde.use_case.2':
+		'Confrontare con l’output Go o TypeScript dallo stesso JSON in fmtly',
+	'tool.json-to-rust-serde.use_case.3': 'Prototipare schemi serde prima di scrivere struct manuali',
+	'ui.json_to_rust.tab_label': 'Rust',
 	'tool.json-flatten.display_name': 'Appiattitore / Ripristino JSON',
 	'tool.json-flatten.tagline': 'Appiattisci percorsi JSON annidati e ricostruiscili all’istante',
 	'tool.json-flatten.description':

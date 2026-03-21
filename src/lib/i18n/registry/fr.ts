@@ -1532,6 +1532,34 @@ const registryFr: Record<string, string> = {
 		'Réduire l’écriture manuelle d’interfaces pour du JSON profondément imbriqué',
 	'tool.json-to-typescript.use_case.3':
 		'Accélérer les refactors en dérivant des types stricts depuis des données d’exemple',
+	'tool.json-to-rust-serde.display_name': 'JSON vers Rust (Serde)',
+	'tool.json-to-rust-serde.tagline':
+		'Générez des structs Rust prêtes pour serde avec serde(rename) et Option depuis du JSON',
+	'tool.json-to-rust-serde.description':
+		'Transformez des échantillons JSON en structs Rust avec derive Serde, renommage des clés JSON, Option pour champs optionnels ou null, Vec pour les tableaux et serde_json::Value pour les données hétérogènes. Les formes imbriquées sont dédupliquées comme pour Go. Les grandes entrées passent par un Web Worker ; tout reste dans le navigateur.',
+	'tool.json-to-rust-serde.primary_keyword': 'json vers rust serde structs',
+	'tool.json-to-rust-serde.meta_title': 'JSON vers structs Rust Serde — fmtly.dev',
+	'tool.json-to-rust-serde.meta_description':
+		'Générez des structs Rust avec serde depuis le navigateur. rename, Option, Vec, imbrication. Privé, rapide, Worker pour gros JSON.',
+	'tool.json-to-rust-serde.operation': 'Convertir',
+	'tool.json-to-rust-serde.faq.0.question': 'Comment les types JSON sont-ils mappés vers Rust ?',
+	'tool.json-to-rust-serde.faq.0.answer':
+		'Les chaînes vers String, les booléens vers bool, les entiers vers i64, les nombres flottants vers f64, les tableaux vers Vec, les objets vers des structs générées et les formes mixtes vers serde_json::Value.',
+	'tool.json-to-rust-serde.faq.1.question': 'Pourquoi serde(rename) sur chaque champ ?',
+	'tool.json-to-rust-serde.faq.1.answer':
+		'Les champs utilisent le snake_case idiomatique en Rust alors que le JSON est souvent en camelCase. Un rename explicite aligne serde sur les clés d’origine sans règle globale fragile.',
+	'tool.json-to-rust-serde.faq.2.question': 'Faut-il serde et serde_json dans Cargo.toml ?',
+	'tool.json-to-rust-serde.faq.2.answer':
+		'Oui. Ajoutez serde avec la fonctionnalité derive et serde_json pour Value, par ex. serde = { version = "1", features = ["derive"] } et serde_json = "1".',
+	'tool.json-to-rust-serde.use_case.0':
+		'Amorcer des modèles d’API Rust à partir de vrais corps JSON de requête et réponse',
+	'tool.json-to-rust-serde.use_case.1':
+		'Créer des modèles serde pour webhooks, files et CLI à partir d’exemples',
+	'tool.json-to-rust-serde.use_case.2':
+		'Comparer avec la sortie Go ou TypeScript du même JSON dans fmtly',
+	'tool.json-to-rust-serde.use_case.3':
+		'Prototyper des schémas serde avant d’écrire les structs à la main',
+	'ui.json_to_rust.tab_label': 'Rust',
 	'tool.json-flatten.display_name': 'Aplatiseur / Désaplatiseur JSON',
 	'tool.json-flatten.tagline':
 		'Aplatissez des chemins JSON imbriqués et restaurez-les instantanément',

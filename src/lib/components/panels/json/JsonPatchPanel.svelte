@@ -470,7 +470,7 @@
 				</div>
 				<button
 					type="button"
-					class="rounded-[var(--radius-md)] border border-[var(--border-default)] px-[var(--space-2)] py-[var(--space-1)] text-[length:var(--text-xs)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-hover)]"
+					class="inline-flex items-center gap-[var(--space-1)] rounded-[var(--radius-md)] border border-[var(--border-default)] px-[var(--space-2)] py-[var(--space-1)] text-[length:var(--text-xs)] leading-none text-[var(--text-secondary)] hover:bg-[var(--bg-surface-hover)]"
 					onclick={toggleWrapResult}
 				>
 					{$t('ui.output.actions.wrap', 'Wrap')}

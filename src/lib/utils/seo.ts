@@ -52,7 +52,7 @@ export function buildCategorySeo(
 	};
 }
 
-/** Builds page metadata from `ToolDefinition`; titles and descriptions are localized via registry keys (e.g. Punycode IDN, JWT). */
+/** Builds page metadata from `ToolDefinition`; titles and descriptions are localized via registry keys (e.g. JSON → Rust Serde, Punycode IDN, JWT). */
 export function generateToolSEO(
 	tool: ToolDefinition,
 	baseUrl: string,

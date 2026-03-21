@@ -63,14 +63,14 @@ Core category — format, validate, convert, diff, and query structured data.
 | 50 | JSON ↔ JSON Schema Validator | `json/schema-validate` | done | Validate a JSON document against a user-supplied JSON Schema (Draft-07 / 2020-12). Show per-path error annotations. |
 | 51 | JSON → Go Structs | `json/to-go` | done | Generate idiomatic Go struct definitions from JSON with nested type inference, json tags, and optional-field handling. |
 | 52 | JSON → TypeScript Types | `json/to-typescript` | done | Generate TypeScript interfaces and union types from JSON samples with nested inference, optional fields, and null-safe output. |
-| 53 | JSON Flattener / Unflattener | `json/flatten` | done | Flatten deeply nested JSON into path-based key maps and restore nested JSON instantly with array-safe paths. |
-| 54 | JSON Patch Builder | `json/patch` | done | Generate RFC 6902 JSON Patch from two documents and apply patch arrays to base JSON payloads. |
+| 53 | JSON → Rust Serde | `json/to-rust` | done | Generate Rust structs with serde derive, serde(rename) per field, Option for optional/null, Vec for arrays, serde_json::Value for heterogeneous JSON; Web Worker for large input. |
+| 54 | JSON Flattener / Unflattener | `json/flatten` | done | Flatten deeply nested JSON into path-based key maps and restore nested JSON instantly with array-safe paths. |
+| 55 | JSON Patch Builder | `json/patch` | done | Generate RFC 6902 JSON Patch from two documents and apply patch arrays to base JSON payloads. |
 
 ### Backlog — Data Formats
 
 | 51 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 56 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
 | 57 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
 | 58 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
 | 59 | YAML Anchor Resolver | `yaml/resolve-anchors` | Resolve all YAML anchors and aliases into their expanded form. |

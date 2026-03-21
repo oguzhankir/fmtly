@@ -15,6 +15,7 @@ import {
 	flattenJson,
 	generateJsonPatch,
 	toGoStructs,
+	toRustSerdeStructs,
 	toTypeScriptTypes,
 	unflattenJson
 } from '$engines/json/json.engine.js';
@@ -31,6 +32,7 @@ const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>
 	buildJSONTree: (data: unknown) => buildJSONTree(data),
 	validateJSON: (input: unknown) => validateJSON(input as string),
 	toGoStructs: (input: unknown) => toGoStructs(input as string),
+	toRustSerdeStructs: (input: unknown) => toRustSerdeStructs(input as string),
 	toTypeScriptTypes: (input: unknown) => toTypeScriptTypes(input as string),
 	generateJsonPatch: (input: unknown, operand: unknown) =>
 		generateJsonPatch(input as string, operand as string),

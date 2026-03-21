@@ -1454,6 +1454,34 @@ const registryDe: Record<string, string> = {
 		'Manuelles Interface-Schreiben bei tief verschachtelten JSON-Daten reduzieren',
 	'tool.json-to-typescript.use_case.3':
 		'Refactorings beschleunigen, indem strikte Typen aus Beispieldaten abgeleitet werden',
+	'tool.json-to-rust-serde.display_name': 'JSON zu Rust (Serde)',
+	'tool.json-to-rust-serde.tagline':
+		'Serde-taugliche Rust-Structs mit serde(rename) und Option aus JSON erzeugen',
+	'tool.json-to-rust-serde.description':
+		'Wandelt JSON-Beispiele in Rust-Structs mit Serde-Derive um: JSON-Schlüssel per serde(rename), Option für fehlende/null-Werte, Vec für Arrays, serde_json::Value für heterogene Daten. Verschachtelte Formen werden wie beim Go-Generator dedupliziert. Große Eingaben laufen im Web Worker; alles bleibt im Browser.',
+	'tool.json-to-rust-serde.primary_keyword': 'json zu rust serde structs',
+	'tool.json-to-rust-serde.meta_title': 'JSON zu Rust Serde-Structs — fmtly.dev',
+	'tool.json-to-rust-serde.meta_description':
+		'Rust-Structs mit Serde aus JSON im Browser erzeugen. Rename, Option, Vec, Verschachtelung. Privat, schnell, Worker für große JSON.',
+	'tool.json-to-rust-serde.operation': 'Konvertieren',
+	'tool.json-to-rust-serde.faq.0.question': 'Wie werden JSON-Typen auf Rust abgebildet?',
+	'tool.json-to-rust-serde.faq.0.answer':
+		'Zeichenketten werden zu String, boolesche Werte zu bool, Ganzzahlen zu i64, Fließkommazahlen zu f64, Arrays zu Vec, Objekte zu generierten Structs und gemischte oder unbekannte Formen zu serde_json::Value.',
+	'tool.json-to-rust-serde.faq.1.question': 'Warum serde(rename) pro Feld?',
+	'tool.json-to-rust-serde.faq.1.answer':
+		'Feldnamen folgen idiomatischem snake_case, während JSON oft camelCase nutzt. Explizites rename hält serde ohne globale Umbenennungsregeln an die Originalschlüssel.',
+	'tool.json-to-rust-serde.faq.2.question': 'Brauche ich serde und serde_json in Cargo.toml?',
+	'tool.json-to-rust-serde.faq.2.answer':
+		'Ja. serde mit derive-Feature und serde_json für Value-Typen, z. B. serde = { version = "1", features = ["derive"] } und serde_json = "1".',
+	'tool.json-to-rust-serde.use_case.0':
+		'Rust-API-Modelle aus echten JSON-Request- und Response-Bodies starten',
+	'tool.json-to-rust-serde.use_case.1':
+		'Serde-Modelle für Webhooks, Queues und CLI-Tools aus Beispielpayloads erstellen',
+	'tool.json-to-rust-serde.use_case.2':
+		'Mit demselben JSON Go- oder TypeScript-Ausgabe in fmtly vergleichen',
+	'tool.json-to-rust-serde.use_case.3':
+		'Serde-Schemas prototypen, bevor man manuelle Structs schreibt',
+	'ui.json_to_rust.tab_label': 'Rust',
 	'tool.json-flatten.display_name': 'JSON Abflacher / Entfalter',
 	'tool.json-flatten.tagline': 'Verschachtelte JSON-Pfade abflachen und sofort zurückwandeln',
 	'tool.json-flatten.description':

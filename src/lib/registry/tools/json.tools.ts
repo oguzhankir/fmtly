@@ -392,6 +392,7 @@ export const jsonTools: ToolDefinition[] = [
 		outputLanguage: 'go',
 		hasTreeView: false,
 		relatedTools: [
+			{ category: 'json', slug: 'to-rust' },
 			{ category: 'json', slug: 'schema-generator' },
 			{ category: 'json', slug: 'to-yaml' },
 			{ category: 'json', slug: 'to-toml' },
@@ -452,6 +453,7 @@ export const jsonTools: ToolDefinition[] = [
 		hasTreeView: false,
 		relatedTools: [
 			{ category: 'json', slug: 'to-go' },
+			{ category: 'json', slug: 'to-rust' },
 			{ category: 'json', slug: 'schema-generator' },
 			{ category: 'json', slug: 'formatter' },
 			{ category: 'json', slug: 'to-toml' }
@@ -505,6 +507,64 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
+		id: 'json-to-rust-serde',
+		category: 'json',
+		slug: 'to-rust',
+		displayName: 'tool.json-to-rust-serde.display_name',
+		tagline: 'tool.json-to-rust-serde.tagline',
+		description: 'tool.json-to-rust-serde.description',
+		primaryKeyword: 'tool.json-to-rust-serde.primary_keyword',
+		metaTitle: 'tool.json-to-rust-serde.meta_title',
+		metaDescription: 'tool.json-to-rust-serde.meta_description',
+		engine: 'json',
+		operation: 'tool.json-to-rust-serde.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'json',
+		outputLanguage: 'rust',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'to-go' },
+			{ category: 'json', slug: 'to-typescript' },
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-to-rust-serde.faq.0.question',
+				answer: 'tool.json-to-rust-serde.faq.0.answer'
+			},
+			{
+				question: 'tool.json-to-rust-serde.faq.1.question',
+				answer: 'tool.json-to-rust-serde.faq.1.answer'
+			},
+			{
+				question: 'tool.json-to-rust-serde.faq.2.question',
+				answer: 'tool.json-to-rust-serde.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-to-rust-serde.use_case.0',
+			'tool.json-to-rust-serde.use_case.1',
+			'tool.json-to-rust-serde.use_case.2',
+			'tool.json-to-rust-serde.use_case.3'
+		],
+		sampleInput: `{
+  "id": "evt_204",
+  "createdAt": "2026-03-21T12:00:00Z",
+  "score": 42.5,
+  "active": true,
+  "meta": { "source": "web", "version": 2 },
+  "tags": ["alpha", "beta"],
+  "profile": {
+    "displayName": "Ada Lovelace",
+    "email": null
+  },
+  "sessions": [
+    { "ip": "10.0.0.1", "durationSeconds": 120, "ok": true }
+  ]
+}`
+	},
+	{
 		id: 'json-flatten',
 		category: 'json',
 		slug: 'flatten',
@@ -524,7 +584,8 @@ export const jsonTools: ToolDefinition[] = [
 			{ category: 'json', slug: 'formatter' },
 			{ category: 'json', slug: 'to-csv' },
 			{ category: 'json', slug: 'to-yaml' },
-			{ category: 'json', slug: 'to-typescript' }
+			{ category: 'json', slug: 'to-typescript' },
+			{ category: 'json', slug: 'to-rust' }
 		],
 		faqs: [
 			{

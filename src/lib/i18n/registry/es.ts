@@ -1511,6 +1511,34 @@ const registryEs: Record<string, string> = {
 		'Reducir redacción manual de interfaces en JSON profundamente anidados',
 	'tool.json-to-typescript.use_case.3':
 		'Acelerar refactors derivando tipos estrictos desde datos de ejemplo',
+	'tool.json-to-rust-serde.display_name': 'JSON a Rust (Serde)',
+	'tool.json-to-rust-serde.tagline':
+		'Genera structs Rust listos para serde con serde(rename) y Option desde JSON',
+	'tool.json-to-rust-serde.description':
+		'Convierte muestras JSON en structs Rust con derive de Serde, renombres de claves JSON, Option para campos opcionales o null, Vec para arrays y serde_json::Value para datos heterogéneos. Las formas anidadas se deduplican como en el generador Go. Entradas grandes usan Web Worker; todo en el navegador.',
+	'tool.json-to-rust-serde.primary_keyword': 'json a rust serde structs',
+	'tool.json-to-rust-serde.meta_title': 'JSON a structs Rust Serde — fmtly.dev',
+	'tool.json-to-rust-serde.meta_description':
+		'Genera structs Rust con serde desde JSON en el navegador. rename, Option, Vec, anidación. Privado, rápido, Worker para JSON grande.',
+	'tool.json-to-rust-serde.operation': 'Convertir',
+	'tool.json-to-rust-serde.faq.0.question': '¿Cómo se mapean los tipos JSON a Rust?',
+	'tool.json-to-rust-serde.faq.0.answer':
+		'Las cadenas a String, booleanos a bool, enteros a i64, números con decimales a f64, arrays a Vec, objetos a structs generados y formas mixtas o desconocidas a serde_json::Value.',
+	'tool.json-to-rust-serde.faq.1.question': '¿Por qué serde(rename) en cada campo?',
+	'tool.json-to-rust-serde.faq.1.answer':
+		'Los campos usan snake_case idiomático en Rust mientras el JSON suele ser camelCase. El rename explícito alinea serde con las claves originales sin una política global que falle en casos raros.',
+	'tool.json-to-rust-serde.faq.2.question': '¿Necesito serde y serde_json en Cargo.toml?',
+	'tool.json-to-rust-serde.faq.2.answer':
+		'Sí. Añade serde con la feature derive y serde_json para tipos Value, p. ej. serde = { version = "1", features = ["derive"] } y serde_json = "1".',
+	'tool.json-to-rust-serde.use_case.0':
+		'Arrancar modelos de API en Rust desde cuerpos JSON reales de petición y respuesta',
+	'tool.json-to-rust-serde.use_case.1':
+		'Crear modelos serde para webhooks, colas y CLIs a partir de payloads de ejemplo',
+	'tool.json-to-rust-serde.use_case.2':
+		'Comparar con salida Go o TypeScript del mismo JSON en fmtly',
+	'tool.json-to-rust-serde.use_case.3':
+		'Prototipar esquemas serde antes de escribir structs a mano',
+	'ui.json_to_rust.tab_label': 'Rust',
 	'tool.json-flatten.display_name': 'Aplanador / Desaplanador JSON',
 	'tool.json-flatten.tagline': 'Aplana rutas JSON anidadas y restáuralas al instante',
 	'tool.json-flatten.description':
