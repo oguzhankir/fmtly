@@ -2530,6 +2530,105 @@ const registryEs: Record<string, string> = {
 	'ui.encode_html_entities.button.apply_output': 'Aplicar salida a la entrada',
 	'ui.encode_html_entities.toast.applied': 'La salida se aplicó a la entrada',
 	'ui.encode_html_entities.characters': 'caracteres',
+	// ── Inspector Unicode — herramienta ──────────────────────────────────────
+	'tool.encode-unicode-inspector.display_name': 'Inspector Unicode',
+	'tool.encode-unicode-inspector.tagline':
+		'Inspecciona puntos de código, bytes UTF-8, nombres, categoría, script y anchura de Asia oriental',
+	'tool.encode-unicode-inspector.description':
+		'Pega cualquier texto UTF-8 para ver cada clúster de grafemas o cada valor escalar Unicode con notación U+, bytes hex UTF-8, nombre oficial, categoría general, script y anchura de Asia oriental. Las entradas grandes se procesan en un Web Worker; todo ocurre en tu navegador.',
+	'tool.encode-unicode-inspector.primary_keyword': 'inspector unicode puntos de código',
+	'tool.encode-unicode-inspector.meta_title': 'Inspector Unicode — UTF-8 y U+ | fmtly.dev',
+	'tool.encode-unicode-inspector.meta_description':
+		'Inspecciona Unicode en el navegador: puntos U+, bytes UTF-8, nombres, categoría, script y anchura de Asia oriental. Modo grafema o escalar; Worker para textos grandes. Privado e instantáneo.',
+	'tool.encode-unicode-inspector.operation': 'Inspeccionar Unicode',
+	'tool.encode-unicode-inspector.faq.0.question': '¿Se sube mi texto a un servidor?',
+	'tool.encode-unicode-inspector.faq.0.answer':
+		'No. El análisis se ejecuta por completo en tu navegador. Tu entrada no sale del dispositivo.',
+	'tool.encode-unicode-inspector.faq.1.question':
+		'¿Qué diferencia hay entre modo grafema y escalar?',
+	'tool.encode-unicode-inspector.faq.1.answer':
+		'El modo grafema agrupa caracteres percibidos por el usuario (emojis con tonos, secuencias ZWJ, marcas combinantes) si el navegador admite Intl.Segmenter. El modo escalar lista cada punto de código Unicode por separado.',
+	'tool.encode-unicode-inspector.faq.2.question':
+		'¿Por qué a veces los nombres o propiedades parecen poco familiares?',
+	'tool.encode-unicode-inspector.faq.2.answer':
+		'Los nombres y propiedades siguen la Unicode Character Database. Los puntos no asignados aparecen como «unassigned» o similar; algunos símbolos usan nombres normativos de Unicode.',
+	'tool.encode-unicode-inspector.faq.3.question':
+		'¿Por qué las entradas grandes usan un Web Worker?',
+	'tool.encode-unicode-inspector.faq.3.answer':
+		'Las entradas de más de 500 KB se procesan fuera del hilo principal para que la tabla, el desplazamiento y los controles sigan fluidos al consultar las tablas Unicode.',
+	'tool.encode-unicode-inspector.use_case.0':
+		'Depurar caracteres invisibles, codificación incorrecta o mezcla de scripts en registros y entradas de usuario',
+	'tool.encode-unicode-inspector.use_case.1':
+		'Comprobar secuencias UTF-8 y puntos de código para nombres de archivo o APIs internacionalizados',
+	'tool.encode-unicode-inspector.use_case.2':
+		'Enseñar conceptos Unicode: clústeres de grafemas, marcas combinantes y secuencias de emoji',
+	'tool.encode-unicode-inspector.use_case.3':
+		'Exportar una tabla TSV de segmentos y propiedades para documentación o datos de prueba',
+	// ── Inspector Unicode — interfaz ─────────────────────────────────────────
+	'ui.unicode_inspector.tab_label': 'Unicode',
+	'ui.unicode_inspector.utf16_units': 'unidades UTF-16',
+	'ui.unicode_inspector.backend_load_error':
+		'No se pudieron cargar las tablas de nombres Unicode. Comprueba la conexión e inténtalo de nuevo.',
+	'ui.unicode_inspector.worker_failed':
+		'Falló el procesamiento en Worker. Volviendo al hilo principal.',
+	'ui.unicode_inspector.granularity_label': 'Segmentación',
+	'ui.unicode_inspector.granularity.grapheme': 'Clústeres de grafemas',
+	'ui.unicode_inspector.granularity.codepoint': 'Valores escalares Unicode',
+	'ui.unicode_inspector.granularity_hint':
+		'El modo grafema usa Intl.Segmenter si está disponible (secuencias ZWJ de emoji, marcas combinantes). Si no, se muestra cada escalar por separado.',
+	'ui.unicode_inspector.max_scalars_label': 'Límite de filas (escalares)',
+	'ui.unicode_inspector.worker_active':
+		'Entrada grande (>{size}). La inspección se ejecuta en un Web Worker.',
+	'ui.unicode_inspector.copy_tsv': 'Copiar TSV',
+	'ui.unicode_inspector.input_label': 'Entrada',
+	'ui.unicode_inspector.input_placeholder': 'Pega texto UTF-8 para inspeccionar puntos de código…',
+	'ui.unicode_inspector.results_label': 'Inspección',
+	'ui.unicode_inspector.loading_backend': 'Cargando datos Unicode…',
+	'ui.unicode_inspector.worker_badge': 'Worker',
+	'ui.unicode_inspector.summary':
+		'{clusters} clústeres · {scalars} escalares · {bytes} bytes UTF-8 · {ms} ms',
+	'ui.unicode_inspector.truncated':
+		'Salida truncada; {omitted} escalar(es) más no mostrados. Sube el límite o acorta la entrada.',
+	'ui.unicode_inspector.col.segment': 'Segmento',
+	'ui.unicode_inspector.col.codepoint': 'U+',
+	'ui.unicode_inspector.col.glyph': 'Glifo',
+	'ui.unicode_inspector.col.utf8': 'UTF-8',
+	'ui.unicode_inspector.col.category': 'Cat.',
+	'ui.unicode_inspector.col.script': 'Script',
+	'ui.unicode_inspector.col.eaw': 'EaW',
+	'ui.unicode_inspector.col.name': 'Nombre',
+	'ui.unicode_inspector.table_region': 'Tabla de escalares Unicode',
+	'ui.unicode_inspector.empty_hint': 'Escribe o pega texto para ver puntos de código y nombres.',
+	'ui.unicode_inspector.gc.Lu': 'Letra, mayúscula',
+	'ui.unicode_inspector.gc.Ll': 'Letra, minúscula',
+	'ui.unicode_inspector.gc.Lt': 'Letra, título',
+	'ui.unicode_inspector.gc.Lm': 'Letra, modificador',
+	'ui.unicode_inspector.gc.Lo': 'Letra, otra',
+	'ui.unicode_inspector.gc.Mn': 'Marca, no espaciadora',
+	'ui.unicode_inspector.gc.Mc': 'Marca, espaciadora combinante',
+	'ui.unicode_inspector.gc.Me': 'Marca, encerrante',
+	'ui.unicode_inspector.gc.Nd': 'Número, dígito decimal',
+	'ui.unicode_inspector.gc.Nl': 'Número, letra',
+	'ui.unicode_inspector.gc.No': 'Número, otro',
+	'ui.unicode_inspector.gc.Pc': 'Puntuación, conector',
+	'ui.unicode_inspector.gc.Pd': 'Puntuación, guión',
+	'ui.unicode_inspector.gc.Ps': 'Puntuación, apertura',
+	'ui.unicode_inspector.gc.Pe': 'Puntuación, cierre',
+	'ui.unicode_inspector.gc.Pi': 'Puntuación, comilla inicial',
+	'ui.unicode_inspector.gc.Pf': 'Puntuación, comilla final',
+	'ui.unicode_inspector.gc.Po': 'Puntuación, otro',
+	'ui.unicode_inspector.gc.Sm': 'Símbolo, matemáticas',
+	'ui.unicode_inspector.gc.Sc': 'Símbolo, moneda',
+	'ui.unicode_inspector.gc.Sk': 'Símbolo, modificador',
+	'ui.unicode_inspector.gc.So': 'Símbolo, otro',
+	'ui.unicode_inspector.gc.Zs': 'Separador, espacio',
+	'ui.unicode_inspector.gc.Zl': 'Separador, línea',
+	'ui.unicode_inspector.gc.Zp': 'Separador, párrafo',
+	'ui.unicode_inspector.gc.Cc': 'Otro, control',
+	'ui.unicode_inspector.gc.Cf': 'Otro, formato',
+	'ui.unicode_inspector.gc.Cs': 'Otro, sustituto',
+	'ui.unicode_inspector.gc.Co': 'Otro, uso privado',
+	'ui.unicode_inspector.gc.Cn': 'Otro, sin asignar',
 	// ── Codificar / Decodificar URL — cadenas de interfaz ────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Acción',

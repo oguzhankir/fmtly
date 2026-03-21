@@ -147,6 +147,54 @@ export const encodeTools: ToolDefinition[] = [
 		sampleInput: '<p title="Tom & Jerry">café "100%" safe: <code>&lt;tag&gt;</code> ©</p>'
 	},
 	{
+		id: 'encode-unicode-inspector',
+		category: 'encode',
+		slug: 'unicode',
+		displayName: 'tool.encode-unicode-inspector.display_name',
+		tagline: 'tool.encode-unicode-inspector.tagline',
+		description: 'tool.encode-unicode-inspector.description',
+		primaryKeyword: 'tool.encode-unicode-inspector.primary_keyword',
+		metaTitle: 'tool.encode-unicode-inspector.meta_title',
+		metaDescription: 'tool.encode-unicode-inspector.meta_description',
+		engine: 'encode',
+		operation: 'tool.encode-unicode-inspector.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'encode', slug: 'base64' },
+			{ category: 'encode', slug: 'url' },
+			{ category: 'text', slug: 'escape' },
+			{ category: 'json', slug: 'formatter' }
+		],
+		faqs: [
+			{
+				question: 'tool.encode-unicode-inspector.faq.0.question',
+				answer: 'tool.encode-unicode-inspector.faq.0.answer'
+			},
+			{
+				question: 'tool.encode-unicode-inspector.faq.1.question',
+				answer: 'tool.encode-unicode-inspector.faq.1.answer'
+			},
+			{
+				question: 'tool.encode-unicode-inspector.faq.2.question',
+				answer: 'tool.encode-unicode-inspector.faq.2.answer'
+			},
+			{
+				question: 'tool.encode-unicode-inspector.faq.3.question',
+				answer: 'tool.encode-unicode-inspector.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.encode-unicode-inspector.use_case.0',
+			'tool.encode-unicode-inspector.use_case.1',
+			'tool.encode-unicode-inspector.use_case.2',
+			'tool.encode-unicode-inspector.use_case.3'
+		],
+		sampleInput: 'Hello 你好 🫶 🏳️‍🌈 — café\nU+1F600'
+	},
+	{
 		id: 'encode-jwt-decoder',
 		category: 'encode',
 		slug: 'jwt',

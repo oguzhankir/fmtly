@@ -64,3 +64,18 @@ export {
 	type HTMLEntityWorkerRequest,
 	type HTMLEntityWorkerResponse
 } from './html-entities.js';
+
+export {
+	inspectUnicode,
+	shouldUseUnicodeInspectorWorker,
+	UNICODE_INSPECTOR_WORKER_THRESHOLD_BYTES,
+	type UnicodeInspectorGranularity,
+	type UnicodeInspectorOptions,
+	type UnicodePropertyLookup,
+	type UnicodeScalarInspection,
+	type UnicodeClusterInspection,
+	type UnicodeInspectorMetrics,
+	type UnicodeInspectorResult,
+	type UnicodeInspectorWorkerRequest,
+	type UnicodeInspectorWorkerResponse
+} from './unicode-inspector.js';

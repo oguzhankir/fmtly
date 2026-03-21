@@ -2518,6 +2518,105 @@ const registryIt: Record<string, string> = {
 	'ui.encode_html_entities.button.apply_output': 'Applica output all’input',
 	'ui.encode_html_entities.toast.applied': 'Output applicato all’input',
 	'ui.encode_html_entities.characters': 'caratteri',
+	// ── Ispezione Unicode — strumento ───────────────────────────────────────
+	'tool.encode-unicode-inspector.display_name': 'Ispezione Unicode',
+	'tool.encode-unicode-inspector.tagline':
+		'Ispeziona punti di codice, byte UTF-8, nomi, categoria, script e larghezza est-asiativa',
+	'tool.encode-unicode-inspector.description':
+		'Incolla testo UTF-8 per vedere ogni cluster di grafemi o ogni valore scalare Unicode con notazione U+, byte UTF-8 in esadecimale, nome ufficiale, categoria generale, script e larghezza est-asiativa. Gli input grandi usano un Web Worker; tutto resta nel browser.',
+	'tool.encode-unicode-inspector.primary_keyword': 'ispezione unicode punti di codice',
+	'tool.encode-unicode-inspector.meta_title': 'Ispezione Unicode — UTF-8 | fmtly.dev',
+	'tool.encode-unicode-inspector.meta_description':
+		'Ispeziona Unicode nel browser: punti U+, byte UTF-8, nomi, categoria, script e larghezza est-asiativa. Modalità grafema o scalare; Worker per testi grandi. Privato e immediato.',
+	'tool.encode-unicode-inspector.operation': 'Ispeziona Unicode',
+	'tool.encode-unicode-inspector.faq.0.question': 'Il mio testo viene caricato su un server?',
+	'tool.encode-unicode-inspector.faq.0.answer':
+		'No. L’analisi avviene interamente nel browser. L’input non lascia il dispositivo.',
+	'tool.encode-unicode-inspector.faq.1.question':
+		'Che differenza c’è tra modalità grafema e scalare?',
+	'tool.encode-unicode-inspector.faq.1.answer':
+		'La modalità grafema raggruppa i caratteri percepiti dall’utente (emoji con tonalità, sequenze ZWJ, segni combinanti) se il browser supporta Intl.Segmenter. La modalità scalare elenca ogni punto di codice Unicode separatamente.',
+	'tool.encode-unicode-inspector.faq.2.question':
+		'Perché nomi o proprietà a volte sembrano poco familiari?',
+	'tool.encode-unicode-inspector.faq.2.answer':
+		'Nomi e proprietà seguono l’Unicode Character Database. I punti non assegnati compaiono come «unassigned» o simile; alcuni simboli usano nomi Unicode normativi.',
+	'tool.encode-unicode-inspector.faq.3.question': 'Perché gli input grandi usano un Web Worker?',
+	'tool.encode-unicode-inspector.faq.3.answer':
+		'Gli input oltre 500 KB vengono elaborati fuori dal thread principale per mantenere reattivi tabella, scorrimento e controlli durante l’uso delle tabelle Unicode.',
+	'tool.encode-unicode-inspector.use_case.0':
+		'Debug di caratteri invisibili, encoding errato o script misti in log e input utente',
+	'tool.encode-unicode-inspector.use_case.1':
+		'Verificare sequenze UTF-8 e punti di codice per nomi file o API internazionalizzate',
+	'tool.encode-unicode-inspector.use_case.2':
+		'Insegnare le basi Unicode: cluster di grafemi, segni combinanti e sequenze emoji',
+	'tool.encode-unicode-inspector.use_case.3':
+		'Esportare una tabella TSV di segmenti e proprietà per documentazione o fixture di test',
+	// ── Ispezione Unicode — interfaccia ────────────────────────────────────────
+	'ui.unicode_inspector.tab_label': 'Unicode',
+	'ui.unicode_inspector.utf16_units': 'unità UTF-16',
+	'ui.unicode_inspector.backend_load_error':
+		'Impossibile caricare le tabelle dei nomi Unicode. Controlla la connessione e riprova.',
+	'ui.unicode_inspector.worker_failed':
+		'Elaborazione Worker non riuscita. Ripiego sul thread principale.',
+	'ui.unicode_inspector.granularity_label': 'Segmentazione',
+	'ui.unicode_inspector.granularity.grapheme': 'Cluster di grafemi',
+	'ui.unicode_inspector.granularity.codepoint': 'Valori scalari Unicode',
+	'ui.unicode_inspector.granularity_hint':
+		'La modalità grafema usa Intl.Segmenter se disponibile (sequenze ZWJ emoji, segni combinanti). Altrimenti ogni scalare è mostrato separatamente.',
+	'ui.unicode_inspector.max_scalars_label': 'Limite righe (scalari)',
+	'ui.unicode_inspector.worker_active':
+		'Input grande (>{size}). L’ispezione viene eseguita in un Web Worker.',
+	'ui.unicode_inspector.copy_tsv': 'Copia TSV',
+	'ui.unicode_inspector.input_label': 'Input',
+	'ui.unicode_inspector.input_placeholder':
+		'Incolla testo UTF-8 per ispezionare i punti di codice…',
+	'ui.unicode_inspector.results_label': 'Ispezione',
+	'ui.unicode_inspector.loading_backend': 'Caricamento dati Unicode…',
+	'ui.unicode_inspector.worker_badge': 'Worker',
+	'ui.unicode_inspector.summary':
+		'{clusters} cluster · {scalars} scalari · {bytes} byte UTF-8 · {ms} ms',
+	'ui.unicode_inspector.truncated':
+		'Output troncato; altri {omitted} scalare/i non mostrati. Aumenta il limite o accorcia l’input.',
+	'ui.unicode_inspector.col.segment': 'Segmento',
+	'ui.unicode_inspector.col.codepoint': 'U+',
+	'ui.unicode_inspector.col.glyph': 'Glifo',
+	'ui.unicode_inspector.col.utf8': 'UTF-8',
+	'ui.unicode_inspector.col.category': 'Cat.',
+	'ui.unicode_inspector.col.script': 'Script',
+	'ui.unicode_inspector.col.eaw': 'EaW',
+	'ui.unicode_inspector.col.name': 'Nome',
+	'ui.unicode_inspector.table_region': 'Tabella scalari Unicode',
+	'ui.unicode_inspector.empty_hint': 'Digita o incolla testo per vedere punti di codice e nomi.',
+	'ui.unicode_inspector.gc.Lu': 'Lettera, maiuscola',
+	'ui.unicode_inspector.gc.Ll': 'Lettera, minuscola',
+	'ui.unicode_inspector.gc.Lt': 'Lettera, titolo',
+	'ui.unicode_inspector.gc.Lm': 'Lettera, modificatore',
+	'ui.unicode_inspector.gc.Lo': 'Lettera, altro',
+	'ui.unicode_inspector.gc.Mn': 'Segno, non spaziante',
+	'ui.unicode_inspector.gc.Mc': 'Segno, spaziante combinante',
+	'ui.unicode_inspector.gc.Me': 'Segno, racchiudente',
+	'ui.unicode_inspector.gc.Nd': 'Numero, cifra decimale',
+	'ui.unicode_inspector.gc.Nl': 'Numero, lettera',
+	'ui.unicode_inspector.gc.No': 'Numero, altro',
+	'ui.unicode_inspector.gc.Pc': 'Punteggiatura, connettore',
+	'ui.unicode_inspector.gc.Pd': 'Punteggiatura, trattino',
+	'ui.unicode_inspector.gc.Ps': 'Punteggiatura, apertura',
+	'ui.unicode_inspector.gc.Pe': 'Punteggiatura, chiusura',
+	'ui.unicode_inspector.gc.Pi': 'Punteggiatura, virgoletta iniziale',
+	'ui.unicode_inspector.gc.Pf': 'Punteggiatura, virgoletta finale',
+	'ui.unicode_inspector.gc.Po': 'Punteggiatura, altro',
+	'ui.unicode_inspector.gc.Sm': 'Simbolo, matematica',
+	'ui.unicode_inspector.gc.Sc': 'Simbolo, valuta',
+	'ui.unicode_inspector.gc.Sk': 'Simbolo, modificatore',
+	'ui.unicode_inspector.gc.So': 'Simbolo, altro',
+	'ui.unicode_inspector.gc.Zs': 'Separatore, spazio',
+	'ui.unicode_inspector.gc.Zl': 'Separatore, riga',
+	'ui.unicode_inspector.gc.Zp': 'Separatore, paragrafo',
+	'ui.unicode_inspector.gc.Cc': 'Altro, controllo',
+	'ui.unicode_inspector.gc.Cf': 'Altro, formato',
+	'ui.unicode_inspector.gc.Cs': 'Altro, surrogato',
+	'ui.unicode_inspector.gc.Co': 'Altro, uso privato',
+	'ui.unicode_inspector.gc.Cn': 'Altro, non assegnato',
 	// ── Codifica / Decodifica URL — stringhe interfaccia ─────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Azione',

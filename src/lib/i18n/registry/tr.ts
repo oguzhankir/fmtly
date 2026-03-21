@@ -2512,6 +2512,103 @@ const registryTr: Record<string, string> = {
 	'ui.encode_html_entities.button.apply_output': 'Çıktıyı girdiye uygula',
 	'ui.encode_html_entities.toast.applied': 'Çıktı girdiye uygulandı',
 	'ui.encode_html_entities.characters': 'karakter',
+	// ── Unicode denetleyici — araç ──────────────────────────────────────────
+	'tool.encode-unicode-inspector.display_name': 'Unicode Denetleyici',
+	'tool.encode-unicode-inspector.tagline':
+		'Kod noktaları, UTF-8 baytları, adlar, kategori, yazı ve Doğu Asya genişliğini inceleyin',
+	'tool.encode-unicode-inspector.description':
+		'Her grafem kümesini veya Unicode skaler değerini U+ gösterimi, UTF-8 onaltılık baytlar, resmî ad, genel kategori, yazı ve Doğu Asya genişliğiyle görmek için UTF-8 metin yapıştırın. Büyük girdiler Web Worker’da işlenir; her şey tarayıcıda kalır.',
+	'tool.encode-unicode-inspector.primary_keyword': 'unicode kod noktası denetleyici',
+	'tool.encode-unicode-inspector.meta_title': 'Unicode Denetleyici — UTF-8 & U+ | fmtly.dev',
+	'tool.encode-unicode-inspector.meta_description':
+		'Unicode’u tarayıcıda inceleyin: U+ kod noktaları, UTF-8 baytları, adlar, kategori, yazı ve Doğu Asya genişliği. Grafem veya skaler mod; büyük metinler için Worker. Gizli ve anında.',
+	'tool.encode-unicode-inspector.operation': 'Unicode incele',
+	'tool.encode-unicode-inspector.faq.0.question': 'Metnim sunucuya yüklenir mi?',
+	'tool.encode-unicode-inspector.faq.0.answer':
+		'Hayır. İnceleme tamamen tarayıcınızda çalışır. Girdiniz cihazınızdan çıkmaz.',
+	'tool.encode-unicode-inspector.faq.1.question': 'Grafem ve skaler mod arasındaki fark nedir?',
+	'tool.encode-unicode-inspector.faq.1.answer':
+		'Grafem modu, tarayıcı Intl.Segmenter destekliyorsa kullanıcının algıladığı karakterleri gruplar (cilt tonlu emoji, ZWJ dizileri, birleşen işaretler). Skaler modu her Unicode kod noktasını ayrı listeler.',
+	'tool.encode-unicode-inspector.faq.2.question':
+		'Adlar veya özellikler bazen neden yabancı görünür?',
+	'tool.encode-unicode-inspector.faq.2.answer':
+		'Adlar ve özellikler Unicode Karakter Veritabanı’na uyar. Atanmamış kod noktaları «unassigned» vb. görünür; bazı semboller normatif Unicode adları kullanır.',
+	'tool.encode-unicode-inspector.faq.3.question': 'Büyük girdi neden Web Worker kullanır?',
+	'tool.encode-unicode-inspector.faq.3.answer':
+		'500 KB üzeri girdiler ana iş parçacığı dışında işlenir; Unicode tabloları sorgulanırken tablo, kaydırma ve kontroller akıcı kalır.',
+	'tool.encode-unicode-inspector.use_case.0':
+		'Günlüklerde ve kullanıcı girdisinde görünmez karakterler, yanlış kodlama veya karışık yazıları ayıklama',
+	'tool.encode-unicode-inspector.use_case.1':
+		'Uluslararasılaştırılmış dosya adları veya API’ler için UTF-8 bayt dizileri ve kod noktalarını doğrulama',
+	'tool.encode-unicode-inspector.use_case.2':
+		'Unicode temelleri öğretmek: grafem kümeleri, birleşen işaretler ve emoji dizileri',
+	'tool.encode-unicode-inspector.use_case.3':
+		'Belgeleme veya test verileri için segment ve özelliklerin TSV tablosunu dışa aktarma',
+	// ── Unicode denetleyici — arayüz ──────────────────────────────────────────
+	'ui.unicode_inspector.tab_label': 'Unicode',
+	'ui.unicode_inspector.utf16_units': 'UTF-16 birimi',
+	'ui.unicode_inspector.backend_load_error':
+		'Unicode ad tabloları yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.',
+	'ui.unicode_inspector.worker_failed': 'Worker işlemi başarısız. Ana iş parçacığına dönülüyor.',
+	'ui.unicode_inspector.granularity_label': 'Segmentasyon',
+	'ui.unicode_inspector.granularity.grapheme': 'Grafem kümeleri',
+	'ui.unicode_inspector.granularity.codepoint': 'Unicode skaler değerleri',
+	'ui.unicode_inspector.granularity_hint':
+		'Grafem modu mümkünse Intl.Segmenter kullanır (emoji ZWJ dizileri, birleşen işaretler). Aksi halde her skaler ayrı gösterilir.',
+	'ui.unicode_inspector.max_scalars_label': 'Satır limiti (skaler)',
+	'ui.unicode_inspector.worker_active': 'Büyük girdi (>{size}). İnceleme Web Worker’da çalışır.',
+	'ui.unicode_inspector.copy_tsv': 'TSV kopyala',
+	'ui.unicode_inspector.input_label': 'Girdi',
+	'ui.unicode_inspector.input_placeholder':
+		'Kod noktalarını incelemek için UTF-8 metin yapıştırın…',
+	'ui.unicode_inspector.results_label': 'İnceleme',
+	'ui.unicode_inspector.loading_backend': 'Unicode verileri yükleniyor…',
+	'ui.unicode_inspector.worker_badge': 'Worker',
+	'ui.unicode_inspector.summary':
+		'{clusters} küme · {scalars} skaler · {bytes} bayt UTF-8 · {ms} ms',
+	'ui.unicode_inspector.truncated':
+		'Çıktı kısaltıldı; {omitted} skaler daha gösterilmedi. Limiti artırın veya girdiyi kısaltın.',
+	'ui.unicode_inspector.col.segment': 'Segment',
+	'ui.unicode_inspector.col.codepoint': 'U+',
+	'ui.unicode_inspector.col.glyph': 'Glif',
+	'ui.unicode_inspector.col.utf8': 'UTF-8',
+	'ui.unicode_inspector.col.category': 'Kat.',
+	'ui.unicode_inspector.col.script': 'Yazı',
+	'ui.unicode_inspector.col.eaw': 'DAG',
+	'ui.unicode_inspector.col.name': 'Ad',
+	'ui.unicode_inspector.table_region': 'Unicode skaler tablosu',
+	'ui.unicode_inspector.empty_hint':
+		'Kod noktalarını ve adları görmek için metin yazın veya yapıştırın.',
+	'ui.unicode_inspector.gc.Lu': 'Harf, büyük',
+	'ui.unicode_inspector.gc.Ll': 'Harf, küçük',
+	'ui.unicode_inspector.gc.Lt': 'Harf, başlık',
+	'ui.unicode_inspector.gc.Lm': 'Harf, değiştirici',
+	'ui.unicode_inspector.gc.Lo': 'Harf, diğer',
+	'ui.unicode_inspector.gc.Mn': 'İşaret, birleşen (spacing dışı)',
+	'ui.unicode_inspector.gc.Mc': 'İşaret, birleşen (spacing)',
+	'ui.unicode_inspector.gc.Me': 'İşaret, saran',
+	'ui.unicode_inspector.gc.Nd': 'Sayı, ondalık rakam',
+	'ui.unicode_inspector.gc.Nl': 'Sayı, harf',
+	'ui.unicode_inspector.gc.No': 'Sayı, diğer',
+	'ui.unicode_inspector.gc.Pc': 'Noktalama, bağlayıcı',
+	'ui.unicode_inspector.gc.Pd': 'Noktalama, tire',
+	'ui.unicode_inspector.gc.Ps': 'Noktalama, açılış',
+	'ui.unicode_inspector.gc.Pe': 'Noktalama, kapanış',
+	'ui.unicode_inspector.gc.Pi': 'Noktalama, açılış tırnak',
+	'ui.unicode_inspector.gc.Pf': 'Noktalama, kapanış tırnak',
+	'ui.unicode_inspector.gc.Po': 'Noktalama, diğer',
+	'ui.unicode_inspector.gc.Sm': 'Sembol, matematik',
+	'ui.unicode_inspector.gc.Sc': 'Sembol, para',
+	'ui.unicode_inspector.gc.Sk': 'Sembol, değiştirici',
+	'ui.unicode_inspector.gc.So': 'Sembol, diğer',
+	'ui.unicode_inspector.gc.Zs': 'Ayraç, boşluk',
+	'ui.unicode_inspector.gc.Zl': 'Ayraç, satır',
+	'ui.unicode_inspector.gc.Zp': 'Ayraç, paragraf',
+	'ui.unicode_inspector.gc.Cc': 'Diğer, denetim',
+	'ui.unicode_inspector.gc.Cf': 'Diğer, biçim',
+	'ui.unicode_inspector.gc.Cs': 'Diğer, vekil',
+	'ui.unicode_inspector.gc.Co': 'Diğer, özel kullanım',
+	'ui.unicode_inspector.gc.Cn': 'Diğer, atanmamış',
 	// ── URL Kodla / Çöz — arayüz metinleri ───────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'İşlem',

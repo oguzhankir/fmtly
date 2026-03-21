@@ -60,6 +60,8 @@
 		"marked": "^17.0.4",
 		"papaparse": "^5.5.3",
 		"qrcode": "^1.5.4",
-		"smol-toml": "^1.6.0"
+		"smol-toml": "^1.6.0",
+		"unicode-name": "^1.1.0",
+		"unicode-properties": "^1.4.1"
 	}
 }

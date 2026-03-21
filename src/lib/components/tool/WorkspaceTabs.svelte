@@ -70,6 +70,8 @@
 				return $t('ui.encode_html_entities.tab_label', 'Entities');
 			case 'base64':
 				return $t('ui.base64.tab_label', 'Base64');
+			case 'unicode':
+				return $t('ui.unicode_inspector.tab_label', 'Unicode');
 			case 'generator':
 				return $t('ui.qr.tab_label', 'QR');
 			default:

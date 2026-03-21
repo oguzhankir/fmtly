@@ -91,7 +91,7 @@ Encode, decode, hash, and escape strings across common formats.
 | 66 | Base64 Encode / Decode ✅ | `encode/base64` | done — Encode and decode Base64 strings with standard and URL-safe variants, padding controls, and large-input worker support. |
 | 67 | URL Encode / Decode ✅ | `encode/url` | done — Percent-encode and decode URL text with component/full URL modes, plus-space handling, and large-input worker support. |
 | 68 | HTML Entity Encode / Decode ✅ | `encode/html-entities` | done — Encode/decode with full WHATWG named map, decimal/hex modes, strict or permissive decode, optional non-ASCII scope, CR/LF options, and Web Worker for inputs >500KB. |
-| 69 | Unicode Inspector | `encode/unicode` | Show codepoint, UTF-8 bytes, category, and glyph name for each character. |
+| 69 | Unicode Inspector ✅ | `encode/unicode` | done — Inspect grapheme clusters or scalar values: U+ hex, UTF-8 bytes, General Category, script, East Asian width, and Unicode names; Web Worker for inputs >500KB. |
 | 70 | JWT Decoder ✅ | `encode/jwt` | done — Decode JWT tokens — display header, payload, and signature. Validate expiry. No verification of secrets. |
 | 71 | Hex ↔ ASCII / UTF-8 | `encode/hex` | Convert between hexadecimal and text. Supports ASCII and UTF-8. |
 | 72 | ROT13 / Caesar Cipher | `encode/rot13` | Apply ROT13 or arbitrary Caesar shift. Useful for spoiler text and simple obfuscation. |
