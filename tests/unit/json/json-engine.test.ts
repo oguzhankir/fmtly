@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { formatJSON, minifyJSON } from '../../../src/lib/engines/json/formatter.js';
 import {
+	applyJsonPatch,
 	flattenJson,
+	generateJsonPatch,
 	generateJsonSchema,
 	toGoStructs,
 	toMarkdownTable,
@@ -323,6 +325,59 @@ describe('flattenJson and unflattenJson', () => {
 	it('rejects invalid flatten options', () => {
 		expect(() => flattenJson('{"a":1}', { separator: '' })).toThrow(
 			'ui.json_flatten.error.empty_separator'
+		);
+	});
+});
+
+describe('generateJsonPatch and applyJsonPatch', () => {
+	it('generates deterministic patch operations between two objects', () => {
+		const patch = JSON.parse(
+			generateJsonPatch(
+				'{"name":"fmtly","meta":{"version":1,"tags":["json"]}}',
+				'{"name":"fmtly","meta":{"version":2,"tags":["json","patch"]},"active":true}'
+			)
+		) as Array<Record<string, unknown>>;
+
+		expect(patch).toEqual([
+			{ op: 'add', path: '/active', value: true },
+			{ op: 'add', path: '/meta/tags/-', value: 'patch' },
+			{ op: 'replace', path: '/meta/version', value: 2 }
+		]);
+	});
+
+	it('applies patch operations and returns patched JSON', () => {
+		const result = JSON.parse(
+			applyJsonPatch(
+				'{"name":"fmtly","meta":{"version":1,"tags":["json"]}}',
+				'[{"op":"add","path":"/active","value":true},{"op":"replace","path":"/meta/version","value":2},{"op":"add","path":"/meta/tags/-","value":"patch"}]'
+			)
+		) as Record<string, unknown>;
+
+		expect(result).toEqual({
+			name: 'fmtly',
+			meta: { version: 2, tags: ['json', 'patch'] },
+			active: true
+		});
+	});
+
+	it('supports remove and test operations', () => {
+		const result = JSON.parse(
+			applyJsonPatch(
+				'{"name":"fmtly","active":true,"roles":["admin","editor"]}',
+				'[{"op":"test","path":"/active","value":true},{"op":"remove","path":"/roles/1"}]'
+			)
+		) as Record<string, unknown>;
+
+		expect(result).toEqual({
+			name: 'fmtly',
+			active: true,
+			roles: ['admin']
+		});
+	});
+
+	it('throws for invalid patch arrays', () => {
+		expect(() => applyJsonPatch('{"a":1}', '{"op":"replace"}')).toThrow(
+			'ui.json_patch.error.invalid_patch_array'
 		);
 	});
 });

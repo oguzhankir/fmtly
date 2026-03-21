@@ -577,6 +577,64 @@ export const jsonTools: ToolDefinition[] = [
 }`
 	},
 	{
+		id: 'json-patch',
+		category: 'json',
+		slug: 'patch',
+		displayName: 'tool.json-patch.display_name',
+		tagline: 'tool.json-patch.tagline',
+		description: 'tool.json-patch.description',
+		primaryKeyword: 'tool.json-patch.primary_keyword',
+		metaTitle: 'tool.json-patch.meta_title',
+		metaDescription: 'tool.json-patch.meta_description',
+		engine: 'json',
+		operation: 'tool.json-patch.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'json',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'diff' },
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'flatten' },
+			{ category: 'json', slug: 'schema-validate' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-patch.faq.0.question',
+				answer: 'tool.json-patch.faq.0.answer'
+			},
+			{
+				question: 'tool.json-patch.faq.1.question',
+				answer: 'tool.json-patch.faq.1.answer'
+			},
+			{
+				question: 'tool.json-patch.faq.2.question',
+				answer: 'tool.json-patch.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-patch.use_case.0',
+			'tool.json-patch.use_case.1',
+			'tool.json-patch.use_case.2',
+			'tool.json-patch.use_case.3'
+		],
+		sampleInput: `{
+  "app": {
+    "name": "fmtly",
+    "version": "1.0.0",
+    "features": ["format", "validate"],
+    "settings": {
+      "theme": "light",
+      "telemetry": false
+    }
+  },
+  "limits": {
+    "projects": 3,
+    "members": 5
+  }
+}`
+	},
+	{
 		id: 'json-schema-validate',
 		category: 'json',
 		slug: 'schema-validate',

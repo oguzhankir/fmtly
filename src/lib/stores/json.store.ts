@@ -22,8 +22,12 @@ import {
 	type JsonStats as AdvancedJsonStats,
 	type JsonFlattenMode,
 	type JsonFlattenOptions,
+	type JsonPatchMode,
+	type JsonPatchOptions,
+	applyJsonPatch,
 	flattenJson,
 	format as formatAdvancedJson,
+	generateJsonPatch,
 	generateJsonSchema,
 	minify as minifyAdvancedJson,
 	toGoStructs,
@@ -61,6 +65,10 @@ export const jsonFlattenOptions = writable<JsonFlattenOptions>({
 	separator: '.',
 	rootKey: '$'
 });
+export const jsonPatchOptions = writable<JsonPatchOptions>({
+	mode: 'generate',
+	operand: ''
+});
 
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 let parserInitialized = false;
@@ -76,6 +84,37 @@ const pendingWorkerRequests = new Map<
 		reject: (reason?: unknown) => void;
 	}
 >();
+
+async function applyPatchOutput(value: string): Promise<void> {
+	try {
+		const options = get(jsonPatchOptions);
+		if (!options.operand.trim()) {
+			clearOutput();
+			jsonAdvancedStats.set(null);
+			jsonFormatWarnings.set([]);
+			return;
+		}
+
+		const workerMethod = options.mode === 'generate' ? 'generateJsonPatch' : 'applyJsonPatch';
+		const transformed = shouldUseWorker(`${value}\n${options.operand}`)
+			? await callJsonWorkerMethod(workerMethod, [value, options.operand])
+			: options.mode === 'generate'
+				? generateJsonPatch(value, options.operand)
+				: applyJsonPatch(value, options.operand);
+
+		if (typeof transformed !== 'string') {
+			throw new Error('ui.json_patch.error.invalid_result');
+		}
+
+		output.set(transformed);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([toPatchWarningMessage(error)]);
+	}
+}
 
 async function ensureParser(): Promise<void> {
 	if (!parserInitialized) {
@@ -179,6 +218,9 @@ async function applyToolOutput(value: string): Promise<void> {
 			return;
 		case 'flatten':
 			await applyFlattenOutput(value);
+			return;
+		case 'patch':
+			await applyPatchOutput(value);
 			return;
 		case 'validator':
 		case 'schema-validate':
@@ -366,6 +408,18 @@ function toFlattenWarningMessage(error: unknown): string {
 	return error.message || 'ui.json_flatten.error.generic';
 }
 
+function toPatchWarningMessage(error: unknown): string {
+	if (!(error instanceof Error)) {
+		return 'ui.json_patch.error.generic';
+	}
+
+	if (error.message.startsWith('ui.json_patch.error.')) {
+		return error.message;
+	}
+
+	return error.message || 'ui.json_patch.error.generic';
+}
+
 async function getJsonWorker(): Promise<Worker> {
 	if (jsonWorker) {
 		return jsonWorker;
@@ -471,6 +525,29 @@ export function setJsonFlattenOptions(next: Partial<JsonFlattenOptions>): void {
 	});
 
 	if (activeJsonToolSlug !== 'flatten') {
+		return;
+	}
+
+	const value = get(input);
+	if (!value.trim()) {
+		return;
+	}
+
+	void processInput(value);
+}
+
+export function setJsonPatchOptions(next: Partial<JsonPatchOptions>): void {
+	jsonPatchOptions.update((current) => {
+		const mode: JsonPatchMode = next.mode ?? current.mode;
+		const operand = next.operand ?? current.operand;
+
+		return {
+			mode,
+			operand
+		};
+	});
+
+	if (activeJsonToolSlug !== 'patch') {
 		return;
 	}
 

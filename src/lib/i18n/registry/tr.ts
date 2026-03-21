@@ -1082,6 +1082,33 @@ const registryTr: Record<string, string> = {
 		'Düzleştirilmiş yollar çakışıyor; güvenli şekilde birleştirilemiyor.',
 	'ui.json_flatten.error.unsafe_key':
 		'Yol içinde güvensiz bir anahtar var (__proto__, constructor veya prototype).',
+	'ui.json_patch.tab_label': 'Patch',
+	'ui.json_patch.mode_label': 'Mod',
+	'ui.json_patch.mode.generate': 'Patch Üret',
+	'ui.json_patch.mode.apply': 'Patch Uygula',
+	'ui.json_patch.target_label': 'Hedef JSON',
+	'ui.json_patch.patch_label': 'JSON Patch (RFC 6902)',
+	'ui.json_patch.target_placeholder': 'Hedef JSON belgesini buraya yapıştır…',
+	'ui.json_patch.patch_placeholder': 'JSON Patch dizisini buraya yapıştır…',
+	'ui.json_patch.base_label': 'Temel JSON',
+	'ui.json_patch.base_hint': 'Giriş paneli temel JSON’dur. Çıktı üretilen patch olur.',
+	'ui.json_patch.apply_hint': 'Giriş paneli temel JSON’dur. Çıktı patch uygulanmış sonuçtur.',
+	'ui.json_patch.result_label_generate': 'Üretilen Patch',
+	'ui.json_patch.result_label_apply': 'Patch Sonucu JSON',
+	'ui.json_patch.empty_generate': 'RFC 6902 patch üretmek için hedef JSON belgesi ekleyin.',
+	'ui.json_patch.empty_apply': 'Temel belgeye uygulamak için bir JSON Patch dizisi ekleyin.',
+	'ui.json_patch.error.generic': 'Geçerli girdilerle JSON Patch işlenemedi.',
+	'ui.json_patch.error.invalid_result': 'Patch işlemi başarısız: çıktı geçersiz.',
+	'ui.json_patch.error.invalid_patch_array':
+		'Patch girdisi, işlem nesneleri içeren bir JSON dizi olmalıdır.',
+	'ui.json_patch.error.invalid_operation': 'Patch içinde geçersiz bir işlem nesnesi var.',
+	'ui.json_patch.error.unsupported_operation': 'Patch içinde desteklenmeyen bir işlem var.',
+	'ui.json_patch.error.missing_from': 'Patch işleminde zorunlu "from" yolu eksik.',
+	'ui.json_patch.error.missing_value': 'Patch işleminde zorunlu "value" alanı eksik.',
+	'ui.json_patch.error.invalid_pointer': 'Patch işleminde geçersiz bir JSON Pointer yolu var.',
+	'ui.json_patch.error.path_not_found': 'Patch yolu mevcut belgede bulunamadı.',
+	'ui.json_patch.error.test_failed': 'Patch test işlemi verilen yol için başarısız oldu.',
+	'ui.json_patch.error.invalid_array_index': 'Patch işlemi geçersiz bir dizi indeksine başvuruyor.',
 
 	// ── Araç SSS\'leri ve Kullanım Durumları ────────────────────────────
 	'tool.json-formatter.faq.0.question': 'JSON biçimlendirmesi nedir?',
@@ -1501,9 +1528,34 @@ const registryTr: Record<string, string> = {
 	'tool.json-flatten.use_case.1':
 		'İç içe API fixture verilerini tablo benzeri düzenleme için normalize etmek',
 	'tool.json-flatten.use_case.2':
-		'Ortam değişkeni benzeri yol anahtarlarından iç içe yapıları yeniden üretmek',
+		'Ortam değişkeni tarzı anahtarlardan iç içe yapıları yeniden oluşturmak',
 	'tool.json-flatten.use_case.3':
-		'Büyük JSON belgelerinde dağıtımdan önce yol seviyesinde değişiklikleri ayıklamak',
+		'Yayın öncesi büyük JSON belgelerinde yol seviyesinde değişiklikleri analiz etmek',
+	'tool.json-patch.display_name': 'JSON Patch Builder',
+	'tool.json-patch.tagline': 'RFC 6902 JSON Patch işlemlerini anında üret ve uygula',
+	'tool.json-patch.description':
+		'Temel ve hedef belgeyi karşılaştırarak RFC 6902 JSON Patch işlemleri üretin veya bir patch dizisini temel JSON belgesine uygulayın. Her şey tarayıcıda yerel çalışır.',
+	'tool.json-patch.primary_keyword': 'json patch builder',
+	'tool.json-patch.meta_title': 'JSON Patch Builder (RFC 6902) — fmtly.dev',
+	'tool.json-patch.meta_description':
+		'İki JSON belgeden patch işlemleri üretin veya RFC 6902 patch dizilerini tarayıcıda anında uygulayın. Hızlı, gizli, yükleme yok.',
+	'tool.json-patch.operation': 'Patch',
+	'tool.json-patch.faq.0.question': 'JSON Patch (RFC 6902) nedir?',
+	'tool.json-patch.faq.0.answer':
+		'JSON Patch; add, remove ve replace gibi işlemleri JSON Pointer yolları ile tanımlayan standart bir değişiklik formatıdır.',
+	'tool.json-patch.faq.1.question': 'Üret modu nasıl çalışır?',
+	'tool.json-patch.faq.1.answer':
+		'Giriş paneline temel JSON’u, yan panele hedef JSON’u yapıştırın. Araç, temel veriyi hedefe dönüştürmek için gereken patch işlemlerini üretir.',
+	'tool.json-patch.faq.2.question': 'Uygula modu nasıl çalışır?',
+	'tool.json-patch.faq.2.answer':
+		'Giriş paneline temel JSON’u, yan panele geçerli bir JSON Patch dizisini yapıştırın. Çıktı, patch uygulanmış JSON sonucunu gösterir.',
+	'tool.json-patch.use_case.0':
+		'API payload değişikliklerini deterministik patch işlemleriyle versiyonlamak',
+	'tool.json-patch.use_case.1':
+		'Test akışlarında belge güncellemelerini patch dizileriyle uygulamak',
+	'tool.json-patch.use_case.2':
+		'Entegrasyon hatalarını patch adımlarını yeniden oynatarak analiz etmek',
+	'tool.json-patch.use_case.3': 'Düz metin diff yerine yapısal JSON değişikliklerini incelemek',
 	'tool.json-schema-validate.display_name': 'JSON Şema Doğrulayıcı',
 	'tool.json-schema-validate.tagline': 'JSON verisini sağlanan şemaya karşı doğrula',
 	'tool.json-schema-validate.description':

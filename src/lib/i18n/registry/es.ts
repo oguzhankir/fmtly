@@ -1064,6 +1064,37 @@ const registryEs: Record<string, string> = {
 		'Las rutas aplanadas entran en conflicto y no pueden fusionarse con seguridad.',
 	'ui.json_flatten.error.unsafe_key':
 		'La ruta contiene una clave insegura (__proto__, constructor o prototype).',
+	'ui.json_patch.tab_label': 'Patch',
+	'ui.json_patch.mode_label': 'Modo',
+	'ui.json_patch.mode.generate': 'Generar Patch',
+	'ui.json_patch.mode.apply': 'Aplicar Patch',
+	'ui.json_patch.target_label': 'JSON destino',
+	'ui.json_patch.patch_label': 'JSON Patch (RFC 6902)',
+	'ui.json_patch.target_placeholder': 'Pega aquí el JSON destino…',
+	'ui.json_patch.patch_placeholder': 'Pega aquí el array JSON Patch…',
+	'ui.json_patch.base_label': 'JSON base',
+	'ui.json_patch.base_hint':
+		'El panel de entrada es el JSON base. La salida muestra el patch generado.',
+	'ui.json_patch.apply_hint':
+		'El panel de entrada es el JSON base. La salida muestra el resultado con patch aplicado.',
+	'ui.json_patch.result_label_generate': 'Patch generado',
+	'ui.json_patch.result_label_apply': 'JSON con patch aplicado',
+	'ui.json_patch.empty_generate': 'Añade un JSON destino para generar un patch RFC 6902.',
+	'ui.json_patch.empty_apply': 'Añade un array JSON Patch para aplicarlo sobre el documento base.',
+	'ui.json_patch.error.generic': 'No se pudo procesar JSON Patch con las entradas actuales.',
+	'ui.json_patch.error.invalid_result': 'La operación de patch falló porque la salida es inválida.',
+	'ui.json_patch.error.invalid_patch_array':
+		'La entrada patch debe ser un array JSON de operaciones.',
+	'ui.json_patch.error.invalid_operation': 'El patch contiene un objeto de operación inválido.',
+	'ui.json_patch.error.unsupported_operation': 'El patch contiene una operación no soportada.',
+	'ui.json_patch.error.missing_from': 'La operación patch requiere una ruta "from".',
+	'ui.json_patch.error.missing_value': 'La operación patch requiere un campo "value".',
+	'ui.json_patch.error.invalid_pointer':
+		'La operación patch contiene una ruta JSON Pointer inválida.',
+	'ui.json_patch.error.path_not_found': 'La ruta patch no existe en el documento actual.',
+	'ui.json_patch.error.test_failed': 'La operación test del patch falló para la ruta indicada.',
+	'ui.json_patch.error.invalid_array_index':
+		'La operación patch referencia un índice de array inválido.',
 
 	// ── FAQs de Herramientas y Casos de Uso ──────────────────────────────
 	'tool.json-formatter.faq.0.question': '¿Qué es el formateo de JSON?',
@@ -1504,14 +1535,38 @@ const registryEs: Record<string, string> = {
 	'tool.json-flatten.use_case.1':
 		'Normalizar fixtures de API anidados para edición tipo hoja de cálculo',
 	'tool.json-flatten.use_case.2':
-		'Reconstruir estructuras anidadas desde claves estilo variables de entorno',
-	'tool.json-flatten.use_case.3': 'Analizar cambios por ruta en JSON grandes antes de desplegar',
-	'tool.json-schema-validate.display_name': 'Validador de JSON Schema',
-	'tool.json-schema-validate.tagline': 'Validar JSON contra un esquema proporcionado',
+		'Reconstruir estructuras anidadas a partir de claves estilo variables de entorno',
+	'tool.json-flatten.use_case.3':
+		'Depurar cambios por ruta en documentos JSON grandes antes de desplegar',
+	'tool.json-patch.display_name': 'JSON Patch Builder',
+	'tool.json-patch.tagline': 'Genera y aplica operaciones JSON Patch RFC 6902 al instante',
+	'tool.json-patch.description':
+		'Genera operaciones JSON Patch RFC 6902 comparando un documento base y uno destino, o aplica un array patch sobre un JSON base. Todo se ejecuta localmente en tu navegador.',
+	'tool.json-patch.primary_keyword': 'json patch builder',
+	'tool.json-patch.meta_title': 'JSON Patch Builder (RFC 6902) — fmtly.dev',
+	'tool.json-patch.meta_description':
+		'Genera operaciones JSON Patch desde dos documentos JSON o aplica parches RFC 6902 en tu navegador al instante. Rápido, privado y sin cargas.',
+	'tool.json-patch.operation': 'Patch',
+	'tool.json-patch.faq.0.question': '¿Qué es JSON Patch (RFC 6902)?',
+	'tool.json-patch.faq.0.answer':
+		'JSON Patch es un formato estándar para describir cambios como operaciones add, remove o replace usando rutas JSON Pointer.',
+	'tool.json-patch.faq.1.question': '¿Cómo funciona el modo Generar?',
+	'tool.json-patch.faq.1.answer':
+		'Pega el JSON base en el panel de entrada y el JSON destino en el panel lateral. La herramienta calcula las operaciones necesarias para transformar base en destino.',
+	'tool.json-patch.faq.2.question': '¿Cómo funciona el modo Aplicar?',
+	'tool.json-patch.faq.2.answer':
+		'Pega el JSON base en el panel de entrada y un array JSON Patch válido en el panel lateral. La salida muestra el JSON resultante tras aplicar el patch.',
+	'tool.json-patch.use_case.0':
+		'Versionar cambios de payload API como operaciones patch deterministas',
+	'tool.json-patch.use_case.1': 'Aplicar actualizaciones de documentos en flujos de prueba',
+	'tool.json-patch.use_case.2': 'Depurar fallos de integración reproduciendo secuencias patch',
+	'tool.json-patch.use_case.3': 'Revisar cambios JSON estructurados más allá del diff textual',
+	'tool.json-schema-validate.display_name': 'Validador de Esquema JSON',
+	'tool.json-schema-validate.tagline': 'Valida JSON contra un esquema proporcionado',
 	'tool.json-schema-validate.description':
-		'Valida payloads JSON contra JSON Schema Draft-07 o Draft 2020-12. Obtén errores por ruta con mapeo de línea y columna para corregir campos inválidos rápidamente.',
-	'tool.json-schema-validate.primary_keyword': 'validador json schema',
-	'tool.json-schema-validate.meta_title': 'Validador de JSON Schema — fmtly.dev',
+		'Valida payloads JSON frente a JSON Schema Draft-07 o Draft 2020-12. Obtén errores por ruta con mapeo a línea y columna para corregir campos inválidos más rápido.',
+	'tool.json-schema-validate.primary_keyword': 'validador esquema json',
+	'tool.json-schema-validate.meta_title': 'Validador de Esquema JSON — fmtly.dev',
 	'tool.json-schema-validate.meta_description':
 		'Valida JSON contra JSON Schema Draft-07 y 2020-12 en tu navegador. Incluye anotaciones de error por ruta, línea y columna.',
 	'tool.json-schema-validate.operation': 'Validar Esquema',

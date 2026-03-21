@@ -11,7 +11,9 @@ import {
 } from '$engines/json/index.js';
 import type { FormatOptions, WorkerRequest, WorkerResponse } from '$engines/json/index.js';
 import {
+	applyJsonPatch,
 	flattenJson,
+	generateJsonPatch,
 	toGoStructs,
 	toTypeScriptTypes,
 	unflattenJson
@@ -30,6 +32,10 @@ const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>
 	validateJSON: (input: unknown) => validateJSON(input as string),
 	toGoStructs: (input: unknown) => toGoStructs(input as string),
 	toTypeScriptTypes: (input: unknown) => toTypeScriptTypes(input as string),
+	generateJsonPatch: (input: unknown, operand: unknown) =>
+		generateJsonPatch(input as string, operand as string),
+	applyJsonPatch: (input: unknown, operand: unknown) =>
+		applyJsonPatch(input as string, operand as string),
 	flattenJson: (input: unknown, options: unknown) =>
 		flattenJson(input as string, options as Parameters<typeof flattenJson>[1]),
 	unflattenJson: (input: unknown, options: unknown) =>

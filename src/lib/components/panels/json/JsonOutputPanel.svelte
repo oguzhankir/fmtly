@@ -8,10 +8,12 @@
 		jsonError,
 		jsonAdvancedStats,
 		jsonFlattenOptions,
+		jsonPatchOptions,
 		jsonFormatOptions,
 		jsonFormatWarnings,
 		setFormatOptions,
-		setJsonFlattenOptions
+		setJsonFlattenOptions,
+		setJsonPatchOptions
 	} from '$stores/json.store';
 	import {
 		AlertTriangle,
@@ -43,6 +45,7 @@
 	let showCleanMenu = $state(false);
 	let isFormatter = $derived(toolSlug === 'formatter');
 	let isFlattenTool = $derived(toolSlug === 'flatten');
+	let isPatchTool = $derived(toolSlug === 'patch');
 	let isMinifier = $derived(toolSlug === 'minifier');
 	let isConverter = $derived(
 		[
@@ -54,7 +57,8 @@
 			'schema-generator',
 			'to-go',
 			'to-typescript',
-			'flatten'
+			'flatten',
+			'patch'
 		].includes(
 			toolSlug
 		)
@@ -72,7 +76,8 @@
 			'schema-generator',
 			'to-go',
 			'to-typescript',
-			'flatten'
+			'flatten',
+			'patch'
 		].includes(toolSlug)
 	);
 	let supportsStructuredCopy = $derived(outputLanguage === 'json');
@@ -296,6 +301,15 @@
 		setJsonFlattenOptions({ separator: input.value });
 	}
 
+	function switchPatchMode(mode: 'generate' | 'apply'): void {
+		setJsonPatchOptions({ mode });
+	}
+
+	function updatePatchOperand(event: Event): void {
+		const input = event.currentTarget as HTMLTextAreaElement;
+		setJsonPatchOptions({ operand: input.value });
+	}
+
 	function resolveWarningText(warning: string): string {
 		if (warning.startsWith('ui.')) {
 			return $t(warning, warning);
@@ -330,6 +344,52 @@
 				<span><strong>{$jsonAdvancedStats.sizeFormatted}</strong> B {$t('ui.output.stats.size_out', 'out')}</span>
 			</div>
 		{/if}
+	{/if}
+
+	{#if isPatchTool}
+		<div class="json-output-controls json-output-controls--stack">
+			<div class="json-output-controls__group">
+				<span class="json-output-controls__label">{$t('ui.json_patch.mode_label', 'Mode')}</span>
+				<button
+					type="button"
+					class="json-output-chip"
+					class:json-output-chip--active={$jsonPatchOptions.mode === 'generate'}
+					onclick={() => switchPatchMode('generate')}
+				>
+					{$t('ui.json_patch.mode.generate', 'Generate Patch')}
+				</button>
+				<button
+					type="button"
+					class="json-output-chip"
+					class:json-output-chip--active={$jsonPatchOptions.mode === 'apply'}
+					onclick={() => switchPatchMode('apply')}
+				>
+					{$t('ui.json_patch.mode.apply', 'Apply Patch')}
+				</button>
+			</div>
+			<div class="json-output-controls__group json-output-controls__group--column">
+				<label class="json-output-controls__label" for="json-patch-operand">
+					{$jsonPatchOptions.mode === 'generate'
+						? $t('ui.json_patch.target_label', 'Target JSON')
+						: $t('ui.json_patch.patch_label', 'JSON Patch (RFC 6902)')}
+				</label>
+				<textarea
+					id="json-patch-operand"
+					class="json-output-textarea"
+					value={$jsonPatchOptions.operand}
+					oninput={updatePatchOperand}
+					placeholder={$jsonPatchOptions.mode === 'generate'
+						? $t('ui.json_patch.target_placeholder', 'Paste target JSON document here…')
+						: $t('ui.json_patch.patch_placeholder', 'Paste JSON Patch array here…')}
+					spellcheck="false"
+				></textarea>
+				<span class="json-output-controls__hint">
+					{$jsonPatchOptions.mode === 'generate'
+						? $t('ui.json_patch.base_hint', 'Input panel is the base JSON. Output is the generated patch.')
+						: $t('ui.json_patch.apply_hint', 'Input panel is the base JSON. Output is the patched result.')}
+				</span>
+			</div>
+		</div>
 	{/if}
 
 	{#if $jsonFormatWarnings.length > 0}
@@ -627,6 +687,10 @@
 		background: var(--bg-surface);
 	}
 
+	.json-output-controls--stack {
+		align-items: stretch;
+	}
+
 	.json-output-meta {
 		display: flex;
 		align-items: center;
@@ -652,6 +716,7 @@
 
 	.json-output-controls {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-2);
@@ -664,52 +729,21 @@
 		display: flex;
 		align-items: center;
 		gap: var(--space-2);
-		flex-wrap: wrap;
 	}
 
-	.json-output-menu-wrap {
-		position: relative;
-	}
-
-	.json-output-menu {
-		position: absolute;
-		top: calc(100% + 6px);
-		right: 0;
-		z-index: var(--z-dropdown);
-		display: flex;
+	.json-output-controls__group--column {
+		flex: 1;
+		min-width: min(100%, 320px);
 		flex-direction: column;
-		gap: var(--space-2);
-		width: min(260px, 80vw);
-		padding: var(--space-2);
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-lg);
-		background: var(--bg-elevated);
-		box-shadow: var(--shadow-md);
-	}
-
-	.json-output-menu__row {
-		display: flex;
-		align-items: center;
-		gap: var(--space-2);
-		font-family: var(--font-ui);
-		font-size: 12px;
-		color: var(--text-primary);
-	}
-
-	.json-output-controls__label {
-		color: var(--text-muted);
-		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		align-items: stretch;
 	}
 
 	.json-output-btn,
 	.json-output-input,
 	.json-output-select,
-	.json-output-chip {
-		height: 28px;
+	.json-output-input {
+		height: 30px;
+		min-width: 72px;
 		padding: 0 var(--space-2);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
@@ -717,25 +751,24 @@
 		color: var(--text-secondary);
 		font-family: var(--font-ui);
 		font-size: 12px;
-		font-weight: 500;
 	}
 
-	.json-output-input {
-		width: 92px;
-	}
-
-	.json-output-btn,
-	.json-output-chip {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-1);
-		cursor: pointer;
-	}
-
-	.json-output-chip--active {
-		border-color: var(--accent-border);
-		background: var(--accent-dim);
+	.json-output-textarea {
+		min-height: 104px;
+		resize: vertical;
+		padding: var(--space-2) var(--space-3);
+		border: 1px solid var(--border-subtle);
+		border-radius: var(--radius-sm);
+		background: var(--bg-base);
 		color: var(--text-primary);
+		font-family: var(--font-mono);
+		font-size: 12px;
+		line-height: 1.5;
+	}
+
+	.json-output-controls__hint {
+		font-size: 12px;
+		color: var(--text-muted);
 	}
 
 	.json-output-code,
@@ -744,7 +777,7 @@
 		overflow: auto;
 		background: var(--bg-base);
 		font-family: var(--font-mono);
-		font-size: 13px;
+		font-size: 12px;
 	}
 
 	.json-output-line {
@@ -786,7 +819,6 @@
 		border-right: none;
 	}
 
-	
 	.json-compare-line {
 		display: grid;
 		grid-template-columns: 52px minmax(0, 1fr);

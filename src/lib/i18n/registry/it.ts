@@ -1060,6 +1060,39 @@ const registryIt: Record<string, string> = {
 		'I percorsi appiattiti sono in conflitto e non possono essere fusi in sicurezza.',
 	'ui.json_flatten.error.unsafe_key':
 		'Il percorso contiene una chiave non sicura (__proto__, constructor o prototype).',
+	'ui.json_patch.tab_label': 'Patch',
+	'ui.json_patch.mode_label': 'Modalità',
+	'ui.json_patch.mode.generate': 'Genera Patch',
+	'ui.json_patch.mode.apply': 'Applica Patch',
+	'ui.json_patch.target_label': 'JSON di destinazione',
+	'ui.json_patch.patch_label': 'JSON Patch (RFC 6902)',
+	'ui.json_patch.target_placeholder': 'Incolla qui il JSON di destinazione…',
+	'ui.json_patch.patch_placeholder': 'Incolla qui l’array JSON Patch…',
+	'ui.json_patch.base_label': 'JSON di base',
+	'ui.json_patch.base_hint':
+		'Il pannello di input è il JSON base. L’output mostra il patch generato.',
+	'ui.json_patch.apply_hint':
+		'Il pannello di input è il JSON base. L’output mostra il risultato patchato.',
+	'ui.json_patch.result_label_generate': 'Patch generato',
+	'ui.json_patch.result_label_apply': 'JSON patchato',
+	'ui.json_patch.empty_generate':
+		'Aggiungi un JSON di destinazione per generare un patch RFC 6902.',
+	'ui.json_patch.empty_apply': 'Aggiungi un array JSON Patch per applicarlo al documento di base.',
+	'ui.json_patch.error.generic': 'Impossibile elaborare JSON Patch con gli input correnti.',
+	'ui.json_patch.error.invalid_result': 'Operazione patch non riuscita: output non valido.',
+	'ui.json_patch.error.invalid_patch_array':
+		'L’input patch deve essere un array JSON di operazioni.',
+	'ui.json_patch.error.invalid_operation': 'Il patch contiene un oggetto operazione non valido.',
+	'ui.json_patch.error.unsupported_operation': 'Il patch contiene un’operazione non supportata.',
+	'ui.json_patch.error.missing_from': 'L’operazione patch richiede un percorso "from".',
+	'ui.json_patch.error.missing_value': 'L’operazione patch richiede un campo "value".',
+	'ui.json_patch.error.invalid_pointer': 'Il patch contiene un percorso JSON Pointer non valido.',
+	'ui.json_patch.error.path_not_found':
+		'Il percorso patch non è stato trovato nel documento corrente.',
+	'ui.json_patch.error.test_failed':
+		'L’operazione test del patch è fallita per il percorso indicato.',
+	'ui.json_patch.error.invalid_array_index':
+		'Il patch fa riferimento a un indice array non valido.',
 
 	// ── FAQ e Casi d\'Uso degli Strumenti ────────────────────────────────────
 	'tool.json-formatter.faq.0.question': "Che cos'è la formattazione JSON?",
@@ -1500,6 +1533,29 @@ const registryIt: Record<string, string> = {
 		'Ricostruire strutture annidate da chiavi stile variabili d’ambiente',
 	'tool.json-flatten.use_case.3':
 		'Analizzare modifiche per percorso su JSON grandi prima del deploy',
+	'tool.json-patch.display_name': 'JSON Patch Builder',
+	'tool.json-patch.tagline': 'Genera e applica operazioni JSON Patch RFC 6902 in tempo reale',
+	'tool.json-patch.description':
+		'Genera operazioni JSON Patch RFC 6902 confrontando un documento base e uno di destinazione, oppure applica un array patch a un JSON base. Tutto avviene localmente nel browser.',
+	'tool.json-patch.primary_keyword': 'json patch builder',
+	'tool.json-patch.meta_title': 'JSON Patch Builder (RFC 6902) — fmtly.dev',
+	'tool.json-patch.meta_description':
+		'Genera operazioni JSON Patch da due documenti JSON o applica patch RFC 6902 direttamente nel browser. Veloce, privato, senza upload.',
+	'tool.json-patch.operation': 'Patch',
+	'tool.json-patch.faq.0.question': 'Che cos’è JSON Patch (RFC 6902)?',
+	'tool.json-patch.faq.0.answer':
+		'JSON Patch è un formato standard che descrive modifiche come operazioni add, remove e replace usando percorsi JSON Pointer.',
+	'tool.json-patch.faq.1.question': 'Come funziona la modalità Genera?',
+	'tool.json-patch.faq.1.answer':
+		'Incolla il JSON base nel pannello di input e il JSON di destinazione nel pannello laterale. Lo strumento calcola le operazioni necessarie per trasformare il base nel target.',
+	'tool.json-patch.faq.2.question': 'Come funziona la modalità Applica?',
+	'tool.json-patch.faq.2.answer':
+		'Incolla il JSON base nel pannello di input e un array JSON Patch valido nel pannello laterale. L’output mostra il risultato JSON dopo l’applicazione del patch.',
+	'tool.json-patch.use_case.0':
+		'Versionare cambi payload API come operazioni patch deterministiche',
+	'tool.json-patch.use_case.1': 'Applicare aggiornamenti documento in workflow di test',
+	'tool.json-patch.use_case.2': 'Analizzare errori di integrazione riproducendo sequenze patch',
+	'tool.json-patch.use_case.3': 'Rivedere cambi strutturati JSON oltre il semplice diff testuale',
 	'tool.json-schema-validate.display_name': 'Validatore JSON Schema',
 	'tool.json-schema-validate.tagline': 'Valida JSON rispetto a uno schema fornito',
 	'tool.json-schema-validate.description':

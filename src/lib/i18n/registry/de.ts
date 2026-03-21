@@ -1062,6 +1062,39 @@ const registryDe: Record<string, string> = {
 		'Flache Pfade stehen im Konflikt und können nicht sicher zusammengeführt werden.',
 	'ui.json_flatten.error.unsafe_key':
 		'Der Pfad enthält einen unsicheren Schlüssel (__proto__, constructor oder prototype).',
+	'ui.json_patch.tab_label': 'Patch',
+	'ui.json_patch.mode_label': 'Modus',
+	'ui.json_patch.mode.generate': 'Patch erzeugen',
+	'ui.json_patch.mode.apply': 'Patch anwenden',
+	'ui.json_patch.target_label': 'Ziel-JSON',
+	'ui.json_patch.patch_label': 'JSON Patch (RFC 6902)',
+	'ui.json_patch.target_placeholder': 'Ziel-JSON hier einfügen…',
+	'ui.json_patch.patch_placeholder': 'JSON-Patch-Array hier einfügen…',
+	'ui.json_patch.base_label': 'Basis-JSON',
+	'ui.json_patch.base_hint':
+		'Im Eingabefeld steht das Basis-JSON. Die Ausgabe zeigt den erzeugten Patch.',
+	'ui.json_patch.apply_hint':
+		'Im Eingabefeld steht das Basis-JSON. Die Ausgabe zeigt das gepatchte Ergebnis.',
+	'ui.json_patch.result_label_generate': 'Erzeugter Patch',
+	'ui.json_patch.result_label_apply': 'Gepatchtes JSON',
+	'ui.json_patch.empty_generate':
+		'Fügen Sie ein Ziel-JSON hinzu, um einen RFC-6902-Patch zu erzeugen.',
+	'ui.json_patch.empty_apply':
+		'Fügen Sie ein JSON-Patch-Array hinzu, um es auf das Basisdokument anzuwenden.',
+	'ui.json_patch.error.generic':
+		'JSON Patch konnte mit den aktuellen Eingaben nicht verarbeitet werden.',
+	'ui.json_patch.error.invalid_result': 'Patch-Vorgang fehlgeschlagen: ungültige Ausgabe.',
+	'ui.json_patch.error.invalid_patch_array':
+		'Patch-Eingabe muss ein JSON-Array mit Operationen sein.',
+	'ui.json_patch.error.invalid_operation': 'Patch enthält ein ungültiges Operationsobjekt.',
+	'ui.json_patch.error.unsupported_operation': 'Patch enthält eine nicht unterstützte Operation.',
+	'ui.json_patch.error.missing_from': 'Für diese Operation fehlt der erforderliche "from"-Pfad.',
+	'ui.json_patch.error.missing_value': 'Für diese Operation fehlt der erforderliche "value".',
+	'ui.json_patch.error.invalid_pointer': 'Patch enthält einen ungültigen JSON-Pointer-Pfad.',
+	'ui.json_patch.error.path_not_found': 'Patch-Pfad wurde im aktuellen Dokument nicht gefunden.',
+	'ui.json_patch.error.test_failed':
+		'Die Patch-Testoperation ist für den angegebenen Pfad fehlgeschlagen.',
+	'ui.json_patch.error.invalid_array_index': 'Patch verweist auf einen ungültigen Array-Index.',
 
 	// ── FAQ & Use Cases ──────────────────────────────────────────
 	'tool.json-formatter.faq.0.question': 'Was ist JSON-Formatierung?',
@@ -1450,6 +1483,30 @@ const registryDe: Record<string, string> = {
 		'Verschachtelte Strukturen aus Environment-ähnlichen Pfadschlüsseln rekonstruieren',
 	'tool.json-flatten.use_case.3':
 		'Pfadbasierte Änderungen in großen JSON-Dokumenten vor Deployments analysieren',
+	'tool.json-patch.display_name': 'JSON Patch Builder',
+	'tool.json-patch.tagline': 'RFC-6902-JSON-Patches sofort erzeugen und anwenden',
+	'tool.json-patch.description':
+		'Erzeugen Sie RFC-6902-JSON-Patches aus Basis- und Ziel-Dokumenten oder wenden Sie ein Patch-Array auf ein Basis-JSON an. Alles läuft lokal im Browser.',
+	'tool.json-patch.primary_keyword': 'json patch builder',
+	'tool.json-patch.meta_title': 'JSON Patch Builder (RFC 6902) — fmtly.dev',
+	'tool.json-patch.meta_description':
+		'JSON-Patch-Operationen aus zwei JSON-Dokumenten erzeugen oder RFC-6902-Patches direkt im Browser anwenden. Schnell, privat, ohne Upload.',
+	'tool.json-patch.operation': 'Patch',
+	'tool.json-patch.faq.0.question': 'Was ist JSON Patch (RFC 6902)?',
+	'tool.json-patch.faq.0.answer':
+		'JSON Patch ist ein Standardformat, das Änderungen als Operationen wie add, remove oder replace über JSON-Pointer-Pfade beschreibt.',
+	'tool.json-patch.faq.1.question': 'Wie funktioniert der Erzeugen-Modus?',
+	'tool.json-patch.faq.1.answer':
+		'Fügen Sie das Basis-JSON im Eingabefeld und das Ziel-JSON im Nebenfeld ein. Das Tool berechnet die nötigen Patch-Operationen.',
+	'tool.json-patch.faq.2.question': 'Wie funktioniert der Anwenden-Modus?',
+	'tool.json-patch.faq.2.answer':
+		'Fügen Sie das Basis-JSON im Eingabefeld und ein gültiges JSON-Patch-Array im Nebenfeld ein. Die Ausgabe zeigt das gepatchte Ergebnis.',
+	'tool.json-patch.use_case.0':
+		'API-Payload-Änderungen als reproduzierbare Patch-Operationen versionieren',
+	'tool.json-patch.use_case.1': 'Dokument-Updates in Test-Workflows per Patch anwenden',
+	'tool.json-patch.use_case.2':
+		'Integrationsfehler durch sicheres Wiederholen von Patch-Sequenzen analysieren',
+	'tool.json-patch.use_case.3': 'Strukturierte JSON-Änderungen über Text-Diffs hinaus prüfen',
 	'tool.json-schema-validate.display_name': 'JSON-Schema-Validator',
 	'tool.json-schema-validate.tagline': 'JSON gegen ein bereitgestelltes Schema validieren',
 	'tool.json-schema-validate.description':

@@ -146,6 +146,20 @@ export interface JsonFlattenOptions {
 	rootKey: string;
 }
 
+export type JsonPatchMode = 'generate' | 'apply';
+
+export interface JsonPatchOptions {
+	mode: JsonPatchMode;
+	operand: string;
+}
+
+interface JsonPatchOperation {
+	op: 'add' | 'remove' | 'replace' | 'move' | 'copy' | 'test';
+	path: string;
+	from?: string;
+	value?: unknown;
+}
+
 interface ResolvedJsonFlattenOptions {
 	mode: JsonFlattenMode;
 	separator: string;
@@ -543,6 +557,46 @@ export function generateJsonSchema(json: string): string {
 	return JSON.stringify(schema, null, 2);
 }
 
+export function generateJsonPatch(baseJson: string, targetJson: string): string {
+	const baseParsed = parseJSON(baseJson);
+	if (!baseParsed.success) {
+		throw new Error(baseParsed.error.plainLanguageExplanation);
+	}
+
+	const targetParsed = parseJSON(targetJson);
+	if (!targetParsed.success) {
+		throw new Error(targetParsed.error.plainLanguageExplanation);
+	}
+
+	const operations: JsonPatchOperation[] = [];
+	buildJsonPatchOperations(baseParsed.data, targetParsed.data, '', operations);
+	return JSON.stringify(operations, null, 2);
+}
+
+export function applyJsonPatch(baseJson: string, patchJson: string): string {
+	const baseParsed = parseJSON(baseJson);
+	if (!baseParsed.success) {
+		throw new Error(baseParsed.error.plainLanguageExplanation);
+	}
+
+	const patchParsed = parseJSON(patchJson);
+	if (!patchParsed.success) {
+		throw new Error(patchParsed.error.plainLanguageExplanation);
+	}
+
+	if (!Array.isArray(patchParsed.data)) {
+		throw new Error('ui.json_patch.error.invalid_patch_array');
+	}
+
+	let currentDocument: unknown = structuredClone(baseParsed.data);
+	for (const candidate of patchParsed.data) {
+		const operation = normalizePatchOperation(candidate);
+		currentDocument = applyPatchOperation(currentDocument, operation);
+	}
+
+	return JSON.stringify(currentDocument, null, 2);
+}
+
 export async function jsonpathQuery(json: string, query: string): Promise<unknown> {
 	const { JSONPath } = await import('jsonpath-plus');
 	const parsed = JSON.parse(json) as JsonValue;
@@ -862,7 +916,349 @@ function isRecordObject(value: unknown): value is Record<string, unknown> {
 	return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
-function isTraversableContainer(value: unknown): value is Record<string, unknown> | unknown[] {
+function buildJsonPatchOperations(
+	base: unknown,
+	target: unknown,
+	path: string,
+	operations: JsonPatchOperation[]
+): void {
+	if (isDeepEqual(base, target)) {
+		return;
+	}
+
+	if (Array.isArray(base) && Array.isArray(target)) {
+		buildArrayPatchOperations(base, target, path, operations);
+		return;
+	}
+
+	if (isRecordObject(base) && isRecordObject(target)) {
+		buildObjectPatchOperations(base, target, path, operations);
+		return;
+	}
+
+	operations.push({
+		op: path === '' ? 'add' : 'replace',
+		path: path || '/',
+		value: target
+	});
+}
+
+function buildObjectPatchOperations(
+	base: Record<string, unknown>,
+	target: Record<string, unknown>,
+	path: string,
+	operations: JsonPatchOperation[]
+): void {
+	const baseKeys = Object.keys(base).sort();
+	const targetKeys = Object.keys(target).sort();
+
+	for (const key of baseKeys) {
+		if (!Object.prototype.hasOwnProperty.call(target, key)) {
+			operations.push({ op: 'remove', path: `${path}/${encodePointerToken(key)}` || '/' });
+		}
+	}
+
+	for (const key of targetKeys) {
+		const nextPath = `${path}/${encodePointerToken(key)}`;
+		if (!Object.prototype.hasOwnProperty.call(base, key)) {
+			operations.push({ op: 'add', path: nextPath, value: target[key] });
+			continue;
+		}
+
+		buildJsonPatchOperations(base[key], target[key], nextPath, operations);
+	}
+}
+
+function buildArrayPatchOperations(
+	base: unknown[],
+	target: unknown[],
+	path: string,
+	operations: JsonPatchOperation[]
+): void {
+	const sharedLength = Math.min(base.length, target.length);
+
+	for (let index = 0; index < sharedLength; index += 1) {
+		buildJsonPatchOperations(base[index], target[index], `${path}/${index}`, operations);
+	}
+
+	for (let index = base.length - 1; index >= target.length; index -= 1) {
+		operations.push({ op: 'remove', path: `${path}/${index}` || '/' });
+	}
+
+	for (let index = base.length; index < target.length; index += 1) {
+		operations.push({ op: 'add', path: `${path}/-` || '/-', value: target[index] });
+	}
+}
+
+function normalizePatchOperation(candidate: unknown): JsonPatchOperation {
+	if (!isRecordObject(candidate)) {
+		throw new Error('ui.json_patch.error.invalid_operation');
+	}
+
+	const op = candidate.op;
+	const path = candidate.path;
+	if (typeof op !== 'string' || typeof path !== 'string') {
+		throw new Error('ui.json_patch.error.invalid_operation');
+	}
+
+	if (!['add', 'remove', 'replace', 'move', 'copy', 'test'].includes(op)) {
+		throw new Error('ui.json_patch.error.unsupported_operation');
+	}
+
+	if ((op === 'move' || op === 'copy') && typeof candidate.from !== 'string') {
+		throw new Error('ui.json_patch.error.missing_from');
+	}
+
+	if (
+		(op === 'add' || op === 'replace' || op === 'test') &&
+		!Object.prototype.hasOwnProperty.call(candidate, 'value')
+	) {
+		throw new Error('ui.json_patch.error.missing_value');
+	}
+
+	const normalizedOp = op as JsonPatchOperation['op'];
+
+	return {
+		op: normalizedOp,
+		path,
+		from: typeof candidate.from === 'string' ? candidate.from : undefined,
+		value: candidate.value
+	};
+}
+
+function applyPatchOperation(document: unknown, operation: JsonPatchOperation): unknown {
+	if (operation.path === '' || operation.path === '/') {
+		if (operation.op === 'add' || operation.op === 'replace') {
+			return structuredClone(operation.value);
+		}
+		if (operation.op === 'remove') {
+			return null;
+		}
+		if (operation.op === 'test') {
+			if (!isDeepEqual(document, operation.value)) {
+				throw new Error('ui.json_patch.error.test_failed');
+			}
+			return document;
+		}
+	}
+
+	if (operation.op === 'move' || operation.op === 'copy') {
+		if (!operation.from) {
+			throw new Error('ui.json_patch.error.missing_from');
+		}
+		const sourceValue = getByPointer(document, operation.from);
+		const nextValue = operation.op === 'copy' ? structuredClone(sourceValue) : sourceValue;
+		let nextDocument = document;
+		if (operation.op === 'move') {
+			nextDocument = removeByPointer(nextDocument, operation.from);
+		}
+		return addOrReplaceByPointer(nextDocument, operation.path, nextValue, 'add');
+	}
+
+	if (operation.op === 'add' || operation.op === 'replace') {
+		return addOrReplaceByPointer(document, operation.path, operation.value, operation.op);
+	}
+
+	if (operation.op === 'remove') {
+		return removeByPointer(document, operation.path);
+	}
+
+	if (operation.op === 'test') {
+		const currentValue = getByPointer(document, operation.path);
+		if (!isDeepEqual(currentValue, operation.value)) {
+			throw new Error('ui.json_patch.error.test_failed');
+		}
+		return document;
+	}
+
+	throw new Error('ui.json_patch.error.unsupported_operation');
+}
+
+function addOrReplaceByPointer(
+	document: unknown,
+	pointer: string,
+	value: unknown,
+	mode: 'add' | 'replace'
+): unknown {
+	const { parent, token } = resolvePointerParent(document, pointer);
+
+	if (Array.isArray(parent)) {
+		if (token === '-') {
+			if (mode === 'replace') {
+				throw new Error('ui.json_patch.error.invalid_array_index');
+			}
+			parent.push(structuredClone(value));
+			return document;
+		}
+
+		const index = Number(token);
+		if (!Number.isInteger(index) || index < 0) {
+			throw new Error('ui.json_patch.error.invalid_array_index');
+		}
+
+		if (mode === 'replace') {
+			if (index >= parent.length) {
+				throw new Error('ui.json_patch.error.path_not_found');
+			}
+			parent[index] = structuredClone(value);
+			return document;
+		}
+
+		if (index > parent.length) {
+			throw new Error('ui.json_patch.error.invalid_array_index');
+		}
+
+		parent.splice(index, 0, structuredClone(value));
+		return document;
+	}
+
+	if (!isRecordObject(parent)) {
+		throw new Error('ui.json_patch.error.path_not_found');
+	}
+
+	if (mode === 'replace' && !Object.prototype.hasOwnProperty.call(parent, token)) {
+		throw new Error('ui.json_patch.error.path_not_found');
+	}
+
+	parent[token] = structuredClone(value);
+	return document;
+}
+
+function removeByPointer(document: unknown, pointer: string): unknown {
+	const { parent, token } = resolvePointerParent(document, pointer);
+
+	if (Array.isArray(parent)) {
+		const index = Number(token);
+		if (!Number.isInteger(index) || index < 0 || index >= parent.length) {
+			throw new Error('ui.json_patch.error.path_not_found');
+		}
+		parent.splice(index, 1);
+		return document;
+	}
+
+	if (!isRecordObject(parent) || !Object.prototype.hasOwnProperty.call(parent, token)) {
+		throw new Error('ui.json_patch.error.path_not_found');
+	}
+
+	delete parent[token];
+	return document;
+}
+
+function getByPointer(document: unknown, pointer: string): unknown {
+	const tokens = parsePointer(pointer);
+	let current: unknown = document;
+
+	for (const token of tokens) {
+		if (Array.isArray(current)) {
+			const index = Number(token);
+			if (!Number.isInteger(index) || index < 0 || index >= current.length) {
+				throw new Error('ui.json_patch.error.path_not_found');
+			}
+			current = current[index];
+			continue;
+		}
+
+		if (!isRecordObject(current) || !Object.prototype.hasOwnProperty.call(current, token)) {
+			throw new Error('ui.json_patch.error.path_not_found');
+		}
+
+		current = current[token];
+	}
+
+	return current;
+}
+
+function resolvePointerParent(
+	document: unknown,
+	pointer: string
+): { parent: unknown; token: string } {
+	const tokens = parsePointer(pointer);
+	if (tokens.length === 0) {
+		throw new Error('ui.json_patch.error.invalid_pointer');
+	}
+
+	let parent: unknown = document;
+	for (let index = 0; index < tokens.length - 1; index += 1) {
+		const token = tokens[index];
+		if (Array.isArray(parent)) {
+			const arrayIndex = Number(token);
+			if (!Number.isInteger(arrayIndex) || arrayIndex < 0 || arrayIndex >= parent.length) {
+				throw new Error('ui.json_patch.error.path_not_found');
+			}
+			parent = parent[arrayIndex];
+			continue;
+		}
+
+		if (!isRecordObject(parent) || !Object.prototype.hasOwnProperty.call(parent, token)) {
+			throw new Error('ui.json_patch.error.path_not_found');
+		}
+
+		parent = parent[token];
+	}
+
+	return {
+		parent,
+		token: tokens[tokens.length - 1] ?? ''
+	};
+}
+
+function parsePointer(pointer: string): string[] {
+	if (pointer === '' || pointer === '/') {
+		return [];
+	}
+
+	if (!pointer.startsWith('/')) {
+		throw new Error('ui.json_patch.error.invalid_pointer');
+	}
+
+	return pointer
+		.slice(1)
+		.split('/')
+		.map((token) => token.replaceAll('~1', '/').replaceAll('~0', '~'));
+}
+
+function encodePointerToken(token: string): string {
+	return token.replaceAll('~', '~0').replaceAll('/', '~1');
+}
+
+function isDeepEqual(left: unknown, right: unknown): boolean {
+	if (left === right) {
+		return true;
+	}
+
+	if (Array.isArray(left) && Array.isArray(right)) {
+		if (left.length !== right.length) {
+			return false;
+		}
+		for (let index = 0; index < left.length; index += 1) {
+			if (!isDeepEqual(left[index], right[index])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	if (isRecordObject(left) && isRecordObject(right)) {
+		const leftKeys = Object.keys(left);
+		const rightKeys = Object.keys(right);
+		if (leftKeys.length !== rightKeys.length) {
+			return false;
+		}
+		for (const key of leftKeys) {
+			if (!Object.prototype.hasOwnProperty.call(right, key)) {
+				return false;
+			}
+			if (!isDeepEqual(left[key], right[key])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	return false;
+}
+
+function isTraversableContainer(value: unknown): boolean {
 	return Array.isArray(value) || isRecordObject(value);
 }
 

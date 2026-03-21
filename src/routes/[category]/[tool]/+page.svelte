@@ -10,6 +10,7 @@
 	import DiffInputPanel from "$components/panels/shared/DiffInputPanel.svelte";
 	import DiffResultsPanel from "$components/tool/DiffResultsPanel.svelte";
 	import JsonInputPanel from "$components/panels/json/JsonInputPanel.svelte";
+	import JsonPatchPanel from "$components/panels/json/JsonPatchPanel.svelte";
 	import JsonOutputPanel from "$components/panels/json/JsonOutputPanel.svelte";
 	import JsonQueryOutputPanel from "$components/panels/json/JsonQueryOutputPanel.svelte";
 	import JsonValidatorPanel from "$components/panels/json/JsonValidatorPanel.svelte";
@@ -650,6 +651,8 @@
 					sampleInput={data.tool.sampleInput ?? ""}
 					workspaceTools={[]}
 				/>
+			{:else if data.tool.category === "json" && data.tool.slug === "patch"}
+				<JsonPatchPanel toolSlug={data.tool.slug} />
 			{:else if data.tool.category === "json" && ["validator", "schema-validate"].includes(data.tool.slug)}
 				<JsonValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "json" && !["validator", "schema-validate"].includes(data.tool.slug)}
@@ -745,7 +748,7 @@
 					/>
 				{:else if data.tool.category === "json" && ["jsonpath", "jmespath"].includes(data.tool.slug)}
 					<JsonQueryOutputPanel toolSlug={data.tool.slug === "jsonpath" ? "jsonpath" : "jmespath"} />
-				{:else if data.tool.category === "json" && data.tool.slug !== "validator"}
+				{:else if data.tool.category === "json" && !["validator", "patch"].includes(data.tool.slug)}
 					<JsonOutputPanel
 						outputLanguage={data.tool.outputLanguage}
 						downloadFilename={data.tool.id}

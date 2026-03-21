@@ -64,12 +64,12 @@ Core category — format, validate, convert, diff, and query structured data.
 | 51 | JSON → Go Structs | `json/to-go` | done | Generate idiomatic Go struct definitions from JSON with nested type inference, json tags, and optional-field handling. |
 | 52 | JSON → TypeScript Types | `json/to-typescript` | done | Generate TypeScript interfaces and union types from JSON samples with nested inference, optional fields, and null-safe output. |
 | 53 | JSON Flattener / Unflattener | `json/flatten` | done | Flatten deeply nested JSON into path-based key maps and restore nested JSON instantly with array-safe paths. |
+| 54 | JSON Patch Builder | `json/patch` | done | Generate RFC 6902 JSON Patch from two documents and apply patch arrays to base JSON payloads. |
 
 ### Backlog — Data Formats
 
 | 51 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 53 | JSON Patch Builder | `json/patch` | Generate RFC 6902 JSON Patch from two documents. Apply patches to a base document. |
 | 56 | JSON → Rust Serde | `json/to-rust` | Generate Rust serde structs from JSON. |
 | 57 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
 | 58 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
