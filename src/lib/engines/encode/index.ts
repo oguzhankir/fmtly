@@ -79,3 +79,21 @@ export {
 	type UnicodeInspectorWorkerRequest,
 	type UnicodeInspectorWorkerResponse
 } from './unicode-inspector.js';
+
+export {
+	processHex,
+	shouldUseHexWorker,
+	HEX_WORKER_THRESHOLD_BYTES,
+	type HexAction,
+	type HexByteDelimiter,
+	type HexEncodeOptions,
+	type HexDecodeOptions,
+	type HexOptions,
+	type HexWarningCode,
+	type HexErrorCode,
+	type HexError,
+	type HexMetrics,
+	type HexResult,
+	type HexWorkerRequest,
+	type HexWorkerResponse
+} from './hex.js';

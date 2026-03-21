@@ -2609,6 +2609,73 @@ const registryTr: Record<string, string> = {
 	'ui.unicode_inspector.gc.Cs': 'Diğer, vekil',
 	'ui.unicode_inspector.gc.Co': 'Diğer, özel kullanım',
 	'ui.unicode_inspector.gc.Cn': 'Diğer, atanmamış',
+	// ── Hex ↔ Metin — araç ───────────────────────────────────────────────────
+	'tool.encode-hex-encode-decode.display_name': 'Hex ↔ ASCII / UTF-8',
+	'tool.encode-hex-encode-decode.tagline':
+		'UTF-8 metnini onaltılık baytlara veya hex dökümlerini okunur metne dönüştürün',
+	'tool.encode-hex-encode-decode.description':
+		'Her UTF-8 dizisini büyük/küçük harf, ayraçlar ve satır kaydırmalarıyla onaltılık bayt çiftleri olarak kodlayın. Boşluk, virgül ve 0x öneklerine izin veren hex’i katı UTF-8 doğrulamasıyla metne çözün. Büyük girdiler Web Worker’da işlenir; her şey tarayıcıda kalır.',
+	'tool.encode-hex-encode-decode.primary_keyword': 'hex metin utf-8',
+	'tool.encode-hex-encode-decode.meta_title': 'Hex ↔ Metin — UTF-8 ve ASCII | fmtly.dev',
+	'tool.encode-hex-encode-decode.meta_description':
+		'Hex’i UTF-8 metne veya metni hex’e tarayıcıda dönüştürün. Ayraçlar, büyük/küçük harf, satır kırımı, 0x önekleri ve Worker. Gizli ve hızlı.',
+	'tool.encode-hex-encode-decode.operation': 'Hex kodla / çöz',
+	'tool.encode-hex-encode-decode.faq.0.question': 'Verilerim sunucuya gönderilir mi?',
+	'tool.encode-hex-encode-decode.faq.0.answer':
+		'Hayır. Tüm dönüşüm tarayıcınızda çalışır. Metin ve hex cihazınızdan çıkmaz.',
+	'tool.encode-hex-encode-decode.faq.1.question': 'Araç hangi kodlamayı kullanır?',
+	'tool.encode-hex-encode-decode.faq.1.answer':
+		'Metin her iki yönde UTF-8 olarak yorumlanır. ASCII, UTF-8’in alt kümesidir; düz İngilizce aynı şekilde çalışır.',
+	'tool.encode-hex-encode-decode.faq.2.question':
+		'Çözme «geçersiz UTF-8» ile neden başarısız olur?',
+	'tool.encode-hex-encode-decode.faq.2.answer':
+		'Çözülen baytlar geçerli UTF-8 oluşturmalıdır. Rastgele ikili hex veya eski kodlamalar metin olarak görünmez — doğru aracı kullanın.',
+	'tool.encode-hex-encode-decode.faq.3.question': 'Büyük girdi için neden Web Worker?',
+	'tool.encode-hex-encode-decode.faq.3.answer':
+		'500 KB üzeri girdiler ana iş parçacığı dışında işlenir; yazma, kaydırma ve kontroller akıcı kalır.',
+	'tool.encode-hex-encode-decode.use_case.0':
+		'Günlüklerden veya yakalardan pano hex’ini okunur UTF-8 parçalarına çevirme',
+	'tool.encode-hex-encode-decode.use_case.1':
+		'Belge, test veya gömülü sabitler için biçimli hex dökümleri üretme',
+	'tool.encode-hex-encode-decode.use_case.2':
+		'Emoji ve Latin dışı karakterlerin UTF-8 bayt dizilerine nasıl genişlediğini doğrulama',
+	'tool.encode-hex-encode-decode.use_case.3':
+		'API, jeton veya kodlanmış yük hata ayıklarken hex ile metin arasında hızlı geçiş',
+	// ── Hex ↔ Metin — arayüz ─────────────────────────────────────────────────
+	'ui.hex.tab_label': 'Hex',
+	'ui.hex.action_label': 'İşlem',
+	'ui.hex.action.encode': 'Metin → hex',
+	'ui.hex.action.decode': 'Hex → metin',
+	'ui.hex.hex_case_label': 'Hex büyük/küçük',
+	'ui.hex.hex_case.upper': 'Büyük harf',
+	'ui.hex.hex_case.lower': 'Küçük harf',
+	'ui.hex.delimiter_label': 'Bayt ayırıcı',
+	'ui.hex.delimiter.space': 'Boşluk',
+	'ui.hex.delimiter.none': 'Yok',
+	'ui.hex.delimiter.comma': 'Virgül',
+	'ui.hex.bytes_per_line_label': 'Satır başına bayt',
+	'ui.hex.bytes_per_line.off': 'Satır kırma yok',
+	'ui.hex.bytes_per_line.n': '{n} bayt',
+	'ui.hex.decode_options_label': 'Çözüm seçenekleri',
+	'ui.hex.option.ignore_whitespace': 'Boşluk ve satır sonlarını yok say',
+	'ui.hex.option.ignore_commas': 'Virgül ayırıcılarını yok say',
+	'ui.hex.option.allow_0x': 'Her bayttan önce 0x önekine izin ver',
+	'ui.hex.worker_active': 'Büyük girdi algılandı (>{size}). İşlem Web Worker üzerinde çalışır.',
+	'ui.hex.worker_failed': 'Worker işlemi başarısız. Ana thread işlemine dönülüyor.',
+	'ui.hex.worker_badge': 'Worker',
+	'ui.hex.button.swap_direction': 'Yönü değiştir',
+	'ui.hex.button.apply_output': 'Çıktıyı girdiye uygula',
+	'ui.hex.input_label': 'Girdi',
+	'ui.hex.output_label': 'Çıktı',
+	'ui.hex.input_placeholder': 'Kodlanacak düz metin veya UTF-8’e çözülecek hex rakamları…',
+	'ui.hex.output_placeholder': 'Hex çıktısı veya çözülmüş UTF-8 metni burada görünür…',
+	'ui.hex.characters': 'karakter',
+	'ui.hex.toast.applied': 'Çıktı girdiye uygulandı',
+	'ui.hex.warning.whitespace_skipped': 'Hex rakamları ayrıştırılırken boşluklar atlandı.',
+	'ui.hex.warning.commas_skipped': 'Virgül ayırıcıları ayrıştırılırken atlandı.',
+	'ui.hex.error.invalid_hex_digit': 'Hex girdisinde geçersiz karakter (yaklaşık sütun {position}).',
+	'ui.hex.error.odd_hex_length': 'Tek sayıda hex rakamı ({count}). Baytlar için çiftler gerekir.',
+	'ui.hex.error.invalid_utf8': 'Çözülen baytlar geçerli UTF-8 değil ({bytes} bayt).',
 	// ── URL Kodla / Çöz — arayüz metinleri ───────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'İşlem',

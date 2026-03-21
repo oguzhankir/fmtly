@@ -2617,6 +2617,77 @@ const registryIt: Record<string, string> = {
 	'ui.unicode_inspector.gc.Cs': 'Altro, surrogato',
 	'ui.unicode_inspector.gc.Co': 'Altro, uso privato',
 	'ui.unicode_inspector.gc.Cn': 'Altro, non assegnato',
+	// ── Hex ↔ Testo — strumento ─────────────────────────────────────────────
+	'tool.encode-hex-encode-decode.display_name': 'Hex ↔ ASCII / UTF-8',
+	'tool.encode-hex-encode-decode.tagline':
+		'Converti testo UTF-8 in byte esadecimali o dump hex in testo leggibile',
+	'tool.encode-hex-encode-decode.description':
+		'Codifica qualsiasi stringa UTF-8 in coppie di byte hex con maiuscole/minuscole, separatori e a capo configurabili. Decodifica hex permissivo (spazi, virgole, prefissi 0x) in testo con validazione UTF-8 rigorosa. Gli input grandi usano un Web Worker; tutto resta nel browser.',
+	'tool.encode-hex-encode-decode.primary_keyword': 'hex a testo utf-8',
+	'tool.encode-hex-encode-decode.meta_title': 'Hex ↔ Testo — UTF-8 e ASCII | fmtly.dev',
+	'tool.encode-hex-encode-decode.meta_description':
+		'Converti hex in testo UTF-8 o testo in hex nel browser. Delimitatori, maiuscole, a capo, prefissi 0x e Worker. Privato e veloce.',
+	'tool.encode-hex-encode-decode.operation': 'Codifica / decodifica hex',
+	'tool.encode-hex-encode-decode.faq.0.question': 'I miei dati vengono inviati a un server?',
+	'tool.encode-hex-encode-decode.faq.0.answer':
+		'No. Tutta la conversione avviene nel browser. Testo ed hex non lasciano il dispositivo.',
+	'tool.encode-hex-encode-decode.faq.1.question': 'Quale codifica usa lo strumento?',
+	'tool.encode-hex-encode-decode.faq.1.answer':
+		'Il testo è interpretato come UTF-8 in entrambe le direzioni. L’ASCII è un sottoinsieme dell’UTF-8; l’inglese semplice si comporta allo stesso modo.',
+	'tool.encode-hex-encode-decode.faq.2.question':
+		'Perché la decodifica fallisce con «UTF-8 non valido»?',
+	'tool.encode-hex-encode-decode.faq.2.answer':
+		'I byte decodificati devono formare UTF-8 valido. Hex binario casuale o altre codifiche non diventeranno testo — usa lo strumento giusto.',
+	'tool.encode-hex-encode-decode.faq.3.question': 'Perché un Web Worker per input grandi?',
+	'tool.encode-hex-encode-decode.faq.3.answer':
+		'Gli input oltre 500 KB sono elaborati fuori dal thread principale per mantenere fluidi digitazione, scorrimento e controlli.',
+	'tool.encode-hex-encode-decode.use_case.0':
+		'Ricondurre hex dagli appunti di log o catture a frammenti UTF-8 leggibili',
+	'tool.encode-hex-encode-decode.use_case.1':
+		'Produrre dump hex formattati per documentazione, test o costanti embedded',
+	'tool.encode-hex-encode-decode.use_case.2':
+		'Verificare come emoji e caratteri non latini si espandono in byte UTF-8',
+	'tool.encode-hex-encode-decode.use_case.3':
+		'Passare rapidamente tra hex e testo durante il debug di API, token o payload codificati',
+	// ── Hex ↔ Testo — interfaccia ────────────────────────────────────────────
+	'ui.hex.tab_label': 'Hex',
+	'ui.hex.action_label': 'Azione',
+	'ui.hex.action.encode': 'Testo → hex',
+	'ui.hex.action.decode': 'Hex → testo',
+	'ui.hex.hex_case_label': 'Maiuscole / minuscole',
+	'ui.hex.hex_case.upper': 'Maiuscole',
+	'ui.hex.hex_case.lower': 'Minuscole',
+	'ui.hex.delimiter_label': 'Separatore byte',
+	'ui.hex.delimiter.space': 'Spazio',
+	'ui.hex.delimiter.none': 'Nessuno',
+	'ui.hex.delimiter.comma': 'Virgola',
+	'ui.hex.bytes_per_line_label': 'Byte per riga',
+	'ui.hex.bytes_per_line.off': 'Nessun a capo',
+	'ui.hex.bytes_per_line.n': '{n} byte',
+	'ui.hex.decode_options_label': 'Opzioni decodifica',
+	'ui.hex.option.ignore_whitespace': 'Ignora spazi e a capo',
+	'ui.hex.option.ignore_commas': 'Ignora virgole separatrici',
+	'ui.hex.option.allow_0x': 'Consenti prefisso 0x prima di ogni byte',
+	'ui.hex.worker_active':
+		'Input grande rilevato (>{size}). L’elaborazione avviene in un Web Worker.',
+	'ui.hex.worker_failed': 'Elaborazione Worker non riuscita. Ripiego sul thread principale.',
+	'ui.hex.worker_badge': 'Worker',
+	'ui.hex.button.swap_direction': 'Inverti direzione',
+	'ui.hex.button.apply_output': 'Applica output all’input',
+	'ui.hex.input_label': 'Input',
+	'ui.hex.output_label': 'Output',
+	'ui.hex.input_placeholder': 'Testo da codificare, o cifre hex da decodificare in UTF-8…',
+	'ui.hex.output_placeholder': 'L’output hex o il testo UTF-8 decodificato appare qui…',
+	'ui.hex.characters': 'caratteri',
+	'ui.hex.toast.applied': 'Output applicato all’input',
+	'ui.hex.warning.whitespace_skipped':
+		'Gli spazi bianchi sono stati ignorati durante l’analisi delle cifre hex.',
+	'ui.hex.warning.commas_skipped': 'Le virgole separatrici sono state ignorate durante l’analisi.',
+	'ui.hex.error.invalid_hex_digit':
+		'Carattere non valido nell’input hex (vicino alla colonna {position}).',
+	'ui.hex.error.odd_hex_length':
+		'Numero dispari di cifre hex ({count}). Servono coppie per i byte.',
+	'ui.hex.error.invalid_utf8': 'I byte decodificati non sono UTF-8 valido ({bytes} byte).',
 	// ── Codifica / Decodifica URL — stringhe interfaccia ─────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Azione',

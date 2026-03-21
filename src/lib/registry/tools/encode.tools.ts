@@ -195,6 +195,54 @@ export const encodeTools: ToolDefinition[] = [
 		sampleInput: 'Hello 你好 🫶 🏳️‍🌈 — café\nU+1F600'
 	},
 	{
+		id: 'encode-hex-encode-decode',
+		category: 'encode',
+		slug: 'hex',
+		displayName: 'tool.encode-hex-encode-decode.display_name',
+		tagline: 'tool.encode-hex-encode-decode.tagline',
+		description: 'tool.encode-hex-encode-decode.description',
+		primaryKeyword: 'tool.encode-hex-encode-decode.primary_keyword',
+		metaTitle: 'tool.encode-hex-encode-decode.meta_title',
+		metaDescription: 'tool.encode-hex-encode-decode.meta_description',
+		engine: 'encode',
+		operation: 'tool.encode-hex-encode-decode.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'encode', slug: 'unicode' },
+			{ category: 'encode', slug: 'base64' },
+			{ category: 'text', slug: 'escape' },
+			{ category: 'encode', slug: 'url' }
+		],
+		faqs: [
+			{
+				question: 'tool.encode-hex-encode-decode.faq.0.question',
+				answer: 'tool.encode-hex-encode-decode.faq.0.answer'
+			},
+			{
+				question: 'tool.encode-hex-encode-decode.faq.1.question',
+				answer: 'tool.encode-hex-encode-decode.faq.1.answer'
+			},
+			{
+				question: 'tool.encode-hex-encode-decode.faq.2.question',
+				answer: 'tool.encode-hex-encode-decode.faq.2.answer'
+			},
+			{
+				question: 'tool.encode-hex-encode-decode.faq.3.question',
+				answer: 'tool.encode-hex-encode-decode.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.encode-hex-encode-decode.use_case.0',
+			'tool.encode-hex-encode-decode.use_case.1',
+			'tool.encode-hex-encode-decode.use_case.2',
+			'tool.encode-hex-encode-decode.use_case.3'
+		],
+		sampleInput: 'fmtly — UTF-8 safe: café 你好 👋'
+	},
+	{
 		id: 'encode-jwt-decoder',
 		category: 'encode',
 		slug: 'jwt',

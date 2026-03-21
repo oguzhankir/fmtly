@@ -2629,6 +2629,77 @@ const registryEs: Record<string, string> = {
 	'ui.unicode_inspector.gc.Cs': 'Otro, sustituto',
 	'ui.unicode_inspector.gc.Co': 'Otro, uso privado',
 	'ui.unicode_inspector.gc.Cn': 'Otro, sin asignar',
+	// ── Hex ↔ Texto — herramienta ─────────────────────────────────────────────
+	'tool.encode-hex-encode-decode.display_name': 'Hex ↔ ASCII / UTF-8',
+	'tool.encode-hex-encode-decode.tagline':
+		'Convierte texto UTF-8 a bytes hexadecimales o vuelca hex a texto legible',
+	'tool.encode-hex-encode-decode.description':
+		'Codifica cualquier cadena UTF-8 en pares de bytes hex con mayúsculas, separadores y saltos de línea configurables. Decodifica hex permisivo (espacios, comas, prefijos 0x) a texto con validación UTF-8 estricta. Las entradas grandes usan Web Worker; todo ocurre en el navegador.',
+	'tool.encode-hex-encode-decode.primary_keyword': 'hex a texto utf-8',
+	'tool.encode-hex-encode-decode.meta_title': 'Hex ↔ Texto — UTF-8 y ASCII | fmtly.dev',
+	'tool.encode-hex-encode-decode.meta_description':
+		'Convierte hex a texto UTF-8 o texto a hex en el navegador. Delimitadores, mayúsculas, saltos, prefijos 0x y Worker. Privado y rápido.',
+	'tool.encode-hex-encode-decode.operation': 'Codificar / decodificar hex',
+	'tool.encode-hex-encode-decode.faq.0.question': '¿Se envían mis datos a un servidor?',
+	'tool.encode-hex-encode-decode.faq.0.answer':
+		'No. Toda la conversión se ejecuta en tu navegador. Tu texto y hex no salen del dispositivo.',
+	'tool.encode-hex-encode-decode.faq.1.question': '¿Qué codificación usa la herramienta?',
+	'tool.encode-hex-encode-decode.faq.1.answer':
+		'El texto se interpreta como UTF-8 en ambos sentidos. ASCII es un subconjunto de UTF-8, así que el inglés simple se comporta igual.',
+	'tool.encode-hex-encode-decode.faq.2.question':
+		'¿Por qué falla la decodificación con «UTF-8 no válido»?',
+	'tool.encode-hex-encode-decode.faq.2.answer':
+		'Los bytes decodificados deben formar UTF-8 válido. Hex binario aleatorio u otras codificaciones no se mostrarán como texto; usa la herramienta adecuada.',
+	'tool.encode-hex-encode-decode.faq.3.question': '¿Por qué un Web Worker con entradas grandes?',
+	'tool.encode-hex-encode-decode.faq.3.answer':
+		'Las entradas de más de 500 KB se procesan fuera del hilo principal para mantener fluidos la escritura, el desplazamiento y los controles.',
+	'tool.encode-hex-encode-decode.use_case.0':
+		'Pasar hex del portapapeles de registros o capturas a fragmentos UTF-8 legibles',
+	'tool.encode-hex-encode-decode.use_case.1':
+		'Generar volcados hex formateados para documentación, pruebas o constantes embebidas',
+	'tool.encode-hex-encode-decode.use_case.2':
+		'Comprobar cómo los emoji y caracteres no latinos se expanden a bytes UTF-8',
+	'tool.encode-hex-encode-decode.use_case.3':
+		'Alternar rápidamente entre hex y texto al depurar APIs, tokens o cargas codificadas',
+	// ── Hex ↔ Texto — interfaz ────────────────────────────────────────────────
+	'ui.hex.tab_label': 'Hex',
+	'ui.hex.action_label': 'Acción',
+	'ui.hex.action.encode': 'Texto → hex',
+	'ui.hex.action.decode': 'Hex → texto',
+	'ui.hex.hex_case_label': 'Mayúsculas / minúsculas',
+	'ui.hex.hex_case.upper': 'Mayúsculas',
+	'ui.hex.hex_case.lower': 'Minúsculas',
+	'ui.hex.delimiter_label': 'Separador de bytes',
+	'ui.hex.delimiter.space': 'Espacio',
+	'ui.hex.delimiter.none': 'Ninguno',
+	'ui.hex.delimiter.comma': 'Coma',
+	'ui.hex.bytes_per_line_label': 'Bytes por línea',
+	'ui.hex.bytes_per_line.off': 'Sin salto',
+	'ui.hex.bytes_per_line.n': '{n} bytes',
+	'ui.hex.decode_options_label': 'Opciones de decodificación',
+	'ui.hex.option.ignore_whitespace': 'Ignorar espacios y saltos de línea',
+	'ui.hex.option.ignore_commas': 'Ignorar comas separadoras',
+	'ui.hex.option.allow_0x': 'Permitir prefijo 0x antes de cada byte',
+	'ui.hex.worker_active':
+		'Se detectó una entrada grande (>{size}). El procesamiento se ejecuta en un Web Worker.',
+	'ui.hex.worker_failed': 'Falló el procesamiento en Worker. Volviendo al hilo principal.',
+	'ui.hex.worker_badge': 'Worker',
+	'ui.hex.button.swap_direction': 'Cambiar dirección',
+	'ui.hex.button.apply_output': 'Aplicar salida a la entrada',
+	'ui.hex.input_label': 'Entrada',
+	'ui.hex.output_label': 'Salida',
+	'ui.hex.input_placeholder': 'Texto plano para codificar, o dígitos hex para decodificar a UTF-8…',
+	'ui.hex.output_placeholder': 'La salida hex o el texto UTF-8 decodificado aparece aquí…',
+	'ui.hex.characters': 'caracteres',
+	'ui.hex.toast.applied': 'La salida se aplicó a la entrada',
+	'ui.hex.warning.whitespace_skipped':
+		'Se ignoraron espacios en blanco al analizar los dígitos hex.',
+	'ui.hex.warning.commas_skipped': 'Se ignoraron comas separadoras al analizar.',
+	'ui.hex.error.invalid_hex_digit':
+		'Carácter no válido en la entrada hex (cerca de la columna {position}).',
+	'ui.hex.error.odd_hex_length':
+		'Cantidad impar de dígitos hex ({count}). Se requieren pares para bytes.',
+	'ui.hex.error.invalid_utf8': 'Los bytes decodificados no son UTF-8 válido ({bytes} bytes).',
 	// ── Codificar / Decodificar URL — cadenas de interfaz ────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Acción',

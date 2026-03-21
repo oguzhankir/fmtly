@@ -2546,6 +2546,73 @@ const registryEn: Record<string, string> = {
 	'ui.unicode_inspector.gc.Cs': 'Other, surrogate',
 	'ui.unicode_inspector.gc.Co': 'Other, private use',
 	'ui.unicode_inspector.gc.Cn': 'Other, not assigned',
+	// ── Hex ↔ Text tool ──────────────────────────────────────────────────────
+	'tool.encode-hex-encode-decode.display_name': 'Hex ↔ ASCII / UTF-8',
+	'tool.encode-hex-encode-decode.tagline':
+		'Convert UTF-8 text to hex bytes or hex dumps back to readable text',
+	'tool.encode-hex-encode-decode.description':
+		'Encode any UTF-8 string to hexadecimal byte pairs with your choice of case, separators, and line wrapping. Decode permissive hex (spaces, commas, 0x prefixes) back to text with strict UTF-8 validation. Large inputs run in a Web Worker; everything stays in your browser.',
+	'tool.encode-hex-encode-decode.primary_keyword': 'hex to text utf-8',
+	'tool.encode-hex-encode-decode.meta_title': 'Hex ↔ Text — UTF-8 & ASCII | fmtly.dev',
+	'tool.encode-hex-encode-decode.meta_description':
+		'Convert hex to UTF-8 text or text to hex in your browser. Custom delimiters, case, line wrap, 0x prefixes, and Worker support. Private, fast, no upload.',
+	'tool.encode-hex-encode-decode.operation': 'Hex encode / decode',
+	'tool.encode-hex-encode-decode.faq.0.question': 'Is my data sent to a server?',
+	'tool.encode-hex-encode-decode.faq.0.answer':
+		'No. All conversion runs in your browser. Your text and hex never leave your device.',
+	'tool.encode-hex-encode-decode.faq.1.question': 'What encoding does the tool use?',
+	'tool.encode-hex-encode-decode.faq.1.answer':
+		'Text is interpreted as UTF-8 for both directions. ASCII is a subset of UTF-8, so plain English works the same way.',
+	'tool.encode-hex-encode-decode.faq.2.question': 'Why does decoding fail with “invalid UTF-8”?',
+	'tool.encode-hex-encode-decode.faq.2.answer':
+		'Decoded bytes must form valid UTF-8. Random binary hex or legacy encodings will not decode as text — use a hex dump viewer or the right codec instead.',
+	'tool.encode-hex-encode-decode.faq.3.question': 'Why use a Web Worker for large input?',
+	'tool.encode-hex-encode-decode.faq.3.answer':
+		'Inputs over 500KB are processed off the main thread so typing, scrolling, and controls stay smooth.',
+	'tool.encode-hex-encode-decode.use_case.0':
+		'Turn clipboard hex from logs or wire captures back into readable UTF-8 snippets',
+	'tool.encode-hex-encode-decode.use_case.1':
+		'Produce formatted hex dumps of strings for docs, tests, or embedded firmware constants',
+	'tool.encode-hex-encode-decode.use_case.2':
+		'Verify how emoji and non-Latin characters expand to UTF-8 byte sequences',
+	'tool.encode-hex-encode-decode.use_case.3':
+		'Quickly round-trip hex and text when debugging APIs, tokens, or encoded payloads',
+	// ── Hex ↔ Text UI ───────────────────────────────────────────────────────
+	'ui.hex.tab_label': 'Hex',
+	'ui.hex.action_label': 'Action',
+	'ui.hex.action.encode': 'Text → hex',
+	'ui.hex.action.decode': 'Hex → text',
+	'ui.hex.hex_case_label': 'Hex case',
+	'ui.hex.hex_case.upper': 'Uppercase',
+	'ui.hex.hex_case.lower': 'Lowercase',
+	'ui.hex.delimiter_label': 'Byte separator',
+	'ui.hex.delimiter.space': 'Space',
+	'ui.hex.delimiter.none': 'None',
+	'ui.hex.delimiter.comma': 'Comma',
+	'ui.hex.bytes_per_line_label': 'Bytes per line',
+	'ui.hex.bytes_per_line.off': 'No wrap',
+	'ui.hex.bytes_per_line.n': '{n} bytes',
+	'ui.hex.decode_options_label': 'Decode options',
+	'ui.hex.option.ignore_whitespace': 'Ignore spaces and line breaks',
+	'ui.hex.option.ignore_commas': 'Ignore comma separators',
+	'ui.hex.option.allow_0x': 'Allow 0x prefix before each byte',
+	'ui.hex.worker_active': 'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.hex.worker_failed': 'Worker processing failed. Falling back to main thread processing.',
+	'ui.hex.worker_badge': 'Worker',
+	'ui.hex.button.swap_direction': 'Swap direction',
+	'ui.hex.button.apply_output': 'Apply output to input',
+	'ui.hex.input_label': 'Input',
+	'ui.hex.output_label': 'Output',
+	'ui.hex.input_placeholder': 'Plain text to encode, or hex digits to decode to UTF-8…',
+	'ui.hex.output_placeholder': 'Hex output or decoded UTF-8 text appears here…',
+	'ui.hex.characters': 'chars',
+	'ui.hex.toast.applied': 'Output applied to input',
+	'ui.hex.warning.whitespace_skipped': 'Whitespace was skipped while parsing hex digits.',
+	'ui.hex.warning.commas_skipped': 'Comma separators were skipped while parsing.',
+	'ui.hex.error.invalid_hex_digit': 'Invalid character in hex input (near column {position}).',
+	'ui.hex.error.odd_hex_length':
+		'Odd number of hex digits ({count}). Pairs are required for bytes.',
+	'ui.hex.error.invalid_utf8': 'Decoded bytes are not valid UTF-8 ({bytes} bytes).',
 	// ── URL Encode / Decode UI strings ───────────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Action',

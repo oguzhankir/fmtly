@@ -2573,6 +2573,77 @@ const registryDe: Record<string, string> = {
 	'ui.unicode_inspector.gc.Cs': 'Sonstiges, Surrogat',
 	'ui.unicode_inspector.gc.Co': 'Sonstiges, Private Use',
 	'ui.unicode_inspector.gc.Cn': 'Sonstiges, nicht zugewiesen',
+	// ── Hex ↔ Text — Tool ───────────────────────────────────────────────────
+	'tool.encode-hex-encode-decode.display_name': 'Hex ↔ ASCII / UTF-8',
+	'tool.encode-hex-encode-decode.tagline':
+		'UTF-8-Text in Hex-Bytes umwandeln oder Hex-Dumps zurücklesen',
+	'tool.encode-hex-encode-decode.description':
+		'Kodieren Sie beliebige UTF-8-Strings als Hexadezimal-Bytepaare mit wählbarer Schreibweise, Trennzeichen und Zeilenumbrüchen. Dekodieren Sie tolerantes Hex (Leerzeichen, Kommas, 0x-Präfixe) zurück in Text mit strikter UTF-8-Validierung. Große Eingaben laufen in einem Web Worker; alles bleibt im Browser.',
+	'tool.encode-hex-encode-decode.primary_keyword': 'hex zu text utf-8',
+	'tool.encode-hex-encode-decode.meta_title': 'Hex ↔ Text — UTF-8 & ASCII | fmtly.dev',
+	'tool.encode-hex-encode-decode.meta_description':
+		'Hex in UTF-8-Text oder Text in Hex im Browser wandeln. Trennzeichen, Schreibweise, Zeilenumbruch, 0x-Präfixe und Worker-Unterstützung. Privat und schnell.',
+	'tool.encode-hex-encode-decode.operation': 'Hex kodieren / dekodieren',
+	'tool.encode-hex-encode-decode.faq.0.question': 'Werden meine Daten an einen Server gesendet?',
+	'tool.encode-hex-encode-decode.faq.0.answer':
+		'Nein. Die Umwandlung erfolgt vollständig in Ihrem Browser. Text und Hex verlassen Ihr Gerät nicht.',
+	'tool.encode-hex-encode-decode.faq.1.question': 'Welche Kodierung verwendet das Tool?',
+	'tool.encode-hex-encode-decode.faq.1.answer':
+		'Text wird in beiden Richtungen als UTF-8 interpretiert. ASCII ist eine Teilmenge von UTF-8; einfaches Englisch verhält sich gleich.',
+	'tool.encode-hex-encode-decode.faq.2.question':
+		'Warum schlägt Dekodieren mit „ungültiges UTF-8“ fehl?',
+	'tool.encode-hex-encode-decode.faq.2.answer':
+		'Die dekodierten Bytes müssen gültiges UTF-8 ergeben. Zufälliges Binär-Hex oder Legacy-Kodierungen lassen sich nicht als Text darstellen — nutzen Sie passende Werkzeuge oder Kodierungen.',
+	'tool.encode-hex-encode-decode.faq.3.question': 'Warum ein Web Worker bei großen Eingaben?',
+	'tool.encode-hex-encode-decode.faq.3.answer':
+		'Eingaben über 500 KB werden außerhalb des Hauptthreads verarbeitet, damit Eingabe, Scrollen und Steuerung flüssig bleiben.',
+	'tool.encode-hex-encode-decode.use_case.0':
+		'Hex aus Logs oder Mitschnitten in lesbare UTF-8-Schnipsel zurückverwandeln',
+	'tool.encode-hex-encode-decode.use_case.1':
+		'Formatierte Hex-Dumps von Strings für Doku, Tests oder eingebettete Konstanten erzeugen',
+	'tool.encode-hex-encode-decode.use_case.2':
+		'Prüfen, wie Emoji und nicht-lateinische Zeichen als UTF-8-Bytes aussehen',
+	'tool.encode-hex-encode-decode.use_case.3':
+		'Schnell zwischen Hex und Text wechseln beim Debuggen von APIs, Tokens oder Nutzdaten',
+	// ── Hex ↔ Text — UI ─────────────────────────────────────────────────────
+	'ui.hex.tab_label': 'Hex',
+	'ui.hex.action_label': 'Aktion',
+	'ui.hex.action.encode': 'Text → Hex',
+	'ui.hex.action.decode': 'Hex → Text',
+	'ui.hex.hex_case_label': 'Hex-Schreibweise',
+	'ui.hex.hex_case.upper': 'Großbuchstaben',
+	'ui.hex.hex_case.lower': 'Kleinbuchstaben',
+	'ui.hex.delimiter_label': 'Byte-Trenner',
+	'ui.hex.delimiter.space': 'Leerzeichen',
+	'ui.hex.delimiter.none': 'Keiner',
+	'ui.hex.delimiter.comma': 'Komma',
+	'ui.hex.bytes_per_line_label': 'Bytes pro Zeile',
+	'ui.hex.bytes_per_line.off': 'Kein Umbruch',
+	'ui.hex.bytes_per_line.n': '{n} Bytes',
+	'ui.hex.decode_options_label': 'Dekodier-Optionen',
+	'ui.hex.option.ignore_whitespace': 'Leerzeichen und Zeilenumbrüche ignorieren',
+	'ui.hex.option.ignore_commas': 'Komma-Trenner ignorieren',
+	'ui.hex.option.allow_0x': '0x-Präfix vor jedem Byte erlauben',
+	'ui.hex.worker_active':
+		'Große Eingabe erkannt (>{size}). Die Verarbeitung läuft in einem Web Worker.',
+	'ui.hex.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Es wird auf den Hauptthread zurückgefallen.',
+	'ui.hex.worker_badge': 'Worker',
+	'ui.hex.button.swap_direction': 'Richtung wechseln',
+	'ui.hex.button.apply_output': 'Ausgabe als Eingabe übernehmen',
+	'ui.hex.input_label': 'Eingabe',
+	'ui.hex.output_label': 'Ausgabe',
+	'ui.hex.input_placeholder': 'Klartext zum Kodieren oder Hex-Ziffern zum Dekodieren nach UTF-8…',
+	'ui.hex.output_placeholder': 'Hex-Ausgabe oder dekodierter UTF-8-Text erscheint hier…',
+	'ui.hex.characters': 'Zeichen',
+	'ui.hex.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
+	'ui.hex.warning.whitespace_skipped':
+		'Leerzeichen wurden beim Einlesen der Hex-Ziffern übersprungen.',
+	'ui.hex.warning.commas_skipped': 'Komma-Trenner wurden beim Einlesen übersprungen.',
+	'ui.hex.error.invalid_hex_digit':
+		'Ungültiges Zeichen in der Hex-Eingabe (bei Spalte {position}).',
+	'ui.hex.error.odd_hex_length': 'Ungerade Anzahl Hex-Ziffern ({count}). Bytes erfordern Paare.',
+	'ui.hex.error.invalid_utf8': 'Dekodierte Bytes sind kein gültiges UTF-8 ({bytes} Bytes).',
 	// ── URL Kodieren / Dekodieren — UI-Texte ─────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Aktion',
