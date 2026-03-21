@@ -38,12 +38,14 @@
 	"files": {
 		"ignore": [
 			"node_modules",
+			".cursor",
 			".svelte-kit",
 			"build",
 			"dist",
 			"*.min.js",
 			"**/*.svelte",
-			"test-results"
+			"test-results",
+			"**/html-entity-named-map.generated.ts"
 		]
 	}
 }

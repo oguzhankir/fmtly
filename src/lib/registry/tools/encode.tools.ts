@@ -99,6 +99,54 @@ export const encodeTools: ToolDefinition[] = [
 			'https://fmtly.dev/search?q=hello world&redirect=%2Fdocs%2Fstart%3Ftab%3Durl+tools#quick start'
 	},
 	{
+		id: 'encode-html-entities-encode-decode',
+		category: 'encode',
+		slug: 'html-entities',
+		displayName: 'tool.encode-html-entities-encode-decode.display_name',
+		tagline: 'tool.encode-html-entities-encode-decode.tagline',
+		description: 'tool.encode-html-entities-encode-decode.description',
+		primaryKeyword: 'tool.encode-html-entities-encode-decode.primary_keyword',
+		metaTitle: 'tool.encode-html-entities-encode-decode.meta_title',
+		metaDescription: 'tool.encode-html-entities-encode-decode.meta_description',
+		engine: 'encode',
+		operation: 'tool.encode-html-entities-encode-decode.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'encode', slug: 'url' },
+			{ category: 'encode', slug: 'base64' },
+			{ category: 'text', slug: 'escape' },
+			{ category: 'text', slug: 'markdown-to-html' }
+		],
+		faqs: [
+			{
+				question: 'tool.encode-html-entities-encode-decode.faq.0.question',
+				answer: 'tool.encode-html-entities-encode-decode.faq.0.answer'
+			},
+			{
+				question: 'tool.encode-html-entities-encode-decode.faq.1.question',
+				answer: 'tool.encode-html-entities-encode-decode.faq.1.answer'
+			},
+			{
+				question: 'tool.encode-html-entities-encode-decode.faq.2.question',
+				answer: 'tool.encode-html-entities-encode-decode.faq.2.answer'
+			},
+			{
+				question: 'tool.encode-html-entities-encode-decode.faq.3.question',
+				answer: 'tool.encode-html-entities-encode-decode.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.encode-html-entities-encode-decode.use_case.0',
+			'tool.encode-html-entities-encode-decode.use_case.1',
+			'tool.encode-html-entities-encode-decode.use_case.2',
+			'tool.encode-html-entities-encode-decode.use_case.3'
+		],
+		sampleInput: '<p title="Tom & Jerry">café "100%" safe: <code>&lt;tag&gt;</code> ©</p>'
+	},
+	{
 		id: 'encode-jwt-decoder',
 		category: 'encode',
 		slug: 'jwt',

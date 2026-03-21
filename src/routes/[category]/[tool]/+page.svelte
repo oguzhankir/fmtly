@@ -37,6 +37,7 @@
 	import EncodeBase64Panel from "$components/panels/encode/EncodeBase64Panel.svelte";
 	import EncodeUrlPanel from "$components/panels/encode/EncodeUrlPanel.svelte";
 	import EncodeJwtDecoderPanel from "$components/panels/encode/EncodeJwtDecoderPanel.svelte";
+	import EncodeHtmlEntitiesPanel from "$components/panels/encode/EncodeHtmlEntitiesPanel.svelte";
 	import QrCodeGeneratorPanel from "$components/panels/qr/QrCodeGeneratorPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
@@ -735,6 +736,8 @@
 				<EncodeBase64Panel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else if data.tool.category === "encode" && data.tool.slug === "url"}
 				<EncodeUrlPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
+			{:else if data.tool.category === "encode" && data.tool.slug === "html-entities"}
+				<EncodeHtmlEntitiesPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else if data.tool.category === "encode" && data.tool.slug === "jwt"}
 				<EncodeJwtDecoderPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else if data.tool.category === "qr" && data.tool.slug === "generator"}

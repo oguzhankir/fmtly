@@ -43,3 +43,24 @@ export {
 	type URLEncodeWorkerRequest,
 	type URLEncodeWorkerResponse
 } from './url.js';
+
+export {
+	processHTMLEntities,
+	shouldUseHTMLEntityWorker,
+	HTML_ENTITY_WORKER_THRESHOLD_BYTES,
+	type HTMLEntityAction,
+	type HTMLEntityEncodeFormat,
+	type HTMLEntityEncodeScope,
+	type HTMLEntityApostropheStyle,
+	type HTMLEntityDecodeMode,
+	type HTMLEntityEncodeOptions,
+	type HTMLEntityDecodeOptions,
+	type HTMLEntityOptions,
+	type HTMLEntityWarningCode,
+	type HTMLEntityErrorCode,
+	type HTMLEntityError,
+	type HTMLEntityMetrics,
+	type HTMLEntityResult,
+	type HTMLEntityWorkerRequest,
+	type HTMLEntityWorkerResponse
+} from './html-entities.js';

@@ -2379,6 +2379,77 @@ const registryEn: Record<string, string> = {
 		'Validate plus-space behavior in form-urlencoded payload samples',
 	'tool.encode-url-encode-decode.use_case.3':
 		'Compare encoded and decoded URLs when troubleshooting redirects',
+	// ── HTML Entity Encode / Decode tool ─────────────────────────────────────
+	'tool.encode-html-entities-encode-decode.display_name': 'HTML Entity Encode / Decode',
+	'tool.encode-html-entities-encode-decode.tagline':
+		'Encode or decode HTML character references with WHATWG-named, decimal, and hex output',
+	'tool.encode-html-entities-encode-decode.description':
+		'Convert text to safe HTML entities or decode entities back to Unicode in your browser. Supports every WHATWG named reference plus numeric forms, strict or permissive decoding, optional non-ASCII encoding, and Web Worker offload for inputs above 500KB.',
+	'tool.encode-html-entities-encode-decode.primary_keyword': 'html entity encode decode online',
+	'tool.encode-html-entities-encode-decode.meta_title':
+		'HTML Entities: Encode & Decode Online | fmtly.dev',
+	'tool.encode-html-entities-encode-decode.meta_description':
+		'Encode or decode HTML entities instantly in your browser. Full WHATWG named map, decimal and hex modes, strict decode validation, essentials vs full Unicode scope, and large-input Web Worker support.',
+	'tool.encode-html-entities-encode-decode.operation': 'Encode / Decode HTML entities',
+	'tool.encode-html-entities-encode-decode.faq.0.question': 'Is my text sent to a server?',
+	'tool.encode-html-entities-encode-decode.faq.0.answer':
+		'No. All encoding and decoding runs locally in your browser. Your input never leaves your device.',
+	'tool.encode-html-entities-encode-decode.faq.1.question':
+		'What is the difference between strict and permissive decode?',
+	'tool.encode-html-entities-encode-decode.faq.1.answer':
+		'Permissive mode leaves unknown or malformed references untouched so you can process mixed or partial snippets. Strict mode stops with an error when a reference is incomplete or not recognized.',
+	'tool.encode-html-entities-encode-decode.faq.2.question': 'Which named entities are supported?',
+	'tool.encode-html-entities-encode-decode.faq.2.answer':
+		'Decoding uses the full WHATWG HTML named character reference list (over 2,100 names) plus decimal and hexadecimal numeric references.',
+	'tool.encode-html-entities-encode-decode.faq.3.question': 'Can this handle very large documents?',
+	'tool.encode-html-entities-encode-decode.faq.3.answer':
+		'Yes. Inputs larger than 500KB are processed in a Web Worker so the tab stays responsive.',
+	'tool.encode-html-entities-encode-decode.use_case.0':
+		'Escape user-generated snippets before inserting them into HTML templates',
+	'tool.encode-html-entities-encode-decode.use_case.1':
+		'Decode entities from scraped or exported HTML for readable plain text',
+	'tool.encode-html-entities-encode-decode.use_case.2':
+		'Normalize quotes, ampersands, and symbols for CMS or email markup',
+	'tool.encode-html-entities-encode-decode.use_case.3':
+		'Verify strict parsing rules when validating HTML fragments or test fixtures',
+	// ── HTML Entity Encode / Decode UI strings ───────────────────────────────
+	'ui.encode_html_entities.tab_label': 'Entities',
+	'ui.encode_html_entities.action_label': 'Action',
+	'ui.encode_html_entities.action.encode': 'Encode',
+	'ui.encode_html_entities.action.decode': 'Decode',
+	'ui.encode_html_entities.format_label': 'Output format',
+	'ui.encode_html_entities.format.named': 'Named + numeric fallback',
+	'ui.encode_html_entities.format.decimal': 'Decimal numeric',
+	'ui.encode_html_entities.format.hex': 'Hex numeric',
+	'ui.encode_html_entities.scope_label': 'Encode scope',
+	'ui.encode_html_entities.scope.essentials': 'Essentials (& < > " \')',
+	'ui.encode_html_entities.scope.all_non_ascii': 'Essentials + all non-ASCII',
+	'ui.encode_html_entities.apostrophe_label': 'Apostrophe (named mode)',
+	'ui.encode_html_entities.apostrophe.numeric': '&#39;',
+	'ui.encode_html_entities.apostrophe.apos': '&apos;',
+	'ui.encode_html_entities.option.encode_line_breaks': 'Encode CR/LF as numeric entities',
+	'ui.encode_html_entities.option.encode_apostrophe': 'Encode apostrophe (U+0027)',
+	'ui.encode_html_entities.decode_mode_label': 'Decode mode',
+	'ui.encode_html_entities.decode.permissive': 'Permissive',
+	'ui.encode_html_entities.decode.strict': 'Strict',
+	'ui.encode_html_entities.decode.hint':
+		'Strict mode rejects unknown or malformed references. Permissive leaves invalid fragments unchanged.',
+	'ui.encode_html_entities.input_label': 'Input',
+	'ui.encode_html_entities.output_label': 'Output',
+	'ui.encode_html_entities.input_placeholder': 'Paste text or HTML snippets with entities...',
+	'ui.encode_html_entities.output_placeholder': 'Encoded or decoded output appears here...',
+	'ui.encode_html_entities.worker_active':
+		'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.encode_html_entities.worker_failed':
+		'Worker processing failed. Falling back to main thread processing.',
+	'ui.encode_html_entities.worker_badge': 'Worker',
+	'ui.encode_html_entities.warning.no_changes': 'No changes detected for the selected options.',
+	'ui.encode_html_entities.error.invalid_entity': '{detail} (offset {offset})',
+	'ui.encode_html_entities.error.incomplete_reference': '{detail} (offset {offset})',
+	'ui.encode_html_entities.button.swap_direction': 'Swap direction',
+	'ui.encode_html_entities.button.apply_output': 'Apply output to input',
+	'ui.encode_html_entities.toast.applied': 'Output applied to input',
+	'ui.encode_html_entities.characters': 'chars',
 	// ── URL Encode / Decode UI strings ───────────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Action',

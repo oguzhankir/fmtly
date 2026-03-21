@@ -2493,6 +2493,82 @@ const registryFr: Record<string, string> = {
 		'Valider le comportement + / espace dans des exemples form-urlencoded',
 	'tool.encode-url-encode-decode.use_case.3':
 		'Comparer URL encodées et décodées lors d’analyses de redirections',
+	// ── Entités HTML encoder / décoder — outil ──────────────────────────────
+	'tool.encode-html-entities-encode-decode.display_name': 'Encoder / décoder les entités HTML',
+	'tool.encode-html-entities-encode-decode.tagline':
+		'Encoder ou décoder les références de caractères HTML — noms WHATWG, décimal et hexadécimal',
+	'tool.encode-html-entities-encode-decode.description':
+		'Transformez du texte en entités HTML sûres ou décodez les références vers Unicode, entièrement dans le navigateur. Jeu complet de noms WHATWG, formes numériques, décodage strict ou permissif, option pour tout le non-ASCII et Web Worker au-delà de 500 Ko.',
+	'tool.encode-html-entities-encode-decode.primary_keyword':
+		'encoder décoder entités html en ligne',
+	'tool.encode-html-entities-encode-decode.meta_title':
+		'Entités HTML : encoder et décoder en ligne | fmtly.dev',
+	'tool.encode-html-entities-encode-decode.meta_description':
+		'Encodez ou décodez des entités HTML instantanément dans le navigateur. Carte WHATWG complète, modes décimal et hexadécimal, validation stricte, périmètre essentiel ou Unicode complet et Web Worker pour les grandes entrées.',
+	'tool.encode-html-entities-encode-decode.operation': 'Encoder / décoder les entités HTML',
+	'tool.encode-html-entities-encode-decode.faq.0.question':
+		'Mon texte est-il envoyé à un serveur ?',
+	'tool.encode-html-entities-encode-decode.faq.0.answer':
+		'Non. Tout s’exécute localement dans votre navigateur ; votre saisie ne quitte pas l’appareil.',
+	'tool.encode-html-entities-encode-decode.faq.1.question':
+		'Quelle est la différence entre décodage strict et permissif ?',
+	'tool.encode-html-entities-encode-decode.faq.1.answer':
+		'Le mode permissif laisse intactes les références inconnues ou mal formées, pratique pour des fragments mélangés. Le mode strict s’arrête avec une erreur si une référence est incomplète ou inconnue.',
+	'tool.encode-html-entities-encode-decode.faq.2.question':
+		'Quelles entités nommées sont prises en charge ?',
+	'tool.encode-html-entities-encode-decode.faq.2.answer':
+		'Le décodage utilise la liste complète WHATWG des références nommées (plus de 2 100 noms), ainsi que les références numériques décimales et hexadécimales.',
+	'tool.encode-html-entities-encode-decode.faq.3.question': 'Gère-t-il de très gros documents ?',
+	'tool.encode-html-entities-encode-decode.faq.3.answer':
+		'Oui. Au-delà de 500 Ko, le traitement est délégué à un Web Worker pour garder l’interface fluide.',
+	'tool.encode-html-entities-encode-decode.use_case.0':
+		'Échapper les contenus utilisateur avant insertion dans des gabarits HTML',
+	'tool.encode-html-entities-encode-decode.use_case.1':
+		'Décoder les entités d’HTML exporté ou scrapé vers du texte brut lisible',
+	'tool.encode-html-entities-encode-decode.use_case.2':
+		'Normaliser guillemets, esperluettes et symboles pour du balisage CMS ou e-mail',
+	'tool.encode-html-entities-encode-decode.use_case.3':
+		'Vérifier des règles d’analyse strictes sur des fragments HTML ou jeux de tests',
+	// ── Entités HTML — interface ───────────────────────────────────────────
+	'ui.encode_html_entities.tab_label': 'Entités',
+	'ui.encode_html_entities.action_label': 'Action',
+	'ui.encode_html_entities.action.encode': 'Encoder',
+	'ui.encode_html_entities.action.decode': 'Décoder',
+	'ui.encode_html_entities.format_label': 'Format de sortie',
+	'ui.encode_html_entities.format.named': 'Nommées + repli numérique',
+	'ui.encode_html_entities.format.decimal': 'Numérique décimal',
+	'ui.encode_html_entities.format.hex': 'Numérique hexadécimal',
+	'ui.encode_html_entities.scope_label': 'Périmètre d’encodage',
+	'ui.encode_html_entities.scope.essentials': 'Essentiels (& < > " \')',
+	'ui.encode_html_entities.scope.all_non_ascii': 'Essentiels + tout le non-ASCII',
+	'ui.encode_html_entities.apostrophe_label': 'Apostrophe (mode nommé)',
+	'ui.encode_html_entities.apostrophe.numeric': '&#39;',
+	'ui.encode_html_entities.apostrophe.apos': '&apos;',
+	'ui.encode_html_entities.option.encode_line_breaks': 'Encoder CR/LF en entités numériques',
+	'ui.encode_html_entities.option.encode_apostrophe': 'Encoder l’apostrophe (U+0027)',
+	'ui.encode_html_entities.decode_mode_label': 'Mode de décodage',
+	'ui.encode_html_entities.decode.permissive': 'Permissif',
+	'ui.encode_html_entities.decode.strict': 'Strict',
+	'ui.encode_html_entities.decode.hint':
+		'Le mode strict rejette les références inconnues ou mal formées. Le permissif laisse les fragments invalides inchangés.',
+	'ui.encode_html_entities.input_label': 'Entrée',
+	'ui.encode_html_entities.output_label': 'Sortie',
+	'ui.encode_html_entities.input_placeholder':
+		'Collez du texte ou des fragments HTML avec entités...',
+	'ui.encode_html_entities.output_placeholder': 'La sortie encodée ou décodée s’affiche ici...',
+	'ui.encode_html_entities.worker_active':
+		'Grande entrée détectée (>{size}). Le traitement s’exécute dans un Web Worker.',
+	'ui.encode_html_entities.worker_failed':
+		'Échec du Worker. Retour au traitement sur le thread principal.',
+	'ui.encode_html_entities.worker_badge': 'Worker',
+	'ui.encode_html_entities.warning.no_changes':
+		'Aucun changement détecté pour les options choisies.',
+	'ui.encode_html_entities.error.invalid_entity': '{detail} (position {offset})',
+	'ui.encode_html_entities.error.incomplete_reference': '{detail} (position {offset})',
+	'ui.encode_html_entities.button.swap_direction': 'Inverser le sens',
+	'ui.encode_html_entities.button.apply_output': 'Appliquer la sortie à l’entrée',
+	'ui.encode_html_entities.toast.applied': 'La sortie a été appliquée à l’entrée',
+	'ui.encode_html_entities.characters': 'caractères',
 	// ── Encoder / Décoder URL — chaînes d’interface ──────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Action',

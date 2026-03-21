@@ -2396,6 +2396,83 @@ const registryDe: Record<string, string> = {
 		'Plus-Leerzeichen-Verhalten in form-urlencoded Beispielen prüfen',
 	'tool.encode-url-encode-decode.use_case.3':
 		'Kodierte und dekodierte URLs bei Redirect-Problemen vergleichen',
+	// ── HTML-Entities kodieren / dekodieren — Tool ────────────────────────────
+	'tool.encode-html-entities-encode-decode.display_name': 'HTML-Entities kodieren / dekodieren',
+	'tool.encode-html-entities-encode-decode.tagline':
+		'HTML-Zeichenreferenzen kodieren oder dekodieren — WHATWG-Namen, dezimal und hex',
+	'tool.encode-html-entities-encode-decode.description':
+		'Wandeln Sie Text in sichere HTML-Entities um oder dekodieren Sie Referenzen zurück nach Unicode — alles lokal im Browser. Vollständige WHATWG-Namenliste, numerische Formen, strikter oder nachsichtiger Dekodiermodus, optional alle Nicht-ASCII-Zeichen kodieren und Web-Worker ab 500 KB.',
+	'tool.encode-html-entities-encode-decode.primary_keyword':
+		'html entities kodieren dekodieren online',
+	'tool.encode-html-entities-encode-decode.meta_title':
+		'HTML-Entities online kodieren/dekodieren | fmtly.dev',
+	'tool.encode-html-entities-encode-decode.meta_description':
+		'HTML-Entities sofort im Browser kodieren oder dekodieren. Vollständige WHATWG-Namen, Dezimal- und Hex-Modi, strikte Validierung, Essentials vs. voller Unicode-Umfang und Web-Worker für große Eingaben.',
+	'tool.encode-html-entities-encode-decode.operation': 'HTML-Entities kodieren / dekodieren',
+	'tool.encode-html-entities-encode-decode.faq.0.question':
+		'Werden meine Texte an einen Server gesendet?',
+	'tool.encode-html-entities-encode-decode.faq.0.answer':
+		'Nein. Kodierung und Dekodierung laufen vollständig lokal in Ihrem Browser; Ihre Eingabe verlässt das Gerät nicht.',
+	'tool.encode-html-entities-encode-decode.faq.1.question':
+		'Was ist der Unterschied zwischen strikt und nachsichtig beim Dekodieren?',
+	'tool.encode-html-entities-encode-decode.faq.1.answer':
+		'Nachsichtig lässt unbekannte oder fehlerhafte Referenzen unverändert — ideal für gemischte Schnipsel. Strikt bricht mit einer Fehlermeldung ab, sobald eine Referenz unvollständig oder unbekannt ist.',
+	'tool.encode-html-entities-encode-decode.faq.2.question':
+		'Welche benannten Entities werden unterstützt?',
+	'tool.encode-html-entities-encode-decode.faq.2.answer':
+		'Die Dekodierung nutzt die vollständige WHATWG-Liste der benannten Zeichenreferenzen (über 2.100 Namen) plus dezimale und hexadezimale numerische Referenzen.',
+	'tool.encode-html-entities-encode-decode.faq.3.question':
+		'Funktioniert das mit sehr großen Dokumenten?',
+	'tool.encode-html-entities-encode-decode.faq.3.answer':
+		'Ja. Eingaben über 500 KB werden in einem Web Worker verarbeitet, damit die Oberfläche flüssig bleibt.',
+	'tool.encode-html-entities-encode-decode.use_case.0':
+		'Nutzerinhalte escapen, bevor sie in HTML-Templates eingefügt werden',
+	'tool.encode-html-entities-encode-decode.use_case.1':
+		'Entities aus exportiertem oder gescraptem HTML für lesbaren Klartext dekodieren',
+	'tool.encode-html-entities-encode-decode.use_case.2':
+		'Anführungszeichen, kaufmännisches Und und Symbole für CMS- oder E-Mail-Markup normalisieren',
+	'tool.encode-html-entities-encode-decode.use_case.3':
+		'Strikte Parserregeln bei HTML-Fragmenten oder Test-Fixtures prüfen',
+	// ── HTML-Entities — UI-Texte ─────────────────────────────────────────────
+	'ui.encode_html_entities.tab_label': 'Entities',
+	'ui.encode_html_entities.action_label': 'Aktion',
+	'ui.encode_html_entities.action.encode': 'Kodieren',
+	'ui.encode_html_entities.action.decode': 'Dekodieren',
+	'ui.encode_html_entities.format_label': 'Ausgabeformat',
+	'ui.encode_html_entities.format.named': 'Benannt + numerischer Fallback',
+	'ui.encode_html_entities.format.decimal': 'Dezimal numerisch',
+	'ui.encode_html_entities.format.hex': 'Hex numerisch',
+	'ui.encode_html_entities.scope_label': 'Kodierungsumfang',
+	'ui.encode_html_entities.scope.essentials': 'Wesentliche Zeichen (& < > " \')',
+	'ui.encode_html_entities.scope.all_non_ascii': 'Wesentliche + alle Nicht-ASCII-Zeichen',
+	'ui.encode_html_entities.apostrophe_label': 'Apostroph (Benannt-Modus)',
+	'ui.encode_html_entities.apostrophe.numeric': '&#39;',
+	'ui.encode_html_entities.apostrophe.apos': '&apos;',
+	'ui.encode_html_entities.option.encode_line_breaks': 'CR/LF als numerische Entities kodieren',
+	'ui.encode_html_entities.option.encode_apostrophe': 'Apostroph (U+0027) kodieren',
+	'ui.encode_html_entities.decode_mode_label': 'Dekodiermodus',
+	'ui.encode_html_entities.decode.permissive': 'Nachsichtig',
+	'ui.encode_html_entities.decode.strict': 'Strikt',
+	'ui.encode_html_entities.decode.hint':
+		'Strikt lehnt unbekannte oder fehlerhafte Referenzen ab. Nachsichtig lässt ungültige Fragmente unverändert.',
+	'ui.encode_html_entities.input_label': 'Eingabe',
+	'ui.encode_html_entities.output_label': 'Ausgabe',
+	'ui.encode_html_entities.input_placeholder': 'Text oder HTML-Schnipsel mit Entities einfügen...',
+	'ui.encode_html_entities.output_placeholder':
+		'Kodierte oder dekodierte Ausgabe erscheint hier...',
+	'ui.encode_html_entities.worker_active':
+		'Große Eingabe erkannt (>{size}). Verarbeitung läuft in einem Web Worker.',
+	'ui.encode_html_entities.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Es wird auf den Hauptthread zurückgefallen.',
+	'ui.encode_html_entities.worker_badge': 'Worker',
+	'ui.encode_html_entities.warning.no_changes':
+		'Für die gewählten Optionen wurden keine Änderungen erkannt.',
+	'ui.encode_html_entities.error.invalid_entity': '{detail} (Position {offset})',
+	'ui.encode_html_entities.error.incomplete_reference': '{detail} (Position {offset})',
+	'ui.encode_html_entities.button.swap_direction': 'Richtung wechseln',
+	'ui.encode_html_entities.button.apply_output': 'Ausgabe als Eingabe übernehmen',
+	'ui.encode_html_entities.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
+	'ui.encode_html_entities.characters': 'Zeichen',
 	// ── URL Kodieren / Dekodieren — UI-Texte ─────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Aktion',

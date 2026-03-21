@@ -2439,6 +2439,79 @@ const registryTr: Record<string, string> = {
 		'Form-urlencoded örneklerinde artı-boşluk davranışını doğrulamak',
 	'tool.encode-url-encode-decode.use_case.3':
 		'Redirect sorunlarında kodlanmış ve çözülmüş URL çıktısını karşılaştırmak',
+	// ── HTML varlıkları kodla / çöz — araç ───────────────────────────────────
+	'tool.encode-html-entities-encode-decode.display_name': 'HTML varlığı kodla / çöz',
+	'tool.encode-html-entities-encode-decode.tagline':
+		'HTML karakter başvurularını kodlayın veya çözün — WHATWG adları, ondalık ve onaltılık',
+	'tool.encode-html-entities-encode-decode.description':
+		'Metni güvenli HTML varlıklarına dönüştürün veya başvuruları Unicode’a çözün; tamamı tarayıcıda. Tam WHATWG ad haritası, sayısal biçimler, katı veya hoşgörülü çözümleme, isteğe bağlı ASCII dışı kodlama ve 500 KB üzeri Web Worker desteği.',
+	'tool.encode-html-entities-encode-decode.primary_keyword': 'html entity kodla çöz çevrimiçi',
+	'tool.encode-html-entities-encode-decode.meta_title':
+		'HTML varlıkları: kodla ve çöz çevrimiçi | fmtly.dev',
+	'tool.encode-html-entities-encode-decode.meta_description':
+		'HTML varlıklarını tarayıcıda anında kodlayın veya çözün. Tam WHATWG ad seti, ondalık ve onaltılık modlar, katı doğrulama, temel karakterler ve tam Unicode kapsamı ve büyük girdiler için Web Worker.',
+	'tool.encode-html-entities-encode-decode.operation': 'HTML varlığı kodla / çöz',
+	'tool.encode-html-entities-encode-decode.faq.0.question': 'Metnim bir sunucuya gönderilir mi?',
+	'tool.encode-html-entities-encode-decode.faq.0.answer':
+		'Hayır. Tüm kodlama ve çözümleme tarayıcınızda yerel olarak çalışır; girdiniz cihazınızdan çıkmaz.',
+	'tool.encode-html-entities-encode-decode.faq.1.question':
+		'Katı ve hoşgörülü çözümleme arasındaki fark nedir?',
+	'tool.encode-html-entities-encode-decode.faq.1.answer':
+		'Hoşgörülü mod, bilinmeyen veya hatalı başvuruları olduğu gibi bırakır; karışık parçalar için uygundur. Katı mod, başvuru eksik veya tanınmıyorsa hata verir.',
+	'tool.encode-html-entities-encode-decode.faq.2.question':
+		'Hangi adlandırılmış varlıklar desteklenir?',
+	'tool.encode-html-entities-encode-decode.faq.2.answer':
+		'Çözümleme, WHATWG’nin tam adlandırılmış karakter başvuru listesini (2.100’den fazla ad) ve ondalık ile onaltılık sayısal başvuruları kullanır.',
+	'tool.encode-html-entities-encode-decode.faq.3.question': 'Çok büyük belgeleri işleyebilir mi?',
+	'tool.encode-html-entities-encode-decode.faq.3.answer':
+		'Evet. 500 KB üzerindeki girdiler arayüzün akıcı kalması için Web Worker üzerinde işlenir.',
+	'tool.encode-html-entities-encode-decode.use_case.0':
+		'Kullanıcı içeriğini HTML şablonlarına eklemeden önce kaçışlamak',
+	'tool.encode-html-entities-encode-decode.use_case.1':
+		'Dışa aktarılmış veya kazınmış HTML’deki varlıkları okunabilir düz metne çözmek',
+	'tool.encode-html-entities-encode-decode.use_case.2':
+		'Tırnak, ve işareti ve sembolleri CMS veya e-posta işaretlemesi için normalize etmek',
+	'tool.encode-html-entities-encode-decode.use_case.3':
+		'HTML parçalarında veya test verilerinde katı ayrıştırma kurallarını doğrulamak',
+	// ── HTML varlıkları — arayüz ────────────────────────────────────────────
+	'ui.encode_html_entities.tab_label': 'Varlıklar',
+	'ui.encode_html_entities.action_label': 'İşlem',
+	'ui.encode_html_entities.action.encode': 'Kodla',
+	'ui.encode_html_entities.action.decode': 'Çöz',
+	'ui.encode_html_entities.format_label': 'Çıktı biçimi',
+	'ui.encode_html_entities.format.named': 'Adlandırılmış + sayısal yedek',
+	'ui.encode_html_entities.format.decimal': 'Ondalık sayısal',
+	'ui.encode_html_entities.format.hex': 'Onaltılık sayısal',
+	'ui.encode_html_entities.scope_label': 'Kodlama kapsamı',
+	'ui.encode_html_entities.scope.essentials': 'Temel (& < > " \')',
+	'ui.encode_html_entities.scope.all_non_ascii': 'Temel + tüm ASCII dışı',
+	'ui.encode_html_entities.apostrophe_label': 'Kesme işareti (adlandırılmış mod)',
+	'ui.encode_html_entities.apostrophe.numeric': '&#39;',
+	'ui.encode_html_entities.apostrophe.apos': '&apos;',
+	'ui.encode_html_entities.option.encode_line_breaks': 'CR/LF’yi sayısal varlık olarak kodla',
+	'ui.encode_html_entities.option.encode_apostrophe': 'Kesme işaretini (U+0027) kodla',
+	'ui.encode_html_entities.decode_mode_label': 'Çözümleme modu',
+	'ui.encode_html_entities.decode.permissive': 'Hoşgörülü',
+	'ui.encode_html_entities.decode.strict': 'Katı',
+	'ui.encode_html_entities.decode.hint':
+		'Katı mod bilinmeyen veya hatalı başvuruları reddeder. Hoşgörülü mod geçersiz parçaları olduğu gibi bırakır.',
+	'ui.encode_html_entities.input_label': 'Girdi',
+	'ui.encode_html_entities.output_label': 'Çıktı',
+	'ui.encode_html_entities.input_placeholder': 'Metin veya varlıklı HTML parçaları yapıştırın...',
+	'ui.encode_html_entities.output_placeholder': 'Kodlanmış veya çözülmüş çıktı burada görünür...',
+	'ui.encode_html_entities.worker_active':
+		'Büyük girdi algılandı (>{size}). İşlem bir Web Worker içinde çalışıyor.',
+	'ui.encode_html_entities.worker_failed':
+		'Worker işlemi başarısız oldu. Ana iş parçacığına dönülüyor.',
+	'ui.encode_html_entities.worker_badge': 'Worker',
+	'ui.encode_html_entities.warning.no_changes':
+		'Seçilen seçenekler için değişiklik tespit edilmedi.',
+	'ui.encode_html_entities.error.invalid_entity': '{detail} (konum {offset})',
+	'ui.encode_html_entities.error.incomplete_reference': '{detail} (konum {offset})',
+	'ui.encode_html_entities.button.swap_direction': 'Yönü değiştir',
+	'ui.encode_html_entities.button.apply_output': 'Çıktıyı girdiye uygula',
+	'ui.encode_html_entities.toast.applied': 'Çıktı girdiye uygulandı',
+	'ui.encode_html_entities.characters': 'karakter',
 	// ── URL Kodla / Çöz — arayüz metinleri ───────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'İşlem',

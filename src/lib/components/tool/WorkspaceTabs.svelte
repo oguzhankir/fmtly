@@ -66,6 +66,8 @@
 				return $t('ui.whitespace_cleaner.tab_label', 'Whitespace');
 			case 'url':
 				return $t('ui.encode_url.tab_label', 'URL');
+			case 'html-entities':
+				return $t('ui.encode_html_entities.tab_label', 'Entities');
 			case 'base64':
 				return $t('ui.base64.tab_label', 'Base64');
 			case 'generator':

@@ -62,6 +62,8 @@ export function generateToolSEO(
 	const ogImage = `${baseUrl}/og/${tool.category}-${tool.slug}.png`;
 	const alternates = buildAlternateLinks(baseUrl, canonicalPath);
 
+	const featureList = [tool.tagline, ...tool.useCases.slice(0, 4)];
+
 	const structuredData = {
 		'@context': 'https://schema.org',
 		'@type': 'WebApplication',
@@ -70,7 +72,7 @@ export function generateToolSEO(
 		keywords: tool.primaryKeyword,
 		applicationCategory: 'DeveloperApplication',
 		applicationSubCategory: `${tool.category} ${tool.operation}`,
-		featureList: [tool.tagline],
+		featureList,
 		isAccessibleForFree: true,
 		browserRequirements: 'Requires JavaScript; works in modern browsers.',
 		operatingSystem: 'Any',

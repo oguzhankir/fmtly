@@ -8,13 +8,22 @@ import registryEn from '../src/lib/i18n/registry/en.js';
 import { examples } from '../src/lib/registry/examples/index.js';
 import { localizeToolDefinitions } from '../src/lib/registry/localized.js';
 import { csvTools } from '../src/lib/registry/tools/csv.tools.js';
+import { encodeTools } from '../src/lib/registry/tools/encode.tools.js';
 import { jsonTools } from '../src/lib/registry/tools/json.tools.js';
 import { qrTools } from '../src/lib/registry/tools/qr.tools.js';
 import { tomlTools } from '../src/lib/registry/tools/toml.tools.js';
 import { xmlTools } from '../src/lib/registry/tools/xml.tools.js';
 import { yamlTools } from '../src/lib/registry/tools/yaml.tools.js';
 
-const allTools = [...jsonTools, ...yamlTools, ...xmlTools, ...csvTools, ...tomlTools, ...qrTools];
+const allTools = [
+	...jsonTools,
+	...yamlTools,
+	...xmlTools,
+	...csvTools,
+	...tomlTools,
+	...qrTools,
+	...encodeTools
+];
 
 const translate = (key: string, fallback?: string): string => registryEn[key] ?? fallback ?? key;
 const localizedTools = localizeToolDefinitions(allTools, translate);
