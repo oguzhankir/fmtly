@@ -2413,8 +2413,7 @@ const registryEn: Record<string, string> = {
 	'tool.qr-code-generator.description':
 		'Create scan-friendly QR codes instantly in your browser. Customize size, quiet zone, colors, transparent background, error correction level, and centered logo overlays, then export production-ready SVG or PNG without sending data to a server.',
 	'tool.qr-code-generator.primary_keyword': 'qr code generator',
-	'tool.qr-code-generator.meta_title':
-		'QR Code Generator — SVG, PNG, Colors & Logo Overlay | fmtly.dev',
+	'tool.qr-code-generator.meta_title': 'QR Code Generator — SVG, PNG, Colors & Logo | fmtly',
 	'tool.qr-code-generator.meta_description':
 		'Generate QR codes online with live preview, SVG and PNG export, custom colors, quiet zone controls, transparent background, and logo overlay. Browser-only and private.',
 	'tool.qr-code-generator.operation': 'Generate QR Code',
