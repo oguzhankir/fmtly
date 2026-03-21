@@ -82,6 +82,8 @@
 				return $t('ui.punycode.tab_label', 'Punycode');
 			case 'generator':
 				return $t('ui.qr.tab_label', 'QR');
+			case 'reader':
+				return $t('ui.qr.tab_reader', 'Read');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

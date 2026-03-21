@@ -15,3 +15,17 @@ export {
 	type QRGeneratorWorkerRequest,
 	type QRGeneratorWorkerResponse
 } from './qrcode.js';
+export {
+	DEFAULT_JSQR_OPTIONS,
+	QR_READ_MAX_EDGE_PX,
+	QR_READ_WORKER_THRESHOLD_BYTES,
+	decodeQrFromImageBuffer,
+	scaleDimensions,
+	shouldUseQrReadWorker,
+	type JsQrFunction,
+	type QRReadErrorCode,
+	type QRReadResult,
+	type QRReadWorkerRequest,
+	type QRReadWorkerResponse,
+	type QrReadImageBuffer
+} from './qr-read.js';

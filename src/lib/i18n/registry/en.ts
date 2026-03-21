@@ -2810,7 +2810,37 @@ const registryEn: Record<string, string> = {
 		'Export crisp SVG QR assets for Figma, design systems, or developer documentation',
 	'tool.qr-code-generator.use_case.3':
 		'Test how margin, colors, and error correction affect scan reliability before publishing',
+	'tool.qr-code-reader.display_name': 'QR Code Reader',
+	'tool.qr-code-reader.tagline':
+		'Scan QR codes from images in your browser with fast decode, clipboard paste, and Web Worker offload',
+	'tool.qr-code-reader.description':
+		'Upload PNG, JPG, WebP, or paste a screenshot to extract QR payloads instantly. Decoding runs locally with optional Web Workers for large images—no uploads, no accounts.',
+	'tool.qr-code-reader.primary_keyword': 'qr code reader online',
+	'tool.qr-code-reader.meta_title': 'QR Code Reader — Scan Images & Paste Screenshots | fmtly',
+	'tool.qr-code-reader.meta_description':
+		'Read QR codes from images in your browser. Drag-and-drop, camera capture, clipboard paste, and large-image Web Worker decoding. Private and offline-friendly.',
+	'tool.qr-code-reader.operation': 'Read QR Code',
+	'tool.qr-code-reader.faq.0.question': 'Are my images uploaded to a server?',
+	'tool.qr-code-reader.faq.0.answer':
+		'No. Images are processed entirely in your browser using JavaScript and Web Workers when needed.',
+	'tool.qr-code-reader.faq.1.question': 'Which image formats work best?',
+	'tool.qr-code-reader.faq.1.answer':
+		'PNG and JPG are the most reliable. WebP and GIF also work. Very small or heavily compressed images may be harder to decode.',
+	'tool.qr-code-reader.faq.2.question': 'Why use a Web Worker?',
+	'tool.qr-code-reader.faq.2.answer':
+		'Large photos produce big pixel buffers. Offloading decode keeps scrolling and typing smooth while the scan finishes.',
+	'tool.qr-code-reader.faq.3.question': 'Can I scan a QR from a screenshot?',
+	'tool.qr-code-reader.faq.3.answer':
+		'Yes. Copy an image to the clipboard and paste it into this page, or save the screenshot and upload it.',
+	'tool.qr-code-reader.use_case.0':
+		'Open Wi-Fi QR stickers, event links, or app deep links from a photo',
+	'tool.qr-code-reader.use_case.1':
+		'Verify marketing QR artwork before print by testing the extracted URL',
+	'tool.qr-code-reader.use_case.2': 'Decode a QR from a screenshot without installing a mobile app',
+	'tool.qr-code-reader.use_case.3':
+		'Recover plain text or vCard payloads from conference badge photos',
 	'ui.qr.tab_label': 'QR',
+	'ui.qr.tab_reader': 'Read',
 	'ui.qr.characters': 'chars',
 	'ui.qr.output_empty': 'Generate a QR code to preview and export it.',
 	'ui.qr.preview_alt': 'Generated QR code preview',
@@ -2869,7 +2899,27 @@ const registryEn: Record<string, string> = {
 	'ui.qr.warning.logo_overlay_low_error_correction':
 		'Using a center logo with L or M correction can reduce scan reliability. Prefer Q or H.',
 	'ui.qr.toast.logo_added': 'Logo overlay added',
-	'ui.qr.toast.logo_removed': 'Logo overlay removed'
+	'ui.qr.toast.logo_removed': 'Logo overlay removed',
+	'ui.qr.reader.upload': 'Upload',
+	'ui.qr.reader.camera': 'Camera',
+	'ui.qr.reader.drop_title': 'Drop an image here',
+	'ui.qr.reader.drop_hint':
+		'PNG, JPG, WebP, GIF, or SVG. Large images decode off the main thread. You can also paste a screenshot.',
+	'ui.qr.reader.drop_aria': 'Upload or drop an image to scan',
+	'ui.qr.reader.preview_alt': 'Uploaded image preview',
+	'ui.qr.reader.result_label': 'Decoded content',
+	'ui.qr.reader.empty_state': 'Decoded text appears here. Your image never leaves the browser.',
+	'ui.qr.reader.status_decoding': 'Scanning image…',
+	'ui.qr.reader.status_ok': '{size} · {ms} ms',
+	'ui.qr.reader.error_no_qr':
+		'No QR code was found. Try a sharper photo, better lighting, or a larger crop.',
+	'ui.qr.reader.error_decode': 'Could not read this image. Try another file or format.',
+	'ui.qr.reader.error_load': 'Could not load this image. Try PNG, JPG, or WebP from your device.',
+	'ui.qr.reader.error_type': 'Please choose an image file.',
+	'ui.qr.reader.worker_active':
+		'Large image ({size}). Decoding runs in a Web Worker to keep the UI responsive.',
+	'ui.qr.reader.worker_badge': 'Worker',
+	'ui.qr.reader.worker_failed': 'Worker decoding failed. Retrying on the main thread.'
 };
 
 export default registryEn;

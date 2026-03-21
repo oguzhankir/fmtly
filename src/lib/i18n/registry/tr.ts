@@ -2872,7 +2872,38 @@ const registryTr: Record<string, string> = {
 		'Figma, tasarım sistemleri veya geliştirici dokümantasyonu için net SVG QR varlıkları dışa aktarmak',
 	'tool.qr-code-generator.use_case.3':
 		'Yayınlamadan önce boşluk, renk ve hata düzeltmenin tarama güvenilirliğini nasıl etkilediğini test etmek',
+	'tool.qr-code-reader.display_name': 'QR Kod Okuyucu',
+	'tool.qr-code-reader.tagline':
+		'Tarayıcıda görsellerden QR kodları tarayın — hızlı çözümleme, pano yapıştırma ve isteğe bağlı Web Worker',
+	'tool.qr-code-reader.description':
+		'PNG, JPG veya WebP yükleyin ya da ekran görüntüsü yapıştırarak QR içeriğini anında çıkarın. Çözümleme yereldir; büyük görseller için Web Worker kullanılabilir — yükleme veya hesap yok.',
+	'tool.qr-code-reader.primary_keyword': 'qr kod okuyucu online',
+	'tool.qr-code-reader.meta_title':
+		'QR Kod Okuyucu — Görsel tara ve ekran görüntüsü yapıştır | fmtly',
+	'tool.qr-code-reader.meta_description':
+		'Tarayıcıda görsellerden QR kodları okuyun. Sürükle-bırak, kamera, pano yapıştırma ve büyük görseller için Web Worker çözümlemesi. Gizli ve sunucusuz.',
+	'tool.qr-code-reader.operation': 'QR Kod Oku',
+	'tool.qr-code-reader.faq.0.question': 'Görsellerim bir sunucuya yükleniyor mu?',
+	'tool.qr-code-reader.faq.0.answer':
+		'Hayır. Görseller yalnızca tarayıcınızda JavaScript ve gerektiğinde Web Worker ile işlenir.',
+	'tool.qr-code-reader.faq.1.question': 'Hangi görsel formatları daha iyi çalışır?',
+	'tool.qr-code-reader.faq.1.answer':
+		'PNG ve JPG genelde en güveniliridir. WebP ve GIF de çalışır. Çok küçük veya aşırı sıkıştırılmış görseller çözümlemeyi zorlaştırabilir.',
+	'tool.qr-code-reader.faq.2.question': 'Web Worker ne işe yarar?',
+	'tool.qr-code-reader.faq.2.answer':
+		'Büyük fotoğraflar büyük piksel tamponları oluşturur. Çözümlemeyi ayırmak, tarama sürerken kaydırmayı ve yazmayı akıcı tutar.',
+	'tool.qr-code-reader.faq.3.question': 'Ekran görüntüsündeki QR kodu okuyabilir miyim?',
+	'tool.qr-code-reader.faq.3.answer':
+		'Evet. Görseli panoya kopyalayıp bu sayfaya yapıştırın veya ekran görüntüsünü kaydedip yükleyin.',
+	'tool.qr-code-reader.use_case.0':
+		'Wi‑Fi QR etiketleri, etkinlik bağlantıları veya uygulama deep linklerini fotoğraftan açmak',
+	'tool.qr-code-reader.use_case.1':
+		'Baskı öncesi pazarlama görsellerindeki QR kodlarını çıkarılan URL ile doğrulamak',
+	'tool.qr-code-reader.use_case.2': 'Uygulama yüklemeden ekran görüntüsünden QR kodu çözmek',
+	'tool.qr-code-reader.use_case.3':
+		'Konferans yaka kartı fotoğraflarından düz metin veya vCard kurtarmak',
 	'ui.qr.tab_label': 'QR',
+	'ui.qr.tab_reader': 'Oku',
 	'ui.qr.characters': 'karakter',
 	'ui.qr.output_empty': 'Önizlemek ve dışa aktarmak için bir QR kod oluşturun.',
 	'ui.qr.preview_alt': 'Üretilen QR kod önizlemesi',
@@ -2932,6 +2963,27 @@ const registryTr: Record<string, string> = {
 		'Merkez logo ile L veya M düzeltme kullanmak tarama güvenilirliğini azaltabilir. Q veya H tercih edin.',
 	'ui.qr.toast.logo_added': 'Logo katmanı eklendi',
 	'ui.qr.toast.logo_removed': 'Logo katmanı kaldırıldı',
+	'ui.qr.reader.upload': 'Yükle',
+	'ui.qr.reader.camera': 'Kamera',
+	'ui.qr.reader.drop_title': 'Görseli buraya bırakın',
+	'ui.qr.reader.drop_hint':
+		'PNG, JPG, WebP, GIF veya SVG. Büyük görseller ana iş parçacığı dışında çözülür. Ekran görüntüsü de yapıştırabilirsiniz.',
+	'ui.qr.reader.drop_aria': 'Taramak için görsel yükleyin veya bırakın',
+	'ui.qr.reader.preview_alt': 'Yüklenen görsel önizlemesi',
+	'ui.qr.reader.result_label': 'Çözülen içerik',
+	'ui.qr.reader.empty_state': 'Çözülen metin burada görünür. Görseliniz tarayıcıdan çıkmaz.',
+	'ui.qr.reader.status_decoding': 'Görsel taranıyor…',
+	'ui.qr.reader.status_ok': '{size} · {ms} ms',
+	'ui.qr.reader.error_no_qr':
+		'QR kod bulunamadı. Daha net bir fotoğraf, daha iyi ışık veya daha geniş bir kırpma deneyin.',
+	'ui.qr.reader.error_decode': 'Bu görsel okunamadı. Başka bir dosya veya format deneyin.',
+	'ui.qr.reader.error_load': 'Bu görsel yüklenemedi. Cihazınızdan PNG, JPG veya WebP deneyin.',
+	'ui.qr.reader.error_type': 'Lütfen bir görsel dosyası seçin.',
+	'ui.qr.reader.worker_active':
+		'Büyük görsel ({size}). Arayüzü akıcı tutmak için çözümleme Web Worker’da çalışır.',
+	'ui.qr.reader.worker_badge': 'Worker',
+	'ui.qr.reader.worker_failed':
+		'Worker çözümlemesi başarısız. Ana iş parçacığında yeniden deneniyor.',
 
 	// Missing keys from English
 	'ui.validator.warnings': 'ui.validator.warnings',

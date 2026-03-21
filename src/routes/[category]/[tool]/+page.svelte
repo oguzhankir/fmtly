@@ -43,6 +43,7 @@
 	import EncodeRot13CaesarPanel from "$components/panels/encode/EncodeRot13CaesarPanel.svelte";
 	import EncodePunycodePanel from "$components/panels/encode/EncodePunycodePanel.svelte";
 	import QrCodeGeneratorPanel from "$components/panels/qr/QrCodeGeneratorPanel.svelte";
+	import QrCodeReaderPanel from "$components/panels/qr/QrCodeReaderPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -754,6 +755,8 @@
 				<EncodeJwtDecoderPanel toolSlug={data.tool.slug} workspaceTools={encodeWorkspaceTools} />
 			{:else if data.tool.category === "qr" && data.tool.slug === "generator"}
 				<QrCodeGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "qr" && data.tool.slug === "reader"}
+				<QrCodeReaderPanel toolSlug={data.tool.slug} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

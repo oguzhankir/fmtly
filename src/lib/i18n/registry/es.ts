@@ -2902,7 +2902,38 @@ const registryEs: Record<string, string> = {
 		'Exportar recursos SVG nítidos para Figma, sistemas de diseño o documentación técnica',
 	'tool.qr-code-generator.use_case.3':
 		'Probar cómo el margen, los colores y la corrección de errores afectan la fiabilidad antes de publicar',
+	'tool.qr-code-reader.display_name': 'Lector de códigos QR',
+	'tool.qr-code-reader.tagline':
+		'Escanea códigos QR desde imágenes en el navegador, con decodificación rápida, pegado desde el portapapeles y Web Worker opcional',
+	'tool.qr-code-reader.description':
+		'Sube PNG, JPG o WebP o pega una captura para extraer al instante el contenido del QR. La decodificación es local; las imágenes grandes pueden usar Web Workers: sin subidas ni cuentas.',
+	'tool.qr-code-reader.primary_keyword': 'leer codigo qr online',
+	'tool.qr-code-reader.meta_title':
+		'Lector de códigos QR — Escanear imágenes y pegar capturas | fmtly',
+	'tool.qr-code-reader.meta_description':
+		'Lee códigos QR desde imágenes en el navegador. Arrastrar y soltar, cámara, pegado desde el portapapeles y decodificación en Web Worker para fotos grandes. Privado y sin servidor.',
+	'tool.qr-code-reader.operation': 'Leer código QR',
+	'tool.qr-code-reader.faq.0.question': '¿Se suben mis imágenes a un servidor?',
+	'tool.qr-code-reader.faq.0.answer':
+		'No. Las imágenes se procesan por completo en tu navegador con JavaScript y, si hace falta, con Web Workers.',
+	'tool.qr-code-reader.faq.1.question': '¿Qué formatos de imagen funcionan mejor?',
+	'tool.qr-code-reader.faq.1.answer':
+		'PNG y JPG suelen ser los más fiables. WebP y GIF también funcionan. Las imágenes muy pequeñas o muy comprimidas pueden ser más difíciles de decodificar.',
+	'tool.qr-code-reader.faq.2.question': '¿Para qué sirve un Web Worker?',
+	'tool.qr-code-reader.faq.2.answer':
+		'Las fotos grandes generan búferes de píxeles grandes. Externalizar la decodificación mantiene fluidos el desplazamiento y la escritura mientras termina el escaneo.',
+	'tool.qr-code-reader.faq.3.question': '¿Puedo escanear un QR desde una captura de pantalla?',
+	'tool.qr-code-reader.faq.3.answer':
+		'Sí. Copia una imagen al portapapeles y pégala en esta página, o guarda la captura y súbela.',
+	'tool.qr-code-reader.use_case.0':
+		'Abrir enlaces Wi‑Fi, de eventos o deep links de apps desde una foto',
+	'tool.qr-code-reader.use_case.1':
+		'Comprobar gráficos de marketing con QR antes de imprimir verificando la URL extraída',
+	'tool.qr-code-reader.use_case.2': 'Decodificar un QR desde una captura sin instalar una app',
+	'tool.qr-code-reader.use_case.3':
+		'Recuperar texto plano o vCard desde fotos de credenciales de conferencia',
 	'ui.qr.tab_label': 'QR',
+	'ui.qr.tab_reader': 'Leer',
 	'ui.qr.characters': 'caracteres',
 	'ui.qr.output_empty': 'Genera un código QR para previsualizarlo y exportarlo.',
 	'ui.qr.preview_alt': 'Vista previa del código QR generado',
@@ -2962,6 +2993,29 @@ const registryEs: Record<string, string> = {
 		'Usar un logotipo central con corrección L o M puede reducir la fiabilidad de escaneo. Es mejor usar Q o H.',
 	'ui.qr.toast.logo_added': 'Superposición de logotipo añadida',
 	'ui.qr.toast.logo_removed': 'Superposición de logotipo eliminada',
+	'ui.qr.reader.upload': 'Subir',
+	'ui.qr.reader.camera': 'Cámara',
+	'ui.qr.reader.drop_title': 'Suelta una imagen aquí',
+	'ui.qr.reader.drop_hint':
+		'PNG, JPG, WebP, GIF o SVG. Las imágenes grandes se decodifican fuera del hilo principal. También puedes pegar una captura.',
+	'ui.qr.reader.drop_aria': 'Subir o soltar una imagen para escanear',
+	'ui.qr.reader.preview_alt': 'Vista previa de la imagen subida',
+	'ui.qr.reader.result_label': 'Contenido decodificado',
+	'ui.qr.reader.empty_state':
+		'El texto decodificado aparece aquí. Tu imagen no sale del navegador.',
+	'ui.qr.reader.status_decoding': 'Escaneando imagen…',
+	'ui.qr.reader.status_ok': '{size} · {ms} ms',
+	'ui.qr.reader.error_no_qr':
+		'No se encontró ningún código QR. Prueba una foto más nítida, mejor luz o un recorte más grande.',
+	'ui.qr.reader.error_decode': 'No se pudo leer esta imagen. Prueba otro archivo u otro formato.',
+	'ui.qr.reader.error_load':
+		'No se pudo cargar esta imagen. Prueba PNG, JPG o WebP desde tu dispositivo.',
+	'ui.qr.reader.error_type': 'Elige un archivo de imagen.',
+	'ui.qr.reader.worker_active':
+		'Imagen grande ({size}). La decodificación se ejecuta en un Web Worker para mantener la interfaz fluida.',
+	'ui.qr.reader.worker_badge': 'Worker',
+	'ui.qr.reader.worker_failed':
+		'Falló la decodificación en el Worker. Reintentando en el hilo principal.',
 
 	// Missing keys from English
 	'tool.csv-diff.display_name': 'tool.csv-diff.display_name',
