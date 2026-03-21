@@ -2932,6 +2932,103 @@ const registryTr: Record<string, string> = {
 		'Marka kılavuzları veya dokümantasyon için vektör SVG barkodları dışa aktarmak',
 	'tool.barcode-generator.use_case.3':
 		'Eski sistemler ve iç araçlar için Codabar veya MSI sembolleri oluşturmak',
+	'category.crypto.display_name': 'Kripto',
+	'category.crypto.description':
+		'Tarayıcınızda karakter kümesi ön ayarları, özel alfabeler, toplu çıktı ve çok büyük sonuçlar için Web Worker ile kriptografik olarak güçlü rastgele dizeler üretin.',
+	'category.crypto.primary_keyword': 'rastgele dize üretici',
+	'tool.random-string-generator.display_name': 'Rastgele Dize Üretici',
+	'tool.random-string-generator.tagline':
+		'Ön ayarlar, özel alfabeler, ayırıcılar ve Web Worker ile güvenli rastgele dizeler',
+	'tool.random-string-generator.description':
+		'Web Crypto getRandomValues ile parolalar, belirteçler, kimlikler ve test verileri için rastgele dizeler oluşturun—yükleme yok, sunucu yok. Alfasayısal, on altılık, sayısal, Base64 URL-güvenli veya özel alfabe seçin; belirsiz karakterleri hariç tutun; uzunluk, adet ve ayırıcıları kontrol edin; büyük işler Web Worker’da çalışır.',
+	'tool.random-string-generator.primary_keyword': 'rastgele dize üretici',
+	'tool.random-string-generator.meta_title': 'Rastgele Dize — Tarayıcıda Güvenli Kripto | fmtly',
+	'tool.random-string-generator.meta_description':
+		'Tarayıcıda güçlü rastgele dizeler üretin. Ön ayarlar, özel alfabe, toplu çıktı, belirsizleri eleme ve Web Worker. Gizli ve anında.',
+	'tool.random-string-generator.operation': 'Rastgele dize üret',
+	'tool.random-string-generator.faq.0.question': 'Parolalar ve API anahtarları için uygun mu?',
+	'tool.random-string-generator.faq.0.answer':
+		'Dizeler, seçtiğiniz alfabeden sapmasız örnekleme ile crypto.getRandomValues kullanır. Parolalar için uzunluk, geniş alfabe ve iyi giz yönetimi tercih edin.',
+	'tool.random-string-generator.faq.1.question': 'Neden bazen Web Worker kullanılıyor?',
+	'tool.random-string-generator.faq.1.answer':
+		'Çok büyük çıktılar veya dev özel alfabeler arayüzü kilitleyebilir. Eşik üzerinde iş yükü devredilir, sayfa akıcı kalır.',
+	'tool.random-string-generator.faq.2.question': '«Belirsiz karakterleri hariç tut» ne yapar?',
+	'tool.random-string-generator.faq.2.answer':
+		'Ön ayarlardan 0/O, 1/l gibi karıştırılması kolay karakterleri çıkarır; elle kopyalamayı kolaylaştırır.',
+	'tool.random-string-generator.faq.3.question': 'Veriler sunucuya gönderilir mi?',
+	'tool.random-string-generator.faq.3.answer':
+		'Hayır. Üretim tamamen tarayıcınızda çalışır. fmtly tarafından yüklenmez veya kaydedilmez.',
+	'tool.random-string-generator.use_case.0':
+		'Sıfırlama belirteçleri, davet kodları ve tek kullanımlık sırları yerelde üretmek',
+	'tool.random-string-generator.use_case.1':
+		'Uzunluk, karakter kümesi ve çok satırlı toplu çıktısı kontrollü test verileri üretmek',
+	'tool.random-string-generator.use_case.2':
+		'Tanımlayıcılar ve opak kimlikler için Base64 URL-güvenli alfabe dizeleri',
+	'tool.random-string-generator.use_case.3':
+		'Simülasyonlar, oyunlar ve kısıtlı sistemler için özel alfabeler',
+	'ui.random_string.tab_label': 'Rastgele',
+	'ui.random_string.simple_hint':
+		'Uzunluk ve karakter türlerini değiştirin — çıktı otomatik güncellenir.',
+	'ui.random_string.length_with_value': 'Uzunluk: {n}',
+	'ui.random_string.characters_used': 'Kullanılan karakterler',
+	'ui.random_string.pick.upper': 'ABC',
+	'ui.random_string.pick.lower': 'abc',
+	'ui.random_string.pick.digits': '123',
+	'ui.random_string.pick.symbols': '#$&',
+	'ui.random_string.preset_active_hint':
+		'Bir karakter kümesi ön ayarı seçili. ABC / abc / 123 / semboller için Gelişmiş’den “Seç” moduna geçin.',
+	'ui.random_string.advanced.title': 'Gelişmiş',
+	'ui.random_string.exact_length': 'Tam uzunluk',
+	'ui.random_string.slider_hint':
+		'Üstteki kaydırıcı 1–256 uzunluk için hızlıdır. Daha uzun dizeleri buraya yazın (en fazla 100.000).',
+	'ui.random_string.regenerate': 'Yeniden üret',
+	'ui.random_string.decrease_length': 'Uzunluğu azalt',
+	'ui.random_string.increase_length': 'Uzunluğu artır',
+	'ui.random_string.mode.pick': 'Seç (anahtarlar)',
+	'ui.random_string.strength.very_weak': 'Çok zayıf',
+	'ui.random_string.strength.weak': 'Zayıf',
+	'ui.random_string.strength.fair': 'Orta',
+	'ui.random_string.strength.strong': 'Güçlü',
+	'ui.random_string.strength.very_strong': 'Çok güçlü',
+	'ui.random_string.toast.one_charset': 'En az bir karakter türü seçin.',
+	'ui.random_string.generate': 'Üret',
+	'ui.random_string.processing': 'Çalışıyor…',
+	'ui.random_string.length_label': 'Dize başına uzunluk',
+	'ui.random_string.count_label': 'Kaç dize',
+	'ui.random_string.charset_label': 'Karakter kümesi',
+	'ui.random_string.custom_charset_label': 'Özel karakterler',
+	'ui.random_string.custom_charset_placeholder': 'Örnekleme için tam karakterleri yazın…',
+	'ui.random_string.separator_label': 'Dizeler arası ayırıcı',
+	'ui.random_string.charset.alphanumeric': 'Alfasayısal',
+	'ui.random_string.charset.hex_lower': 'On altılık (küçük)',
+	'ui.random_string.charset.hex_upper': 'On altılık (büyük)',
+	'ui.random_string.charset.numeric': 'Sayısal',
+	'ui.random_string.charset.base64url': 'Base64 URL-güvenli',
+	'ui.random_string.charset.custom': 'Özel',
+	'ui.random_string.separator.newline': 'Satır sonu',
+	'ui.random_string.separator.comma': 'Virgül',
+	'ui.random_string.separator.space': 'Boşluk',
+	'ui.random_string.separator.none': 'Yok (birleştir)',
+	'ui.random_string.exclude_ambiguous':
+		'Görsel olarak belirsiz karakterleri hariç tut (0/O, 1/l, …)',
+	'ui.random_string.output_label': 'Çıktı',
+	'ui.random_string.panel_options_heading': 'Üretim seçenekleri',
+	'ui.random_string.panel_options_hint':
+		'Uzunluk, adet, karakter kümesi ve birden fazla dizenin nasıl birleştirileceği.',
+	'ui.random_string.output_placeholder': 'Üretilen dizeler burada görünür',
+	'ui.random_string.worker_active':
+		'Büyük girdi algılandı (>{size}). Üretim Web Worker’da çalışıyor.',
+	'ui.random_string.worker_failed': 'Worker başarısız. Ana iş parçacığına dönülüyor.',
+	'ui.random_string.worker_badge': 'Worker',
+	'ui.random_string.toast.generated': 'Rastgele dizeler üretildi',
+	'ui.random_string.toast.cleared': 'Çıktı temizlendi',
+	'ui.random_string.toast.nothing_to_download': 'Henüz indirilecek bir şey yok',
+	'ui.random_string.error.invalid_length': 'Uzunluk izin verilen aralıkta olmalıdır.',
+	'ui.random_string.error.invalid_count': 'Adet izin verilen aralıkta olmalıdır.',
+	'ui.random_string.error.empty_charset': 'Boş olmayan bir karakter kümesi seçin.',
+	'ui.random_string.error.charset_too_large': 'Karakter kümesi çok büyük.',
+	'ui.random_string.error.crypto_unavailable': 'Bu ortamda Web Crypto yok.',
+	'ui.random_string.error.unknown': 'Dizeler üretilemedi.',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Oku',
 	'ui.qr.tab_barcode': 'Barkod',

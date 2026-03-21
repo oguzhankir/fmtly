@@ -24,7 +24,8 @@
 		'toml',
 		'text',
 		'encode',
-		'qr'
+		'qr',
+		'crypto'
 	];
 	const faviconUrl: string = '/favicon.svg';
 

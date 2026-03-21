@@ -2907,6 +2907,104 @@ const registryDe: Record<string, string> = {
 		'Vektor-SVG-Strichcodes für Brand Guidelines, Folien oder Dokumentation exportieren',
 	'tool.barcode-generator.use_case.3':
 		'Codabar- oder MSI-Symbole für Altsysteme und interne Tools erstellen',
+	'category.crypto.display_name': 'Krypto',
+	'category.crypto.description':
+		'Erzeuge kryptografisch starke Zufallszeichenketten im Browser mit Zeichensatz-Presets, benutzerdefinierten Alphabeten, Stapel-Ausgabe und Web-Worker-Auslagerung für große Ergebnisse.',
+	'category.crypto.primary_keyword': 'Zufallszeichengenerator',
+	'tool.random-string-generator.display_name': 'Zufallszeichengenerator',
+	'tool.random-string-generator.tagline':
+		'Sichere Zufallszeichenketten mit Presets, benutzerdefinierten Alphabeten, Trennzeichen und Web-Worker-Auslagerung',
+	'tool.random-string-generator.description':
+		'Erzeuge Zufallszeichenketten für Passwörter, Tokens, IDs und Testdaten mit Web Crypto getRandomValues—ohne Upload, ohne Server. Wähle alphanumerisch, Hex, numerisch, Base64 URL-sicher oder ein eigenes Alphabet; schließe verwechselbare Zeichen aus; steuere Länge, Anzahl und Trenner; große Aufgaben laufen in einem Web Worker.',
+	'tool.random-string-generator.primary_keyword': 'Zufallszeichengenerator',
+	'tool.random-string-generator.meta_title': 'Zufallszeichengenerator — Sicher im Browser | fmtly',
+	'tool.random-string-generator.meta_description':
+		'Starke Zufallszeichenketten im Browser erzeugen. Presets, eigenes Alphabet, Stapel-Ausgabe, Modus ohne verwechselbare Zeichen und Web-Worker. Privat und sofort.',
+	'tool.random-string-generator.operation': 'Zufallszeichenketten erzeugen',
+	'tool.random-string-generator.faq.0.question':
+		'Eignet sich das für Passwörter und API-Schlüssel?',
+	'tool.random-string-generator.faq.0.answer':
+		'Die Zeichenketten nutzen crypto.getRandomValues mit unverzerrter Stichprobe aus Ihrem Alphabet. Für Passwörter: lieber lange Länge, großes Alphabet und eigene Geheimnisverwaltung.',
+	'tool.random-string-generator.faq.1.question': 'Warum wird manchmal ein Web Worker genutzt?',
+	'tool.random-string-generator.faq.1.answer':
+		'Sehr große Ausgaben oder riesige benutzerdefinierte Alphabete können die UI blockieren. Die Arbeit wird über einer Größenschwelle ausgelagert, damit die Seite reaktionsfähig bleibt.',
+	'tool.random-string-generator.faq.2.question':
+		'Was bedeutet „verwechselbare Zeichen ausschließen“?',
+	'tool.random-string-generator.faq.2.answer':
+		'Zeichen, die leicht verwechselt werden (z. B. 0/O, 1/l), werden aus Presets entfernt – hilfreich beim manuellen Abschreiben.',
+	'tool.random-string-generator.faq.3.question': 'Werden Daten an einen Server gesendet?',
+	'tool.random-string-generator.faq.3.answer':
+		'Nein. Die Erzeugung läuft vollständig in Ihrem Browser. Nichts wird hochgeladen oder von fmtly protokolliert.',
+	'tool.random-string-generator.use_case.0':
+		'Passwort-Reset-Tokens, Einladungscodes und Einmal-Geheimnisse lokal erzeugen',
+	'tool.random-string-generator.use_case.1':
+		'Testdaten mit kontrollierter Länge, Zeichensatz und mehrzeiliger Stapel-Ausgabe',
+	'tool.random-string-generator.use_case.2':
+		'URL-sichere Base64-Alphabet-Strings für Kennungen und undurchsichtige IDs',
+	'tool.random-string-generator.use_case.3':
+		'Benutzerdefinierte Alphabete für Simulationen, Spiele und eingeschränkte Systeme',
+	'ui.random_string.tab_label': 'Zufall',
+	'ui.random_string.simple_hint':
+		'Länge und Zeichentypen anpassen — die Ausgabe aktualisiert sich automatisch.',
+	'ui.random_string.length_with_value': 'Länge: {n}',
+	'ui.random_string.characters_used': 'Verwendete Zeichen',
+	'ui.random_string.pick.upper': 'ABC',
+	'ui.random_string.pick.lower': 'abc',
+	'ui.random_string.pick.digits': '123',
+	'ui.random_string.pick.symbols': '#$&',
+	'ui.random_string.preset_active_hint':
+		'Ein Zeichensatz-Preset ist aktiv. Erweitert öffnen und auf „Auswahl“ wechseln für ABC / abc / 123 / Symbole.',
+	'ui.random_string.advanced.title': 'Erweitert',
+	'ui.random_string.exact_length': 'Genaue Länge',
+	'ui.random_string.slider_hint':
+		'Der Schieberegler oben eignet sich für Längen 1–256. Hier längere Zeichenketten (bis 100.000) eintragen.',
+	'ui.random_string.regenerate': 'Neu erzeugen',
+	'ui.random_string.decrease_length': 'Länge verringern',
+	'ui.random_string.increase_length': 'Länge erhöhen',
+	'ui.random_string.mode.pick': 'Auswahl (Umschalter)',
+	'ui.random_string.strength.very_weak': 'Sehr schwach',
+	'ui.random_string.strength.weak': 'Schwach',
+	'ui.random_string.strength.fair': 'Mittel',
+	'ui.random_string.strength.strong': 'Stark',
+	'ui.random_string.strength.very_strong': 'Sehr stark',
+	'ui.random_string.toast.one_charset': 'Mindestens einen Zeichentyp auswählen.',
+	'ui.random_string.generate': 'Erzeugen',
+	'ui.random_string.processing': 'Arbeitet…',
+	'ui.random_string.length_label': 'Länge pro Zeichenkette',
+	'ui.random_string.count_label': 'Anzahl Zeichenketten',
+	'ui.random_string.charset_label': 'Zeichensatz',
+	'ui.random_string.custom_charset_label': 'Eigene Zeichen',
+	'ui.random_string.custom_charset_placeholder': 'Zeichen eingeben, aus denen gezogen wird…',
+	'ui.random_string.separator_label': 'Trenner zwischen Zeichenketten',
+	'ui.random_string.charset.alphanumeric': 'Alphanumerisch',
+	'ui.random_string.charset.hex_lower': 'Hex (klein)',
+	'ui.random_string.charset.hex_upper': 'Hex (groß)',
+	'ui.random_string.charset.numeric': 'Numerisch',
+	'ui.random_string.charset.base64url': 'Base64 URL-sicher',
+	'ui.random_string.charset.custom': 'Benutzerdefiniert',
+	'ui.random_string.separator.newline': 'Zeilenumbruch',
+	'ui.random_string.separator.comma': 'Komma',
+	'ui.random_string.separator.space': 'Leerzeichen',
+	'ui.random_string.separator.none': 'Keiner (verketten)',
+	'ui.random_string.exclude_ambiguous': 'Visuell verwechselbare Zeichen ausschließen (0/O, 1/l, …)',
+	'ui.random_string.output_label': 'Ausgabe',
+	'ui.random_string.panel_options_heading': 'Erzeugungsoptionen',
+	'ui.random_string.panel_options_hint':
+		'Länge, Anzahl, Zeichensatz und wie mehrere Zeichenketten verbunden werden.',
+	'ui.random_string.output_placeholder': 'Generierte Zeichenketten erscheinen hier',
+	'ui.random_string.worker_active':
+		'Große Eingabe erkannt (>{size}). Erzeugung läuft in einem Web Worker.',
+	'ui.random_string.worker_failed': 'Worker fehlgeschlagen. Fallback auf Erzeugung im Hauptthread.',
+	'ui.random_string.worker_badge': 'Worker',
+	'ui.random_string.toast.generated': 'Zufallszeichenketten erzeugt',
+	'ui.random_string.toast.cleared': 'Ausgabe geleert',
+	'ui.random_string.toast.nothing_to_download': 'Noch nichts zum Herunterladen',
+	'ui.random_string.error.invalid_length': 'Länge liegt außerhalb des erlaubten Bereichs.',
+	'ui.random_string.error.invalid_count': 'Anzahl liegt außerhalb des erlaubten Bereichs.',
+	'ui.random_string.error.empty_charset': 'Wählen Sie einen nicht leeren Zeichensatz.',
+	'ui.random_string.error.charset_too_large': 'Zeichensatz ist zu groß.',
+	'ui.random_string.error.crypto_unavailable': 'Web Crypto ist in dieser Umgebung nicht verfügbar.',
+	'ui.random_string.error.unknown': 'Zeichenketten konnten nicht erzeugt werden.',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Lesen',
 	'ui.qr.tab_barcode': 'Barcode',

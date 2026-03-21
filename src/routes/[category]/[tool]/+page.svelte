@@ -45,6 +45,7 @@
 	import QrCodeGeneratorPanel from "$components/panels/qr/QrCodeGeneratorPanel.svelte";
 	import QrCodeReaderPanel from "$components/panels/qr/QrCodeReaderPanel.svelte";
 	import BarcodeGeneratorPanel from "$components/panels/qr/BarcodeGeneratorPanel.svelte";
+	import RandomStringGeneratorPanel from "$components/panels/crypto/RandomStringGeneratorPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -143,6 +144,11 @@
 	let qrWorkspaceTools = $derived(
 		data.tool.category === "qr"
 			? localizeToolDefinitions(getToolsByCategory("qr"), $t)
+			: []
+	);
+	let cryptoWorkspaceTools = $derived(
+		data.tool.category === "crypto"
+			? localizeToolDefinitions(getToolsByCategory("crypto"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -586,6 +592,8 @@
 				<WorkspaceTabs tools={tomlWorkspaceTools} activeSlug={data.tool.slug} category="toml" locale={currentLocale} />
 			{:else if data.tool.category === 'qr' && qrWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={qrWorkspaceTools} activeSlug={data.tool.slug} category="qr" locale={currentLocale} />
+			{:else if data.tool.category === 'crypto' && cryptoWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={cryptoWorkspaceTools} activeSlug={data.tool.slug} category="crypto" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -657,6 +665,8 @@
 				<WorkspaceTabs tools={tomlWorkspaceTools} activeSlug={data.tool.slug} category="toml" locale={currentLocale} />
 			{:else if data.tool.category === 'qr' && qrWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={qrWorkspaceTools} activeSlug={data.tool.slug} category="qr" locale={currentLocale} />
+			{:else if data.tool.category === 'crypto' && cryptoWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={cryptoWorkspaceTools} activeSlug={data.tool.slug} category="crypto" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -760,6 +770,8 @@
 				<QrCodeReaderPanel toolSlug={data.tool.slug} />
 			{:else if data.tool.category === "qr" && data.tool.slug === "barcode"}
 				<BarcodeGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "random-string"}
+				<RandomStringGeneratorPanel toolSlug={data.tool.slug} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

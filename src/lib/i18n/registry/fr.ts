@@ -3005,6 +3005,105 @@ const registryFr: Record<string, string> = {
 		'Exporter des codes-barres SVG pour chartes graphiques ou documentation',
 	'tool.barcode-generator.use_case.3':
 		'Créer des symboles Codabar ou MSI pour systèmes hérités et outils internes',
+	'category.crypto.display_name': 'Crypto',
+	'category.crypto.description':
+		'Générez des chaînes aléatoires cryptographiquement solides dans le navigateur avec des préréglages de jeux de caractères, des alphabets personnalisés, une sortie par lots et un délestage Web Worker pour les très gros résultats.',
+	'category.crypto.primary_keyword': 'générateur de chaînes aléatoires',
+	'tool.random-string-generator.display_name': 'Générateur de chaînes aléatoires',
+	'tool.random-string-generator.tagline':
+		'Chaînes aléatoires sécurisées avec préréglages, alphabets personnalisés, séparateurs et Web Worker',
+	'tool.random-string-generator.description':
+		'Créez des chaînes aléatoires pour mots de passe, jetons, identifiants et données de test avec Web Crypto getRandomValues—sans envoi ni serveur. Choisissez alphanumérique, hexadécimal, numérique, Base64 URL-safe ou un alphabet personnalisé ; excluez les caractères ambigus ; contrôlez longueur, nombre et séparateurs ; les gros calculs passent dans un Web Worker.',
+	'tool.random-string-generator.primary_keyword': 'générateur de chaînes aléatoires',
+	'tool.random-string-generator.meta_title':
+		'Chaînes aléatoires — Crypto sécurisée navigateur | fmtly',
+	'tool.random-string-generator.meta_description':
+		'Générez des chaînes aléatoires fortes dans le navigateur. Préréglages, alphabet personnalisé, lots, mode sans ambiguïté et Web Worker. Privé et instantané.',
+	'tool.random-string-generator.operation': 'Générer des chaînes aléatoires',
+	'tool.random-string-generator.faq.0.question': 'Est-ce adapté aux mots de passe et clés API ?',
+	'tool.random-string-generator.faq.0.answer':
+		'Les chaînes utilisent crypto.getRandomValues avec un tirage sans biais. Pour les mots de passe, privilégiez une grande longueur, un alphabet large et une bonne gestion des secrets.',
+	'tool.random-string-generator.faq.1.question': 'Pourquoi un Web Worker parfois ?',
+	'tool.random-string-generator.faq.1.answer':
+		'Les très grandes sorties ou alphabets énormes peuvent bloquer l’interface. Au-delà d’un seuil, le travail est délégué pour garder la page fluide.',
+	'tool.random-string-generator.faq.2.question': 'Que fait « exclure les caractères ambigus » ?',
+	'tool.random-string-generator.faq.2.answer':
+		'Cela retire des préréglages les caractères faciles à confondre (0/O, 1/l, etc.) pour faciliter la copie manuelle.',
+	'tool.random-string-generator.faq.3.question': 'Mes données sont-elles envoyées à un serveur ?',
+	'tool.random-string-generator.faq.3.answer':
+		'Non. La génération se fait entièrement dans votre navigateur. Rien n’est téléversé ni journalisé par fmtly.',
+	'tool.random-string-generator.use_case.0':
+		'Générer des jetons de réinitialisation, codes d’invitation et secrets à usage unique localement',
+	'tool.random-string-generator.use_case.1':
+		'Créer des jeux de test avec longueur, jeu de caractères et sortie multiligne maîtrisés',
+	'tool.random-string-generator.use_case.2':
+		'Chaînes alphabet Base64 URL-safe pour identifiants et IDs opaques',
+	'tool.random-string-generator.use_case.3':
+		'Alphabets personnalisés pour simulations, jeux et systèmes contraints',
+	'ui.random_string.tab_label': 'Aléatoire',
+	'ui.random_string.simple_hint':
+		'Ajustez la longueur et les types de caractères — la sortie se met à jour automatiquement.',
+	'ui.random_string.length_with_value': 'Longueur : {n}',
+	'ui.random_string.characters_used': 'Caractères utilisés',
+	'ui.random_string.pick.upper': 'ABC',
+	'ui.random_string.pick.lower': 'abc',
+	'ui.random_string.pick.digits': '123',
+	'ui.random_string.pick.symbols': '#$&',
+	'ui.random_string.preset_active_hint':
+		'Un préréglage de jeu de caractères est actif. Ouvrez Avancé et passez à « Choix » pour ABC / abc / 123 / symboles.',
+	'ui.random_string.advanced.title': 'Avancé',
+	'ui.random_string.exact_length': 'Longueur exacte',
+	'ui.random_string.slider_hint':
+		'Le curseur convient pour des longueurs 1–256. Saisissez ici des chaînes plus longues (jusqu’à 100 000).',
+	'ui.random_string.regenerate': 'Régénérer',
+	'ui.random_string.decrease_length': 'Réduire la longueur',
+	'ui.random_string.increase_length': 'Augmenter la longueur',
+	'ui.random_string.mode.pick': 'Choix (cases)',
+	'ui.random_string.strength.very_weak': 'Très faible',
+	'ui.random_string.strength.weak': 'Faible',
+	'ui.random_string.strength.fair': 'Correct',
+	'ui.random_string.strength.strong': 'Fort',
+	'ui.random_string.strength.very_strong': 'Très fort',
+	'ui.random_string.toast.one_charset': 'Sélectionnez au moins un type de caractère.',
+	'ui.random_string.generate': 'Générer',
+	'ui.random_string.processing': 'Traitement…',
+	'ui.random_string.length_label': 'Longueur par chaîne',
+	'ui.random_string.count_label': 'Nombre de chaînes',
+	'ui.random_string.charset_label': 'Jeu de caractères',
+	'ui.random_string.custom_charset_label': 'Caractères personnalisés',
+	'ui.random_string.custom_charset_placeholder':
+		'Saisissez les caractères exacts à échantillonner…',
+	'ui.random_string.separator_label': 'Séparateur entre chaînes',
+	'ui.random_string.charset.alphanumeric': 'Alphanumérique',
+	'ui.random_string.charset.hex_lower': 'Hex (minuscules)',
+	'ui.random_string.charset.hex_upper': 'Hex (majuscules)',
+	'ui.random_string.charset.numeric': 'Numérique',
+	'ui.random_string.charset.base64url': 'Base64 URL-safe',
+	'ui.random_string.charset.custom': 'Personnalisé',
+	'ui.random_string.separator.newline': 'Saut de ligne',
+	'ui.random_string.separator.comma': 'Virgule',
+	'ui.random_string.separator.space': 'Espace',
+	'ui.random_string.separator.none': 'Aucun (concat)',
+	'ui.random_string.exclude_ambiguous': 'Exclure les caractères visuellement ambigus (0/O, 1/l, …)',
+	'ui.random_string.output_label': 'Sortie',
+	'ui.random_string.panel_options_heading': 'Options de génération',
+	'ui.random_string.panel_options_hint':
+		'Longueur, nombre, jeu de caractères et séparation entre les chaînes.',
+	'ui.random_string.output_placeholder': 'Les chaînes générées apparaissent ici',
+	'ui.random_string.worker_active':
+		'Grande entrée détectée (>{size}). La génération s’exécute dans un Web Worker.',
+	'ui.random_string.worker_failed': 'Échec du Worker. Retour au thread principal.',
+	'ui.random_string.worker_badge': 'Worker',
+	'ui.random_string.toast.generated': 'Chaînes aléatoires générées',
+	'ui.random_string.toast.cleared': 'Sortie effacée',
+	'ui.random_string.toast.nothing_to_download': 'Rien à télécharger pour l’instant',
+	'ui.random_string.error.invalid_length': 'La longueur doit être dans la plage autorisée.',
+	'ui.random_string.error.invalid_count': 'Le nombre doit être dans la plage autorisée.',
+	'ui.random_string.error.empty_charset': 'Choisissez un jeu de caractères non vide.',
+	'ui.random_string.error.charset_too_large': 'Le jeu de caractères est trop grand.',
+	'ui.random_string.error.crypto_unavailable':
+		'Web Crypto n’est pas disponible dans cet environnement.',
+	'ui.random_string.error.unknown': 'Impossible de générer les chaînes.',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Lire',
 	'ui.qr.tab_barcode': 'Code-barres',

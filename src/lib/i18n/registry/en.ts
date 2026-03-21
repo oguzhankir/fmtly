@@ -2869,6 +2869,105 @@ const registryEn: Record<string, string> = {
 		'Export vector SVG barcodes for brand guidelines, slides, or documentation',
 	'tool.barcode-generator.use_case.3':
 		'Create Codabar or MSI symbols for legacy systems and internal tooling',
+	'category.crypto.display_name': 'Crypto',
+	'category.crypto.description':
+		'Generate cryptographically strong random strings in your browser with charset presets, custom alphabets, batch output, and Web Worker offload for huge results.',
+	'category.crypto.primary_keyword': 'random string generator',
+	'tool.random-string-generator.display_name': 'Random String Generator',
+	'tool.random-string-generator.tagline':
+		'Generate cryptographically secure random strings with charset presets, custom alphabets, separators, and Web Worker offload',
+	'tool.random-string-generator.description':
+		'Create random strings for passwords, tokens, identifiers, and test data using Web Crypto getRandomValues—no uploads, no server. Choose alphanumeric, hex, numeric, Base64 URL-safe, or a custom alphabet; exclude ambiguous characters; control length, count, and separators; large jobs run in a Web Worker.',
+	'tool.random-string-generator.primary_keyword': 'random string generator',
+	'tool.random-string-generator.meta_title':
+		'Random String Generator — Secure Browser Crypto | fmtly',
+	'tool.random-string-generator.meta_description':
+		'Generate cryptographically strong random strings in your browser. Presets, custom charset, batch output, ambiguous-safe mode, and Web Worker support. Private and instant.',
+	'tool.random-string-generator.operation': 'Generate random strings',
+	'tool.random-string-generator.faq.0.question': 'Is this suitable for passwords and API keys?',
+	'tool.random-string-generator.faq.0.answer':
+		'Strings use crypto.getRandomValues with unbiased sampling from your chosen alphabet. For passwords, prefer long length, a large alphabet, and your own secret management practices.',
+	'tool.random-string-generator.faq.1.question': 'Why does it sometimes use a Web Worker?',
+	'tool.random-string-generator.faq.1.answer':
+		'Very large outputs or huge custom alphabets can block the UI thread. The tool offloads work above a size threshold so the page stays responsive.',
+	'tool.random-string-generator.faq.2.question': 'What does “exclude ambiguous characters” do?',
+	'tool.random-string-generator.faq.2.answer':
+		'It removes characters that are easy to confuse visually (like 0/O, 1/l) from presets, helping humans copy values reliably.',
+	'tool.random-string-generator.faq.3.question': 'Is my data sent to a server?',
+	'tool.random-string-generator.faq.3.answer':
+		'No. Generation runs entirely in your browser. Nothing is uploaded or logged by fmtly.',
+	'tool.random-string-generator.use_case.0':
+		'Generate password-reset tokens, invite codes, and one-time secrets locally',
+	'tool.random-string-generator.use_case.1':
+		'Create test fixtures with controlled length, charset, and multi-line batch output',
+	'tool.random-string-generator.use_case.2':
+		'Produce URL-safe Base64 alphabet strings for identifiers and opaque IDs',
+	'tool.random-string-generator.use_case.3':
+		'Build custom-alphabet strings for simulations, games, and constrained systems',
+	'ui.random_string.tab_label': 'Random',
+	'ui.random_string.simple_hint':
+		'Change length and character types — output updates automatically.',
+	'ui.random_string.length_with_value': 'Length: {n}',
+	'ui.random_string.characters_used': 'Characters used',
+	'ui.random_string.pick.upper': 'ABC',
+	'ui.random_string.pick.lower': 'abc',
+	'ui.random_string.pick.digits': '123',
+	'ui.random_string.pick.symbols': '#$&',
+	'ui.random_string.preset_active_hint':
+		'A preset charset is selected. Open Advanced to switch to “Pick” for ABC / abc / 123 / symbols.',
+	'ui.random_string.advanced.title': 'Advanced',
+	'ui.random_string.exact_length': 'Exact length',
+	'ui.random_string.slider_hint':
+		'The slider above is quick for lengths 1–256. Type here for longer strings (up to 100,000).',
+	'ui.random_string.regenerate': 'Regenerate',
+	'ui.random_string.decrease_length': 'Decrease length',
+	'ui.random_string.increase_length': 'Increase length',
+	'ui.random_string.mode.pick': 'Pick (toggles)',
+	'ui.random_string.strength.very_weak': 'Very weak',
+	'ui.random_string.strength.weak': 'Weak',
+	'ui.random_string.strength.fair': 'Fair',
+	'ui.random_string.strength.strong': 'Strong',
+	'ui.random_string.strength.very_strong': 'Very strong',
+	'ui.random_string.toast.one_charset': 'Select at least one character type.',
+	'ui.random_string.generate': 'Generate',
+	'ui.random_string.processing': 'Working…',
+	'ui.random_string.length_label': 'Length per string',
+	'ui.random_string.count_label': 'How many strings',
+	'ui.random_string.charset_label': 'Character set',
+	'ui.random_string.custom_charset_label': 'Custom characters',
+	'ui.random_string.custom_charset_placeholder':
+		'Paste or type the exact characters to sample from…',
+	'ui.random_string.separator_label': 'Separator between strings',
+	'ui.random_string.charset.alphanumeric': 'Alphanumeric',
+	'ui.random_string.charset.hex_lower': 'Hex (lowercase)',
+	'ui.random_string.charset.hex_upper': 'Hex (uppercase)',
+	'ui.random_string.charset.numeric': 'Numeric',
+	'ui.random_string.charset.base64url': 'Base64 URL-safe',
+	'ui.random_string.charset.custom': 'Custom',
+	'ui.random_string.separator.newline': 'New line',
+	'ui.random_string.separator.comma': 'Comma',
+	'ui.random_string.separator.space': 'Space',
+	'ui.random_string.separator.none': 'None (concat)',
+	'ui.random_string.exclude_ambiguous': 'Exclude visually ambiguous characters (0/O, 1/l, …)',
+	'ui.random_string.output_label': 'Output',
+	'ui.random_string.panel_options_heading': 'Generation options',
+	'ui.random_string.panel_options_hint':
+		'Length, count, charset, and how multiple strings are joined.',
+	'ui.random_string.output_placeholder': 'Generated strings appear here',
+	'ui.random_string.worker_active':
+		'Large input detected (>{size}). Generation runs in a Web Worker.',
+	'ui.random_string.worker_failed':
+		'Worker processing failed. Falling back to main thread generation.',
+	'ui.random_string.worker_badge': 'Worker',
+	'ui.random_string.toast.generated': 'Random strings generated',
+	'ui.random_string.toast.cleared': 'Output cleared',
+	'ui.random_string.toast.nothing_to_download': 'Nothing to download yet',
+	'ui.random_string.error.invalid_length': 'Length must be within the allowed range.',
+	'ui.random_string.error.invalid_count': 'Count must be within the allowed range.',
+	'ui.random_string.error.empty_charset': 'Choose a non-empty character set.',
+	'ui.random_string.error.charset_too_large': 'Character set is too large.',
+	'ui.random_string.error.crypto_unavailable': 'Web Crypto is not available in this environment.',
+	'ui.random_string.error.unknown': 'Could not generate strings.',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Read',
 	'ui.qr.tab_barcode': 'Barcode',

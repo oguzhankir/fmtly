@@ -53,6 +53,12 @@ const categoryMetaList: CategoryMeta[] = [
 		displayName: 'category.qr.display_name',
 		description: 'category.qr.description',
 		primaryKeyword: 'category.qr.primary_keyword'
+	},
+	{
+		slug: 'crypto',
+		displayName: 'category.crypto.display_name',
+		description: 'category.crypto.description',
+		primaryKeyword: 'category.crypto.primary_keyword'
 	}
 ];
 

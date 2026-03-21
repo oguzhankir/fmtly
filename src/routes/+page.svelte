@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	import { Search, ArrowRight } from 'lucide-svelte';
+	import { ArrowRight, Search, Shield } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import SeoHead from '$components/layout/SeoHead.svelte';
 	import { getAllTools, getToolsByCategory } from '$registry/index.js';
@@ -192,7 +192,13 @@
 					{#if count > 0}
 						<a href={localizePath(`/${cat.slug}`, currentLocale)} class="category-card">
 							<div class="category-card-top">
-								<div class="category-card-icon">{categoryIcons[cat.slug] ?? '#'}</div>
+								<div class="category-card-icon">
+									{#if cat.slug === 'crypto'}
+										<Shield size={18} strokeWidth={1.75} aria-hidden="true" class="category-card-lucide" />
+									{:else}
+										{categoryIcons[cat.slug] ?? '#'}
+									{/if}
+								</div>
 								<h3 class="category-card-name">{cat.displayName}</h3>
 							</div>
 							<span class="category-card-count">
@@ -482,6 +488,11 @@
 		font-family: var(--font-mono);
 		color: var(--text-secondary);
 		flex-shrink: 0;
+	}
+
+	.category-card-icon :global(.category-card-lucide) {
+		flex-shrink: 0;
+		color: var(--text-secondary);
 	}
 
 	.category-card-name {

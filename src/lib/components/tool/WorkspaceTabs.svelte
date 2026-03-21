@@ -86,6 +86,8 @@
 				return $t('ui.qr.tab_reader', 'Read');
 			case 'barcode':
 				return $t('ui.qr.tab_barcode', 'Barcode');
+			case 'random-string':
+				return $t('ui.random_string.tab_label', 'Random');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}
