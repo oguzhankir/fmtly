@@ -2676,6 +2676,61 @@ const registryTr: Record<string, string> = {
 	'ui.hex.error.invalid_hex_digit': 'Hex girdisinde geçersiz karakter (yaklaşık sütun {position}).',
 	'ui.hex.error.odd_hex_length': 'Tek sayıda hex rakamı ({count}). Baytlar için çiftler gerekir.',
 	'ui.hex.error.invalid_utf8': 'Çözülen baytlar geçerli UTF-8 değil ({bytes} bayt).',
+	// ── ROT13 / Sezar — araç ─────────────────────────────────────────────────
+	'tool.encode-rot13-caesar-cipher.display_name': 'ROT13 / Sezar şifresi',
+	'tool.encode-rot13-caesar-cipher.tagline':
+		'Spoiler için ROT13 veya A–Z ve a–z üzerinde şifreleme ve çözme ile Sezar kaydırması',
+	'tool.encode-rot13-caesar-cipher.description':
+		'Klasik ROT13’ü (13 konum, kendi tersi) veya 1–25 arası kaydırmalı Sezar şifresini uygulayın. Sezar için şifrele veya çöz seçin; hazır değerler veya kaydırıcı kullanın; rakamlar, noktalama ve temel Latin dışı Unicode değişmez. Büyük girdiler Web Worker’da işlenir; her şey tarayıcıda kalır.',
+	'tool.encode-rot13-caesar-cipher.primary_keyword': 'rot13 sezar sifre online',
+	'tool.encode-rot13-caesar-cipher.meta_title': 'ROT13 ve Sezar — fmtly.dev',
+	'tool.encode-rot13-caesar-cipher.meta_description':
+		'Tarayıcıda ROT13 ve Sezar: şifrele, çöz, 1–25 hazır ayarlar, büyük metin için Worker. Yalnızca harfler; gizli ve anında.',
+	'tool.encode-rot13-caesar-cipher.operation': 'ROT13 / Sezar',
+	'tool.encode-rot13-caesar-cipher.faq.0.question': 'Metnim bir yere yüklenir mi?',
+	'tool.encode-rot13-caesar-cipher.faq.0.answer':
+		'Hayır. Dönüşüm tamamen tarayıcınızda çalışır. Metniniz cihazınızdan çıkmaz.',
+	'tool.encode-rot13-caesar-cipher.faq.1.question': 'Hangi karakterler değişir?',
+	'tool.encode-rot13-caesar-cipher.faq.1.answer':
+		'Yalnızca temel Latin harfleri A–Z ve a–z döndürülür. Boşluk, rakam, noktalama, aksanlı harfler, emoji ve diğer Unicode aynı kalır.',
+	'tool.encode-rot13-caesar-cipher.faq.2.question': 'Bu gerçek şifreleme mi?',
+	'tool.encode-rot13-caesar-cipher.faq.2.answer':
+		'Hayır. ROT13 ve Sezar; oyun, spoiler veya öğretim için gizlemedir — kolayca kırılır ve sırlar için uygun değildir.',
+	'tool.encode-rot13-caesar-cipher.faq.3.question': 'Büyük girdi neden Web Worker kullanır?',
+	'tool.encode-rot13-caesar-cipher.faq.3.answer':
+		'500 KB üzeri girdiler ana iş parçacığı dışında işlenir; yazma akıcı kalır.',
+	'tool.encode-rot13-caesar-cipher.use_case.0':
+		'Forum ve sohbetlerde tersine çevrilebilir ROT13 ile bulmaca veya hikâye spoiler’larını gizleme',
+	'tool.encode-rot13-caesar-cipher.use_case.1':
+		'Klasik yer değiştirme şifrelerini ve alfabede modüler aritmetiği öğretme',
+	'tool.encode-rot13-caesar-cipher.use_case.2':
+		'CTF veya kağıt bilmecelerinde birden fazla Sezar kaydırmasını hızlıca deneme',
+	'tool.encode-rot13-caesar-cipher.use_case.3':
+		'API veya günlüklerden gelen ROT13 içeriğini tekrar okunur metne çevirme',
+	// ── ROT13 / Sezar — arayüz ───────────────────────────────────────────────
+	'ui.rot13.tab_label': 'ROT13',
+	'ui.rot13.mode_label': 'Şifre',
+	'ui.rot13.mode.rot13': 'ROT13',
+	'ui.rot13.mode.caesar': 'Sezar',
+	'ui.rot13.rot13_hint':
+		'ROT13, A–Z ve a–z harflerini 13 konum kaydırır. İki kez uygulamak özgün metni verir.',
+	'ui.rot13.direction_label': 'Yön',
+	'ui.rot13.direction.encrypt': 'Şifrele (ileri)',
+	'ui.rot13.direction.decrypt': 'Çöz (geri)',
+	'ui.rot13.shift_label': 'Kaydırma (1–25)',
+	'ui.rot13.presets_label': 'Hazır',
+	'ui.rot13.caesar_scope_hint':
+		'Yalnızca temel Latin A–Z ve a–z kaydırılır; rakamlar, noktalama, boşluklar ve diğer Unicode değişmez.',
+	'ui.rot13.worker_active': 'Büyük girdi algılandı (>{size}). İşlem Web Worker üzerinde çalışır.',
+	'ui.rot13.worker_failed': 'Worker işlemi başarısız. Ana thread işlemine dönülüyor.',
+	'ui.rot13.worker_badge': 'Worker',
+	'ui.rot13.button.apply_output': 'Çıktıyı girdiye uygula',
+	'ui.rot13.input_label': 'Girdi',
+	'ui.rot13.output_label': 'Çıktı',
+	'ui.rot13.input_placeholder': 'Dönüştürmek için metin yazın veya yapıştırın…',
+	'ui.rot13.output_placeholder': 'Dönüştürülmüş metin burada görünür…',
+	'ui.rot13.characters': 'karakter',
+	'ui.rot13.toast.applied': 'Çıktı girdiye uygulandı',
 	// ── URL Kodla / Çöz — arayüz metinleri ───────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'İşlem',

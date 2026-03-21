@@ -2613,6 +2613,61 @@ const registryEn: Record<string, string> = {
 	'ui.hex.error.odd_hex_length':
 		'Odd number of hex digits ({count}). Pairs are required for bytes.',
 	'ui.hex.error.invalid_utf8': 'Decoded bytes are not valid UTF-8 ({bytes} bytes).',
+	// ── ROT13 / Caesar tool ──────────────────────────────────────────────────
+	'tool.encode-rot13-caesar-cipher.display_name': 'ROT13 / Caesar Cipher',
+	'tool.encode-rot13-caesar-cipher.tagline':
+		'ROT13 spoilers or Caesar-shift A–Z and a–z with encrypt and decrypt modes',
+	'tool.encode-rot13-caesar-cipher.description':
+		'Apply classic ROT13 (rotate letters by 13, its own inverse) or a Caesar cipher with any shift from 1 to 25. Choose encrypt or decrypt for Caesar, use presets or a slider, and keep numbers, punctuation, and Unicode outside basic Latin untouched. Large inputs run in a Web Worker; everything stays in your browser.',
+	'tool.encode-rot13-caesar-cipher.primary_keyword': 'rot13 caesar cipher online',
+	'tool.encode-rot13-caesar-cipher.meta_title': 'ROT13 & Caesar Cipher — fmtly.dev',
+	'tool.encode-rot13-caesar-cipher.meta_description':
+		'ROT13 and Caesar shift in your browser: encrypt, decrypt, presets 1–25, Worker for big text. Letters only; private and instant.',
+	'tool.encode-rot13-caesar-cipher.operation': 'ROT13 / Caesar shift',
+	'tool.encode-rot13-caesar-cipher.faq.0.question': 'Is my text uploaded anywhere?',
+	'tool.encode-rot13-caesar-cipher.faq.0.answer':
+		'No. The transformation runs entirely in your browser. Your text never leaves your device.',
+	'tool.encode-rot13-caesar-cipher.faq.1.question': 'Which characters are changed?',
+	'tool.encode-rot13-caesar-cipher.faq.1.answer':
+		'Only basic Latin letters A–Z and a–z are rotated. Spaces, digits, punctuation, accented letters, emoji, and all other Unicode code points are left unchanged.',
+	'tool.encode-rot13-caesar-cipher.faq.2.question': 'Is this real encryption?',
+	'tool.encode-rot13-caesar-cipher.faq.2.answer':
+		'No. ROT13 and Caesar ciphers are obfuscation for fun, spoilers, or teaching — they are trivial to break and must not be used to protect secrets.',
+	'tool.encode-rot13-caesar-cipher.faq.3.question': 'Why does large input use a Web Worker?',
+	'tool.encode-rot13-caesar-cipher.faq.3.answer':
+		'Inputs over 500KB are processed off the main thread so the editor stays responsive while every character is scanned.',
+	'tool.encode-rot13-caesar-cipher.use_case.0':
+		'Hide puzzle or story spoilers in forums and chats with reversible ROT13 text',
+	'tool.encode-rot13-caesar-cipher.use_case.1':
+		'Teach classical substitution ciphers and modular arithmetic on the alphabet',
+	'tool.encode-rot13-caesar-cipher.use_case.2':
+		'Quickly try several Caesar shifts when solving CTF or pen-and-paper riddles',
+	'tool.encode-rot13-caesar-cipher.use_case.3':
+		'Normalize ROT13-encoded payloads from APIs or logs back to readable prose',
+	// ── ROT13 / Caesar UI ────────────────────────────────────────────────────
+	'ui.rot13.tab_label': 'ROT13',
+	'ui.rot13.mode_label': 'Cipher',
+	'ui.rot13.mode.rot13': 'ROT13',
+	'ui.rot13.mode.caesar': 'Caesar',
+	'ui.rot13.rot13_hint':
+		'ROT13 rotates A–Z and a–z by 13 places. Applying it twice returns the original text.',
+	'ui.rot13.direction_label': 'Direction',
+	'ui.rot13.direction.encrypt': 'Encrypt (shift forward)',
+	'ui.rot13.direction.decrypt': 'Decrypt (shift backward)',
+	'ui.rot13.shift_label': 'Shift (1–25)',
+	'ui.rot13.presets_label': 'Presets',
+	'ui.rot13.caesar_scope_hint':
+		'Only basic Latin letters A–Z and a–z are shifted; numbers, punctuation, spaces, and other Unicode stay unchanged.',
+	'ui.rot13.worker_active': 'Large input detected (>{size}). Processing runs in a Web Worker.',
+	'ui.rot13.worker_failed': 'Worker processing failed. Falling back to main thread processing.',
+	'ui.rot13.worker_badge': 'Worker',
+	'ui.rot13.button.apply_output': 'Apply output to input',
+	'ui.rot13.input_label': 'Input',
+	'ui.rot13.output_label': 'Output',
+	'ui.rot13.input_placeholder': 'Type or paste text to transform…',
+	'ui.rot13.output_placeholder': 'Transformed text appears here…',
+	'ui.rot13.characters': 'chars',
+	'ui.rot13.toast.applied': 'Output applied to input',
 	// ── URL Encode / Decode UI strings ───────────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Action',

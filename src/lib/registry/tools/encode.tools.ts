@@ -243,6 +243,55 @@ export const encodeTools: ToolDefinition[] = [
 		sampleInput: 'fmtly — UTF-8 safe: café 你好 👋'
 	},
 	{
+		id: 'encode-rot13-caesar-cipher',
+		category: 'encode',
+		slug: 'rot13',
+		displayName: 'tool.encode-rot13-caesar-cipher.display_name',
+		tagline: 'tool.encode-rot13-caesar-cipher.tagline',
+		description: 'tool.encode-rot13-caesar-cipher.description',
+		primaryKeyword: 'tool.encode-rot13-caesar-cipher.primary_keyword',
+		metaTitle: 'tool.encode-rot13-caesar-cipher.meta_title',
+		metaDescription: 'tool.encode-rot13-caesar-cipher.meta_description',
+		engine: 'encode',
+		operation: 'tool.encode-rot13-caesar-cipher.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'encode', slug: 'hex' },
+			{ category: 'encode', slug: 'base64' },
+			{ category: 'text', slug: 'escape' },
+			{ category: 'encode', slug: 'url' }
+		],
+		faqs: [
+			{
+				question: 'tool.encode-rot13-caesar-cipher.faq.0.question',
+				answer: 'tool.encode-rot13-caesar-cipher.faq.0.answer'
+			},
+			{
+				question: 'tool.encode-rot13-caesar-cipher.faq.1.question',
+				answer: 'tool.encode-rot13-caesar-cipher.faq.1.answer'
+			},
+			{
+				question: 'tool.encode-rot13-caesar-cipher.faq.2.question',
+				answer: 'tool.encode-rot13-caesar-cipher.faq.2.answer'
+			},
+			{
+				question: 'tool.encode-rot13-caesar-cipher.faq.3.question',
+				answer: 'tool.encode-rot13-caesar-cipher.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.encode-rot13-caesar-cipher.use_case.0',
+			'tool.encode-rot13-caesar-cipher.use_case.1',
+			'tool.encode-rot13-caesar-cipher.use_case.2',
+			'tool.encode-rot13-caesar-cipher.use_case.3'
+		],
+		sampleInput:
+			'Hello from fmtly! Use ROT13 or Caesar shift (1–25) on A–Z and a–z; emoji like 👋 stay as-is.'
+	},
+	{
 		id: 'encode-jwt-decoder',
 		category: 'encode',
 		slug: 'jwt',

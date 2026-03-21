@@ -74,6 +74,8 @@
 				return $t('ui.unicode_inspector.tab_label', 'Unicode');
 			case 'hex':
 				return $t('ui.hex.tab_label', 'Hex');
+			case 'rot13':
+				return $t('ui.rot13.tab_label', 'ROT13');
 			case 'generator':
 				return $t('ui.qr.tab_label', 'QR');
 			default:

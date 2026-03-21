@@ -2644,6 +2644,63 @@ const registryDe: Record<string, string> = {
 		'Ungültiges Zeichen in der Hex-Eingabe (bei Spalte {position}).',
 	'ui.hex.error.odd_hex_length': 'Ungerade Anzahl Hex-Ziffern ({count}). Bytes erfordern Paare.',
 	'ui.hex.error.invalid_utf8': 'Dekodierte Bytes sind kein gültiges UTF-8 ({bytes} Bytes).',
+	// ── ROT13 / Caesar — Tool ─────────────────────────────────────────────────
+	'tool.encode-rot13-caesar-cipher.display_name': 'ROT13 / Caesar-Chiffre',
+	'tool.encode-rot13-caesar-cipher.tagline':
+		'ROT13 für Spoiler oder Caesar-Verschiebung von A–Z und a–z mit Ver- und Entschlüsselung',
+	'tool.encode-rot13-caesar-cipher.description':
+		'Wenden Sie klassisches ROT13 (13 Plätze, selbstinvers) oder eine Caesar-Chiffre mit Verschiebung 1–25 an. Für Caesar zwischen Verschlüsseln und Entschlüsseln wählen, Presets oder Schieberegler nutzen; Ziffern, Satzzeichen und Unicode außerhalb des lateinischen Grundalphabets bleiben unverändert. Große Eingaben laufen in einem Web Worker; alles bleibt im Browser.',
+	'tool.encode-rot13-caesar-cipher.primary_keyword': 'rot13 caesar online',
+	'tool.encode-rot13-caesar-cipher.meta_title': 'ROT13 & Caesar-Chiffre — fmtly.dev',
+	'tool.encode-rot13-caesar-cipher.meta_description':
+		'ROT13 und Caesar im Browser: ver- und entschlüsseln, Presets 1–25, Worker für große Texte. Nur Buchstaben; privat und schnell.',
+	'tool.encode-rot13-caesar-cipher.operation': 'ROT13 / Caesar',
+	'tool.encode-rot13-caesar-cipher.faq.0.question': 'Wird mein Text irgendwo hochgeladen?',
+	'tool.encode-rot13-caesar-cipher.faq.0.answer':
+		'Nein. Die Umwandlung erfolgt vollständig in Ihrem Browser. Ihr Text verlässt Ihr Gerät nicht.',
+	'tool.encode-rot13-caesar-cipher.faq.1.question': 'Welche Zeichen werden verändert?',
+	'tool.encode-rot13-caesar-cipher.faq.1.answer':
+		'Nur lateinische Grundbuchstaben A–Z und a–z werden verschoben. Leerzeichen, Ziffern, Satzzeichen, diakritische Buchstaben, Emoji und übriges Unicode bleiben gleich.',
+	'tool.encode-rot13-caesar-cipher.faq.2.question': 'Ist das echte Verschlüsselung?',
+	'tool.encode-rot13-caesar-cipher.faq.2.answer':
+		'Nein. ROT13 und Caesar sind Verschleierung zu Demonstrations- oder Spoilerzwecken — trivial zu brechen und ungeeignet für Geheimnisse.',
+	'tool.encode-rot13-caesar-cipher.faq.3.question': 'Warum ein Web Worker bei großen Eingaben?',
+	'tool.encode-rot13-caesar-cipher.faq.3.answer':
+		'Eingaben über 500 KB werden außerhalb des Hauptthreads verarbeitet, damit die Eingabe flüssig bleibt.',
+	'tool.encode-rot13-caesar-cipher.use_case.0':
+		'Spoiler in Foren und Chats mit umkehrbarem ROT13 verstecken',
+	'tool.encode-rot13-caesar-cipher.use_case.1':
+		'Klassische Substitutionschiffren und Modulo-Arithmetik am Alphabet vermitteln',
+	'tool.encode-rot13-caesar-cipher.use_case.2':
+		'Mehrere Caesar-Verschiebungen bei CTF- oder Rätselaufgaben schnell testen',
+	'tool.encode-rot13-caesar-cipher.use_case.3':
+		'ROT13-kodierte Inhalte aus APIs oder Logs wieder lesbar machen',
+	// ── ROT13 / Caesar — UI ───────────────────────────────────────────────────
+	'ui.rot13.tab_label': 'ROT13',
+	'ui.rot13.mode_label': 'Chiffre',
+	'ui.rot13.mode.rot13': 'ROT13',
+	'ui.rot13.mode.caesar': 'Caesar',
+	'ui.rot13.rot13_hint':
+		'ROT13 verschiebt A–Z und a–z um 13 Stellen. Zweimal anwenden ergibt wieder den Originaltext.',
+	'ui.rot13.direction_label': 'Richtung',
+	'ui.rot13.direction.encrypt': 'Verschlüsseln (vorwärts)',
+	'ui.rot13.direction.decrypt': 'Entschlüsseln (rückwärts)',
+	'ui.rot13.shift_label': 'Verschiebung (1–25)',
+	'ui.rot13.presets_label': 'Voreinstellungen',
+	'ui.rot13.caesar_scope_hint':
+		'Nur lateinische Grundbuchstaben A–Z und a–z werden verschoben; Ziffern, Satzzeichen, Leerzeichen und übriges Unicode bleiben unverändert.',
+	'ui.rot13.worker_active':
+		'Große Eingabe erkannt (>{size}). Die Verarbeitung läuft in einem Web Worker.',
+	'ui.rot13.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Es wird auf den Hauptthread zurückgefallen.',
+	'ui.rot13.worker_badge': 'Worker',
+	'ui.rot13.button.apply_output': 'Ausgabe als Eingabe übernehmen',
+	'ui.rot13.input_label': 'Eingabe',
+	'ui.rot13.output_label': 'Ausgabe',
+	'ui.rot13.input_placeholder': 'Text zum Transformieren eingeben oder einfügen…',
+	'ui.rot13.output_placeholder': 'Der transformierte Text erscheint hier…',
+	'ui.rot13.characters': 'Zeichen',
+	'ui.rot13.toast.applied': 'Ausgabe wurde als Eingabe übernommen',
 	// ── URL Kodieren / Dekodieren — UI-Texte ─────────────────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Aktion',

@@ -2688,6 +2688,62 @@ const registryIt: Record<string, string> = {
 	'ui.hex.error.odd_hex_length':
 		'Numero dispari di cifre hex ({count}). Servono coppie per i byte.',
 	'ui.hex.error.invalid_utf8': 'I byte decodificati non sono UTF-8 valido ({bytes} byte).',
+	// ── ROT13 / Cesare — strumento ────────────────────────────────────────────
+	'tool.encode-rot13-caesar-cipher.display_name': 'ROT13 / cifrario di Cesare',
+	'tool.encode-rot13-caesar-cipher.tagline':
+		'ROT13 per spoiler o cifrario di Cesare su A–Z e a–z con cifratura e decifratura',
+	'tool.encode-rot13-caesar-cipher.description':
+		'Applica il ROT13 classico (13 posizioni, auto-inverso) o il cifrario di Cesare con spostamento 1–25. Per Cesare scegli cifrare o decifrare, usa preset o cursore; numeri, punteggiatura e Unicode oltre il latino base restano invariati. Gli input grandi usano un Web Worker; tutto resta nel browser.',
+	'tool.encode-rot13-caesar-cipher.primary_keyword': 'rot13 cesare cifrario online',
+	'tool.encode-rot13-caesar-cipher.meta_title': 'ROT13 e Cesare — fmtly.dev',
+	'tool.encode-rot13-caesar-cipher.meta_description':
+		'ROT13 e Cesare nel browser: cifra, decifra, preset 1–25, Worker per testi grandi. Solo lettere; privato e immediato.',
+	'tool.encode-rot13-caesar-cipher.operation': 'ROT13 / Cesare',
+	'tool.encode-rot13-caesar-cipher.faq.0.question': 'Il mio testo viene caricato da qualche parte?',
+	'tool.encode-rot13-caesar-cipher.faq.0.answer':
+		'No. La trasformazione avviene interamente nel browser. Il testo non lascia il dispositivo.',
+	'tool.encode-rot13-caesar-cipher.faq.1.question': 'Quali caratteri cambiano?',
+	'tool.encode-rot13-caesar-cipher.faq.1.answer':
+		'Solo le lettere latine di base A–Z e a–z vengono ruotate. Spazi, cifre, punteggiatura, lettere accentate, emoji e altro Unicode restano uguali.',
+	'tool.encode-rot13-caesar-cipher.faq.2.question': 'È una crittografia vera?',
+	'tool.encode-rot13-caesar-cipher.faq.2.answer':
+		'No. ROT13 e Cesare sono offuscamento per giochi, spoiler o didattica; si rompono facilmente e non proteggono segreti.',
+	'tool.encode-rot13-caesar-cipher.faq.3.question': 'Perché un Web Worker per input grandi?',
+	'tool.encode-rot13-caesar-cipher.faq.3.answer':
+		'Gli input oltre 500 KB sono elaborati fuori dal thread principale per mantenere fluida la digitazione.',
+	'tool.encode-rot13-caesar-cipher.use_case.0':
+		'Nascondere spoiler di enigmi o storie in forum e chat con testo ROT13 reversibile',
+	'tool.encode-rot13-caesar-cipher.use_case.1':
+		'Insegnare cifrari a sostituzione classica e aritmetica modulare sull’alfabeto',
+	'tool.encode-rot13-caesar-cipher.use_case.2':
+		'Provare rapidamente vari spostamenti Cesare per sfide CTF o giochi cartacei',
+	'tool.encode-rot13-caesar-cipher.use_case.3':
+		'Riportare in testo leggibile contenuti ROT13 da API o log',
+	// ── ROT13 / Cesare — interfaccia ──────────────────────────────────────────
+	'ui.rot13.tab_label': 'ROT13',
+	'ui.rot13.mode_label': 'Cifrario',
+	'ui.rot13.mode.rot13': 'ROT13',
+	'ui.rot13.mode.caesar': 'Cesare',
+	'ui.rot13.rot13_hint':
+		'Il ROT13 ruota A–Z e a–z di 13 posizioni. Applicarlo due volte restituisce il testo originale.',
+	'ui.rot13.direction_label': 'Direzione',
+	'ui.rot13.direction.encrypt': 'Cifra (avanti)',
+	'ui.rot13.direction.decrypt': 'Decifra (indietro)',
+	'ui.rot13.shift_label': 'Spostamento (1–25)',
+	'ui.rot13.presets_label': 'Preset',
+	'ui.rot13.caesar_scope_hint':
+		'Solo le lettere latine di base A–Z e a–z vengono spostate; numeri, punteggiatura, spazi e altro Unicode restano invariati.',
+	'ui.rot13.worker_active':
+		'Input grande rilevato (>{size}). L’elaborazione avviene in un Web Worker.',
+	'ui.rot13.worker_failed': 'Elaborazione Worker non riuscita. Ripiego sul thread principale.',
+	'ui.rot13.worker_badge': 'Worker',
+	'ui.rot13.button.apply_output': 'Applica output all’input',
+	'ui.rot13.input_label': 'Input',
+	'ui.rot13.output_label': 'Output',
+	'ui.rot13.input_placeholder': 'Digita o incolla testo da trasformare…',
+	'ui.rot13.output_placeholder': 'Il testo trasformato appare qui…',
+	'ui.rot13.characters': 'caratteri',
+	'ui.rot13.toast.applied': 'Output applicato all’input',
 	// ── Codifica / Decodifica URL — stringhe interfaccia ─────────────────────
 	'ui.encode_url.tab_label': 'URL',
 	'ui.encode_url.action_label': 'Azione',

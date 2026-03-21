@@ -97,3 +97,16 @@ export {
 	type HexWorkerRequest,
 	type HexWorkerResponse
 } from './hex.js';
+
+export {
+	processRot13Caesar,
+	shouldUseRot13CaesarWorker,
+	ROT13_CAESAR_WORKER_THRESHOLD_BYTES,
+	type Rot13CaesarMode,
+	type CaesarDirection,
+	type Rot13CaesarOptions,
+	type Rot13CaesarMetrics,
+	type Rot13CaesarResult,
+	type Rot13CaesarWorkerRequest,
+	type Rot13CaesarWorkerResponse
+} from './rot13-caesar.js';
