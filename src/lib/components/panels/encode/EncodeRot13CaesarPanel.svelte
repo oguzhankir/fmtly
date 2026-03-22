@@ -20,6 +20,8 @@
 	import { t } from '$stores/language';
 	import { addToast } from '$stores/toast.store';
 	import { ArrowLeftRight, Copy, Eraser } from 'lucide-svelte';
+	import EncodeToolFrame from './EncodeToolFrame.svelte';
+	import { encodeChoiceButtonClass } from './encode-panel-ui.js';
 
 	type Props = {
 		toolSlug: string;
@@ -292,14 +294,9 @@
 		}
 	}
 
-	function getChoiceButtonClass(active: boolean): string {
-		return active
-			? 'border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)]'
-			: 'border-[var(--border-default)] bg-[var(--bg-base)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-hover)]';
-	}
 </script>
 
-<div class="flex h-full w-full min-h-0 flex-col">
+<div class="flex h-full min-h-0 w-full flex-col">
 	{#if workspaceTools.length > 0}
 		<WorkspaceTabs
 			tools={workspaceTools}
@@ -309,7 +306,8 @@
 		/>
 	{/if}
 
-	<div class="border-b border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-3)]">
+	<EncodeToolFrame>
+		{#snippet toolbar()}
 		<div class="flex flex-col gap-[var(--space-3)]">
 			<div class="flex flex-col gap-[var(--space-2)]">
 				<span
@@ -322,7 +320,7 @@
 						type="button"
 						data-mode="rot13"
 						onclick={handleModeClick}
-						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(mode === 'rot13')}`}
+						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(mode === 'rot13')}`}
 					>
 						{$t('ui.rot13.mode.rot13', 'ROT13')}
 					</button>
@@ -330,7 +328,7 @@
 						type="button"
 						data-mode="caesar"
 						onclick={handleModeClick}
-						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(mode === 'caesar')}`}
+						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(mode === 'caesar')}`}
 					>
 						{$t('ui.rot13.mode.caesar', 'Caesar')}
 					</button>
@@ -358,7 +356,7 @@
 								type="button"
 								data-direction="encrypt"
 								onclick={handleDirectionClick}
-								class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(caesarDirection === 'encrypt')}`}
+								class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(caesarDirection === 'encrypt')}`}
 							>
 								{$t('ui.rot13.direction.encrypt', 'Encrypt (shift forward)')}
 							</button>
@@ -366,7 +364,7 @@
 								type="button"
 								data-direction="decrypt"
 								onclick={handleDirectionClick}
-								class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(caesarDirection === 'decrypt')}`}
+								class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(caesarDirection === 'decrypt')}`}
 							>
 								{$t('ui.rot13.direction.decrypt', 'Decrypt (shift backward)')}
 							</button>
@@ -407,7 +405,7 @@
 									type="button"
 									data-shift={p}
 									onclick={handleShiftPresetClick}
-									class={`inline-flex h-7 min-w-[2rem] items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-2)] text-[length:var(--text-xs)] font-[family-name:var(--font-mono)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(normalizeCaesarShift(caesarShift) === p)}`}
+									class={`inline-flex h-7 min-w-[2rem] items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-2)] text-[length:var(--text-xs)] font-[family-name:var(--font-mono)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(normalizeCaesarShift(caesarShift) === p)}`}
 								>
 									{p}
 								</button>
@@ -457,10 +455,11 @@
 				</button>
 			</div>
 		</div>
-	</div>
+		{/snippet}
 
+		{#snippet main()}
 	<div
-		class="grid min-h-0 flex-1 grid-cols-1 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]"
+		class="grid h-full min-h-0 flex-1 grid-cols-1 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]"
 	>
 		<div class="flex min-h-[200px] min-w-0 flex-col bg-[var(--bg-base)] xl:min-h-0">
 			<div
@@ -524,6 +523,8 @@
 			></textarea>
 		</div>
 	</div>
+		{/snippet}
+	</EncodeToolFrame>
 </div>
 
 <ConfirmModal

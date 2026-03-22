@@ -16,6 +16,7 @@
 	import { t } from '$stores/language';
 	import { addToast } from '$stores/toast.store';
 	import { Copy, Eraser, ShieldAlert } from 'lucide-svelte';
+	import EncodeToolFrame from './EncodeToolFrame.svelte';
 
 	type Props = {
 		toolSlug: string;
@@ -369,7 +370,7 @@
 	}
 </script>
 
-<div class="flex h-full w-full flex-col">
+<div class="flex h-full min-h-0 w-full flex-col">
 	{#if workspaceTools.length > 0}
 		<WorkspaceTabs
 			tools={workspaceTools}
@@ -379,8 +380,10 @@
 		/>
 	{/if}
 
+	<EncodeToolFrame>
+		{#snippet toolbar()}
 	<!-- Token Input Section -->
-	<div class="border-b border-[var(--border-default)] bg-[var(--bg-surface)]">
+	<div>
 		<!-- Status bar -->
 		<div class="flex flex-wrap items-center justify-between gap-[var(--space-2)] px-[var(--space-3)] pt-[var(--space-3)]">
 			<div class="flex flex-wrap items-center gap-[var(--space-2)]">
@@ -451,7 +454,9 @@
 			</div>
 		</div>
 	</div>
+		{/snippet}
 
+		{#snippet main()}
 	<!-- Decoded Output -->
 	<div class="min-h-0 flex-1 overflow-auto">
 		{#if decodeResult?.ok}
@@ -569,6 +574,8 @@
 			</div>
 		{/if}
 	</div>
+		{/snippet}
+	</EncodeToolFrame>
 </div>
 
 <ConfirmModal

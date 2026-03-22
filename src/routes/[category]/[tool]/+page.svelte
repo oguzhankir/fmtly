@@ -46,6 +46,14 @@
 	import QrCodeReaderPanel from "$components/panels/qr/QrCodeReaderPanel.svelte";
 	import BarcodeGeneratorPanel from "$components/panels/qr/BarcodeGeneratorPanel.svelte";
 	import RandomStringGeneratorPanel from "$components/panels/crypto/RandomStringGeneratorPanel.svelte";
+	import HashGeneratorPanel from "$components/panels/crypto/HashGeneratorPanel.svelte";
+	import HmacGeneratorPanel from "$components/panels/crypto/HmacGeneratorPanel.svelte";
+	import FileHashCalculatorPanel from "$components/panels/crypto/FileHashCalculatorPanel.svelte";
+	import PasswordStrengthPanel from "$components/panels/crypto/PasswordStrengthPanel.svelte";
+	import UuidGeneratorPanel from "$components/panels/crypto/UuidGeneratorPanel.svelte";
+	import KeypairGeneratorPanel from "$components/panels/crypto/KeypairGeneratorPanel.svelte";
+	import CertDecoderPanel from "$components/panels/crypto/CertDecoderPanel.svelte";
+	import TotpGeneratorPanel from "$components/panels/crypto/TotpGeneratorPanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -772,6 +780,22 @@
 				<BarcodeGeneratorPanel toolSlug={data.tool.slug} />
 			{:else if data.tool.category === "crypto" && data.tool.slug === "random-string"}
 				<RandomStringGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "hash"}
+				<HashGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "hmac"}
+				<HmacGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "file-hash"}
+				<FileHashCalculatorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "password-strength"}
+				<PasswordStrengthPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "uuid"}
+				<UuidGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "keypair"}
+				<KeypairGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "cert-decoder"}
+				<CertDecoderPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "crypto" && data.tool.slug === "totp"}
+				<TotpGeneratorPanel toolSlug={data.tool.slug} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

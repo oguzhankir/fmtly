@@ -178,15 +178,15 @@ Hashing, encoding, password tools, and key generation — all client-side.
 
 | 115 | Tool | Slug | Status | Description |
 |---|------|------|--------|-------------|
-| 116 | Hash Generator (SHA/MD5) | `crypto/hash` | | Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes of text input. |
-| 117 | HMAC Generator | `crypto/hmac` | | Compute HMAC signatures with configurable algorithm and secret key. |
-| 118 | File Hash Calculator | `crypto/file-hash` | | Drag-and-drop file hashing. Calculate SHA-256, MD5, CRC32 of any file without uploading. |
-| 119 | Password Strength Meter | `crypto/password-strength` | | Analyze password entropy, estimate crack time, flag common patterns and breached passwords (via k-anonymity). |
+| 116 | Hash Generator (SHA/MD5) | `crypto/hash` | done | Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes of text input. |
+| 117 | HMAC Generator | `crypto/hmac` | done | Compute HMAC signatures with configurable algorithm and secret key. |
+| 118 | File Hash Calculator | `crypto/file-hash` | done | Drag-and-drop file hashing. Calculate SHA-256, MD5, CRC32 of any file without uploading. |
+| 119 | Password Strength Meter | `crypto/password-strength` | done | Analyze password entropy, estimate crack time, flag common patterns and breached passwords (via k-anonymity). |
 | 120 | Random String Generator | `crypto/random-string` | done | Generate cryptographically secure random strings with configurable charset, length, and count. |
-| 121 | UUID / ULID Generator | `crypto/uuid` | | Generate UUID v4, UUID v7, and ULID with batch generation and timestamp decoding. |
-| 122 | RSA/EC Key Pair Generator | `crypto/keypair` | | Generate RSA or ECDSA key pairs in PEM format using Web Crypto API. |
-| 123 | Certificate Decoder | `crypto/cert-decoder` | | Parse PEM-encoded X.509 certificates. Show subject, issuer, validity, SANs, and key info. |
-| 124 | TOTP Generator | `crypto/totp` | | Generate time-based one-time passwords (RFC 6238). Configure period, digits, and algorithm. |
+| 121 | UUID / ULID Generator | `crypto/uuid` | done | Generate UUID v4, UUID v7, and ULID with batch generation and timestamp decoding. |
+| 122 | RSA/EC Key Pair Generator | `crypto/keypair` | done | Generate RSA or ECDSA key pairs in PEM format using Web Crypto API. |
+| 123 | Certificate Decoder | `crypto/cert-decoder` | done | Parse PEM-encoded X.509 certificates. Show subject, issuer, validity, SANs, and key info. |
+| 124 | TOTP Generator | `crypto/totp` | done | Generate time-based one-time passwords (RFC 6238). Configure period, digits, and algorithm. |
 
 ---
 

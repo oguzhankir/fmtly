@@ -2934,8 +2934,8 @@ const registryTr: Record<string, string> = {
 		'Eski sistemler ve iç araçlar için Codabar veya MSI sembolleri oluşturmak',
 	'category.crypto.display_name': 'Kripto',
 	'category.crypto.description':
-		'Tarayıcınızda karakter kümesi ön ayarları, özel alfabeler, toplu çıktı ve çok büyük sonuçlar için Web Worker ile kriptografik olarak güçlü rastgele dizeler üretin.',
-	'category.crypto.primary_keyword': 'rastgele dize üretici',
+		'Özetleme, HMAC, dosya parmak izi, parola gücü, UUID/ULID, RSA/EC anahtarlar, X.509 inceleme, TOTP ve rastgele dizeler — hepsi tarayıcıda.',
+	'category.crypto.primary_keyword': 'tarayıcı kripto araçları',
 	'tool.random-string-generator.display_name': 'Rastgele Dize Üretici',
 	'tool.random-string-generator.tagline':
 		'Ön ayarlar, özel alfabeler, ayırıcılar ve Web Worker ile güvenli rastgele dizeler',
@@ -2966,6 +2966,213 @@ const registryTr: Record<string, string> = {
 		'Tanımlayıcılar ve opak kimlikler için Base64 URL-güvenli alfabe dizeleri',
 	'tool.random-string-generator.use_case.3':
 		'Simülasyonlar, oyunlar ve kısıtlı sistemler için özel alfabeler',
+	'tool.hash-generator.display_name': 'Özet (Hash) Üretici',
+	'tool.hash-generator.tagline':
+		'Her UTF-8 metin için MD5 ve SHA ailesi özetleri — gizli ve anında',
+	'tool.hash-generator.description':
+		'Yapıştırılan metin için MD5, SHA-1, SHA-256, SHA-384 ve SHA-512 özetlerini Web Crypto (ve denetlenmiş MD5) ile hesaplayın. Büyük girdiler arayüzü akıcı tutmak için Web Worker’a aktarılır.',
+	'tool.hash-generator.primary_keyword': 'online hash md5 sha256 üretici',
+	'tool.hash-generator.meta_title': 'Hash Üretici — MD5 ve SHA tarayıcıda | fmtly',
+	'tool.hash-generator.meta_description':
+		'MD5, SHA-1, SHA-256, SHA-384, SHA-512 özetlerini yerelde üretin. Yükleme yok. Büyük metinler için Web Worker.',
+	'tool.hash-generator.operation': 'Metni özetle',
+	'tool.hash-generator.faq.0.question': 'MD5 hâlâ kullanılır mı?',
+	'tool.hash-generator.faq.0.answer':
+		'MD5 eskidir ve güvenlik açısından bütünlük için uygun değildir. Sağlama toplamları ve uyumluluk için yaygındır. Yeni tasarımlarda SHA-256 tercih edin.',
+	'tool.hash-generator.faq.1.question': 'Büyük metin neden worker kullanıyor?',
+	'tool.hash-generator.faq.1.answer':
+		'Ana iş parçacığında megabayt özetlemek sayfayı dondurabilir. Eşik üzerinde iş Web Worker’a taşınır.',
+	'tool.hash-generator.faq.2.question': 'Hangi kodlama kullanılıyor?',
+	'tool.hash-generator.faq.2.answer':
+		'Girdi UTF-8 baytları olarak özetlenir; geliştirici beklentisiyle uyumludur.',
+	'tool.hash-generator.faq.3.question': 'Veri sunucuya gider mi?',
+	'tool.hash-generator.faq.3.answer': 'Hayır. Her şey yalnızca tarayıcınızda çalışır.',
+	'tool.hash-generator.use_case.0':
+		'İndirmeleri ve yapılandırmaları yayımlanan sağlama toplamlarıyla doğrulama',
+	'tool.hash-generator.use_case.1':
+		'Dosya yüklemeden parmak izlerini karşılaştırma (ikili dosyalar için Dosya Özeti aracını kullanın)',
+	'tool.hash-generator.use_case.2': 'API yüklerini ve kanonik dize özetlemesini hata ayıklama',
+	'tool.hash-generator.use_case.3': 'Günlükler ve önbellek anahtarları için hızlı özetler',
+	'tool.hmac-generator.display_name': 'HMAC Üretici',
+	'tool.hmac-generator.tagline': 'Mesajlar ve test vektörleri için anahtarlı HMAC-SHA imzaları',
+	'tool.hmac-generator.description':
+		'SHA-1, SHA-256, SHA-384 veya SHA-512 ile HMAC hesaplayın. Giz anahtarınız ve mesaj bu sekmede kalır; uzun mesajlar Web Worker kullanabilir.',
+	'tool.hmac-generator.primary_keyword': 'online hmac üretici',
+	'tool.hmac-generator.meta_title': 'HMAC Üretici — SHA HMAC tarayıcıda | fmtly',
+	'tool.hmac-generator.meta_description':
+		'Ayarlanabilir özet ve giz anahtarı ile HMAC imzaları. Yalnızca tarayıcı, yükleme yok, büyük mesajlarda worker.',
+	'tool.hmac-generator.operation': 'HMAC hesapla',
+	'tool.hmac-generator.faq.0.question': 'Anahtarı nasıl biçimlendirmeliyim?',
+	'tool.hmac-generator.faq.0.answer':
+		'Anahtar UTF-8 metin olarak yorumlanır; yaygın API örnekleriyle uyumludur. Ham ikili anahtarlar için önce hex çözümleyin.',
+	'tool.hmac-generator.faq.1.question': 'Bu JWT imasıyla aynı mı?',
+	'tool.hmac-generator.faq.1.answer':
+		'JWT belirli bir kodlamayı (Base64URL segmentleri) kullanır. Bu araç ham mesaj baytları üzerinde hata ayıklama ve test vektörleri içindir.',
+	'tool.hmac-generator.faq.2.question': 'SHA-1’den neden kaçınmalı?',
+	'tool.hmac-generator.faq.2.answer':
+		'SHA-1 eskidir. HMAC-SHA1 eski sistemlerde görülür; yeni iş için SHA-256 tercih edin.',
+	'tool.hmac-generator.faq.3.question': 'Gizler saklanır mı?',
+	'tool.hmac-generator.faq.3.answer':
+		'Gizler yalnızca sayfa belleğinde kalır. İşiniz bitince alanı temizleyin; fmtly verinizi yüklemez.',
+	'tool.hmac-generator.use_case.0': 'Webhook imza test vektörlerini yeniden üretme',
+	'tool.hmac-generator.use_case.1': 'AWS tarzı imza yapı taşlarını doğrulama',
+	'tool.hmac-generator.use_case.2': 'OpenSSL veya dil kütüphaneleriyle çıktıları karşılaştırma',
+	'tool.hmac-generator.use_case.3': 'MAC ile özet farkını öğretmek',
+	'tool.file-hash-calculator.display_name': 'Dosya Özeti Hesaplayıcı',
+	'tool.file-hash-calculator.tagline': 'Yerel dosyanın MD5, SHA-256 ve CRC32’si — asla yüklenmez',
+	'tool.file-hash-calculator.description':
+		'Dosyayı sürükleyin; MD5, SHA-256 ve CRC32’yi tarayıcıda hesaplayın. Büyük dosyalar arayüzü akıcı tutmak için Web Worker’da özetlenir.',
+	'tool.file-hash-calculator.primary_keyword': 'dosya hash sha256 hesaplayıcı',
+	'tool.file-hash-calculator.meta_title': 'Dosya Özeti — MD5, SHA-256, CRC32 | fmtly',
+	'tool.file-hash-calculator.meta_description':
+		'Yerel dosya özetleme: MD5, SHA-256, CRC32. Bulut yüklemesi yok. Büyük dosyalarda worker.',
+	'tool.file-hash-calculator.operation': 'Dosyayı yerelde özetle',
+	'tool.file-hash-calculator.faq.0.question': 'Dosyalar yüklenir mi?',
+	'tool.file-hash-calculator.faq.0.answer':
+		'Hayır. Dosya File API ile okunur ve yalnızca tarayıcı belleğinde işlenir.',
+	'tool.file-hash-calculator.faq.1.question': 'Neden üç algoritma?',
+	'tool.file-hash-calculator.faq.1.answer':
+		'SHA-256 modern parmak izidir; MD5 eski manifestlerde görülür; CRC32 zip ve ağ katmanlarında kullanılır.',
+	'tool.file-hash-calculator.faq.2.question': 'Çok büyük dosyalarda RAM?',
+	'tool.file-hash-calculator.faq.2.answer':
+		'Tüm dosya özetlemek için belleğe yüklenir. Çok büyük dosyalar yeterli boş RAM gerektirebilir.',
+	'tool.file-hash-calculator.faq.3.question': 'İndirmeleri doğrulayabilir miyim?',
+	'tool.file-hash-calculator.faq.3.answer':
+		'Evet — üretilen özeti yayıncı sağlama toplamıyla karşılaştırın. Kaynak SHA-256 yayınlıyorsa onu tercih edin.',
+	'tool.file-hash-calculator.use_case.0': 'ISO ve yükleyici sağlama toplamlarını doğrulama',
+	'tool.file-hash-calculator.use_case.1': 'CI düğümleri arasında yapı çıktılarını karşılaştırma',
+	'tool.file-hash-calculator.use_case.2': 'Bilet ekinde varlıklara parmak izi verme',
+	'tool.file-hash-calculator.use_case.3': 'Arşiv ve veri kümelerinde hızlı bütünlük kontrolü',
+	'tool.password-strength-meter.display_name': 'Parola Gücü Ölçer',
+	'tool.password-strength-meter.tagline':
+		'Entropi, zxcvbn ve parolanızı göndermeden sızıntı kontrolü',
+	'tool.password-strength-meter.description':
+		'Entropiyi tahmin edin, zxcvbn skorunu gösterin ve k-anonymity ile Have I Been Pwned sorgusu yapın (yalnızca SHA-1 öneki). Tam parola tarayıcıdan çıkmaz.',
+	'tool.password-strength-meter.primary_keyword': 'parola gücü kontrol',
+	'tool.password-strength-meter.meta_title': 'Parola Gücü — Entropi ve HIBP | fmtly',
+	'tool.password-strength-meter.meta_description':
+		'Entropi ve zxcvbn ile parola gücünü analiz edin. İsteğe bağlı HIBP k-anonymity. Tamamen tarayıcıda.',
+	'tool.password-strength-meter.operation': 'Parola gücünü analiz et',
+	'tool.password-strength-meter.faq.0.question': 'Sızıntı kontrolü nasıl çalışır?',
+	'tool.password-strength-meter.faq.0.answer':
+		'Parolanız yerelde SHA-1 ile özetlenir. Have I Been Pwned’e yalnızca ilk beş on altılık karakter gider — k-anonymity tasarımı.',
+	'tool.password-strength-meter.faq.1.question': 'fmtly parolamı görür mü?',
+	'tool.password-strength-meter.faq.1.answer':
+		'Hayır. Analiz tarayıcınızda çalışır. Sızıntı API’si tam parolanızı almaz.',
+	'tool.password-strength-meter.faq.2.question': 'Yalnızca zxcvbn yeterli mi?',
+	'tool.password-strength-meter.faq.2.answer':
+		'zxcvbn güçlü bir sezgisel yöntemdir. Benzersiz parola ve parola yöneticisiyle birleştirin.',
+	'tool.password-strength-meter.faq.3.question': 'Çevrimdışıysam?',
+	'tool.password-strength-meter.faq.3.answer':
+		'Entropi ve zxcvbn çalışır; ağ yoksa sızıntı sayısı görünmeyebilir.',
+	'tool.password-strength-meter.use_case.0': 'Kayıt akışlarında kullanıcıları yönlendirme',
+	'tool.password-strength-meter.use_case.1': 'Parola fikirlerini benimsemeden karşılaştırma',
+	'tool.password-strength-meter.use_case.2': 'Yazılım kurmadan farkındalık laboratuvarları',
+	'tool.password-strength-meter.use_case.3':
+		'Uzunluk ve çeşitliliğin neden önemli olduğunu anlatma',
+	'tool.uuid-generator.display_name': 'UUID / ULID Üretici',
+	'tool.uuid-generator.tagline': 'UUID v4, v7 ve ULID toplu üretim; ULID zaman çözümleme',
+	'tool.uuid-generator.description':
+		'Rastgele UUID v4, zaman sıralı UUID v7 ve ULID tanımlayıcıları üretin. ULID zaman damgasını yerelde çözün. Sabit veri için en fazla 500 değer.',
+	'tool.uuid-generator.primary_keyword': 'uuid v7 ulid üretici',
+	'tool.uuid-generator.meta_title': 'UUID v4 v7 ve ULID Üretici | fmtly',
+	'tool.uuid-generator.meta_description':
+		'Toplu UUID v4, v7 ve ULID oluşturun. ULID zamanını tarayıcıda çözün. Sunucuda saklama yok.',
+	'tool.uuid-generator.operation': 'Tanımlayıcı üret',
+	'tool.uuid-generator.faq.0.question': 'Hangi kimliği kullanmalıyım?',
+	'tool.uuid-generator.faq.0.answer':
+		'Saf rastgele için v4; veritabanında zaman sıralı ve daha kolay sıralama için v7 veya ULID.',
+	'tool.uuid-generator.faq.1.question': 'Kriptografik olarak rastgele mi?',
+	'tool.uuid-generator.faq.1.answer':
+		'UUID v4/v7 ve ULID, mümkün olduğunda tarayıcıdan güvenli rastgelelik kullanır.',
+	'tool.uuid-generator.faq.2.question': 'ULID çözümlemesi ne gösterir?',
+	'tool.uuid-generator.faq.2.answer':
+		'ULID ilk karakterlerde milisaniye zaman damgası taşır; bunu ISO zamana çeviririz.',
+	'tool.uuid-generator.faq.3.question': 'Dışa aktarabilir miyim?',
+	'tool.uuid-generator.faq.3.answer':
+		'Çıktı alanından toplu kopyalayın veya pano yardımcılarını kullanın — fmtly saklamaz.',
+	'tool.uuid-generator.use_case.0': 'Veritabanlarını gerçekçi kimliklerle doldurma',
+	'tool.uuid-generator.use_case.1': 'Dağıtık iz için korelasyon kimlikleri üretme',
+	'tool.uuid-generator.use_case.2': 'Olay akışları için sıralanabilir kimlikler',
+	'tool.uuid-generator.use_case.3': 'UUID veya ULID alanı gerektiren API’leri deneme',
+	'tool.keypair-generator.display_name': 'RSA / EC Anahtar Çifti Üretici',
+	'tool.keypair-generator.tagline':
+		'Web Crypto ile RSA-PSS ve ECDSA PEM anahtarları — yalnızca oturumunuza özel',
+	'tool.keypair-generator.description':
+		'RSA 2048/4096 ve ECDSA P-256/P-384 anahtar çiftleri üretin, PEM olarak dışa aktarın. Anahtarlar tarayıcıdan çıkmaz; sayfadan indirin veya kopyalayın.',
+	'tool.keypair-generator.primary_keyword': 'rsa pem anahtar üret tarayıcı',
+	'tool.keypair-generator.meta_title': 'RSA ve EC Anahtar Çifti (PEM) | fmtly',
+	'tool.keypair-generator.meta_description':
+		'Web Crypto ile PEM biçiminde RSA ve eliptik eğri anahtar çiftleri. Yalnızca istemci tarafı.',
+	'tool.keypair-generator.operation': 'Anahtar çifti üret',
+	'tool.keypair-generator.faq.0.question': 'Hangi algoritmalar kullanılıyor?',
+	'tool.keypair-generator.faq.0.answer':
+		'RSA anahtarları SHA-256 ile RSA-PSS; EC anahtarları NIST eğrileriyle ECDSA. PKIX SPKI ve PKCS#8 PEM olarak dışa aktarılır.',
+	'tool.keypair-generator.faq.1.question': 'Bunlar üretim anahtarı mı?',
+	'tool.keypair-generator.faq.1.answer':
+		'Web Crypto’dan gerçek anahtarlardır; özel materyali koruyun ve üretim politikasına uyun.',
+	'tool.keypair-generator.faq.2.question': 'TLS için kullanabilir miyim?',
+	'tool.keypair-generator.faq.2.answer':
+		'CA (veya kendi PKI’nız) tarafından imzalanmış sertifika gerekir. Bu araç yalnızca ham çift üretir.',
+	'tool.keypair-generator.faq.3.question': 'Özel anahtarlar nerede saklanır?',
+	'tool.keypair-generator.faq.3.answer':
+		'Yalnızca sayfadayken bellekte. Sonra ihtiyaç varsa güvenle kaydedin.',
+	'tool.keypair-generator.use_case.0': 'Yerel PEM dosyalarıyla JWT imasını deneme',
+	'tool.keypair-generator.use_case.1': 'Geliştirme konteynerleri için tek kullanımlık anahtarlar',
+	'tool.keypair-generator.use_case.2': 'Dışa aktarılabilir PEM ile asimetrik kriptografiyi öğretme',
+	'tool.keypair-generator.use_case.3': 'RSA ile eliptik eğri anahtar boyutlarını karşılaştırma',
+	'tool.certificate-decoder.display_name': 'Sertifika Çözücü',
+	'tool.certificate-decoder.tagline':
+		'PEM X.509 sertifikalarını ayrıştır: konu, SAN, geçerlilik, parmak izi',
+	'tool.certificate-decoder.description':
+		'PEM sertifikası yükleyin; konu, yayıncı, geçerlilik penceresi, imza algoritması, Konu Alternatif Adları ve SHA-256 parmak izini yerelde inceleyin.',
+	'tool.certificate-decoder.primary_keyword': 'x509 sertifika pem çözümle',
+	'tool.certificate-decoder.meta_title': 'X.509 Sertifika Çözücü — PEM İnceleyici | fmtly',
+	'tool.certificate-decoder.meta_description':
+		'PEM sertifikalarını tarayıcıda çözün. SAN, geçerlilik, algoritmalar ve parmak izleri; yükleme yok.',
+	'tool.certificate-decoder.operation': 'Sertifikaları çözümle',
+	'tool.certificate-decoder.faq.0.question': 'Güven zincirini doğrular mı?',
+	'tool.certificate-decoder.faq.0.answer':
+		'Alanları ayrıştırır ve gösterir. Güven deposuna karşı tam zincir doğrulaması bu hafif görüntüleyicinin kapsamı dışındadır.',
+	'tool.certificate-decoder.faq.1.question': 'İki parmak izi biçimi neden?',
+	'tool.certificate-decoder.faq.1.answer':
+		'SHA-256’yı yaygın yönetici biçimi olan iki nokta üst üste ayrılmış hex olarak gösteriyoruz.',
+	'tool.certificate-decoder.faq.2.question': 'DER yapıştırabilir miyim?',
+	'tool.certificate-decoder.faq.2.answer':
+		'Ayrıştırıcı PEM ve ayrıştırıcının desteklediği kodlamaları kabul eder; başlıklı PEM en kolayıdır.',
+	'tool.certificate-decoder.faq.3.question': 'Sertifika yüklenir mi?',
+	'tool.certificate-decoder.faq.3.answer': 'Hayır. Ayrıştırma tamamen tarayıcınızda olur.',
+	'tool.certificate-decoder.use_case.0': 'Olay anında SAN ve son kullanma tarihini hızlı okuma',
+	'tool.certificate-decoder.use_case.1':
+		'Geliştirme ve üretim sertifika üst verisini karşılaştırma',
+	'tool.certificate-decoder.use_case.2': 'El sıkışma sorunlarını kesin parmak izleriyle belgeleme',
+	'tool.certificate-decoder.use_case.3': 'openssl olmadan X.509 yapısını öğretme',
+	'tool.totp-generator.display_name': 'TOTP Üretici',
+	'tool.totp-generator.tagline':
+		'Base32 gizlerinden RFC 6238 kodları — doğrulayıcı uygulamalarla uyumlu',
+	'tool.totp-generator.description':
+		'Ayarlanabilir süre, basamak ve HMAC algoritması ile zamana bağlı tek kullanımlık parolalar üretin. Giz yerelde kalır; kodlar saniyede yenilenir.',
+	'tool.totp-generator.primary_keyword': 'totp üretici doğrulayıcı',
+	'tool.totp-generator.meta_title': 'TOTP Üretici — RFC 6238 OTP | fmtly',
+	'tool.totp-generator.meta_description':
+		'Base32 gizlerinden TOTP hesaplayın. Ayarlanabilir süre, basamak, SHA-1/256/512. Yalnızca tarayıcı.',
+	'tool.totp-generator.operation': 'TOTP kodu üret',
+	'tool.totp-generator.faq.0.question': 'Neden Base32?',
+	'tool.totp-generator.faq.0.answer':
+		'Doğrulayıcı uygulamalar gizleri genelde Base32 dizeleri olarak verir. HMAC öncesi baytlara çözümleriz.',
+	'tool.totp-generator.faq.1.question': 'Google Authenticator’ın yerini alır mı?',
+	'tool.totp-generator.faq.1.answer':
+		'Matematiği yansıtır; hata ayıklama içindir. Hesaplar için telefon uygulamasını birincil faktör olarak kullanın.',
+	'tool.totp-generator.faq.2.question': 'Saat kayması?',
+	'tool.totp-generator.faq.2.answer':
+		'Kodlar UTC zamanına bağlıdır. Büyük saat sapması sunucuyla uyuşmazlık yaratabilir; sistem saatini eşitleyin.',
+	'tool.totp-generator.faq.3.question': 'Giz saklanır mı?',
+	'tool.totp-generator.faq.3.answer': 'Yalnızca bu sekme açıkken bellekte. Bitince temizleyin.',
+	'tool.totp-generator.use_case.0':
+		'Geliştirme sırasında doğrulayıcı uygulama uygulamalarını doğrulama',
+	'tool.totp-generator.use_case.1': 'Kodları RFC test vektörleriyle karşılaştırma',
+	'tool.totp-generator.use_case.2': 'Bilinen iyi bir üreticiyle giz döndürme',
+	'tool.totp-generator.use_case.3': 'MFA sorunlarını yeniden üreten destek mühendisleri',
 	'ui.random_string.tab_label': 'Rastgele',
 	'ui.random_string.simple_hint':
 		'Uzunluk ve karakter türlerini değiştirin — çıktı otomatik güncellenir.',
@@ -3029,6 +3236,98 @@ const registryTr: Record<string, string> = {
 	'ui.random_string.error.charset_too_large': 'Karakter kümesi çok büyük.',
 	'ui.random_string.error.crypto_unavailable': 'Bu ortamda Web Crypto yok.',
 	'ui.random_string.error.unknown': 'Dizeler üretilemedi.',
+	'ui.crypto.tab.hash': 'Özet',
+	'ui.crypto.tab.hmac': 'HMAC',
+	'ui.crypto.tab.file_hash': 'Dosya',
+	'ui.crypto.tab.password': 'Parola',
+	'ui.crypto.tab.uuid': 'UUID',
+	'ui.crypto.tab.keypair': 'Anahtar',
+	'ui.crypto.tab.cert': 'Sertifika',
+	'ui.crypto.tab.totp': 'TOTP',
+	'ui.hash.intro':
+		'MD5 veya SHA ile metni özetleyin. Her şey tarayıcınızda çalışır — hiçbir şey yüklenmez.',
+	'ui.hash.sample_input': 'fmtly',
+	'ui.hash.input_label': 'Girdi (UTF-8)',
+	'ui.hash.regenerate': 'Yeniden hesapla',
+	'ui.hash.error_failed': 'Özet hesaplanamadı.',
+	'ui.hash.worker_label': 'Worker',
+	'ui.hash.worker_hint':
+		'Büyük girdiler sayfayı akıcı tutmak için otomatik olarak Web Worker kullanır.',
+	'ui.hmac.intro':
+		'Giz anahtarınızla HMAC hesaplayın. Anahtarlar bu sekmede kalır — sunucuya gönderilmez.',
+	'ui.hmac.sample_message': 'mesaj',
+	'ui.hmac.sample_secret': 'giz',
+	'ui.hmac.secret_label': 'Giz anahtar',
+	'ui.hmac.message_label': 'Mesaj (UTF-8)',
+	'ui.hmac.regenerate': 'Yeniden hesapla',
+	'ui.hmac.error_failed': 'HMAC hesaplanamadı.',
+	'ui.hmac.worker_hint':
+		'Uzun mesajlar sayfayı akıcı tutmak için otomatik olarak Web Worker kullanır.',
+	'ui.file_hash.intro':
+		'Her dosya için MD5, SHA-256 ve CRC32 — yalnızca yerel tarayıcınızda işlenir.',
+	'ui.file_hash.drop_zone': 'Dosyayı buraya bırakın veya seçmek için tıklayın',
+	'ui.file_hash.drop_hint': 'Dosyalar asla yüklenmez.',
+	'ui.file_hash.rehash': 'Yeniden özetle',
+	'ui.file_hash.error_failed': 'Dosya özetlenemedi.',
+	'ui.file_hash.worker_hint':
+		'Büyük dosyalar sayfayı akıcı tutmak için otomatik olarak Web Worker kullanır.',
+	'ui.password_strength.intro':
+		'Entropi, zxcvbn ve Have I Been Pwned (k-anonymity). Parolanız anonim aralık sorgusu dışında tarayıcıdan çıkmaz.',
+	'ui.password_strength.field_label': 'Parola',
+	'ui.password_strength.show': 'Göster',
+	'ui.password_strength.hide': 'Gizle',
+	'ui.password_strength.bits': 'bit',
+	'ui.password_strength.band.very_weak': 'Çok zayıf',
+	'ui.password_strength.band.weak': 'Zayıf',
+	'ui.password_strength.band.fair': 'Orta',
+	'ui.password_strength.band.good': 'İyi',
+	'ui.password_strength.band.strong': 'Güçlü',
+	'ui.password_strength.summary.entropy': 'Entropi (tahmini)',
+	'ui.password_strength.summary.crack': 'Kırılma süresi (kabaca)',
+	'ui.password_strength.summary.zxcvbn': 'zxcvbn skoru',
+	'ui.password_strength.summary.pwned': 'Bilinen sızıntılar (HIBP)',
+	'ui.password_strength.summary.pwned_unknown':
+		'Sızıntı kontrolü kullanılamıyor (çevrimdışı veya hata).',
+	'ui.password_strength.zxcvbn_label': 'zxcvbn skoru',
+	'ui.password_strength.hibp_label': 'HIBP sayısı',
+	'ui.uuid.intro':
+		'UUID v4, UUID v7 ve ULID — yerelde üretilir. ULID içinde çözülebilecek bir zaman damgası vardır.',
+	'ui.uuid.count': 'Adet',
+	'ui.uuid.regenerate': 'Yeniden üret',
+	'ui.uuid.output_label': 'Üretilen tanımlayıcılar',
+	'ui.uuid.ulid_decode_label': 'ULID zamanını çöz',
+	'ui.uuid.ulid_placeholder': 'Bir ULID yapıştırın',
+	'ui.uuid.ulid_decode_invalid': 'Geçerli bir ULID değil',
+	'ui.uuid.decode': 'Çöz',
+	'ui.keypair.intro':
+		'RSA (PSS) ve ECDSA anahtar çiftleri PEM olarak. Yalnızca Web Crypto ile tarayıcınızda üretilir.',
+	'ui.keypair.bits': 'bit',
+	'ui.keypair.generate': 'Üret',
+	'ui.keypair.public': 'Açık anahtar',
+	'ui.keypair.private': 'Özel anahtar',
+	'ui.keypair.error_failed': 'Anahtar çifti üretilemedi.',
+	'ui.cert.intro':
+		'PEM X.509 sertifikalarını inceleyin: konu, geçerlilik, SAN, parmak izi — yerelde ayrıştırılır.',
+	'ui.cert.pem_label': 'PEM sertifikası',
+	'ui.cert.placeholder_hint': 'PEM kodlu sertifikayı yapıştırın…',
+	'ui.cert.subject': 'Konu',
+	'ui.cert.issuer': 'Yayıncı',
+	'ui.cert.serial': 'Seri numarası',
+	'ui.cert.valid_from': 'Geçerlilik başlangıcı',
+	'ui.cert.valid_to': 'Geçerlilik bitişi',
+	'ui.cert.sig_alg': 'İmza',
+	'ui.cert.public_key': 'Açık anahtar',
+	'ui.cert.fp256': 'SHA-256 parmak izi',
+	'ui.cert.san': 'Konu Alternatif Adları',
+	'ui.cert.redo': 'Tekrar çöz',
+	'ui.totp.intro':
+		'RFC 6238 TOTP, Base32 gizden. Ayarlar uyumlu olduğunda doğrulayıcı uygulamalarla eşleşir.',
+	'ui.totp.secret_label': 'Giz (Base32)',
+	'ui.totp.period': 'Süre (sn)',
+	'ui.totp.digits': 'Basamak',
+	'ui.totp.code_label': 'Kod',
+	'ui.totp.refresh': 'Yenile',
+	'ui.totp.error_failed': 'Geçersiz giz veya ayar.',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Oku',
 	'ui.qr.tab_barcode': 'Barkod',

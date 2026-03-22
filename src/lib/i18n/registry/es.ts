@@ -2965,8 +2965,8 @@ const registryEs: Record<string, string> = {
 		'Crear Codabar o MSI para sistemas heredados y herramientas internas',
 	'category.crypto.display_name': 'Cripto',
 	'category.crypto.description':
-		'Genera cadenas aleatorias criptográficamente fuertes en tu navegador con ajustes predefinidos de juegos de caracteres, alfabetos personalizados, salida por lotes y descarga a Web Worker para resultados enormes.',
-	'category.crypto.primary_keyword': 'generador de cadenas aleatorias',
+		'Hashing, HMAC, huellas de archivos, fortaleza de contraseñas, UUID/ULID, claves RSA/EC, inspección X.509, TOTP y cadenas aleatorias — todo en tu navegador.',
+	'category.crypto.primary_keyword': 'herramientas criptográficas en el navegador',
 	'tool.random-string-generator.display_name': 'Generador de cadenas aleatorias',
 	'tool.random-string-generator.tagline':
 		'Cadenas aleatorias seguras con ajustes, alfabetos personalizados, separadores y descarga a Web Worker',
@@ -2998,6 +2998,214 @@ const registryEs: Record<string, string> = {
 		'Cadenas alfabeto Base64 URL-seguro para identificadores y IDs opacos',
 	'tool.random-string-generator.use_case.3':
 		'Alfabetos personalizados para simulaciones, juegos y sistemas con restricciones',
+	'tool.hash-generator.display_name': 'Generador de hash',
+	'tool.hash-generator.tagline':
+		'Resúmenes MD5 y familia SHA para cualquier texto UTF-8 — privado e instantáneo',
+	'tool.hash-generator.description':
+		'Calcula hashes MD5, SHA-1, SHA-256, SHA-384 y SHA-512 de texto pegado con Web Crypto (y MD5 auditado). Las entradas grandes se delegan a un Web Worker para mantener la interfaz fluida.',
+	'tool.hash-generator.primary_keyword': 'generador hash online md5 sha256',
+	'tool.hash-generator.meta_title': 'Generador de hash — MD5 y SHA en el navegador | fmtly',
+	'tool.hash-generator.meta_description':
+		'Genera hashes MD5, SHA-1, SHA-256, SHA-384 y SHA-512 en local. Sin subidas. Web Worker para textos grandes.',
+	'tool.hash-generator.operation': 'Hashear texto',
+	'tool.hash-generator.faq.0.question': '¿Sigue siendo útil MD5?',
+	'tool.hash-generator.faq.0.answer':
+		'MD5 es heredado y no sirve para integridad en contextos de seguridad. Sigue siendo habitual para sumas de comprobación y compatibilidad. Prefiera SHA-256 en diseños nuevos.',
+	'tool.hash-generator.faq.1.question': '¿Por qué el texto grande usa un worker?',
+	'tool.hash-generator.faq.1.answer':
+		'Hashear megabytes en el hilo principal puede congelar la página. Por encima de un umbral el trabajo pasa a un Web Worker.',
+	'tool.hash-generator.faq.2.question': '¿Qué codificación se usa?',
+	'tool.hash-generator.faq.2.answer':
+		'La entrada se hashea como bytes UTF-8, como suelen esperar los desarrolladores.',
+	'tool.hash-generator.faq.3.question': '¿Se envían datos a un servidor?',
+	'tool.hash-generator.faq.3.answer': 'No. Todo se ejecuta localmente en tu navegador.',
+	'tool.hash-generator.use_case.0':
+		'Verificar descargas y configuraciones frente a sumas publicadas',
+	'tool.hash-generator.use_case.1':
+		'Comparar huellas de archivo sin subir el archivo (para binarios use Hash de archivo)',
+	'tool.hash-generator.use_case.2': 'Depurar cargas de API y hashing canónico de cadenas',
+	'tool.hash-generator.use_case.3': 'Generar resúmenes rápidos para registros y claves de caché',
+	'tool.hmac-generator.display_name': 'Generador HMAC',
+	'tool.hmac-generator.tagline': 'Firmas HMAC-SHA con clave para mensajes y vectores de prueba',
+	'tool.hmac-generator.description':
+		'Calcula HMAC con SHA-1, SHA-256, SHA-384 o SHA-512. Tu secreto y el mensaje permanecen en la pestaña; los mensajes largos pueden usar Web Worker.',
+	'tool.hmac-generator.primary_keyword': 'generador hmac online',
+	'tool.hmac-generator.meta_title': 'Generador HMAC — HMAC SHA en el navegador | fmtly',
+	'tool.hmac-generator.meta_description':
+		'Firmas HMAC con hash y secreto configurables. Solo en el navegador, sin subidas, worker para mensajes largos.',
+	'tool.hmac-generator.operation': 'Calcular HMAC',
+	'tool.hmac-generator.faq.0.question': '¿Cómo formateo la clave?',
+	'tool.hmac-generator.faq.0.answer':
+		'La clave se interpreta como texto UTF-8, como en muchos ejemplos de API. Para claves binarias crudas, decodifica hex antes en otro sitio.',
+	'tool.hmac-generator.faq.1.question': '¿Es lo mismo que firmar un JWT?',
+	'tool.hmac-generator.faq.1.answer':
+		'JWT usa una codificación concreta (segmentos Base64URL). Esta herramienta es HMAC crudo sobre los bytes del mensaje para depuración y vectores de prueba.',
+	'tool.hmac-generator.faq.2.question': '¿Por qué evitar SHA-1?',
+	'tool.hmac-generator.faq.2.answer':
+		'SHA-1 es heredado. HMAC-SHA1 aún aparece en sistemas antiguos, pero prefiera SHA-256 para trabajo nuevo.',
+	'tool.hmac-generator.faq.3.question': '¿Se guardan los secretos?',
+	'tool.hmac-generator.faq.3.answer':
+		'Los secretos solo permanecen en la memoria de la página. Vacía el campo al terminar; fmtly no sube tus datos.',
+	'tool.hmac-generator.use_case.0': 'Reproducir vectores de prueba de firmas de webhooks',
+	'tool.hmac-generator.use_case.1': 'Verificar bloques de construcción de firmas estilo AWS',
+	'tool.hmac-generator.use_case.2': 'Comparar salidas con OpenSSL o bibliotecas del lenguaje',
+	'tool.hmac-generator.use_case.3': 'Enseñar MAC frente a hash en cursos',
+	'tool.file-hash-calculator.display_name': 'Calculadora de hash de archivos',
+	'tool.file-hash-calculator.tagline':
+		'MD5, SHA-256 y CRC32 de cualquier archivo local — nunca se sube',
+	'tool.file-hash-calculator.description':
+		'Arrastra un archivo para calcular MD5, SHA-256 y CRC32 en el navegador. Los archivos grandes se hashean en un Web Worker para mantener la interfaz fluida.',
+	'tool.file-hash-calculator.primary_keyword': 'calculadora hash archivo sha256',
+	'tool.file-hash-calculator.meta_title': 'Hash de archivos — MD5, SHA-256, CRC32 | fmtly',
+	'tool.file-hash-calculator.meta_description':
+		'Hash de archivos en local: MD5, SHA-256, CRC32. Sin subida a la nube. Worker para archivos grandes.',
+	'tool.file-hash-calculator.operation': 'Hashear archivos en local',
+	'tool.file-hash-calculator.faq.0.question': '¿Se suben los archivos?',
+	'tool.file-hash-calculator.faq.0.answer':
+		'No. El archivo se lee con la File API y se procesa solo en memoria en tu navegador.',
+	'tool.file-hash-calculator.faq.1.question': '¿Por qué tres algoritmos?',
+	'tool.file-hash-calculator.faq.1.answer':
+		'SHA-256 es una huella moderna; MD5 aparece en manifiestos antiguos; CRC32 en zip y pilas de red.',
+	'tool.file-hash-calculator.faq.2.question': '¿Y la RAM con archivos enormes?',
+	'tool.file-hash-calculator.faq.2.answer':
+		'Se carga el archivo completo en memoria para hashearlo. Los archivos muy grandes pueden requerir RAM libre suficiente.',
+	'tool.file-hash-calculator.faq.3.question': '¿Puedo verificar descargas?',
+	'tool.file-hash-calculator.faq.3.answer':
+		'Sí — compara el resumen calculado con el del publicador. Prefiera SHA-256 cuando lo publiquen.',
+	'tool.file-hash-calculator.use_case.0': 'Verificar sumas de ISO e instaladores',
+	'tool.file-hash-calculator.use_case.1': 'Comparar artefactos de build entre nodos de CI',
+	'tool.file-hash-calculator.use_case.2': 'Huellas de activos antes de adjuntarlos a un ticket',
+	'tool.file-hash-calculator.use_case.3':
+		'Comprobaciones rápidas de integridad en archivos y conjuntos de datos',
+	'tool.password-strength-meter.display_name': 'Medidor de fortaleza de contraseña',
+	'tool.password-strength-meter.tagline':
+		'Entropía, zxcvbn y comprobación de filtraciones sin enviar tu contraseña',
+	'tool.password-strength-meter.description':
+		'Estima entropía, muestra la puntuación zxcvbn y consulta Have I Been Pwned con k-anonimato (solo prefijo SHA-1). Tu contraseña completa no sale del navegador.',
+	'tool.password-strength-meter.primary_keyword': 'comprobar fortaleza contraseña',
+	'tool.password-strength-meter.meta_title': 'Fortaleza de contraseña — Entropía y HIBP | fmtly',
+	'tool.password-strength-meter.meta_description':
+		'Analiza la fortaleza con entropía y zxcvbn. Comprobación HIBP opcional con k-anonimato. Todo en local en el navegador.',
+	'tool.password-strength-meter.operation': 'Analizar fortaleza de contraseña',
+	'tool.password-strength-meter.faq.0.question': '¿Cómo funciona la comprobación de filtraciones?',
+	'tool.password-strength-meter.faq.0.answer':
+		'Tu contraseña se hashea con SHA-1 en local. Solo los primeros cinco caracteres hex van a Have I Been Pwned — diseño k-anonimato.',
+	'tool.password-strength-meter.faq.1.question': '¿fmtly ve mi contraseña?',
+	'tool.password-strength-meter.faq.1.answer':
+		'No. El análisis corre en tu navegador. La API de filtraciones nunca recibe tu contraseña completa.',
+	'tool.password-strength-meter.faq.2.question': '¿Basta con zxcvbn?',
+	'tool.password-strength-meter.faq.2.answer':
+		'zxcvbn es una heurística sólida. Combínalo con contraseñas únicas y un gestor de contraseñas.',
+	'tool.password-strength-meter.faq.3.question': '¿Y si estoy sin conexión?',
+	'tool.password-strength-meter.faq.3.answer':
+		'Entropía y zxcvbn siguen funcionando; el recuento de filtraciones puede no estar sin red.',
+	'tool.password-strength-meter.use_case.0': 'Guiar a usuarios en flujos de registro',
+	'tool.password-strength-meter.use_case.1':
+		'Comparar ideas de frase de contraseña antes de adoptarlas',
+	'tool.password-strength-meter.use_case.2': 'Talleres de concienciación sin instalar software',
+	'tool.password-strength-meter.use_case.3': 'Explicar por qué importan longitud y diversidad',
+	'tool.uuid-generator.display_name': 'Generador UUID / ULID',
+	'tool.uuid-generator.tagline': 'UUID v4, UUID v7 y lotes ULID con decodificación de tiempo ULID',
+	'tool.uuid-generator.description':
+		'Genera UUID v4 aleatorios, UUID v7 ordenables por tiempo e identificadores ULID. Decodifica marcas de tiempo ULID en local. Hasta 500 valores por lote para fixtures.',
+	'tool.uuid-generator.primary_keyword': 'generador uuid v7 ulid',
+	'tool.uuid-generator.meta_title': 'Generador UUID v4, v7 y ULID | fmtly',
+	'tool.uuid-generator.meta_description':
+		'Crea UUID v4, v7 y ULID en serie. Decodifica tiempo ULID en el navegador. Sin almacenamiento en servidor.',
+	'tool.uuid-generator.operation': 'Generar identificadores',
+	'tool.uuid-generator.faq.0.question': '¿Qué ID debo usar?',
+	'tool.uuid-generator.faq.0.answer':
+		'v4 para aleatoriedad pura; v7 o ULID cuando quieras IDs ordenados por tiempo y ordenación más amigable en bases de datos.',
+	'tool.uuid-generator.faq.1.question': '¿Son criptográficamente aleatorios?',
+	'tool.uuid-generator.faq.1.answer':
+		'UUID v4/v7 y ULID usan aleatoriedad segura del navegador cuando está disponible.',
+	'tool.uuid-generator.faq.2.question': '¿Qué muestra el decode ULID?',
+	'tool.uuid-generator.faq.2.answer':
+		'ULID incrusta una marca de tiempo en milisegundos en los primeros caracteres; la convertimos a hora ISO.',
+	'tool.uuid-generator.faq.3.question': '¿Puedo exportar?',
+	'tool.uuid-generator.faq.3.answer':
+		'Copia el lote desde la salida o usa utilidades del portapapeles — fmtly no lo guarda.',
+	'tool.uuid-generator.use_case.0': 'Rellenar bases de datos con identificadores realistas',
+	'tool.uuid-generator.use_case.1': 'Generar IDs de correlación para demos de trazas distribuidas',
+	'tool.uuid-generator.use_case.2': 'Crear IDs ordenables para flujos de eventos',
+	'tool.uuid-generator.use_case.3': 'Prototipar APIs que requieren campos UUID o ULID',
+	'tool.keypair-generator.display_name': 'Generador de par de claves RSA / EC',
+	'tool.keypair-generator.tagline': 'Claves PEM RSA-PSS y ECDSA vía Web Crypto — solo en tu sesión',
+	'tool.keypair-generator.description':
+		'Genera pares RSA 2048/4096 y ECDSA P-256/P-384, exportados como PEM. Las claves no salen del navegador; descarga o copia desde la página.',
+	'tool.keypair-generator.primary_keyword': 'generar clave rsa pem navegador',
+	'tool.keypair-generator.meta_title': 'Par de claves RSA y EC (PEM) | fmtly',
+	'tool.keypair-generator.meta_description':
+		'Crea pares de claves RSA y de curva elíptica en formato PEM con Web Crypto. Solo en el cliente.',
+	'tool.keypair-generator.operation': 'Generar pares de claves',
+	'tool.keypair-generator.faq.0.question': '¿Qué algoritmos se usan?',
+	'tool.keypair-generator.faq.0.answer':
+		'Las claves RSA usan RSA-PSS con SHA-256; las EC usan ECDSA con curvas NIST. Exportadas como PEM PKIX SPKI y PKCS#8.',
+	'tool.keypair-generator.faq.1.question': '¿Son claves de producción?',
+	'tool.keypair-generator.faq.1.answer':
+		'Son claves reales de Web Crypto, pero debes proteger el material privado y seguir la política de tu organización.',
+	'tool.keypair-generator.faq.2.question': '¿Sirven para TLS?',
+	'tool.keypair-generator.faq.2.answer':
+		'Aún necesitas un certificado firmado por una CA (o tu propia PKI). Esta herramienta solo genera pares de claves en bruto.',
+	'tool.keypair-generator.faq.3.question': '¿Dónde se guardan las claves privadas?',
+	'tool.keypair-generator.faq.3.answer':
+		'Solo en la memoria de la página hasta que salgas o recargues. Guárdalas de forma segura si las necesitas después.',
+	'tool.keypair-generator.use_case.0': 'Probar firma JWT con archivos PEM locales',
+	'tool.keypair-generator.use_case.1': 'Generar claves desechables para contenedores de desarrollo',
+	'tool.keypair-generator.use_case.2': 'Enseñar criptografía asimétrica con PEM exportable',
+	'tool.keypair-generator.use_case.3': 'Comparar tamaños de clave RSA frente a curva elíptica',
+	'tool.certificate-decoder.display_name': 'Decodificador de certificados',
+	'tool.certificate-decoder.tagline':
+		'Analiza certificados PEM X.509: sujeto, SAN, validez, huella',
+	'tool.certificate-decoder.description':
+		'Carga un certificado PEM para inspeccionar sujeto, emisor, ventana de validez, algoritmo de firma, nombres alternativos del sujeto y huella SHA-256 — analizado en local.',
+	'tool.certificate-decoder.primary_keyword': 'decodificador certificado x509 pem',
+	'tool.certificate-decoder.meta_title': 'Decodificador X.509 — Inspector PEM | fmtly',
+	'tool.certificate-decoder.meta_description':
+		'Decodifica certificados PEM en el navegador. SAN, validez, algoritmos y huellas sin subir nada.',
+	'tool.certificate-decoder.operation': 'Decodificar certificados',
+	'tool.certificate-decoder.faq.0.question': '¿Valida la cadena de confianza?',
+	'tool.certificate-decoder.faq.0.answer':
+		'Analiza y muestra campos. La validación completa de cadena frente a almacenes de confianza queda fuera de este visor ligero.',
+	'tool.certificate-decoder.faq.1.question': '¿Por qué un estilo de huella?',
+	'tool.certificate-decoder.faq.1.answer':
+		'Mostramos SHA-256 en hex separado por dos puntos, formato habitual de administración.',
+	'tool.certificate-decoder.faq.2.question': '¿Puedo pegar DER?',
+	'tool.certificate-decoder.faq.2.answer':
+		'El decodificador acepta PEM y codificaciones que soporte el analizador; PEM con cabeceras es lo más sencillo.',
+	'tool.certificate-decoder.faq.3.question': '¿Se sube el certificado?',
+	'tool.certificate-decoder.faq.3.answer': 'No. El análisis ocurre por completo en tu navegador.',
+	'tool.certificate-decoder.use_case.0': 'Leer rápido SAN y caducidad en incidentes',
+	'tool.certificate-decoder.use_case.1': 'Comparar metadatos de cert dev frente a prod',
+	'tool.certificate-decoder.use_case.2': 'Documentar problemas de handshake con huellas exactas',
+	'tool.certificate-decoder.use_case.3': 'Enseñar estructura X.509 sin openssl instalado',
+	'tool.totp-generator.display_name': 'Generador TOTP',
+	'tool.totp-generator.tagline':
+		'Códigos RFC 6238 desde secretos Base32 — como las apps autenticadoras',
+	'tool.totp-generator.description':
+		'Genera contraseñas de un solo uso basadas en el tiempo con periodo, dígitos y algoritmo HMAC configurables. El secreto permanece local; los códigos se actualizan cada segundo.',
+	'tool.totp-generator.primary_keyword': 'generador totp autenticador',
+	'tool.totp-generator.meta_title': 'Generador TOTP — OTP RFC 6238 | fmtly',
+	'tool.totp-generator.meta_description':
+		'Calcula TOTP desde secretos Base32. Periodo, dígitos y SHA-1/256/512 configurables. Solo en el navegador.',
+	'tool.totp-generator.operation': 'Generar códigos TOTP',
+	'tool.totp-generator.faq.0.question': '¿Por qué Base32?',
+	'tool.totp-generator.faq.0.answer':
+		'Las apps autenticadoras suelen entregar secretos como cadenas Base32. Los decodificamos a bytes antes del HMAC.',
+	'tool.totp-generator.faq.1.question': '¿Sustituye a Google Authenticator?',
+	'tool.totp-generator.faq.1.answer':
+		'Refleja la matemática para depuración. Mantén la app del teléfono como segundo factor principal.',
+	'tool.totp-generator.faq.2.question': '¿Deriva de reloj?',
+	'tool.totp-generator.faq.2.answer':
+		'Los códigos dependen de la hora UTC. Un reloj muy descuadrado puede no coincidir con el servidor; sincroniza la hora del sistema.',
+	'tool.totp-generator.faq.3.question': '¿Se guarda el secreto?',
+	'tool.totp-generator.faq.3.answer':
+		'Solo en memoria mientras esta pestaña está abierta. Bórralo al terminar.',
+	'tool.totp-generator.use_case.0':
+		'Verificar implementaciones de autenticador durante el desarrollo',
+	'tool.totp-generator.use_case.1': 'Comparar códigos con vectores de prueba del RFC',
+	'tool.totp-generator.use_case.2': 'Rotar secretos con un generador de confianza',
+	'tool.totp-generator.use_case.3': 'Soporte reproduce incidencias MFA',
 	'ui.random_string.tab_label': 'Aleatorio',
 	'ui.random_string.simple_hint':
 		'Ajusta la longitud y los tipos de caracteres — la salida se actualiza sola.',
@@ -3061,6 +3269,97 @@ const registryEs: Record<string, string> = {
 	'ui.random_string.error.charset_too_large': 'El juego de caracteres es demasiado grande.',
 	'ui.random_string.error.crypto_unavailable': 'Web Crypto no está disponible en este entorno.',
 	'ui.random_string.error.unknown': 'No se pudieron generar las cadenas.',
+	'ui.crypto.tab.hash': 'Hash',
+	'ui.crypto.tab.hmac': 'HMAC',
+	'ui.crypto.tab.file_hash': 'Archivo',
+	'ui.crypto.tab.password': 'Contraseña',
+	'ui.crypto.tab.uuid': 'UUID',
+	'ui.crypto.tab.keypair': 'Claves',
+	'ui.crypto.tab.cert': 'Cert.',
+	'ui.crypto.tab.totp': 'TOTP',
+	'ui.hash.intro': 'Hashea texto con MD5 o SHA. Todo se ejecuta en tu navegador — no se sube nada.',
+	'ui.hash.sample_input': 'fmtly',
+	'ui.hash.input_label': 'Entrada (UTF-8)',
+	'ui.hash.regenerate': 'Recalcular',
+	'ui.hash.error_failed': 'No se pudo calcular el hash.',
+	'ui.hash.worker_label': 'Worker',
+	'ui.hash.worker_hint':
+		'Las entradas grandes usan automáticamente un Web Worker para mantener la página fluida.',
+	'ui.hmac.intro':
+		'Calcula HMAC con tu clave secreta. Las claves permanecen en esta pestaña — nunca se envían al servidor.',
+	'ui.hmac.sample_message': 'mensaje',
+	'ui.hmac.sample_secret': 'secreto',
+	'ui.hmac.secret_label': 'Clave secreta',
+	'ui.hmac.message_label': 'Mensaje (UTF-8)',
+	'ui.hmac.regenerate': 'Recalcular',
+	'ui.hmac.error_failed': 'No se pudo calcular el HMAC.',
+	'ui.hmac.worker_hint':
+		'Los mensajes largos usan automáticamente un Web Worker para mantener la página fluida.',
+	'ui.file_hash.intro':
+		'MD5, SHA-256 y CRC32 de cualquier archivo — solo procesado en local en tu navegador.',
+	'ui.file_hash.drop_zone': 'Suelta un archivo aquí o haz clic para elegir',
+	'ui.file_hash.drop_hint': 'Los archivos nunca se suben.',
+	'ui.file_hash.rehash': 'Volver a hashear',
+	'ui.file_hash.error_failed': 'No se pudo hashear el archivo.',
+	'ui.file_hash.worker_hint':
+		'Los archivos grandes usan automáticamente un Web Worker para mantener la página fluida.',
+	'ui.password_strength.intro':
+		'Entropía, zxcvbn y Have I Been Pwned (k-anonimato). Tu contraseña no sale del navegador salvo la consulta anónima por rango.',
+	'ui.password_strength.field_label': 'Contraseña',
+	'ui.password_strength.show': 'Mostrar',
+	'ui.password_strength.hide': 'Ocultar',
+	'ui.password_strength.bits': 'bits',
+	'ui.password_strength.band.very_weak': 'Muy débil',
+	'ui.password_strength.band.weak': 'Débil',
+	'ui.password_strength.band.fair': 'Regular',
+	'ui.password_strength.band.good': 'Buena',
+	'ui.password_strength.band.strong': 'Fuerte',
+	'ui.password_strength.summary.entropy': 'Entropía (estimación)',
+	'ui.password_strength.summary.crack': 'Tiempo de ruptura (aprox.)',
+	'ui.password_strength.summary.zxcvbn': 'Puntuación zxcvbn',
+	'ui.password_strength.summary.pwned': 'Filtraciones conocidas (HIBP)',
+	'ui.password_strength.summary.pwned_unknown':
+		'Comprobación de filtraciones no disponible (sin conexión o error).',
+	'ui.password_strength.zxcvbn_label': 'Puntuación zxcvbn',
+	'ui.password_strength.hibp_label': 'Recuento HIBP',
+	'ui.uuid.intro':
+		'UUID v4, UUID v7 y ULID — generados en local. ULID incluye una marca de tiempo decodificable.',
+	'ui.uuid.count': 'Cantidad',
+	'ui.uuid.regenerate': 'Regenerar',
+	'ui.uuid.output_label': 'Identificadores generados',
+	'ui.uuid.ulid_decode_label': 'Decodificar tiempo ULID',
+	'ui.uuid.ulid_placeholder': 'Pega un ULID',
+	'ui.uuid.ulid_decode_invalid': 'No es un ULID válido',
+	'ui.uuid.decode': 'Decodificar',
+	'ui.keypair.intro':
+		'Pares de claves RSA (PSS) y ECDSA en PEM. Generados solo en tu navegador con Web Crypto.',
+	'ui.keypair.bits': 'bits',
+	'ui.keypair.generate': 'Generar',
+	'ui.keypair.public': 'Clave pública',
+	'ui.keypair.private': 'Clave privada',
+	'ui.keypair.error_failed': 'No se pudo generar el par de claves.',
+	'ui.cert.intro':
+		'Inspecciona certificados PEM X.509: sujeto, validez, SAN, huella — analizado en local.',
+	'ui.cert.pem_label': 'Certificado PEM',
+	'ui.cert.placeholder_hint': 'Pega un certificado codificado en PEM…',
+	'ui.cert.subject': 'Sujeto',
+	'ui.cert.issuer': 'Emisor',
+	'ui.cert.serial': 'Serie',
+	'ui.cert.valid_from': 'Válido desde',
+	'ui.cert.valid_to': 'Válido hasta',
+	'ui.cert.sig_alg': 'Firma',
+	'ui.cert.public_key': 'Clave pública',
+	'ui.cert.fp256': 'Huella SHA-256',
+	'ui.cert.san': 'Nombres alternativos del sujeto',
+	'ui.cert.redo': 'Volver a decodificar',
+	'ui.totp.intro':
+		'TOTP RFC 6238 desde secreto Base32. Coincide con apps autenticadoras cuando los ajustes coinciden.',
+	'ui.totp.secret_label': 'Secreto (Base32)',
+	'ui.totp.period': 'Periodo (s)',
+	'ui.totp.digits': 'Dígitos',
+	'ui.totp.code_label': 'Código',
+	'ui.totp.refresh': 'Actualizar',
+	'ui.totp.error_failed': 'Secreto o ajustes no válidos.',
 	'ui.qr.tab_label': 'QR',
 	'ui.qr.tab_reader': 'Leer',
 	'ui.qr.tab_barcode': 'Barras',

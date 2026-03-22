@@ -88,6 +88,22 @@
 				return $t('ui.qr.tab_barcode', 'Barcode');
 			case 'random-string':
 				return $t('ui.random_string.tab_label', 'Random');
+			case 'hash':
+				return $t('ui.crypto.tab.hash', 'Hash');
+			case 'hmac':
+				return $t('ui.crypto.tab.hmac', 'HMAC');
+			case 'file-hash':
+				return $t('ui.crypto.tab.file_hash', 'File');
+			case 'password-strength':
+				return $t('ui.crypto.tab.password', 'Password');
+			case 'uuid':
+				return $t('ui.crypto.tab.uuid', 'UUID');
+			case 'keypair':
+				return $t('ui.crypto.tab.keypair', 'Keys');
+			case 'cert-decoder':
+				return $t('ui.crypto.tab.cert', 'Cert');
+			case 'totp':
+				return $t('ui.crypto.tab.totp', 'TOTP');
 			default:
 				return $t(tDef.displayName, tDef.displayName);
 		}

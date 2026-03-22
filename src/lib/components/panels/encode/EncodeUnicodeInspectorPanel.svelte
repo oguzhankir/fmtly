@@ -22,6 +22,8 @@
 	import { t } from '$stores/language';
 	import { addToast } from '$stores/toast.store';
 	import { Eraser, Table } from 'lucide-svelte';
+	import EncodeToolFrame from './EncodeToolFrame.svelte';
+	import { encodeChoiceButtonClass } from './encode-panel-ui.js';
 
 	type Props = {
 		toolSlug: string;
@@ -361,14 +363,9 @@
 		}
 	}
 
-	function getChoiceButtonClass(active: boolean): string {
-		return active
-			? 'border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)]'
-			: 'border-[var(--border-default)] bg-[var(--bg-base)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-hover)]';
-	}
 </script>
 
-<div class="flex h-full w-full min-h-0 flex-col">
+<div class="flex h-full min-h-0 w-full flex-col">
 	{#if workspaceTools.length > 0}
 		<WorkspaceTabs
 			tools={workspaceTools}
@@ -378,7 +375,8 @@
 		/>
 	{/if}
 
-	<div class="border-b border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-3)]">
+	<EncodeToolFrame>
+		{#snippet toolbar()}
 		<div class="flex flex-col gap-[var(--space-3)]">
 			<div class="flex flex-col gap-[var(--space-2)]">
 				<span
@@ -391,7 +389,7 @@
 						type="button"
 						data-granularity="grapheme"
 						onclick={handleGranularityClick}
-						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(granularity === 'grapheme')}`}
+						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(granularity === 'grapheme')}`}
 					>
 						{$t('ui.unicode_inspector.granularity.grapheme', 'Grapheme clusters')}
 					</button>
@@ -399,7 +397,7 @@
 						type="button"
 						data-granularity="codepoint"
 						onclick={handleGranularityClick}
-						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(granularity === 'codepoint')}`}
+						class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(granularity === 'codepoint')}`}
 					>
 						{$t('ui.unicode_inspector.granularity.codepoint', 'Unicode scalar values')}
 					</button>
@@ -462,10 +460,11 @@
 				</button>
 			</div>
 		</div>
-	</div>
+		{/snippet}
 
+		{#snippet main()}
 	<div
-		class="grid min-h-0 flex-1 grid-cols-1 gap-0 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]"
+		class="grid h-full min-h-0 flex-1 grid-cols-1 gap-0 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]"
 	>
 		<div class="flex min-h-[200px] min-w-0 flex-col bg-[var(--bg-base)] xl:min-h-0">
 			<div
@@ -644,6 +643,8 @@
 			</div>
 		</div>
 	</div>
+		{/snippet}
+	</EncodeToolFrame>
 </div>
 
 <ConfirmModal

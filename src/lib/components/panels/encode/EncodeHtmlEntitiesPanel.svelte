@@ -25,6 +25,8 @@
 	import { t } from '$stores/language';
 	import { addToast } from '$stores/toast.store';
 	import { ArrowLeftRight, Copy, Eraser, RefreshCw } from 'lucide-svelte';
+	import EncodeToolFrame from './EncodeToolFrame.svelte';
+	import { encodeChoiceButtonClass } from './encode-panel-ui.js';
 
 	type Props = {
 		toolSlug: string;
@@ -381,14 +383,9 @@
 		return $t('ui.encode_html_entities.error.invalid_entity', params, '{detail} (offset {offset})');
 	}
 
-	function getChoiceButtonClass(active: boolean): string {
-		return active
-			? 'border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)]'
-			: 'border-[var(--border-default)] bg-[var(--bg-base)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-hover)]';
-	}
 </script>
 
-<div class="flex h-full w-full flex-col">
+<div class="flex h-full min-h-0 w-full flex-col">
 	{#if workspaceTools.length > 0}
 		<WorkspaceTabs
 			tools={workspaceTools}
@@ -398,7 +395,8 @@
 		/>
 	{/if}
 
-	<div class="border-b border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-3)]">
+	<EncodeToolFrame>
+		{#snippet toolbar()}
 		<div class="flex flex-col gap-[var(--space-3)]">
 			<div class="flex flex-col gap-[var(--space-2)]">
 				<span
@@ -412,7 +410,7 @@
 							type="button"
 							data-action={option.value}
 							onclick={handleActionClick}
-							class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(selectedAction === option.value)}`}
+							class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(selectedAction === option.value)}`}
 						>
 							{$t(option.labelKey, option.value)}
 						</button>
@@ -434,7 +432,7 @@
 									type="button"
 									data-format={option.value}
 									onclick={handleFormatClick}
-									class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(encodeOptions.format === option.value)}`}
+									class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(encodeOptions.format === option.value)}`}
 								>
 									{$t(option.labelKey, option.value)}
 								</button>
@@ -453,7 +451,7 @@
 									type="button"
 									data-scope={option.value}
 									onclick={handleScopeClick}
-									class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(encodeOptions.scope === option.value)}`}
+									class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(encodeOptions.scope === option.value)}`}
 								>
 									{$t(option.labelKey, option.value)}
 								</button>
@@ -475,7 +473,7 @@
 									type="button"
 									data-apostrophe={option.value}
 									onclick={handleApostropheClick}
-									class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(encodeOptions.apostropheStyle === option.value)}`}
+									class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(encodeOptions.apostropheStyle === option.value)}`}
 								>
 									{$t(option.labelKey, option.value)}
 								</button>
@@ -521,7 +519,7 @@
 								type="button"
 								data-decode-mode={option.value}
 								onclick={handleDecodeModeClick}
-								class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${getChoiceButtonClass(decodeOptions.mode === option.value)}`}
+								class={`inline-flex h-8 items-center justify-center rounded-[var(--radius-md)] border px-[var(--space-3)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] ${encodeChoiceButtonClass(decodeOptions.mode === option.value)}`}
 							>
 								{$t(option.labelKey, option.value)}
 							</button>
@@ -577,10 +575,11 @@
 				</button>
 			</div>
 		</div>
-	</div>
+		{/snippet}
 
+		{#snippet main()}
 	<div
-		class="grid h-full min-h-0 grid-cols-1 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]"
+		class="grid h-full min-h-0 flex-1 grid-cols-1 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]"
 	>
 		<div class="flex min-h-0 flex-col bg-[var(--bg-base)]">
 			<div
@@ -669,6 +668,8 @@
 			></textarea>
 		</div>
 	</div>
+		{/snippet}
+	</EncodeToolFrame>
 </div>
 
 <ConfirmModal
