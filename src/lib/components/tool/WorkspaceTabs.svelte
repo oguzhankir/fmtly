@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$stores/language';
-	import { goto } from '$app/navigation';
+	import { goto, preloadData } from '$app/navigation';
 	import { localizePath } from '$lib/utils/locale-routing.js';
 	import type { ToolDefinition } from '$lib/registry/types.js';
 
@@ -109,9 +109,21 @@
 		}
 	}
 
-	function handleNavigate(slug: string) {
+	function targetPath(slug: string): string {
+		return localizePath(`/${category}/${slug}`, locale);
+	}
+
+	function prefetchTab(slug: string): void {
 		if (slug === activeSlug) return;
-		void goto(localizePath(`/${category}/${slug}`, locale), {
+		void preloadData(targetPath(slug));
+	}
+
+	async function handleNavigate(slug: string): Promise<void> {
+		if (slug === activeSlug) return;
+		const path = targetPath(slug);
+		// Best-effort preload keeps tab switches snappy on slower connections.
+		void preloadData(path);
+		await goto(path, {
 			replaceState: true,
 			noScroll: true,
 			keepFocus: true
@@ -127,7 +139,11 @@
 			class="workspace-tab"
 			class:workspace-tab--active={tool.slug === activeSlug}
 			aria-selected={tool.slug === activeSlug}
-			onclick={() => handleNavigate(tool.slug)}
+			onmouseenter={() => prefetchTab(tool.slug)}
+			onfocus={() => prefetchTab(tool.slug)}
+			onclick={() => {
+				void handleNavigate(tool.slug);
+			}}
 		>
 			{getWorkspaceLabel(tool)}
 		</button>

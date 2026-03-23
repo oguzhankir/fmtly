@@ -3394,7 +3394,202 @@ const registryEn: Record<string, string> = {
 	'ui.barcode.format.MSI11': 'MSI (mod 11)',
 	'ui.barcode.format.MSI1010': 'MSI (mod 1010)',
 	'ui.barcode.format.MSI1110': 'MSI (mod 1110)',
-	'ui.barcode.format.pharmacode': 'Pharmacode'
+	'ui.barcode.format.pharmacode': 'Pharmacode',
+
+	'category.generate.display_name': 'Generators',
+	'category.generate.description':
+		'Create test data, identifiers, passwords, .gitignore files, and README skeletons — instantly in your browser.',
+	'category.generate.primary_keyword': 'developer generators',
+
+	'tool.fake-data-generator.display_name': 'Fake Data Generator',
+	'tool.fake-data-generator.tagline': 'Realistic rows for QA and demos',
+	'tool.fake-data-generator.description':
+		'Generate names, emails, addresses, and more with locale-aware Faker. Export as JSON, CSV, or SQL INSERT statements. Large batches run in a Web Worker.',
+	'tool.fake-data-generator.primary_keyword': 'fake data generator',
+	'tool.fake-data-generator.meta_title': 'Fake Data Generator — JSON, CSV, SQL | fmtly',
+	'tool.fake-data-generator.meta_description':
+		'Free in-browser fake data: configurable fields, locale, row count, JSON/CSV/SQL export. No upload, Web Worker for huge outputs.',
+	'tool.fake-data-generator.operation': 'generate',
+	'tool.fake-data-generator.faq.0.question': 'Is data truly random?',
+	'tool.fake-data-generator.faq.0.answer':
+		'Values are produced with Faker and Web Crypto–backed randomness where applicable. Use only for testing — never as real PII.',
+	'tool.fake-data-generator.faq.1.question': 'When does generation use a worker?',
+	'tool.fake-data-generator.faq.1.answer':
+		'Very large row counts or estimated output over ~500KB are generated off the main thread so the page stays responsive.',
+	'tool.fake-data-generator.faq.2.question': 'Which export formats are supported?',
+	'tool.fake-data-generator.faq.2.answer':
+		'JSON array of objects, CSV with a header row, or SQL INSERT into a table name you choose.',
+	'tool.fake-data-generator.faq.3.question': 'Does my data leave the browser?',
+	'tool.fake-data-generator.faq.3.answer':
+		'No. Everything runs locally; fmtly does not send your input or output to a server.',
+	'tool.fake-data-generator.use_case.0': 'Seed integration tests and staging databases',
+	'tool.fake-data-generator.use_case.1': 'Demo apps without exposing real customer data',
+	'tool.fake-data-generator.use_case.2': 'Prototype CSV imports and ETL pipelines',
+	'tool.fake-data-generator.use_case.3': 'Share reproducible samples with teammates',
+
+	'tool.uuid-batch-generator.display_name': 'UUID Batch Generator',
+	'tool.uuid-batch-generator.tagline': 'Thousands of UUID v4 or v7 values',
+	'tool.uuid-batch-generator.description':
+		'Generate newline or comma-separated UUID batches, copy all, or download a text file. Large batches use a Web Worker.',
+	'tool.uuid-batch-generator.primary_keyword': 'uuid batch generator',
+	'tool.uuid-batch-generator.meta_title': 'UUID Batch Generator — v4 & v7 | fmtly',
+	'tool.uuid-batch-generator.meta_description':
+		'Generate up to hundreds of thousands of UUID v4 or v7 identifiers in the browser. Copy or download; worker offload for huge counts.',
+	'tool.uuid-batch-generator.operation': 'generate',
+	'tool.uuid-batch-generator.faq.0.question': 'How is this different from the single UUID tool?',
+	'tool.uuid-batch-generator.faq.0.answer':
+		'This tool is optimized for bulk lists, file download, and comma-separated export. The crypto UUID tool focuses on one ID and ULID decode.',
+	'tool.uuid-batch-generator.faq.1.question': 'v4 vs v7?',
+	'tool.uuid-batch-generator.faq.1.answer':
+		'v4 is random. v7 is time-sortable (RFC 9562) — useful for ordered IDs. Both are generated locally.',
+	'tool.uuid-batch-generator.faq.2.question': 'Why use a worker?',
+	'tool.uuid-batch-generator.faq.2.answer':
+		'Generating hundreds of thousands of UUIDs can block the UI; the worker keeps scrolling and typing smooth.',
+	'tool.uuid-batch-generator.faq.3.question': 'Are these cryptographically secure?',
+	'tool.uuid-batch-generator.faq.3.answer':
+		'They use the same uuid package as common runtimes. For security-critical secrets, follow your threat model and platform guidance.',
+	'tool.uuid-batch-generator.use_case.0': 'Load tests and fixture files',
+	'tool.uuid-batch-generator.use_case.1': 'Populate spreadsheet columns with unique IDs',
+	'tool.uuid-batch-generator.use_case.2': 'Seed databases with time-ordered v7 keys',
+	'tool.uuid-batch-generator.use_case.3': 'Quick clipboard paste into config or scripts',
+
+	'tool.generate-password-generator.display_name': 'Password Generator',
+	'tool.generate-password-generator.tagline': 'Strong passwords in the browser',
+	'tool.generate-password-generator.description':
+		'Build passwords from length and character classes with Web Crypto randomness. Optional readability dashes and a local zxcvbn strength hint.',
+	'tool.generate-password-generator.primary_keyword': 'password generator',
+	'tool.generate-password-generator.meta_title': 'Password Generator — secure & local | fmtly',
+	'tool.generate-password-generator.meta_description':
+		'Generate secure passwords with custom length, symbols, and ambiguity options. Strength hint via zxcvbn; no data sent to a server.',
+	'tool.generate-password-generator.operation': 'generate',
+	'tool.generate-password-generator.faq.0.question':
+		'How is this different from the password strength checker?',
+	'tool.generate-password-generator.faq.0.answer':
+		'This tool creates new passwords. The crypto strength meter scores passwords you already have.',
+	'tool.generate-password-generator.faq.1.question': 'Where does randomness come from?',
+	'tool.generate-password-generator.faq.1.answer':
+		'From crypto.getRandomValues in your browser — the same API used for TLS and other secure contexts.',
+	'tool.generate-password-generator.faq.2.question': 'What does the strength hint mean?',
+	'tool.generate-password-generator.faq.2.answer':
+		'zxcvbn estimates guessability from patterns. It runs locally and is a hint, not a guarantee.',
+	'tool.generate-password-generator.faq.3.question': 'Should I use these passwords in production?',
+	'tool.generate-password-generator.faq.3.answer':
+		'Combine generated secrets with your organization’s policies, rotation, and vault tooling.',
+	'tool.generate-password-generator.use_case.0': 'New admin or service account credentials',
+	'tool.generate-password-generator.use_case.1': 'Temporary share secrets for demos',
+	'tool.generate-password-generator.use_case.2': 'High-entropy strings when symbols are required',
+	'tool.generate-password-generator.use_case.3': 'Teaching secure defaults in workshops',
+
+	'tool.gitignore-builder.display_name': '.gitignore Builder',
+	'tool.gitignore-builder.tagline': 'Merge curated ignore rules',
+	'tool.gitignore-builder.description':
+		'Pick stacks and environments — Node, Python, Rust, OS noise, IDEs, and more — and merge into one .gitignore. Static templates, no network calls.',
+	'tool.gitignore-builder.primary_keyword': 'gitignore generator',
+	'tool.gitignore-builder.meta_title': '.gitignore Builder — merged templates | fmtly',
+	'tool.gitignore-builder.meta_description':
+		'Combine curated gitignore-style fragments for languages, frameworks, Docker, Terraform, and editors. Copy the result in one click.',
+	'tool.gitignore-builder.operation': 'generate',
+	'tool.gitignore-builder.faq.0.question': 'Is this the same as gitignore.io?',
+	'tool.gitignore-builder.faq.0.answer':
+		'We ship curated fragments inspired by common community templates; you merge them locally without API calls.',
+	'tool.gitignore-builder.faq.1.question': 'Can I edit the output?',
+	'tool.gitignore-builder.faq.1.answer':
+		'Yes — copy to your repo and adjust. Order and sections are deterministic for easy diffs.',
+	'tool.gitignore-builder.faq.2.question': 'Why merge instead of one giant template?',
+	'tool.gitignore-builder.faq.2.answer':
+		'Smaller, relevant rules reduce noise and merge conflicts in new projects.',
+	'tool.gitignore-builder.faq.3.question': 'Do you log my selections?',
+	'tool.gitignore-builder.faq.3.answer': 'No. Selections stay in your browser.',
+	'tool.gitignore-builder.use_case.0': 'Bootstrap a new repo with sensible defaults',
+	'tool.gitignore-builder.use_case.1': 'Add OS and editor cruft rules quickly',
+	'tool.gitignore-builder.use_case.2': 'Combine Docker or Terraform snippets with app stacks',
+	'tool.gitignore-builder.use_case.3': 'Teach Git hygiene in courses',
+
+	'tool.readme-template-generator.display_name': 'README Template',
+	'tool.readme-template-generator.tagline': 'Project readme skeleton in seconds',
+	'tool.readme-template-generator.description':
+		'Fill title, description, install, usage, license, and optional GitHub badges — get a clean Markdown README you can paste into your repo.',
+	'tool.readme-template-generator.primary_keyword': 'readme generator',
+	'tool.readme-template-generator.meta_title': 'README Template Generator — Markdown | fmtly',
+	'tool.readme-template-generator.meta_description':
+		'Create a structured README.md from form fields: install commands, usage, license, optional badges. All client-side.',
+	'tool.readme-template-generator.operation': 'generate',
+	'tool.readme-template-generator.faq.0.question': 'Can I customize sections later?',
+	'tool.readme-template-generator.faq.0.answer':
+		'Yes. The output is plain Markdown — edit in any editor or extend with your own sections.',
+	'tool.readme-template-generator.faq.1.question': 'Do badges work for any host?',
+	'tool.readme-template-generator.faq.1.answer':
+		'Badges use a common shields.io-style pattern for GitHub paths. Adjust URLs for other forges if needed.',
+	'tool.readme-template-generator.faq.2.question': 'Is my project name sent anywhere?',
+	'tool.readme-template-generator.faq.2.answer': 'No. Text is assembled only in your browser.',
+	'tool.readme-template-generator.faq.3.question': 'Can I use this for private repos?',
+	'tool.readme-template-generator.faq.3.answer':
+		'Yes — nothing is uploaded; copy the Markdown into your repository manually.',
+	'tool.readme-template-generator.use_case.0': 'Open source releases on GitHub or GitLab',
+	'tool.readme-template-generator.use_case.1': 'Internal libraries needing a consistent readme',
+	'tool.readme-template-generator.use_case.2': 'Hackathons and prototypes that need polish fast',
+	'tool.readme-template-generator.use_case.3': 'Teaching Markdown and repo hygiene',
+
+	'ui.generate_fake_data.no_fields': 'Select at least one field.',
+	'ui.generate_fake_data.fields_label': 'Fields',
+	'ui.generate_fake_data.rows': 'Rows',
+	'ui.generate_fake_data.format': 'Export format',
+	'ui.generate_fake_data.table': 'SQL table name',
+	'ui.generate_fake_data.generate': 'Generate',
+	'ui.generate_fake_data.worker_badge': 'Web Worker',
+	'ui.generate_fake_data.preview': 'Output',
+	'ui.generate_fake_data.placeholder': 'Generated data appears here…',
+	'ui.generate_fake_data.field.fullName': 'Full name',
+	'ui.generate_fake_data.field.firstName': 'First name',
+	'ui.generate_fake_data.field.lastName': 'Last name',
+	'ui.generate_fake_data.field.email': 'Email',
+	'ui.generate_fake_data.field.phone': 'Phone',
+	'ui.generate_fake_data.field.street': 'Street',
+	'ui.generate_fake_data.field.city': 'City',
+	'ui.generate_fake_data.field.zip': 'ZIP',
+	'ui.generate_fake_data.field.country': 'Country',
+	'ui.generate_fake_data.field.company': 'Company',
+	'ui.generate_fake_data.field.jobTitle': 'Job title',
+	'ui.generate_fake_data.field.ipv4': 'IPv4',
+	'ui.generate_fake_data.field.date': 'Date',
+	'ui.generate_fake_data.field.uuid': 'UUID',
+
+	'ui.generate_uuid_batch.count': 'Count',
+	'ui.generate_uuid_batch.separator': 'Separator',
+	'ui.generate_uuid_batch.sep_line': 'Newline',
+	'ui.generate_uuid_batch.sep_comma': 'Comma',
+	'ui.generate_uuid_batch.generate': 'Generate',
+	'ui.generate_uuid_batch.worker': 'Web Worker',
+	'ui.generate_uuid_batch.output': 'UUIDs',
+	'ui.generate_uuid_batch.placeholder': 'Generated UUIDs appear here…',
+
+	'ui.generate_password.length': 'Length',
+	'ui.generate_password.upper': 'A–Z',
+	'ui.generate_password.lower': 'a–z',
+	'ui.generate_password.digits': '0–9',
+	'ui.generate_password.symbols': 'Symbols',
+	'ui.generate_password.no_ambiguous': 'Avoid ambiguous',
+	'ui.generate_password.groups': 'Dash every N chars (0 = off)',
+	'ui.generate_password.regenerate': 'Regenerate',
+	'ui.generate_password.strength_hint': 'Hint',
+	'ui.generate_password.strength.0': 'Too guessable',
+	'ui.generate_password.strength.1': 'Very weak',
+	'ui.generate_password.strength.2': 'Weak',
+	'ui.generate_password.strength.3': 'Good',
+	'ui.generate_password.strength.4': 'Strong',
+	'ui.generate_password.disclaimer':
+		'Generated in your browser with Web Crypto. Strength hint uses zxcvbn locally — verify policies for production secrets.',
+
+	'ui.generate_gitignore.search': 'Filter stacks…',
+
+	'ui.generate_readme.title': 'Title',
+	'ui.generate_readme.license': 'License',
+	'ui.generate_readme.description': 'Description',
+	'ui.generate_readme.install': 'Installation',
+	'ui.generate_readme.usage': 'Usage',
+	'ui.generate_readme.badges': 'Include GitHub-style badges',
+	'ui.generate_readme.repo_user': 'GitHub user/org',
+	'ui.generate_readme.repo_name': 'Repository name'
 };
 
 export default registryEn;

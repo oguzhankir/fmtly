@@ -1,6 +1,7 @@
 import { cryptoTools } from './tools/crypto.tools.js';
 import { csvTools } from './tools/csv.tools.js';
 import { encodeTools } from './tools/encode.tools.js';
+import { generateTools } from './tools/generate.tools.js';
 import { jsonTools } from './tools/json.tools.js';
 import { qrTools } from './tools/qr.tools.js';
 import { textTools } from './tools/text.tools.js';
@@ -18,7 +19,8 @@ const allTools: ToolDefinition[] = [
 	...textTools,
 	...encodeTools,
 	...qrTools,
-	...cryptoTools
+	...cryptoTools,
+	...generateTools
 ];
 
 export function getAllTools(): ToolDefinition[] {

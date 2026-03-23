@@ -54,6 +54,11 @@
 	import KeypairGeneratorPanel from "$components/panels/crypto/KeypairGeneratorPanel.svelte";
 	import CertDecoderPanel from "$components/panels/crypto/CertDecoderPanel.svelte";
 	import TotpGeneratorPanel from "$components/panels/crypto/TotpGeneratorPanel.svelte";
+	import FakeDataGeneratorPanel from "$components/panels/generate/FakeDataGeneratorPanel.svelte";
+	import UuidBatchGeneratorPanel from "$components/panels/generate/UuidBatchGeneratorPanel.svelte";
+	import GeneratePasswordPanel from "$components/panels/generate/GeneratePasswordPanel.svelte";
+	import GitignoreBuilderPanel from "$components/panels/generate/GitignoreBuilderPanel.svelte";
+	import ReadmeTemplatePanel from "$components/panels/generate/ReadmeTemplatePanel.svelte";
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
@@ -157,6 +162,11 @@
 	let cryptoWorkspaceTools = $derived(
 		data.tool.category === "crypto"
 			? localizeToolDefinitions(getToolsByCategory("crypto"), $t)
+			: []
+	);
+	let generateWorkspaceTools = $derived(
+		data.tool.category === "generate"
+			? localizeToolDefinitions(getToolsByCategory("generate"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -602,6 +612,8 @@
 				<WorkspaceTabs tools={qrWorkspaceTools} activeSlug={data.tool.slug} category="qr" locale={currentLocale} />
 			{:else if data.tool.category === 'crypto' && cryptoWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={cryptoWorkspaceTools} activeSlug={data.tool.slug} category="crypto" locale={currentLocale} />
+			{:else if data.tool.category === 'generate' && generateWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={generateWorkspaceTools} activeSlug={data.tool.slug} category="generate" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -675,6 +687,8 @@
 				<WorkspaceTabs tools={qrWorkspaceTools} activeSlug={data.tool.slug} category="qr" locale={currentLocale} />
 			{:else if data.tool.category === 'crypto' && cryptoWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={cryptoWorkspaceTools} activeSlug={data.tool.slug} category="crypto" locale={currentLocale} />
+			{:else if data.tool.category === 'generate' && generateWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={generateWorkspaceTools} activeSlug={data.tool.slug} category="generate" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -796,6 +810,16 @@
 				<CertDecoderPanel toolSlug={data.tool.slug} />
 			{:else if data.tool.category === "crypto" && data.tool.slug === "totp"}
 				<TotpGeneratorPanel toolSlug={data.tool.slug} />
+			{:else if data.tool.category === "generate" && data.tool.slug === "fake-data"}
+				<FakeDataGeneratorPanel />
+			{:else if data.tool.category === "generate" && data.tool.slug === "uuid-batch"}
+				<UuidBatchGeneratorPanel />
+			{:else if data.tool.category === "generate" && data.tool.slug === "password"}
+				<GeneratePasswordPanel />
+			{:else if data.tool.category === "generate" && data.tool.slug === "gitignore"}
+				<GitignoreBuilderPanel />
+			{:else if data.tool.category === "generate" && data.tool.slug === "readme"}
+				<ReadmeTemplatePanel />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

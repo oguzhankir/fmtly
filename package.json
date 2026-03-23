@@ -45,6 +45,7 @@
 		"vitest": "^4.1.0"
 	},
 	"dependencies": {
+		"@faker-js/faker": "^10.3.0",
 		"@monaco-editor/loader": "^1.7.0",
 		"@noble/hashes": "^2.0.1",
 		"@peculiar/x509": "^1.14.3",

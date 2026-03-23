@@ -304,11 +304,11 @@ Generate test data, IDs, and code scaffolding.
 
 | 177 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 178 | Fake Data Generator | `generate/fake-data` | Generate realistic test data — names, emails, addresses, phone numbers, dates. Configurable locale and count. Export as JSON, CSV, or SQL. |
-| 179 | UUID Batch Generator | `generate/uuid-batch` | Generate batches of UUID v4 or v7 with copy-all and download. |
-| 180 | Password Generator | `generate/password` | Generate secure passwords with configurable length, charset, and memorability options. |
-| 181 | .gitignore Builder | `generate/gitignore` | Select frameworks and languages to generate a `.gitignore` file. Powered by gitignore.io templates. |
-| 182 | README Template | `generate/readme` | Generate a README.md skeleton from project metadata — title, description, install, usage, license. |
+| 178 | Fake Data Generator ✅ | `generate/fake-data` | done — Faker-powered rows (names, emails, addresses, etc.), locale + count, export JSON/CSV/SQL; Web Worker when output is large. |
+| 179 | UUID Batch Generator ✅ | `generate/uuid-batch` | done — Many UUID v4 or v7, newline or comma-separated, copy and download; Web Worker for huge batches. |
+| 180 | Password Generator ✅ | `generate/password` | done — Web Crypto passwords with charset toggles, optional separators, local zxcvbn hint. |
+| 181 | .gitignore Builder ✅ | `generate/gitignore` | done — Merge curated static fragments for common stacks/OS/IDE (gitignore.io–style, no network). |
+| 182 | README Template ✅ | `generate/readme` | done — README.md skeleton from title, description, install, usage, license, optional GitHub badges. |
 
 ---
 
