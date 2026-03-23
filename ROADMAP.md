@@ -263,12 +263,12 @@ View, extract, merge, and split PDFs — all in-browser.
 
 | 160 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 161 | PDF Viewer | `pdf/viewer` | Render and navigate PDF files in the browser with page thumbnails and zoom. |
-| 162 | PDF → Text | `pdf/to-text` | Extract raw text from PDF pages with page-by-page output. |
-| 163 | PDF Merge | `pdf/merge` | Combine multiple PDF files into one. Drag-and-drop reordering. |
-| 164 | PDF Split | `pdf/split` | Split a PDF into individual pages or custom page ranges. |
-| 165 | PDF Page Extractor | `pdf/extract-pages` | Extract specific pages from a PDF into a new document. |
-| 166 | PDF Metadata Viewer | `pdf/metadata` | Display PDF metadata — title, author, creator, creation date, page count, file size. |
+| 161 | PDF Viewer ✅ | `pdf/viewer` | done — Render and navigate PDF files in-browser with page controls, zoom, fit-width, and responsive canvas preview. |
+| 162 | PDF → Text ✅ | `pdf/to-text` | done — Extract raw text from each PDF page with structured output, copy/download, and worker offload for large files. |
+| 163 | PDF Merge ✅ | `pdf/merge` | done — Combine multiple PDFs with drag reorder, clear controls, and a clear post-merge success state (ready banner, output size, primary download CTA). |
+| 164 | PDF Split ✅ | `pdf/split` | done — Split a PDF into individual files from custom page ranges with validated range parsing and downloadable outputs. |
+| 165 | PDF Page Extractor ✅ | `pdf/extract-pages` | done — Extract selected pages into a single new PDF with range input and browser-only processing. |
+| 166 | PDF Metadata Viewer ✅ | `pdf/metadata` | done — Inspect title, author, creator, dates, page count, and file size with optional worker path for large documents. |
 
 ---
 

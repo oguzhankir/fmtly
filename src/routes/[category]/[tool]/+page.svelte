@@ -62,6 +62,12 @@
 	import YamlOutputPanel from "$components/panels/yaml/YamlOutputPanel.svelte";
 	import YamlValidatorPanel from "$components/panels/yaml/YamlValidatorPanel.svelte";
 	import TomlValidatorPanel from "$components/panels/toml/TomlValidatorPanel.svelte";
+	import PdfViewerPanel from "$components/panels/pdf/PdfViewerPanel.svelte";
+	import PdfToTextPanel from "$components/panels/pdf/PdfToTextPanel.svelte";
+	import PdfMergePanel from "$components/panels/pdf/PdfMergePanel.svelte";
+	import PdfSplitPanel from "$components/panels/pdf/PdfSplitPanel.svelte";
+	import PdfExtractPagesPanel from "$components/panels/pdf/PdfExtractPagesPanel.svelte";
+	import PdfMetadataPanel from "$components/panels/pdf/PdfMetadataPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -167,6 +173,11 @@
 	let generateWorkspaceTools = $derived(
 		data.tool.category === "generate"
 			? localizeToolDefinitions(getToolsByCategory("generate"), $t)
+			: []
+	);
+	let pdfWorkspaceTools = $derived(
+		data.tool.category === "pdf"
+			? localizeToolDefinitions(getToolsByCategory("pdf"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -614,6 +625,8 @@
 				<WorkspaceTabs tools={cryptoWorkspaceTools} activeSlug={data.tool.slug} category="crypto" locale={currentLocale} />
 			{:else if data.tool.category === 'generate' && generateWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={generateWorkspaceTools} activeSlug={data.tool.slug} category="generate" locale={currentLocale} />
+			{:else if data.tool.category === 'pdf' && pdfWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={pdfWorkspaceTools} activeSlug={data.tool.slug} category="pdf" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -689,6 +702,8 @@
 				<WorkspaceTabs tools={cryptoWorkspaceTools} activeSlug={data.tool.slug} category="crypto" locale={currentLocale} />
 			{:else if data.tool.category === 'generate' && generateWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={generateWorkspaceTools} activeSlug={data.tool.slug} category="generate" locale={currentLocale} />
+			{:else if data.tool.category === 'pdf' && pdfWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={pdfWorkspaceTools} activeSlug={data.tool.slug} category="pdf" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -820,6 +835,18 @@
 				<GitignoreBuilderPanel />
 			{:else if data.tool.category === "generate" && data.tool.slug === "readme"}
 				<ReadmeTemplatePanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "viewer"}
+				<PdfViewerPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "to-text"}
+				<PdfToTextPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "merge"}
+				<PdfMergePanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "split"}
+				<PdfSplitPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "extract-pages"}
+				<PdfExtractPagesPanel />
+			{:else if data.tool.category === "pdf" && data.tool.slug === "metadata"}
+				<PdfMetadataPanel />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

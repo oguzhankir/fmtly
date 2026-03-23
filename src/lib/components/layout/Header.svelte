@@ -25,7 +25,9 @@
 		'text',
 		'encode',
 		'qr',
-		'crypto'
+		'crypto',
+		'generate',
+		'pdf'
 	];
 	const faviconUrl: string = '/favicon.svg';
 

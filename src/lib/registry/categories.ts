@@ -65,6 +65,12 @@ const categoryMetaList: CategoryMeta[] = [
 		displayName: 'category.generate.display_name',
 		description: 'category.generate.description',
 		primaryKeyword: 'category.generate.primary_keyword'
+	},
+	{
+		slug: 'pdf',
+		displayName: 'category.pdf.display_name',
+		description: 'category.pdf.description',
+		primaryKeyword: 'category.pdf.primary_keyword'
 	}
 ];
 

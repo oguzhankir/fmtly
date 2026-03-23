@@ -3,6 +3,7 @@ import { csvTools } from './tools/csv.tools.js';
 import { encodeTools } from './tools/encode.tools.js';
 import { generateTools } from './tools/generate.tools.js';
 import { jsonTools } from './tools/json.tools.js';
+import { pdfTools } from './tools/pdf.tools.js';
 import { qrTools } from './tools/qr.tools.js';
 import { textTools } from './tools/text.tools.js';
 import { tomlTools } from './tools/toml.tools.js';
@@ -20,7 +21,8 @@ const allTools: ToolDefinition[] = [
 	...encodeTools,
 	...qrTools,
 	...cryptoTools,
-	...generateTools
+	...generateTools,
+	...pdfTools
 ];
 
 export function getAllTools(): ToolDefinition[] {
