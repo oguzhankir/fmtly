@@ -53,7 +53,7 @@
 		"ajv-formats": "^3.0.1",
 		"bits-ui": "^2.16.3",
 		"diff-match-patch": "^1.0.5",
-		"fast-xml-parser": "^5.5.7",
+		"fast-xml-parser": "^5.5.8",
 		"highlight.js": "^11.11.1",
 		"jmespath": "^0.16.0",
 		"js-yaml": "^4.1.1",
