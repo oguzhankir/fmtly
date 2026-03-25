@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	deduplicateCsvRows,
 	format,
 	toHtmlTable,
 	toSql,
@@ -47,5 +48,20 @@ describe('CSV Engine', () => {
 	it('validates CSV correctly', async () => {
 		const valid = await validate(sampleCsv);
 		expect(valid.valid).toBe(true);
+	});
+
+	it('deduplicates rows by key columns (papaparse load path)', async () => {
+		const csv = 'id,name\n1,Alice\n1,Bob\n2,Carol';
+		const out = await deduplicateCsvRows(csv, {
+			delimiter: ',',
+			headerRow: true,
+			skipEmptyLines: true,
+			trimCells: false,
+			quoteAll: true,
+			keyColumns: ['id']
+		});
+		expect(out).toContain('"1","Alice"');
+		expect(out).not.toContain('Bob');
+		expect(out).toContain('"2","Carol"');
 	});
 });

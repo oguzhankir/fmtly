@@ -3877,7 +3877,182 @@ const registryEn: Record<string, string> = {
 	'ui.pdf.metadata.creation_date': 'Creation date',
 	'ui.pdf.metadata.modification_date': 'Modification date',
 	'ui.pdf.metadata.page_count': 'Page count',
-	'ui.pdf.metadata.file_size': 'File size (bytes)'
+	'ui.pdf.metadata.file_size': 'File size (bytes)',
+
+	'tool.json-to-zod.display_name': 'JSON to Zod Schema',
+	'tool.json-to-zod.tagline': 'Generate a Zod schema from a JSON sample',
+	'tool.json-to-zod.description':
+		'Infer a practical Zod validation schema from sample JSON data. Great for bootstrapping runtime validation and typed parsing.',
+	'tool.json-to-zod.primary_keyword': 'json to zod',
+	'tool.json-to-zod.meta_title': 'JSON to Zod Schema Generator — fmtly.dev',
+	'tool.json-to-zod.meta_description':
+		'Generate Zod schemas from JSON samples instantly in your browser. No uploads, no server, fast type-safe validation scaffolding.',
+	'tool.json-to-zod.operation': 'Generate',
+	'tool.json-to-zod.faq.0.question': 'How accurate is inferred schema output?',
+	'tool.json-to-zod.faq.0.answer':
+		'It reflects the shape of your sample input. Add more representative samples for better coverage.',
+	'tool.json-to-zod.faq.1.question': 'Does it mark optional fields?',
+	'tool.json-to-zod.faq.1.answer':
+		'Fields that are absent in parts of the sample can be emitted as optional in the inferred schema.',
+	'tool.json-to-zod.faq.2.question': 'Can I edit the generated schema?',
+	'tool.json-to-zod.faq.2.answer':
+		'Yes. The output is plain Zod code meant to be copied and customized in your project.',
+	'tool.json-to-zod.use_case.0': 'Bootstrap API response validators quickly',
+	'tool.json-to-zod.use_case.1': 'Create type-safe parsing boundaries',
+	'tool.json-to-zod.use_case.2': 'Generate starter schemas for forms',
+	'tool.json-to-zod.use_case.3': 'Speed up migration to runtime validation',
+
+	'tool.json-ndjson.display_name': 'JSON Lines (NDJSON) Viewer',
+	'tool.json-ndjson.tagline': 'Parse NDJSON and inspect each line with formatting',
+	'tool.json-ndjson.description':
+		'Parse newline-delimited JSON and render each record with line numbers. Quickly spot malformed rows while preserving valid entries.',
+	'tool.json-ndjson.primary_keyword': 'ndjson viewer',
+	'tool.json-ndjson.meta_title': 'NDJSON Viewer & Formatter — fmtly.dev',
+	'tool.json-ndjson.meta_description':
+		'Parse and format JSON Lines (NDJSON) in your browser. See per-line records, errors, and line numbers instantly.',
+	'tool.json-ndjson.operation': 'Parse',
+	'tool.json-ndjson.faq.0.question': 'What happens with invalid lines?',
+	'tool.json-ndjson.faq.0.answer':
+		'Invalid lines are reported with line numbers while valid lines are still parsed and displayed.',
+	'tool.json-ndjson.faq.1.question': 'Can I export parsed output?',
+	'tool.json-ndjson.faq.1.answer':
+		'Yes. You can copy or download the generated structured report from the output panel.',
+	'tool.json-ndjson.use_case.0': 'Inspect log pipelines using JSON Lines',
+	'tool.json-ndjson.use_case.1': 'Debug broken rows in large NDJSON feeds',
+	'tool.json-ndjson.use_case.2': 'Validate streaming JSON batch output',
+
+	'tool.json-from-protobuf.display_name': 'Protocol Buffers to JSON',
+	'tool.json-from-protobuf.tagline': 'Generate sample JSON from .proto definitions',
+	'tool.json-from-protobuf.description':
+		'Parse Protocol Buffers schemas and generate sample JSON payloads for selected message types.',
+	'tool.json-from-protobuf.primary_keyword': 'protobuf to json',
+	'tool.json-from-protobuf.meta_title': 'Protobuf to JSON Sample Generator — fmtly.dev',
+	'tool.json-from-protobuf.meta_description':
+		'Parse .proto files and generate JSON examples for message types in your browser. Fast, private, and developer-friendly.',
+	'tool.json-from-protobuf.operation': 'Generate',
+	'tool.json-from-protobuf.faq.0.question': 'Do you support nested messages?',
+	'tool.json-from-protobuf.faq.0.answer':
+		'Yes. Nested and referenced message types are resolved and included in generated examples.',
+	'tool.json-from-protobuf.faq.1.question': 'Can I choose the root message?',
+	'tool.json-from-protobuf.faq.1.answer':
+		'Yes. Select any discovered message type from the dropdown and regenerate instantly.',
+	'tool.json-from-protobuf.faq.2.question': 'Does this upload proto files?',
+	'tool.json-from-protobuf.faq.2.answer':
+		'No. Everything runs locally in your browser and your schema never leaves your device.',
+	'tool.json-from-protobuf.use_case.0': 'Create API example payloads from proto contracts',
+	'tool.json-from-protobuf.use_case.1': 'Test mock responses for gRPC gateways',
+	'tool.json-from-protobuf.use_case.2': 'Understand unfamiliar protobuf models quickly',
+
+	'tool.yaml-resolve-anchors.display_name': 'YAML Anchor Resolver',
+	'tool.yaml-resolve-anchors.tagline': 'Expand YAML anchors and aliases to full values',
+	'tool.yaml-resolve-anchors.description':
+		'Resolve YAML anchors and aliases into explicit output so the final document has no references.',
+	'tool.yaml-resolve-anchors.primary_keyword': 'yaml anchor resolver',
+	'tool.yaml-resolve-anchors.meta_title': 'YAML Anchor Resolver — fmtly.dev',
+	'tool.yaml-resolve-anchors.meta_description':
+		'Expand YAML anchors and aliases instantly. Produce explicit YAML without merges or references directly in your browser.',
+	'tool.yaml-resolve-anchors.operation': 'Resolve',
+	'tool.yaml-resolve-anchors.faq.0.question': 'Will merge keys be expanded?',
+	'tool.yaml-resolve-anchors.faq.0.answer':
+		'Yes. Merged values are emitted directly in output for easier downstream processing.',
+	'tool.yaml-resolve-anchors.faq.1.question': 'Does it keep document order?',
+	'tool.yaml-resolve-anchors.faq.1.answer':
+		'The output preserves logical structure while removing aliases and references.',
+	'tool.yaml-resolve-anchors.use_case.0': 'Prepare config for systems that do not support anchors',
+	'tool.yaml-resolve-anchors.use_case.1': 'Debug inherited values in complex YAML',
+	'tool.yaml-resolve-anchors.use_case.2': 'Generate explicit deployment manifests',
+	'tool.yaml-resolve-anchors.use_case.3': 'Normalize YAML before diffs and reviews',
+
+	'tool.yaml-split.display_name': 'YAML Multi-Doc Splitter',
+	'tool.yaml-split.tagline': 'Split multi-document YAML into separate documents',
+	'tool.yaml-split.description':
+		'Split YAML files containing multiple `---` documents and emit each document clearly and consistently.',
+	'tool.yaml-split.primary_keyword': 'yaml split',
+	'tool.yaml-split.meta_title': 'YAML Multi-Document Splitter — fmtly.dev',
+	'tool.yaml-split.meta_description':
+		'Split multi-doc YAML files into individual documents in your browser. Great for Kubernetes and CI config workflows.',
+	'tool.yaml-split.operation': 'Split',
+	'tool.yaml-split.faq.0.question': 'Do comments survive splitting?',
+	'tool.yaml-split.faq.0.answer':
+		'The tool focuses on structural correctness; formatting and comments may be normalized.',
+	'tool.yaml-split.faq.1.question': 'Can it handle single-document YAML?',
+	'tool.yaml-split.faq.1.answer':
+		'Yes. Single documents are returned as-is with consistent formatting.',
+	'tool.yaml-split.use_case.0': 'Extract Kubernetes resources into separate docs',
+	'tool.yaml-split.use_case.1': 'Review long config bundles document by document',
+	'tool.yaml-split.use_case.2': 'Prepare per-document processing in CI',
+
+	'tool.xml-xsd-validate.display_name': 'XSD Validator',
+	'tool.xml-xsd-validate.tagline': 'Validate XML against an XSD schema',
+	'tool.xml-xsd-validate.description':
+		'Validate XML instances with XSD and get structured validation results including line-aware issues when available.',
+	'tool.xml-xsd-validate.primary_keyword': 'xml xsd validator',
+	'tool.xml-xsd-validate.meta_title': 'XML XSD Validator — fmtly.dev',
+	'tool.xml-xsd-validate.meta_description':
+		'Validate XML against XSD in your browser with clear valid/invalid output and detailed error reporting.',
+	'tool.xml-xsd-validate.operation': 'Validate',
+	'tool.xml-xsd-validate.faq.0.question': 'Do I need both XML and XSD input?',
+	'tool.xml-xsd-validate.faq.0.answer':
+		'Yes. Paste the XML document and its XSD schema to run validation.',
+	'tool.xml-xsd-validate.faq.1.question': 'Will I get line and column details?',
+	'tool.xml-xsd-validate.faq.1.answer':
+		'When provided by the validator, line and column data are shown in the results.',
+	'tool.xml-xsd-validate.use_case.0': 'Verify XML payloads before integration tests',
+	'tool.xml-xsd-validate.use_case.1': 'Catch schema violations in ETL pipelines',
+	'tool.xml-xsd-validate.use_case.2': 'Validate vendor XML feeds quickly',
+
+	'tool.csv-columns.display_name': 'CSV Column Reorder / Drop',
+	'tool.csv-columns.tagline': 'Reorder, rename, and drop CSV columns',
+	'tool.csv-columns.description':
+		'Transform CSV column layout by selecting, reordering, and renaming fields for downstream systems.',
+	'tool.csv-columns.primary_keyword': 'csv column reorder',
+	'tool.csv-columns.meta_title': 'CSV Column Reorder & Drop — fmtly.dev',
+	'tool.csv-columns.meta_description':
+		'Reorder, rename, and remove CSV columns directly in your browser. Keep delimiter and quoting behavior under control.',
+	'tool.csv-columns.operation': 'Transform',
+	'tool.csv-columns.faq.0.question': 'Can I output only selected columns?',
+	'tool.csv-columns.faq.0.answer':
+		'Yes. Define the exact target column list to keep and drop everything else.',
+	'tool.csv-columns.faq.1.question': 'Can I rename columns while reordering?',
+	'tool.csv-columns.faq.1.answer':
+		'Yes. Each selected source column can map to a new output header name.',
+	'tool.csv-columns.use_case.0': 'Prepare CSV exports for third-party imports',
+	'tool.csv-columns.use_case.1': 'Remove sensitive fields before sharing',
+	'tool.csv-columns.use_case.2': 'Normalize inconsistent column order between systems',
+
+	'tool.csv-deduplicate.display_name': 'CSV Deduplicator',
+	'tool.csv-deduplicate.tagline': 'Remove duplicate CSV rows using key columns',
+	'tool.csv-deduplicate.description':
+		'Deduplicate CSV rows by one or more key columns while preserving stable first-seen row order.',
+	'tool.csv-deduplicate.primary_keyword': 'csv deduplicate',
+	'tool.csv-deduplicate.meta_title': 'CSV Deduplicator — fmtly.dev',
+	'tool.csv-deduplicate.meta_description':
+		'Remove duplicate CSV rows with configurable key columns. Keep the first occurrence and export clean output instantly.',
+	'tool.csv-deduplicate.operation': 'Deduplicate',
+	'tool.csv-deduplicate.faq.0.question': 'How are duplicates determined?',
+	'tool.csv-deduplicate.faq.0.answer':
+		'Rows are considered duplicates when selected key-column values match exactly.',
+	'tool.csv-deduplicate.faq.1.question': 'Which row is kept?',
+	'tool.csv-deduplicate.faq.1.answer':
+		'The first row encountered for each unique key is kept, preserving input order.',
+	'tool.csv-deduplicate.use_case.0': 'Clean customer exports before import',
+	'tool.csv-deduplicate.use_case.1': 'Remove duplicate events in analytics CSVs',
+	'tool.csv-deduplicate.use_case.2': 'Normalize joined data from multiple sources',
+
+	'tool.ndjson.entries_title': 'NDJSON entries',
+	'tool.json-from-protobuf.message_type': 'Message type',
+	'tool.json-from-protobuf.select_message_type': 'Select a message type',
+	'tool.xml-xsd-validate.xml_label': 'XML',
+	'tool.xml-xsd-validate.xsd_label': 'XSD',
+	'tool.xml-xsd-validate.result_title': 'Validation result',
+	'tool.xml-xsd-validate.empty_hint': 'Paste both XML and XSD to validate.',
+	'tool.xml-xsd-validate.xml_well_formed_error': 'XML is not well-formed',
+	'tool.xml-xsd-validate.valid': 'XML matches the XSD',
+	'tool.xml-xsd-validate.invalid': 'XML does not match the XSD',
+	'tool.xml-xsd-validate.warnings': '{count} warning(s)',
+	'tool.xml-xsd-validate.errors_title': 'Errors',
+	'tool.xml-xsd-validate.warnings_title': 'Warnings',
+	'tool.xml-xsd-validate.waiting_hint': 'Paste XSD schema to run validation.'
 };
 
 export default registryEn;

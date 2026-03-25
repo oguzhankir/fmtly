@@ -1,6 +1,9 @@
 import {
 	type CSVProcessingOptions,
+	type CsvColumnsOperation,
+	deduplicateCsvRows,
 	format as formatCSV,
+	reorderRenameDropColumns,
 	toHtmlTable,
 	toXml,
 	toYaml,
@@ -37,6 +40,8 @@ export const csvStats = writable<CSVStats | null>(null);
 export const csvProcessingOptions = writable<CSVFormatOptions>({ ...DEFAULT_CSV_OPTIONS });
 export const csvPreviewHeaders = writable<string[]>([]);
 export const csvPreviewRows = writable<string[][]>([]);
+export const csvColumnsOperations = writable<CsvColumnsOperation[]>([]);
+export const csvDeduplicateKeyColumns = writable<string[]>([]);
 
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 let activeCsvToolSlug = 'formatter';
@@ -91,6 +96,8 @@ function updatePreview(data: unknown, options: CSVFormatOptions): void {
 
 export function initCSVStore(toolSlug: string): void {
 	activeCsvToolSlug = toolSlug;
+	csvColumnsOperations.set([]);
+	csvDeduplicateKeyColumns.set([]);
 	unsubscribeInput?.();
 	unsubscribeInput = input.subscribe((value) => {
 		if (debounceTimer) clearTimeout(debounceTimer);
@@ -151,6 +158,52 @@ async function applyToolOutput(value: string, options: CSVFormatOptions): Promis
 		case 'formatter':
 			output.set(await formatCSV(value, options));
 			return;
+		case 'columns': {
+			try {
+				const ops = get(csvColumnsOperations);
+				const engineOptions = {
+					delimiter: options.delimiter,
+					headerRow: options.headerRow,
+					skipEmptyLines: options.skipEmptyLines,
+					trimCells: options.trimCells,
+					quoteAll: options.quoteAll,
+					operations: ops
+				};
+
+				const transformed = await reorderRenameDropColumns(value, engineOptions);
+				output.set(transformed);
+				csvError.set(null);
+			} catch (error) {
+				clearOutput();
+				csvError.set({
+					message: error instanceof Error ? error.message : 'Could not transform CSV'
+				});
+			}
+			return;
+		}
+		case 'deduplicate': {
+			try {
+				const keyColumns = get(csvDeduplicateKeyColumns);
+				const engineOptions = {
+					delimiter: options.delimiter,
+					headerRow: options.headerRow,
+					skipEmptyLines: options.skipEmptyLines,
+					trimCells: options.trimCells,
+					quoteAll: options.quoteAll,
+					keyColumns
+				};
+
+				const transformed = await deduplicateCsvRows(value, engineOptions);
+				output.set(transformed);
+				csvError.set(null);
+			} catch (error) {
+				clearOutput();
+				csvError.set({
+					message: error instanceof Error ? error.message : 'Could not deduplicate CSV'
+				});
+			}
+			return;
+		}
 		case 'to-json': {
 			const result = await csvToJSON(value, {
 				headers: options.headerRow,
@@ -208,6 +261,22 @@ export function setCsvProcessingOptions(next: Partial<CSVFormatOptions>): void {
 	if (value.trim()) {
 		void processInput(value);
 	}
+}
+
+export function setCsvColumnsOperations(next: CsvColumnsOperation[]): void {
+	csvColumnsOperations.set(next);
+	if (activeCsvToolSlug !== 'columns') return;
+	const value = get(input);
+	if (!value.trim()) return;
+	void processInput(value);
+}
+
+export function setCsvDeduplicateKeyColumns(next: string[]): void {
+	csvDeduplicateKeyColumns.set(next);
+	if (activeCsvToolSlug !== 'deduplicate') return;
+	const value = get(input);
+	if (!value.trim()) return;
+	void processInput(value);
 }
 
 export async function formatCsv(): Promise<void> {

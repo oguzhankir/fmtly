@@ -1,5 +1,17 @@
-import { computeXMLStats, formatXML, minifyXML, parseXML, xmlToJSON } from '$engines/xml/index.js';
-import type { XMLFormatOptions, XMLParseError, XMLStats } from '$engines/xml/index.js';
+import {
+	computeXMLStats,
+	formatXML,
+	minifyXML,
+	parseXML,
+	validateXmlAgainstXsd,
+	xmlToJSON
+} from '$engines/xml/index.js';
+import type {
+	XMLFormatOptions,
+	XMLParseError,
+	XMLStats,
+	XsdValidationResult
+} from '$engines/xml/index.js';
 import { toCsv, toJsonSchema, toYaml } from '$engines/xml/xml.engine.js';
 import { input } from '$stores/input.store';
 import { clearOutput, output } from '$stores/output.store';
@@ -7,6 +19,8 @@ import { get, writable } from 'svelte/store';
 
 export const xmlError = writable<XMLParseError | null>(null);
 export const xmlStats = writable<XMLStats | null>(null);
+export const xmlXsdSchema = writable<string>('');
+export const xmlXsdValidationResult = writable<XsdValidationResult | null>(null);
 export const xmlFormatOptions = writable<XMLFormatOptions>({ indent: 2 });
 
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
@@ -15,6 +29,8 @@ let unsubscribeInput: (() => void) | undefined;
 
 export function initXMLStore(toolSlug: string): void {
 	activeXmlToolSlug = toolSlug;
+	xmlXsdSchema.set('');
+	xmlXsdValidationResult.set(null);
 	unsubscribeInput?.();
 	unsubscribeInput = input.subscribe((value) => {
 		if (debounceTimer) clearTimeout(debounceTimer);
@@ -22,6 +38,7 @@ export function initXMLStore(toolSlug: string): void {
 		if (!value.trim()) {
 			xmlError.set(null);
 			xmlStats.set(null);
+			xmlXsdValidationResult.set(null);
 			clearOutput();
 			return;
 		}
@@ -78,6 +95,9 @@ async function applyToolOutput(value: string): Promise<void> {
 			return;
 		case 'validator':
 		case 'xpath':
+			return;
+		case 'xsd-validate':
+			await applyXsdValidateOutput(value);
 			return;
 		default:
 			clearOutput();
@@ -154,4 +174,27 @@ export function minifyXml(): void {
 	const value = get(input);
 	if (!value.trim()) return;
 	applyMinifyOutput(value);
+}
+
+async function applyXsdValidateOutput(xmlText: string): Promise<void> {
+	const schemaText = get(xmlXsdSchema);
+	if (!schemaText.trim()) {
+		xmlXsdValidationResult.set(null);
+		clearOutput();
+		return;
+	}
+
+	const validation = await validateXmlAgainstXsd(xmlText, schemaText);
+	xmlXsdValidationResult.set(validation);
+	output.set(JSON.stringify(validation, null, 2));
+}
+
+export function setXsdSchema(next: string): void {
+	xmlXsdSchema.set(next);
+	if (activeXmlToolSlug !== 'xsd-validate') return;
+
+	const value = get(input);
+	if (!value.trim()) return;
+
+	void processInput(value);
 }

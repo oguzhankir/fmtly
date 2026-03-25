@@ -3996,6 +3996,8 @@ const registryEs: Record<string, string> = {
 	'ui.pdf.merge.ready_subtitle': 'Tamaño de salida: {size}. Se guarda como merged.pdf.',
 	'ui.pdf.merge.download_primary': 'Descargar PDF combinado',
 	'ui.pdf.merge.download_locked': 'Primero pulsa Combinar — el botón de descarga aparecerá aquí.'
+
+	// Missing keys from English
 };
 
 export default registryEs;

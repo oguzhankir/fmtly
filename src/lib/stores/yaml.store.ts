@@ -1,5 +1,11 @@
 import type { EngineParseError, FormatResult } from '$engines/types.js';
-import { toCsv, toToml, toXml } from '$engines/yaml/yaml.engine.js';
+import {
+	resolveYamlAnchors,
+	splitYamlDocuments,
+	toCsv,
+	toToml,
+	toXml
+} from '$engines/yaml/yaml.engine.js';
 import { input } from '$stores/input.store';
 import { clearOutput, output } from '$stores/output.store';
 import { get, writable } from 'svelte/store';
@@ -228,6 +234,12 @@ async function applyToolOutput(value: string, parsed: ParsedYAMLSuccess): Promis
 			return;
 		case 'minifier':
 			output.set(await stringifyDocuments(parsed.documents, true));
+			return;
+		case 'resolve-anchors':
+			output.set(await resolveYamlAnchors(parsed.documents));
+			return;
+		case 'split':
+			output.set(await splitYamlDocuments(parsed.documents));
 			return;
 		case 'to-json':
 			await convertYamlToJson(parsed);

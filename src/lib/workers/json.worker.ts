@@ -5,6 +5,7 @@ import {
 	initParser,
 	minifyJSON,
 	parseJSON,
+	parseNdjson,
 	repairJSON,
 	sortJSONKeys,
 	validateJSON
@@ -19,9 +20,12 @@ import {
 	toTypeScriptTypes,
 	unflattenJson
 } from '$engines/json/json.engine.js';
+import { getProtobufMessageTypes, protobufToSampleJson } from '$engines/json/protobuf.engine.js';
 
 const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>> = {
 	parseJSON: (input: unknown) => parseJSON(input as string),
+	parseNdjson: (input: unknown, indentLevel: unknown) =>
+		parseNdjson(input as string, indentLevel as number),
 	formatJSON: (input: unknown, options: unknown) =>
 		formatJSON(input as string, options as FormatOptions),
 	minifyJSON: (input: unknown) => minifyJSON(input as string),
@@ -36,6 +40,9 @@ const methods: Record<string, (...args: unknown[]) => unknown | Promise<unknown>
 	toTypeScriptTypes: (input: unknown) => toTypeScriptTypes(input as string),
 	generateJsonPatch: (input: unknown, operand: unknown) =>
 		generateJsonPatch(input as string, operand as string),
+	getProtobufMessageTypes: (proto: unknown) => getProtobufMessageTypes(proto as string),
+	protobufToSampleJson: (proto: unknown, messageTypeFullName: unknown) =>
+		protobufToSampleJson(proto as string, messageTypeFullName as string),
 	applyJsonPatch: (input: unknown, operand: unknown) =>
 		applyJsonPatch(input as string, operand as string),
 	flattenJson: (input: unknown, options: unknown) =>

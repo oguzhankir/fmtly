@@ -251,3 +251,6 @@ export function jsonToXML(
 		};
 	}
 }
+
+export type { XsdValidationIssue, XsdValidationResult } from './xsd.engine.js';
+export { validateXmlAgainstXsd } from './xsd.engine.js';

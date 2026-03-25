@@ -3935,6 +3935,8 @@ const registryIt: Record<string, string> = {
 	'ui.pdf.merge.ready_subtitle': 'Dimensione output: {size}. Salvato come merged.pdf.',
 	'ui.pdf.merge.download_primary': 'Scarica PDF unito',
 	'ui.pdf.merge.download_locked': 'Prima premi Unisci — il pulsante di download apparirà qui.'
+
+	// Missing keys from English
 };
 
 export default registryIt;

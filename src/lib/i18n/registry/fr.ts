@@ -4017,6 +4017,8 @@ const registryFr: Record<string, string> = {
 	'ui.pdf.merge.ready_subtitle': 'Taille de sortie : {size}. Enregistré en merged.pdf.',
 	'ui.pdf.merge.download_primary': 'Télécharger le PDF fusionné',
 	'ui.pdf.merge.download_locked': 'Fusionnez d’abord — le bouton de téléchargement apparaîtra ici.'
+
+	// Missing keys from English
 };
 
 export default registryFr;

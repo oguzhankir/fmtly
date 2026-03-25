@@ -565,5 +565,49 @@ export const xmlTools: ToolDefinition[] = [
 			'tool.xml-diff.use_case.3'
 		],
 		sampleInput: ''
+	},
+	{
+		id: 'xml-xsd-validate',
+		category: 'xml',
+		slug: 'xsd-validate',
+		displayName: 'tool.xml-xsd-validate.display_name',
+		tagline: 'tool.xml-xsd-validate.tagline',
+		description: 'tool.xml-xsd-validate.description',
+		primaryKeyword: 'tool.xml-xsd-validate.primary_keyword',
+		metaTitle: 'tool.xml-xsd-validate.meta_title',
+		metaDescription: 'tool.xml-xsd-validate.meta_description',
+		engine: 'xml',
+		operation: 'tool.xml-xsd-validate.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'xml',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'xml', slug: 'formatter' },
+			{ category: 'xml', slug: 'validator' },
+			{ category: 'xml', slug: 'to-json' }
+		],
+		faqs: [
+			{
+				question: 'tool.xml-xsd-validate.faq.0.question',
+				answer: 'tool.xml-xsd-validate.faq.0.answer'
+			},
+			{
+				question: 'tool.xml-xsd-validate.faq.1.question',
+				answer: 'tool.xml-xsd-validate.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.xml-xsd-validate.use_case.0',
+			'tool.xml-xsd-validate.use_case.1',
+			'tool.xml-xsd-validate.use_case.2'
+		],
+		sampleInput: `<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>`
 	}
 ];

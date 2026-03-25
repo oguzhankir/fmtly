@@ -104,3 +104,66 @@ export async function diff(a: string, b: string): Promise<DiffResult> {
 		return { valid: false, error: e.message };
 	}
 }
+
+function expandYamlAliases(value: unknown, ancestors: Set<unknown>): unknown {
+	if (value === null || value === undefined) return value;
+	if (typeof value !== 'object') return value;
+
+	if (Array.isArray(value)) {
+		return value.map((entry) => expandYamlAliases(entry, ancestors));
+	}
+
+	// Cycle guard (rare in YAML, but anchors can theoretically form cycles).
+	if (ancestors.has(value)) {
+		return {};
+	}
+
+	ancestors.add(value);
+	const entries = Object.entries(value as Record<string, unknown>).map(([key, entry]) => [
+		key,
+		expandYamlAliases(entry, ancestors)
+	]);
+	ancestors.delete(value);
+
+	return Object.fromEntries(entries);
+}
+
+async function dumpYaml(document: unknown): Promise<string> {
+	const jsYaml = await import('js-yaml');
+	return jsYaml.dump(document, {
+		indent: 2,
+		lineWidth: 120,
+		noRefs: true,
+		sortKeys: false,
+		flowLevel: -1,
+		condenseFlow: false,
+		noCompatMode: false
+	});
+}
+
+export async function resolveYamlAnchors(documents: unknown[]): Promise<string> {
+	const expanded = documents.map((doc) => expandYamlAliases(doc, new Set<unknown>()));
+	const dumped = await Promise.all(expanded.map((doc) => dumpYaml(doc)));
+	const separator = dumped.length > 1 ? '\n---\n' : '';
+	return dumped.map((s) => s.trimEnd()).join(separator);
+}
+
+export async function splitYamlDocuments(
+	documents: unknown[],
+	options: { includeDocumentLabels?: boolean } = {}
+): Promise<string> {
+	const expanded = documents.map((doc) => expandYamlAliases(doc, new Set<unknown>()));
+	const includeLabels = options.includeDocumentLabels ?? expanded.length > 1;
+
+	const parts: string[] = [];
+	for (let index = 0; index < expanded.length; index += 1) {
+		const dumped = (await dumpYaml(expanded[index])).trimEnd();
+		if (includeLabels) {
+			parts.push(`# Document ${index + 1}\n${dumped}`);
+		} else {
+			parts.push(dumped);
+		}
+	}
+
+	return parts.join('\n---\n');
+}

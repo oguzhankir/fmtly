@@ -3906,6 +3906,8 @@ const registryDe: Record<string, string> = {
 	'ui.pdf.merge.ready_subtitle': 'Ausgabegröße {size}. Wird als merged.pdf gespeichert.',
 	'ui.pdf.merge.download_primary': 'Zusammengeführte PDF herunterladen',
 	'ui.pdf.merge.download_locked': 'Zuerst Zusammenführen — der Download-Button erscheint dann hier.'
+
+	// Missing keys from English
 };
 
 export default registryDe;

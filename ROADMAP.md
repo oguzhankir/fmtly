@@ -66,19 +66,18 @@ Core category — format, validate, convert, diff, and query structured data.
 | 53 | JSON → Rust Serde | `json/to-rust` | done | Generate Rust structs with serde derive, serde(rename) per field, Option for optional/null, Vec for arrays, serde_json::Value for heterogeneous JSON; Web Worker for large input. |
 | 54 | JSON Flattener / Unflattener | `json/flatten` | done | Flatten deeply nested JSON into path-based key maps and restore nested JSON instantly with array-safe paths. |
 | 55 | JSON Patch Builder | `json/patch` | done | Generate RFC 6902 JSON Patch from two documents and apply patch arrays to base JSON payloads. |
+| 56 | JSON → Zod Schema | `json/to-zod` | done | Generate Zod validation schemas from a JSON sample with nested inference. |
+| 57 | JSON Lines (NDJSON) | `json/ndjson` | done | Parse and format newline-delimited JSON; each line as formatted JSON with line numbers; copy/download. |
+| 58 | YAML Anchor Resolver | `yaml/resolve-anchors` | done | Expand YAML anchors and aliases into a fully materialized document. |
+| 59 | YAML Multi-Doc Splitter | `yaml/split` | done | Split multi-document YAML (`---`) into separate dumped documents. |
+| 60 | XSD Validator | `xml/xsd-validate` | done | Validate XML instances against a user-supplied XSD schema; structured errors in-browser. |
+| 61 | CSV Column Reorder / Rename / Drop | `csv/columns` | done | Reorder, rename, and drop columns with stable headers and quoting (drag-and-drop UI planned as polish). |
+| 62 | CSV Deduplicator | `csv/deduplicate` | done | Remove duplicate rows using configurable key columns; first occurrence wins. |
+| 63 | Protocol Buffers → JSON | `json/from-protobuf` | done | Parse `.proto` definitions and generate sample JSON per message type (browser, lazy-loaded). |
 
 ### Backlog — Data Formats
 
-| 51 | Tool | Slug | Description |
-|---|------|------|-------------|
-| 57 | JSON → Zod Schema | `json/to-zod` | Generate Zod validation schemas from a JSON sample. |
-| 58 | JSON Lines (NDJSON) Viewer | `json/ndjson` | Parse and format newline-delimited JSON. Show each line as a formatted object with line numbers. |
-| 59 | YAML Anchor Resolver | `yaml/resolve-anchors` | Resolve all YAML anchors and aliases into their expanded form. |
-| 60 | YAML Multi-Doc Splitter | `yaml/split` | Split a multi-document YAML file (---) into individual documents. |
-| 61 | XSD Validator | `xml/xsd-validate` | Validate XML against an XSD schema. |
-| 62 | CSV Column Reorder / Drop | `csv/columns` | Visually reorder, rename, or drop CSV columns via drag-and-drop. |
-| 63 | CSV Deduplicator | `csv/deduplicate` | Remove duplicate rows from CSV, with configurable key columns. |
-| 64 | Protocol Buffers → JSON | `json/from-protobuf` | Parse .proto files and generate sample JSON messages. |
+_No items in this queue right now._
 
 ---
 

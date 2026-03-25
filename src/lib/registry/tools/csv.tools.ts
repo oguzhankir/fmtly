@@ -299,5 +299,81 @@ Diana,28,Tokyo,true`
 		],
 		useCases: ['tool.csv-diff.use_case.0', 'tool.csv-diff.use_case.1'],
 		sampleInput: ''
+	},
+	{
+		id: 'csv-columns',
+		category: 'csv',
+		slug: 'columns',
+		displayName: 'tool.csv-columns.display_name',
+		tagline: 'tool.csv-columns.tagline',
+		description: 'tool.csv-columns.description',
+		primaryKeyword: 'tool.csv-columns.primary_keyword',
+		metaTitle: 'tool.csv-columns.meta_title',
+		metaDescription: 'tool.csv-columns.meta_description',
+		engine: 'csv',
+		operation: 'tool.csv-columns.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'csv',
+		outputLanguage: 'csv',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'csv', slug: 'validator' },
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'csv', slug: 'deduplicate' }
+		],
+		faqs: [
+			{
+				question: 'tool.csv-columns.faq.0.question',
+				answer: 'tool.csv-columns.faq.0.answer'
+			},
+			{
+				question: 'tool.csv-columns.faq.1.question',
+				answer: 'tool.csv-columns.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.csv-columns.use_case.0',
+			'tool.csv-columns.use_case.1',
+			'tool.csv-columns.use_case.2'
+		],
+		sampleInput: 'id,name,age\n1,Alice,30\n2,Bob,25\n3,Carol,27'
+	},
+	{
+		id: 'csv-deduplicate',
+		category: 'csv',
+		slug: 'deduplicate',
+		displayName: 'tool.csv-deduplicate.display_name',
+		tagline: 'tool.csv-deduplicate.tagline',
+		description: 'tool.csv-deduplicate.description',
+		primaryKeyword: 'tool.csv-deduplicate.primary_keyword',
+		metaTitle: 'tool.csv-deduplicate.meta_title',
+		metaDescription: 'tool.csv-deduplicate.meta_description',
+		engine: 'csv',
+		operation: 'tool.csv-deduplicate.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'csv',
+		outputLanguage: 'csv',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'csv', slug: 'columns' },
+			{ category: 'csv', slug: 'formatter' },
+			{ category: 'csv', slug: 'validator' }
+		],
+		faqs: [
+			{
+				question: 'tool.csv-deduplicate.faq.0.question',
+				answer: 'tool.csv-deduplicate.faq.0.answer'
+			},
+			{
+				question: 'tool.csv-deduplicate.faq.1.question',
+				answer: 'tool.csv-deduplicate.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.csv-deduplicate.use_case.0',
+			'tool.csv-deduplicate.use_case.1',
+			'tool.csv-deduplicate.use_case.2'
+		],
+		sampleInput: 'id,email\n1,a@example.com\n2,b@example.com\n1,a@example.com'
 	}
 ];

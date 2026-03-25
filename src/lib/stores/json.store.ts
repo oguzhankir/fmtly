@@ -24,20 +24,26 @@ import {
 	type JsonFlattenOptions,
 	type JsonPatchMode,
 	type JsonPatchOptions,
+	type NdjsonEntry,
+	type NdjsonParseResult,
 	applyJsonPatch,
 	flattenJson,
 	format as formatAdvancedJson,
 	generateJsonPatch,
 	generateJsonSchema,
 	minify as minifyAdvancedJson,
+	parseNdjson,
 	toGoStructs,
 	toMarkdownTable,
 	toRustSerdeStructs,
 	toToml,
 	toTypeScriptTypes,
 	toYaml,
+	toZodSchema,
 	unflattenJson
 } from '$engines/json/json.engine.js';
+import type { ProtobufMessageTypeInfo } from '$engines/json/protobuf.engine.js';
+import { getProtobufMessageTypes, protobufToSampleJson } from '$engines/json/protobuf.engine.js';
 import { jsonToXML } from '$engines/xml/index.js';
 import { input } from '$stores/input.store';
 import { clearOutput, output } from '$stores/output.store';
@@ -70,6 +76,11 @@ export const jsonPatchOptions = writable<JsonPatchOptions>({
 	mode: 'generate',
 	operand: ''
 });
+
+export const jsonNdjsonEntries = writable<NdjsonEntry[]>([]);
+export const jsonProtobufMessageTypes = writable<ProtobufMessageTypeInfo[]>([]);
+export const jsonProtobufSelectedMessageType = writable<string>('');
+export const jsonProtobufError = writable<string | null>(null);
 
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 let parserInitialized = false;
@@ -126,6 +137,18 @@ async function ensureParser(): Promise<void> {
 
 export function initJSONStore(toolSlug: string): void {
 	activeJsonToolSlug = toolSlug;
+	jsonNdjsonEntries.set([]);
+	jsonProtobufMessageTypes.set([]);
+	jsonProtobufSelectedMessageType.set('');
+	jsonProtobufError.set(null);
+
+	jsonError.set(null);
+	jsonStats.set(null);
+	jsonAdvancedStats.set(null);
+	jsonTree.set([]);
+	jsonParsedData.set(null);
+	jsonFormatWarnings.set([]);
+	clearOutput();
 	unsubscribeInput?.();
 	unsubscribeInput = input.subscribe((value) => {
 		if (debounceTimer) clearTimeout(debounceTimer);
@@ -137,6 +160,10 @@ export function initJSONStore(toolSlug: string): void {
 			jsonTree.set([]);
 			jsonParsedData.set(null);
 			jsonFormatWarnings.set([]);
+			jsonNdjsonEntries.set([]);
+			jsonProtobufMessageTypes.set([]);
+			jsonProtobufSelectedMessageType.set('');
+			jsonProtobufError.set(null);
 			clearOutput();
 			return;
 		}
@@ -159,6 +186,30 @@ export function destroyJSONStore(): void {
 }
 
 async function processInput(value: string): Promise<void> {
+	if (activeJsonToolSlug === 'ndjson') {
+		await ensureParser();
+		jsonError.set(null);
+		jsonParsedData.set(null);
+		jsonStats.set(null);
+		jsonAdvancedStats.set(null);
+		jsonTree.set([]);
+		jsonFormatWarnings.set([]);
+		await applyToolOutput(value);
+		return;
+	}
+
+	if (activeJsonToolSlug === 'from-protobuf') {
+		jsonError.set(null);
+		jsonParsedData.set(null);
+		jsonStats.set(null);
+		jsonAdvancedStats.set(null);
+		jsonTree.set([]);
+		jsonFormatWarnings.set([]);
+		jsonNdjsonEntries.set([]);
+		await applyToolOutput(value);
+		return;
+	}
+
 	await ensureParser();
 
 	const result = parseJSON(value);
@@ -192,6 +243,15 @@ async function applyToolOutput(value: string): Promise<void> {
 			return;
 		case 'minifier':
 			applyMinifyOutput(value);
+			return;
+		case 'to-zod':
+			applyToZodOutput(value);
+			return;
+		case 'ndjson':
+			await applyNdjsonOutput(value);
+			return;
+		case 'from-protobuf':
+			await applyProtobufOutput(value);
 			return;
 		case 'to-yaml':
 			await applyYamlOutput(value);
@@ -327,6 +387,105 @@ function applySchemaOutput(value: string): void {
 		jsonFormatWarnings.set([
 			error instanceof Error ? error.message : 'Could not generate JSON Schema'
 		]);
+	}
+}
+
+function applyToZodOutput(value: string): void {
+	try {
+		output.set(toZodSchema(value));
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([
+			error instanceof Error ? error.message : 'Could not generate Zod schema'
+		]);
+	}
+}
+
+async function applyNdjsonOutput(value: string): Promise<void> {
+	jsonNdjsonEntries.set([]);
+	try {
+		const parsed: NdjsonParseResult = shouldUseWorker(value)
+			? ((await callJsonWorkerMethod('parseNdjson', [value, 2])) as NdjsonParseResult)
+			: parseNdjson(value, 2);
+
+		if (!parsed.success) {
+			clearOutput();
+			jsonAdvancedStats.set(null);
+			jsonFormatWarnings.set([]);
+			return;
+		}
+
+		jsonNdjsonEntries.set(parsed.entries);
+		output.set(formatNdjsonEntriesReport(parsed.entries, 2));
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([error instanceof Error ? error.message : 'Could not parse NDJSON']);
+	}
+}
+
+function formatNdjsonEntriesReport(entries: NdjsonEntry[], indentLevel: number): string {
+	const report = entries.map((entry) => {
+		if (entry.kind === 'value') {
+			return { line: entry.lineNumber, value: entry.value };
+		}
+
+		return {
+			line: entry.lineNumber,
+			error: {
+				message: entry.error.message,
+				column: entry.error.column,
+				plainLanguageExplanation: entry.error.plainLanguageExplanation
+			}
+		};
+	});
+
+	return JSON.stringify(report, null, indentLevel);
+}
+
+async function applyProtobufOutput(value: string): Promise<void> {
+	jsonProtobufError.set(null);
+	try {
+		const types = shouldUseWorker(value)
+			? ((await callJsonWorkerMethod('getProtobufMessageTypes', [
+					value
+				])) as ProtobufMessageTypeInfo[])
+			: await getProtobufMessageTypes(value);
+		jsonProtobufMessageTypes.set(types);
+
+		const currentSelected = get(jsonProtobufSelectedMessageType);
+		const nextSelected =
+			currentSelected && types.some((t) => t.fullName === currentSelected)
+				? currentSelected
+				: (types[0]?.fullName ?? '');
+
+		jsonProtobufSelectedMessageType.set(nextSelected);
+
+		if (!nextSelected) {
+			clearOutput();
+			jsonAdvancedStats.set(null);
+			jsonFormatWarnings.set([]);
+			return;
+		}
+
+		const sample = shouldUseWorker(value)
+			? ((await callJsonWorkerMethod('protobufToSampleJson', [value, nextSelected])) as string)
+			: await protobufToSampleJson(value, nextSelected);
+		output.set(sample);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
+	} catch (error) {
+		clearOutput();
+		jsonProtobufError.set(
+			error instanceof Error ? error.message : 'Could not parse Protobuf / generate sample JSON'
+		);
+		jsonAdvancedStats.set(null);
+		jsonFormatWarnings.set([]);
 	}
 }
 
@@ -582,6 +741,14 @@ export function setJsonPatchOptions(next: Partial<JsonPatchOptions>): void {
 		return;
 	}
 
+	void processInput(value);
+}
+
+export function setProtobufSelectedMessageType(next: string): void {
+	jsonProtobufSelectedMessageType.set(next);
+	if (activeJsonToolSlug !== 'from-protobuf') return;
+	const value = get(input);
+	if (!value.trim()) return;
 	void processInput(value);
 }
 

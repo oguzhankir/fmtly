@@ -3935,7 +3935,172 @@ const registryTr: Record<string, string> = {
 	'ui.pdf.merge.ready_title': 'Birleştirilmiş PDF hazır',
 	'ui.pdf.merge.ready_subtitle': 'Çıktı boyutu: {size}. merged.pdf olarak kaydedilir.',
 	'ui.pdf.merge.download_primary': 'Birleştirilmiş PDF’i indir',
-	'ui.pdf.merge.download_locked': 'Önce Birleştir’e basın — indirme düğmesi burada görünecek.'
+	'ui.pdf.merge.download_locked': 'Önce Birleştir’e basın — indirme düğmesi burada görünecek.',
+
+	// Missing keys from English
+	'tool.json-to-zod.display_name': 'JSON → Zod Şema',
+	'tool.json-to-zod.tagline': 'JSON örneğinden Zod şeması üret',
+	'tool.json-to-zod.description':
+		'Örnek JSON verisinden pratik bir Zod doğrulama şeması çıkarır. Runtime doğrulama ve tipli ayrıştırma için idealdir.',
+	'tool.json-to-zod.primary_keyword': 'json to zod',
+	'tool.json-to-zod.meta_title': 'JSON to Zod Şema Üretici — fmtly.dev',
+	'tool.json-to-zod.meta_description':
+		'JSON örneklerinden tarayıcıda anında Zod şeması üretin. Yükleme yok, sunucu yok, hızlı ve güvenli doğrulama başlangıcı.',
+	'tool.json-to-zod.operation': 'Üret',
+	'tool.json-to-zod.faq.0.question': 'Çıkan şema ne kadar doğru?',
+	'tool.json-to-zod.faq.0.answer':
+		'Şema örnek girdinin yapısını yansıtır. Daha iyi kapsama için daha temsilî örnekler ekleyin.',
+	'tool.json-to-zod.faq.1.question': 'Opsiyonel alanları işaretler mi?',
+	'tool.json-to-zod.faq.1.answer':
+		'Örneğin bazı kısımlarında bulunmayan alanlar opsiyonel olarak üretilebilir.',
+	'tool.json-to-zod.faq.2.question': 'Üretilen şemayı düzenleyebilir miyim?',
+	'tool.json-to-zod.faq.2.answer':
+		'Evet. Çıktı düz Zod kodudur; projene kopyalayıp özelleştirebilirsin.',
+	'tool.json-to-zod.use_case.0': 'API yanıt doğrulayıcılarını hızlı başlatmak',
+	'tool.json-to-zod.use_case.1': 'Tip güvenli ayrıştırma sınırları oluşturmak',
+	'tool.json-to-zod.use_case.2': 'Formlar için başlangıç şemaları üretmek',
+	'tool.json-to-zod.use_case.3': 'Runtime doğrulamaya geçişi hızlandırmak',
+	'tool.json-ndjson.display_name': 'JSON Lines (NDJSON) Görüntüleyici',
+	'tool.json-ndjson.tagline': 'NDJSON satırlarını ayrıştır ve formatlı incele',
+	'tool.json-ndjson.description':
+		'Satır bazlı JSON (NDJSON) verisini ayrıştırır, her kaydı satır numarasıyla gösterir. Hatalı satırları hızlıca bulmanı sağlar.',
+	'tool.json-ndjson.primary_keyword': 'ndjson viewer',
+	'tool.json-ndjson.meta_title': 'NDJSON Görüntüleyici & Formatlayıcı — fmtly.dev',
+	'tool.json-ndjson.meta_description':
+		'JSON Lines (NDJSON) verisini tarayıcıda ayrıştırın ve formatlayın. Satır bazlı kayıt ve hata görünümüyle anında inceleyin.',
+	'tool.json-ndjson.operation': 'Ayrıştır',
+	'tool.json-ndjson.faq.0.question': 'Hatalı satırlar olursa ne olur?',
+	'tool.json-ndjson.faq.0.answer':
+		'Hatalı satırlar satır numarasıyla raporlanır, geçerli satırlar yine de gösterilir.',
+	'tool.json-ndjson.faq.1.question': 'Çıktıyı dışa aktarabilir miyim?',
+	'tool.json-ndjson.faq.1.answer': 'Evet. Üretilen raporu kopyalayabilir veya indirebilirsin.',
+	'tool.json-ndjson.use_case.0': 'JSON Lines log akışlarını incelemek',
+	'tool.json-ndjson.use_case.1': 'Büyük NDJSON akışlarında bozuk satırları ayıklamak',
+	'tool.json-ndjson.use_case.2': 'Streaming JSON toplu çıktısını doğrulamak',
+	'tool.json-from-protobuf.display_name': 'Protocol Buffers → JSON',
+	'tool.json-from-protobuf.tagline': '.proto tanımlarından örnek JSON üret',
+	'tool.json-from-protobuf.description':
+		'Protocol Buffers şemalarını ayrıştırır, seçilen message türleri için örnek JSON payload üretir.',
+	'tool.json-from-protobuf.primary_keyword': 'protobuf to json',
+	'tool.json-from-protobuf.meta_title': 'Protobuf to JSON Örnek Üretici — fmtly.dev',
+	'tool.json-from-protobuf.meta_description':
+		'.proto dosyalarını parse edip message tipleri için JSON örnekleri üretin. Hızlı, gizli ve geliştirici dostu.',
+	'tool.json-from-protobuf.operation': 'Üret',
+	'tool.json-from-protobuf.faq.0.question': 'İç içe message tiplerini destekler mi?',
+	'tool.json-from-protobuf.faq.0.answer':
+		'Evet. İç içe ve referanslanan message tipleri çözülüp örneğe dahil edilir.',
+	'tool.json-from-protobuf.faq.1.question': 'Kök message tipini seçebilir miyim?',
+	'tool.json-from-protobuf.faq.1.answer':
+		'Evet. Açılır listeden bulunan message tiplerinden birini seçebilirsin.',
+	'tool.json-from-protobuf.faq.2.question': 'Proto dosyam sunucuya gider mi?',
+	'tool.json-from-protobuf.faq.2.answer':
+		'Hayır. Her şey tarayıcıda çalışır; şeman cihazdan çıkmaz.',
+	'tool.json-from-protobuf.use_case.0': 'Proto sözleşmelerinden API örnek payload üretmek',
+	'tool.json-from-protobuf.use_case.1': 'gRPC gateway için mock yanıt hazırlamak',
+	'tool.json-from-protobuf.use_case.2': 'Bilinmeyen protobuf modellerini hızlı anlamak',
+	'tool.yaml-resolve-anchors.display_name': 'YAML Anchor Çözücü',
+	'tool.yaml-resolve-anchors.tagline': 'YAML anchor ve alias değerlerini aç',
+	'tool.yaml-resolve-anchors.description':
+		'YAML anchor/alias yapılarını açık değerlere dönüştürür; çıktı referans içermez.',
+	'tool.yaml-resolve-anchors.primary_keyword': 'yaml anchor resolver',
+	'tool.yaml-resolve-anchors.meta_title': 'YAML Anchor Çözücü — fmtly.dev',
+	'tool.yaml-resolve-anchors.meta_description':
+		'YAML anchor ve alias yapılarını tarayıcıda anında genişletin. Merge/reference içermeyen açık YAML üretin.',
+	'tool.yaml-resolve-anchors.operation': 'Çöz',
+	'tool.yaml-resolve-anchors.faq.0.question': 'Merge key değerleri de açılır mı?',
+	'tool.yaml-resolve-anchors.faq.0.answer': 'Evet. Merge edilen değerler çıktıya doğrudan yazılır.',
+	'tool.yaml-resolve-anchors.faq.1.question': 'Belge düzeni korunur mu?',
+	'tool.yaml-resolve-anchors.faq.1.answer':
+		'Mantıksal yapı korunur; alias/reference kullanımı kaldırılır.',
+	'tool.yaml-resolve-anchors.use_case.0': 'Anchor desteklemeyen sistemler için config hazırlamak',
+	'tool.yaml-resolve-anchors.use_case.1': 'Karmaşık YAML’da miras değerleri hata ayıklamak',
+	'tool.yaml-resolve-anchors.use_case.2': 'Açık deployment manifest üretmek',
+	'tool.yaml-resolve-anchors.use_case.3': 'Diff/review öncesi YAML normalleştirmek',
+	'tool.yaml-split.display_name': 'YAML Çoklu Belge Bölücü',
+	'tool.yaml-split.tagline': 'Çoklu YAML dosyasını ayrı belgelere böl',
+	'tool.yaml-split.description':
+		'`---` içeren çoklu YAML dosyalarını ayrı belgelere böler ve tutarlı çıktı üretir.',
+	'tool.yaml-split.primary_keyword': 'yaml split',
+	'tool.yaml-split.meta_title': 'YAML Çoklu Belge Bölücü — fmtly.dev',
+	'tool.yaml-split.meta_description':
+		'Çoklu belge YAML dosyalarını tarayıcıda ayrı belgelere bölün. Kubernetes ve CI akışları için idealdir.',
+	'tool.yaml-split.operation': 'Böl',
+	'tool.yaml-split.faq.0.question': 'Yorumlar korunur mu?',
+	'tool.yaml-split.faq.0.answer':
+		'Araç yapısal doğruluğa odaklanır; yorumlar/biçim kısmen normalize olabilir.',
+	'tool.yaml-split.faq.1.question': 'Tek belgeli YAML’ı işler mi?',
+	'tool.yaml-split.faq.1.answer': 'Evet. Tek belgeyi tutarlı biçimde çıktılar.',
+	'tool.yaml-split.use_case.0': 'Kubernetes kaynaklarını belge belge ayırmak',
+	'tool.yaml-split.use_case.1': 'Uzun config paketlerini parça parça incelemek',
+	'tool.yaml-split.use_case.2': 'CI’da belge bazlı işleme hazırlamak',
+	'tool.xml-xsd-validate.display_name': 'XSD Doğrulayıcı',
+	'tool.xml-xsd-validate.tagline': 'XML’i XSD şemasına göre doğrula',
+	'tool.xml-xsd-validate.description':
+		'XML içeriklerini XSD ile doğrular; mümkün olduğunda satır/sütun bilgili yapılandırılmış hata çıktısı verir.',
+	'tool.xml-xsd-validate.primary_keyword': 'xml xsd validator',
+	'tool.xml-xsd-validate.meta_title': 'XML XSD Doğrulayıcı — fmtly.dev',
+	'tool.xml-xsd-validate.meta_description':
+		'XML’i XSD’ye karşı tarayıcıda doğrulayın. Geçerli/geçersiz sonucu ve detaylı hata listesini anında görün.',
+	'tool.xml-xsd-validate.operation': 'Doğrula',
+	'tool.xml-xsd-validate.faq.0.question': 'Hem XML hem XSD gerekli mi?',
+	'tool.xml-xsd-validate.faq.0.answer':
+		'Evet. Doğrulama için XML belgesi ve XSD şemasını birlikte girmeniz gerekir.',
+	'tool.xml-xsd-validate.faq.1.question': 'Satır ve sütun bilgisi gösterilir mi?',
+	'tool.xml-xsd-validate.faq.1.answer':
+		'Doğrulayıcı sağlıyorsa satır/sütun bilgisi sonuçta gösterilir.',
+	'tool.xml-xsd-validate.use_case.0': 'Entegrasyon testlerinden önce XML payload doğrulamak',
+	'tool.xml-xsd-validate.use_case.1': 'ETL süreçlerinde şema ihlallerini yakalamak',
+	'tool.xml-xsd-validate.use_case.2': 'Tedarikçi XML akışlarını hızlı kontrol etmek',
+	'tool.csv-columns.display_name': 'CSV Sütun Sırala / Kaldır',
+	'tool.csv-columns.tagline': 'CSV sütunlarını sırala, yeniden adlandır, kaldır',
+	'tool.csv-columns.description':
+		'CSV sütun düzenini hedef sisteme uygun hale getirmek için seçme, sıralama ve ad değiştirme işlemleri yapar.',
+	'tool.csv-columns.primary_keyword': 'csv column reorder',
+	'tool.csv-columns.meta_title': 'CSV Sütun Sıralama & Kaldırma — fmtly.dev',
+	'tool.csv-columns.meta_description':
+		'CSV sütunlarını tarayıcıda yeniden sıralayın, adlandırın ve kaldırın. Ayraç ve tırnaklama davranışını koruyun.',
+	'tool.csv-columns.operation': 'Dönüştür',
+	'tool.csv-columns.faq.0.question': 'Sadece seçili sütunları bırakabilir miyim?',
+	'tool.csv-columns.faq.0.answer':
+		'Evet. Hedef sütun listesini tanımlayıp diğerlerini çıkarabilirsiniz.',
+	'tool.csv-columns.faq.1.question': 'Sıralarken sütun adını da değiştirebilir miyim?',
+	'tool.csv-columns.faq.1.answer':
+		'Evet. Her kaynak sütunu yeni bir çıktı başlığına eşleyebilirsiniz.',
+	'tool.csv-columns.use_case.0': 'Üçüncü parti importlar için CSV hazırlamak',
+	'tool.csv-columns.use_case.1': 'Paylaşım öncesi hassas alanları kaldırmak',
+	'tool.csv-columns.use_case.2': 'Sistemler arası sütun düzenini normalleştirmek',
+	'tool.csv-deduplicate.display_name': 'CSV Tekilleştirici',
+	'tool.csv-deduplicate.tagline': 'Anahtar sütunlara göre tekrar eden satırları kaldır',
+	'tool.csv-deduplicate.description':
+		'Bir veya daha fazla anahtar sütuna göre tekrar eden CSV satırlarını kaldırır, ilk görülen satırı korur.',
+	'tool.csv-deduplicate.primary_keyword': 'csv deduplicate',
+	'tool.csv-deduplicate.meta_title': 'CSV Tekilleştirici — fmtly.dev',
+	'tool.csv-deduplicate.meta_description':
+		'Anahtar sütun seçerek tekrar eden CSV satırlarını kaldırın. İlk kaydı koruyup temiz çıktı alın.',
+	'tool.csv-deduplicate.operation': 'Tekilleştir',
+	'tool.csv-deduplicate.faq.0.question': 'Tekrarlar nasıl belirleniyor?',
+	'tool.csv-deduplicate.faq.0.answer':
+		'Seçilen anahtar sütun değerleri birebir aynıysa satırlar tekrar kabul edilir.',
+	'tool.csv-deduplicate.faq.1.question': 'Hangi satır korunur?',
+	'tool.csv-deduplicate.faq.1.answer':
+		'Her benzersiz anahtar için ilk görülen satır korunur; girdi sırası bozulmaz.',
+	'tool.csv-deduplicate.use_case.0': 'Import öncesi müşteri listelerini temizlemek',
+	'tool.csv-deduplicate.use_case.1': 'Analitik CSV’lerinde mükerrer eventleri kaldırmak',
+	'tool.csv-deduplicate.use_case.2': 'Birleşik kaynak verilerini normalize etmek',
+	'tool.ndjson.entries_title': 'NDJSON kayıtları',
+	'tool.json-from-protobuf.message_type': 'Mesaj türü',
+	'tool.json-from-protobuf.select_message_type': 'Bir mesaj türü seçin',
+	'tool.xml-xsd-validate.xml_label': 'XML',
+	'tool.xml-xsd-validate.xsd_label': 'XSD',
+	'tool.xml-xsd-validate.result_title': 'Doğrulama sonucu',
+	'tool.xml-xsd-validate.empty_hint': 'Doğrulamak için hem XML hem XSD girin.',
+	'tool.xml-xsd-validate.xml_well_formed_error': 'XML iyi biçimlendirilmiş değil',
+	'tool.xml-xsd-validate.valid': 'XML, XSD ile uyumlu',
+	'tool.xml-xsd-validate.invalid': 'XML, XSD ile uyumlu değil',
+	'tool.xml-xsd-validate.warnings': '{count} uyarı',
+	'tool.xml-xsd-validate.errors_title': 'Hatalar',
+	'tool.xml-xsd-validate.warnings_title': 'Uyarılar',
+	'tool.xml-xsd-validate.waiting_hint': 'Doğrulama için XSD şeması girin.'
 };
 
 export default registryTr;

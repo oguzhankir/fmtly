@@ -30,3 +30,6 @@ const SIZE_THRESHOLD = 500 * 1024;
 export function shouldUseWorker(input: string): boolean {
 	return new TextEncoder().encode(input).length > SIZE_THRESHOLD;
 }
+
+export { formatNdjsonReport, parseNdjson, toZodSchema } from './json.engine.js';
+export { getProtobufMessageTypes, protobufToSampleJson } from './protobuf.engine.js';

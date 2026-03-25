@@ -413,5 +413,94 @@ logging:
   bicycle:
     color: red
     price: 19.95`
+	},
+	{
+		id: 'yaml-resolve-anchors',
+		category: 'yaml',
+		slug: 'resolve-anchors',
+		displayName: 'tool.yaml-resolve-anchors.display_name',
+		tagline: 'tool.yaml-resolve-anchors.tagline',
+		description: 'tool.yaml-resolve-anchors.description',
+		primaryKeyword: 'tool.yaml-resolve-anchors.primary_keyword',
+		metaTitle: 'tool.yaml-resolve-anchors.meta_title',
+		metaDescription: 'tool.yaml-resolve-anchors.meta_description',
+		engine: 'yaml',
+		operation: 'tool.yaml-resolve-anchors.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'yaml',
+		outputLanguage: 'yaml',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'yaml', slug: 'minifier' },
+			{ category: 'yaml', slug: 'split' }
+		],
+		faqs: [
+			{
+				question: 'tool.yaml-resolve-anchors.faq.0.question',
+				answer: 'tool.yaml-resolve-anchors.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-resolve-anchors.faq.1.question',
+				answer: 'tool.yaml-resolve-anchors.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-resolve-anchors.use_case.0',
+			'tool.yaml-resolve-anchors.use_case.1',
+			'tool.yaml-resolve-anchors.use_case.2',
+			'tool.yaml-resolve-anchors.use_case.3'
+		],
+		sampleInput: `defaults: &defaults
+  adapter: postgres
+  host: localhost
+  port: 5432
+
+dev:
+  <<: *defaults
+  host: 127.0.0.1
+`
+	},
+	{
+		id: 'yaml-split',
+		category: 'yaml',
+		slug: 'split',
+		displayName: 'tool.yaml-split.display_name',
+		tagline: 'tool.yaml-split.tagline',
+		description: 'tool.yaml-split.description',
+		primaryKeyword: 'tool.yaml-split.primary_keyword',
+		metaTitle: 'tool.yaml-split.meta_title',
+		metaDescription: 'tool.yaml-split.meta_description',
+		engine: 'yaml',
+		operation: 'tool.yaml-split.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'yaml',
+		outputLanguage: 'yaml',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'yaml', slug: 'formatter' },
+			{ category: 'yaml', slug: 'resolve-anchors' },
+			{ category: 'yaml', slug: 'minifier' }
+		],
+		faqs: [
+			{
+				question: 'tool.yaml-split.faq.0.question',
+				answer: 'tool.yaml-split.faq.0.answer'
+			},
+			{
+				question: 'tool.yaml-split.faq.1.question',
+				answer: 'tool.yaml-split.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.yaml-split.use_case.0',
+			'tool.yaml-split.use_case.1',
+			'tool.yaml-split.use_case.2'
+		],
+		sampleInput: `name: fmtly
+version: "1.0.0"
+---
+name: fmtly-cli
+version: "1.0.0"`
 	}
 ];

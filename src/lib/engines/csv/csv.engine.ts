@@ -1,5 +1,7 @@
 import type { EngineParseError } from '$engines/types.js';
 
+import { loadPapaParse } from './load-papa-parse.js';
+
 export type CSVProcessingOptions = {
 	delimiter?: string;
 	headerRow?: boolean;
@@ -8,14 +10,8 @@ export type CSVProcessingOptions = {
 	quoteAll?: boolean;
 };
 
-type PapaParseModule = typeof import('papaparse');
-
 type CsvArrayRow = unknown[];
 type CsvObjectRow = Record<string, unknown>;
-
-async function loadPapaParse(): Promise<PapaParseModule> {
-	return await import('papaparse');
-}
 
 function toEngineParseError(message: string, row?: number): EngineParseError {
 	return {
@@ -318,4 +314,135 @@ export async function validate(
 	}
 
 	return { valid: true };
+}
+
+export type CsvColumnsOperation = {
+	from: string;
+	to: string;
+};
+
+export type CsvColumnsOptions = CSVProcessingOptions & {
+	operations: CsvColumnsOperation[];
+};
+
+export type CsvDeduplicateOptions = CSVProcessingOptions & {
+	keyColumns: string[];
+};
+
+type ParsedCsvTable = {
+	headerRow: boolean;
+	delimiter: string;
+	headers: string[];
+	rows: string[][];
+};
+
+async function parseCsvTable(csv: string, options: CSVProcessingOptions): Promise<ParsedCsvTable> {
+	const normalized = getNormalizedOptions(options);
+	const Papa = await loadPapaParse();
+
+	const parsed = Papa.parse(csv, {
+		header: false,
+		skipEmptyLines: normalized.skipEmptyLines,
+		delimiter: normalized.delimiter
+	});
+
+	if (parsed.errors.length > 0) {
+		const first = parsed.errors[0];
+		throw new Error(first.message);
+	}
+
+	const rawRows = normalizeArrayRows(parsed.data as unknown[], normalized.trimCells);
+	const maxColumns = rawRows.reduce<number>((max, row) => Math.max(max, row.length), 0);
+	const paddedRows = rawRows.map((row) =>
+		Array.from({ length: maxColumns }, (_, index) => String(row[index] ?? ''))
+	);
+
+	if (paddedRows.length === 0) {
+		return {
+			headerRow: normalized.headerRow,
+			delimiter: normalized.delimiter,
+			headers: [],
+			rows: []
+		};
+	}
+
+	if (normalized.headerRow) {
+		const headers = paddedRows[0].map((cell) => String(cell ?? ''));
+		const rows = paddedRows.slice(1);
+		return { headerRow: true, delimiter: normalized.delimiter, headers, rows };
+	}
+
+	const headers = Array.from({ length: maxColumns }, (_, index) => buildColumnName(index));
+	return { headerRow: false, delimiter: normalized.delimiter, headers, rows: paddedRows };
+}
+
+function findColumnIndex(headers: string[], name: string): number {
+	const index = headers.indexOf(name);
+	if (index === -1) {
+		throw new Error(`CSV column not found: ${name}`);
+	}
+	return index;
+}
+
+export async function reorderRenameDropColumns(
+	csv: string,
+	options: CsvColumnsOptions
+): Promise<string> {
+	const normalized = getNormalizedOptions(options);
+	const table = await parseCsvTable(csv, options);
+	if (table.headers.length === 0 && table.rows.length === 0) return '';
+
+	const operations = options.operations ?? [];
+	if (operations.length === 0) {
+		throw new Error('No column operations configured');
+	}
+
+	const indices = operations.map((op) => findColumnIndex(table.headers, op.from));
+	const outputColumns = operations.map((op) => op.to);
+	const outputRows = table.rows.map((row) => indices.map((i) => row[i] ?? ''));
+
+	const outputTable = table.headerRow ? [outputColumns, ...outputRows] : outputRows;
+
+	const Papa = await loadPapaParse();
+	return Papa.unparse(outputTable, {
+		quotes: normalized.quoteAll,
+		quoteChar: '"',
+		escapeChar: '"',
+		delimiter: normalized.delimiter
+	});
+}
+
+export async function deduplicateCsvRows(
+	csv: string,
+	options: CsvDeduplicateOptions
+): Promise<string> {
+	const normalized = getNormalizedOptions(options);
+	const table = await parseCsvTable(csv, options);
+	if (table.headers.length === 0 && table.rows.length === 0) return '';
+
+	const keyColumns = options.keyColumns ?? [];
+	if (keyColumns.length === 0) {
+		throw new Error('No key columns configured');
+	}
+
+	const keyIndices = keyColumns.map((col) => findColumnIndex(table.headers, col));
+	const seen = new Set<string>();
+
+	const dedupRows: string[][] = [];
+	for (const row of table.rows) {
+		const key = keyIndices.map((i) => row[i] ?? '').join('\u0000');
+		if (seen.has(key)) continue;
+		seen.add(key);
+		dedupRows.push(row);
+	}
+
+	const outputTable = table.headerRow ? [table.headers, ...dedupRows] : dedupRows;
+
+	const Papa = await loadPapaParse();
+	return Papa.unparse(outputTable, {
+		quotes: normalized.quoteAll,
+		quoteChar: '"',
+		escapeChar: '"',
+		delimiter: normalized.delimiter
+	});
 }

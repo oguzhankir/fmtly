@@ -14,10 +14,13 @@
 	import JsonOutputPanel from "$components/panels/json/JsonOutputPanel.svelte";
 	import JsonQueryOutputPanel from "$components/panels/json/JsonQueryOutputPanel.svelte";
 	import JsonValidatorPanel from "$components/panels/json/JsonValidatorPanel.svelte";
+	import JsonNdjsonPanel from "$components/panels/json/JsonNdjsonPanel.svelte";
+	import ProtobufToJsonPanel from "$components/panels/json/ProtobufToJsonPanel.svelte";
 	import WorkspaceTabs from "$components/tool/WorkspaceTabs.svelte";
 	import XmlInputPanel from "$components/panels/xml/XmlInputPanel.svelte";
 	import XmlOutputPanel from "$components/panels/xml/XmlOutputPanel.svelte";
 	import XmlValidatorPanel from "$components/panels/xml/XmlValidatorPanel.svelte";
+	import XsdValidatePanel from "$components/panels/xml/XsdValidatePanel.svelte";
 	import XmlQueryOutputPanel from "$components/panels/xml/XmlQueryOutputPanel.svelte";
 	import CsvValidatorPanel from "$components/panels/csv/CsvValidatorPanel.svelte";
 	import CsvOutputPanel from "$components/panels/csv/CsvOutputPanel.svelte";
@@ -707,7 +710,13 @@
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
-			{#if data.tool.category === "xml" && data.tool.slug === "validator"}
+		{#if data.tool.category === "json" && data.tool.slug === "ndjson"}
+			<div class="hidden"></div>
+		{:else if data.tool.category === "json" && data.tool.slug === "from-protobuf"}
+			<div class="hidden"></div>
+		{:else if data.tool.category === "xml" && data.tool.slug === "xsd-validate"}
+			<div class="hidden"></div>
+		{:else if data.tool.category === "xml" && data.tool.slug === "validator"}
 				<XmlValidatorPanel toolSlug={data.tool.slug} workspaceTools={[]} />
 			{:else if data.tool.category === "xml" && data.tool.slug !== "validator"}
 				<XmlInputPanel
@@ -898,6 +907,22 @@
 						downloadFilename={data.tool.id}
 					/>
 				{/if}
+			{:else if data.tool.category === "json" && data.tool.slug === "ndjson"}
+				<JsonNdjsonPanel
+					toolSlug={data.tool.slug}
+					inputLanguage={data.tool.inputLanguage}
+					sampleInput={data.tool.sampleInput ?? ""}
+					downloadFilename={data.tool.id}
+				/>
+			{:else if data.tool.category === "json" && data.tool.slug === "from-protobuf"}
+				<ProtobufToJsonPanel
+					toolSlug={data.tool.slug}
+					inputLanguage={data.tool.inputLanguage}
+					sampleInput={data.tool.sampleInput ?? ""}
+					downloadFilename={data.tool.id}
+				/>
+			{:else if data.tool.category === "xml" && data.tool.slug === "xsd-validate"}
+				<XsdValidatePanel toolSlug={data.tool.slug} downloadFilename={data.tool.id} />
 			{/if}
 		{/snippet}
 		{#snippet treePanel()}

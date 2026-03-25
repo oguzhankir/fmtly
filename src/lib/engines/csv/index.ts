@@ -1,5 +1,7 @@
 import type { ConvertResult, ParseResult } from '../types.js';
 
+import { loadPapaParse } from './load-papa-parse.js';
+
 export type CSVParseOptions = {
 	headers: boolean;
 	delimiter?: string;
@@ -12,12 +14,6 @@ export type CSVReadOptions = {
 	skipEmptyLines?: boolean;
 	trimCells?: boolean;
 };
-
-type PapaParseModule = typeof import('papaparse');
-
-async function loadPapaParse(): Promise<PapaParseModule> {
-	return await import('papaparse');
-}
 
 function toError(message: string, row?: number): ParseResult | ConvertResult {
 	return {

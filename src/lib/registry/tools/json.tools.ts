@@ -890,5 +890,148 @@ export const jsonTools: ToolDefinition[] = [
 			'tool.json-diff.use_case.3'
 		],
 		sampleInput: ''
+	},
+	{
+		id: 'json-to-zod',
+		category: 'json',
+		slug: 'to-zod',
+		displayName: 'tool.json-to-zod.display_name',
+		tagline: 'tool.json-to-zod.tagline',
+		description: 'tool.json-to-zod.description',
+		primaryKeyword: 'tool.json-to-zod.primary_keyword',
+		metaTitle: 'tool.json-to-zod.meta_title',
+		metaDescription: 'tool.json-to-zod.meta_description',
+		engine: 'json',
+		operation: 'tool.json-to-zod.operation',
+		layoutVariant: 'split',
+		inputLanguage: 'json',
+		outputLanguage: 'typescript',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'schema-validate' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-to-zod.faq.0.question',
+				answer: 'tool.json-to-zod.faq.0.answer'
+			},
+			{
+				question: 'tool.json-to-zod.faq.1.question',
+				answer: 'tool.json-to-zod.faq.1.answer'
+			},
+			{
+				question: 'tool.json-to-zod.faq.2.question',
+				answer: 'tool.json-to-zod.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-to-zod.use_case.0',
+			'tool.json-to-zod.use_case.1',
+			'tool.json-to-zod.use_case.2',
+			'tool.json-to-zod.use_case.3'
+		],
+		sampleInput: `{
+  "id": "user_1",
+  "age": 30,
+  "active": true,
+  "tags": ["beta", "early_access"]
+}`
+	},
+	{
+		id: 'json-ndjson',
+		category: 'json',
+		slug: 'ndjson',
+		displayName: 'tool.json-ndjson.display_name',
+		tagline: 'tool.json-ndjson.tagline',
+		description: 'tool.json-ndjson.description',
+		primaryKeyword: 'tool.json-ndjson.primary_keyword',
+		metaTitle: 'tool.json-ndjson.meta_title',
+		metaDescription: 'tool.json-ndjson.meta_description',
+		engine: 'json',
+		operation: 'tool.json-ndjson.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'json',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'validator' },
+			{ category: 'json', slug: 'schema-generator' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-ndjson.faq.0.question',
+				answer: 'tool.json-ndjson.faq.0.answer'
+			},
+			{
+				question: 'tool.json-ndjson.faq.1.question',
+				answer: 'tool.json-ndjson.faq.1.answer'
+			}
+		],
+		useCases: [
+			'tool.json-ndjson.use_case.0',
+			'tool.json-ndjson.use_case.1',
+			'tool.json-ndjson.use_case.2'
+		],
+		sampleInput: `{"id":1,"name":"Alice"}
+{"id":2,"name":"Bob"}
+{"id":3,"name":"Carol"}`
+	},
+	{
+		id: 'json-from-protobuf',
+		category: 'json',
+		slug: 'from-protobuf',
+		displayName: 'tool.json-from-protobuf.display_name',
+		tagline: 'tool.json-from-protobuf.tagline',
+		description: 'tool.json-from-protobuf.description',
+		primaryKeyword: 'tool.json-from-protobuf.primary_keyword',
+		metaTitle: 'tool.json-from-protobuf.meta_title',
+		metaDescription: 'tool.json-from-protobuf.meta_description',
+		engine: 'json',
+		operation: 'tool.json-from-protobuf.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'proto',
+		outputLanguage: 'json',
+		hasTreeView: false,
+		relatedTools: [
+			{ category: 'json', slug: 'formatter' },
+			{ category: 'json', slug: 'schema-generator' },
+			{ category: 'json', slug: 'validator' }
+		],
+		faqs: [
+			{
+				question: 'tool.json-from-protobuf.faq.0.question',
+				answer: 'tool.json-from-protobuf.faq.0.answer'
+			},
+			{
+				question: 'tool.json-from-protobuf.faq.1.question',
+				answer: 'tool.json-from-protobuf.faq.1.answer'
+			},
+			{
+				question: 'tool.json-from-protobuf.faq.2.question',
+				answer: 'tool.json-from-protobuf.faq.2.answer'
+			}
+		],
+		useCases: [
+			'tool.json-from-protobuf.use_case.0',
+			'tool.json-from-protobuf.use_case.1',
+			'tool.json-from-protobuf.use_case.2'
+		],
+		sampleInput: `syntax = "proto3";
+
+package demo;
+
+message User {
+  string id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message Project {
+  string key = 1;
+  repeated string tags = 2;
+}`
 	}
 ];
