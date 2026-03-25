@@ -5,7 +5,11 @@ export type PapaParseModule = typeof PapaTypes;
 function resolvePapaInstance(mod: unknown): PapaParseModule | null {
 	let cur: unknown = mod;
 	for (let depth = 0; depth < 6; depth++) {
-		if (cur !== null && typeof cur === 'object' && typeof (cur as { parse?: unknown }).parse === 'function') {
+		if (
+			cur !== null &&
+			typeof cur === 'object' &&
+			typeof (cur as { parse?: unknown }).parse === 'function'
+		) {
 			return cur as PapaParseModule;
 		}
 		if (cur !== null && typeof cur === 'object' && 'default' in (cur as object)) {
