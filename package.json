@@ -68,7 +68,7 @@
 		"marked": "^17.0.4",
 		"papaparse": "^5.5.3",
 		"pdf-lib": "^1.17.1",
-		"pdfjs-dist": "^5.5.207",
+		"pdfjs-dist": "^5.6.205",
 		"protobufjs": "^8.0.0",
 		"punycode": "^2.3.1",
 		"qrcode": "^1.5.4",
