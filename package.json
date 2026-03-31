@@ -48,7 +48,7 @@
 		"@faker-js/faker": "^10.4.0",
 		"@monaco-editor/loader": "^1.7.0",
 		"@noble/hashes": "^2.0.1",
-		"@peculiar/x509": "^1.14.3",
+		"@peculiar/x509": "^2.0.0",
 		"@tanstack/svelte-virtual": "^3.13.23",
 		"ajv": "^8.18.0",
 		"ajv-formats": "^3.0.1",
