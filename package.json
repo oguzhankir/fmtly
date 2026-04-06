@@ -20,7 +20,7 @@
 		"@biomejs/biome": "^1.9.4",
 		"@lhci/cli": "^0.15.1",
 		"@napi-rs/canvas": "^0.1.97",
-		"@playwright/test": "^1.58.2",
+		"@playwright/test": "^1.59.1",
 		"@sveltejs/adapter-cloudflare": "^7.2.8",
 		"@sveltejs/kit": "^2.55.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
@@ -33,7 +33,7 @@
 		"@types/papaparse": "^5.5.2",
 		"@types/uuid": "^11.0.0",
 		"@types/zxcvbn": "^4.4.5",
-		"happy-dom": "^20.8.4",
+		"happy-dom": "^20.8.9",
 		"jsdom": "^29.0.0",
 		"monaco-editor": "^0.55.1",
 		"svelte": "^5.55.1",
@@ -42,7 +42,7 @@
 		"tsx": "^4.21.0",
 		"typescript": "~5.9.3",
 		"vite": "^6.0.0",
-		"vitest": "^4.1.0"
+		"vitest": "^4.1.2"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^10.4.0",
