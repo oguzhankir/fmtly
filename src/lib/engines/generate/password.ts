@@ -28,6 +28,9 @@ function buildCharset(options: PasswordGeneratorOptions): string {
 			charset = charset.split(ch).join('');
 		}
 	}
+	if (options.separatorEvery > 0) {
+		charset = charset.replaceAll('-', '');
+	}
 	return charset;
 }
 

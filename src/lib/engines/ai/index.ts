@@ -1,0 +1,23 @@
+export {
+	AI_TOKEN_WORKER_THRESHOLD_BYTES,
+	MODEL_PROFILES,
+	PROMPT_OPTIMIZER_DEFAULT_TEXT,
+	PROMPT_OPTIMIZER_WORKER_THRESHOLD_BYTES,
+	TOKEN_COUNTER_DEFAULT_TEXT,
+	analyzeAiTokens,
+	getModelProfile,
+	optimizePrompt,
+	shouldUseAiTokenWorker,
+	shouldUsePromptOptimizerWorker,
+	type AiModelId,
+	type AiModelProfile,
+	type AiTokenCounterResult,
+	type AiTokenCounterWorkerRequest,
+	type AiTokenCounterWorkerResponse,
+	type AiTokenizerAccuracy,
+	type PromptOptimizationChange,
+	type PromptOptimizationOptions,
+	type PromptOptimizationResult,
+	type PromptOptimizerWorkerRequest,
+	type PromptOptimizerWorkerResponse
+} from './ai.engine.js';

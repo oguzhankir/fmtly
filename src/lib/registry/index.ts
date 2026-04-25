@@ -1,3 +1,4 @@
+import { aiTools } from './tools/ai.tools.js';
 import { cryptoTools } from './tools/crypto.tools.js';
 import { csvTools } from './tools/csv.tools.js';
 import { encodeTools } from './tools/encode.tools.js';
@@ -21,6 +22,7 @@ const allTools: ToolDefinition[] = [
 	...encodeTools,
 	...qrTools,
 	...cryptoTools,
+	...aiTools,
 	...generateTools,
 	...pdfTools
 ];

@@ -158,8 +158,8 @@ Purpose-built for developers working with large language models, prompt engineer
 
 | 104 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 105 | LLM Token Counter | `ai/token-counter` | Count tokens for GPT-4o, Claude, Llama 3, Gemini, and Mistral. Paste text or upload files. Show token-per-word ratio and cost estimate. |
-| 106 | Prompt Token Optimizer | `ai/token-optimizer` | Shorten a prompt while preserving meaning — strip filler words, compress whitespace, abbreviate known patterns. Show before/after token count and savings percentage. |
+| 105 | LLM Token Counter ✅ | `ai/token-counter` | done — Count GPT-4o tokens with an on-demand tokenizer, estimate Claude/Llama/Gemini/Mistral usage, compare token-per-word ratio and input cost, and offload large inputs to a Web Worker. |
+| 106 | Prompt Token Optimizer ✅ | `ai/token-optimizer` | done — Shorten prompts while preserving intent with filler removal, whitespace compression, Markdown cleanup, optional abbreviations, before/after token counts, savings percentage, and Web Worker support. |
 | 107 | System Prompt Builder | `ai/system-prompt` | Guided wizard to compose effective system prompts. Templates for code assistant, data analyst, translator, customer support. Export as plain text or JSON message array. |
 | 108 | Function Calling Schema Builder | `ai/function-schema` | Visually build OpenAI-compatible function/tool schemas. Drag-and-drop parameter builder, type picker, enum editor. Export as JSON. |
 | 109 | MCP Server Manifest Generator | `ai/mcp-manifest` | Generate Model Context Protocol server manifests. Define tools, resources, and prompts with a form-based UI. Export valid MCP JSON. |

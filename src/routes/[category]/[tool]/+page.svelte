@@ -71,6 +71,8 @@
 	import PdfSplitPanel from "$components/panels/pdf/PdfSplitPanel.svelte";
 	import PdfExtractPagesPanel from "$components/panels/pdf/PdfExtractPagesPanel.svelte";
 	import PdfMetadataPanel from "$components/panels/pdf/PdfMetadataPanel.svelte";
+	import AiTokenCounterPanel from "$components/panels/ai/AiTokenCounterPanel.svelte";
+	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -181,6 +183,11 @@
 	let pdfWorkspaceTools = $derived(
 		data.tool.category === "pdf"
 			? localizeToolDefinitions(getToolsByCategory("pdf"), $t)
+			: []
+	);
+	let aiWorkspaceTools = $derived(
+		data.tool.category === "ai"
+			? localizeToolDefinitions(getToolsByCategory("ai"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -609,7 +616,15 @@
 
 <SeoHead metadata={seo} />
 
-{#if data.tool.category === "text" && data.tool.slug === "diff"}
+{#if data.tool.category === "ai" && (data.tool.slug === "token-counter" || data.tool.slug === "token-optimizer")}
+	<div class="w-full overflow-hidden" style="height: calc(100vh - var(--header-height));">
+		{#if data.tool.slug === "token-counter"}
+			<AiTokenCounterPanel toolSlug={data.tool.slug} workspaceTools={aiWorkspaceTools} />
+		{:else}
+			<PromptTokenOptimizerPanel toolSlug={data.tool.slug} workspaceTools={aiWorkspaceTools} />
+		{/if}
+	</div>
+{:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
 {:else if isDiffTool}
 	<ToolLayout tool={localizedTool}>

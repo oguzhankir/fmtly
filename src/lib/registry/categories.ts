@@ -61,6 +61,12 @@ const categoryMetaList: CategoryMeta[] = [
 		primaryKeyword: 'category.crypto.primary_keyword'
 	},
 	{
+		slug: 'ai',
+		displayName: 'category.ai.display_name',
+		description: 'category.ai.description',
+		primaryKeyword: 'category.ai.primary_keyword'
+	},
+	{
 		slug: 'generate',
 		displayName: 'category.generate.display_name',
 		description: 'category.generate.description',

@@ -24,10 +24,71 @@ const registryEn: Record<string, string> = {
 	'category.text.description':
 		'Count, analyze, and transform plain text. Measure words, characters, structure, and readability instantly in your browser.',
 	'category.text.primary_keyword': 'text tools',
+	'category.ai.display_name': 'AI',
+	'category.ai.description':
+		'Count AI tokens, estimate LLM costs, and compress prompts for GPT-4o, Claude, Llama, Gemini, and Mistral without uploading text.',
+	'category.ai.primary_keyword': 'ai tools',
 	'category.pdf.display_name': 'PDF',
 	'category.pdf.description':
 		'View, extract, merge, split, and inspect PDF files directly in your browser with zero uploads.',
 	'category.pdf.primary_keyword': 'pdf tools',
+	// ── AI tools ────────────────────────────────────────────────────────────
+	'tool.ai-token-counter.display_name': 'LLM Token Counter',
+	'tool.ai-token-counter.tagline': 'Count tokens and estimate input cost across leading LLMs',
+	'tool.ai-token-counter.description':
+		'Paste prompts, documents, or transcripts to count GPT-4o tokens exactly and estimate Claude, Llama 3, Gemini, and Mistral usage with cost and token-per-word metrics.',
+	'tool.ai-token-counter.primary_keyword': 'llm token counter',
+	'tool.ai-token-counter.meta_title': 'LLM Token Counter for GPT-4o & Claude — fmtly.dev',
+	'tool.ai-token-counter.meta_description':
+		'Count GPT-4o tokens and estimate Claude, Llama 3, Gemini, and Mistral usage. See token-per-word ratio and input cost in your browser.',
+	'tool.ai-token-counter.operation': 'Count tokens',
+	'tool.ai-token-counter.faq.0.question': 'Is the token count exact for every model?',
+	'tool.ai-token-counter.faq.0.answer':
+		'GPT-4o uses a real tokenizer loaded on demand. Claude, Llama 3, Gemini, and Mistral use calibrated browser-side estimates because their exact production tokenizers are not publicly shipped for identical local use.',
+	'tool.ai-token-counter.faq.1.question': 'Does my prompt leave the browser?',
+	'tool.ai-token-counter.faq.1.answer':
+		'No. Text is processed locally in your browser, and large inputs move to a Web Worker so the interface stays responsive.',
+	'tool.ai-token-counter.faq.2.question': 'How is cost estimated?',
+	'tool.ai-token-counter.faq.2.answer':
+		'Cost uses the selected model profile and input tokens per million. It is designed for planning and comparison, not billing reconciliation.',
+	'tool.ai-token-counter.faq.3.question': 'Can I compare token density between models?',
+	'tool.ai-token-counter.faq.3.answer':
+		'Yes. The comparison table shows token count, token-per-word ratio, and estimated input cost for each supported model family.',
+	'tool.ai-token-counter.use_case.0': 'Estimate prompt size before calling an LLM API',
+	'tool.ai-token-counter.use_case.1':
+		'Compare token cost across GPT-4o, Claude, Llama, Gemini, and Mistral',
+	'tool.ai-token-counter.use_case.2': 'Check whether long documents fit into a context window',
+	'tool.ai-token-counter.use_case.3':
+		'Measure token-per-word density for prompts, datasets, and transcripts',
+
+	'tool.ai-token-optimizer.display_name': 'Prompt Token Optimizer',
+	'tool.ai-token-optimizer.tagline':
+		'Shorten prompts while preserving intent and output requirements',
+	'tool.ai-token-optimizer.description':
+		'Compress AI prompts by removing filler, normalizing whitespace, simplifying Markdown, and optionally abbreviating common patterns while tracking token savings.',
+	'tool.ai-token-optimizer.primary_keyword': 'prompt token optimizer',
+	'tool.ai-token-optimizer.meta_title': 'Prompt Token Optimizer — Shorten AI Prompts | fmtly.dev',
+	'tool.ai-token-optimizer.meta_description':
+		'Shorten AI prompts while preserving meaning. Remove filler, compress whitespace, compare before/after tokens, and estimate cost savings.',
+	'tool.ai-token-optimizer.operation': 'Optimize prompt',
+	'tool.ai-token-optimizer.faq.0.question': 'Does the optimizer rewrite my prompt creatively?',
+	'tool.ai-token-optimizer.faq.0.answer':
+		'No. It applies conservative, transparent reductions such as filler removal, whitespace compression, and Markdown cleanup so the prompt intent remains intact.',
+	'tool.ai-token-optimizer.faq.1.question': 'Can I control what gets optimized?',
+	'tool.ai-token-optimizer.faq.1.answer':
+		'Yes. Toggle filler removal, whitespace compression, Markdown simplification, and known abbreviations independently.',
+	'tool.ai-token-optimizer.faq.2.question': 'How are token savings calculated?',
+	'tool.ai-token-optimizer.faq.2.answer':
+		'The tool counts the original and optimized prompt with the selected model profile, then reports saved tokens, savings percentage, and estimated input cost reduction.',
+	'tool.ai-token-optimizer.faq.3.question': 'Is it safe for long prompts?',
+	'tool.ai-token-optimizer.faq.3.answer':
+		'Large prompts are processed in a Web Worker above 500KB, keeping the UI responsive while all text remains local.',
+	'tool.ai-token-optimizer.use_case.0': 'Reduce API spend on repeated system prompts',
+	'tool.ai-token-optimizer.use_case.1':
+		'Fit prompts into tighter context windows without changing intent',
+	'tool.ai-token-optimizer.use_case.2': 'Clean prompt templates before sharing them with a team',
+	'tool.ai-token-optimizer.use_case.3':
+		'Compare before/after token budgets during prompt engineering',
 	// ── JSON tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Formatter',
 	'tool.json-formatter.tagline': 'Format and beautify JSON with configurable indentation',
@@ -1938,6 +1999,70 @@ const registryEn: Record<string, string> = {
 	'ui.text_counter.minutes': 'min',
 	'ui.text_counter.lines': 'lines',
 	'ui.text_counter.placeholder': 'Type or paste your text here...',
+	'ui.ai_tokens.characters': 'chars',
+	'ui.ai_tokens.model_label': 'Model',
+	'ui.ai_tokens.upload_file': 'Upload file',
+	'ui.ai_tokens.file_loaded': 'Loaded {name}',
+	'ui.ai_tokens.file_failed': 'Could not load file',
+	'ui.ai_tokens.copy_summary': 'Copy summary',
+	'ui.ai_tokens.copy.title': 'AI token summary',
+	'ui.ai_tokens.worker_active':
+		'Large input detected (>{size}). Token analysis runs in a Web Worker.',
+	'ui.ai_tokens.worker_failed': 'Token analysis failed. Try a smaller input or refresh the page.',
+	'ui.ai_tokens.worker_badge': 'Worker',
+	'ui.ai_tokens.input_label': 'Prompt or text',
+	'ui.ai_tokens.input_placeholder':
+		'Paste a prompt, chat transcript, or document to estimate tokens...',
+	'ui.ai_tokens.analysis_title': 'Token analysis',
+	'ui.ai_tokens.processing': 'Counting...',
+	'ui.ai_tokens.comparison_title': 'Model comparison',
+	'ui.ai_tokens.stat.tokens': 'Tokens',
+	'ui.ai_tokens.stat.words': 'Words',
+	'ui.ai_tokens.stat.words_helper': 'Whitespace-delimited words',
+	'ui.ai_tokens.stat.characters': 'Characters',
+	'ui.ai_tokens.stat.tokens_per_word': 'Tokens / word',
+	'ui.ai_tokens.stat.tokens_per_word_helper': 'Lower is usually cheaper',
+	'ui.ai_tokens.stat.estimated_cost': 'Estimated cost',
+	'ui.ai_tokens.stat.estimated_cost_helper': 'Input token estimate',
+	'ui.ai_tokens.table.model': 'Model',
+	'ui.ai_tokens.table.tokens': 'Tokens',
+	'ui.ai_tokens.table.ratio': 'Tokens / word',
+	'ui.ai_tokens.table.cost': 'Cost',
+	'ui.prompt_optimizer.characters': 'chars',
+	'ui.prompt_optimizer.tokens': 'tokens',
+	'ui.prompt_optimizer.model_label': 'Model',
+	'ui.prompt_optimizer.upload_file': 'Upload file',
+	'ui.prompt_optimizer.file_loaded': 'Loaded {name}',
+	'ui.prompt_optimizer.file_failed': 'Could not load file',
+	'ui.prompt_optimizer.worker_active':
+		'Large input detected (>{size}). Optimization runs in a Web Worker.',
+	'ui.prompt_optimizer.worker_failed':
+		'Worker optimization failed. Falling back to main thread processing.',
+	'ui.prompt_optimizer.worker_badge': 'Worker',
+	'ui.prompt_optimizer.input_label': 'Original prompt',
+	'ui.prompt_optimizer.input_placeholder': 'Paste a prompt to optimize for token usage...',
+	'ui.prompt_optimizer.output_label': 'Optimized output',
+	'ui.prompt_optimizer.processing': 'Optimizing...',
+	'ui.prompt_optimizer.copy_output': 'Copy optimized',
+	'ui.prompt_optimizer.preview_title': 'Preview',
+	'ui.prompt_optimizer.output_placeholder': 'Optimized prompt appears here...',
+	'ui.prompt_optimizer.option.filler': 'Remove filler words',
+	'ui.prompt_optimizer.option.filler_desc': 'Trim low-signal phrases while preserving intent.',
+	'ui.prompt_optimizer.option.whitespace': 'Compress whitespace',
+	'ui.prompt_optimizer.option.whitespace_desc': 'Normalize repeated spaces and blank lines.',
+	'ui.prompt_optimizer.option.markdown': 'Simplify Markdown',
+	'ui.prompt_optimizer.option.markdown_desc': 'Reduce decorative formatting that costs tokens.',
+	'ui.prompt_optimizer.option.abbreviation': 'Use abbreviations',
+	'ui.prompt_optimizer.option.abbreviation_desc': 'Shorten common AI prompt phrases where safe.',
+	'ui.prompt_optimizer.stat.before': 'Before',
+	'ui.prompt_optimizer.stat.before_helper': 'Original token count',
+	'ui.prompt_optimizer.stat.after': 'After',
+	'ui.prompt_optimizer.stat.after_helper': 'Optimized token count',
+	'ui.prompt_optimizer.stat.saved': 'Saved tokens',
+	'ui.prompt_optimizer.stat.saved_helper': 'Estimated reduction',
+	'ui.prompt_optimizer.stat.savings_percent': 'Savings',
+	'ui.prompt_optimizer.stat.savings_percent_helper': 'Before vs after',
+	'ui.prompt_optimizer.stat.cost_saved': 'Cost saved',
 	'ui.lorem.mode': 'Mode',
 	'ui.lorem.mode.paragraphs': 'Paragraphs',
 	'ui.lorem.mode.sentences': 'Sentences',

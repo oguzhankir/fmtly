@@ -24,6 +24,71 @@ const registryTr: Record<string, string> = {
 	'category.text.description':
 		'Metinleri analiz et, say ve düzenle. Kelime, karakter, cümle, paragraf ve okuma süresini tarayıcıda anında ölç.',
 	'category.text.primary_keyword': 'metin araçları',
+	'category.ai.display_name': 'AI',
+	'category.ai.description':
+		'GPT-4o, Claude, Llama, Gemini ve Mistral için metin yüklemeden AI tokenlarını say, LLM maliyetini tahmin et ve promptları sıkıştır.',
+	'category.ai.primary_keyword': 'ai araçları',
+	// ── AI araçları ─────────────────────────────────────────────────────────
+	'tool.ai-token-counter.display_name': 'LLM Token Sayacı',
+	'tool.ai-token-counter.tagline':
+		'Önde gelen LLM modellerinde token say ve giriş maliyetini tahmin et',
+	'tool.ai-token-counter.description':
+		'Prompt, belge veya konuşma metni yapıştır; GPT-4o tokenlarını kesin say, Claude, Llama 3, Gemini ve Mistral kullanımını maliyet ve token/kelime metriğiyle tahmin et.',
+	'tool.ai-token-counter.primary_keyword': 'llm token sayacı',
+	'tool.ai-token-counter.meta_title': 'GPT-4o ve Claude için LLM Token Sayacı — fmtly.dev',
+	'tool.ai-token-counter.meta_description':
+		'GPT-4o tokenlarını say; Claude, Llama 3, Gemini ve Mistral kullanımını tahmin et. Token/kelime oranı ve giriş maliyeti tarayıcıda.',
+	'tool.ai-token-counter.operation': 'Token say',
+	'tool.ai-token-counter.faq.0.question': 'Token sayımı her model için kesin mi?',
+	'tool.ai-token-counter.faq.0.answer':
+		'GPT-4o için ihtiyaç anında yüklenen gerçek tokenizer kullanılır. Claude, Llama 3, Gemini ve Mistral için aynı üretim tokenizerları yerel kullanım için yayınlanmadığından kalibre edilmiş tarayıcı içi tahminler kullanılır.',
+	'tool.ai-token-counter.faq.1.question': 'Promptum tarayıcıdan çıkar mı?',
+	'tool.ai-token-counter.faq.1.answer':
+		'Hayır. Metin yerel olarak tarayıcıda işlenir; büyük girişler arayüzün akıcı kalması için Web Worker’a taşınır.',
+	'tool.ai-token-counter.faq.2.question': 'Maliyet nasıl tahmin ediliyor?',
+	'tool.ai-token-counter.faq.2.answer':
+		'Maliyet, seçili model profili ve milyon giriş tokenı başına fiyat üzerinden hesaplanır. Amaç planlama ve karşılaştırmadır, fatura mutabakatı değildir.',
+	'tool.ai-token-counter.faq.3.question':
+		'Modeller arasında token yoğunluğunu karşılaştırabilir miyim?',
+	'tool.ai-token-counter.faq.3.answer':
+		'Evet. Karşılaştırma tablosu her desteklenen model ailesi için token sayısını, token/kelime oranını ve tahmini giriş maliyetini gösterir.',
+	'tool.ai-token-counter.use_case.0': 'Bir LLM API çağrısından önce prompt boyutunu tahmin et',
+	'tool.ai-token-counter.use_case.1':
+		'GPT-4o, Claude, Llama, Gemini ve Mistral arasında token maliyetini karşılaştır',
+	'tool.ai-token-counter.use_case.2':
+		'Uzun belgelerin bağlam penceresine sığıp sığmadığını kontrol et',
+	'tool.ai-token-counter.use_case.3':
+		'Prompt, veri seti ve transkriptlerde token/kelime yoğunluğunu ölç',
+
+	'tool.ai-token-optimizer.display_name': 'Prompt Token Optimize Edici',
+	'tool.ai-token-optimizer.tagline': 'Anlamı ve çıktı gereksinimlerini koruyarak promptları kısalt',
+	'tool.ai-token-optimizer.description':
+		'AI promptlarını dolgu ifadeleri kaldırarak, boşlukları sıkıştırarak, Markdown’ı sadeleştirerek ve isteğe bağlı yaygın kalıpları kısaltarak optimize et; token tasarrufunu izle.',
+	'tool.ai-token-optimizer.primary_keyword': 'prompt token optimize edici',
+	'tool.ai-token-optimizer.meta_title':
+		'Prompt Token Optimize Edici — AI Prompt Kısalt | fmtly.dev',
+	'tool.ai-token-optimizer.meta_description':
+		'AI promptlarını anlamı koruyarak kısalt. Dolgu ifadeleri kaldır, boşluğu sıkıştır, önce/sonra tokenları ve maliyet tasarrufunu gör.',
+	'tool.ai-token-optimizer.operation': 'Prompt optimize et',
+	'tool.ai-token-optimizer.faq.0.question':
+		'Optimize edici promptu yaratıcı biçimde yeniden yazar mı?',
+	'tool.ai-token-optimizer.faq.0.answer':
+		'Hayır. Prompt niyetini korumak için dolgu kaldırma, boşluk sıkıştırma ve Markdown temizliği gibi tutucu, şeffaf azaltmalar uygular.',
+	'tool.ai-token-optimizer.faq.1.question': 'Nelerin optimize edileceğini kontrol edebilir miyim?',
+	'tool.ai-token-optimizer.faq.1.answer':
+		'Evet. Dolgu kaldırma, boşluk sıkıştırma, Markdown sadeleştirme ve bilinen kısaltmaları ayrı ayrı açıp kapatabilirsin.',
+	'tool.ai-token-optimizer.faq.2.question': 'Token tasarrufu nasıl hesaplanıyor?',
+	'tool.ai-token-optimizer.faq.2.answer':
+		'Araç özgün ve optimize edilmiş promptu seçili model profiliyle sayar; kaydedilen tokenı, tasarruf yüzdesini ve tahmini giriş maliyeti düşüşünü raporlar.',
+	'tool.ai-token-optimizer.faq.3.question': 'Uzun promptlar için güvenli mi?',
+	'tool.ai-token-optimizer.faq.3.answer':
+		'500KB üzerindeki büyük promptlar Web Worker’da işlenir; arayüz akıcı kalır ve tüm metin yerel kalır.',
+	'tool.ai-token-optimizer.use_case.0': 'Tekrarlanan sistem promptlarında API maliyetini azalt',
+	'tool.ai-token-optimizer.use_case.1':
+		'Niyeti değiştirmeden promptları daha dar bağlam pencerelerine sığdır',
+	'tool.ai-token-optimizer.use_case.2': 'Prompt şablonlarını ekiple paylaşmadan önce temizle',
+	'tool.ai-token-optimizer.use_case.3':
+		'Prompt mühendisliğinde önce/sonra token bütçelerini karşılaştır',
 	// ── JSON araçları ────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Biçimlendirici',
 	'tool.json-formatter.tagline': "JSON'u ayarlanabilir girinti ile biçimlendir ve güzelleştir",
@@ -1978,6 +2043,73 @@ const registryTr: Record<string, string> = {
 	'ui.text_counter.minutes': 'dk',
 	'ui.text_counter.lines': 'satır',
 	'ui.text_counter.placeholder': 'Metninizi buraya yazın veya yapıştırın...',
+	'ui.ai_tokens.characters': 'karakter',
+	'ui.ai_tokens.model_label': 'Model',
+	'ui.ai_tokens.upload_file': 'Dosya yükle',
+	'ui.ai_tokens.file_loaded': '{name} yüklendi',
+	'ui.ai_tokens.file_failed': 'Dosya yüklenemedi',
+	'ui.ai_tokens.copy_summary': 'Özeti kopyala',
+	'ui.ai_tokens.copy.title': 'AI token özeti',
+	'ui.ai_tokens.worker_active':
+		'Büyük giriş algılandı (>{size}). Token analizi Web Worker’da çalışır.',
+	'ui.ai_tokens.worker_failed':
+		'Token analizi başarısız oldu. Daha küçük bir giriş deneyin veya sayfayı yenileyin.',
+	'ui.ai_tokens.worker_badge': 'Worker',
+	'ui.ai_tokens.input_label': 'Prompt veya metin',
+	'ui.ai_tokens.input_placeholder': 'Token tahmini için prompt, konuşma veya belge yapıştırın...',
+	'ui.ai_tokens.analysis_title': 'Token analizi',
+	'ui.ai_tokens.processing': 'Sayılıyor...',
+	'ui.ai_tokens.comparison_title': 'Model karşılaştırması',
+	'ui.ai_tokens.stat.tokens': 'Token',
+	'ui.ai_tokens.stat.words': 'Kelime',
+	'ui.ai_tokens.stat.words_helper': 'Boşlukla ayrılmış kelimeler',
+	'ui.ai_tokens.stat.characters': 'Karakter',
+	'ui.ai_tokens.stat.tokens_per_word': 'Token / kelime',
+	'ui.ai_tokens.stat.tokens_per_word_helper': 'Düşük değer genelde daha ucuzdur',
+	'ui.ai_tokens.stat.estimated_cost': 'Tahmini maliyet',
+	'ui.ai_tokens.stat.estimated_cost_helper': 'Giriş tokenı tahmini',
+	'ui.ai_tokens.table.model': 'Model',
+	'ui.ai_tokens.table.tokens': 'Token',
+	'ui.ai_tokens.table.ratio': 'Token / kelime',
+	'ui.ai_tokens.table.cost': 'Maliyet',
+	'ui.prompt_optimizer.characters': 'karakter',
+	'ui.prompt_optimizer.tokens': 'token',
+	'ui.prompt_optimizer.model_label': 'Model',
+	'ui.prompt_optimizer.upload_file': 'Dosya yükle',
+	'ui.prompt_optimizer.file_loaded': '{name} yüklendi',
+	'ui.prompt_optimizer.file_failed': 'Dosya yüklenemedi',
+	'ui.prompt_optimizer.worker_active':
+		'Büyük giriş algılandı (>{size}). Optimizasyon Web Worker’da çalışır.',
+	'ui.prompt_optimizer.worker_failed':
+		'Worker optimizasyonu başarısız oldu. Ana iş parçacığında işlemeye dönülüyor.',
+	'ui.prompt_optimizer.worker_badge': 'Worker',
+	'ui.prompt_optimizer.input_label': 'Özgün prompt',
+	'ui.prompt_optimizer.input_placeholder':
+		'Token kullanımı için optimize edilecek promptu yapıştırın...',
+	'ui.prompt_optimizer.output_label': 'Optimize çıktı',
+	'ui.prompt_optimizer.processing': 'Optimize ediliyor...',
+	'ui.prompt_optimizer.copy_output': 'Optimize metni kopyala',
+	'ui.prompt_optimizer.preview_title': 'Önizleme',
+	'ui.prompt_optimizer.output_placeholder': 'Optimize edilmiş prompt burada görünür...',
+	'ui.prompt_optimizer.option.filler': 'Dolgu kelimelerini kaldır',
+	'ui.prompt_optimizer.option.filler_desc': 'Niyeti koruyarak düşük sinyalli ifadeleri temizle.',
+	'ui.prompt_optimizer.option.whitespace': 'Boşluğu sıkıştır',
+	'ui.prompt_optimizer.option.whitespace_desc':
+		'Tekrarlanan boşlukları ve boş satırları normalleştir.',
+	'ui.prompt_optimizer.option.markdown': 'Markdown’ı sadeleştir',
+	'ui.prompt_optimizer.option.markdown_desc': 'Token harcatan dekoratif biçimlendirmeyi azalt.',
+	'ui.prompt_optimizer.option.abbreviation': 'Kısaltmaları kullan',
+	'ui.prompt_optimizer.option.abbreviation_desc':
+		'Güvenli olduğunda yaygın AI prompt ifadelerini kısalt.',
+	'ui.prompt_optimizer.stat.before': 'Önce',
+	'ui.prompt_optimizer.stat.before_helper': 'Özgün token sayısı',
+	'ui.prompt_optimizer.stat.after': 'Sonra',
+	'ui.prompt_optimizer.stat.after_helper': 'Optimize token sayısı',
+	'ui.prompt_optimizer.stat.saved': 'Kazanılan token',
+	'ui.prompt_optimizer.stat.saved_helper': 'Tahmini azalma',
+	'ui.prompt_optimizer.stat.savings_percent': 'Tasarruf',
+	'ui.prompt_optimizer.stat.savings_percent_helper': 'Önce ve sonra',
+	'ui.prompt_optimizer.stat.cost_saved': 'Maliyet tasarrufu',
 	'ui.lorem.mode': 'Mod',
 	'ui.lorem.mode.paragraphs': 'Paragraf',
 	'ui.lorem.mode.sentences': 'Cümle',

@@ -19,6 +19,12 @@ export type SeoMetadata = {
 	alternates?: AlternateLink[];
 };
 
+const categoryAudiences: Record<string, string> = {
+	ai: 'AI engineers, prompt engineers, and developers',
+	crypto: 'Security engineers and developers',
+	pdf: 'Developers and document operations teams'
+};
+
 export function buildCategorySeo(
 	displayName: string,
 	description: string,
@@ -64,6 +70,7 @@ export function generateToolSEO(
 	const alternates = buildAlternateLinks(baseUrl, canonicalPath);
 
 	const featureList = [tool.tagline, ...tool.useCases.slice(0, 4)];
+	const audienceType = categoryAudiences[tool.category] ?? 'Developers';
 
 	const structuredData = {
 		'@context': 'https://schema.org',
@@ -77,6 +84,10 @@ export function generateToolSEO(
 		isAccessibleForFree: true,
 		browserRequirements: 'Requires JavaScript; works in modern browsers.',
 		operatingSystem: 'Any',
+		audience: {
+			'@type': 'Audience',
+			audienceType
+		},
 		creator: {
 			'@type': 'Organization',
 			name: 'fmtly.dev'
