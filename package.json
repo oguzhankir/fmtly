@@ -34,7 +34,7 @@
 		"@types/uuid": "^11.0.0",
 		"@types/zxcvbn": "^4.4.5",
 		"happy-dom": "^20.9.0",
-		"jsdom": "^29.0.0",
+		"jsdom": "^29.1.0",
 		"monaco-editor": "^0.55.1",
 		"svelte": "^5.55.1",
 		"svelte-check": "^4.0.0",
