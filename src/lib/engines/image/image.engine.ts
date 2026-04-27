@@ -67,7 +67,6 @@ type Canvas2DLike = {
 		dHeight: number
 	) => void;
 };
-
 const DATA_URL_HEADER_PATTERN = /^data:image\/(png|jpeg|jpg|webp|gif|bmp|x-icon|svg\+xml);base64,/i;
 const MIN_DIMENSION = 1;
 const MAX_DIMENSION = 8192;
@@ -253,7 +252,6 @@ function isCanvas2DLike(context: unknown): context is Canvas2DLike {
 		'drawImage' in context
 	);
 }
-
 async function canvasToDataUrl(
 	canvas: OffscreenCanvas | HTMLCanvasElement,
 	format: ImageResizeOutputFormat,
@@ -363,19 +361,6 @@ function blobToDataUrl(blob: Blob): Promise<string> {
 function clampNumber(value: number, min: number, max: number): number {
 	return Math.min(max, Math.max(min, value));
 }
-
-function is2dCanvasContext(
-	context: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null
-): context is OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D {
-	if (context === null) return false;
-	return (
-		'drawImage' in context &&
-		typeof context.drawImage === 'function' &&
-		'clearRect' in context &&
-		typeof context.clearRect === 'function'
-	);
-}
-
 function nowMs(): number {
 	if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
 		return performance.now();
