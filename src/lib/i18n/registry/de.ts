@@ -4281,7 +4281,94 @@ const registryDe: Record<string, string> = {
 	'tool.xml-xsd-validate.warnings': 'tool.xml-xsd-validate.warnings',
 	'tool.xml-xsd-validate.errors_title': 'tool.xml-xsd-validate.errors_title',
 	'tool.xml-xsd-validate.warnings_title': 'tool.xml-xsd-validate.warnings_title',
-	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint'
+	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint',
+
+	// Missing keys from English
+	'category.image.display_name': 'Bild',
+	'category.image.description':
+		'Bilder direkt im Browser skalieren, konvertieren und optimieren — ohne Upload.',
+	'category.image.primary_keyword': 'bild tools',
+	'tool.image-resizer.display_name': 'Bildgrößen-Änderer',
+	'tool.image-resizer.tagline':
+		'Bilder mit Seitenverhältnis, Prozentwerten oder festen Pixelmaßen skalieren',
+	'tool.image-resizer.description':
+		'Ändern Sie Bildgrößen lokal im Browser mit gesperrtem Seitenverhältnis, Prozent-Skalierung oder exakten Breite/Höhe-Werten. Unterstützt PNG, JPEG und WebP mit Qualitätssteuerung und Vorher/Nachher-Statistiken.',
+	'tool.image-resizer.primary_keyword': 'bildgröße ändern',
+	'tool.image-resizer.meta_title': 'Bildgröße online ändern — Image Resizer | fmtly.dev',
+	'tool.image-resizer.meta_description':
+		'Bilder direkt im Browser skalieren. Seitenverhältnis sperren, Format wählen, Qualität einstellen und die verkleinerte Datei sofort herunterladen.',
+	'tool.image-resizer.operation': 'Skalieren',
+	'tool.image-resizer.faq.0.question': 'Verlässt mein Bild den Browser?',
+	'tool.image-resizer.faq.0.answer':
+		'Nein. Die gesamte Verarbeitung läuft lokal in Ihrem Browser, ohne Server-Upload.',
+	'tool.image-resizer.faq.1.question': 'Kann ich das Seitenverhältnis beibehalten?',
+	'tool.image-resizer.faq.1.answer':
+		'Ja. Mit aktivierter Verhältnis-Sperre werden Breite und Höhe proportional angepasst.',
+	'tool.image-resizer.faq.2.question': 'Welche Ausgabeformate werden unterstützt?',
+	'tool.image-resizer.faq.2.answer':
+		'PNG, JPEG und WebP werden unterstützt. Auf Wunsch können Sie auch das Originalformat beibehalten.',
+	'tool.image-resizer.faq.3.question': 'Was passiert bei großen Bildern?',
+	'tool.image-resizer.faq.3.answer':
+		'Ab einer Eingabegröße über 500KB wird die Verarbeitung in einen Web Worker ausgelagert, damit die Oberfläche flüssig bleibt.',
+	'tool.image-resizer.use_case.0': 'Produktbilder für Webseiten ohne Qualitätsverlust anpassen',
+	'tool.image-resizer.use_case.1': 'Screenshots für Dokumentation auf exakte Pixelmaße skalieren',
+	'tool.image-resizer.use_case.2':
+		'Dateigröße durch kleinere Abmessungen und Qualitätseinstellung reduzieren',
+	'tool.image-resizer.use_case.3':
+		'Bilder als PNG, JPEG oder WebP für verschiedene Zielkanäle exportieren',
+	'ui.image_resizer.drop_title': 'Bild hier ablegen oder auswählen',
+	'ui.image_resizer.drop_hint':
+		'Ihre Datei bleibt lokal im Browser. Nichts wird an einen Server gesendet.',
+	'ui.image_resizer.browse': 'Bild auswählen',
+	'ui.image_resizer.input_aria': 'Bilddatei auswählen',
+	'ui.image_resizer.no_file': 'Noch kein Bild geladen',
+	'ui.image_resizer.file_loaded': '{name} geladen',
+	'ui.image_resizer.file_read_error': 'Bild konnte nicht geladen werden',
+	'ui.image_resizer.preview_alt': 'Vorschau des skalierten Bildes',
+	'ui.image_resizer.controls_title': 'Skalierungsoptionen',
+	'ui.image_resizer.width_label': 'Breite',
+	'ui.image_resizer.height_label': 'Höhe',
+	'ui.image_resizer.scale_label': 'Skalierung (%)',
+	'ui.image_resizer.lock_ratio': 'Seitenverhältnis sperren',
+	'ui.image_resizer.keep_format': 'Originalformat beibehalten',
+	'ui.image_resizer.output_format': 'Ausgabeformat',
+	'ui.image_resizer.quality_label': 'Qualität',
+	'ui.image_resizer.worker_active':
+		'Große Bilddatei erkannt (>{size}). Verarbeitung läuft in einem Web Worker.',
+	'ui.image_resizer.worker_badge': 'Worker',
+	'ui.image_resizer.worker_used': 'Ausgelagert verarbeitet',
+	'ui.image_resizer.worker_failed':
+		'Worker-Verarbeitung fehlgeschlagen. Fallback auf Haupt-Thread.',
+	'ui.image_resizer.resize_failed': 'Bild konnte nicht skaliert werden',
+	'ui.image_resizer.output_title': 'Ausgabevorschau',
+	'ui.image_resizer.output_placeholder': 'Das skalierte Bild erscheint hier',
+	'ui.image_resizer.processing': 'Wird skaliert...',
+	'ui.image_resizer.copy_image': 'Bild kopieren',
+	'ui.image_resizer.download_image': 'Bild herunterladen',
+	'ui.image_resizer.clear': 'Zurücksetzen',
+	'ui.image_resizer.copy_empty': 'Kein Bild zum Kopieren vorhanden',
+	'ui.image_resizer.copy_success': 'Bild in Zwischenablage kopiert',
+	'ui.image_resizer.copy_error': 'Kopieren fehlgeschlagen',
+	'ui.image_resizer.download_empty': 'Kein Bild zum Herunterladen vorhanden',
+	'ui.image_resizer.download_success': '{filename} heruntergeladen',
+	'ui.image_resizer.download_error': 'Download fehlgeschlagen',
+	'ui.image_resizer.clear_title': 'Geladenes Bild und Einstellungen zurücksetzen?',
+	'ui.image_resizer.clear_description':
+		'Dies entfernt das aktuelle Bild, die Vorschau und alle gewählten Werte.',
+	'ui.image_resizer.input_cleared': 'Bild und Einstellungen zurückgesetzt',
+	'ui.image_resizer.stat.input_dimensions': 'Eingabegröße',
+	'ui.image_resizer.stat.input_size': 'Eingabedatei',
+	'ui.image_resizer.stat.output_dimensions': 'Ausgabegröße',
+	'ui.image_resizer.stat.output_size': 'Ausgabedatei',
+	'ui.image_resizer.stat.reduction': 'Dateigrößen-Ersparnis',
+	'ui.image_resizer.stat.reduction_helper': 'positiv = kleiner',
+	'ui.image_resizer.placeholder_width': 'Breite',
+	'ui.image_resizer.placeholder_height': 'Höhe',
+	'ui.image_resizer.png': 'PNG',
+	'ui.image_resizer.jpeg': 'JPEG',
+	'ui.image_resizer.webp': 'WebP',
+	'ui.image_resizer.source_status': '{size} · {width}×{height} px',
+	'ui.image_resizer.output_status': '{size} · {width}×{height} px'
 };
 
 export default registryDe;

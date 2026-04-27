@@ -74,6 +74,7 @@
 	import AiTokenCounterPanel from "$components/panels/ai/AiTokenCounterPanel.svelte";
 	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
 	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
+import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -186,6 +187,11 @@
 			? localizeToolDefinitions(getToolsByCategory("pdf"), $t)
 			: []
 	);
+	let imageWorkspaceTools = $derived(
+		data.tool.category === "image"
+			? localizeToolDefinitions(getToolsByCategory("image"), $t)
+			: []
+	);
 	let aiWorkspaceTools = $derived(
 		data.tool.category === "ai"
 			? localizeToolDefinitions(getToolsByCategory("ai"), $t)
@@ -279,6 +285,7 @@
 		toml: [".toml", ".txt"],
 		csv: [".csv", ".txt"],
 		txt: [".txt", ".md", ".log"],
+		image: [".png", ".jpg", ".jpeg", ".webp", ".bmp"],
 	};
 
 	let acceptedExts = $derived(
@@ -629,6 +636,8 @@
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
+{:else if data.tool.category === "image" && data.tool.slug === "resize"}
+	<ImageResizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 {:else if isDiffTool}
 	<ToolLayout tool={localizedTool}>
 		{#snippet workspaceTabs()}
@@ -648,6 +657,8 @@
 				<WorkspaceTabs tools={generateWorkspaceTools} activeSlug={data.tool.slug} category="generate" locale={currentLocale} />
 			{:else if data.tool.category === 'pdf' && pdfWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={pdfWorkspaceTools} activeSlug={data.tool.slug} category="pdf" locale={currentLocale} />
+			{:else if data.tool.category === 'image' && imageWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={imageWorkspaceTools} activeSlug={data.tool.slug} category="image" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}
@@ -725,6 +736,8 @@
 				<WorkspaceTabs tools={generateWorkspaceTools} activeSlug={data.tool.slug} category="generate" locale={currentLocale} />
 			{:else if data.tool.category === 'pdf' && pdfWorkspaceTools.length > 0}
 				<WorkspaceTabs tools={pdfWorkspaceTools} activeSlug={data.tool.slug} category="pdf" locale={currentLocale} />
+			{:else if data.tool.category === 'image' && imageWorkspaceTools.length > 0}
+				<WorkspaceTabs tools={imageWorkspaceTools} activeSlug={data.tool.slug} category="image" locale={currentLocale} />
 			{/if}
 		{/snippet}
 		{#snippet inputPanel()}

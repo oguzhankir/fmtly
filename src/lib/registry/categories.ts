@@ -77,6 +77,12 @@ const categoryMetaList: CategoryMeta[] = [
 		displayName: 'category.pdf.display_name',
 		description: 'category.pdf.description',
 		primaryKeyword: 'category.pdf.primary_keyword'
+	},
+	{
+		slug: 'image',
+		displayName: 'category.image.display_name',
+		description: 'category.image.description',
+		primaryKeyword: 'category.image.primary_keyword'
 	}
 ];
 

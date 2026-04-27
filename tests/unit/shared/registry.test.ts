@@ -76,6 +76,16 @@ describe('Tool Registry', () => {
 			expect(tool).toBeUndefined();
 		});
 
+		it('returns image/resize correctly', () => {
+			const rawTool = getTool('image', 'resize');
+			expect(rawTool).toBeDefined();
+			expect(rawTool?.id).toBe('image-resizer');
+			expect(rawTool?.layoutVariant).toBe('single-panel');
+
+			const tool = localizeToolDefinition(rawTool!, t);
+			expect(tool.operation).toBe('Resize image');
+		});
+
 		it('returns json/validator correctly', () => {
 			const tool = getTool('json', 'validator');
 			expect(tool).toBeDefined();

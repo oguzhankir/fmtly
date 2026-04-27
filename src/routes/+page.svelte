@@ -27,6 +27,7 @@
 		yaml: '~',
 		csv: '\u229E',
 		toml: '\u2261',
+		image: '\u25A7',
 		qr: '\u25A6\u25A3'
 	};
 

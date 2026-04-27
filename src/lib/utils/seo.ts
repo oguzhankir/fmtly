@@ -22,6 +22,7 @@ export type SeoMetadata = {
 const categoryAudiences: Record<string, string> = {
 	ai: 'AI engineers, prompt engineers, developers, and LLM product teams',
 	crypto: 'Security engineers and developers',
+	image: 'Designers, frontend engineers, and media teams',
 	pdf: 'Developers and document operations teams'
 };
 
