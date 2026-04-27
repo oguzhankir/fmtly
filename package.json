@@ -64,7 +64,7 @@
 		"jsonpath-plus": "^10.4.0",
 		"jsonrepair": "^3.13.3",
 		"jsqr": "^1.4.0",
-		"lucide-svelte": "^0.577.0",
+		"lucide-svelte": "^1.0.1",
 		"lz-string": "^1.5.0",
 		"marked": "^18.0.2",
 		"papaparse": "^5.5.3",
