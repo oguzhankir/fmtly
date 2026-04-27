@@ -73,6 +73,7 @@
 	import PdfMetadataPanel from "$components/panels/pdf/PdfMetadataPanel.svelte";
 	import AiTokenCounterPanel from "$components/panels/ai/AiTokenCounterPanel.svelte";
 	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
+	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -616,12 +617,14 @@
 
 <SeoHead metadata={seo} />
 
-{#if data.tool.category === "ai" && (data.tool.slug === "token-counter" || data.tool.slug === "token-optimizer")}
+{#if data.tool.category === "ai" && (data.tool.slug === "token-counter" || data.tool.slug === "token-optimizer" || data.tool.slug === "system-prompt")}
 	<div class="w-full overflow-hidden" style="height: calc(100vh - var(--header-height));">
 		{#if data.tool.slug === "token-counter"}
 			<AiTokenCounterPanel toolSlug={data.tool.slug} workspaceTools={aiWorkspaceTools} />
-		{:else}
+		{:else if data.tool.slug === "token-optimizer"}
 			<PromptTokenOptimizerPanel toolSlug={data.tool.slug} workspaceTools={aiWorkspaceTools} />
+		{:else}
+			<SystemPromptBuilderPanel toolSlug={data.tool.slug} workspaceTools={aiWorkspaceTools} />
 		{/if}
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}

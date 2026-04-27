@@ -26,7 +26,7 @@ const registryTr: Record<string, string> = {
 	'category.text.primary_keyword': 'metin araçları',
 	'category.ai.display_name': 'AI',
 	'category.ai.description':
-		'GPT-4o, Claude, Llama, Gemini ve Mistral için metin yüklemeden AI tokenlarını say, LLM maliyetini tahmin et ve promptları sıkıştır.',
+		'GPT-4o, Claude, Llama, Gemini ve Mistral için metin yüklemeden AI tokenlarını say, LLM maliyetini tahmin et, promptları sıkıştır ve üretime hazır sistem promptları oluştur.',
 	'category.ai.primary_keyword': 'ai araçları',
 	// ── AI araçları ─────────────────────────────────────────────────────────
 	'tool.ai-token-counter.display_name': 'LLM Token Sayacı',
@@ -89,6 +89,38 @@ const registryTr: Record<string, string> = {
 	'tool.ai-token-optimizer.use_case.2': 'Prompt şablonlarını ekiple paylaşmadan önce temizle',
 	'tool.ai-token-optimizer.use_case.3':
 		'Prompt mühendisliğinde önce/sonra token bütçelerini karşılaştır',
+	'tool.ai-system-prompt-builder.display_name': 'Sistem Prompt Oluşturucu',
+	'tool.ai-system-prompt-builder.tagline':
+		'Yapılandırılmış şablonlardan üretime hazır sistem promptları oluştur',
+	'tool.ai-system-prompt-builder.description':
+		'Kod asistanları, veri analistleri, çevirmenler ve destek ajanları için yapılandırılmış bölümler, güvenlik sınırları, kalite kontrolleri ve OpenAI JSON dışa aktarımıyla yüksek kaliteli sistem promptları hazırla.',
+	'tool.ai-system-prompt-builder.primary_keyword': 'sistem prompt oluşturucu',
+	'tool.ai-system-prompt-builder.meta_title':
+		'AI Asistanları için Sistem Prompt Oluşturucu — fmtly.dev',
+	'tool.ai-system-prompt-builder.meta_description':
+		'Tarayıcıda AI asistanları için net sistem promptları oluştur. Şablonlar, kısıtlar, örnekler, güvenlik kuralları, kalite kontrolleri kullan; düz metin veya OpenAI JSON olarak dışa aktar.',
+	'tool.ai-system-prompt-builder.operation': 'Prompt oluştur',
+	'tool.ai-system-prompt-builder.faq.0.question': 'Sistem promptu nedir?',
+	'tool.ai-system-prompt-builder.faq.0.answer':
+		'Sistem promptu, kullanıcı mesajı işlenmeden önce asistanın rolünü, hedefini, çalışma bağlamını, sınırlarını ve çıktı kurallarını tanımlar.',
+	'tool.ai-system-prompt-builder.faq.1.question': 'Bu araç bir AI modeli çağırır mı?',
+	'tool.ai-system-prompt-builder.faq.1.answer':
+		'Hayır. Promptu tarayıcıda deterministik olarak birleştirir. Hiçbir şey yüklenmez ve hiçbir model metnini almaz.',
+	'tool.ai-system-prompt-builder.faq.2.question':
+		'OpenAI sohbet mesajlarını dışa aktarabilir miyim?',
+	'tool.ai-system-prompt-builder.faq.2.answer':
+		'Evet. Çıktı biçimini OpenAI JSON mesajları olarak değiştirerek API koduna veya prompt testlerine yapıştırabileceğin system rolünde bir mesaj dizisi dışa aktarabilirsin.',
+	'tool.ai-system-prompt-builder.faq.3.question': 'Çok büyük bağlam blokları için güvenli mi?',
+	'tool.ai-system-prompt-builder.faq.3.answer':
+		'500KB üzerindeki büyük oluşturucu girişleri Web Worker’da çalışır; arayüz akıcı kalır ve tüm işlem yerel kalır.',
+	'tool.ai-system-prompt-builder.use_case.0':
+		'AI ürün özellikleri için yeniden kullanılabilir sistem promptları oluştur',
+	'tool.ai-system-prompt-builder.use_case.1':
+		'Kod asistanı, analist, çevirmen ve destek ajanı davranışını standartlaştır',
+	'tool.ai-system-prompt-builder.use_case.2':
+		'Sistem promptlarını düz metin veya OpenAI uyumlu JSON mesajları olarak dışa aktar',
+	'tool.ai-system-prompt-builder.use_case.3':
+		'Promptlara güvenlik sınırları, akıl yürütme yönergeleri, örnekler ve kalite kontrolleri ekle',
 	// ── JSON araçları ────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Biçimlendirici',
 	'tool.json-formatter.tagline': "JSON'u ayarlanabilir girinti ile biçimlendir ve güzelleştir",
@@ -2110,6 +2142,80 @@ const registryTr: Record<string, string> = {
 	'ui.prompt_optimizer.stat.savings_percent': 'Tasarruf',
 	'ui.prompt_optimizer.stat.savings_percent_helper': 'Önce ve sonra',
 	'ui.prompt_optimizer.stat.cost_saved': 'Maliyet tasarrufu',
+	'ui.system_prompt_builder.template.custom': 'Özel',
+	'ui.system_prompt_builder.template.code_assistant': 'Kod asistanı',
+	'ui.system_prompt_builder.template.data_analyst': 'Veri analisti',
+	'ui.system_prompt_builder.template.translator': 'Çevirmen',
+	'ui.system_prompt_builder.template.customer_support': 'Müşteri desteği',
+	'ui.system_prompt_builder.format.plain_text': 'Düz metin',
+	'ui.system_prompt_builder.format.openai_json': 'OpenAI JSON mesajları',
+	'ui.system_prompt_builder.field.role': 'Rol',
+	'ui.system_prompt_builder.field.objective': 'Hedef',
+	'ui.system_prompt_builder.field.context': 'Bağlam',
+	'ui.system_prompt_builder.field.constraints': 'Kısıtlar',
+	'ui.system_prompt_builder.field.examples': 'Örnekler',
+	'ui.system_prompt_builder.field.output_requirements': 'Çıktı gereksinimleri',
+	'ui.system_prompt_builder.placeholder.role': 'Asistan kimliğini ve uzmanlık düzeyini tanımla...',
+	'ui.system_prompt_builder.placeholder.objective':
+		'Asistanın neyi başarması gerektiğini açıkla...',
+	'ui.system_prompt_builder.placeholder.context':
+		'Çalışma bağlamı, hedef kitle, alan veya ürün ayrıntıları ekle...',
+	'ui.system_prompt_builder.placeholder.constraints':
+		'Sınırları, politikaları, yasak davranışları veya kesin gereksinimleri listele...',
+	'ui.system_prompt_builder.placeholder.examples':
+		'Örnek kullanıcı istekleri ve ideal asistan davranışı ekle...',
+	'ui.system_prompt_builder.placeholder.output_requirements':
+		'Yanıt yapısı, biçimlendirme, alıntı veya ton gereksinimlerini belirt...',
+	'ui.system_prompt_builder.option.safety_boundaries': 'Güvenlik sınırları',
+	'ui.system_prompt_builder.option.safety_boundaries_desc':
+		'Gizlilik, belirsizlik, güvensiz istekler ve uydurma bilgiyle ilgili yönergeler ekle.',
+	'ui.system_prompt_builder.option.quality_checklist': 'Kalite kontrol listesi',
+	'ui.system_prompt_builder.option.quality_checklist_desc':
+		'Gereksinimler, biçim ve sınırlamalar için son bir öz denetim ekle.',
+	'ui.system_prompt_builder.option.reasoning_guidance': 'Akıl yürütme yönergesi',
+	'ui.system_prompt_builder.option.reasoning_guidance_desc':
+		'Asistanın önce düşünmesini ve yalnızca yararlı sonuçları göstermesini sağla.',
+	'ui.system_prompt_builder.output_status': '{size} · {characters} karakter · {lines} satır',
+	'ui.system_prompt_builder.input_status': '{size} · {characters} karakter · {lines} satır',
+	'ui.system_prompt_builder.stat.characters': 'Karakter',
+	'ui.system_prompt_builder.stat.characters_helper': 'Üretilen çıktı',
+	'ui.system_prompt_builder.stat.size': 'Boyut',
+	'ui.system_prompt_builder.stat.size_helper': 'UTF-8 çıktı boyutu',
+	'ui.system_prompt_builder.stat.lines': 'Satır',
+	'ui.system_prompt_builder.stat.lines_helper': 'Önizleme satır sayısı',
+	'ui.system_prompt_builder.stat.sections': 'Bölüm',
+	'ui.system_prompt_builder.worker_failed':
+		'Worker ile oluşturma başarısız oldu. Ana iş parçacığında devam ediliyor.',
+	'ui.system_prompt_builder.build_failed':
+		'Sistem promptu oluşturulamadı. Giriş boyutunu azaltmayı dene.',
+	'ui.system_prompt_builder.sample_loaded': 'Örnek yüklendi',
+	'ui.system_prompt_builder.clear_title': 'Sistem prompt oluşturucu alanları temizlensin mi?',
+	'ui.system_prompt_builder.clear_description':
+		'Bu işlem mevcut oluşturucu girişlerini ve önizlemeyi kaldırır.',
+	'ui.system_prompt_builder.input_cleared': 'Oluşturucu girişleri temizlendi',
+	'ui.system_prompt_builder.copy_empty': 'Henüz kopyalanacak bir şey yok',
+	'ui.system_prompt_builder.copy_success': 'Sistem promptu kopyalandı',
+	'ui.system_prompt_builder.copy_error': 'Kopyalama başarısız. Tarayıcı izinlerini kontrol et.',
+	'ui.system_prompt_builder.download_empty': 'Henüz indirilecek bir şey yok',
+	'ui.system_prompt_builder.download_success': '{filename} indirildi',
+	'ui.system_prompt_builder.download_error':
+		'İndirme başarısız. Bunun yerine çıktıyı kopyalamayı dene.',
+	'ui.system_prompt_builder.milliseconds': 'ms',
+	'ui.system_prompt_builder.template_label': 'Şablon',
+	'ui.system_prompt_builder.output_format_label': 'Çıktı biçimi',
+	'ui.system_prompt_builder.worker_active':
+		'Büyük oluşturucu girişi algılandı (>{size}). Prompt oluşturma Web Worker’da çalışır.',
+	'ui.system_prompt_builder.load_sample': 'Örnek yükle',
+	'ui.system_prompt_builder.clear': 'Temizle',
+	'ui.system_prompt_builder.builder_inputs_title': 'Oluşturucu girişleri',
+	'ui.system_prompt_builder.output_label': 'Çıktı önizlemesi',
+	'ui.system_prompt_builder.processing': 'Oluşturuluyor...',
+	'ui.system_prompt_builder.worker_badge': 'Worker',
+	'ui.system_prompt_builder.worker_used': 'Arka iş parçacığında işlendi',
+	'ui.system_prompt_builder.copy_output': 'Çıktıyı kopyala',
+	'ui.system_prompt_builder.download_output': 'İndir',
+	'ui.system_prompt_builder.preview_title': 'Önizleme',
+	'ui.system_prompt_builder.output_placeholder': 'Oluşturulan sistem promptu burada görünür...',
 	'ui.lorem.mode': 'Mod',
 	'ui.lorem.mode.paragraphs': 'Paragraf',
 	'ui.lorem.mode.sentences': 'Cümle',

@@ -1,5 +1,6 @@
 export const AI_TOKEN_WORKER_THRESHOLD_BYTES = 500 * 1024;
 export const PROMPT_OPTIMIZER_WORKER_THRESHOLD_BYTES = 500 * 1024;
+export const SYSTEM_PROMPT_BUILDER_WORKER_THRESHOLD_BYTES = 500 * 1024;
 
 export type AiModelId =
 	| 'gpt-4o'
@@ -62,6 +63,65 @@ export type PromptOptimizationResult = {
 	durationMs: number;
 };
 
+export type SystemPromptTemplateId =
+	| 'custom'
+	| 'code-assistant'
+	| 'data-analyst'
+	| 'translator'
+	| 'customer-support';
+
+export type SystemPromptOutputFormat = 'plain-text' | 'openai-json';
+
+export type SystemPromptBuilderInput = {
+	templateId: SystemPromptTemplateId;
+	role: string;
+	objective: string;
+	context: string;
+	constraints: string;
+	examples: string;
+	outputRequirements: string;
+};
+
+export type SystemPromptBuilderOptions = {
+	outputFormat: SystemPromptOutputFormat;
+	includeSafetyBoundaries: boolean;
+	includeQualityChecklist: boolean;
+	includeReasoningGuidance: boolean;
+};
+
+export type SystemPromptMessage = {
+	role: 'system';
+	content: string;
+};
+
+export type SystemPromptSection = {
+	id:
+		| 'identity'
+		| 'objective'
+		| 'context'
+		| 'constraints'
+		| 'examples'
+		| 'output'
+		| 'reasoning'
+		| 'safety'
+		| 'quality';
+	title: string;
+	content: string;
+};
+
+export type SystemPromptBuilderResult = {
+	templateId: SystemPromptTemplateId;
+	outputFormat: SystemPromptOutputFormat;
+	promptText: string;
+	output: string;
+	messages: SystemPromptMessage[];
+	sections: SystemPromptSection[];
+	characterCount: number;
+	byteCount: number;
+	lineCount: number;
+	durationMs: number;
+};
+
 export type AiTokenCounterWorkerRequest = {
 	id: number;
 	input: string;
@@ -84,6 +144,18 @@ export type PromptOptimizerWorkerRequest = {
 export type PromptOptimizerWorkerResponse = {
 	id: number;
 	result?: PromptOptimizationResult;
+	error?: string;
+};
+
+export type SystemPromptBuilderWorkerRequest = {
+	id: number;
+	input: SystemPromptBuilderInput;
+	options?: Partial<SystemPromptBuilderOptions>;
+};
+
+export type SystemPromptBuilderWorkerResponse = {
+	id: number;
+	result?: SystemPromptBuilderResult;
 	error?: string;
 };
 
@@ -199,6 +271,94 @@ const DEFAULT_PROMPT_OPTIONS: PromptOptimizationOptions = {
 	abbreviateKnownPatterns: false
 };
 
+export const SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT: SystemPromptBuilderInput = {
+	templateId: 'code-assistant',
+	role: 'Senior software engineering assistant',
+	objective:
+		'Help developers understand, improve, debug, and ship production-quality software while preserving existing behavior.',
+	context:
+		'The user works in an existing codebase. Read the surrounding implementation first, follow local patterns, and keep edits focused.',
+	constraints:
+		'Do not invent APIs. Do not expose secrets. Ask for clarification only when the requested outcome is ambiguous or unsafe.',
+	examples:
+		'User: Refactor this parser for readability.\nAssistant: First inspect the parser and tests, identify behavior that must stay stable, then make the smallest clear change.',
+	outputRequirements:
+		'Lead with the result, cite changed files when relevant, call out tests run, and mention residual risks briefly.'
+};
+
+const DEFAULT_SYSTEM_PROMPT_OPTIONS: SystemPromptBuilderOptions = {
+	outputFormat: 'plain-text',
+	includeSafetyBoundaries: true,
+	includeQualityChecklist: true,
+	includeReasoningGuidance: true
+};
+
+const TEMPLATE_DEFAULTS: Record<
+	SystemPromptTemplateId,
+	Omit<SystemPromptBuilderInput, 'templateId'>
+> = {
+	custom: {
+		role: 'Helpful AI assistant',
+		objective: 'Complete the user request accurately and efficiently.',
+		context: 'Adapt to the user-provided context and keep responses practical.',
+		constraints: 'Be truthful, clear, and concise. Do not fabricate facts.',
+		examples: '',
+		outputRequirements: 'Provide a useful final answer in the format requested by the user.'
+	},
+	'code-assistant': {
+		role: 'Senior software engineering assistant',
+		objective:
+			'Help developers understand, improve, debug, and ship production-quality software while preserving existing behavior.',
+		context:
+			'The user works in an existing codebase. Read the surrounding implementation first, follow local patterns, and keep edits focused.',
+		constraints:
+			'Do not invent APIs. Do not expose secrets. Ask for clarification only when the requested outcome is ambiguous or unsafe.',
+		examples:
+			'User: Refactor this parser for readability.\nAssistant: First inspect the parser and tests, identify behavior that must stay stable, then make the smallest clear change.',
+		outputRequirements:
+			'Lead with the result, cite changed files when relevant, call out tests run, and mention residual risks briefly.'
+	},
+	'data-analyst': {
+		role: 'Careful data analyst',
+		objective:
+			'Turn messy datasets, metric requests, and business questions into clear analysis with reproducible reasoning.',
+		context:
+			'Prefer explicit assumptions, validate units and time windows, and separate observed data from interpretation.',
+		constraints:
+			'Do not overstate causality. Flag missing sample sizes, biased data, or unclear definitions before drawing conclusions.',
+		examples:
+			'User: Why did conversion drop last week?\nAssistant: Check event definitions, segment the change by channel and device, compare against historical baselines, then state confidence.',
+		outputRequirements:
+			'Return an executive summary, key findings, supporting evidence, caveats, and recommended next steps.'
+	},
+	translator: {
+		role: 'Professional localization specialist',
+		objective:
+			'Translate content naturally while preserving meaning, tone, terminology, formatting, and audience intent.',
+		context:
+			'The user may provide source text, target locale, product context, glossary terms, or brand voice requirements.',
+		constraints:
+			'Do not translate code, variables, placeholders, or product names unless explicitly instructed. Preserve Markdown and ICU placeholders.',
+		examples:
+			'User: Translate this onboarding email to German.\nAssistant: Keep the friendly tone, preserve placeholders like {name}, and localize idioms instead of translating literally.',
+		outputRequirements:
+			'Return only the translation unless notes, alternatives, or glossary issues are requested.'
+	},
+	'customer-support': {
+		role: 'Empathetic customer support assistant',
+		objective:
+			'Resolve customer issues with accurate, calm, and action-oriented guidance while protecting user privacy.',
+		context:
+			'The assistant may see tickets, product details, troubleshooting history, and policy constraints.',
+		constraints:
+			'Never promise refunds, legal outcomes, or unsupported fixes. Escalate security, billing, account access, and safety-sensitive cases.',
+		examples:
+			'User: The customer cannot access their account after changing phones.\nAssistant: Acknowledge the issue, verify account recovery prerequisites, provide safe recovery steps, and escalate if verification fails.',
+		outputRequirements:
+			'Respond with a concise customer-ready message, then include internal notes only when requested.'
+	}
+};
+
 const FILLER_REPLACEMENTS: Array<[RegExp, string]> = [
 	[/\bplease\s+/giu, ''],
 	[/\bkindly\s+/giu, ''],
@@ -237,6 +397,13 @@ export function shouldUseAiTokenWorker(input: string): boolean {
 
 export function shouldUsePromptOptimizerWorker(input: string): boolean {
 	return getByteCount(input) > PROMPT_OPTIMIZER_WORKER_THRESHOLD_BYTES;
+}
+
+export function shouldUseSystemPromptBuilderWorker(input: SystemPromptBuilderInput): boolean {
+	return (
+		getByteCount(serializeSystemPromptBuilderInput(input)) >
+		SYSTEM_PROMPT_BUILDER_WORKER_THRESHOLD_BYTES
+	);
 }
 
 export async function analyzeAiTokens(
@@ -294,8 +461,51 @@ export async function optimizePrompt(
 	};
 }
 
+export async function buildSystemPrompt(
+	input: SystemPromptBuilderInput,
+	options: Partial<SystemPromptBuilderOptions> = {}
+): Promise<SystemPromptBuilderResult> {
+	const startedAt = now();
+	const normalizedInput = normalizeSystemPromptInput(input);
+	const mergedOptions: SystemPromptBuilderOptions = {
+		...DEFAULT_SYSTEM_PROMPT_OPTIONS,
+		...options
+	};
+	const sections = buildSystemPromptSections(normalizedInput, mergedOptions);
+	const promptText = sections
+		.map((section) => `## ${section.title}\n${section.content}`)
+		.join('\n\n')
+		.trim();
+	const messages: SystemPromptMessage[] = [{ role: 'system', content: promptText }];
+	const output =
+		mergedOptions.outputFormat === 'openai-json' ? JSON.stringify(messages, null, 2) : promptText;
+
+	return {
+		templateId: normalizedInput.templateId,
+		outputFormat: mergedOptions.outputFormat,
+		promptText,
+		output,
+		messages,
+		sections,
+		characterCount: Array.from(output).length,
+		byteCount: getByteCount(output),
+		lineCount: output.length === 0 ? 0 : output.split(/\r?\n/u).length,
+		durationMs: elapsed(startedAt)
+	};
+}
+
 export function getModelProfile(modelId: AiModelId): AiModelProfile {
 	return MODEL_PROFILES.find((profile) => profile.id === modelId) ?? MODEL_PROFILES[0];
+}
+
+export function getSystemPromptTemplateDefaults(
+	templateId: SystemPromptTemplateId
+): SystemPromptBuilderInput {
+	const defaults = TEMPLATE_DEFAULTS[templateId] ?? TEMPLATE_DEFAULTS.custom;
+	return {
+		templateId,
+		...defaults
+	};
 }
 
 function collectTextStats(input: string): TextStats {
@@ -381,6 +591,105 @@ function applyPromptOptimizations(
 		text: nextText.trim(),
 		changes
 	};
+}
+
+function normalizeSystemPromptInput(input: SystemPromptBuilderInput): SystemPromptBuilderInput {
+	const templateId = TEMPLATE_DEFAULTS[input.templateId] ? input.templateId : 'custom';
+	const defaults = TEMPLATE_DEFAULTS[templateId];
+
+	return {
+		templateId,
+		role: normalizePromptField(input.role) || defaults.role,
+		objective: normalizePromptField(input.objective) || defaults.objective,
+		context: normalizePromptField(input.context),
+		constraints: normalizePromptField(input.constraints),
+		examples: normalizePromptField(input.examples),
+		outputRequirements:
+			normalizePromptField(input.outputRequirements) || defaults.outputRequirements
+	};
+}
+
+function buildSystemPromptSections(
+	input: SystemPromptBuilderInput,
+	options: SystemPromptBuilderOptions
+): SystemPromptSection[] {
+	const sections: SystemPromptSection[] = [
+		{
+			id: 'identity',
+			title: 'Role',
+			content: input.role
+		},
+		{
+			id: 'objective',
+			title: 'Primary Objective',
+			content: input.objective
+		}
+	];
+
+	pushPromptSection(sections, 'context', 'Operating Context', input.context);
+	pushPromptSection(sections, 'constraints', 'Constraints', input.constraints);
+	pushPromptSection(sections, 'examples', 'Examples', input.examples);
+	pushPromptSection(sections, 'output', 'Output Requirements', input.outputRequirements);
+
+	if (options.includeReasoningGuidance) {
+		pushPromptSection(
+			sections,
+			'reasoning',
+			'Reasoning Guidance',
+			'Think through the task before answering. Keep private reasoning concise, and expose only the conclusions, checks, and trade-offs the user needs.'
+		);
+	}
+
+	if (options.includeSafetyBoundaries) {
+		pushPromptSection(
+			sections,
+			'safety',
+			'Safety and Boundaries',
+			'Protect confidential information, refuse unsafe requests briefly, acknowledge uncertainty, and avoid inventing facts, citations, APIs, policies, or capabilities.'
+		);
+	}
+
+	if (options.includeQualityChecklist) {
+		pushPromptSection(
+			sections,
+			'quality',
+			'Quality Checklist',
+			'Before finalizing, verify that the answer follows the requested format, satisfies every explicit requirement, preserves important constraints, and names any meaningful limitation.'
+		);
+	}
+
+	return sections;
+}
+
+function pushPromptSection(
+	sections: SystemPromptSection[],
+	id: SystemPromptSection['id'],
+	title: string,
+	content: string
+): void {
+	const normalizedContent = normalizePromptField(content);
+	if (normalizedContent.length === 0) return;
+	sections.push({ id, title, content: normalizedContent });
+}
+
+function normalizePromptField(input: string): string {
+	return normalizeLineEndings(input)
+		.split('\n')
+		.map((line) => line.trimEnd())
+		.join('\n')
+		.trim();
+}
+
+function serializeSystemPromptBuilderInput(input: SystemPromptBuilderInput): string {
+	return [
+		input.templateId,
+		input.role,
+		input.objective,
+		input.context,
+		input.constraints,
+		input.examples,
+		input.outputRequirements
+	].join('\n\n');
 }
 
 function replaceOutsideCodeFences(

@@ -1,10 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
 	AI_TOKEN_WORKER_THRESHOLD_BYTES,
+	SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT,
+	SYSTEM_PROMPT_BUILDER_WORKER_THRESHOLD_BYTES,
 	analyzeAiTokens,
+	buildSystemPrompt,
+	getSystemPromptTemplateDefaults,
 	optimizePrompt,
 	shouldUseAiTokenWorker,
-	shouldUsePromptOptimizerWorker
+	shouldUsePromptOptimizerWorker,
+	shouldUseSystemPromptBuilderWorker
 } from '../../../src/lib/engines/ai/index.js';
 import { getTool, getToolsByCategory } from '../../../src/lib/registry/index.js';
 
@@ -70,10 +75,66 @@ describe('Prompt token optimizer engine', () => {
 	});
 });
 
+describe('System prompt builder engine', () => {
+	it('builds a structured system prompt from template fields', async () => {
+		const result = await buildSystemPrompt(SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT);
+
+		expect(result.templateId).toBe('code-assistant');
+		expect(result.outputFormat).toBe('plain-text');
+		expect(result.promptText).toContain('## Role');
+		expect(result.promptText).toContain('Senior software engineering assistant');
+		expect(result.promptText).toContain('## Quality Checklist');
+		expect(result.sections.length).toBeGreaterThanOrEqual(7);
+		expect(result.byteCount).toBeGreaterThan(0);
+	});
+
+	it('exports an OpenAI-compatible system message array', async () => {
+		const result = await buildSystemPrompt(SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT, {
+			outputFormat: 'openai-json'
+		});
+		const messages = JSON.parse(result.output) as Array<{ role: string; content: string }>;
+
+		expect(messages).toHaveLength(1);
+		expect(messages[0]?.role).toBe('system');
+		expect(messages[0]?.content).toContain('## Primary Objective');
+	});
+
+	it('loads deterministic defaults for each supported template', () => {
+		expect(getSystemPromptTemplateDefaults('data-analyst').role).toContain('data analyst');
+		expect(getSystemPromptTemplateDefaults('translator').constraints).toContain('placeholders');
+		expect(getSystemPromptTemplateDefaults('customer-support').objective).toContain('customer');
+	});
+
+	it('uses workers for system prompt builder inputs above the byte threshold', () => {
+		const smallInput = {
+			...SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT,
+			context: 'a'.repeat(16 * 1024)
+		};
+		const largeInput = {
+			...SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT,
+			context: 'a'.repeat(SYSTEM_PROMPT_BUILDER_WORKER_THRESHOLD_BYTES + 1)
+		};
+
+		expect(shouldUseSystemPromptBuilderWorker(smallInput)).toBe(false);
+		expect(shouldUseSystemPromptBuilderWorker(largeInput)).toBe(true);
+	});
+
+	it('measures worker eligibility by UTF-8 bytes rather than code units', () => {
+		const input = {
+			...SYSTEM_PROMPT_BUILDER_DEFAULT_INPUT,
+			context: '€'.repeat(Math.ceil(SYSTEM_PROMPT_BUILDER_WORKER_THRESHOLD_BYTES / 3) + 1)
+		};
+
+		expect(input.context.length).toBeLessThan(SYSTEM_PROMPT_BUILDER_WORKER_THRESHOLD_BYTES);
+		expect(shouldUseSystemPromptBuilderWorker(input)).toBe(true);
+	});
+});
+
 describe('AI tool registry', () => {
-	it('registers both AI tools', () => {
+	it('registers all AI tools', () => {
 		expect(getTool('ai', 'token-counter')?.id).toBe('ai-token-counter');
 		expect(getTool('ai', 'token-optimizer')?.id).toBe('ai-token-optimizer');
-		expect(getToolsByCategory('ai')).toHaveLength(2);
+		expect(getTool('ai', 'system-prompt')?.id).toBe('ai-system-prompt-builder');
+		expect(getToolsByCategory('ai')).toHaveLength(3);
 	});
 });

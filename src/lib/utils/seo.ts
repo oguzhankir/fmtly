@@ -20,7 +20,7 @@ export type SeoMetadata = {
 };
 
 const categoryAudiences: Record<string, string> = {
-	ai: 'AI engineers, prompt engineers, and developers',
+	ai: 'AI engineers, prompt engineers, developers, and LLM product teams',
 	crypto: 'Security engineers and developers',
 	pdf: 'Developers and document operations teams'
 };

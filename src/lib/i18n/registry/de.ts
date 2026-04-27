@@ -26,7 +26,7 @@ const registryDe: Record<string, string> = {
 	'category.text.primary_keyword': 'text tools',
 	'category.ai.display_name': 'KI',
 	'category.ai.description':
-		'KI-Tokens zählen, LLM-Kosten schätzen und Prompts für GPT-4o, Claude, Llama, Gemini und Mistral komprimieren, ohne Text hochzuladen.',
+		'KI-Tokens zählen, LLM-Kosten schätzen, Prompts komprimieren und produktionsreife System-Prompts für GPT-4o, Claude, Llama, Gemini und Mistral erstellen, ohne Text hochzuladen.',
 	'category.ai.primary_keyword': 'ki tools',
 	// ── KI Tools ────────────────────────────────────────────────────────────
 	'tool.ai-token-counter.display_name': 'LLM-Token-Zähler',
@@ -86,6 +86,37 @@ const registryDe: Record<string, string> = {
 	'tool.ai-token-optimizer.use_case.2': 'Prompt-Vorlagen vor dem Teilen im Team bereinigen',
 	'tool.ai-token-optimizer.use_case.3':
 		'Tokenbudgets vor und nach der Prompt-Optimierung vergleichen',
+	'tool.ai-system-prompt-builder.display_name': 'System-Prompt-Builder',
+	'tool.ai-system-prompt-builder.tagline':
+		'Produktionsreife System-Prompts aus strukturierten Vorlagen erstellen',
+	'tool.ai-system-prompt-builder.description':
+		'Erstellen Sie hochwertige System-Prompts für Coding-Assistenten, Datenanalysten, Übersetzer und Support-Agenten mit strukturierten Abschnitten, Sicherheitsgrenzen, Qualitätschecks und OpenAI-JSON-Export.',
+	'tool.ai-system-prompt-builder.primary_keyword': 'system prompt builder',
+	'tool.ai-system-prompt-builder.meta_title':
+		'System-Prompt-Builder für KI-Assistenten — fmtly.dev',
+	'tool.ai-system-prompt-builder.meta_description':
+		'Erstellen Sie klare System-Prompts für KI-Assistenten im Browser. Nutzen Sie Vorlagen, Einschränkungen, Beispiele, Sicherheitsregeln, Qualitätschecks und Export als Text oder OpenAI-JSON.',
+	'tool.ai-system-prompt-builder.operation': 'Prompt erstellen',
+	'tool.ai-system-prompt-builder.faq.0.question': 'Was ist ein System-Prompt?',
+	'tool.ai-system-prompt-builder.faq.0.answer':
+		'Ein System-Prompt definiert Rolle, Ziel, Arbeitskontext, Grenzen und Ausgaberegeln des Assistenten, bevor die Nutzernachricht verarbeitet wird.',
+	'tool.ai-system-prompt-builder.faq.1.question': 'Ruft dieses Tool ein KI-Modell auf?',
+	'tool.ai-system-prompt-builder.faq.1.answer':
+		'Nein. Es setzt den Prompt deterministisch im Browser zusammen. Nichts wird hochgeladen und kein Modell erhält Ihren Text.',
+	'tool.ai-system-prompt-builder.faq.2.question': 'Kann ich OpenAI-Chat-Nachrichten exportieren?',
+	'tool.ai-system-prompt-builder.faq.2.answer':
+		'Ja. Stellen Sie das Ausgabeformat auf OpenAI-JSON-Nachrichten, um ein System-Message-Array für API-Code oder Prompt-Tests zu exportieren.',
+	'tool.ai-system-prompt-builder.faq.3.question': 'Ist es für sehr große Kontextblöcke geeignet?',
+	'tool.ai-system-prompt-builder.faq.3.answer':
+		'Große Builder-Eingaben über 500KB laufen in einem Web Worker, damit die Oberfläche reaktionsfähig bleibt und alles lokal verarbeitet wird.',
+	'tool.ai-system-prompt-builder.use_case.0':
+		'Wiederverwendbare System-Prompts für KI-Produktfunktionen erstellen',
+	'tool.ai-system-prompt-builder.use_case.1':
+		'Verhalten von Coding-Assistenten, Analysten, Übersetzern und Support-Agenten standardisieren',
+	'tool.ai-system-prompt-builder.use_case.2':
+		'System-Prompts als Klartext oder OpenAI-kompatible JSON-Nachrichten exportieren',
+	'tool.ai-system-prompt-builder.use_case.3':
+		'Sicherheitsgrenzen, Denkhinweise, Beispiele und Qualitätschecks zu Prompts hinzufügen',
 	// ── JSON Tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON-Formatierer',
 	'tool.json-formatter.tagline': 'JSON formatieren und verschönern mit konfigurierbarer Einrückung',
@@ -2058,6 +2089,82 @@ const registryDe: Record<string, string> = {
 	'ui.prompt_optimizer.stat.savings_percent': 'Ersparnis',
 	'ui.prompt_optimizer.stat.savings_percent_helper': 'Vorher gegenüber nachher',
 	'ui.prompt_optimizer.stat.cost_saved': 'Kostenersparnis',
+	'ui.system_prompt_builder.template.custom': 'Benutzerdefiniert',
+	'ui.system_prompt_builder.template.code_assistant': 'Coding-Assistent',
+	'ui.system_prompt_builder.template.data_analyst': 'Datenanalyst',
+	'ui.system_prompt_builder.template.translator': 'Übersetzer',
+	'ui.system_prompt_builder.template.customer_support': 'Kundensupport',
+	'ui.system_prompt_builder.format.plain_text': 'Klartext',
+	'ui.system_prompt_builder.format.openai_json': 'OpenAI-JSON-Nachrichten',
+	'ui.system_prompt_builder.field.role': 'Rolle',
+	'ui.system_prompt_builder.field.objective': 'Ziel',
+	'ui.system_prompt_builder.field.context': 'Kontext',
+	'ui.system_prompt_builder.field.constraints': 'Einschränkungen',
+	'ui.system_prompt_builder.field.examples': 'Beispiele',
+	'ui.system_prompt_builder.field.output_requirements': 'Ausgabeanforderungen',
+	'ui.system_prompt_builder.placeholder.role':
+		'Definieren Sie Identität und Expertise des Assistenten...',
+	'ui.system_prompt_builder.placeholder.objective':
+		'Beschreiben Sie, was der Assistent erreichen soll...',
+	'ui.system_prompt_builder.placeholder.context':
+		'Fügen Sie Arbeitskontext, Zielgruppe, Domäne oder Produktdetails hinzu...',
+	'ui.system_prompt_builder.placeholder.constraints':
+		'Listen Sie Grenzen, Richtlinien, verbotenes Verhalten oder feste Anforderungen auf...',
+	'ui.system_prompt_builder.placeholder.examples':
+		'Geben Sie Beispielanfragen und ideales Assistentenverhalten an...',
+	'ui.system_prompt_builder.placeholder.output_requirements':
+		'Legen Sie Antwortstruktur, Formatierung, Zitate oder Tonalität fest...',
+	'ui.system_prompt_builder.option.safety_boundaries': 'Sicherheitsgrenzen',
+	'ui.system_prompt_builder.option.safety_boundaries_desc':
+		'Anweisungen zu Datenschutz, Unsicherheit, unsicheren Anfragen und erfundenen Angaben hinzufügen.',
+	'ui.system_prompt_builder.option.quality_checklist': 'Qualitätscheckliste',
+	'ui.system_prompt_builder.option.quality_checklist_desc':
+		'Eine abschließende Selbstprüfung für Anforderungen, Format und Einschränkungen hinzufügen.',
+	'ui.system_prompt_builder.option.reasoning_guidance': 'Denkhinweise',
+	'ui.system_prompt_builder.option.reasoning_guidance_desc':
+		'Den Assistenten anleiten, zuerst zu denken und nur nützliche Schlussfolgerungen offenzulegen.',
+	'ui.system_prompt_builder.output_status': '{size} · {characters} Zeichen · {lines} Zeilen',
+	'ui.system_prompt_builder.input_status': '{size} · {characters} Zeichen · {lines} Zeilen',
+	'ui.system_prompt_builder.stat.characters': 'Zeichen',
+	'ui.system_prompt_builder.stat.characters_helper': 'Generierte Ausgabe',
+	'ui.system_prompt_builder.stat.size': 'Größe',
+	'ui.system_prompt_builder.stat.size_helper': 'UTF-8-Ausgabegröße',
+	'ui.system_prompt_builder.stat.lines': 'Zeilen',
+	'ui.system_prompt_builder.stat.lines_helper': 'Zeilenzahl der Vorschau',
+	'ui.system_prompt_builder.stat.sections': 'Abschnitte',
+	'ui.system_prompt_builder.worker_failed':
+		'Worker-Erstellung fehlgeschlagen. Verarbeitung wird im Hauptthread fortgesetzt.',
+	'ui.system_prompt_builder.build_failed':
+		'Der System-Prompt konnte nicht erstellt werden. Verkleinern Sie die Eingabe.',
+	'ui.system_prompt_builder.sample_loaded': 'Beispiel geladen',
+	'ui.system_prompt_builder.clear_title': 'Felder des System-Prompt-Builders löschen?',
+	'ui.system_prompt_builder.clear_description':
+		'Dadurch werden die aktuellen Builder-Eingaben und die Vorschau entfernt.',
+	'ui.system_prompt_builder.input_cleared': 'Builder-Eingaben gelöscht',
+	'ui.system_prompt_builder.copy_empty': 'Noch nichts zum Kopieren vorhanden',
+	'ui.system_prompt_builder.copy_success': 'System-Prompt kopiert',
+	'ui.system_prompt_builder.copy_error':
+		'Kopieren fehlgeschlagen. Prüfen Sie die Browserberechtigungen.',
+	'ui.system_prompt_builder.download_empty': 'Noch nichts zum Herunterladen vorhanden',
+	'ui.system_prompt_builder.download_success': '{filename} heruntergeladen',
+	'ui.system_prompt_builder.download_error':
+		'Download fehlgeschlagen. Kopieren Sie stattdessen die Ausgabe.',
+	'ui.system_prompt_builder.milliseconds': 'ms',
+	'ui.system_prompt_builder.template_label': 'Vorlage',
+	'ui.system_prompt_builder.output_format_label': 'Ausgabeformat',
+	'ui.system_prompt_builder.worker_active':
+		'Große Builder-Eingabe erkannt (>{size}). Die Prompt-Erstellung läuft in einem Web Worker.',
+	'ui.system_prompt_builder.load_sample': 'Beispiel laden',
+	'ui.system_prompt_builder.clear': 'Löschen',
+	'ui.system_prompt_builder.builder_inputs_title': 'Builder-Eingaben',
+	'ui.system_prompt_builder.output_label': 'Ausgabevorschau',
+	'ui.system_prompt_builder.processing': 'Wird erstellt...',
+	'ui.system_prompt_builder.worker_badge': 'Worker',
+	'ui.system_prompt_builder.worker_used': 'Ausgelagert verarbeitet',
+	'ui.system_prompt_builder.copy_output': 'Ausgabe kopieren',
+	'ui.system_prompt_builder.download_output': 'Herunterladen',
+	'ui.system_prompt_builder.preview_title': 'Vorschau',
+	'ui.system_prompt_builder.output_placeholder': 'Der erstellte System-Prompt erscheint hier...',
 	'ui.lorem.mode': 'Modus',
 	'ui.lorem.mode.paragraphs': 'Absätze',
 	'ui.lorem.mode.sentences': 'Sätze',

@@ -26,7 +26,7 @@ const registryEn: Record<string, string> = {
 	'category.text.primary_keyword': 'text tools',
 	'category.ai.display_name': 'AI',
 	'category.ai.description':
-		'Count AI tokens, estimate LLM costs, and compress prompts for GPT-4o, Claude, Llama, Gemini, and Mistral without uploading text.',
+		'Count AI tokens, estimate LLM costs, compress prompts, and build production-ready system prompts for GPT-4o, Claude, Llama, Gemini, and Mistral without uploading text.',
 	'category.ai.primary_keyword': 'ai tools',
 	'category.pdf.display_name': 'PDF',
 	'category.pdf.description':
@@ -89,6 +89,37 @@ const registryEn: Record<string, string> = {
 	'tool.ai-token-optimizer.use_case.2': 'Clean prompt templates before sharing them with a team',
 	'tool.ai-token-optimizer.use_case.3':
 		'Compare before/after token budgets during prompt engineering',
+
+	'tool.ai-system-prompt-builder.display_name': 'System Prompt Builder',
+	'tool.ai-system-prompt-builder.tagline':
+		'Build production-ready system prompts from structured templates',
+	'tool.ai-system-prompt-builder.description':
+		'Compose high-quality system prompts for coding assistants, data analysts, translators, and support agents with structured sections, safety boundaries, quality checks, and OpenAI JSON export.',
+	'tool.ai-system-prompt-builder.primary_keyword': 'system prompt builder',
+	'tool.ai-system-prompt-builder.meta_title': 'System Prompt Builder for AI Assistants — fmtly.dev',
+	'tool.ai-system-prompt-builder.meta_description':
+		'Build clear system prompts for AI assistants in your browser. Use templates, constraints, examples, safety rules, quality checks, and export plain text or OpenAI JSON messages.',
+	'tool.ai-system-prompt-builder.operation': 'Build prompt',
+	'tool.ai-system-prompt-builder.faq.0.question': 'What is a system prompt?',
+	'tool.ai-system-prompt-builder.faq.0.answer':
+		'A system prompt defines the assistant role, objective, operating context, boundaries, and output rules before the user message is handled.',
+	'tool.ai-system-prompt-builder.faq.1.question': 'Does this tool call an AI model?',
+	'tool.ai-system-prompt-builder.faq.1.answer':
+		'No. It deterministically assembles your prompt in the browser. Nothing is uploaded and no model receives your text.',
+	'tool.ai-system-prompt-builder.faq.2.question': 'Can I export OpenAI chat messages?',
+	'tool.ai-system-prompt-builder.faq.2.answer':
+		'Yes. Switch the output format to OpenAI JSON messages to export a system-role message array you can paste into API code or prompt tests.',
+	'tool.ai-system-prompt-builder.faq.3.question': 'Is it safe for very large context blocks?',
+	'tool.ai-system-prompt-builder.faq.3.answer':
+		'Large builder inputs above 500KB run in a Web Worker so the interface stays responsive while all processing remains local.',
+	'tool.ai-system-prompt-builder.use_case.0':
+		'Create reusable system prompts for AI product features',
+	'tool.ai-system-prompt-builder.use_case.1':
+		'Standardize coding assistant, analyst, translator, and support agent behavior',
+	'tool.ai-system-prompt-builder.use_case.2':
+		'Export system prompts as plain text or OpenAI-compatible JSON messages',
+	'tool.ai-system-prompt-builder.use_case.3':
+		'Add safety boundaries, reasoning guidance, examples, and quality checks to prompts',
 	// ── JSON tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Formatter',
 	'tool.json-formatter.tagline': 'Format and beautify JSON with configurable indentation',
@@ -2063,6 +2094,80 @@ const registryEn: Record<string, string> = {
 	'ui.prompt_optimizer.stat.savings_percent': 'Savings',
 	'ui.prompt_optimizer.stat.savings_percent_helper': 'Before vs after',
 	'ui.prompt_optimizer.stat.cost_saved': 'Cost saved',
+	'ui.system_prompt_builder.template.custom': 'Custom',
+	'ui.system_prompt_builder.template.code_assistant': 'Code assistant',
+	'ui.system_prompt_builder.template.data_analyst': 'Data analyst',
+	'ui.system_prompt_builder.template.translator': 'Translator',
+	'ui.system_prompt_builder.template.customer_support': 'Customer support',
+	'ui.system_prompt_builder.format.plain_text': 'Plain text',
+	'ui.system_prompt_builder.format.openai_json': 'OpenAI JSON messages',
+	'ui.system_prompt_builder.field.role': 'Role',
+	'ui.system_prompt_builder.field.objective': 'Objective',
+	'ui.system_prompt_builder.field.context': 'Context',
+	'ui.system_prompt_builder.field.constraints': 'Constraints',
+	'ui.system_prompt_builder.field.examples': 'Examples',
+	'ui.system_prompt_builder.field.output_requirements': 'Output requirements',
+	'ui.system_prompt_builder.placeholder.role':
+		'Define the assistant identity and level of expertise...',
+	'ui.system_prompt_builder.placeholder.objective':
+		'Describe what the assistant should accomplish...',
+	'ui.system_prompt_builder.placeholder.context':
+		'Add operating context, audience, domain, or product details...',
+	'ui.system_prompt_builder.placeholder.constraints':
+		'List boundaries, policies, forbidden behavior, or hard requirements...',
+	'ui.system_prompt_builder.placeholder.examples':
+		'Provide example user requests and ideal assistant behavior...',
+	'ui.system_prompt_builder.placeholder.output_requirements':
+		'Specify answer structure, formatting, citation, or tone requirements...',
+	'ui.system_prompt_builder.option.safety_boundaries': 'Safety boundaries',
+	'ui.system_prompt_builder.option.safety_boundaries_desc':
+		'Add instructions for privacy, uncertainty, unsafe requests, and fabrication.',
+	'ui.system_prompt_builder.option.quality_checklist': 'Quality checklist',
+	'ui.system_prompt_builder.option.quality_checklist_desc':
+		'Add a final self-check for requirements, format, and limitations.',
+	'ui.system_prompt_builder.option.reasoning_guidance': 'Reasoning guidance',
+	'ui.system_prompt_builder.option.reasoning_guidance_desc':
+		'Guide the assistant to think first and expose only useful conclusions.',
+	'ui.system_prompt_builder.output_status': '{size} · {characters} chars · {lines} lines',
+	'ui.system_prompt_builder.input_status': '{size} · {characters} chars · {lines} lines',
+	'ui.system_prompt_builder.stat.characters': 'Characters',
+	'ui.system_prompt_builder.stat.characters_helper': 'Generated output',
+	'ui.system_prompt_builder.stat.size': 'Size',
+	'ui.system_prompt_builder.stat.size_helper': 'UTF-8 output size',
+	'ui.system_prompt_builder.stat.lines': 'Lines',
+	'ui.system_prompt_builder.stat.lines_helper': 'Preview line count',
+	'ui.system_prompt_builder.stat.sections': 'Sections',
+	'ui.system_prompt_builder.worker_failed':
+		'Worker build failed. Falling back to main thread processing.',
+	'ui.system_prompt_builder.build_failed':
+		'Could not build the system prompt. Try reducing the input size.',
+	'ui.system_prompt_builder.sample_loaded': 'Sample loaded',
+	'ui.system_prompt_builder.clear_title': 'Clear system prompt builder fields?',
+	'ui.system_prompt_builder.clear_description':
+		'This removes the current builder inputs and preview.',
+	'ui.system_prompt_builder.input_cleared': 'Builder inputs cleared',
+	'ui.system_prompt_builder.copy_empty': 'Nothing to copy yet',
+	'ui.system_prompt_builder.copy_success': 'System prompt copied',
+	'ui.system_prompt_builder.copy_error': 'Copy failed. Check browser permissions.',
+	'ui.system_prompt_builder.download_empty': 'Nothing to download yet',
+	'ui.system_prompt_builder.download_success': 'Downloaded {filename}',
+	'ui.system_prompt_builder.download_error': 'Download failed. Try copying the output instead.',
+	'ui.system_prompt_builder.milliseconds': 'ms',
+	'ui.system_prompt_builder.template_label': 'Template',
+	'ui.system_prompt_builder.output_format_label': 'Output format',
+	'ui.system_prompt_builder.worker_active':
+		'Large builder input detected (>{size}). Prompt generation runs in a Web Worker.',
+	'ui.system_prompt_builder.load_sample': 'Load sample',
+	'ui.system_prompt_builder.clear': 'Clear',
+	'ui.system_prompt_builder.builder_inputs_title': 'Builder inputs',
+	'ui.system_prompt_builder.output_label': 'Output preview',
+	'ui.system_prompt_builder.processing': 'Building...',
+	'ui.system_prompt_builder.worker_badge': 'Worker',
+	'ui.system_prompt_builder.worker_used': 'Processed off-thread',
+	'ui.system_prompt_builder.copy_output': 'Copy output',
+	'ui.system_prompt_builder.download_output': 'Download',
+	'ui.system_prompt_builder.preview_title': 'Preview',
+	'ui.system_prompt_builder.output_placeholder': 'Built system prompt appears here...',
 	'ui.lorem.mode': 'Mode',
 	'ui.lorem.mode.paragraphs': 'Paragraphs',
 	'ui.lorem.mode.sentences': 'Sentences',

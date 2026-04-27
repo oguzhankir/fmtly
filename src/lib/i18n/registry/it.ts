@@ -26,7 +26,7 @@ const registryIt: Record<string, string> = {
 	'category.text.primary_keyword': 'strumenti testo',
 	'category.ai.display_name': 'IA',
 	'category.ai.description':
-		'Conta token IA, stima i costi LLM e comprimi prompt per GPT-4o, Claude, Llama, Gemini e Mistral senza caricare testo.',
+		'Conta token IA, stima i costi LLM, comprimi prompt e crea prompt di sistema pronti per la produzione per GPT-4o, Claude, Llama, Gemini e Mistral senza caricare testo.',
 	'category.ai.primary_keyword': 'strumenti ia',
 	// ── Strumenti IA ────────────────────────────────────────────────────────
 	'tool.ai-token-counter.display_name': 'Contatore Token LLM',
@@ -87,6 +87,37 @@ const registryIt: Record<string, string> = {
 		'Pulire template di prompt prima di condividerli con il team',
 	'tool.ai-token-optimizer.use_case.3':
 		'Confrontare budget token prima/dopo durante il prompt engineering',
+	'tool.ai-system-prompt-builder.display_name': 'Generatore di Prompt di Sistema',
+	'tool.ai-system-prompt-builder.tagline':
+		'Crea prompt di sistema pronti per la produzione da template strutturati',
+	'tool.ai-system-prompt-builder.description':
+		'Componi prompt di sistema di alta qualità per assistenti di codice, analisti dati, traduttori e agenti di supporto con sezioni strutturate, limiti di sicurezza, controlli qualità ed esportazione JSON OpenAI.',
+	'tool.ai-system-prompt-builder.primary_keyword': 'generatore prompt di sistema',
+	'tool.ai-system-prompt-builder.meta_title':
+		'Generatore di Prompt di Sistema per Assistenti IA — fmtly.dev',
+	'tool.ai-system-prompt-builder.meta_description':
+		'Crea prompt di sistema chiari per assistenti IA nel browser. Usa template, vincoli, esempi, regole di sicurezza, controlli qualità ed esporta testo o JSON OpenAI.',
+	'tool.ai-system-prompt-builder.operation': 'Crea prompt',
+	'tool.ai-system-prompt-builder.faq.0.question': 'Che cos’è un prompt di sistema?',
+	'tool.ai-system-prompt-builder.faq.0.answer':
+		'Un prompt di sistema definisce ruolo, obiettivo, contesto operativo, limiti e regole di output dell’assistente prima del messaggio utente.',
+	'tool.ai-system-prompt-builder.faq.1.question': 'Questo strumento chiama un modello IA?',
+	'tool.ai-system-prompt-builder.faq.1.answer':
+		'No. Assembla il prompt in modo deterministico nel browser. Nulla viene caricato e nessun modello riceve il tuo testo.',
+	'tool.ai-system-prompt-builder.faq.2.question': 'Posso esportare messaggi chat OpenAI?',
+	'tool.ai-system-prompt-builder.faq.2.answer':
+		'Sì. Imposta il formato di output su messaggi JSON OpenAI per esportare un array con ruolo system da incollare in codice API o test di prompt.',
+	'tool.ai-system-prompt-builder.faq.3.question': 'È sicuro per blocchi di contesto molto grandi?',
+	'tool.ai-system-prompt-builder.faq.3.answer':
+		'Gli input grandi del generatore sopra 500KB vengono elaborati in un Web Worker, mantenendo reattiva l’interfaccia e il trattamento locale.',
+	'tool.ai-system-prompt-builder.use_case.0':
+		'Creare prompt di sistema riutilizzabili per funzionalità di prodotti IA',
+	'tool.ai-system-prompt-builder.use_case.1':
+		'Standardizzare il comportamento di assistenti di codice, analisti, traduttori e agenti di supporto',
+	'tool.ai-system-prompt-builder.use_case.2':
+		'Esportare prompt di sistema come testo semplice o messaggi JSON compatibili OpenAI',
+	'tool.ai-system-prompt-builder.use_case.3':
+		'Aggiungere limiti di sicurezza, guida al ragionamento, esempi e controlli qualità ai prompt',
 	// ── Strumenti JSON ──────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'Formattatore JSON',
 	'tool.json-formatter.tagline': 'Formatta e abbellisci JSON con indentazione configurabile',
@@ -2109,6 +2140,79 @@ const registryIt: Record<string, string> = {
 	'ui.prompt_optimizer.stat.savings_percent': 'Risparmio',
 	'ui.prompt_optimizer.stat.savings_percent_helper': 'Prima vs dopo',
 	'ui.prompt_optimizer.stat.cost_saved': 'Costo risparmiato',
+	'ui.system_prompt_builder.template.custom': 'Personalizzato',
+	'ui.system_prompt_builder.template.code_assistant': 'Assistente di codice',
+	'ui.system_prompt_builder.template.data_analyst': 'Analista dati',
+	'ui.system_prompt_builder.template.translator': 'Traduttore',
+	'ui.system_prompt_builder.template.customer_support': 'Supporto clienti',
+	'ui.system_prompt_builder.format.plain_text': 'Testo semplice',
+	'ui.system_prompt_builder.format.openai_json': 'Messaggi JSON OpenAI',
+	'ui.system_prompt_builder.field.role': 'Ruolo',
+	'ui.system_prompt_builder.field.objective': 'Obiettivo',
+	'ui.system_prompt_builder.field.context': 'Contesto',
+	'ui.system_prompt_builder.field.constraints': 'Vincoli',
+	'ui.system_prompt_builder.field.examples': 'Esempi',
+	'ui.system_prompt_builder.field.output_requirements': 'Requisiti di output',
+	'ui.system_prompt_builder.placeholder.role':
+		'Definisci identità e livello di competenza dell’assistente...',
+	'ui.system_prompt_builder.placeholder.objective': 'Descrivi cosa deve ottenere l’assistente...',
+	'ui.system_prompt_builder.placeholder.context':
+		'Aggiungi contesto operativo, pubblico, dominio o dettagli prodotto...',
+	'ui.system_prompt_builder.placeholder.constraints':
+		'Elenca limiti, policy, comportamenti vietati o requisiti rigidi...',
+	'ui.system_prompt_builder.placeholder.examples':
+		'Fornisci esempi di richieste utente e comportamento ideale dell’assistente...',
+	'ui.system_prompt_builder.placeholder.output_requirements':
+		'Specifica struttura, formattazione, citazioni o tono della risposta...',
+	'ui.system_prompt_builder.option.safety_boundaries': 'Limiti di sicurezza',
+	'ui.system_prompt_builder.option.safety_boundaries_desc':
+		'Aggiungi istruzioni su privacy, incertezza, richieste non sicure e invenzioni.',
+	'ui.system_prompt_builder.option.quality_checklist': 'Checklist qualità',
+	'ui.system_prompt_builder.option.quality_checklist_desc':
+		'Aggiungi un controllo finale su requisiti, formato e limitazioni.',
+	'ui.system_prompt_builder.option.reasoning_guidance': 'Guida al ragionamento',
+	'ui.system_prompt_builder.option.reasoning_guidance_desc':
+		'Guida l’assistente a pensare prima e mostrare solo conclusioni utili.',
+	'ui.system_prompt_builder.output_status': '{size} · {characters} caratteri · {lines} righe',
+	'ui.system_prompt_builder.input_status': '{size} · {characters} caratteri · {lines} righe',
+	'ui.system_prompt_builder.stat.characters': 'Caratteri',
+	'ui.system_prompt_builder.stat.characters_helper': 'Output generato',
+	'ui.system_prompt_builder.stat.size': 'Dimensione',
+	'ui.system_prompt_builder.stat.size_helper': 'Dimensione output UTF-8',
+	'ui.system_prompt_builder.stat.lines': 'Righe',
+	'ui.system_prompt_builder.stat.lines_helper': 'Conteggio righe anteprima',
+	'ui.system_prompt_builder.stat.sections': 'Sezioni',
+	'ui.system_prompt_builder.worker_failed':
+		'Creazione nel worker non riuscita. Elaborazione nel thread principale.',
+	'ui.system_prompt_builder.build_failed':
+		'Impossibile creare il prompt di sistema. Prova a ridurre la dimensione dell’input.',
+	'ui.system_prompt_builder.sample_loaded': 'Esempio caricato',
+	'ui.system_prompt_builder.clear_title': 'Cancellare i campi del generatore di prompt?',
+	'ui.system_prompt_builder.clear_description':
+		'Rimuove gli input correnti del generatore e l’anteprima.',
+	'ui.system_prompt_builder.input_cleared': 'Input del generatore cancellati',
+	'ui.system_prompt_builder.copy_empty': 'Niente da copiare per ora',
+	'ui.system_prompt_builder.copy_success': 'Prompt di sistema copiato',
+	'ui.system_prompt_builder.copy_error': 'Copia non riuscita. Controlla i permessi del browser.',
+	'ui.system_prompt_builder.download_empty': 'Niente da scaricare per ora',
+	'ui.system_prompt_builder.download_success': '{filename} scaricato',
+	'ui.system_prompt_builder.download_error': 'Download non riuscito. Prova a copiare l’output.',
+	'ui.system_prompt_builder.milliseconds': 'ms',
+	'ui.system_prompt_builder.template_label': 'Template',
+	'ui.system_prompt_builder.output_format_label': 'Formato output',
+	'ui.system_prompt_builder.worker_active':
+		'Input grande rilevato (>{size}). La generazione del prompt viene eseguita in un Web Worker.',
+	'ui.system_prompt_builder.load_sample': 'Carica esempio',
+	'ui.system_prompt_builder.clear': 'Cancella',
+	'ui.system_prompt_builder.builder_inputs_title': 'Input del generatore',
+	'ui.system_prompt_builder.output_label': 'Anteprima output',
+	'ui.system_prompt_builder.processing': 'Creazione...',
+	'ui.system_prompt_builder.worker_badge': 'Worker',
+	'ui.system_prompt_builder.worker_used': 'Elaborato fuori dal thread principale',
+	'ui.system_prompt_builder.copy_output': 'Copia output',
+	'ui.system_prompt_builder.download_output': 'Scarica',
+	'ui.system_prompt_builder.preview_title': 'Anteprima',
+	'ui.system_prompt_builder.output_placeholder': 'Il prompt di sistema creato apparirà qui...',
 	'ui.lorem.mode': 'Modalità',
 	'ui.lorem.mode.paragraphs': 'Paragrafi',
 	'ui.lorem.mode.sentences': 'Frasi',

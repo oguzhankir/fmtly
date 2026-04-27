@@ -3,6 +3,7 @@ import type { ToolDefinition } from '../types.js';
 const aiRelated = [
 	{ category: 'ai', slug: 'token-counter' },
 	{ category: 'ai', slug: 'token-optimizer' },
+	{ category: 'ai', slug: 'system-prompt' },
 	{ category: 'text', slug: 'word-counter' },
 	{ category: 'text', slug: 'readability' }
 ] as const;
@@ -96,5 +97,52 @@ User: Refactor this Svelte component for readability, keep behavior unchanged, a
 		],
 		sampleInput:
 			'Please carefully analyze this prompt and make sure to remove unnecessary words while preserving the full intent and output requirements.'
+	},
+	{
+		id: 'ai-system-prompt-builder',
+		category: 'ai',
+		slug: 'system-prompt',
+		displayName: 'tool.ai-system-prompt-builder.display_name',
+		tagline: 'tool.ai-system-prompt-builder.tagline',
+		description: 'tool.ai-system-prompt-builder.description',
+		primaryKeyword: 'tool.ai-system-prompt-builder.primary_keyword',
+		metaTitle: 'tool.ai-system-prompt-builder.meta_title',
+		metaDescription: 'tool.ai-system-prompt-builder.meta_description',
+		engine: 'ai',
+		operation: 'tool.ai-system-prompt-builder.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'txt',
+		outputLanguage: 'txt',
+		hasTreeView: false,
+		relatedTools: [...aiRelated],
+		faqs: [
+			{
+				question: 'tool.ai-system-prompt-builder.faq.0.question',
+				answer: 'tool.ai-system-prompt-builder.faq.0.answer'
+			},
+			{
+				question: 'tool.ai-system-prompt-builder.faq.1.question',
+				answer: 'tool.ai-system-prompt-builder.faq.1.answer'
+			},
+			{
+				question: 'tool.ai-system-prompt-builder.faq.2.question',
+				answer: 'tool.ai-system-prompt-builder.faq.2.answer'
+			},
+			{
+				question: 'tool.ai-system-prompt-builder.faq.3.question',
+				answer: 'tool.ai-system-prompt-builder.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.ai-system-prompt-builder.use_case.0',
+			'tool.ai-system-prompt-builder.use_case.1',
+			'tool.ai-system-prompt-builder.use_case.2',
+			'tool.ai-system-prompt-builder.use_case.3'
+		],
+		sampleInput: `Role: Senior software engineering assistant
+
+Objective: Help developers debug, refactor, and ship production-quality code.
+
+Constraints: Preserve behavior, follow local patterns, and report tests run.`
 	}
 ];

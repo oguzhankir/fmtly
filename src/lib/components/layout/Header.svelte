@@ -26,6 +26,7 @@
 		'encode',
 		'qr',
 		'crypto',
+		'ai',
 		'generate',
 		'pdf'
 	];
