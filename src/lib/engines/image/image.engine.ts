@@ -55,6 +55,19 @@ type ResizeDimensions = {
 	height: number;
 };
 
+type Canvas2DLike = {
+	imageSmoothingEnabled: boolean;
+	imageSmoothingQuality: ImageSmoothingQuality;
+	clearRect: (x: number, y: number, width: number, height: number) => void;
+	drawImage: (
+		image: CanvasImageSource,
+		dx: number,
+		dy: number,
+		dWidth: number,
+		dHeight: number
+	) => void;
+};
+
 const DATA_URL_HEADER_PATTERN = /^data:image\/(png|jpeg|jpg|webp|gif|bmp|x-icon|svg\+xml);base64,/i;
 const MIN_DIMENSION = 1;
 const MAX_DIMENSION = 8192;
@@ -221,12 +234,7 @@ function drawImageToCanvas(
 	dimensions: ResizeDimensions
 ): void {
 	const context = canvas.getContext('2d');
-	if (
-		!(
-			context instanceof OffscreenCanvasRenderingContext2D ||
-			context instanceof CanvasRenderingContext2D
-		)
-	) {
+	if (!isCanvas2DLike(context)) {
 		throw new Error('2D canvas context is unavailable');
 	}
 
@@ -234,6 +242,16 @@ function drawImageToCanvas(
 	context.imageSmoothingQuality = 'high';
 	context.clearRect(0, 0, dimensions.width, dimensions.height);
 	context.drawImage(bitmap, 0, 0, dimensions.width, dimensions.height);
+}
+
+function isCanvas2DLike(context: unknown): context is Canvas2DLike {
+	if (!context || typeof context !== 'object') return false;
+	return (
+		'imageSmoothingEnabled' in context &&
+		'imageSmoothingQuality' in context &&
+		'clearRect' in context &&
+		'drawImage' in context
+	);
 }
 
 async function canvasToDataUrl(
@@ -344,6 +362,18 @@ function blobToDataUrl(blob: Blob): Promise<string> {
 
 function clampNumber(value: number, min: number, max: number): number {
 	return Math.min(max, Math.max(min, value));
+}
+
+function is2dCanvasContext(
+	context: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null
+): context is OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D {
+	if (context === null) return false;
+	return (
+		'drawImage' in context &&
+		typeof context.drawImage === 'function' &&
+		'clearRect' in context &&
+		typeof context.clearRect === 'function'
+	);
 }
 
 function nowMs(): number {
