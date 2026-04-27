@@ -4338,7 +4338,95 @@ const registryTr: Record<string, string> = {
 	'tool.xml-xsd-validate.warnings': '{count} uyarı',
 	'tool.xml-xsd-validate.errors_title': 'Hatalar',
 	'tool.xml-xsd-validate.warnings_title': 'Uyarılar',
-	'tool.xml-xsd-validate.waiting_hint': 'Doğrulama için XSD şeması girin.'
+	'tool.xml-xsd-validate.waiting_hint': 'Doğrulama için XSD şeması girin.',
+
+	// Missing keys from English
+	'category.image.display_name': 'Görsel',
+	'category.image.description':
+		'Görselleri tarayıcıda yeniden boyutlandır, dönüştür ve optimize et. Tüm işlemler yerel çalışır, dosyalar cihazdan çıkmaz.',
+	'category.image.primary_keyword': 'görsel araçları',
+	'tool.image-resizer.display_name': 'Görsel Yeniden Boyutlandırıcı',
+	'tool.image-resizer.tagline':
+		'Oranı koruyarak veya özel ölçülerle görselleri hızlıca yeniden boyutlandır',
+	'tool.image-resizer.description':
+		'PNG, JPEG ve WebP görsellerini tarayıcıda yeniden boyutlandır. Özel genişlik/yükseklik, yüzde ölçekleme, oran kilidi, kalite ayarı ve yerel dışa aktarma desteği sunar.',
+	'tool.image-resizer.primary_keyword': 'görsel yeniden boyutlandırıcı',
+	'tool.image-resizer.meta_title': 'Görsel Yeniden Boyutlandırıcı — PNG, JPEG, WebP | fmtly.dev',
+	'tool.image-resizer.meta_description':
+		'Görselleri tarayıcıda yeniden boyutlandır. Oranı kilitle, genişlik/yükseklik veya yüzde ölçek kullan, kaliteyi ayarla ve çıktıyı anında indir.',
+	'tool.image-resizer.operation': 'Yeniden boyutlandır',
+	'tool.image-resizer.faq.0.question': 'Dosyalarım sunucuya yükleniyor mu?',
+	'tool.image-resizer.faq.0.answer':
+		'Hayır. Tüm görsel işleme tarayıcıda yerel olarak yapılır; dosyalar cihazını terk etmez.',
+	'tool.image-resizer.faq.1.question': 'Orijinal en-boy oranını koruyabilir miyim?',
+	'tool.image-resizer.faq.1.answer':
+		'Evet. Oran kilidi açıkken bir ölçüyü değiştirdiğinde diğer ölçü otomatik güncellenir.',
+	'tool.image-resizer.faq.2.question': 'Hangi çıktı formatları destekleniyor?',
+	'tool.image-resizer.faq.2.answer':
+		'PNG, JPEG ve WebP çıktısı alabilirsin. İstersen orijinal formatı koruyabilirsin.',
+	'tool.image-resizer.faq.3.question': 'Büyük görsellerde performans nasıl korunuyor?',
+	'tool.image-resizer.faq.3.answer':
+		'500KB üzerindeki girişlerde işlem Web Worker’da yürütülür; arayüz akıcı kalır.',
+	'tool.image-resizer.use_case.0': 'Web ve mobil için görselleri doğru boyutlara hızlıca uyarlama',
+	'tool.image-resizer.use_case.1':
+		'Yayın öncesi görsel dosya boyutunu azaltma ve kaliteyi dengeleme',
+	'tool.image-resizer.use_case.2':
+		'Farklı platformlar için aynı görselin alternatif çıktıları hazırlama',
+	'tool.image-resizer.use_case.3':
+		'Sunucuya yüklemeden gizli görselleri güvenli şekilde yeniden boyutlandırma',
+	'ui.image_resizer.drop_title': 'Görseli buraya bırak veya gözat',
+	'ui.image_resizer.drop_hint': 'Dosyaların bu tarayıcıda kalır — hiçbir şey sunucuya yüklenmez.',
+	'ui.image_resizer.browse': 'Dosya seç',
+	'ui.image_resizer.input_aria': 'Görsel dosyası seç',
+	'ui.image_resizer.no_file': 'Henüz görsel yüklenmedi',
+	'ui.image_resizer.file_loaded': '{name} yüklendi',
+	'ui.image_resizer.file_read_error': 'Görsel okunamadı',
+	'ui.image_resizer.preview_alt': 'Yeniden boyutlandırılmış görsel önizlemesi',
+	'ui.image_resizer.controls_title': 'Yeniden boyutlandırma ayarları',
+	'ui.image_resizer.width_label': 'Genişlik',
+	'ui.image_resizer.height_label': 'Yükseklik',
+	'ui.image_resizer.scale_label': 'Ölçek (%)',
+	'ui.image_resizer.lock_ratio': 'Oranı kilitle',
+	'ui.image_resizer.keep_format': 'Orijinal formatı koru',
+	'ui.image_resizer.output_format': 'Çıktı formatı',
+	'ui.image_resizer.quality_label': 'Kalite',
+	'ui.image_resizer.worker_active':
+		'Büyük giriş algılandı (>{size}). İşlem Web Worker üzerinde çalışıyor.',
+	'ui.image_resizer.worker_badge': 'Worker',
+	'ui.image_resizer.worker_used': 'Arka iş parçacığında işlendi',
+	'ui.image_resizer.worker_failed':
+		'Worker işlemi başarısız oldu. Ana iş parçacığına geri dönüldü.',
+	'ui.image_resizer.resize_failed': 'Görsel yeniden boyutlandırılamadı',
+	'ui.image_resizer.output_title': 'Çıktı önizlemesi',
+	'ui.image_resizer.output_placeholder':
+		'Önizleme için bir görsel yükleyip boyut/format ayarlarını güncelle.',
+	'ui.image_resizer.processing': 'İşleniyor...',
+	'ui.image_resizer.copy_image': 'Görseli kopyala',
+	'ui.image_resizer.download_image': 'Görseli indir',
+	'ui.image_resizer.clear': 'Temizle',
+	'ui.image_resizer.copy_empty': 'Kopyalanacak görsel yok',
+	'ui.image_resizer.copy_success': 'Görsel panoya kopyalandı',
+	'ui.image_resizer.copy_error': 'Kopyalama başarısız. Tarayıcı izinlerini kontrol et.',
+	'ui.image_resizer.download_empty': 'İndirilecek görsel yok',
+	'ui.image_resizer.download_success': '{filename} indirildi',
+	'ui.image_resizer.download_error': 'İndirme başarısız oldu',
+	'ui.image_resizer.clear_title': 'Yeniden boyutlandırıcı temizlensin mi?',
+	'ui.image_resizer.clear_description':
+		'Bu işlem yüklenen görseli, çıktı önizlemesini ve ayarları sıfırlar.',
+	'ui.image_resizer.input_cleared': 'Görsel girdisi temizlendi',
+	'ui.image_resizer.stat.input_dimensions': 'Giriş ölçüsü',
+	'ui.image_resizer.stat.input_size': 'Giriş boyutu',
+	'ui.image_resizer.stat.output_dimensions': 'Çıktı ölçüsü',
+	'ui.image_resizer.stat.output_size': 'Çıktı boyutu',
+	'ui.image_resizer.stat.reduction': 'Boyut farkı',
+	'ui.image_resizer.stat.reduction_helper': 'Girişe göre değişim',
+	'ui.image_resizer.placeholder_width': 'Genişlik',
+	'ui.image_resizer.placeholder_height': 'Yükseklik',
+	'ui.image_resizer.png': 'PNG',
+	'ui.image_resizer.jpeg': 'JPEG',
+	'ui.image_resizer.webp': 'WebP',
+	'ui.image_resizer.source_status': '{size} · {dimensions} · {format}',
+	'ui.image_resizer.output_status': '{size} · {dimensions} · {format}'
 };
 
 export default registryTr;

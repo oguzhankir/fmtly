@@ -4304,7 +4304,93 @@ const registryIt: Record<string, string> = {
 	'tool.xml-xsd-validate.warnings': 'tool.xml-xsd-validate.warnings',
 	'tool.xml-xsd-validate.errors_title': 'tool.xml-xsd-validate.errors_title',
 	'tool.xml-xsd-validate.warnings_title': 'tool.xml-xsd-validate.warnings_title',
-	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint'
+	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint',
+
+	// Missing keys from English
+	'category.image.display_name': 'Immagine',
+	'category.image.description':
+		'Ridimensiona, converti e ottimizza immagini direttamente nel browser, senza upload.',
+	'category.image.primary_keyword': 'strumenti immagini',
+	'tool.image-resizer.display_name': 'Ridimensionatore Immagini',
+	'tool.image-resizer.tagline':
+		'Ridimensiona immagini con proporzioni bloccate, scala percentuale e controllo qualità',
+	'tool.image-resizer.description':
+		'Ridimensiona immagini in modo preciso con blocco proporzioni, larghezza/altezza personalizzate, scala percentuale e output PNG, JPEG o WebP con confronto prima/dopo.',
+	'tool.image-resizer.primary_keyword': 'ridimensionatore immagini',
+	'tool.image-resizer.meta_title': 'Ridimensionatore Immagini Online — PNG, JPG, WebP | fmtly.dev',
+	'tool.image-resizer.meta_description':
+		'Ridimensiona immagini online nel browser. Mantieni proporzioni, imposta dimensioni esatte o percentuali, regola qualità ed esporta PNG, JPEG o WebP.',
+	'tool.image-resizer.operation': 'Ridimensiona',
+	'tool.image-resizer.faq.0.question': 'Le mie immagini vengono caricate su un server?',
+	'tool.image-resizer.faq.0.answer':
+		'No. Tutta l’elaborazione avviene localmente nel browser; nessun file viene inviato ai server.',
+	'tool.image-resizer.faq.1.question': 'Posso mantenere le proporzioni originali?',
+	'tool.image-resizer.faq.1.answer':
+		'Sì. Attiva il blocco proporzioni per aggiornare automaticamente larghezza e altezza in modo coerente.',
+	'tool.image-resizer.faq.2.question': 'Quali formati di output sono supportati?',
+	'tool.image-resizer.faq.2.answer':
+		'Puoi esportare in PNG, JPEG o WebP. Se vuoi, puoi anche mantenere il formato originale.',
+	'tool.image-resizer.faq.3.question': 'Cosa succede con file grandi?',
+	'tool.image-resizer.faq.3.answer':
+		'Per input oltre 500KB il ridimensionamento passa a un Web Worker, mantenendo l’interfaccia fluida.',
+	'tool.image-resizer.use_case.0': 'Preparare immagini responsive per pagine web e blog',
+	'tool.image-resizer.use_case.1': 'Ridurre immagini ad alta risoluzione per upload più veloci',
+	'tool.image-resizer.use_case.2': 'Creare varianti immagine con dimensioni pixel esatte',
+	'tool.image-resizer.use_case.3':
+		'Convertire output ridimensionato in PNG, JPEG o WebP con controllo qualità',
+	'ui.image_resizer.drop_title': 'Trascina un’immagine qui o seleziona un file',
+	'ui.image_resizer.drop_hint':
+		'Elaborazione locale nel browser. Sono supportati PNG, JPEG e WebP.',
+	'ui.image_resizer.browse': 'Seleziona immagine',
+	'ui.image_resizer.input_aria': 'Seleziona file immagine',
+	'ui.image_resizer.no_file': 'Carica un’immagine per iniziare il ridimensionamento.',
+	'ui.image_resizer.file_loaded': 'Immagine caricata: {name}',
+	'ui.image_resizer.file_read_error': 'Impossibile leggere il file immagine selezionato.',
+	'ui.image_resizer.preview_alt': 'Anteprima immagine ridimensionata',
+	'ui.image_resizer.controls_title': 'Controlli ridimensionamento',
+	'ui.image_resizer.width_label': 'Larghezza',
+	'ui.image_resizer.height_label': 'Altezza',
+	'ui.image_resizer.scale_label': 'Scala',
+	'ui.image_resizer.lock_ratio': 'Blocca proporzioni',
+	'ui.image_resizer.keep_format': 'Mantieni formato originale',
+	'ui.image_resizer.output_format': 'Formato output',
+	'ui.image_resizer.quality_label': 'Qualità',
+	'ui.image_resizer.worker_active':
+		'Input grande rilevato (>{size}). Ridimensionamento in Web Worker.',
+	'ui.image_resizer.worker_badge': 'Worker',
+	'ui.image_resizer.worker_used': 'Elaborato fuori dal thread principale',
+	'ui.image_resizer.worker_failed':
+		'Il worker ha fallito. Ripiego sull’elaborazione nel thread principale.',
+	'ui.image_resizer.resize_failed': 'Ridimensionamento non riuscito. Controlla input e opzioni.',
+	'ui.image_resizer.output_title': 'Anteprima output',
+	'ui.image_resizer.output_placeholder': 'L’anteprima dell’immagine ridimensionata apparirà qui...',
+	'ui.image_resizer.processing': 'Ridimensionamento...',
+	'ui.image_resizer.copy_image': 'Copia immagine',
+	'ui.image_resizer.download_image': 'Scarica immagine',
+	'ui.image_resizer.clear': 'Pulisci',
+	'ui.image_resizer.copy_empty': 'Nessuna immagine da copiare.',
+	'ui.image_resizer.copy_success': 'Immagine copiata negli appunti.',
+	'ui.image_resizer.copy_error': 'Copia non riuscita. Usa il download come alternativa.',
+	'ui.image_resizer.download_empty': 'Nessuna immagine da scaricare.',
+	'ui.image_resizer.download_success': 'Immagine ridimensionata scaricata.',
+	'ui.image_resizer.download_error': 'Download non riuscito. Riprova.',
+	'ui.image_resizer.clear_title': 'Vuoi cancellare input e output dell’immagine?',
+	'ui.image_resizer.clear_description':
+		'Questa azione rimuove il file caricato, opzioni e anteprima ridimensionata.',
+	'ui.image_resizer.input_cleared': 'Input e output immagine cancellati.',
+	'ui.image_resizer.stat.input_dimensions': 'Dimensioni input',
+	'ui.image_resizer.stat.input_size': 'Dimensione input',
+	'ui.image_resizer.stat.output_dimensions': 'Dimensioni output',
+	'ui.image_resizer.stat.output_size': 'Dimensione output',
+	'ui.image_resizer.stat.reduction': 'Riduzione',
+	'ui.image_resizer.stat.reduction_helper': 'Riduzione dimensione file',
+	'ui.image_resizer.placeholder_width': 'Larghezza',
+	'ui.image_resizer.placeholder_height': 'Altezza',
+	'ui.image_resizer.png': 'PNG',
+	'ui.image_resizer.jpeg': 'JPEG',
+	'ui.image_resizer.webp': 'WebP',
+	'ui.image_resizer.source_status': '{name} · {size} · {width}×{height}px',
+	'ui.image_resizer.output_status': '{format} · {size} · {width}×{height}px'
 };
 
 export default registryIt;

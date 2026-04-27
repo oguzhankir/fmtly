@@ -214,7 +214,7 @@ Process images entirely in the browser.
 
 | 136 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 137 | Image Resizer | `image/resize` | Resize images with locked aspect ratio, custom dimensions, or percentage scale. |
+| 137 | Image Resizer ✅ | `image/resize` | done — Resize images in-browser with locked aspect ratio, custom width/height, percentage scaling, PNG/JPEG/WebP output, quality controls, before/after metrics, and Web Worker offloading above 500KB. |
 | 138 | Image Format Converter | `image/convert` | Convert between PNG, JPEG, WebP, AVIF, and GIF. |
 | 139 | Image Compressor | `image/compress` | Reduce file size with configurable quality. Real-time before/after preview. |
 | 140 | SVG Optimizer | `image/svg-optimizer` | Optimize SVG files with SVGO — remove metadata, simplify paths, collapse groups. |

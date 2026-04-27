@@ -4394,7 +4394,96 @@ const registryFr: Record<string, string> = {
 	'tool.xml-xsd-validate.warnings': 'tool.xml-xsd-validate.warnings',
 	'tool.xml-xsd-validate.errors_title': 'tool.xml-xsd-validate.errors_title',
 	'tool.xml-xsd-validate.warnings_title': 'tool.xml-xsd-validate.warnings_title',
-	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint'
+	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint',
+
+	// Missing keys from English
+	'category.image.display_name': 'Image',
+	'category.image.description':
+		'Redimensionnez et convertissez des images localement dans votre navigateur avec aperçu en temps réel, contrôle du ratio et export instantané.',
+	'category.image.primary_keyword': 'outils image',
+	'tool.image-resizer.display_name': 'Redimensionneur d’Images',
+	'tool.image-resizer.tagline':
+		'Redimensionner des images avec ratio verrouillé, dimensions personnalisées ou échelle en pourcentage',
+	'tool.image-resizer.description':
+		'Redimensionnez des images PNG, JPEG et WebP dans votre navigateur, conservez le ratio, choisissez un format de sortie, réglez la qualité et exportez immédiatement sans envoi au serveur.',
+	'tool.image-resizer.primary_keyword': 'redimensionneur image',
+	'tool.image-resizer.meta_title': 'Redimensionneur d’Images en Ligne — PNG, JPG, WebP | fmtly.dev',
+	'tool.image-resizer.meta_description':
+		'Redimensionnez des images en ligne avec ratio verrouillé, dimensions personnalisées ou pourcentage. Exportez en PNG, JPEG ou WebP directement dans votre navigateur.',
+	'tool.image-resizer.operation': 'Redimensionner',
+	'tool.image-resizer.faq.0.question': 'Mes images sont-elles téléversées ?',
+	'tool.image-resizer.faq.0.answer':
+		'Non. Le redimensionnement s’effectue localement dans votre navigateur ; aucun fichier image n’est envoyé à un serveur.',
+	'tool.image-resizer.faq.1.question': 'Puis-je conserver le ratio d’origine ?',
+	'tool.image-resizer.faq.1.answer':
+		'Oui. Activez le verrouillage du ratio pour ajuster largeur/hauteur sans déformation.',
+	'tool.image-resizer.faq.2.question': 'Quels formats de sortie sont pris en charge ?',
+	'tool.image-resizer.faq.2.answer':
+		'Vous pouvez exporter en PNG, JPEG ou WebP. Pour JPEG/WebP, vous pouvez ajuster la qualité.',
+	'tool.image-resizer.faq.3.question': 'Que se passe-t-il pour les gros fichiers ?',
+	'tool.image-resizer.faq.3.answer':
+		'Au-delà de 500KB, le traitement passe dans un Web Worker pour garder l’interface fluide.',
+	'tool.image-resizer.use_case.0':
+		'Préparer des images optimisées pour sites web, blogs et interfaces produits',
+	'tool.image-resizer.use_case.1':
+		'Créer rapidement des variantes de dimensions pour desktop, tablette et mobile',
+	'tool.image-resizer.use_case.2': 'Réduire le poids des images avec réglages de qualité JPEG/WebP',
+	'tool.image-resizer.use_case.3':
+		'Redimensionner des assets marketing sans outils desktop ni upload cloud',
+	'ui.image_resizer.drop_title': 'Déposez une image ici ou parcourez vos fichiers',
+	'ui.image_resizer.drop_hint':
+		'Votre image reste locale dans ce navigateur. Rien n’est téléversé.',
+	'ui.image_resizer.browse': 'Choisir une image',
+	'ui.image_resizer.input_aria': 'Choisir un fichier image',
+	'ui.image_resizer.no_file': 'Ajoutez une image pour commencer.',
+	'ui.image_resizer.file_loaded': 'Image chargée : {name}',
+	'ui.image_resizer.file_read_error': 'Impossible de lire ce fichier image.',
+	'ui.image_resizer.preview_alt': 'Aperçu de l’image redimensionnée',
+	'ui.image_resizer.controls_title': 'Contrôles de redimensionnement',
+	'ui.image_resizer.width_label': 'Largeur',
+	'ui.image_resizer.height_label': 'Hauteur',
+	'ui.image_resizer.scale_label': 'Échelle (%)',
+	'ui.image_resizer.lock_ratio': 'Verrouiller le ratio',
+	'ui.image_resizer.keep_format': 'Conserver le format d’origine',
+	'ui.image_resizer.output_format': 'Format de sortie',
+	'ui.image_resizer.quality_label': 'Qualité',
+	'ui.image_resizer.worker_active':
+		'Image volumineuse détectée (>{size}). Redimensionnement en Web Worker.',
+	'ui.image_resizer.worker_badge': 'Worker',
+	'ui.image_resizer.worker_used': 'Traitement hors thread principal',
+	'ui.image_resizer.worker_failed':
+		'Échec du worker. Retour au traitement sur le thread principal.',
+	'ui.image_resizer.resize_failed':
+		'Le redimensionnement a échoué. Réessayez avec une autre image.',
+	'ui.image_resizer.output_title': 'Sortie redimensionnée',
+	'ui.image_resizer.output_placeholder': 'L’aperçu redimensionné apparaît ici.',
+	'ui.image_resizer.processing': 'Redimensionnement...',
+	'ui.image_resizer.copy_image': 'Copier l’image',
+	'ui.image_resizer.download_image': 'Télécharger l’image',
+	'ui.image_resizer.clear': 'Effacer',
+	'ui.image_resizer.copy_empty': 'Aucune image redimensionnée à copier.',
+	'ui.image_resizer.copy_success': 'Image copiée dans le presse-papiers.',
+	'ui.image_resizer.copy_error': 'Échec de la copie. Vérifiez les permissions du navigateur.',
+	'ui.image_resizer.download_empty': 'Aucune image redimensionnée à télécharger.',
+	'ui.image_resizer.download_success': '{filename} téléchargé',
+	'ui.image_resizer.download_error': 'Échec du téléchargement de l’image.',
+	'ui.image_resizer.clear_title': 'Effacer l’image importée ?',
+	'ui.image_resizer.clear_description':
+		'Cela supprimera l’image source, l’aperçu et les résultats de sortie.',
+	'ui.image_resizer.input_cleared': 'Image et résultats effacés',
+	'ui.image_resizer.stat.input_dimensions': 'Dimensions source',
+	'ui.image_resizer.stat.input_size': 'Taille source',
+	'ui.image_resizer.stat.output_dimensions': 'Dimensions de sortie',
+	'ui.image_resizer.stat.output_size': 'Taille de sortie',
+	'ui.image_resizer.stat.reduction': 'Réduction',
+	'ui.image_resizer.stat.reduction_helper': 'Variation de taille après redimensionnement',
+	'ui.image_resizer.placeholder_width': 'Largeur',
+	'ui.image_resizer.placeholder_height': 'Hauteur',
+	'ui.image_resizer.png': 'PNG',
+	'ui.image_resizer.jpeg': 'JPEG',
+	'ui.image_resizer.webp': 'WebP',
+	'ui.image_resizer.source_status': '{size} · {dimensions} · {type}',
+	'ui.image_resizer.output_status': '{size} · {dimensions} · {format}'
 };
 
 export default registryFr;

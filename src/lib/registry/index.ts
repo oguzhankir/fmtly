@@ -3,6 +3,7 @@ import { cryptoTools } from './tools/crypto.tools.js';
 import { csvTools } from './tools/csv.tools.js';
 import { encodeTools } from './tools/encode.tools.js';
 import { generateTools } from './tools/generate.tools.js';
+import { imageTools } from './tools/image.tools.js';
 import { jsonTools } from './tools/json.tools.js';
 import { pdfTools } from './tools/pdf.tools.js';
 import { qrTools } from './tools/qr.tools.js';
@@ -24,6 +25,7 @@ const allTools: ToolDefinition[] = [
 	...cryptoTools,
 	...aiTools,
 	...generateTools,
+	...imageTools,
 	...pdfTools
 ];
 

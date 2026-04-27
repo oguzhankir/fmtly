@@ -27,6 +27,7 @@
 		'qr',
 		'crypto',
 		'ai',
+		'image',
 		'generate',
 		'pdf'
 	];

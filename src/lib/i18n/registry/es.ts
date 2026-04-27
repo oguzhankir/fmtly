@@ -4368,7 +4368,95 @@ const registryEs: Record<string, string> = {
 	'tool.xml-xsd-validate.warnings': 'tool.xml-xsd-validate.warnings',
 	'tool.xml-xsd-validate.errors_title': 'tool.xml-xsd-validate.errors_title',
 	'tool.xml-xsd-validate.warnings_title': 'tool.xml-xsd-validate.warnings_title',
-	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint'
+	'tool.xml-xsd-validate.waiting_hint': 'tool.xml-xsd-validate.waiting_hint',
+
+	// Missing keys from English
+	'category.image.display_name': 'Imagen',
+	'category.image.description':
+		'Redimensiona, convierte y optimiza imágenes en tu navegador sin subidas. Mantén control de dimensiones, formato y calidad.',
+	'category.image.primary_keyword': 'herramientas de imagen',
+	'tool.image-resizer.display_name': 'Redimensionador de Imágenes',
+	'tool.image-resizer.tagline':
+		'Redimensiona imágenes con bloqueo de proporción, escala porcentual y control de calidad',
+	'tool.image-resizer.description':
+		'Redimensiona imágenes en tu navegador con ancho/alto personalizados, escala por porcentaje, bloqueo de relación de aspecto, cambio de formato (PNG, JPEG, WebP) y descarga instantánea.',
+	'tool.image-resizer.primary_keyword': 'redimensionador de imágenes',
+	'tool.image-resizer.meta_title':
+		'Redimensionador de Imágenes Online — PNG, JPEG, WebP | fmtly.dev',
+	'tool.image-resizer.meta_description':
+		'Redimensiona imágenes online en tu navegador. Ajusta ancho y alto, mantiene proporción, cambia formato y calidad. Sin subidas ni registro.',
+	'tool.image-resizer.operation': 'Redimensionar',
+	'tool.image-resizer.faq.0.question': '¿Las imágenes se suben a un servidor?',
+	'tool.image-resizer.faq.0.answer':
+		'No. El procesamiento se hace localmente en el navegador; tus archivos no salen de tu dispositivo.',
+	'tool.image-resizer.faq.1.question': '¿Puedo mantener la proporción original?',
+	'tool.image-resizer.faq.1.answer':
+		'Sí. Activa el bloqueo de proporción para que al cambiar ancho o alto se ajuste automáticamente la otra dimensión.',
+	'tool.image-resizer.faq.2.question': '¿Qué formatos de salida son compatibles?',
+	'tool.image-resizer.faq.2.answer':
+		'Puedes conservar el formato original o exportar a PNG, JPEG y WebP con control de calidad para formatos con pérdida.',
+	'tool.image-resizer.faq.3.question': '¿Funciona con imágenes grandes?',
+	'tool.image-resizer.faq.3.answer':
+		'Sí. Cuando la entrada supera 500KB, el redimensionado se ejecuta en un Web Worker para mantener la interfaz fluida.',
+	'tool.image-resizer.use_case.0':
+		'Reducir dimensiones antes de publicar imágenes en web o apps móviles',
+	'tool.image-resizer.use_case.1':
+		'Crear variantes PNG, JPEG o WebP con tamaños y calidad controlados',
+	'tool.image-resizer.use_case.2':
+		'Preparar miniaturas y assets optimizados para velocidad de carga',
+	'tool.image-resizer.use_case.3': 'Redimensionar imágenes de forma privada sin subir archivos',
+	'ui.image_resizer.drop_title': 'Suelta una imagen aquí o selecciónala',
+	'ui.image_resizer.drop_hint':
+		'Todo se procesa localmente en tu navegador. No se sube ninguna imagen.',
+	'ui.image_resizer.browse': 'Seleccionar imagen',
+	'ui.image_resizer.input_aria': 'Elegir archivo de imagen',
+	'ui.image_resizer.no_file': 'Aún no hay imagen',
+	'ui.image_resizer.file_loaded': '{name} cargada',
+	'ui.image_resizer.file_read_error': 'No se pudo leer la imagen',
+	'ui.image_resizer.preview_alt': 'Vista previa redimensionada',
+	'ui.image_resizer.controls_title': 'Controles de redimensionado',
+	'ui.image_resizer.width_label': 'Ancho',
+	'ui.image_resizer.height_label': 'Alto',
+	'ui.image_resizer.scale_label': 'Escala',
+	'ui.image_resizer.lock_ratio': 'Bloquear proporción',
+	'ui.image_resizer.keep_format': 'Mantener formato original',
+	'ui.image_resizer.output_format': 'Formato de salida',
+	'ui.image_resizer.quality_label': 'Calidad',
+	'ui.image_resizer.worker_active':
+		'Entrada grande detectada (>{size}). El redimensionado se ejecuta en un Web Worker.',
+	'ui.image_resizer.worker_badge': 'Worker',
+	'ui.image_resizer.worker_used': 'Procesado en segundo hilo',
+	'ui.image_resizer.worker_failed': 'Falló el procesamiento en worker. Se usará el hilo principal.',
+	'ui.image_resizer.resize_failed': 'No se pudo redimensionar la imagen',
+	'ui.image_resizer.output_title': 'Salida',
+	'ui.image_resizer.output_placeholder': 'La imagen redimensionada aparecerá aquí...',
+	'ui.image_resizer.processing': 'Redimensionando...',
+	'ui.image_resizer.copy_image': 'Copiar imagen',
+	'ui.image_resizer.download_image': 'Descargar',
+	'ui.image_resizer.clear': 'Limpiar',
+	'ui.image_resizer.copy_empty': 'No hay imagen para copiar',
+	'ui.image_resizer.copy_success': 'Imagen copiada al portapapeles',
+	'ui.image_resizer.copy_error': 'No se pudo copiar la imagen',
+	'ui.image_resizer.download_empty': 'No hay imagen para descargar',
+	'ui.image_resizer.download_success': '{filename} descargada',
+	'ui.image_resizer.download_error': 'No se pudo descargar la imagen',
+	'ui.image_resizer.clear_title': '¿Borrar la imagen actual?',
+	'ui.image_resizer.clear_description':
+		'Esta acción elimina la imagen cargada y el resultado redimensionado.',
+	'ui.image_resizer.input_cleared': 'Imagen limpiada',
+	'ui.image_resizer.stat.input_dimensions': 'Dimensiones originales',
+	'ui.image_resizer.stat.input_size': 'Tamaño original',
+	'ui.image_resizer.stat.output_dimensions': 'Dimensiones de salida',
+	'ui.image_resizer.stat.output_size': 'Tamaño de salida',
+	'ui.image_resizer.stat.reduction': 'Reducción',
+	'ui.image_resizer.stat.reduction_helper': 'Ahorro estimado de tamaño',
+	'ui.image_resizer.placeholder_width': 'Ancho',
+	'ui.image_resizer.placeholder_height': 'Alto',
+	'ui.image_resizer.png': 'PNG',
+	'ui.image_resizer.jpeg': 'JPEG',
+	'ui.image_resizer.webp': 'WebP',
+	'ui.image_resizer.source_status': '{size} · {dimensions}',
+	'ui.image_resizer.output_status': '{size} · {dimensions}'
 };
 
 export default registryEs;
