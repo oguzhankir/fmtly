@@ -4405,6 +4405,78 @@ const registryEs: Record<string, string> = {
 	'tool.image-resizer.use_case.2':
 		'Preparar miniaturas y assets optimizados para velocidad de carga',
 	'tool.image-resizer.use_case.3': 'Redimensionar imágenes de forma privada sin subir archivos',
+
+	'tool.image-format-converter.display_name': 'Conversor de Formatos de Imagen',
+	'tool.image-format-converter.tagline': 'Convierte PNG, JPEG, WebP, AVIF y GIF de forma privada',
+	'tool.image-format-converter.description':
+		'Convierte imágenes entre PNG, JPEG, WebP, AVIF y GIF directamente en el navegador. Previsualiza el resultado, ajusta la calidad, aplana transparencias para JPEG y descarga sin subir archivos.',
+	'tool.image-format-converter.primary_keyword': 'conversor de formatos de imagen',
+	'tool.image-format-converter.meta_title':
+		'Conversor Imagen — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-format-converter.meta_description':
+		'Convierte PNG, JPEG, WebP, AVIF y GIF online en tu navegador. Privado, rápido, con control de calidad y Web Worker para archivos grandes.',
+	'tool.image-format-converter.operation': 'Convertir imagen',
+	'tool.image-format-converter.faq.0.question': '¿Se suben mis imágenes?',
+	'tool.image-format-converter.faq.0.answer':
+		'No. Los archivos se decodifican, convierten, previsualizan y descargan localmente en tu navegador. Nada se envía a un servidor.',
+	'tool.image-format-converter.faq.1.question': '¿Entre qué formatos puedo convertir?',
+	'tool.image-format-converter.faq.1.answer':
+		'Puedes importar PNG, JPEG, WebP, AVIF y GIF, y exportar PNG, JPEG, WebP, AVIF o GIF cuando tu navegador admita el codificador de destino.',
+	'tool.image-format-converter.faq.2.question': '¿Qué ocurre con la transparencia?',
+	'tool.image-format-converter.faq.2.answer':
+		'PNG, WebP, AVIF y GIF pueden conservar la transparencia. JPEG no tiene canal alfa, así que las zonas transparentes se componen sobre el fondo elegido.',
+	'tool.image-format-converter.faq.3.question':
+		'¿Cómo se mantiene fluida la interfaz con archivos grandes?',
+	'tool.image-format-converter.faq.3.answer':
+		'Las entradas de más de 500KB se procesan en un Web Worker para mantener la conversión fuera del hilo de la interfaz.',
+	'tool.image-format-converter.use_case.0': 'Convertir capturas a WebP o AVIF antes de publicarlas',
+	'tool.image-format-converter.use_case.1':
+		'Crear versiones JPEG de recursos transparentes con fondo controlado',
+	'tool.image-format-converter.use_case.2':
+		'Exportar GIF ligeros de vista previa desde arte estático',
+	'tool.image-format-converter.use_case.3':
+		'Normalizar imágenes de clientes antes de subirlas a un CMS o API',
+	'ui.image_converter.upload': 'Subir imagen',
+	'ui.image_converter.clear': 'Limpiar',
+	'ui.image_converter.no_file': 'No hay imagen seleccionada',
+	'ui.image_converter.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.worker_active':
+		'Imagen grande detectada (>{size}). La conversión se ejecuta en un Web Worker.',
+	'ui.image_converter.worker_used': 'Procesado fuera del hilo principal',
+	'ui.image_converter.worker_failed': 'Falló la conversión en Worker. Se usará el hilo principal.',
+	'ui.image_converter.convert_failed': 'No se pudo convertir la imagen',
+	'ui.image_converter.file_read_error': 'No se pudo cargar la imagen',
+	'ui.image_converter.file_loaded': '{name} cargado',
+	'ui.image_converter.input_cleared': 'Entrada de imagen limpiada',
+	'ui.image_converter.copy_empty': 'No hay nada que copiar',
+	'ui.image_converter.copy_success': 'Salida copiada',
+	'ui.image_converter.copy_error': 'Error al copiar',
+	'ui.image_converter.download_empty': 'No hay nada que descargar',
+	'ui.image_converter.download_success': '{filename} descargado',
+	'ui.image_converter.download_error': 'Error en la descarga',
+	'ui.image_converter.drop_title': 'Suelta una imagen aquí',
+	'ui.image_converter.drop_hint': 'PNG, JPEG, WebP, AVIF y GIF permanecen en este navegador.',
+	'ui.image_converter.source_preview_alt': 'Vista previa de la imagen de origen',
+	'ui.image_converter.output_preview_alt': 'Vista previa de la imagen convertida',
+	'ui.image_converter.output_format': 'Formato de salida',
+	'ui.image_converter.quality': 'Calidad',
+	'ui.image_converter.background': 'Fondo JPEG',
+	'ui.image_converter.background_white': 'Blanco',
+	'ui.image_converter.background_black': 'Negro',
+	'ui.image_converter.background_transparent': 'Transparente',
+	'ui.image_converter.privacy_note': 'La conversión es local; los archivos no salen del navegador.',
+	'ui.image_converter.performance_note': 'Las entradas grandes usan Web Worker a partir de {size}.',
+	'ui.image_converter.stat.source_format': 'Formato de origen',
+	'ui.image_converter.stat.source_size': 'Tamaño original',
+	'ui.image_converter.stat.output_format': 'Formato de salida',
+	'ui.image_converter.stat.output_size': 'Tamaño convertido',
+	'ui.image_converter.stat.size_delta': 'Cambio de tamaño',
+	'ui.image_converter.stat.size_delta_helper': 'comparado con el origen',
+	'ui.image_converter.processing': 'Convirtiendo...',
+	'ui.image_converter.copy_output': 'Copiar URL de datos',
+	'ui.image_converter.download': 'Descargar',
+	'ui.image_converter.output_placeholder': 'La salida convertida aparecerá aquí...',
 	'ui.image_resizer.drop_title': 'Suelta una imagen aquí o selecciónala',
 	'ui.image_resizer.drop_hint':
 		'Todo se procesa localmente en tu navegador. No se sube ninguna imagen.',

@@ -1,8 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
+	IMAGE_CONVERTER_DEFAULT_OPTIONS,
+	IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES,
 	IMAGE_RESIZER_DEFAULT_OPTIONS,
 	IMAGE_RESIZER_WORKER_THRESHOLD_BYTES,
 	computeScaledDimensions,
+	getImageConversionExtension,
+	normalizeImageConversionOptions,
+	shouldUseImageConverterWorker,
 	shouldUseImageResizerWorker
 } from '../../../src/lib/engines/image/index.js';
 
@@ -53,5 +58,32 @@ describe('image resizer scaled dimensions', () => {
 
 		expect(dimensions.width).toBe(250);
 		expect(dimensions.height).toBe(100);
+	});
+});
+
+describe('image format converter options', () => {
+	it('uses worker only for converter files above 500KB', () => {
+		expect(shouldUseImageConverterWorker(IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES)).toBe(false);
+		expect(shouldUseImageConverterWorker(IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES + 1)).toBe(true);
+	});
+
+	it('normalizes unsupported formats and clamps quality', () => {
+		const options = normalizeImageConversionOptions({
+			outputFormat: 'image/png',
+			quality: 2,
+			backgroundColor: ''
+		});
+
+		expect(options.outputFormat).toBe('image/png');
+		expect(options.quality).toBe(1);
+		expect(options.backgroundColor).toBe(IMAGE_CONVERTER_DEFAULT_OPTIONS.backgroundColor);
+	});
+
+	it('maps conversion MIME types to download extensions', () => {
+		expect(getImageConversionExtension('image/png')).toBe('png');
+		expect(getImageConversionExtension('image/jpeg')).toBe('jpg');
+		expect(getImageConversionExtension('image/webp')).toBe('webp');
+		expect(getImageConversionExtension('image/avif')).toBe('avif');
+		expect(getImageConversionExtension('image/gif')).toBe('gif');
 	});
 });

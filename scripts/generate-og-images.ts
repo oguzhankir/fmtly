@@ -11,6 +11,7 @@ import { cryptoTools } from '../src/lib/registry/tools/crypto.tools.js';
 import { csvTools } from '../src/lib/registry/tools/csv.tools.js';
 import { encodeTools } from '../src/lib/registry/tools/encode.tools.js';
 import { generateTools } from '../src/lib/registry/tools/generate.tools.js';
+import { imageTools } from '../src/lib/registry/tools/image.tools.js';
 import { jsonTools } from '../src/lib/registry/tools/json.tools.js';
 import { qrTools } from '../src/lib/registry/tools/qr.tools.js';
 import { tomlTools } from '../src/lib/registry/tools/toml.tools.js';
@@ -26,7 +27,8 @@ const allTools = [
 	...qrTools,
 	...encodeTools,
 	...cryptoTools,
-	...generateTools
+	...generateTools,
+	...imageTools
 ];
 
 const translate = (key: string, fallback?: string): string => registryEn[key] ?? fallback ?? key;

@@ -152,6 +152,77 @@ const registryEn: Record<string, string> = {
 		'Reduce upload sizes before sending files to APIs or CMS systems',
 	'tool.image-resizer.use_case.3':
 		'Convert between PNG, JPEG, and WebP while preserving output control',
+	'tool.image-format-converter.display_name': 'Image Format Converter',
+	'tool.image-format-converter.tagline': 'Convert PNG, JPEG, WebP, AVIF, and GIF images privately',
+	'tool.image-format-converter.description':
+		'Convert images between PNG, JPEG, WebP, AVIF, and GIF directly in your browser. Preview output, tune quality, flatten transparency for JPEG, and download without uploading files.',
+	'tool.image-format-converter.primary_keyword': 'image format converter',
+	'tool.image-format-converter.meta_title':
+		'Image Converter — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-format-converter.meta_description':
+		'Convert PNG, JPEG, WebP, AVIF, and GIF images online in your browser. Private, fast, with quality controls and Web Worker support for large files.',
+	'tool.image-format-converter.operation': 'Convert image',
+	'tool.image-format-converter.faq.0.question': 'Do my images get uploaded?',
+	'tool.image-format-converter.faq.0.answer':
+		'No. Files are decoded, converted, previewed, and downloaded locally in your browser. Nothing is sent to a server.',
+	'tool.image-format-converter.faq.1.question': 'Which formats can I convert between?',
+	'tool.image-format-converter.faq.1.answer':
+		'You can import PNG, JPEG, WebP, AVIF, and GIF files and export PNG, JPEG, WebP, AVIF, or GIF when your browser supports the target encoder.',
+	'tool.image-format-converter.faq.2.question': 'What happens to transparency?',
+	'tool.image-format-converter.faq.2.answer':
+		'PNG, WebP, AVIF, and GIF can preserve transparency. JPEG has no alpha channel, so transparent areas are composited over the selected background.',
+	'tool.image-format-converter.faq.3.question': 'How does it stay responsive with large files?',
+	'tool.image-format-converter.faq.3.answer':
+		'Inputs above 500KB are processed in a Web Worker so conversion work stays off the UI thread.',
+	'tool.image-format-converter.use_case.0': 'Convert screenshots to WebP or AVIF before publishing',
+	'tool.image-format-converter.use_case.1':
+		'Create JPEG versions of transparent assets with a controlled background',
+	'tool.image-format-converter.use_case.2': 'Export lightweight GIF previews from static artwork',
+	'tool.image-format-converter.use_case.3':
+		'Normalize client-supplied images before CMS or API uploads',
+	'ui.image_converter.upload': 'Upload image',
+	'ui.image_converter.clear': 'Clear',
+	'ui.image_converter.no_file': 'No image selected',
+	'ui.image_converter.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.worker_active':
+		'Large image detected (>{size}). Conversion runs in a Web Worker.',
+	'ui.image_converter.worker_used': 'Processed off-thread',
+	'ui.image_converter.worker_failed':
+		'Worker conversion failed. Falling back to main thread processing.',
+	'ui.image_converter.convert_failed': 'Image conversion failed',
+	'ui.image_converter.file_read_error': 'Could not load image file',
+	'ui.image_converter.file_loaded': 'Loaded {name}',
+	'ui.image_converter.input_cleared': 'Image input cleared',
+	'ui.image_converter.copy_empty': 'Nothing to copy',
+	'ui.image_converter.copy_success': 'Output copied',
+	'ui.image_converter.copy_error': 'Copy failed',
+	'ui.image_converter.download_empty': 'Nothing to download',
+	'ui.image_converter.download_success': 'Downloaded {filename}',
+	'ui.image_converter.download_error': 'Download failed',
+	'ui.image_converter.drop_title': 'Drop an image here',
+	'ui.image_converter.drop_hint': 'PNG, JPEG, WebP, AVIF, and GIF stay in this browser.',
+	'ui.image_converter.source_preview_alt': 'Source image preview',
+	'ui.image_converter.output_preview_alt': 'Converted image preview',
+	'ui.image_converter.output_format': 'Output format',
+	'ui.image_converter.quality': 'Quality',
+	'ui.image_converter.background': 'JPEG background',
+	'ui.image_converter.background_white': 'White',
+	'ui.image_converter.background_black': 'Black',
+	'ui.image_converter.background_transparent': 'Transparent',
+	'ui.image_converter.privacy_note': 'Conversion is local; files never leave your browser.',
+	'ui.image_converter.performance_note': 'Large inputs use a Web Worker above {size}.',
+	'ui.image_converter.stat.source_format': 'Source format',
+	'ui.image_converter.stat.source_size': 'Original size',
+	'ui.image_converter.stat.output_format': 'Output format',
+	'ui.image_converter.stat.output_size': 'Converted size',
+	'ui.image_converter.stat.size_delta': 'Size delta',
+	'ui.image_converter.stat.size_delta_helper': 'compared with source',
+	'ui.image_converter.processing': 'Converting...',
+	'ui.image_converter.copy_output': 'Copy data URL',
+	'ui.image_converter.download': 'Download',
+	'ui.image_converter.output_placeholder': 'Converted output appears here...',
+
 	// ── JSON tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Formatter',
 	'tool.json-formatter.tagline': 'Format and beautify JSON with configurable indentation',

@@ -74,7 +74,8 @@
 	import AiTokenCounterPanel from "$components/panels/ai/AiTokenCounterPanel.svelte";
 	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
 	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
-import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
+	import ImageFormatConverterPanel from "$components/panels/image/ImageFormatConverterPanel.svelte";
+	import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -636,8 +637,12 @@ import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
-{:else if data.tool.category === "image" && data.tool.slug === "resize"}
-	<ImageResizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+{:else if data.tool.category === "image" && (data.tool.slug === "resize" || data.tool.slug === "convert")}
+	{#if data.tool.slug === "resize"}
+		<ImageResizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+	{:else}
+		<ImageFormatConverterPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+	{/if}
 {:else if isDiffTool}
 	<ToolLayout tool={localizedTool}>
 		{#snippet workspaceTabs()}
