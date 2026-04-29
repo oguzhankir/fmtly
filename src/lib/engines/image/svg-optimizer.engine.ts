@@ -57,9 +57,7 @@ export type SvgOptimizerWorkerResponse = {
 };
 
 type SvgPresetPluginConfig = Extract<PluginConfig, { name: 'preset-default' }>;
-type SvgPresetOverrides = NonNullable<
-	NonNullable<SvgPresetPluginConfig['params']>['overrides']
->;
+type SvgPresetOverrides = NonNullable<NonNullable<SvgPresetPluginConfig['params']>['overrides']>;
 
 export type SvgOptimizerConfig = {
 	multipass: boolean;
