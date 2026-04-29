@@ -890,8 +890,23 @@
 					</div>
 				</div>
 			{:else}
-				<div class="min-h-0 flex-1 overflow-auto p-[var(--space-4)]">
-					<pre class="min-h-full whitespace-pre-wrap break-words rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] p-[var(--space-3)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)]">{result?.optimizedText ?? ''}</pre>
+				<div class="grid min-h-0 flex-1 grid-cols-1 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]">
+					<div class="flex min-h-[220px] flex-col bg-[var(--bg-base)]">
+						<div class="border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
+							{$t('ui.svg_optimizer.source_code_label', 'Source SVG code')}
+						</div>
+						<div class="min-h-0 flex-1 overflow-auto p-[var(--space-4)]">
+							<pre class="min-h-full whitespace-pre-wrap break-words rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-3)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)]">{sourceText}</pre>
+						</div>
+					</div>
+					<div class="flex min-h-[220px] flex-col bg-[var(--bg-base)]">
+						<div class="border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
+							{$t('ui.svg_optimizer.output_code_label', 'Optimized SVG code')}
+						</div>
+						<div class="min-h-0 flex-1 overflow-auto p-[var(--space-4)]">
+							<pre class="min-h-full whitespace-pre-wrap break-words rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-surface)] p-[var(--space-3)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)]">{result?.optimizedText ?? ''}</pre>
+						</div>
+					</div>
 				</div>
 			{/if}
 		</div>
