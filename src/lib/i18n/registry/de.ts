@@ -148,6 +148,68 @@ const registryDe: Record<string, string> = {
 		'Leichte GIF-Vorschauen aus statischen Grafiken exportieren',
 	'tool.image-format-converter.use_case.3':
 		'Bilder von Kunden vor CMS- oder API-Uploads vereinheitlichen',
+	'tool.image-to-base64.display_name': 'Bild zu Base64',
+	'tool.image-to-base64.tagline':
+		'Bilder in rohes Base64 oder sofort einsetzbare Data-URIs umwandeln',
+	'tool.image-to-base64.description':
+		'Konvertieren Sie PNG-, JPEG-, WebP-, GIF-, SVG-, BMP-, AVIF- und ICO-Bilder direkt im Browser in Base64. Kopieren Sie den reinen Base64-String oder den vollständigen Data-URI und laden Sie beide Varianten sofort herunter.',
+	'tool.image-to-base64.primary_keyword': 'bild zu base64',
+	'tool.image-to-base64.meta_title': 'Bild zu Base64 — Data-URI-Konverter | fmtly.dev',
+	'tool.image-to-base64.meta_description':
+		'Konvertieren Sie Bilder online in Base64 oder Data-URIs. Läuft komplett im Browser, bleibt privat und nutzt Web Worker für große Dateien.',
+	'tool.image-to-base64.operation': 'Bild in Base64 konvertieren',
+	'tool.image-to-base64.faq.0.question': 'Verlässt mein Bild den Browser?',
+	'tool.image-to-base64.faq.0.answer':
+		'Nein. Das Bild wird lokal im Browser gelesen und in Base64 umgewandelt. Es wird nichts auf einen Server hochgeladen.',
+	'tool.image-to-base64.faq.1.question':
+		'Was ist der Unterschied zwischen Base64 und einem Data-URI?',
+	'tool.image-to-base64.faq.1.answer':
+		'Base64 ist nur die kodierte Nutzlast. Ein Data-URI ergänzt den MIME-Typ und das Präfix data:image/...;base64,, sodass Sie den Wert direkt in HTML, CSS oder JSON einfügen können.',
+	'tool.image-to-base64.faq.2.question': 'Welche Bildformate werden unterstützt?',
+	'tool.image-to-base64.faq.2.answer':
+		'Die Oberfläche akzeptiert gängige Browser-Bildtypen wie PNG, JPEG, WebP, GIF, SVG, BMP, AVIF und ICO. Der ursprüngliche MIME-Typ wird im Data-URI beibehalten.',
+	'tool.image-to-base64.faq.3.question': 'Wie werden große Bilder verarbeitet?',
+	'tool.image-to-base64.faq.3.answer':
+		'Eingaben über 500KB werden in einem Web Worker verarbeitet, damit die Oberfläche reaktionsschnell bleibt.',
+	'tool.image-to-base64.use_case.0':
+		'Icons und kleine Assets inline in HTML, CSS oder JSON einbetten',
+	'tool.image-to-base64.use_case.1':
+		'Bild-Data-URIs für E-Mails, Komponentenbibliotheken oder Tests erzeugen',
+	'tool.image-to-base64.use_case.2':
+		'Rohes Base64 kopieren, ohne das Data-URI-Präfix manuell zu entfernen',
+	'tool.image-to-base64.use_case.3':
+		'Client-seitige Bildnutzlasten privat vorbereiten, ohne Upload-Services',
+	'tool.image-from-base64.display_name': 'Base64 zu Bild',
+	'tool.image-from-base64.tagline':
+		'Base64-Strings oder Data-URIs wieder in herunterladbare Bilder zurückwandeln',
+	'tool.image-from-base64.description':
+		'Fügen Sie rohes Base64 oder komplette Data-URIs ein, um Bilder direkt im Browser wiederherzustellen. Die Vorschau erkennt den Bildtyp, korrigiert fehlendes Padding, entfernt Leerraum und bietet sofortigen Download.',
+	'tool.image-from-base64.primary_keyword': 'base64 zu bild',
+	'tool.image-from-base64.meta_title': 'Base64 zu Bild — Data-URIs decodieren | fmtly.dev',
+	'tool.image-from-base64.meta_description':
+		'Decodieren Sie Base64 oder Data-URIs online zurück in Bilder. Erkennt MIME-Typen, korrigiert häufige Eingabefehler und läuft komplett im Browser.',
+	'tool.image-from-base64.operation': 'Base64-Bild decodieren',
+	'tool.image-from-base64.faq.0.question':
+		'Kann ich einen vollständigen Data-URI statt rohem Base64 einfügen?',
+	'tool.image-from-base64.faq.0.answer':
+		'Ja. Das Tool akzeptiert sowohl reine Base64-Strings als auch komplette data:image/...;base64,-Eingaben und normalisiert sie automatisch.',
+	'tool.image-from-base64.faq.1.question': 'Was passiert, wenn der MIME-Typ fehlt?',
+	'tool.image-from-base64.faq.1.answer':
+		'Das Tool versucht zuerst, den Bildtyp aus den decodierten Bytes zu erkennen. Falls das nicht möglich ist, wird der ausgewählte Fallback-MIME-Typ für Vorschau und Download verwendet.',
+	'tool.image-from-base64.faq.2.question': 'Werden Leerzeichen oder fehlendes Padding korrigiert?',
+	'tool.image-from-base64.faq.2.answer':
+		'Ja. Überflüssiger Leerraum wird entfernt, URL-sichere Zeichen werden normalisiert und fehlendes Padding wird ergänzt, wenn die Eingabe dadurch gültig wird.',
+	'tool.image-from-base64.faq.3.question': 'Bleibt die Base64-Eingabe privat?',
+	'tool.image-from-base64.faq.3.answer':
+		'Ja. Die gesamte Dekodierung und Vorschau läuft lokal im Browser. Nichts wird an einen Server gesendet.',
+	'tool.image-from-base64.use_case.0':
+		'Pasted Data-URIs aus HTML, CSS oder APIs wieder in echte Bilddateien umwandeln',
+	'tool.image-from-base64.use_case.1':
+		'Base64-Bildnutzlasten vor Weitergabe oder Archivierung visuell prüfen',
+	'tool.image-from-base64.use_case.2':
+		'Beschädigte Eingaben mit Leerzeichen oder fehlendem Padding wiederherstellen',
+	'tool.image-from-base64.use_case.3':
+		'In Browser-Tests oder JSON-Antworten eingebettete Bilddaten lokal herunterladen',
 	'ui.image_converter.upload': 'Bild hochladen',
 	'ui.image_converter.clear': 'Leeren',
 	'ui.image_converter.no_file': 'Kein Bild ausgewählt',
@@ -191,6 +253,104 @@ const registryDe: Record<string, string> = {
 	'ui.image_converter.copy_output': 'Data-URL kopieren',
 	'ui.image_converter.download': 'Herunterladen',
 	'ui.image_converter.output_placeholder': 'Die konvertierte Ausgabe erscheint hier...',
+	'ui.image_to_base64.upload': 'Bild hochladen',
+	'ui.image_to_base64.clear': 'Leeren',
+	'ui.image_to_base64.no_file': 'Kein Bild ausgewählt',
+	'ui.image_to_base64.source_status': '{size} · {format}',
+	'ui.image_to_base64.output_status':
+		'{base64Chars} Base64-Zeichen · {dataUrlChars} Data-URI-Zeichen',
+	'ui.image_to_base64.worker_active':
+		'Großes Bild erkannt (>{size}). Die Umwandlung läuft in einem Web Worker.',
+	'ui.image_to_base64.worker_used': 'Nebenläufig verarbeitet',
+	'ui.image_to_base64.worker_failed':
+		'Worker-Kodierung fehlgeschlagen. Verarbeitung läuft im Hauptthread weiter.',
+	'ui.image_to_base64.file_read_error': 'Bilddatei konnte nicht geladen werden',
+	'ui.image_to_base64.file_loaded': '{name} geladen',
+	'ui.image_to_base64.input_cleared': 'Bildeingabe geleert',
+	'ui.image_to_base64.copy_empty': 'Nichts zu kopieren',
+	'ui.image_to_base64.copy_success': 'Ausgabe kopiert',
+	'ui.image_to_base64.copy_data_uri_success': 'Data-URI kopiert',
+	'ui.image_to_base64.copy_error': 'Kopieren fehlgeschlagen',
+	'ui.image_to_base64.download_empty': 'Nichts zum Herunterladen',
+	'ui.image_to_base64.download_success': '{filename} heruntergeladen',
+	'ui.image_to_base64.download_error': 'Download fehlgeschlagen',
+	'ui.image_to_base64.drop_title': 'Bild hier ablegen',
+	'ui.image_to_base64.drop_hint':
+		'PNG, JPEG, WebP, GIF, SVG, BMP, AVIF und ICO bleiben in diesem Browser.',
+	'ui.image_to_base64.source_preview_alt': 'Vorschau des Quellbilds',
+	'ui.image_to_base64.privacy_note':
+		'Die Kodierung läuft lokal; Ihr Bild verlässt den Browser nie.',
+	'ui.image_to_base64.performance_note': 'Große Eingaben nutzen ab {size} einen Web Worker.',
+	'ui.image_to_base64.stat.file_size': 'Bildgröße',
+	'ui.image_to_base64.stat.file_size_helper': 'nur Browser-Eingabe',
+	'ui.image_to_base64.stat.base64_length': 'Base64-Länge',
+	'ui.image_to_base64.stat.base64_length_helper': 'Zeichen ohne Präfix',
+	'ui.image_to_base64.stat.expansion': 'Payload-Wachstum',
+	'ui.image_to_base64.stat.expansion_helper': 'erwarteter Base64-Overhead',
+	'ui.image_to_base64.processing': 'Kodieren...',
+	'ui.image_to_base64.copy_base64': 'Base64 kopieren',
+	'ui.image_to_base64.copy_data_uri': 'Data-URI kopieren',
+	'ui.image_to_base64.download_base64': '.txt herunterladen',
+	'ui.image_to_base64.download_data_uri': 'Data-URI herunterladen',
+	'ui.image_to_base64.base64_output': 'Base64-Ausgabe',
+	'ui.image_to_base64.output_placeholder': 'Das kodierte Base64 erscheint hier...',
+	'ui.image_to_base64.data_uri_output': 'Data-URI-Ausgabe',
+	'ui.image_to_base64.data_uri_placeholder': 'Der Data-URI erscheint hier...',
+	'ui.image_to_base64.unsupported_image': 'Nicht unterstütztes Bildformat',
+	'ui.image_to_base64.empty_image': 'Die Bilddatei ist leer',
+	'ui.image_to_base64.convert_failed': 'Das Bild konnte nicht in Base64 umgewandelt werden',
+	'ui.image_from_base64.input_status': '{size} · {characters} Zeichen',
+	'ui.image_from_base64.output_status': '{size} · {type}',
+	'ui.image_from_base64.worker_active':
+		'Große Base64-Eingabe erkannt (>{size}). Die Dekodierung läuft in einem Web Worker.',
+	'ui.image_from_base64.worker_used': 'Nebenläufig verarbeitet',
+	'ui.image_from_base64.worker_failed':
+		'Worker-Dekodierung fehlgeschlagen. Verarbeitung läuft im Hauptthread weiter.',
+	'ui.image_from_base64.privacy_note':
+		'Dekodierte Bilddaten bleiben in Ihrem Browser; nichts wird hochgeladen.',
+	'ui.image_from_base64.performance_note':
+		'Große Base64-Strings nutzen ab {size} einen Web Worker.',
+	'ui.image_from_base64.input_placeholder':
+		'Fügen Sie hier einen Base64-String oder vollständigen Data-URI ein...',
+	'ui.image_from_base64.output_placeholder': 'Die decodierte Bildvorschau erscheint hier...',
+	'ui.image_from_base64.stat.output_type': 'Ausgabetyp',
+	'ui.image_from_base64.stat.output_type_helper': 'Erkannter oder Fallback-MIME-Typ',
+	'ui.image_from_base64.stat.output_size': 'Ausgabegröße',
+	'ui.image_from_base64.stat.output_size_helper': 'Größe der decodierten Binärdaten',
+	'ui.image_from_base64.stat.flags': 'Normalisierung',
+	'ui.image_from_base64.stat.flags_helper': 'Präfix, Leerzeichen und Padding',
+	'ui.image_from_base64.input_cleared': 'Base64-Eingabe geleert',
+	'ui.image_from_base64.sample_loaded': 'Beispiel-Base64 geladen',
+	'ui.image_from_base64.copy_empty': 'Nichts zu kopieren',
+	'ui.image_from_base64.copy_data_url_success': 'Data-URL kopiert',
+	'ui.image_from_base64.copy_error': 'Kopieren fehlgeschlagen',
+	'ui.image_from_base64.copy_base64_success': 'Normalisiertes Base64 kopiert',
+	'ui.image_from_base64.download_empty': 'Nichts zum Herunterladen',
+	'ui.image_from_base64.download_success': '{filename} heruntergeladen',
+	'ui.image_from_base64.download_error': 'Download fehlgeschlagen',
+	'ui.image_from_base64.decode_failed': 'Base64-Bilddekodierung fehlgeschlagen',
+	'ui.image_from_base64.error.empty': 'Fügen Sie einen Base64-String zum Dekodieren ein.',
+	'ui.image_from_base64.error.invalid_mime':
+		'Der Data-URI enthält einen nicht unterstützten Bild-MIME-Typ.',
+	'ui.image_from_base64.error.invalid_characters':
+		'Die Eingabe enthält Zeichen, die nicht zu gültigem Base64 gehören.',
+	'ui.image_from_base64.error.invalid_padding':
+		'Padding-Zeichen dürfen nur am Ende der Base64-Eingabe stehen.',
+	'ui.image_from_base64.error.invalid_length':
+		'Die Base64-Länge ist ungültig und kann nicht dekodiert werden.',
+	'ui.image_from_base64.flag.data_uri': 'Data-URI',
+	'ui.image_from_base64.flag.whitespace': 'Leerzeichen entfernt',
+	'ui.image_from_base64.flag.padding': 'Padding korrigiert',
+	'ui.image_from_base64.flag.fallback': 'Fallback-MIME',
+	'ui.image_from_base64.flag.clean': 'Keine Korrekturen',
+	'ui.image_from_base64.sample': 'Beispiel laden',
+	'ui.image_from_base64.clear': 'Leeren',
+	'ui.image_from_base64.fallback_mime': 'Fallback-Ausgabetyp',
+	'ui.image_from_base64.processing': 'Dekodieren...',
+	'ui.image_from_base64.copy_base64': 'Base64 kopieren',
+	'ui.image_from_base64.copy_data_url': 'Data-URL kopieren',
+	'ui.image_from_base64.download': 'Herunterladen',
+	'ui.image_from_base64.output_preview_alt': 'Vorschau des decodierten Bildes',
 
 	// ── JSON Tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON-Formatierer',

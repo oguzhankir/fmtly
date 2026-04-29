@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import {
+	IMAGE_BASE64_WORKER_THRESHOLD_BYTES,
 	IMAGE_CONVERTER_DEFAULT_OPTIONS,
 	IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES,
 	IMAGE_RESIZER_DEFAULT_OPTIONS,
 	IMAGE_RESIZER_WORKER_THRESHOLD_BYTES,
 	computeScaledDimensions,
+	decodeBase64ToImage,
+	encodeImageToBase64,
 	getImageConversionExtension,
 	normalizeImageConversionOptions,
+	shouldUseBase64ToImageWorker,
 	shouldUseImageConverterWorker,
-	shouldUseImageResizerWorker
+	shouldUseImageResizerWorker,
+	shouldUseImageToBase64Worker
 } from '../../../src/lib/engines/image/index.js';
 
 describe('image resizer worker threshold', () => {
@@ -85,5 +90,57 @@ describe('image format converter options', () => {
 		expect(getImageConversionExtension('image/webp')).toBe('webp');
 		expect(getImageConversionExtension('image/avif')).toBe('avif');
 		expect(getImageConversionExtension('image/gif')).toBe('gif');
+	});
+});
+
+describe('image base64 conversion', () => {
+	it('encodes image bytes into a Base64 string and data URI', () => {
+		const bytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
+		const result = encodeImageToBase64({
+			buffer: bytes.buffer,
+			sourceName: 'pixel.png',
+			sourceType: 'image/png',
+			sourceSizeBytes: bytes.byteLength
+		});
+
+		expect(result.base64).toBe('iVBORw==');
+		expect(result.dataUrl).toBe('data:image/png;base64,iVBORw==');
+		expect(result.downloadFilenames.base64).toBe('pixel-base64.txt');
+		expect(result.downloadFilenames.dataUri).toBe('pixel-data-uri.txt');
+	});
+
+	it('decodes data URIs and detects the image MIME type', () => {
+		const result = decodeBase64ToImage('data:image/png;base64,iVBORw0KGgo=');
+
+		expect(result.mimeType).toBe('image/png');
+		expect(result.metrics.hadDataUriPrefix).toBe(true);
+		expect(result.downloadFilename).toBe('decoded-image.png');
+	});
+
+	it('normalizes whitespace and missing padding when decoding', () => {
+		const result = decodeBase64ToImage(' iVBORw0K Ggo ');
+
+		expect(result.metrics.whitespaceRemoved).toBe(true);
+		expect(result.metrics.paddingAdded).toBe(true);
+		expect(result.mimeType).toBe('image/png');
+	});
+
+	it('falls back to the selected MIME type when bytes are not recognizable', () => {
+		const result = decodeBase64ToImage('aGVsbG8=', { fallbackMimeType: 'image/webp' });
+
+		expect(result.mimeType).toBe('image/webp');
+		expect(result.metrics.usedFallbackMimeType).toBe(true);
+		expect(result.downloadFilename).toBe('decoded-image.webp');
+	});
+
+	it('uses worker thresholds above 500KB for both directions', () => {
+		expect(shouldUseImageToBase64Worker(IMAGE_BASE64_WORKER_THRESHOLD_BYTES)).toBe(false);
+		expect(shouldUseImageToBase64Worker(IMAGE_BASE64_WORKER_THRESHOLD_BYTES + 1)).toBe(true);
+		expect(shouldUseBase64ToImageWorker('a'.repeat(IMAGE_BASE64_WORKER_THRESHOLD_BYTES))).toBe(
+			false
+		);
+		expect(shouldUseBase64ToImageWorker('a'.repeat(IMAGE_BASE64_WORKER_THRESHOLD_BYTES + 1))).toBe(
+			true
+		);
 	});
 });

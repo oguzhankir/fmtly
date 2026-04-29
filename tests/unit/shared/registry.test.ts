@@ -86,6 +86,26 @@ describe('Tool Registry', () => {
 			expect(tool.operation).toBe('Resize image');
 		});
 
+		it('returns image/to-base64 correctly', () => {
+			const rawTool = getTool('image', 'to-base64');
+			expect(rawTool).toBeDefined();
+			expect(rawTool?.id).toBe('image-to-base64');
+			expect(rawTool?.layoutVariant).toBe('single-panel');
+
+			const tool = localizeToolDefinition(rawTool!, t);
+			expect(tool.operation).toBe('Convert image to Base64');
+		});
+
+		it('returns image/from-base64 correctly', () => {
+			const rawTool = getTool('image', 'from-base64');
+			expect(rawTool).toBeDefined();
+			expect(rawTool?.id).toBe('image-from-base64');
+			expect(rawTool?.layoutVariant).toBe('single-panel');
+
+			const tool = localizeToolDefinition(rawTool!, t);
+			expect(tool.operation).toBe('Decode Base64 image');
+		});
+
 		it('returns json/validator correctly', () => {
 			const tool = getTool('json', 'validator');
 			expect(tool).toBeDefined();

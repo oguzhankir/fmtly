@@ -4369,6 +4369,163 @@ const registryIt: Record<string, string> = {
 	'tool.image-format-converter.use_case.2': 'Esportare anteprime GIF leggere da grafiche statiche',
 	'tool.image-format-converter.use_case.3':
 		'Normalizzare immagini fornite dai clienti prima di CMS o API',
+	'tool.image-to-base64.display_name': 'Immagine in Base64',
+	'tool.image-to-base64.tagline':
+		'Trasforma immagini in Base64 puro o in data URI pronti da incollare',
+	'tool.image-to-base64.description':
+		'Converti PNG, JPEG, WebP, GIF, SVG, BMP, AVIF e ICO in stringhe Base64 o data URI completi direttamente nel browser. Copia l’output, scaricalo come file di testo e mantieni tutto locale.',
+	'tool.image-to-base64.primary_keyword': 'immagine in base64',
+	'tool.image-to-base64.meta_title': 'Immagine in Base64 — Convertitore Data URI | fmtly.dev',
+	'tool.image-to-base64.meta_description':
+		'Converti immagini in Base64 o data URI completi nel browser. Veloce, privato, con copia, download e Web Worker per file grandi.',
+	'tool.image-to-base64.operation': 'Converti immagine in Base64',
+	'tool.image-to-base64.faq.0.question': 'La mia immagine lascia il browser?',
+	'tool.image-to-base64.faq.0.answer':
+		'No. La conversione in Base64 avviene interamente nel browser e nessun file viene inviato a un server.',
+	'tool.image-to-base64.faq.1.question': 'Qual è la differenza tra Base64 puro e data URI?',
+	'tool.image-to-base64.faq.1.answer':
+		'Il Base64 puro contiene solo il payload codificato. Il data URI aggiunge il prefisso MIME, per esempio `data:image/png;base64,`, così puoi incollarlo direttamente in HTML, CSS o JSON.',
+	'tool.image-to-base64.faq.2.question': 'Quali formati immagine sono supportati?',
+	'tool.image-to-base64.faq.2.answer':
+		'Puoi caricare PNG, JPEG, WebP, GIF, BMP, AVIF, SVG e ICO. Il tool mantiene il MIME originale nell’output.',
+	'tool.image-to-base64.faq.3.question': 'Come vengono gestite immagini grandi?',
+	'tool.image-to-base64.faq.3.answer':
+		'Gli input oltre 500KB vengono elaborati in un Web Worker per mantenere l’interfaccia reattiva durante la codifica.',
+	'tool.image-to-base64.use_case.0':
+		'Incorporare icone e asset piccoli inline in payload HTML, CSS o JSON',
+	'tool.image-to-base64.use_case.1': 'Creare rapidamente data URI per prototipi, email o temi',
+	'tool.image-to-base64.use_case.2':
+		'Confrontare l’overhead Base64 prima di inserire asset in configurazioni o seed',
+	'tool.image-to-base64.use_case.3':
+		'Condividere asset come testo quando non è pratico inviare file binari',
+	'tool.image-from-base64.display_name': 'Base64 in Immagine',
+	'tool.image-from-base64.tagline':
+		'Decodifica Base64 o data URI in immagini scaricabili con rilevamento del MIME',
+	'tool.image-from-base64.description':
+		'Incolla Base64 puro o data URI completi per ricostruire immagini direttamente nel browser. Rileva automaticamente PNG, JPEG, WebP, GIF, AVIF, SVG, BMP e ICO, corregge spazi o padding mancanti e offre download immediato.',
+	'tool.image-from-base64.primary_keyword': 'base64 in immagine',
+	'tool.image-from-base64.meta_title': 'Base64 in Immagine — Decodifica Data URI | fmtly.dev',
+	'tool.image-from-base64.meta_description':
+		'Decodifica Base64 o data URI in immagini nel browser. Rileva il tipo immagine, corregge padding e spazi e consente il download istantaneo.',
+	'tool.image-from-base64.operation': 'Decodifica immagine Base64',
+	'tool.image-from-base64.faq.0.question':
+		'Posso incollare un data URI completo invece del Base64 puro?',
+	'tool.image-from-base64.faq.0.answer':
+		'Sì. Il tool accetta sia payload Base64 grezzi sia data URI completi e rimuove automaticamente il prefisso quando necessario.',
+	'tool.image-from-base64.faq.1.question': 'Cosa succede se manca il tipo MIME?',
+	'tool.image-from-base64.faq.1.answer':
+		'Il tool prova prima a rilevare il tipo immagine dai byte decodificati. Se non ci riesce, usa il tipo di fallback che scegli nella UI.',
+	'tool.image-from-base64.faq.2.question': 'Corregge spazi o padding mancanti?',
+	'tool.image-from-base64.faq.2.answer':
+		'Sì. Spazi, interruzioni di riga e padding mancante possono essere normalizzati automaticamente, con indicatori nella UI che mostrano quali correzioni sono state applicate.',
+	'tool.image-from-base64.faq.3.question': 'L’input Base64 resta privato?',
+	'tool.image-from-base64.faq.3.answer':
+		'Sì. L’intera decodifica avviene localmente nel browser, quindi il contenuto Base64 non lascia mai il dispositivo.',
+	'tool.image-from-base64.use_case.0':
+		'Ripristinare immagini da payload API o fixture salvate come Base64',
+	'tool.image-from-base64.use_case.1':
+		'Verificare data URI copiati da HTML, CSS o strumenti di design',
+	'tool.image-from-base64.use_case.2':
+		'Scaricare rapidamente immagini inviate in JSON o log invece che come file',
+	'tool.image-from-base64.use_case.3':
+		'Riparare stringhe Base64 con ritorni a capo o padding mancante prima dell’esportazione',
+	'ui.image_to_base64.upload': 'Carica immagine',
+	'ui.image_to_base64.clear': 'Cancella',
+	'ui.image_to_base64.no_file': 'Nessuna immagine selezionata',
+	'ui.image_to_base64.source_status': '{size} · {format}',
+	'ui.image_to_base64.output_status':
+		'{base64Chars} caratteri Base64 · {dataUrlChars} caratteri data URI',
+	'ui.image_to_base64.worker_active':
+		'Immagine grande rilevata (>{size}). La conversione usa un Web Worker.',
+	'ui.image_to_base64.worker_used': 'Elaborato fuori dal thread principale',
+	'ui.image_to_base64.worker_failed':
+		'Codifica nel Worker non riuscita. Passaggio al thread principale.',
+	'ui.image_to_base64.file_read_error': 'Impossibile caricare il file immagine',
+	'ui.image_to_base64.file_loaded': '{name} caricato',
+	'ui.image_to_base64.input_cleared': 'Input immagine cancellato',
+	'ui.image_to_base64.copy_empty': 'Niente da copiare',
+	'ui.image_to_base64.copy_success': 'Output copiato',
+	'ui.image_to_base64.copy_data_uri_success': 'Data URI copiato',
+	'ui.image_to_base64.copy_error': 'Copia non riuscita',
+	'ui.image_to_base64.download_empty': 'Niente da scaricare',
+	'ui.image_to_base64.download_success': '{filename} scaricato',
+	'ui.image_to_base64.download_error': 'Download non riuscito',
+	'ui.image_to_base64.drop_title': 'Rilascia un’immagine qui',
+	'ui.image_to_base64.drop_hint':
+		'PNG, JPEG, WebP, GIF, SVG, BMP, AVIF e ICO restano in questo browser.',
+	'ui.image_to_base64.source_preview_alt': 'Anteprima immagine sorgente',
+	'ui.image_to_base64.privacy_note': 'La codifica è locale; l’immagine non lascia mai il browser.',
+	'ui.image_to_base64.performance_note': 'Gli input grandi usano un Web Worker sopra {size}.',
+	'ui.image_to_base64.stat.file_size': 'Dimensione immagine',
+	'ui.image_to_base64.stat.file_size_helper': 'input solo browser',
+	'ui.image_to_base64.stat.base64_length': 'Lunghezza Base64',
+	'ui.image_to_base64.stat.base64_length_helper': 'caratteri senza prefisso',
+	'ui.image_to_base64.stat.expansion': 'Crescita payload',
+	'ui.image_to_base64.stat.expansion_helper': 'overhead Base64 previsto',
+	'ui.image_to_base64.processing': 'Codifica...',
+	'ui.image_to_base64.copy_base64': 'Copia Base64',
+	'ui.image_to_base64.copy_data_uri': 'Copia data URI',
+	'ui.image_to_base64.download_base64': 'Scarica .txt',
+	'ui.image_to_base64.download_data_uri': 'Scarica data URI',
+	'ui.image_to_base64.base64_output': 'Output Base64',
+	'ui.image_to_base64.output_placeholder': 'Il Base64 codificato apparirà qui...',
+	'ui.image_to_base64.data_uri_output': 'Output data URI',
+	'ui.image_to_base64.data_uri_placeholder': 'Il data URI apparirà qui...',
+	'ui.image_to_base64.unsupported_image': 'Formato immagine non supportato',
+	'ui.image_to_base64.empty_image': 'Il file immagine è vuoto',
+	'ui.image_to_base64.convert_failed': 'Impossibile convertire l’immagine in Base64',
+	'ui.image_from_base64.input_status': '{size} · {characters} caratteri',
+	'ui.image_from_base64.output_status': '{size} · {type}',
+	'ui.image_from_base64.worker_active':
+		'Input Base64 grande rilevato (>{size}). La decodifica usa un Web Worker.',
+	'ui.image_from_base64.worker_used': 'Elaborato fuori dal thread principale',
+	'ui.image_from_base64.worker_failed':
+		'Decodifica nel Worker non riuscita. Passaggio al thread principale.',
+	'ui.image_from_base64.privacy_note':
+		'I byte dell’immagine decodificata restano nel browser; nulla viene caricato.',
+	'ui.image_from_base64.performance_note':
+		'Le stringhe Base64 grandi usano un Web Worker sopra {size}.',
+	'ui.image_from_base64.input_placeholder':
+		'Incolla qui una stringa Base64 o un data URI completo...',
+	'ui.image_from_base64.output_placeholder': 'L’anteprima immagine decodificata apparirà qui...',
+	'ui.image_from_base64.stat.output_type': 'Tipo output',
+	'ui.image_from_base64.stat.output_type_helper': 'MIME rilevato o di fallback',
+	'ui.image_from_base64.stat.output_size': 'Dimensione output',
+	'ui.image_from_base64.stat.output_size_helper': 'Dimensione binaria decodificata',
+	'ui.image_from_base64.stat.flags': 'Normalizzazione',
+	'ui.image_from_base64.stat.flags_helper': 'Prefisso, spazi e padding',
+	'ui.image_from_base64.input_cleared': 'Input Base64 cancellato',
+	'ui.image_from_base64.sample_loaded': 'Esempio Base64 caricato',
+	'ui.image_from_base64.copy_empty': 'Niente da copiare',
+	'ui.image_from_base64.copy_data_url_success': 'Data URL copiato',
+	'ui.image_from_base64.copy_error': 'Copia non riuscita',
+	'ui.image_from_base64.copy_base64_success': 'Base64 normalizzato copiato',
+	'ui.image_from_base64.download_empty': 'Niente da scaricare',
+	'ui.image_from_base64.download_success': '{filename} scaricato',
+	'ui.image_from_base64.download_error': 'Download non riuscito',
+	'ui.image_from_base64.decode_failed': 'Decodifica immagine Base64 non riuscita',
+	'ui.image_from_base64.error.empty': 'Incolla una stringa Base64 da decodificare.',
+	'ui.image_from_base64.error.invalid_mime':
+		'Il data URI dichiara un tipo MIME immagine non supportato.',
+	'ui.image_from_base64.error.invalid_characters':
+		'L’input contiene caratteri non validi per il Base64.',
+	'ui.image_from_base64.error.invalid_padding':
+		'Il padding deve comparire solo alla fine dell’input Base64.',
+	'ui.image_from_base64.error.invalid_length':
+		'La lunghezza Base64 non è valida e non può essere decodificata.',
+	'ui.image_from_base64.flag.data_uri': 'Data URI',
+	'ui.image_from_base64.flag.whitespace': 'Spazi rimossi',
+	'ui.image_from_base64.flag.padding': 'Padding corretto',
+	'ui.image_from_base64.flag.fallback': 'MIME di fallback',
+	'ui.image_from_base64.flag.clean': 'Nessuna correzione',
+	'ui.image_from_base64.sample': 'Carica esempio',
+	'ui.image_from_base64.clear': 'Cancella',
+	'ui.image_from_base64.fallback_mime': 'Tipo output di fallback',
+	'ui.image_from_base64.processing': 'Decodifica...',
+	'ui.image_from_base64.copy_base64': 'Copia Base64',
+	'ui.image_from_base64.copy_data_url': 'Copia data URL',
+	'ui.image_from_base64.download': 'Scarica',
+	'ui.image_from_base64.output_preview_alt': 'Anteprima immagine decodificata',
 	'ui.image_converter.upload': 'Carica immagine',
 	'ui.image_converter.clear': 'Cancella',
 	'ui.image_converter.no_file': 'Nessuna immagine selezionata',
