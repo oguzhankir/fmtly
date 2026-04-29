@@ -76,6 +76,7 @@
 	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
 	import ImageFormatConverterPanel from "$components/panels/image/ImageFormatConverterPanel.svelte";
 	import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
+	import SvgOptimizerPanel from "$components/panels/image/SvgOptimizerPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -637,9 +638,11 @@
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
-{:else if data.tool.category === "image" && (data.tool.slug === "resize" || data.tool.slug === "convert")}
+{:else if data.tool.category === "image" && (data.tool.slug === "resize" || data.tool.slug === "convert" || data.tool.slug === "svg-optimizer")}
 	{#if data.tool.slug === "resize"}
 		<ImageResizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+	{:else if data.tool.slug === "svg-optimizer"}
+		<SvgOptimizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 	{:else}
 		<ImageFormatConverterPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 	{/if}
