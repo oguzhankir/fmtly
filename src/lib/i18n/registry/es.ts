@@ -4436,6 +4436,37 @@ const registryEs: Record<string, string> = {
 		'Exportar GIF ligeros de vista previa desde arte estático',
 	'tool.image-format-converter.use_case.3':
 		'Normalizar imágenes de clientes antes de subirlas a un CMS o API',
+	'tool.image-compressor.display_name': 'Compresor de Imágenes',
+	'tool.image-compressor.tagline':
+		'Reduce el peso de imágenes con formato inteligente, control de calidad y vista previa en vivo',
+	'tool.image-compressor.description':
+		'Comprime PNG, JPEG, WebP, AVIF y GIF en tu navegador con comparación antes/después, estrategia automática para elegir el formato más pequeño, controles de transparencia y descarga instantánea.',
+	'tool.image-compressor.primary_keyword': 'compresor de imágenes',
+	'tool.image-compressor.meta_title':
+		'Compresor de Imágenes — Reduce PNG, JPG, WebP, AVIF Online | fmtly.dev',
+	'tool.image-compressor.meta_description':
+		'Comprime imágenes online en tu navegador. Prueba automáticamente AVIF, WebP, JPEG y PNG, compara ahorro real de tamaño y mantén el control de transparencia y calidad.',
+	'tool.image-compressor.operation': 'Comprimir imagen',
+	'tool.image-compressor.faq.0.question': '¿Se suben mis imágenes a un servidor?',
+	'tool.image-compressor.faq.0.answer':
+		'No. La compresión se hace completamente en tu navegador. El archivo nunca sale de tu dispositivo.',
+	'tool.image-compressor.faq.1.question': '¿Qué hace el modo automático?',
+	'tool.image-compressor.faq.1.answer':
+		'El modo automático prueba formatos modernos compatibles como AVIF, WebP, JPEG y PNG, y conserva el resultado correcto más pequeño que el navegador pueda codificar.',
+	'tool.image-compressor.faq.2.question': '¿Puedo conservar la transparencia?',
+	'tool.image-compressor.faq.2.answer':
+		'Sí. Si la imagen de origen tiene transparencia, puedes mantenerla con formatos compatibles o aplanarla sobre un fondo elegido cuando quieras el archivo más pequeño.',
+	'tool.image-compressor.faq.3.question': '¿Cómo se mantiene fluida con archivos grandes?',
+	'tool.image-compressor.faq.3.answer':
+		'Las entradas de más de 500KB se procesan en un Web Worker para que la interfaz siga respondiendo mientras se comprime la imagen.',
+	'tool.image-compressor.use_case.0':
+		'Reducir capturas y banners antes de publicarlos en web o en documentación',
+	'tool.image-compressor.use_case.1':
+		'Encontrar automáticamente el formato más ligero para assets de producto',
+	'tool.image-compressor.use_case.2':
+		'Optimizar imágenes de clientes antes de subirlas a un CMS o API',
+	'tool.image-compressor.use_case.3':
+		'Comparar ahorro real antes y después sin usar servicios externos',
 	'ui.image_converter.upload': 'Subir imagen',
 	'ui.image_converter.clear': 'Limpiar',
 	'ui.image_converter.no_file': 'No hay imagen seleccionada',
@@ -4477,6 +4508,67 @@ const registryEs: Record<string, string> = {
 	'ui.image_converter.copy_output': 'Copiar URL de datos',
 	'ui.image_converter.download': 'Descargar',
 	'ui.image_converter.output_placeholder': 'La salida convertida aparecerá aquí...',
+	'ui.image_compressor.upload': 'Subir imagen',
+	'ui.image_compressor.clear': 'Limpiar',
+	'ui.image_compressor.no_file': 'No hay imagen seleccionada',
+	'ui.image_compressor.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_compressor.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_compressor.worker_active':
+		'Imagen grande detectada (>{size}). La compresión se ejecuta en un Web Worker.',
+	'ui.image_compressor.worker_used': 'Procesado fuera del hilo principal',
+	'ui.image_compressor.worker_failed': 'Falló la compresión en Worker. Se usará el hilo principal.',
+	'ui.image_compressor.compress_failed': 'No se pudo comprimir la imagen',
+	'ui.image_compressor.file_read_error': 'No se pudo cargar la imagen',
+	'ui.image_compressor.file_loaded': '{name} cargado',
+	'ui.image_compressor.input_cleared': 'Entrada de imagen limpiada',
+	'ui.image_compressor.copy_empty': 'No hay nada que copiar',
+	'ui.image_compressor.copy_success': 'Salida copiada',
+	'ui.image_compressor.copy_error': 'Error al copiar',
+	'ui.image_compressor.download_empty': 'No hay nada que descargar',
+	'ui.image_compressor.download_success': '{filename} descargado',
+	'ui.image_compressor.download_error': 'Error en la descarga',
+	'ui.image_compressor.drop_title': 'Suelta una imagen aquí',
+	'ui.image_compressor.drop_hint': 'Comprime PNG, JPEG, WebP, AVIF y GIF sin salir del navegador.',
+	'ui.image_compressor.source_preview_alt': 'Vista previa de la imagen original',
+	'ui.image_compressor.output_preview_alt': 'Vista previa de la imagen comprimida',
+	'ui.image_compressor.before_label': 'Antes',
+	'ui.image_compressor.after_label': 'Después',
+	'ui.image_compressor.output_placeholder': 'La vista previa comprimida aparecerá aquí...',
+	'ui.image_compressor.output_format': 'Estrategia de compresión',
+	'ui.image_compressor.output_auto': 'Auto (más pequeño)',
+	'ui.image_compressor.quality': 'Calidad',
+	'ui.image_compressor.preserve_transparency': 'Conservar transparencia',
+	'ui.image_compressor.preserve_transparency_auto':
+		'El modo automático conserva el canal alfa al probar AVIF, WebP y PNG.',
+	'ui.image_compressor.preserve_transparency_locked':
+		'JPEG no puede conservar transparencia, así que las zonas transparentes usan el fondo elegido.',
+	'ui.image_compressor.preserve_transparency_help':
+		'Desactívalo solo si quieres aplanar la imagen sobre un fondo.',
+	'ui.image_compressor.background': 'Fondo al aplanar',
+	'ui.image_compressor.background_white': 'Blanco',
+	'ui.image_compressor.background_black': 'Negro',
+	'ui.image_compressor.background_transparent': 'Transparente',
+	'ui.image_compressor.auto_note':
+		'El modo automático prueba {formats} y conserva el resultado válido más pequeño.',
+	'ui.image_compressor.privacy_note':
+		'La compresión es local; los archivos no salen del navegador.',
+	'ui.image_compressor.performance_note':
+		'Las entradas grandes usan Web Worker a partir de {size}.',
+	'ui.image_compressor.result_summary': 'Se ahorraron {saved} ({percent}) en {format}.',
+	'ui.image_compressor.processing': 'Comprimiendo...',
+	'ui.image_compressor.copy_output': 'Copiar URL de datos',
+	'ui.image_compressor.download': 'Descargar',
+	'ui.image_compressor.original_label': 'Original',
+	'ui.image_compressor.optimized_label': 'Comprimida',
+	'ui.image_compressor.stat.original_size': 'Tamaño original',
+	'ui.image_compressor.stat.original_helper': 'Antes de comprimir',
+	'ui.image_compressor.stat.compressed_size': 'Tamaño comprimido',
+	'ui.image_compressor.stat.compressed_helper': 'Mejor resultado',
+	'ui.image_compressor.stat.saved': 'Ahorrado',
+	'ui.image_compressor.stat.saved_helper': 'Comparado con el original',
+	'ui.image_compressor.stat.format': 'Formato elegido',
+	'ui.image_compressor.stat.format_helper': 'Origen: {source}',
+	'ui.image_compressor.stat.format_helper_idle': 'Se actualizará tras comprimir',
 	'ui.image_resizer.drop_title': 'Suelta una imagen aquí o selecciónala',
 	'ui.image_resizer.drop_hint':
 		'Todo se procesa localmente en tu navegador. No se sube ninguna imagen.',

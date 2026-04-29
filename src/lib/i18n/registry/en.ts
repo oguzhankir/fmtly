@@ -152,6 +152,37 @@ const registryEn: Record<string, string> = {
 		'Reduce upload sizes before sending files to APIs or CMS systems',
 	'tool.image-resizer.use_case.3':
 		'Convert between PNG, JPEG, and WebP while preserving output control',
+	'tool.image-compressor.display_name': 'Image Compressor',
+	'tool.image-compressor.tagline':
+		'Compress images with smart format selection, quality control, and instant previews',
+	'tool.image-compressor.description':
+		'Reduce image file size in your browser with real-time before/after previews, adjustable quality, transparency controls, and automatic format selection across AVIF, WebP, JPEG, and PNG.',
+	'tool.image-compressor.primary_keyword': 'image compressor',
+	'tool.image-compressor.meta_title':
+		'Image Compressor — Compress PNG, JPG, WebP, AVIF Online | fmtly.dev',
+	'tool.image-compressor.meta_description':
+		'Compress images online with before/after previews, adjustable quality, transparency controls, and automatic AVIF, WebP, JPEG, or PNG output. Private and browser-only.',
+	'tool.image-compressor.operation': 'Compress image',
+	'tool.image-compressor.faq.0.question': 'Does image compression happen locally?',
+	'tool.image-compressor.faq.0.answer':
+		'Yes. Compression runs entirely in your browser. Files stay on your device and are never uploaded.',
+	'tool.image-compressor.faq.1.question': 'What does Auto mode do?',
+	'tool.image-compressor.faq.1.answer':
+		'Auto mode tests supported modern formats and keeps the smallest successful result. Transparent images stay on alpha-safe formats when transparency preservation is enabled.',
+	'tool.image-compressor.faq.2.question': 'Can I preserve transparent backgrounds?',
+	'tool.image-compressor.faq.2.answer':
+		'Yes. Keep transparency for PNG, WebP, and AVIF outputs, or intentionally flatten onto a chosen background when you want smaller opaque exports.',
+	'tool.image-compressor.faq.3.question': 'How are large files kept responsive?',
+	'tool.image-compressor.faq.3.answer':
+		'Inputs above 500KB are compressed in a Web Worker so the UI stays responsive while previews and controls remain interactive.',
+	'tool.image-compressor.use_case.0':
+		'Shrink marketing images and screenshots before publishing to the web',
+	'tool.image-compressor.use_case.1':
+		'Auto-pick the smallest modern image format for a given asset',
+	'tool.image-compressor.use_case.2':
+		'Prepare lighter uploads for CMS, APIs, and design handoff workflows',
+	'tool.image-compressor.use_case.3':
+		'Compare before/after previews and file savings without leaving the browser',
 	'tool.image-format-converter.display_name': 'Image Format Converter',
 	'tool.image-format-converter.tagline': 'Convert PNG, JPEG, WebP, AVIF, and GIF images privately',
 	'tool.image-format-converter.description':
@@ -222,6 +253,67 @@ const registryEn: Record<string, string> = {
 	'ui.image_converter.copy_output': 'Copy data URL',
 	'ui.image_converter.download': 'Download',
 	'ui.image_converter.output_placeholder': 'Converted output appears here...',
+	'ui.image_compressor.upload': 'Upload image',
+	'ui.image_compressor.clear': 'Clear',
+	'ui.image_compressor.no_file': 'No image selected',
+	'ui.image_compressor.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_compressor.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_compressor.worker_active':
+		'Large image detected (>{size}). Compression runs in a Web Worker.',
+	'ui.image_compressor.worker_used': 'Processed off-thread',
+	'ui.image_compressor.worker_failed':
+		'Worker compression failed. Falling back to main thread processing.',
+	'ui.image_compressor.compress_failed': 'Image compression failed',
+	'ui.image_compressor.file_read_error': 'Could not load image file',
+	'ui.image_compressor.file_loaded': 'Loaded {name}',
+	'ui.image_compressor.input_cleared': 'Image input cleared',
+	'ui.image_compressor.copy_empty': 'Nothing to copy',
+	'ui.image_compressor.copy_success': 'Output copied',
+	'ui.image_compressor.copy_error': 'Copy failed',
+	'ui.image_compressor.download_empty': 'Nothing to download',
+	'ui.image_compressor.download_success': 'Downloaded {filename}',
+	'ui.image_compressor.download_error': 'Download failed',
+	'ui.image_compressor.drop_title': 'Drop an image here',
+	'ui.image_compressor.drop_hint':
+		'Compress PNG, JPEG, WebP, AVIF, and GIF without leaving the browser.',
+	'ui.image_compressor.source_preview_alt': 'Source image preview',
+	'ui.image_compressor.output_preview_alt': 'Compressed image preview',
+	'ui.image_compressor.before_label': 'Before',
+	'ui.image_compressor.after_label': 'After',
+	'ui.image_compressor.output_placeholder': 'Compressed preview appears here...',
+	'ui.image_compressor.output_format': 'Compression strategy',
+	'ui.image_compressor.output_auto': 'Auto (smallest)',
+	'ui.image_compressor.quality': 'Quality',
+	'ui.image_compressor.preserve_transparency': 'Preserve transparency',
+	'ui.image_compressor.preserve_transparency_auto':
+		'Auto mode keeps alpha by testing AVIF, WebP, and PNG.',
+	'ui.image_compressor.preserve_transparency_locked':
+		'JPEG cannot keep alpha, so transparent areas use the selected background.',
+	'ui.image_compressor.preserve_transparency_help':
+		'Disable this only when you intentionally want a flat background.',
+	'ui.image_compressor.background': 'Flattened background',
+	'ui.image_compressor.background_white': 'White',
+	'ui.image_compressor.background_black': 'Black',
+	'ui.image_compressor.background_transparent': 'Transparent',
+	'ui.image_compressor.auto_note':
+		'Auto mode tests {formats} and keeps the smallest successful result.',
+	'ui.image_compressor.privacy_note': 'Compression is local; files never leave your browser.',
+	'ui.image_compressor.performance_note': 'Large inputs use a Web Worker above {size}.',
+	'ui.image_compressor.result_summary': 'Saved {saved} ({percent}) as {format}.',
+	'ui.image_compressor.processing': 'Compressing...',
+	'ui.image_compressor.copy_output': 'Copy data URL',
+	'ui.image_compressor.download': 'Download',
+	'ui.image_compressor.original_label': 'Original',
+	'ui.image_compressor.optimized_label': 'Compressed',
+	'ui.image_compressor.stat.original_size': 'Original size',
+	'ui.image_compressor.stat.original_helper': 'Before compression',
+	'ui.image_compressor.stat.compressed_size': 'Compressed size',
+	'ui.image_compressor.stat.compressed_helper': 'Best output',
+	'ui.image_compressor.stat.saved': 'Saved',
+	'ui.image_compressor.stat.saved_helper': 'Compared with source',
+	'ui.image_compressor.stat.format': 'Chosen format',
+	'ui.image_compressor.stat.format_helper': 'Source: {source}',
+	'ui.image_compressor.stat.format_helper_idle': 'Will update after compression',
 
 	// ── JSON tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Formatter',

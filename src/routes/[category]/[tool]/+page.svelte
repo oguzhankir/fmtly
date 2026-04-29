@@ -74,6 +74,7 @@
 	import AiTokenCounterPanel from "$components/panels/ai/AiTokenCounterPanel.svelte";
 	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
 	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
+	import ImageCompressorPanel from "$components/panels/image/ImageCompressorPanel.svelte";
 	import ImageFormatConverterPanel from "$components/panels/image/ImageFormatConverterPanel.svelte";
 	import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
@@ -637,9 +638,11 @@
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
-{:else if data.tool.category === "image" && (data.tool.slug === "resize" || data.tool.slug === "convert")}
+{:else if data.tool.category === "image" && (data.tool.slug === "resize" || data.tool.slug === "convert" || data.tool.slug === "compress")}
 	{#if data.tool.slug === "resize"}
 		<ImageResizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+	{:else if data.tool.slug === "compress"}
+		<ImageCompressorPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 	{:else}
 		<ImageFormatConverterPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 	{/if}

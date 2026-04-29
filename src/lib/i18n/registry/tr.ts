@@ -121,6 +121,99 @@ const registryTr: Record<string, string> = {
 		'Sistem promptlarını düz metin veya OpenAI uyumlu JSON mesajları olarak dışa aktar',
 	'tool.ai-system-prompt-builder.use_case.3':
 		'Promptlara güvenlik sınırları, akıl yürütme yönergeleri, örnekler ve kalite kontrolleri ekle',
+	'tool.image-compressor.display_name': 'Görsel Sıkıştırıcı',
+	'tool.image-compressor.tagline':
+		'Akıllı biçim seçimi, kalite kontrolü ve canlı önizleme ile görsel boyutunu küçült',
+	'tool.image-compressor.description':
+		'PNG, JPEG, WebP, AVIF ve GIF görsellerini tamamen tarayıcıda sıkıştır. En küçük çıktıyı otomatik seç, kaliteyi ayarla, şeffaflığı koru veya düz arka plan uygula ve önce/sonra tasarrufunu anında karşılaştır.',
+	'tool.image-compressor.primary_keyword': 'görsel sıkıştırıcı',
+	'tool.image-compressor.meta_title':
+		'Görsel Sıkıştırıcı — PNG, JPG, WebP, AVIF Optimizasyonu | fmtly.dev',
+	'tool.image-compressor.meta_description':
+		'PNG, JPEG, WebP, AVIF ve GIF görsellerini tarayıcıda sıkıştır. Akıllı en küçük biçim seçimi, canlı önce/sonra önizlemesi, kalite ayarı ve Web Worker desteği.',
+	'tool.image-compressor.operation': 'Görsel sıkıştır',
+	'tool.image-compressor.faq.0.question': 'Görsellerim bir sunucuya yükleniyor mu?',
+	'tool.image-compressor.faq.0.answer':
+		'Hayır. Sıkıştırma, önizleme ve indirme tamamen tarayıcıda gerçekleşir. Dosyaların cihazından çıkmaz.',
+	'tool.image-compressor.faq.1.question': 'Otomatik mod nasıl karar veriyor?',
+	'tool.image-compressor.faq.1.answer':
+		'Otomatik mod desteklenen AVIF, WebP, JPEG ve gerektiğinde PNG adaylarını dener; en küçük başarılı çıktıyı seçer. Şeffaflık korunuyorsa alfa kanalı destekleyen biçimlere öncelik verir.',
+	'tool.image-compressor.faq.2.question': 'Şeffaflık ne olur?',
+	'tool.image-compressor.faq.2.answer':
+		'Şeffaflığı korursan araç alfa desteği olan biçimleri tercih eder. JPEG seçersen veya korumayı kapatırsan saydam alanlar seçtiğin arka plan rengine düzleştirilir.',
+	'tool.image-compressor.faq.3.question': 'Büyük görsellerde arayüz akıcı kalır mı?',
+	'tool.image-compressor.faq.3.answer':
+		'Evet. 500KB üzerindeki girdiler, ana arayüzü bloklamamak için Web Worker içinde işlenir.',
+	'tool.image-compressor.use_case.0':
+		'Makale kapak görsellerini ve pazarlama varlıklarını yayınlamadan önce küçült',
+	'tool.image-compressor.use_case.1':
+		'Müşteri yüklemelerinde en küçük AVIF, WebP veya JPEG çıktısını seç',
+	'tool.image-compressor.use_case.2':
+		'Şeffaf UI varlıklarını kalite ile boyut arasında denge kurarak optimize et',
+	'tool.image-compressor.use_case.3':
+		'Herhangi bir şeyi yüklemeden dosya boyutunu önce/sonra karşılaştır',
+	'ui.image_compressor.upload': 'Görsel yükle',
+	'ui.image_compressor.clear': 'Temizle',
+	'ui.image_compressor.no_file': 'Görsel seçilmedi',
+	'ui.image_compressor.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_compressor.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_compressor.worker_active':
+		'Büyük görsel algılandı (>{size}). Sıkıştırma bir Web Worker içinde çalışır.',
+	'ui.image_compressor.worker_used': 'Ana iş parçacığı dışında işlendi',
+	'ui.image_compressor.worker_failed':
+		'Worker sıkıştırması başarısız oldu. Ana iş parçacığına geri dönülüyor.',
+	'ui.image_compressor.compress_failed': 'Görsel sıkıştırma başarısız oldu',
+	'ui.image_compressor.file_read_error': 'Görsel dosyası yüklenemedi',
+	'ui.image_compressor.file_loaded': '{name} yüklendi',
+	'ui.image_compressor.input_cleared': 'Görsel girdisi temizlendi',
+	'ui.image_compressor.copy_empty': 'Kopyalanacak bir şey yok',
+	'ui.image_compressor.copy_success': 'Çıktı kopyalandı',
+	'ui.image_compressor.copy_error': 'Kopyalama başarısız oldu',
+	'ui.image_compressor.download_empty': 'İndirilecek bir şey yok',
+	'ui.image_compressor.download_success': '{filename} indirildi',
+	'ui.image_compressor.download_error': 'İndirme başarısız oldu',
+	'ui.image_compressor.drop_title': 'Bir görseli buraya bırak',
+	'ui.image_compressor.drop_hint':
+		'PNG, JPEG, WebP, AVIF ve GIF görsellerini tarayıcıdan çıkarmadan sıkıştır.',
+	'ui.image_compressor.source_preview_alt': 'Kaynak görsel önizlemesi',
+	'ui.image_compressor.output_preview_alt': 'Sıkıştırılmış görsel önizlemesi',
+	'ui.image_compressor.before_label': 'Önce',
+	'ui.image_compressor.after_label': 'Sonra',
+	'ui.image_compressor.output_placeholder': 'Sıkıştırılmış önizleme burada görünür...',
+	'ui.image_compressor.output_format': 'Sıkıştırma stratejisi',
+	'ui.image_compressor.output_auto': 'Otomatik (en küçük)',
+	'ui.image_compressor.quality': 'Kalite',
+	'ui.image_compressor.preserve_transparency': 'Şeffaflığı koru',
+	'ui.image_compressor.preserve_transparency_auto':
+		'Otomatik mod alfa korumak için AVIF, WebP ve PNG adaylarını dener.',
+	'ui.image_compressor.preserve_transparency_locked':
+		'JPEG alfa desteklemez; saydam alanlar seçilen arka planla doldurulur.',
+	'ui.image_compressor.preserve_transparency_help':
+		'Bunu yalnızca bilerek düz bir arka plan istediğinde kapat.',
+	'ui.image_compressor.background': 'Düzleştirilen arka plan',
+	'ui.image_compressor.background_white': 'Beyaz',
+	'ui.image_compressor.background_black': 'Siyah',
+	'ui.image_compressor.background_transparent': 'Şeffaf',
+	'ui.image_compressor.auto_note':
+		'Otomatik mod {formats} biçimlerini dener ve en küçük başarılı sonucu saklar.',
+	'ui.image_compressor.privacy_note': 'Sıkıştırma yereldir; dosyalar tarayıcından hiç çıkmaz.',
+	'ui.image_compressor.performance_note':
+		'Büyük girdiler {size} üzerindeyse Web Worker kullanılır.',
+	'ui.image_compressor.result_summary': '{format} olarak {saved} ({percent}) tasarruf edildi.',
+	'ui.image_compressor.processing': 'Sıkıştırılıyor...',
+	'ui.image_compressor.copy_output': 'Veri URL’sini kopyala',
+	'ui.image_compressor.download': 'İndir',
+	'ui.image_compressor.original_label': 'Orijinal',
+	'ui.image_compressor.optimized_label': 'Sıkıştırılmış',
+	'ui.image_compressor.stat.original_size': 'Orijinal boyut',
+	'ui.image_compressor.stat.original_helper': 'Sıkıştırmadan önce',
+	'ui.image_compressor.stat.compressed_size': 'Sıkıştırılmış boyut',
+	'ui.image_compressor.stat.compressed_helper': 'En iyi çıktı',
+	'ui.image_compressor.stat.saved': 'Tasarruf',
+	'ui.image_compressor.stat.saved_helper': 'Kaynak ile karşılaştırıldı',
+	'ui.image_compressor.stat.format': 'Seçilen biçim',
+	'ui.image_compressor.stat.format_helper': 'Kaynak: {source}',
+	'ui.image_compressor.stat.format_helper_idle': 'Sıkıştırmadan sonra güncellenir',
 	// ── JSON araçları ────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON Biçimlendirici',
 	'tool.json-formatter.tagline': "JSON'u ayarlanabilir girinti ile biçimlendir ve güzelleştir",

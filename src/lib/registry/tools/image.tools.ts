@@ -2,7 +2,8 @@ import type { ToolDefinition } from '../types.js';
 
 const imageRelated = [
 	{ category: 'image', slug: 'resize' },
-	{ category: 'image', slug: 'convert' }
+	{ category: 'image', slug: 'convert' },
+	{ category: 'image', slug: 'compress' }
 ] as const;
 
 export const imageTools: ToolDefinition[] = [
@@ -34,6 +35,49 @@ export const imageTools: ToolDefinition[] = [
 			'tool.image-resizer.use_case.1',
 			'tool.image-resizer.use_case.2',
 			'tool.image-resizer.use_case.3'
+		],
+		sampleInput: ''
+	},
+	{
+		id: 'image-compressor',
+		category: 'image',
+		slug: 'compress',
+		displayName: 'tool.image-compressor.display_name',
+		tagline: 'tool.image-compressor.tagline',
+		description: 'tool.image-compressor.description',
+		primaryKeyword: 'tool.image-compressor.primary_keyword',
+		metaTitle: 'tool.image-compressor.meta_title',
+		metaDescription: 'tool.image-compressor.meta_description',
+		engine: 'image',
+		operation: 'tool.image-compressor.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'image',
+		outputLanguage: 'image',
+		hasTreeView: false,
+		relatedTools: [...imageRelated],
+		faqs: [
+			{
+				question: 'tool.image-compressor.faq.0.question',
+				answer: 'tool.image-compressor.faq.0.answer'
+			},
+			{
+				question: 'tool.image-compressor.faq.1.question',
+				answer: 'tool.image-compressor.faq.1.answer'
+			},
+			{
+				question: 'tool.image-compressor.faq.2.question',
+				answer: 'tool.image-compressor.faq.2.answer'
+			},
+			{
+				question: 'tool.image-compressor.faq.3.question',
+				answer: 'tool.image-compressor.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.image-compressor.use_case.0',
+			'tool.image-compressor.use_case.1',
+			'tool.image-compressor.use_case.2',
+			'tool.image-compressor.use_case.3'
 		],
 		sampleInput: ''
 	},

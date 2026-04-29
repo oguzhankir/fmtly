@@ -6,6 +6,13 @@ export type ImageConversionOutputFormat =
 	| 'image/avif'
 	| 'image/gif';
 type CanvasEncodedImageFormat = Exclude<ImageConversionOutputFormat, 'image/gif'>;
+export type ImageCompressionOutputFormat =
+	| 'auto'
+	| 'image/png'
+	| 'image/jpeg'
+	| 'image/webp'
+	| 'image/avif';
+export type ImageCompressionResolvedOutputFormat = Exclude<ImageCompressionOutputFormat, 'auto'>;
 
 export type ImageResizeMode = 'dimensions' | 'percentage';
 
@@ -75,6 +82,39 @@ export type ImageConversionResult = {
 	durationMs: number;
 };
 
+export type ImageCompressionInput = ImageResizeInput;
+
+export type ImageCompressionOptions = {
+	outputFormat: ImageCompressionOutputFormat;
+	quality: number;
+	preserveTransparency: boolean;
+	backgroundColor: string;
+};
+
+export type ImageCompressionMetadata = {
+	originalWidth: number;
+	originalHeight: number;
+	outputWidth: number;
+	outputHeight: number;
+	originalSizeBytes: number;
+	outputSizeBytes: number;
+	sizeDeltaBytes: number;
+	sizeDeltaPercent: number;
+	sourceFormat: string;
+	outputFormat: ImageCompressionResolvedOutputFormat;
+	requestedOutputFormat: ImageCompressionOutputFormat;
+	sourceHasTransparency: boolean;
+	transparencyPreserved: boolean;
+};
+
+export type ImageCompressionResult = {
+	dataUrl: string;
+	downloadFilename: string;
+	mimeType: ImageCompressionResolvedOutputFormat;
+	metadata: ImageCompressionMetadata;
+	durationMs: number;
+};
+
 export type ImageResizerWorkerRequest = {
 	id: number;
 	input: ImageResizeInput;
@@ -96,6 +136,18 @@ export type ImageConverterWorkerRequest = {
 export type ImageConverterWorkerResponse = {
 	id: number;
 	result?: ImageConversionResult;
+	error?: string;
+};
+
+export type ImageCompressorWorkerRequest = {
+	id: number;
+	input: ImageCompressionInput;
+	options: ImageCompressionOptions;
+};
+
+export type ImageCompressorWorkerResponse = {
+	id: number;
+	result?: ImageCompressionResult;
 	error?: string;
 };
 
@@ -137,6 +189,7 @@ const GIF_MAX_COLORS = 256;
 
 export const IMAGE_RESIZER_WORKER_THRESHOLD_BYTES = 500 * 1024;
 export const IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES = 500 * 1024;
+export const IMAGE_COMPRESSOR_WORKER_THRESHOLD_BYTES = 500 * 1024;
 
 export const IMAGE_RESIZER_DEFAULT_OPTIONS: ImageResizeOptions = {
 	mode: 'dimensions',
@@ -154,12 +207,30 @@ export const IMAGE_CONVERTER_DEFAULT_OPTIONS: ImageConversionOptions = {
 	backgroundColor: 'white'
 };
 
+export const IMAGE_COMPRESSOR_DEFAULT_OPTIONS: ImageCompressionOptions = {
+	outputFormat: 'auto',
+	quality: 0.82,
+	preserveTransparency: true,
+	backgroundColor: 'white'
+};
+
+export const AUTO_IMAGE_COMPRESSION_FORMATS: ImageCompressionResolvedOutputFormat[] = [
+	'image/avif',
+	'image/webp',
+	'image/jpeg',
+	'image/png'
+];
+
 export function shouldUseImageResizerWorker(inputBytes: number): boolean {
 	return inputBytes > IMAGE_RESIZER_WORKER_THRESHOLD_BYTES;
 }
 
 export function shouldUseImageConverterWorker(inputBytes: number): boolean {
 	return inputBytes > IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES;
+}
+
+export function shouldUseImageCompressorWorker(inputBytes: number): boolean {
+	return inputBytes > IMAGE_COMPRESSOR_WORKER_THRESHOLD_BYTES;
 }
 
 export async function resizeImage(
@@ -269,6 +340,87 @@ export async function convertImageFormat(
 	}
 }
 
+export async function compressImage(
+	input: ImageCompressionInput,
+	options: Partial<ImageCompressionOptions> = {}
+): Promise<ImageCompressionResult> {
+	const startedAt = nowMs();
+	validateImageDataUrl(input.dataUrl);
+	const normalizedOptions = normalizeImageCompressionOptions(options);
+	const sourceBitmap = await createSourceBitmap(input.dataUrl);
+
+	try {
+		const dimensions: ResizeDimensions = {
+			width: clampNumber(sourceBitmap.width, MIN_DIMENSION, MAX_DIMENSION),
+			height: clampNumber(sourceBitmap.height, MIN_DIMENSION, MAX_DIMENSION)
+		};
+		const analysisCanvas = createResizeCanvas(dimensions.width, dimensions.height);
+		drawImageToCanvas(analysisCanvas, sourceBitmap, dimensions);
+		const sourceHasTransparency = canvasHasTransparency(analysisCanvas, dimensions);
+		const candidateFormats = resolveCompressionCandidateFormats(
+			normalizedOptions.outputFormat,
+			normalizedOptions.preserveTransparency,
+			sourceHasTransparency
+		);
+
+		let bestCandidate: {
+			dataUrl: string;
+			sizeBytes: number;
+			format: ImageCompressionResolvedOutputFormat;
+		} | null = null;
+
+		for (const format of candidateFormats) {
+			const canvas = createResizeCanvas(dimensions.width, dimensions.height);
+			drawImageToCanvas(
+				canvas,
+				sourceBitmap,
+				dimensions,
+				shouldFlattenTransparency(format, normalizedOptions, sourceHasTransparency)
+					? normalizedOptions.backgroundColor
+					: undefined
+			);
+
+			try {
+				const dataUrl = await canvasToDataUrl(canvas, format, normalizedOptions.quality);
+				const sizeBytes = getDataUrlByteSize(dataUrl);
+				if (!bestCandidate || sizeBytes < bestCandidate.sizeBytes) {
+					bestCandidate = { dataUrl, sizeBytes, format };
+				}
+			} catch {}
+		}
+
+		if (!bestCandidate) {
+			throw new Error('No supported compression format is available in this browser');
+		}
+
+		return {
+			dataUrl: bestCandidate.dataUrl,
+			downloadFilename: buildDownloadFilename(input.sourceName, bestCandidate.format),
+			mimeType: bestCandidate.format,
+			metadata: {
+				originalWidth: sourceBitmap.width,
+				originalHeight: sourceBitmap.height,
+				outputWidth: dimensions.width,
+				outputHeight: dimensions.height,
+				originalSizeBytes: input.sourceSizeBytes,
+				outputSizeBytes: bestCandidate.sizeBytes,
+				sizeDeltaBytes: bestCandidate.sizeBytes - input.sourceSizeBytes,
+				sizeDeltaPercent: computeSizeDeltaPercent(input.sourceSizeBytes, bestCandidate.sizeBytes),
+				sourceFormat: normalizeSourceFormat(input.sourceType, input.dataUrl),
+				outputFormat: bestCandidate.format,
+				requestedOutputFormat: normalizedOptions.outputFormat,
+				sourceHasTransparency,
+				transparencyPreserved:
+					sourceHasTransparency &&
+					!shouldFlattenTransparency(bestCandidate.format, normalizedOptions, sourceHasTransparency)
+			},
+			durationMs: elapsedMs(startedAt)
+		};
+	} finally {
+		sourceBitmap.close();
+	}
+}
+
 export function normalizeImageResizeOptions(
 	options: Partial<ImageResizeOptions>
 ): ImageResizeOptions {
@@ -328,6 +480,22 @@ export function normalizeImageConversionOptions(
 	};
 }
 
+export function normalizeImageCompressionOptions(
+	options: Partial<ImageCompressionOptions>
+): ImageCompressionOptions {
+	return {
+		outputFormat: normalizeCompressionOutputFormat(options.outputFormat),
+		quality: clampNumber(
+			options.quality ?? IMAGE_COMPRESSOR_DEFAULT_OPTIONS.quality,
+			MIN_QUALITY,
+			MAX_QUALITY
+		),
+		preserveTransparency:
+			options.preserveTransparency ?? IMAGE_COMPRESSOR_DEFAULT_OPTIONS.preserveTransparency,
+		backgroundColor: normalizeBackgroundColor(options.backgroundColor)
+	};
+}
+
 function normalizeConversionFormat(
 	format: ImageConversionOutputFormat | undefined
 ): ImageConversionOutputFormat {
@@ -342,6 +510,38 @@ function normalizeConversionFormat(
 	}
 
 	return IMAGE_CONVERTER_DEFAULT_OPTIONS.outputFormat;
+}
+
+function normalizeCompressionOutputFormat(
+	format: ImageCompressionOutputFormat | undefined
+): ImageCompressionOutputFormat {
+	if (
+		format === 'auto' ||
+		format === 'image/png' ||
+		format === 'image/jpeg' ||
+		format === 'image/webp' ||
+		format === 'image/avif'
+	) {
+		return format;
+	}
+
+	return IMAGE_COMPRESSOR_DEFAULT_OPTIONS.outputFormat;
+}
+
+export function resolveCompressionCandidateFormats(
+	requestedFormat: ImageCompressionOutputFormat,
+	preserveTransparency: boolean,
+	sourceHasTransparency: boolean
+): ImageCompressionResolvedOutputFormat[] {
+	if (requestedFormat !== 'auto') {
+		return [requestedFormat];
+	}
+
+	if (sourceHasTransparency && preserveTransparency) {
+		return ['image/avif', 'image/webp', 'image/png'];
+	}
+
+	return AUTO_IMAGE_COMPRESSION_FORMATS;
 }
 
 export function computeScaledDimensions(
@@ -418,6 +618,21 @@ function isCanvas2DLike(context: unknown): context is Canvas2DLike {
 
 function isCanvasImageDataContext(context: unknown): context is CanvasImageDataContext {
 	return isCanvas2DLike(context) && 'getImageData' in context;
+}
+
+function canvasHasTransparency(
+	canvas: OffscreenCanvas | HTMLCanvasElement,
+	dimensions: ResizeDimensions
+): boolean {
+	const context = canvas.getContext('2d');
+	if (!isCanvasImageDataContext(context)) {
+		throw new Error('Canvas pixel readback is unavailable');
+	}
+	const imageData = context.getImageData(0, 0, dimensions.width, dimensions.height);
+	for (let index = 3; index < imageData.data.length; index += 4) {
+		if (imageData.data[index] < 255) return true;
+	}
+	return false;
 }
 
 async function canvasToDataUrl(
@@ -582,6 +797,16 @@ function validateEncodedBlob(blob: Blob, format: CanvasEncodedImageFormat): void
 
 function requiresOpaqueBackground(format: ImageConversionOutputFormat): boolean {
 	return format === 'image/jpeg';
+}
+
+function shouldFlattenTransparency(
+	format: ImageCompressionResolvedOutputFormat,
+	options: ImageCompressionOptions,
+	sourceHasTransparency: boolean
+): boolean {
+	if (!sourceHasTransparency) return false;
+	if (format === 'image/jpeg') return true;
+	return !options.preserveTransparency;
 }
 
 function normalizeBackgroundColor(color: string | undefined): string {

@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import {
+	IMAGE_COMPRESSOR_DEFAULT_OPTIONS,
+	IMAGE_COMPRESSOR_WORKER_THRESHOLD_BYTES,
 	IMAGE_CONVERTER_DEFAULT_OPTIONS,
 	IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES,
 	IMAGE_RESIZER_DEFAULT_OPTIONS,
 	IMAGE_RESIZER_WORKER_THRESHOLD_BYTES,
 	computeScaledDimensions,
 	getImageConversionExtension,
+	normalizeImageCompressionOptions,
 	normalizeImageConversionOptions,
+	resolveCompressionCandidateFormats,
+	shouldUseImageCompressorWorker,
 	shouldUseImageConverterWorker,
 	shouldUseImageResizerWorker
 } from '../../../src/lib/engines/image/index.js';
@@ -85,5 +90,61 @@ describe('image format converter options', () => {
 		expect(getImageConversionExtension('image/webp')).toBe('webp');
 		expect(getImageConversionExtension('image/avif')).toBe('avif');
 		expect(getImageConversionExtension('image/gif')).toBe('gif');
+	});
+});
+
+describe('image compressor options', () => {
+	it('uses worker only for compressor files above 500KB', () => {
+		expect(shouldUseImageCompressorWorker(IMAGE_COMPRESSOR_WORKER_THRESHOLD_BYTES)).toBe(false);
+		expect(shouldUseImageCompressorWorker(IMAGE_COMPRESSOR_WORKER_THRESHOLD_BYTES + 1)).toBe(true);
+	});
+
+	it('has stable defaults for compression controls', () => {
+		expect(IMAGE_COMPRESSOR_DEFAULT_OPTIONS.outputFormat).toBe('auto');
+		expect(IMAGE_COMPRESSOR_DEFAULT_OPTIONS.quality).toBeGreaterThan(0);
+		expect(IMAGE_COMPRESSOR_DEFAULT_OPTIONS.preserveTransparency).toBe(true);
+		expect(IMAGE_COMPRESSOR_DEFAULT_OPTIONS.backgroundColor).toBeTruthy();
+	});
+
+	it('normalizes compression format, quality, and background color', () => {
+		const options = normalizeImageCompressionOptions({
+			outputFormat: 'image/webp',
+			quality: 2,
+			preserveTransparency: false,
+			backgroundColor: ''
+		});
+
+		expect(options.outputFormat).toBe('image/webp');
+		expect(options.quality).toBe(1);
+		expect(options.preserveTransparency).toBe(false);
+		expect(options.backgroundColor).toBe(IMAGE_CONVERTER_DEFAULT_OPTIONS.backgroundColor);
+	});
+
+	it('keeps alpha-friendly auto candidates when transparency must be preserved', () => {
+		expect(resolveCompressionCandidateFormats('auto', true, true)).toEqual([
+			'image/avif',
+			'image/webp',
+			'image/png'
+		]);
+	});
+
+	it('adds jpeg to auto candidates when transparency is not required', () => {
+		expect(resolveCompressionCandidateFormats('auto', false, true)).toEqual([
+			'image/avif',
+			'image/webp',
+			'image/jpeg',
+			'image/png'
+		]);
+		expect(resolveCompressionCandidateFormats('auto', true, false)).toEqual([
+			'image/avif',
+			'image/webp',
+			'image/jpeg',
+			'image/png'
+		]);
+	});
+
+	it('respects explicitly selected compression output formats', () => {
+		expect(resolveCompressionCandidateFormats('image/jpeg', true, true)).toEqual(['image/jpeg']);
+		expect(resolveCompressionCandidateFormats('image/png', false, false)).toEqual(['image/png']);
 	});
 });
