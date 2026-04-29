@@ -732,6 +732,8 @@
 			{/if}
 
 			<div
+				role="region"
+				aria-label={$t('ui.svg_optimizer.drop_title', 'Drop an SVG file here')}
 				class="mx-[var(--space-3)] mt-[var(--space-3)] flex min-h-[140px] items-center justify-center rounded-[var(--radius-lg)] border border-dashed border-[var(--border-default)] bg-[var(--bg-surface)] px-[var(--space-4)] py-[var(--space-5)] text-center text-[length:var(--text-sm)] text-[var(--text-secondary)]"
 				class:border-[var(--accent)]={dragOver}
 				ondragenter={handleDragEnter}

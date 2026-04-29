@@ -1,3 +1,5 @@
+import type { Config, PluginConfig } from 'svgo';
+
 export type SvgOptimizeInput = {
 	content: string;
 	sourceName: string;
@@ -54,19 +56,10 @@ export type SvgOptimizerWorkerResponse = {
 	error?: string;
 };
 
-type SvgPresetOverrideValue = false | Record<string, boolean | number | string>;
-
-type SvgPresetOverrideKey =
-	| 'cleanupIds'
-	| 'collapseGroups'
-	| 'convertPathData'
-	| 'mergePaths'
-	| 'removeComments'
-	| 'removeDesc'
-	| 'removeMetadata'
-	| 'sortAttrs';
-
-type SvgPresetOverrides = Partial<Record<SvgPresetOverrideKey, SvgPresetOverrideValue>>;
+type SvgPresetPluginConfig = Extract<PluginConfig, { name: 'preset-default' }>;
+type SvgPresetOverrides = NonNullable<
+	NonNullable<SvgPresetPluginConfig['params']>['overrides']
+>;
 
 export type SvgOptimizerConfig = {
 	multipass: boolean;
@@ -75,15 +68,7 @@ export type SvgOptimizerConfig = {
 		pretty: boolean;
 		indent: number;
 	};
-	plugins: Array<
-		| {
-				name: 'preset-default';
-				params: {
-					overrides: SvgPresetOverrides;
-				};
-		  }
-		| 'removeDimensions'
-	>;
+	plugins: Array<SvgPresetPluginConfig | 'removeDimensions'>;
 };
 
 const SVG_OPTIMIZER_DEFAULT_FILE_NAME = 'vector-asset.svg';
@@ -159,14 +144,14 @@ export function buildSvgOptimizerConfig(options: SvgOptimizeOptions): SvgOptimiz
 	if (!options.mergePaths) overrides.mergePaths = false;
 	if (!options.sortAttrs) overrides.sortAttrs = false;
 
-	const plugins: SvgOptimizerConfig['plugins'] = [
-		{
-			name: 'preset-default',
-			params: {
-				overrides
-			}
+	const presetDefaultPlugin: SvgPresetPluginConfig = {
+		name: 'preset-default',
+		params: {
+			overrides
 		}
-	];
+	};
+
+	const plugins: SvgOptimizerConfig['plugins'] = [presetDefaultPlugin];
 
 	if (options.removeDimensions) {
 		plugins.push('removeDimensions');
@@ -207,8 +192,8 @@ export async function optimizeSvg(
 	validateSvgText(normalizedText);
 
 	const normalizedOptions = normalizeSvgOptimizeOptions(options);
-	const { optimize } = await import('svgo');
-	const optimized = optimize(normalizedText, buildSvgOptimizerConfig(normalizedOptions));
+	const { optimize } = await import('svgo/browser');
+	const optimized = optimize(normalizedText, buildSvgOptimizerConfig(normalizedOptions) as Config);
 	const optimizedText = optimized.data.trim();
 	const originalSummary = summarizeSvg(normalizedText);
 	const optimizedSummary = summarizeSvg(optimizedText);
@@ -220,7 +205,10 @@ export async function optimizeSvg(
 			original: originalSummary,
 			optimized: optimizedSummary,
 			sizeDeltaBytes: optimizedSummary.sizeBytes - originalSummary.sizeBytes,
-			sizeDeltaPercent: computeSizeDeltaPercent(originalSummary.sizeBytes, optimizedSummary.sizeBytes)
+			sizeDeltaPercent: computeSizeDeltaPercent(
+				originalSummary.sizeBytes,
+				optimizedSummary.sizeBytes
+			)
 		},
 		durationMs: elapsedMs(startedAt)
 	};

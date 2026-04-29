@@ -139,7 +139,7 @@ describe('svg optimizer options', () => {
 			params: {
 				overrides: expect.objectContaining({
 					removeMetadata: false,
-					collapseGroups: false,
+					collapseGroups: false
 				})
 			}
 		});

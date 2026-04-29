@@ -4536,7 +4536,8 @@ const registryEs: Record<string, string> = {
 	'tool.image-svg-optimizer.description':
 		'Optimiza archivos SVG online con SVGO directamente en tu navegador. Elimina metadatos y comentarios, simplifica rutas, colapsa grupos, ordena atributos, conserva o elimina dimensiones y descarga el SVG limpio al instante.',
 	'tool.image-svg-optimizer.primary_keyword': 'optimizador svg',
-	'tool.image-svg-optimizer.meta_title': 'Optimizador SVG — Optimiza SVG con SVGO online | fmtly.dev',
+	'tool.image-svg-optimizer.meta_title':
+		'Optimizador SVG — Optimiza SVG con SVGO online | fmtly.dev',
 	'tool.image-svg-optimizer.meta_description':
 		'Optimiza SVG online con SVGO. Elimina metadatos, colapsa grupos, simplifica rutas, ordena atributos y mantén cada archivo privado en tu navegador.',
 	'tool.image-svg-optimizer.operation': 'Optimizar SVG',
@@ -4552,8 +4553,10 @@ const registryEs: Record<string, string> = {
 	'tool.image-svg-optimizer.faq.3.question': '¿Qué ocurre con SVG grandes?',
 	'tool.image-svg-optimizer.faq.3.answer':
 		'Cuando la entrada SVG en UTF-8 supera 500KB, la optimización se mueve a un Web Worker para mantener el editor fluido.',
-	'tool.image-svg-optimizer.use_case.0': 'Reducir iconos SVG inline antes de publicarlos en bundles de producto',
-	'tool.image-svg-optimizer.use_case.1': 'Limpiar SVG exportados desde Figma, Illustrator o sistemas de diseño',
+	'tool.image-svg-optimizer.use_case.0':
+		'Reducir iconos SVG inline antes de publicarlos en bundles de producto',
+	'tool.image-svg-optimizer.use_case.1':
+		'Limpiar SVG exportados desde Figma, Illustrator o sistemas de diseño',
 	'tool.image-svg-optimizer.use_case.2':
 		'Normalizar assets SVG para CMS, plantillas de correo y bibliotecas de componentes',
 	'tool.image-svg-optimizer.use_case.3':
@@ -4597,8 +4600,10 @@ const registryEs: Record<string, string> = {
 	'ui.svg_optimizer.option.pretty': 'Formatear salida',
 	'ui.svg_optimizer.float_precision': 'Precisión decimal',
 	'ui.svg_optimizer.indent': 'Sangría de salida formateada',
-	'ui.svg_optimizer.privacy_note': 'La optimización es local; los archivos SVG no salen de tu navegador.',
-	'ui.svg_optimizer.performance_note': 'Las entradas SVG grandes usan un Web Worker a partir de {size}.',
+	'ui.svg_optimizer.privacy_note':
+		'La optimización es local; los archivos SVG no salen de tu navegador.',
+	'ui.svg_optimizer.performance_note':
+		'Las entradas SVG grandes usan un Web Worker a partir de {size}.',
 	'ui.svg_optimizer.stat.original_size': 'Tamaño original',
 	'ui.svg_optimizer.stat.original_elements': 'Elementos de origen',
 	'ui.svg_optimizer.stat.optimized_size': 'Tamaño optimizado',

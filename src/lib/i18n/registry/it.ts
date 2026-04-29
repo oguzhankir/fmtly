@@ -4471,7 +4471,8 @@ const registryIt: Record<string, string> = {
 	'tool.image-svg-optimizer.description':
 		'Ottimizza file SVG online con SVGO direttamente nel browser. Rimuovi metadati e commenti, semplifica i tracciati, comprimi i gruppi, ordina gli attributi, mantieni o rimuovi le dimensioni e scarica subito l’SVG ripulito.',
 	'tool.image-svg-optimizer.primary_keyword': 'ottimizzatore svg',
-	'tool.image-svg-optimizer.meta_title': 'Ottimizzatore SVG — Ottimizza SVG con SVGO online | fmtly.dev',
+	'tool.image-svg-optimizer.meta_title':
+		'Ottimizzatore SVG — Ottimizza SVG con SVGO online | fmtly.dev',
 	'tool.image-svg-optimizer.meta_description':
 		'Ottimizza SVG online con SVGO. Rimuovi metadati, compatta gruppi, semplifica tracciati, ordina attributi e mantieni ogni file privato nel browser.',
 	'tool.image-svg-optimizer.operation': 'Ottimizza SVG',
@@ -4487,8 +4488,10 @@ const registryIt: Record<string, string> = {
 	'tool.image-svg-optimizer.faq.3.question': 'Che succede con SVG molto grandi?',
 	'tool.image-svg-optimizer.faq.3.answer':
 		'Quando l’input SVG in UTF-8 supera 500KB, l’ottimizzazione viene eseguita in un Web Worker per mantenere l’editor reattivo.',
-	'tool.image-svg-optimizer.use_case.0': 'Ridurre icone SVG inline prima della pubblicazione nei bundle prodotto',
-	'tool.image-svg-optimizer.use_case.1': 'Ripulire SVG esportati da Figma, Illustrator o design system',
+	'tool.image-svg-optimizer.use_case.0':
+		'Ridurre icone SVG inline prima della pubblicazione nei bundle prodotto',
+	'tool.image-svg-optimizer.use_case.1':
+		'Ripulire SVG esportati da Figma, Illustrator o design system',
 	'tool.image-svg-optimizer.use_case.2':
 		'Uniformare asset SVG per CMS, email template e librerie di componenti',
 	'tool.image-svg-optimizer.use_case.3':

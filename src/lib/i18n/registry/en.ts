@@ -4445,7 +4445,8 @@ const registryEn: Record<string, string> = {
 	'tool.image-svg-optimizer.description':
 		'Optimize SVG files online with SVGO in your browser. Remove metadata and comments, simplify path data, collapse groups, sort attributes, keep or strip dimensions, compare source vs optimized output, and download the cleaned SVG instantly.',
 	'tool.image-svg-optimizer.primary_keyword': 'svg optimizer',
-	'tool.image-svg-optimizer.meta_title': 'SVG Optimizer — Optimize SVG with SVGO Online | fmtly.dev',
+	'tool.image-svg-optimizer.meta_title':
+		'SVG Optimizer — Optimize SVG with SVGO Online | fmtly.dev',
 	'tool.image-svg-optimizer.meta_description':
 		'Optimize SVG online with SVGO. Remove metadata, collapse groups, simplify paths, sort attributes, preview changes, and keep every file private in your browser.',
 	'tool.image-svg-optimizer.operation': 'Optimize SVG',
@@ -4461,8 +4462,10 @@ const registryEn: Record<string, string> = {
 	'tool.image-svg-optimizer.faq.3.question': 'What happens with large SVG files?',
 	'tool.image-svg-optimizer.faq.3.answer':
 		'When the UTF-8 SVG input exceeds 500KB, optimization moves into a Web Worker to keep the editor responsive.',
-	'tool.image-svg-optimizer.use_case.0': 'Shrink inline SVG icons before shipping them in product bundles',
-	'tool.image-svg-optimizer.use_case.1': 'Clean exported SVG artwork from Figma, Illustrator, or design systems',
+	'tool.image-svg-optimizer.use_case.0':
+		'Shrink inline SVG icons before shipping them in product bundles',
+	'tool.image-svg-optimizer.use_case.1':
+		'Clean exported SVG artwork from Figma, Illustrator, or design systems',
 	'tool.image-svg-optimizer.use_case.2':
 		'Standardize SVG assets for CMS uploads, email templates, and component libraries',
 	'tool.image-svg-optimizer.use_case.3':

@@ -4451,7 +4451,8 @@ const registryDe: Record<string, string> = {
 	'tool.image-svg-optimizer.description':
 		'Optimieren Sie SVG-Dateien online mit SVGO direkt im Browser. Entfernen Sie Metadaten und Kommentare, vereinfachen Sie Pfaddaten, reduzieren Sie Gruppen, sortieren Sie Attribute, behalten oder entfernen Sie Maße und laden Sie die bereinigte SVG sofort herunter.',
 	'tool.image-svg-optimizer.primary_keyword': 'svg optimierer',
-	'tool.image-svg-optimizer.meta_title': 'SVG-Optimierer — SVG mit SVGO online optimieren | fmtly.dev',
+	'tool.image-svg-optimizer.meta_title':
+		'SVG-Optimierer — SVG mit SVGO online optimieren | fmtly.dev',
 	'tool.image-svg-optimizer.meta_description':
 		'Optimieren Sie SVG online mit SVGO. Entfernen Sie Metadaten, reduzieren Sie Gruppen, vereinfachen Sie Pfade, sortieren Sie Attribute und behalten Sie alle Dateien privat im Browser.',
 	'tool.image-svg-optimizer.operation': 'SVG optimieren',
@@ -4467,8 +4468,10 @@ const registryDe: Record<string, string> = {
 	'tool.image-svg-optimizer.faq.3.question': 'Was passiert bei großen SVG-Dateien?',
 	'tool.image-svg-optimizer.faq.3.answer':
 		'Überschreitet die SVG-Eingabe in UTF-8 500KB, läuft die Optimierung in einem Web Worker, damit der Editor reaktionsfähig bleibt.',
-	'tool.image-svg-optimizer.use_case.0': 'Inline-SVG-Icons vor dem Shipping in Produkt-Bundles verkleinern',
-	'tool.image-svg-optimizer.use_case.1': 'Exportierte SVGs aus Figma, Illustrator oder Designsystemen bereinigen',
+	'tool.image-svg-optimizer.use_case.0':
+		'Inline-SVG-Icons vor dem Shipping in Produkt-Bundles verkleinern',
+	'tool.image-svg-optimizer.use_case.1':
+		'Exportierte SVGs aus Figma, Illustrator oder Designsystemen bereinigen',
 	'tool.image-svg-optimizer.use_case.2':
 		'SVG-Assets für CMS-Uploads, E-Mail-Templates und Komponentenbibliotheken vereinheitlichen',
 	'tool.image-svg-optimizer.use_case.3':
@@ -4498,7 +4501,8 @@ const registryDe: Record<string, string> = {
 	'ui.svg_optimizer.output_status': '{size} · {elements} Elemente',
 	'ui.svg_optimizer.input_label': 'Quell-SVG',
 	'ui.svg_optimizer.drop_title': 'SVG-Datei hier ablegen',
-	'ui.svg_optimizer.drop_hint': 'Oder rohes SVG-Markup einfügen, eine Datei hochladen oder das Beispiel laden.',
+	'ui.svg_optimizer.drop_hint':
+		'Oder rohes SVG-Markup einfügen, eine Datei hochladen oder das Beispiel laden.',
 	'ui.svg_optimizer.input_placeholder': 'SVG-Markup hier einfügen...',
 	'ui.svg_optimizer.option.remove_metadata': 'Metadaten entfernen',
 	'ui.svg_optimizer.option.remove_comments': 'Kommentare entfernen',
@@ -4513,7 +4517,8 @@ const registryDe: Record<string, string> = {
 	'ui.svg_optimizer.option.pretty': 'Ausgabe formatieren',
 	'ui.svg_optimizer.float_precision': 'Float-Präzision',
 	'ui.svg_optimizer.indent': 'Einrückung für formatierte Ausgabe',
-	'ui.svg_optimizer.privacy_note': 'Die Optimierung läuft lokal; SVG-Dateien verlassen Ihren Browser nicht.',
+	'ui.svg_optimizer.privacy_note':
+		'Die Optimierung läuft lokal; SVG-Dateien verlassen Ihren Browser nicht.',
 	'ui.svg_optimizer.performance_note': 'Große SVG-Eingaben nutzen ab {size} einen Web Worker.',
 	'ui.svg_optimizer.stat.original_size': 'Originalgröße',
 	'ui.svg_optimizer.stat.original_elements': 'Quell-Elemente',
