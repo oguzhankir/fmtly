@@ -4431,36 +4431,37 @@ const registryFr: Record<string, string> = {
 	'tool.image-resizer.use_case.3':
 		'Redimensionner des assets marketing sans outils desktop ni upload cloud',
 
-	'tool.image-converter.display_name': 'Convertisseur de Format d’Image',
-	'tool.image-converter.tagline':
+	'tool.image-format-converter.display_name': 'Convertisseur de Format d’Image',
+	'tool.image-format-converter.tagline':
 		'Convertissez PNG, JPEG, WebP, AVIF et GIF en toute confidentialité',
-	'tool.image-converter.description':
+	'tool.image-format-converter.description':
 		'Convertissez des images entre PNG, JPEG, WebP, AVIF et GIF directement dans le navigateur. Prévisualisez le résultat, ajustez la qualité, aplatissez la transparence pour JPEG et téléchargez sans envoyer de fichier.',
-	'tool.image-converter.primary_keyword': 'convertisseur de format image',
-	'tool.image-converter.meta_title':
-		'Convertisseur d’Image — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
-	'tool.image-converter.meta_description':
+	'tool.image-format-converter.primary_keyword': 'convertisseur de format image',
+	'tool.image-format-converter.meta_title':
+		'Convertisseur Image — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-format-converter.meta_description':
 		'Convertissez PNG, JPEG, WebP, AVIF et GIF en ligne dans votre navigateur. Privé, rapide, avec réglage de qualité et Web Worker pour les gros fichiers.',
-	'tool.image-converter.operation': 'Convertir l’image',
-	'tool.image-converter.faq.0.question': 'Mes images sont-elles téléversées ?',
-	'tool.image-converter.faq.0.answer':
+	'tool.image-format-converter.operation': 'Convertir l’image',
+	'tool.image-format-converter.faq.0.question': 'Mes images sont-elles téléversées ?',
+	'tool.image-format-converter.faq.0.answer':
 		'Non. Les fichiers sont décodés, convertis, prévisualisés et téléchargés localement dans votre navigateur. Rien n’est envoyé à un serveur.',
-	'tool.image-converter.faq.1.question': 'Quels formats puis-je convertir ?',
-	'tool.image-converter.faq.1.answer':
+	'tool.image-format-converter.faq.1.question': 'Quels formats puis-je convertir ?',
+	'tool.image-format-converter.faq.1.answer':
 		'Vous pouvez importer PNG, JPEG, WebP, AVIF et GIF, puis exporter en PNG, JPEG, WebP, AVIF ou GIF si votre navigateur prend en charge l’encodeur cible.',
-	'tool.image-converter.faq.2.question': 'Que devient la transparence ?',
-	'tool.image-converter.faq.2.answer':
+	'tool.image-format-converter.faq.2.question': 'Que devient la transparence ?',
+	'tool.image-format-converter.faq.2.answer':
 		'PNG, WebP, AVIF et GIF peuvent préserver la transparence. JPEG n’a pas de canal alpha ; les zones transparentes sont donc composées sur le fond choisi.',
-	'tool.image-converter.faq.3.question':
+	'tool.image-format-converter.faq.3.question':
 		'Comment l’interface reste-t-elle fluide avec de gros fichiers ?',
-	'tool.image-converter.faq.3.answer':
+	'tool.image-format-converter.faq.3.answer':
 		'Les entrées de plus de 500KB sont traitées dans un Web Worker afin que la conversion ne bloque pas le fil d’interface.',
-	'tool.image-converter.use_case.0': 'Convertir des captures en WebP ou AVIF avant publication',
-	'tool.image-converter.use_case.1':
+	'tool.image-format-converter.use_case.0':
+		'Convertir des captures en WebP ou AVIF avant publication',
+	'tool.image-format-converter.use_case.1':
 		'Créer des versions JPEG d’assets transparents avec un fond contrôlé',
-	'tool.image-converter.use_case.2':
+	'tool.image-format-converter.use_case.2':
 		'Exporter des aperçus GIF légers à partir d’illustrations statiques',
-	'tool.image-converter.use_case.3': 'Normaliser les images client avant import CMS ou API',
+	'tool.image-format-converter.use_case.3': 'Normaliser les images client avant import CMS ou API',
 	'ui.image_converter.upload': 'Importer une image',
 	'ui.image_converter.clear': 'Effacer',
 	'ui.image_converter.no_file': 'Aucune image sélectionnée',

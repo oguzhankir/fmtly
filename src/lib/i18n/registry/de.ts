@@ -117,34 +117,37 @@ const registryDe: Record<string, string> = {
 		'System-Prompts als Klartext oder OpenAI-kompatible JSON-Nachrichten exportieren',
 	'tool.ai-system-prompt-builder.use_case.3':
 		'Sicherheitsgrenzen, Denkhinweise, Beispiele und Qualitätschecks zu Prompts hinzufügen',
-	'tool.image-converter.display_name': 'Bildformat-Konverter',
-	'tool.image-converter.tagline': 'PNG, JPEG, WebP, AVIF und GIF privat konvertieren',
-	'tool.image-converter.description':
+	'tool.image-format-converter.display_name': 'Bildformat-Konverter',
+	'tool.image-format-converter.tagline': 'PNG, JPEG, WebP, AVIF und GIF privat konvertieren',
+	'tool.image-format-converter.description':
 		'Konvertieren Sie Bilder zwischen PNG, JPEG, WebP, AVIF und GIF direkt im Browser. Vorschau anzeigen, Qualität anpassen, Transparenz für JPEG gezielt hinterlegen und herunterladen, ohne Dateien hochzuladen.',
-	'tool.image-converter.primary_keyword': 'bildformat konverter',
-	'tool.image-converter.meta_title': 'Bildformat-Konverter — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
-	'tool.image-converter.meta_description':
+	'tool.image-format-converter.primary_keyword': 'bildformat konverter',
+	'tool.image-format-converter.meta_title':
+		'Bild-Konverter — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-format-converter.meta_description':
 		'Konvertieren Sie PNG, JPEG, WebP, AVIF und GIF online im Browser. Privat, schnell, mit Qualitätssteuerung und Web Worker für große Dateien.',
-	'tool.image-converter.operation': 'Bild konvertieren',
-	'tool.image-converter.faq.0.question': 'Werden meine Bilder hochgeladen?',
-	'tool.image-converter.faq.0.answer':
+	'tool.image-format-converter.operation': 'Bild konvertieren',
+	'tool.image-format-converter.faq.0.question': 'Werden meine Bilder hochgeladen?',
+	'tool.image-format-converter.faq.0.answer':
 		'Nein. Dateien werden lokal im Browser decodiert, konvertiert, in der Vorschau angezeigt und heruntergeladen. Es wird nichts an einen Server gesendet.',
-	'tool.image-converter.faq.1.question': 'Zwischen welchen Formaten kann ich konvertieren?',
-	'tool.image-converter.faq.1.answer':
+	'tool.image-format-converter.faq.1.question': 'Zwischen welchen Formaten kann ich konvertieren?',
+	'tool.image-format-converter.faq.1.answer':
 		'Sie können PNG, JPEG, WebP, AVIF und GIF importieren und als PNG, JPEG, WebP, AVIF oder GIF exportieren, sofern Ihr Browser den Ziel-Encoder unterstützt.',
-	'tool.image-converter.faq.2.question': 'Was passiert mit Transparenz?',
-	'tool.image-converter.faq.2.answer':
+	'tool.image-format-converter.faq.2.question': 'Was passiert mit Transparenz?',
+	'tool.image-format-converter.faq.2.answer':
 		'PNG, WebP, AVIF und GIF können Transparenz erhalten. JPEG hat keinen Alphakanal, daher werden transparente Bereiche über dem gewählten Hintergrund zusammengesetzt.',
-	'tool.image-converter.faq.3.question':
+	'tool.image-format-converter.faq.3.question':
 		'Wie bleibt die Oberfläche bei großen Dateien reaktionsfähig?',
-	'tool.image-converter.faq.3.answer':
+	'tool.image-format-converter.faq.3.answer':
 		'Eingaben über 500KB werden in einem Web Worker verarbeitet, sodass die Konvertierung nicht den UI-Thread blockiert.',
-	'tool.image-converter.use_case.0':
+	'tool.image-format-converter.use_case.0':
 		'Screenshots vor der Veröffentlichung in WebP oder AVIF umwandeln',
-	'tool.image-converter.use_case.1':
+	'tool.image-format-converter.use_case.1':
 		'JPEG-Versionen transparenter Assets mit kontrolliertem Hintergrund erstellen',
-	'tool.image-converter.use_case.2': 'Leichte GIF-Vorschauen aus statischen Grafiken exportieren',
-	'tool.image-converter.use_case.3': 'Bilder von Kunden vor CMS- oder API-Uploads vereinheitlichen',
+	'tool.image-format-converter.use_case.2':
+		'Leichte GIF-Vorschauen aus statischen Grafiken exportieren',
+	'tool.image-format-converter.use_case.3':
+		'Bilder von Kunden vor CMS- oder API-Uploads vereinheitlichen',
 	'ui.image_converter.upload': 'Bild hochladen',
 	'ui.image_converter.clear': 'Leeren',
 	'ui.image_converter.no_file': 'Kein Bild ausgewählt',

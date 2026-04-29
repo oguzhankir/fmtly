@@ -4339,34 +4339,36 @@ const registryIt: Record<string, string> = {
 	'tool.image-resizer.use_case.3':
 		'Convertire output ridimensionato in PNG, JPEG o WebP con controllo qualità',
 
-	'tool.image-converter.display_name': 'Convertitore di Formati Immagine',
-	'tool.image-converter.tagline': 'Converti PNG, JPEG, WebP, AVIF e GIF in modo privato',
-	'tool.image-converter.description':
+	'tool.image-format-converter.display_name': 'Convertitore di Formati Immagine',
+	'tool.image-format-converter.tagline': 'Converti PNG, JPEG, WebP, AVIF e GIF in modo privato',
+	'tool.image-format-converter.description':
 		'Converti immagini tra PNG, JPEG, WebP, AVIF e GIF direttamente nel browser. Visualizza l’anteprima, regola la qualità, appiattisci la trasparenza per JPEG e scarica senza caricare file.',
-	'tool.image-converter.primary_keyword': 'convertitore formati immagine',
-	'tool.image-converter.meta_title':
-		'Convertitore Immagini — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
-	'tool.image-converter.meta_description':
+	'tool.image-format-converter.primary_keyword': 'convertitore formati immagine',
+	'tool.image-format-converter.meta_title':
+		'Convertitore Immagine — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-format-converter.meta_description':
 		'Converti PNG, JPEG, WebP, AVIF e GIF online nel browser. Privato, veloce, con controlli qualità e Web Worker per file grandi.',
-	'tool.image-converter.operation': 'Converti immagine',
-	'tool.image-converter.faq.0.question': 'Le mie immagini vengono caricate?',
-	'tool.image-converter.faq.0.answer':
+	'tool.image-format-converter.operation': 'Converti immagine',
+	'tool.image-format-converter.faq.0.question': 'Le mie immagini vengono caricate?',
+	'tool.image-format-converter.faq.0.answer':
 		'No. I file vengono decodificati, convertiti, mostrati in anteprima e scaricati localmente nel browser. Nulla viene inviato a un server.',
-	'tool.image-converter.faq.1.question': 'Tra quali formati posso convertire?',
-	'tool.image-converter.faq.1.answer':
+	'tool.image-format-converter.faq.1.question': 'Tra quali formati posso convertire?',
+	'tool.image-format-converter.faq.1.answer':
 		'Puoi importare PNG, JPEG, WebP, AVIF e GIF ed esportare PNG, JPEG, WebP, AVIF o GIF quando il browser supporta il codificatore di destinazione.',
-	'tool.image-converter.faq.2.question': 'Che cosa succede alla trasparenza?',
-	'tool.image-converter.faq.2.answer':
+	'tool.image-format-converter.faq.2.question': 'Che cosa succede alla trasparenza?',
+	'tool.image-format-converter.faq.2.answer':
 		'PNG, WebP, AVIF e GIF possono preservare la trasparenza. JPEG non ha canale alfa, quindi le aree trasparenti vengono composte sullo sfondo scelto.',
-	'tool.image-converter.faq.3.question': 'Come resta reattiva l’interfaccia con file grandi?',
-	'tool.image-converter.faq.3.answer':
+	'tool.image-format-converter.faq.3.question':
+		'Come resta reattiva l’interfaccia con file grandi?',
+	'tool.image-format-converter.faq.3.answer':
 		'Gli input sopra 500KB vengono elaborati in un Web Worker, così la conversione resta fuori dal thread dell’interfaccia.',
-	'tool.image-converter.use_case.0':
+	'tool.image-format-converter.use_case.0':
 		'Convertire screenshot in WebP o AVIF prima della pubblicazione',
-	'tool.image-converter.use_case.1':
+	'tool.image-format-converter.use_case.1':
 		'Creare versioni JPEG di asset trasparenti con sfondo controllato',
-	'tool.image-converter.use_case.2': 'Esportare anteprime GIF leggere da grafiche statiche',
-	'tool.image-converter.use_case.3': 'Normalizzare immagini fornite dai clienti prima di CMS o API',
+	'tool.image-format-converter.use_case.2': 'Esportare anteprime GIF leggere da grafiche statiche',
+	'tool.image-format-converter.use_case.3':
+		'Normalizzare immagini fornite dai clienti prima di CMS o API',
 	'ui.image_converter.upload': 'Carica immagine',
 	'ui.image_converter.clear': 'Cancella',
 	'ui.image_converter.no_file': 'Nessuna immagine selezionata',
