@@ -4374,6 +4374,78 @@ const registryTr: Record<string, string> = {
 		'Farklı platformlar için aynı görselin alternatif çıktıları hazırlama',
 	'tool.image-resizer.use_case.3':
 		'Sunucuya yüklemeden gizli görselleri güvenli şekilde yeniden boyutlandırma',
+
+	'tool.image-converter.display_name': 'Görsel Format Dönüştürücü',
+	'tool.image-converter.tagline': 'PNG, JPEG, WebP, AVIF ve GIF görselleri gizli şekilde dönüştür',
+	'tool.image-converter.description':
+		'Görselleri PNG, JPEG, WebP, AVIF ve GIF arasında doğrudan tarayıcıda dönüştür. Çıktıyı önizle, kaliteyi ayarla, JPEG için şeffaflığı seçilen arka planla birleştir ve dosya yüklemeden indir.',
+	'tool.image-converter.primary_keyword': 'görsel format dönüştürücü',
+	'tool.image-converter.meta_title':
+		'Görsel Format Dönüştürücü — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-converter.meta_description':
+		'PNG, JPEG, WebP, AVIF ve GIF görselleri tarayıcıda dönüştür. Gizli, hızlı, kalite kontrolleri ve büyük dosyalar için Web Worker desteğiyle.',
+	'tool.image-converter.operation': 'Görsel dönüştür',
+	'tool.image-converter.faq.0.question': 'Görsellerim yükleniyor mu?',
+	'tool.image-converter.faq.0.answer':
+		'Hayır. Dosyalar tarayıcında yerel olarak çözülür, dönüştürülür, önizlenir ve indirilir. Hiçbir şey sunucuya gönderilmez.',
+	'tool.image-converter.faq.1.question': 'Hangi formatlar arasında dönüştürebilirim?',
+	'tool.image-converter.faq.1.answer':
+		'PNG, JPEG, WebP, AVIF ve GIF içe aktarabilir; tarayıcın hedef kodlayıcıyı destekliyorsa PNG, JPEG, WebP, AVIF veya GIF olarak dışa aktarabilirsin.',
+	'tool.image-converter.faq.2.question': 'Şeffaflığa ne olur?',
+	'tool.image-converter.faq.2.answer':
+		'PNG, WebP, AVIF ve GIF şeffaflığı koruyabilir. JPEG alfa kanalı desteklemez; şeffaf alanlar seçilen arka plan üzerinde birleştirilir.',
+	'tool.image-converter.faq.3.question': 'Büyük dosyalarda arayüz nasıl akıcı kalıyor?',
+	'tool.image-converter.faq.3.answer':
+		'500KB üzerindeki girdiler Web Worker içinde işlenir; dönüşüm işi arayüz iş parçacığını engellemez.',
+	'tool.image-converter.use_case.0':
+		'Yayınlamadan önce ekran görüntülerini WebP veya AVIF formatına dönüştürme',
+	'tool.image-converter.use_case.1':
+		'Şeffaf görsellerden kontrollü arka plana sahip JPEG sürümleri oluşturma',
+	'tool.image-converter.use_case.2': 'Statik görsellerden hafif GIF önizlemeleri dışa aktarma',
+	'tool.image-converter.use_case.3':
+		'CMS veya API yüklemeleri öncesi müşteri görsellerini standartlaştırma',
+	'ui.image_converter.upload': 'Görsel yükle',
+	'ui.image_converter.clear': 'Temizle',
+	'ui.image_converter.no_file': 'Görsel seçilmedi',
+	'ui.image_converter.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.worker_active':
+		'Büyük görsel algılandı (>{size}). Dönüşüm Web Worker içinde çalışır.',
+	'ui.image_converter.worker_used': 'Arka iş parçacığında işlendi',
+	'ui.image_converter.worker_failed':
+		'Worker dönüşümü başarısız oldu. Ana iş parçacığına dönülüyor.',
+	'ui.image_converter.convert_failed': 'Görsel dönüştürülemedi',
+	'ui.image_converter.file_read_error': 'Görsel dosyası yüklenemedi',
+	'ui.image_converter.file_loaded': '{name} yüklendi',
+	'ui.image_converter.input_cleared': 'Görsel girdisi temizlendi',
+	'ui.image_converter.copy_empty': 'Kopyalanacak bir şey yok',
+	'ui.image_converter.copy_success': 'Çıktı kopyalandı',
+	'ui.image_converter.copy_error': 'Kopyalama başarısız',
+	'ui.image_converter.download_empty': 'İndirilecek bir şey yok',
+	'ui.image_converter.download_success': '{filename} indirildi',
+	'ui.image_converter.download_error': 'İndirme başarısız',
+	'ui.image_converter.drop_title': 'Görseli buraya bırak',
+	'ui.image_converter.drop_hint': 'PNG, JPEG, WebP, AVIF ve GIF bu tarayıcıda kalır.',
+	'ui.image_converter.source_preview_alt': 'Kaynak görsel önizlemesi',
+	'ui.image_converter.output_preview_alt': 'Dönüştürülen görsel önizlemesi',
+	'ui.image_converter.output_format': 'Çıktı formatı',
+	'ui.image_converter.quality': 'Kalite',
+	'ui.image_converter.background': 'JPEG arka planı',
+	'ui.image_converter.background_white': 'Beyaz',
+	'ui.image_converter.background_black': 'Siyah',
+	'ui.image_converter.background_transparent': 'Şeffaf',
+	'ui.image_converter.privacy_note': 'Dönüşüm yereldir; dosyalar tarayıcından çıkmaz.',
+	'ui.image_converter.performance_note': 'Büyük girdiler {size} üzerinde Web Worker kullanır.',
+	'ui.image_converter.stat.source_format': 'Kaynak format',
+	'ui.image_converter.stat.source_size': 'Orijinal boyut',
+	'ui.image_converter.stat.output_format': 'Çıktı formatı',
+	'ui.image_converter.stat.output_size': 'Dönüştürülen boyut',
+	'ui.image_converter.stat.size_delta': 'Boyut farkı',
+	'ui.image_converter.stat.size_delta_helper': 'kaynağa göre',
+	'ui.image_converter.processing': 'Dönüştürülüyor...',
+	'ui.image_converter.copy_output': 'Veri URL’sini kopyala',
+	'ui.image_converter.download': 'İndir',
+	'ui.image_converter.output_placeholder': 'Dönüştürülen çıktı burada görünür...',
 	'ui.image_resizer.drop_title': 'Görseli buraya bırak veya gözat',
 	'ui.image_resizer.drop_hint': 'Dosyaların bu tarayıcıda kalır — hiçbir şey sunucuya yüklenmez.',
 	'ui.image_resizer.browse': 'Dosya seç',

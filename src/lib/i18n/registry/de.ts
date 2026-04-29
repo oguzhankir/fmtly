@@ -117,6 +117,78 @@ const registryDe: Record<string, string> = {
 		'System-Prompts als Klartext oder OpenAI-kompatible JSON-Nachrichten exportieren',
 	'tool.ai-system-prompt-builder.use_case.3':
 		'Sicherheitsgrenzen, Denkhinweise, Beispiele und Qualitätschecks zu Prompts hinzufügen',
+	'tool.image-converter.display_name': 'Bildformat-Konverter',
+	'tool.image-converter.tagline': 'PNG, JPEG, WebP, AVIF und GIF privat konvertieren',
+	'tool.image-converter.description':
+		'Konvertieren Sie Bilder zwischen PNG, JPEG, WebP, AVIF und GIF direkt im Browser. Vorschau anzeigen, Qualität anpassen, Transparenz für JPEG gezielt hinterlegen und herunterladen, ohne Dateien hochzuladen.',
+	'tool.image-converter.primary_keyword': 'bildformat konverter',
+	'tool.image-converter.meta_title': 'Bildformat-Konverter — PNG, JPG, WebP, AVIF, GIF | fmtly.dev',
+	'tool.image-converter.meta_description':
+		'Konvertieren Sie PNG, JPEG, WebP, AVIF und GIF online im Browser. Privat, schnell, mit Qualitätssteuerung und Web Worker für große Dateien.',
+	'tool.image-converter.operation': 'Bild konvertieren',
+	'tool.image-converter.faq.0.question': 'Werden meine Bilder hochgeladen?',
+	'tool.image-converter.faq.0.answer':
+		'Nein. Dateien werden lokal im Browser decodiert, konvertiert, in der Vorschau angezeigt und heruntergeladen. Es wird nichts an einen Server gesendet.',
+	'tool.image-converter.faq.1.question': 'Zwischen welchen Formaten kann ich konvertieren?',
+	'tool.image-converter.faq.1.answer':
+		'Sie können PNG, JPEG, WebP, AVIF und GIF importieren und als PNG, JPEG, WebP, AVIF oder GIF exportieren, sofern Ihr Browser den Ziel-Encoder unterstützt.',
+	'tool.image-converter.faq.2.question': 'Was passiert mit Transparenz?',
+	'tool.image-converter.faq.2.answer':
+		'PNG, WebP, AVIF und GIF können Transparenz erhalten. JPEG hat keinen Alphakanal, daher werden transparente Bereiche über dem gewählten Hintergrund zusammengesetzt.',
+	'tool.image-converter.faq.3.question':
+		'Wie bleibt die Oberfläche bei großen Dateien reaktionsfähig?',
+	'tool.image-converter.faq.3.answer':
+		'Eingaben über 500KB werden in einem Web Worker verarbeitet, sodass die Konvertierung nicht den UI-Thread blockiert.',
+	'tool.image-converter.use_case.0':
+		'Screenshots vor der Veröffentlichung in WebP oder AVIF umwandeln',
+	'tool.image-converter.use_case.1':
+		'JPEG-Versionen transparenter Assets mit kontrolliertem Hintergrund erstellen',
+	'tool.image-converter.use_case.2': 'Leichte GIF-Vorschauen aus statischen Grafiken exportieren',
+	'tool.image-converter.use_case.3': 'Bilder von Kunden vor CMS- oder API-Uploads vereinheitlichen',
+	'ui.image_converter.upload': 'Bild hochladen',
+	'ui.image_converter.clear': 'Leeren',
+	'ui.image_converter.no_file': 'Kein Bild ausgewählt',
+	'ui.image_converter.source_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.output_status': '{size} · {format} · {dimensions}',
+	'ui.image_converter.worker_active':
+		'Großes Bild erkannt (>{size}). Die Konvertierung läuft in einem Web Worker.',
+	'ui.image_converter.worker_used': 'Nebenläufig verarbeitet',
+	'ui.image_converter.worker_failed':
+		'Worker-Konvertierung fehlgeschlagen. Verarbeitung läuft im Hauptthread weiter.',
+	'ui.image_converter.convert_failed': 'Bildkonvertierung fehlgeschlagen',
+	'ui.image_converter.file_read_error': 'Bilddatei konnte nicht geladen werden',
+	'ui.image_converter.file_loaded': '{name} geladen',
+	'ui.image_converter.input_cleared': 'Bildeingabe geleert',
+	'ui.image_converter.copy_empty': 'Nichts zu kopieren',
+	'ui.image_converter.copy_success': 'Ausgabe kopiert',
+	'ui.image_converter.copy_error': 'Kopieren fehlgeschlagen',
+	'ui.image_converter.download_empty': 'Nichts zum Herunterladen',
+	'ui.image_converter.download_success': '{filename} heruntergeladen',
+	'ui.image_converter.download_error': 'Download fehlgeschlagen',
+	'ui.image_converter.drop_title': 'Bild hier ablegen',
+	'ui.image_converter.drop_hint': 'PNG, JPEG, WebP, AVIF und GIF bleiben in diesem Browser.',
+	'ui.image_converter.source_preview_alt': 'Vorschau des Quellbilds',
+	'ui.image_converter.output_preview_alt': 'Vorschau des konvertierten Bildes',
+	'ui.image_converter.output_format': 'Ausgabeformat',
+	'ui.image_converter.quality': 'Qualität',
+	'ui.image_converter.background': 'JPEG-Hintergrund',
+	'ui.image_converter.background_white': 'Weiß',
+	'ui.image_converter.background_black': 'Schwarz',
+	'ui.image_converter.background_transparent': 'Transparent',
+	'ui.image_converter.privacy_note':
+		'Die Konvertierung läuft lokal; Dateien verlassen den Browser nicht.',
+	'ui.image_converter.performance_note': 'Große Eingaben nutzen ab {size} einen Web Worker.',
+	'ui.image_converter.stat.source_format': 'Quellformat',
+	'ui.image_converter.stat.source_size': 'Originalgröße',
+	'ui.image_converter.stat.output_format': 'Ausgabeformat',
+	'ui.image_converter.stat.output_size': 'Konvertierte Größe',
+	'ui.image_converter.stat.size_delta': 'Größenänderung',
+	'ui.image_converter.stat.size_delta_helper': 'im Vergleich zur Quelle',
+	'ui.image_converter.processing': 'Konvertieren...',
+	'ui.image_converter.copy_output': 'Data-URL kopieren',
+	'ui.image_converter.download': 'Herunterladen',
+	'ui.image_converter.output_placeholder': 'Die konvertierte Ausgabe erscheint hier...',
+
 	// ── JSON Tools ──────────────────────────────────────────────────────────
 	'tool.json-formatter.display_name': 'JSON-Formatierer',
 	'tool.json-formatter.tagline': 'JSON formatieren und verschönern mit konfigurierbarer Einrückung',

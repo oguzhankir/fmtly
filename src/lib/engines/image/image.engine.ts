@@ -1,4 +1,11 @@
 export type ImageResizeOutputFormat = 'image/png' | 'image/jpeg' | 'image/webp';
+export type ImageConversionOutputFormat =
+	| 'image/png'
+	| 'image/jpeg'
+	| 'image/webp'
+	| 'image/avif'
+	| 'image/gif';
+type CanvasEncodedImageFormat = Exclude<ImageConversionOutputFormat, 'image/gif'>;
 
 export type ImageResizeMode = 'dimensions' | 'percentage';
 
@@ -38,6 +45,36 @@ export type ImageResizeResult = {
 	durationMs: number;
 };
 
+export type ImageConversionInput = ImageResizeInput;
+
+export type ImageConversionOptions = {
+	outputFormat: ImageConversionOutputFormat;
+	quality: number;
+	backgroundColor: string;
+};
+
+export type ImageConversionMetadata = {
+	originalWidth: number;
+	originalHeight: number;
+	outputWidth: number;
+	outputHeight: number;
+	originalSizeBytes: number;
+	outputSizeBytes: number;
+	sizeDeltaBytes: number;
+	sizeDeltaPercent: number;
+	sourceFormat: string;
+	outputFormat: ImageConversionOutputFormat;
+	usedGifEncoder: boolean;
+};
+
+export type ImageConversionResult = {
+	dataUrl: string;
+	downloadFilename: string;
+	mimeType: ImageConversionOutputFormat;
+	metadata: ImageConversionMetadata;
+	durationMs: number;
+};
+
 export type ImageResizerWorkerRequest = {
 	id: number;
 	input: ImageResizeInput;
@@ -50,6 +87,18 @@ export type ImageResizerWorkerResponse = {
 	error?: string;
 };
 
+export type ImageConverterWorkerRequest = {
+	id: number;
+	input: ImageConversionInput;
+	options: ImageConversionOptions;
+};
+
+export type ImageConverterWorkerResponse = {
+	id: number;
+	result?: ImageConversionResult;
+	error?: string;
+};
+
 type ResizeDimensions = {
 	width: number;
 	height: number;
@@ -58,7 +107,9 @@ type ResizeDimensions = {
 type Canvas2DLike = {
 	imageSmoothingEnabled: boolean;
 	imageSmoothingQuality: ImageSmoothingQuality;
+	fillStyle: string | CanvasGradient | CanvasPattern;
 	clearRect: (x: number, y: number, width: number, height: number) => void;
+	fillRect: (x: number, y: number, width: number, height: number) => void;
 	drawImage: (
 		image: CanvasImageSource,
 		dx: number,
@@ -67,15 +118,25 @@ type Canvas2DLike = {
 		dHeight: number
 	) => void;
 };
-const DATA_URL_HEADER_PATTERN = /^data:image\/(png|jpeg|jpg|webp|gif|bmp|x-icon|svg\+xml);base64,/i;
+
+type CanvasImageDataContext = Canvas2DLike & {
+	getImageData: (sx: number, sy: number, sw: number, sh: number) => ImageData;
+};
+
+type GifPaletteColor = [number, number, number] | [number, number, number, number];
+
+const DATA_URL_HEADER_PATTERN =
+	/^data:image\/(png|jpeg|jpg|webp|avif|gif|bmp|x-icon|svg\+xml);base64,/i;
 const MIN_DIMENSION = 1;
 const MAX_DIMENSION = 8192;
 const MIN_SCALE = 1;
 const MAX_SCALE = 400;
 const MIN_QUALITY = 0.1;
 const MAX_QUALITY = 1;
+const GIF_MAX_COLORS = 256;
 
 export const IMAGE_RESIZER_WORKER_THRESHOLD_BYTES = 500 * 1024;
+export const IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES = 500 * 1024;
 
 export const IMAGE_RESIZER_DEFAULT_OPTIONS: ImageResizeOptions = {
 	mode: 'dimensions',
@@ -87,8 +148,18 @@ export const IMAGE_RESIZER_DEFAULT_OPTIONS: ImageResizeOptions = {
 	quality: 0.92
 };
 
+export const IMAGE_CONVERTER_DEFAULT_OPTIONS: ImageConversionOptions = {
+	outputFormat: 'image/webp',
+	quality: 0.92,
+	backgroundColor: 'white'
+};
+
 export function shouldUseImageResizerWorker(inputBytes: number): boolean {
 	return inputBytes > IMAGE_RESIZER_WORKER_THRESHOLD_BYTES;
+}
+
+export function shouldUseImageConverterWorker(inputBytes: number): boolean {
+	return inputBytes > IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES;
 }
 
 export async function resizeImage(
@@ -144,6 +215,60 @@ export async function resizeImage(
 	}
 }
 
+export async function convertImageFormat(
+	input: ImageConversionInput,
+	options: Partial<ImageConversionOptions> = {}
+): Promise<ImageConversionResult> {
+	const startedAt = nowMs();
+	validateImageDataUrl(input.dataUrl);
+	const normalizedOptions = normalizeImageConversionOptions(options);
+	const sourceBitmap = await createSourceBitmap(input.dataUrl);
+
+	try {
+		const dimensions: ResizeDimensions = {
+			width: clampNumber(sourceBitmap.width, MIN_DIMENSION, MAX_DIMENSION),
+			height: clampNumber(sourceBitmap.height, MIN_DIMENSION, MAX_DIMENSION)
+		};
+		const canvas = createResizeCanvas(dimensions.width, dimensions.height);
+		drawImageToCanvas(
+			canvas,
+			sourceBitmap,
+			dimensions,
+			requiresOpaqueBackground(normalizedOptions.outputFormat)
+				? normalizedOptions.backgroundColor
+				: undefined
+		);
+		const dataUrl =
+			normalizedOptions.outputFormat === 'image/gif'
+				? await canvasToGifDataUrl(canvas, dimensions, normalizedOptions.quality)
+				: await canvasToDataUrl(canvas, normalizedOptions.outputFormat, normalizedOptions.quality);
+		const outputSizeBytes = getDataUrlByteSize(dataUrl);
+		const metadata: ImageConversionMetadata = {
+			originalWidth: sourceBitmap.width,
+			originalHeight: sourceBitmap.height,
+			outputWidth: dimensions.width,
+			outputHeight: dimensions.height,
+			originalSizeBytes: input.sourceSizeBytes,
+			outputSizeBytes,
+			sizeDeltaBytes: outputSizeBytes - input.sourceSizeBytes,
+			sizeDeltaPercent: computeSizeDeltaPercent(input.sourceSizeBytes, outputSizeBytes),
+			sourceFormat: normalizeSourceFormat(input.sourceType, input.dataUrl),
+			outputFormat: normalizedOptions.outputFormat,
+			usedGifEncoder: normalizedOptions.outputFormat === 'image/gif'
+		};
+
+		return {
+			dataUrl,
+			downloadFilename: buildDownloadFilename(input.sourceName, normalizedOptions.outputFormat),
+			mimeType: normalizedOptions.outputFormat,
+			metadata,
+			durationMs: elapsedMs(startedAt)
+		};
+	} finally {
+		sourceBitmap.close();
+	}
+}
+
 export function normalizeImageResizeOptions(
 	options: Partial<ImageResizeOptions>
 ): ImageResizeOptions {
@@ -189,6 +314,36 @@ function normalizeFormat(format: ImageResizeOutputFormat | undefined): ImageResi
 	return IMAGE_RESIZER_DEFAULT_OPTIONS.outputFormat;
 }
 
+export function normalizeImageConversionOptions(
+	options: Partial<ImageConversionOptions>
+): ImageConversionOptions {
+	return {
+		outputFormat: normalizeConversionFormat(options.outputFormat),
+		quality: clampNumber(
+			options.quality ?? IMAGE_CONVERTER_DEFAULT_OPTIONS.quality,
+			MIN_QUALITY,
+			MAX_QUALITY
+		),
+		backgroundColor: normalizeBackgroundColor(options.backgroundColor)
+	};
+}
+
+function normalizeConversionFormat(
+	format: ImageConversionOutputFormat | undefined
+): ImageConversionOutputFormat {
+	if (
+		format === 'image/png' ||
+		format === 'image/jpeg' ||
+		format === 'image/webp' ||
+		format === 'image/avif' ||
+		format === 'image/gif'
+	) {
+		return format;
+	}
+
+	return IMAGE_CONVERTER_DEFAULT_OPTIONS.outputFormat;
+}
+
 export function computeScaledDimensions(
 	originalWidth: number,
 	originalHeight: number,
@@ -230,7 +385,8 @@ export function computeScaledDimensions(
 function drawImageToCanvas(
 	canvas: OffscreenCanvas | HTMLCanvasElement,
 	bitmap: ImageBitmap,
-	dimensions: ResizeDimensions
+	dimensions: ResizeDimensions,
+	backgroundColor?: string
 ): void {
 	const context = canvas.getContext('2d');
 	if (!isCanvas2DLike(context)) {
@@ -239,7 +395,12 @@ function drawImageToCanvas(
 
 	context.imageSmoothingEnabled = true;
 	context.imageSmoothingQuality = 'high';
-	context.clearRect(0, 0, dimensions.width, dimensions.height);
+	if (backgroundColor) {
+		context.fillStyle = backgroundColor;
+		context.fillRect(0, 0, dimensions.width, dimensions.height);
+	} else {
+		context.clearRect(0, 0, dimensions.width, dimensions.height);
+	}
 	context.drawImage(bitmap, 0, 0, dimensions.width, dimensions.height);
 }
 
@@ -248,17 +409,25 @@ function isCanvas2DLike(context: unknown): context is Canvas2DLike {
 	return (
 		'imageSmoothingEnabled' in context &&
 		'imageSmoothingQuality' in context &&
+		'fillStyle' in context &&
 		'clearRect' in context &&
+		'fillRect' in context &&
 		'drawImage' in context
 	);
 }
+
+function isCanvasImageDataContext(context: unknown): context is CanvasImageDataContext {
+	return isCanvas2DLike(context) && 'getImageData' in context;
+}
+
 async function canvasToDataUrl(
 	canvas: OffscreenCanvas | HTMLCanvasElement,
-	format: ImageResizeOutputFormat,
+	format: CanvasEncodedImageFormat,
 	quality: number
 ): Promise<string> {
 	if ('convertToBlob' in canvas) {
 		const blob = await canvas.convertToBlob({ type: format, quality });
+		validateEncodedBlob(blob, format);
 		return blobToDataUrl(blob);
 	}
 
@@ -266,7 +435,25 @@ async function canvasToDataUrl(
 		throw new Error('Canvas conversion API is unavailable');
 	}
 
-	return canvas.toDataURL(format, quality);
+	const dataUrl = canvas.toDataURL(format, quality);
+	if (!dataUrl.startsWith(`data:${format}`)) {
+		throw new Error(`${formatLabel(format)} export is not supported by this browser`);
+	}
+	return dataUrl;
+}
+
+async function canvasToGifDataUrl(
+	canvas: OffscreenCanvas | HTMLCanvasElement,
+	dimensions: ResizeDimensions,
+	quality: number
+): Promise<string> {
+	const context = canvas.getContext('2d');
+	if (!isCanvasImageDataContext(context)) {
+		throw new Error('Canvas pixel readback is unavailable');
+	}
+	const imageData = context.getImageData(0, 0, dimensions.width, dimensions.height);
+	const gifBlob = await encodeStaticGif(imageData, dimensions, quality);
+	return blobToDataUrl(gifBlob);
 }
 
 function createResizeCanvas(width: number, height: number): OffscreenCanvas | HTMLCanvasElement {
@@ -317,10 +504,22 @@ function validateImageDataUrl(dataUrl: string): void {
 	}
 }
 
-function buildDownloadFilename(sourceName: string, format: ImageResizeOutputFormat): string {
-	const extension = format === 'image/png' ? 'png' : format === 'image/webp' ? 'webp' : 'jpg';
+export function getImageConversionExtension(format: ImageConversionOutputFormat): string {
+	if (format === 'image/png') return 'png';
+	if (format === 'image/jpeg') return 'jpg';
+	if (format === 'image/webp') return 'webp';
+	if (format === 'image/avif') return 'avif';
+	return 'gif';
+}
+
+function buildDownloadFilename(sourceName: string, format: ImageConversionOutputFormat): string {
+	const extension = getImageConversionExtension(format);
 	const baseName = sourceName.replace(/\.[^.]+$/u, '').trim() || 'image';
 	return `${baseName}-${Date.now()}.${extension}`;
+}
+
+function computeSizeDeltaPercent(inputBytes: number, outputBytes: number): number {
+	return inputBytes > 0 ? ((outputBytes - inputBytes) / inputBytes) * 100 : 0;
 }
 
 function getDataUrlByteSize(dataUrl: string): number {
@@ -339,6 +538,69 @@ function dataUrlToBlob(dataUrl: string): Blob {
 		bytes[index] = binary.charCodeAt(index);
 	}
 	return new Blob([bytes], { type: mimeType });
+}
+
+async function encodeStaticGif(
+	imageData: ImageData,
+	dimensions: ResizeDimensions,
+	quality: number
+): Promise<Blob> {
+	const { GIFEncoder, applyPalette, quantize } = await import('gifenc');
+	const gif = GIFEncoder();
+	const palette = quantize(imageData.data, colorCountForQuality(quality), {
+		format: 'rgba4444',
+		oneBitAlpha: true
+	});
+	const indexedPixels = applyPalette(imageData.data, palette, 'rgba4444');
+	const transparentIndex = findTransparentPaletteIndex(palette);
+	gif.writeFrame(indexedPixels, dimensions.width, dimensions.height, {
+		palette,
+		transparent: transparentIndex >= 0,
+		transparentIndex: Math.max(0, transparentIndex),
+		repeat: -1
+	});
+	gif.finish();
+	const bytes = gif.bytes();
+	const arrayBuffer = new ArrayBuffer(bytes.byteLength);
+	new Uint8Array(arrayBuffer).set(bytes);
+	return new Blob([arrayBuffer], { type: 'image/gif' });
+}
+
+function colorCountForQuality(quality: number): number {
+	return clampNumber(Math.round(32 + quality * (GIF_MAX_COLORS - 32)), 32, GIF_MAX_COLORS);
+}
+
+function findTransparentPaletteIndex(palette: GifPaletteColor[]): number {
+	return palette.findIndex((color) => color.length === 4 && color[3] <= 127);
+}
+
+function validateEncodedBlob(blob: Blob, format: CanvasEncodedImageFormat): void {
+	if (blob.type && blob.type !== format) {
+		throw new Error(`${formatLabel(format)} export is not supported by this browser`);
+	}
+}
+
+function requiresOpaqueBackground(format: ImageConversionOutputFormat): boolean {
+	return format === 'image/jpeg';
+}
+
+function normalizeBackgroundColor(color: string | undefined): string {
+	const value = color?.trim();
+	if (!value) return IMAGE_CONVERTER_DEFAULT_OPTIONS.backgroundColor;
+	return value;
+}
+
+function normalizeSourceFormat(sourceType: string, dataUrl: string): string {
+	if (sourceType) return sourceType;
+	return dataUrl.match(/^data:([^;]+)/u)?.[1] ?? 'image/*';
+}
+
+function formatLabel(format: ImageConversionOutputFormat): string {
+	if (format === 'image/png') return 'PNG';
+	if (format === 'image/jpeg') return 'JPEG';
+	if (format === 'image/webp') return 'WebP';
+	if (format === 'image/avif') return 'AVIF';
+	return 'GIF';
 }
 
 function blobToDataUrl(blob: Blob): Promise<string> {

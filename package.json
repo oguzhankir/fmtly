@@ -55,6 +55,7 @@
 		"bits-ui": "^2.18.0",
 		"diff-match-patch": "^1.0.5",
 		"fast-xml-parser": "^5.5.10",
+		"gifenc": "^1.0.3",
 		"gpt-tokenizer": "^3.4.0",
 		"highlight.js": "^11.11.1",
 		"jmespath": "^0.16.0",
