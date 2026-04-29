@@ -850,62 +850,50 @@
 				</div>
 			{/if}
 
-			<div class="grid min-h-0 flex-1 grid-cols-1 border-b border-[var(--border-default)] xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]">
-				<div class="flex min-h-[220px] flex-col bg-[var(--bg-base)]">
-					<div class="border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
-						{$t('ui.svg_optimizer.source_preview_label', 'Source preview')}
+			{#if outputPreviewMode === 'preview'}
+				<div class="grid min-h-0 flex-1 grid-cols-1 xl:grid-cols-2 xl:divide-x xl:divide-[var(--border-default)]">
+					<div class="flex min-h-[220px] flex-col bg-[var(--bg-base)]">
+						<div class="border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
+							{$t('ui.svg_optimizer.source_preview_label', 'Source preview')}
+						</div>
+						<div class="flex min-h-0 flex-1 items-center justify-center overflow-auto p-[var(--space-4)]">
+							{#if sourcePreviewUrl}
+								<img
+									src={sourcePreviewUrl}
+									alt={$t('ui.svg_optimizer.source_preview_alt', 'Source SVG preview')}
+									class="max-h-full max-w-full object-contain"
+								/>
+							{:else}
+								<p class="text-center text-[length:var(--text-sm)] text-[var(--text-tertiary)]">
+									{$t('ui.svg_optimizer.source_preview_placeholder', 'Valid source SVG preview appears here.')}
+								</p>
+							{/if}
+						</div>
 					</div>
-					<div class="flex min-h-0 flex-1 items-center justify-center overflow-auto p-[var(--space-4)]">
-						{#if sourcePreviewUrl}
-							<img
-								src={sourcePreviewUrl}
-								alt={$t('ui.svg_optimizer.source_preview_alt', 'Source SVG preview')}
-								class="max-h-full max-w-full object-contain"
-							/>
-						{:else}
-							<p class="text-center text-[length:var(--text-sm)] text-[var(--text-tertiary)]">
-								{$t('ui.svg_optimizer.source_preview_placeholder', 'Valid source SVG preview appears here.')}
-							</p>
-						{/if}
+					<div class="flex min-h-[220px] flex-col bg-[var(--bg-base)]">
+						<div class="border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
+							{$t('ui.svg_optimizer.output_preview_label', 'Optimized preview')}
+						</div>
+						<div class="flex min-h-0 flex-1 items-center justify-center overflow-auto p-[var(--space-4)]">
+							{#if outputPreviewUrl}
+								<img
+									src={outputPreviewUrl}
+									alt={$t('ui.svg_optimizer.output_preview_alt', 'Optimized SVG preview')}
+									class="max-h-full max-w-full object-contain"
+								/>
+							{:else}
+								<p class="text-center text-[length:var(--text-sm)] text-[var(--text-tertiary)]">
+									{$t('ui.svg_optimizer.output_placeholder', 'Optimized SVG output appears here.')}
+								</p>
+							{/if}
+						</div>
 					</div>
 				</div>
-				<div class="flex min-h-[220px] flex-col bg-[var(--bg-base)]">
-					<div class="border-b border-[var(--border-default)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] text-[var(--text-tertiary)]">
-						{$t('ui.svg_optimizer.output_preview_label', 'Optimized preview')}
-					</div>
-					<div class="flex min-h-0 flex-1 items-center justify-center overflow-auto p-[var(--space-4)]">
-						{#if outputPreviewUrl}
-							<img
-								src={outputPreviewUrl}
-								alt={$t('ui.svg_optimizer.output_preview_alt', 'Optimized SVG preview')}
-								class="max-h-full max-w-full object-contain"
-							/>
-						{:else}
-							<p class="text-center text-[length:var(--text-sm)] text-[var(--text-tertiary)]">
-								{$t('ui.svg_optimizer.output_placeholder', 'Optimized SVG output appears here.')}
-							</p>
-						{/if}
-					</div>
-				</div>
-			</div>
-
-			<div class="min-h-0 flex-1 overflow-auto p-[var(--space-4)]">
-				{#if outputPreviewMode === 'code'}
+			{:else}
+				<div class="min-h-0 flex-1 overflow-auto p-[var(--space-4)]">
 					<pre class="min-h-full whitespace-pre-wrap break-words rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] p-[var(--space-3)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)]">{result?.optimizedText ?? ''}</pre>
-				{:else if outputPreviewUrl}
-					<div class="flex h-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] p-[var(--space-4)]">
-						<img
-							src={outputPreviewUrl}
-							alt={$t('ui.svg_optimizer.output_preview_alt', 'Optimized SVG preview')}
-							class="max-h-full max-w-full object-contain"
-						/>
-					</div>
-				{:else}
-					<div class="flex h-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-base)] p-[var(--space-4)] text-center text-[length:var(--text-sm)] text-[var(--text-tertiary)]">
-						{$t('ui.svg_optimizer.output_placeholder', 'Optimized SVG output appears here.')}
-					</div>
-				{/if}
-			</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>
