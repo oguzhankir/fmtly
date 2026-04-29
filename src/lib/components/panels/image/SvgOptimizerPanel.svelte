@@ -752,11 +752,14 @@
 				</div>
 			</div>
 
-			<div class="m-[var(--space-3)] mt-[var(--space-3)] flex min-h-0 flex-1 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-surface)]">
+			<div class="m-[var(--space-3)] mt-[var(--space-3)] grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-[inset_0_1px_0_0_var(--border-subtle)]">
+				<div class="border-b border-[var(--border-default)] bg-[var(--bg-base)] px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] font-[number:var(--weight-semibold)] uppercase tracking-[0.08em] text-[var(--text-tertiary)]">
+					{$t('ui.svg_optimizer.source_editor_label', 'SVG markup editor')}
+				</div>
 				<textarea
 					value={sourceText}
 					oninput={handleSourceInput}
-					class="min-h-[260px] w-full flex-1 resize-none border-0 bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] outline-none"
+					class="block min-h-[260px] w-full flex-1 resize-none border-0 bg-[var(--bg-base)] p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] outline-none"
 					placeholder={$t('ui.svg_optimizer.input_placeholder', 'Paste SVG markup here…')}
 					spellcheck="false"
 				></textarea>
