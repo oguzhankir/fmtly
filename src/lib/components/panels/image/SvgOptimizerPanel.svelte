@@ -752,13 +752,15 @@
 				</div>
 			</div>
 
-			<textarea
-				value={sourceText}
-				oninput={handleSourceInput}
-				class="min-h-[260px] w-full flex-1 resize-none border-0 bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] outline-none"
-				placeholder={$t('ui.svg_optimizer.input_placeholder', 'Paste SVG markup here…')}
-				spellcheck="false"
-			></textarea>
+			<div class="m-[var(--space-3)] mt-[var(--space-3)] flex min-h-0 flex-1 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-default)] bg-[var(--bg-surface)]">
+				<textarea
+					value={sourceText}
+					oninput={handleSourceInput}
+					class="min-h-[260px] w-full flex-1 resize-none border-0 bg-transparent p-[var(--space-4)] font-[family-name:var(--font-mono)] text-[length:var(--text-sm)] leading-[var(--leading-relaxed)] text-[var(--text-primary)] outline-none"
+					placeholder={$t('ui.svg_optimizer.input_placeholder', 'Paste SVG markup here…')}
+					spellcheck="false"
+				></textarea>
+			</div>
 		</div>
 
 		<div class="flex min-h-0 flex-col bg-[var(--bg-surface)]">
