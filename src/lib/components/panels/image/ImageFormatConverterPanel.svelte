@@ -101,12 +101,16 @@
 		{
 			label: $t('ui.image_converter.stat.source_format', 'Source format'),
 			value: result ? formatLabel(result.metadata.sourceFormat) : '—',
-			helper: $t('ui.image_converter.stat.source_size', 'Original size')
+			helper: result
+				? `${$t('ui.image_converter.stat.source_size', 'Original size')}: ${formatBytes(result.metadata.originalSizeBytes)}`
+				: $t('ui.image_converter.stat.source_size', 'Original size')
 		},
 		{
 			label: $t('ui.image_converter.stat.output_format', 'Output format'),
 			value: result ? formatLabel(result.metadata.outputFormat) : formatLabel(outputFormat),
-			helper: $t('ui.image_converter.stat.output_size', 'Converted size')
+			helper: result
+				? `${$t('ui.image_converter.stat.output_size', 'Converted size')}: ${formatBytes(result.metadata.outputSizeBytes)}`
+				: $t('ui.image_converter.stat.output_size', 'Converted size')
 		},
 		{
 			label: $t('ui.image_converter.stat.size_delta', 'Size delta'),
