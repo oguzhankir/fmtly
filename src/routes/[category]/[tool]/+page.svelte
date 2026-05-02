@@ -75,7 +75,9 @@
 	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
 	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
 	import ImageFormatConverterPanel from "$components/panels/image/ImageFormatConverterPanel.svelte";
+	import ImageFromBase64Panel from "$components/panels/image/ImageFromBase64Panel.svelte";
 	import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
+	import ImageToBase64Panel from "$components/panels/image/ImageToBase64Panel.svelte";
 	import SvgOptimizerPanel from "$components/panels/image/SvgOptimizerPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
@@ -288,6 +290,7 @@
 		csv: [".csv", ".txt"],
 		txt: [".txt", ".md", ".log"],
 		image: [".png", ".jpg", ".jpeg", ".webp", ".bmp"],
+		svg: [".svg", ".txt"],
 	};
 
 	let acceptedExts = $derived(
@@ -638,13 +641,17 @@
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
-{:else if data.tool.category === "image" && (data.tool.slug === "resize" || data.tool.slug === "convert" || data.tool.slug === "svg-optimizer")}
+{:else if data.tool.category === "image" && ["resize", "convert", "svg-optimizer", "to-base64", "from-base64"].includes(data.tool.slug)}
 	{#if data.tool.slug === "resize"}
 		<ImageResizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 	{:else if data.tool.slug === "svg-optimizer"}
 		<SvgOptimizerPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
-	{:else}
+	{:else if data.tool.slug === "convert"}
 		<ImageFormatConverterPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+	{:else if data.tool.slug === "to-base64"}
+		<ImageToBase64Panel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+	{:else}
+		<ImageFromBase64Panel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 	{/if}
 {:else if isDiffTool}
 	<ToolLayout tool={localizedTool}>

@@ -28,6 +28,27 @@ export {
 	type ImageResizerWorkerRequest,
 	type ImageResizerWorkerResponse
 } from './image.engine.js';
+
+export {
+	IMAGE_BASE64_WORKER_THRESHOLD_BYTES,
+	IMAGE_BASE64_WORKER_THRESHOLD_BYTES as IMAGE_BASE64_TEXT_WORKER_THRESHOLD_BYTES,
+	decodeBase64ToImage,
+	encodeImageToBase64,
+	readImageFileAsArrayBuffer,
+	shouldUseBase64ToImageWorker,
+	shouldUseImageToBase64Worker,
+	type Base64ToImageMetrics,
+	type Base64ToImageOptions,
+	type Base64ToImageResult,
+	type Base64ToImageWorkerRequest,
+	type Base64ToImageWorkerResponse,
+	type ImageToBase64Input,
+	type ImageToBase64Metrics,
+	type ImageToBase64Result,
+	type ImageToBase64WorkerRequest,
+	type ImageToBase64WorkerResponse
+} from './image-base64.engine.js';
+
 export {
 	buildSvgOptimizerConfig,
 	SVG_OPTIMIZER_DEFAULT_OPTIONS,

@@ -4448,6 +4448,160 @@ const registryTr: Record<string, string> = {
 	'ui.image_converter.copy_output': 'Veri URL’sini kopyala',
 	'ui.image_converter.download': 'İndir',
 	'ui.image_converter.output_placeholder': 'Dönüştürülen çıktı burada görünür...',
+	'tool.image-to-base64.display_name': 'Görselden Base64’e',
+	'tool.image-to-base64.tagline':
+		'Görselleri ham Base64 veya yapıştırmaya hazır veri URI dizelerine dönüştür',
+	'tool.image-to-base64.description':
+		'PNG, JPEG, WebP, GIF, BMP, AVIF, SVG ve ICO görsellerini tarayıcıda Base64 veya tam veri URI çıktısına çevir. Karakter uzunluklarını gör, sonucu kopyala ve .txt olarak indir; hiçbir dosya yüklenmez.',
+	'tool.image-to-base64.primary_keyword': 'görselden base64',
+	'tool.image-to-base64.meta_title': 'Görselden Base64’e — Veri URI Dönüştürücü | fmtly.dev',
+	'tool.image-to-base64.meta_description':
+		'Görselleri tarayıcıda Base64 veya veri URI çıktısına dönüştür. Kopyala, indir, karakter boyutunu gör ve büyük dosyalarda Web Worker ile akıcı kal.',
+	'tool.image-to-base64.operation': 'Görseli Base64’e dönüştür',
+	'tool.image-to-base64.faq.0.question': 'Görselim tarayıcıdan çıkıyor mu?',
+	'tool.image-to-base64.faq.0.answer':
+		'Hayır. Kodlama tamamen tarayıcıda yerel çalışır; dosya hiçbir sunucuya gönderilmez.',
+	'tool.image-to-base64.faq.1.question': 'Ham Base64 ile veri URI arasındaki fark nedir?',
+	'tool.image-to-base64.faq.1.answer':
+		'Ham Base64 yalnızca kodlanmış içeriği içerir. Veri URI ise `data:image/...;base64,` önekiyle MIME türünü de ekler; HTML, CSS ve JSON içine doğrudan gömülmeye hazırdır.',
+	'tool.image-to-base64.faq.2.question': 'Hangi görsel formatları destekleniyor?',
+	'tool.image-to-base64.faq.2.answer':
+		'PNG, JPEG, WebP, GIF, BMP, AVIF, SVG ve ICO girişleri desteklenir. Çıktı aynı görselin Base64/veri URI temsilidir.',
+	'tool.image-to-base64.faq.3.question': 'Büyük görseller nasıl işleniyor?',
+	'tool.image-to-base64.faq.3.answer':
+		'500KB üzerindeki girişler Web Worker içinde işlenir; kodlama sırasında arayüz akıcı kalır.',
+	'tool.image-to-base64.use_case.0': 'Küçük varlıkları HTML, CSS veya JSON içine satır içi gömmek',
+	'tool.image-to-base64.use_case.1':
+		'Veri URI gerektiren e-posta şablonları ve prototipler hazırlamak',
+	'tool.image-to-base64.use_case.2': 'API veya build araçları için Base64 örnek payload üretmek',
+	'tool.image-to-base64.use_case.3': 'Yükleme yapmadan görseli özel şekilde Base64’e çevirmek',
+	'tool.image-from-base64.display_name': 'Base64’ten Görsele',
+	'tool.image-from-base64.tagline':
+		'Base64 veya veri URI girdilerini indirilebilir görsel önizlemesine dönüştür',
+	'tool.image-from-base64.description':
+		'Ham Base64 dizelerini veya tam veri URI’leri yapıştırıp tarayıcıda görsel olarak çöz. MIME türünü algıla, boşlukları ve eksik dolguyu düzelt, sonucu önizle ve anında indir.',
+	'tool.image-from-base64.primary_keyword': 'base64ten görsele',
+	'tool.image-from-base64.meta_title': 'Base64’ten Görsele — Veri URI Çözücü | fmtly.dev',
+	'tool.image-from-base64.meta_description':
+		'Base64 veya veri URI metnini tarayıcıda görsele dönüştür. MIME türünü algılar, önizleme sunar, indirir ve büyük girdileri Web Worker ile çözer.',
+	'tool.image-from-base64.operation': 'Base64 görselini çöz',
+	'tool.image-from-base64.faq.0.question': 'Ham Base64 yerine tam veri URI yapıştırabilir miyim?',
+	'tool.image-from-base64.faq.0.answer':
+		'Evet. Araç hem ham Base64 metnini hem de `data:image/...;base64,...` biçimindeki tam veri URI girişlerini kabul eder.',
+	'tool.image-from-base64.faq.1.question': 'MIME türü eksikse ne olur?',
+	'tool.image-from-base64.faq.1.answer':
+		'Araç önce bayt imzalarından türü algılamaya çalışır. Algılayamazsa seçtiğin yedek çıktı türünü kullanır.',
+	'tool.image-from-base64.faq.2.question':
+		'Boşlukları veya eksik padding karakterlerini düzeltiyor mu?',
+	'tool.image-from-base64.faq.2.answer':
+		'Evet. Uygun durumlarda boşlukları kaldırır ve eksik padding karakterlerini tamamlar; yapılan düzeltmeler arayüzde gösterilir.',
+	'tool.image-from-base64.faq.3.question': 'Base64 girdim gizli kalır mı?',
+	'tool.image-from-base64.faq.3.answer':
+		'Evet. Tüm çözme işlemleri tarayıcıda yerel yapılır; içerik hiçbir yere yüklenmez.',
+	'tool.image-from-base64.use_case.0':
+		'API yanıtlarından veya veritabanı kayıtlarından görselleri geri almak',
+	'tool.image-from-base64.use_case.1':
+		'Veri URI dizelerini tasarım araçlarına veya dosyalara geri dönüştürmek',
+	'tool.image-from-base64.use_case.2':
+		'MIME bilgisi eksik Base64 payload’ları doğrulamak ve önizlemek',
+	'tool.image-from-base64.use_case.3':
+		'Bozuk boşluk/padding içeren Base64 girişlerini düzeltip indirmek',
+	'ui.image_to_base64.upload': 'Görsel yükle',
+	'ui.image_to_base64.clear': 'Temizle',
+	'ui.image_to_base64.no_file': 'Görsel seçilmedi',
+	'ui.image_to_base64.source_status': '{size} · {format}',
+	'ui.image_to_base64.output_status':
+		'{base64Chars} Base64 karakteri · {dataUrlChars} veri URI karakteri',
+	'ui.image_to_base64.worker_active':
+		'Büyük görsel algılandı (>{size}). Dönüşüm Web Worker içinde çalışır.',
+	'ui.image_to_base64.worker_used': 'Arka iş parçacığında işlendi',
+	'ui.image_to_base64.worker_failed':
+		'Worker kodlaması başarısız oldu. Ana iş parçacığına dönülüyor.',
+	'ui.image_to_base64.file_read_error': 'Görsel dosyası yüklenemedi',
+	'ui.image_to_base64.file_loaded': '{name} yüklendi',
+	'ui.image_to_base64.input_cleared': 'Görsel girdisi temizlendi',
+	'ui.image_to_base64.copy_empty': 'Kopyalanacak bir şey yok',
+	'ui.image_to_base64.copy_success': 'Çıktı kopyalandı',
+	'ui.image_to_base64.copy_data_uri_success': 'Veri URI kopyalandı',
+	'ui.image_to_base64.copy_error': 'Kopyalama başarısız',
+	'ui.image_to_base64.download_empty': 'İndirilecek bir şey yok',
+	'ui.image_to_base64.download_success': '{filename} indirildi',
+	'ui.image_to_base64.download_error': 'İndirme başarısız',
+	'ui.image_to_base64.drop_title': 'Görseli buraya bırak',
+	'ui.image_to_base64.drop_hint':
+		'PNG, JPEG, WebP, GIF, SVG, BMP, AVIF ve ICO bu tarayıcıda kalır.',
+	'ui.image_to_base64.source_preview_alt': 'Kaynak görsel önizlemesi',
+	'ui.image_to_base64.privacy_note': 'Kodlama yereldir; görselin tarayıcıdan çıkmaz.',
+	'ui.image_to_base64.performance_note': 'Büyük girdiler {size} üzerinde Web Worker kullanır.',
+	'ui.image_to_base64.stat.file_size': 'Görsel boyutu',
+	'ui.image_to_base64.stat.file_size_helper': 'yalnızca tarayıcı girdisi',
+	'ui.image_to_base64.stat.base64_length': 'Base64 uzunluğu',
+	'ui.image_to_base64.stat.base64_length_helper': 'önek hariç karakterler',
+	'ui.image_to_base64.stat.expansion': 'Payload büyümesi',
+	'ui.image_to_base64.stat.expansion_helper': 'beklenen Base64 ek yükü',
+	'ui.image_to_base64.processing': 'Kodlanıyor...',
+	'ui.image_to_base64.copy_base64': 'Base64 kopyala',
+	'ui.image_to_base64.copy_data_uri': 'Veri URI kopyala',
+	'ui.image_to_base64.download_base64': '.txt indir',
+	'ui.image_to_base64.download_data_uri': 'Veri URI indir',
+	'ui.image_to_base64.base64_output': 'Base64 çıktısı',
+	'ui.image_to_base64.output_placeholder': 'Kodlanmış Base64 burada görünür...',
+	'ui.image_to_base64.data_uri_output': 'Veri URI çıktısı',
+	'ui.image_to_base64.data_uri_placeholder': 'Veri URI burada görünür...',
+	'ui.image_to_base64.unsupported_image': 'Desteklenmeyen görsel formatı',
+	'ui.image_to_base64.empty_image': 'Görsel dosyası boş',
+	'ui.image_to_base64.convert_failed': 'Görsel Base64’e dönüştürülemedi',
+	'ui.image_from_base64.input_status': '{size} · {characters} karakter',
+	'ui.image_from_base64.output_status': '{size} · {type}',
+	'ui.image_from_base64.worker_active':
+		'Büyük Base64 girdisi algılandı (>{size}). Çözme işlemi Web Worker içinde çalışır.',
+	'ui.image_from_base64.worker_used': 'Arka iş parçacığında işlendi',
+	'ui.image_from_base64.worker_failed':
+		'Worker çözmesi başarısız oldu. Ana iş parçacığına dönülüyor.',
+	'ui.image_from_base64.privacy_note':
+		'Çözülen görsel baytları tarayıcıda kalır; hiçbir şey yüklenmez.',
+	'ui.image_from_base64.performance_note':
+		'Büyük Base64 dizeleri {size} üzerinde Web Worker kullanır.',
+	'ui.image_from_base64.input_placeholder':
+		'Buraya bir Base64 dizesi veya tam veri URI yapıştır...',
+	'ui.image_from_base64.output_placeholder': 'Çözülen görsel önizlemesi burada görünür...',
+	'ui.image_from_base64.stat.output_type': 'Çıktı türü',
+	'ui.image_from_base64.stat.output_type_helper': 'Algılanan veya yedek MIME',
+	'ui.image_from_base64.stat.output_size': 'Çıktı boyutu',
+	'ui.image_from_base64.stat.output_size_helper': 'Çözülen ikili boyut',
+	'ui.image_from_base64.stat.flags': 'Normalizasyon',
+	'ui.image_from_base64.stat.flags_helper': 'Önek, boşluk ve padding',
+	'ui.image_from_base64.input_cleared': 'Base64 girdisi temizlendi',
+	'ui.image_from_base64.sample_loaded': 'Örnek Base64 yüklendi',
+	'ui.image_from_base64.copy_empty': 'Kopyalanacak bir şey yok',
+	'ui.image_from_base64.copy_data_url_success': 'Veri URL’si kopyalandı',
+	'ui.image_from_base64.copy_error': 'Kopyalama başarısız',
+	'ui.image_from_base64.copy_base64_success': 'Normalize edilmiş Base64 kopyalandı',
+	'ui.image_from_base64.download_empty': 'İndirilecek bir şey yok',
+	'ui.image_from_base64.download_success': '{filename} indirildi',
+	'ui.image_from_base64.download_error': 'İndirme başarısız',
+	'ui.image_from_base64.decode_failed': 'Base64 görsel çözülemedi',
+	'ui.image_from_base64.error.empty': 'Çözmek için bir Base64 dizesi yapıştır.',
+	'ui.image_from_base64.error.invalid_mime':
+		'Veri URI desteklenmeyen bir görsel MIME türü bildiriyor.',
+	'ui.image_from_base64.error.invalid_characters':
+		'Girdi geçerli olmayan Base64 karakterleri içeriyor.',
+	'ui.image_from_base64.error.invalid_padding':
+		'Padding karakterleri yalnızca Base64 girdisinin sonunda bulunmalıdır.',
+	'ui.image_from_base64.error.invalid_length': 'Base64 uzunluğu geçersiz; çözülemiyor.',
+	'ui.image_from_base64.flag.data_uri': 'Veri URI',
+	'ui.image_from_base64.flag.whitespace': 'Boşluklar kaldırıldı',
+	'ui.image_from_base64.flag.padding': 'Padding düzeltildi',
+	'ui.image_from_base64.flag.fallback': 'Yedek MIME',
+	'ui.image_from_base64.flag.clean': 'Düzeltme yok',
+	'ui.image_from_base64.sample': 'Örnek yükle',
+	'ui.image_from_base64.clear': 'Temizle',
+	'ui.image_from_base64.fallback_mime': 'Yedek çıktı türü',
+	'ui.image_from_base64.processing': 'Çözülüyor...',
+	'ui.image_from_base64.copy_base64': 'Base64 kopyala',
+	'ui.image_from_base64.copy_data_url': 'Veri URL’sini kopyala',
+	'ui.image_from_base64.download': 'İndir',
+	'ui.image_from_base64.output_preview_alt': 'Çözülen görsel önizlemesi',
 	'ui.image_resizer.drop_title': 'Görseli buraya bırak veya gözat',
 	'ui.image_resizer.drop_hint': 'Dosyaların bu tarayıcıda kalır — hiçbir şey sunucuya yüklenmez.',
 	'ui.image_resizer.browse': 'Dosya seç',
