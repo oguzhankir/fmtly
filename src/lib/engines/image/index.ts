@@ -48,3 +48,24 @@ export {
 	type ImageToBase64WorkerRequest,
 	type ImageToBase64WorkerResponse
 } from './image-base64.engine.js';
+
+export {
+	buildSvgOptimizerConfig,
+	SVG_OPTIMIZER_DEFAULT_OPTIONS,
+	SVG_OPTIMIZER_WORKER_THRESHOLD_BYTES,
+	getSvgUtf8ByteSize,
+	looksLikeSvgDocument,
+	normalizeSvgOptimizeOptions,
+	optimizeSvg,
+	readSvgFileAsText,
+	shouldUseSvgOptimizerWorker,
+	summarizeSvg,
+	type SvgDocumentSummary,
+	type SvgOptimizeInput,
+	type SvgOptimizeMetadata,
+	type SvgOptimizeOptions,
+	type SvgOptimizeResult,
+	type SvgOptimizerConfig,
+	type SvgOptimizerWorkerRequest,
+	type SvgOptimizerWorkerResponse
+} from './svg-optimizer.engine.js';

@@ -4603,7 +4603,102 @@ const registryDe: Record<string, string> = {
 	'ui.image_resizer.jpeg': 'JPEG',
 	'ui.image_resizer.webp': 'WebP',
 	'ui.image_resizer.source_status': '{size} · {width}×{height} px',
-	'ui.image_resizer.output_status': '{size} · {width}×{height} px'
+	'ui.image_resizer.output_status': '{size} · {width}×{height} px',
+
+	'tool.image-svg-optimizer.display_name': 'SVG-Optimierer',
+	'tool.image-svg-optimizer.tagline':
+		'SVG-Markup mit SVGO, Live-Vorschau und vollständiger Browser-Privatsphäre optimieren',
+	'tool.image-svg-optimizer.description':
+		'Optimieren Sie SVG-Dateien online mit SVGO direkt im Browser. Entfernen Sie Metadaten und Kommentare, vereinfachen Sie Pfaddaten, reduzieren Sie Gruppen, sortieren Sie Attribute, behalten oder entfernen Sie Maße und laden Sie die bereinigte SVG sofort herunter.',
+	'tool.image-svg-optimizer.primary_keyword': 'svg optimierer',
+	'tool.image-svg-optimizer.meta_title':
+		'SVG-Optimierer — SVG mit SVGO online optimieren | fmtly.dev',
+	'tool.image-svg-optimizer.meta_description':
+		'Optimieren Sie SVG online mit SVGO. Entfernen Sie Metadaten, reduzieren Sie Gruppen, vereinfachen Sie Pfade, sortieren Sie Attribute und behalten Sie alle Dateien privat im Browser.',
+	'tool.image-svg-optimizer.operation': 'SVG optimieren',
+	'tool.image-svg-optimizer.faq.0.question': 'Wird meine SVG an einen Server hochgeladen?',
+	'tool.image-svg-optimizer.faq.0.answer':
+		'Nein. Die Optimierung läuft vollständig im Browser mit dynamisch geladenem SVGO. Ihre SVG bleibt auf Ihrem Gerät.',
+	'tool.image-svg-optimizer.faq.1.question': 'Welche Optimierungen kann ich steuern?',
+	'tool.image-svg-optimizer.faq.1.answer':
+		'Sie können das Entfernen von Metadaten, Kommentaren und <desc>, ID-Bereinigung, Gruppenkollaps, Pfadvereinfachung, Pfadzusammenführung, Attributsortierung, Maßentfernung, Multipass und formatierten Ausgabetext einzeln steuern.',
+	'tool.image-svg-optimizer.faq.2.question': 'Wie kann ich das Ergebnis sicher prüfen?',
+	'tool.image-svg-optimizer.faq.2.answer':
+		'Das Tool rendert Quell- und Ziel-SVG lokal als Browserbilder, damit Sie das visuelle Ergebnis vor dem Download vergleichen können.',
+	'tool.image-svg-optimizer.faq.3.question': 'Was passiert bei großen SVG-Dateien?',
+	'tool.image-svg-optimizer.faq.3.answer':
+		'Überschreitet die SVG-Eingabe in UTF-8 500KB, läuft die Optimierung in einem Web Worker, damit der Editor reaktionsfähig bleibt.',
+	'tool.image-svg-optimizer.use_case.0':
+		'Inline-SVG-Icons vor dem Shipping in Produkt-Bundles verkleinern',
+	'tool.image-svg-optimizer.use_case.1':
+		'Exportierte SVGs aus Figma, Illustrator oder Designsystemen bereinigen',
+	'tool.image-svg-optimizer.use_case.2':
+		'SVG-Assets für CMS-Uploads, E-Mail-Templates und Komponentenbibliotheken vereinheitlichen',
+	'tool.image-svg-optimizer.use_case.3':
+		'Quell- und Ziel-Markup vergleichen, bevor Vektor-Assets committed werden',
+	'ui.svg_optimizer.paste': 'SVG einfügen',
+	'ui.svg_optimizer.paste_empty': 'Zwischenablage ist leer',
+	'ui.svg_optimizer.paste_success': 'SVG-Markup eingefügt',
+	'ui.svg_optimizer.paste_error': 'Einfügen aus der Zwischenablage fehlgeschlagen',
+	'ui.svg_optimizer.no_file': 'Keine SVG ausgewählt',
+	'ui.svg_optimizer.worker_active':
+		'Große SVG erkannt (>{size}). Die Optimierung läuft in einem Web Worker.',
+	'ui.svg_optimizer.worker_used': 'Nebenläufig verarbeitet',
+	'ui.svg_optimizer.worker_failed':
+		'Worker-Optimierung fehlgeschlagen. Verarbeitung läuft im Hauptthread weiter.',
+	'ui.svg_optimizer.optimize_failed': 'SVG-Optimierung fehlgeschlagen',
+	'ui.svg_optimizer.file_read_error': 'SVG-Datei konnte nicht geladen werden',
+	'ui.svg_optimizer.file_loaded': '{name} geladen',
+	'ui.svg_optimizer.sample_loaded': 'Beispiel-SVG geladen',
+	'ui.svg_optimizer.input_cleared': 'SVG-Eingabe geleert',
+	'ui.svg_optimizer.copy_empty': 'Nichts zu kopieren',
+	'ui.svg_optimizer.copy_success': 'Optimierte SVG kopiert',
+	'ui.svg_optimizer.copy_error': 'Kopieren fehlgeschlagen',
+	'ui.svg_optimizer.download_empty': 'Nichts zum Herunterladen',
+	'ui.svg_optimizer.download_success': '{filename} heruntergeladen',
+	'ui.svg_optimizer.download_error': 'Download fehlgeschlagen',
+	'ui.svg_optimizer.source_status': '{size} · {elements} Elemente',
+	'ui.svg_optimizer.output_status': '{size} · {elements} Elemente',
+	'ui.svg_optimizer.input_label': 'Quell-SVG',
+	'ui.svg_optimizer.drop_title': 'SVG-Datei hier ablegen',
+	'ui.svg_optimizer.drop_hint':
+		'Oder rohes SVG-Markup einfügen, eine Datei hochladen oder das Beispiel laden.',
+	'ui.svg_optimizer.input_placeholder': 'SVG-Markup hier einfügen...',
+	'ui.svg_optimizer.option.remove_metadata': 'Metadaten entfernen',
+	'ui.svg_optimizer.option.remove_comments': 'Kommentare entfernen',
+	'ui.svg_optimizer.option.remove_desc': '<desc> entfernen',
+	'ui.svg_optimizer.option.cleanup_ids': 'IDs bereinigen',
+	'ui.svg_optimizer.option.collapse_groups': 'Gruppen reduzieren',
+	'ui.svg_optimizer.option.convert_path_data': 'Pfaddaten vereinfachen',
+	'ui.svg_optimizer.option.merge_paths': 'Pfade zusammenführen',
+	'ui.svg_optimizer.option.sort_attrs': 'Attribute sortieren',
+	'ui.svg_optimizer.option.remove_dimensions': 'Breite/Höhe entfernen',
+	'ui.svg_optimizer.option.multipass': 'Multipass-Optimierung ausführen',
+	'ui.svg_optimizer.option.pretty': 'Ausgabe formatieren',
+	'ui.svg_optimizer.float_precision': 'Float-Präzision',
+	'ui.svg_optimizer.indent': 'Einrückung für formatierte Ausgabe',
+	'ui.svg_optimizer.privacy_note':
+		'Die Optimierung läuft lokal; SVG-Dateien verlassen Ihren Browser nicht.',
+	'ui.svg_optimizer.performance_note': 'Große SVG-Eingaben nutzen ab {size} einen Web Worker.',
+	'ui.svg_optimizer.stat.original_size': 'Originalgröße',
+	'ui.svg_optimizer.stat.original_elements': 'Quell-Elemente',
+	'ui.svg_optimizer.stat.optimized_size': 'Optimierte Größe',
+	'ui.svg_optimizer.stat.optimized_elements': 'Optimierte Elemente',
+	'ui.svg_optimizer.stat.size_delta': 'Größenänderung',
+	'ui.svg_optimizer.stat.size_delta_helper': 'negativ = kleiner',
+	'ui.svg_optimizer.stat.duration': 'Laufzeit',
+	'ui.svg_optimizer.stat.runtime_helper': 'pro Optimierungsdurchlauf',
+	'ui.svg_optimizer.geometry_source': 'Quell-Geometrie',
+	'ui.svg_optimizer.geometry_output': 'Optimierte Geometrie',
+	'ui.svg_optimizer.preview_mode': 'Vorschau',
+	'ui.svg_optimizer.code_mode': 'Code',
+	'ui.svg_optimizer.processing': 'Optimieren...',
+	'ui.svg_optimizer.source_preview_label': 'Quellvorschau',
+	'ui.svg_optimizer.source_preview_alt': 'Vorschau der Quell-SVG',
+	'ui.svg_optimizer.source_preview_placeholder': 'Hier erscheint eine gültige Quell-SVG-Vorschau.',
+	'ui.svg_optimizer.output_preview_label': 'Optimierte Vorschau',
+	'ui.svg_optimizer.output_preview_alt': 'Vorschau der optimierten SVG',
+	'ui.svg_optimizer.output_placeholder': 'Die optimierte SVG-Ausgabe erscheint hier.'
 };
 
 export default registryDe;

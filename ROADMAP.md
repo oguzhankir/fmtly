@@ -217,7 +217,7 @@ Process images entirely in the browser.
 | 137 | Image Resizer ✅ | `image/resize` | done — Resize images in-browser with locked aspect ratio, custom width/height, percentage scaling, PNG/JPEG/WebP output, quality controls, before/after metrics, and Web Worker offloading above 500KB. |
 | 138 | Image Format Converter ✅ | `image/convert` | done — Convert between PNG, JPEG, WebP, AVIF, and GIF in-browser with quality controls, JPEG background flattening, live preview, and Web Worker offloading above 500KB. |
 | 139 | Image Compressor | `image/compress` | Reduce file size with configurable quality. Real-time before/after preview. |
-| 140 | SVG Optimizer | `image/svg-optimizer` | Optimize SVG files with SVGO — remove metadata, simplify paths, collapse groups. |
+| 140 | SVG Optimizer ✅ | `image/svg-optimizer` | done — Optimize SVG files with SVGO in-browser with live source/output previews, configurable cleanup toggles, code + rendered preview modes, and Web Worker offloading above 500KB UTF-8. |
 | 141 | Image → Base64 ✅ | `image/to-base64` | done — Convert PNG, JPEG, WebP, GIF, SVG, BMP, AVIF, and ICO images into raw Base64 or ready-to-paste data URI strings with local processing, copy/download actions, and Web Worker offload above 500KB. |
 | 142 | Base64 → Image ✅ | `image/from-base64` | done — Decode raw Base64 strings or full data URIs back into downloadable images with MIME detection, whitespace/padding normalization, live preview, fallback MIME controls, and Web Worker offload above 500KB. |
 | 143 | Image EXIF Viewer | `image/exif` | Read and display EXIF metadata — camera, GPS, date, orientation. Option to strip EXIF before download. |

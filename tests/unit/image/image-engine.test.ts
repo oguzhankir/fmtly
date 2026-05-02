@@ -5,15 +5,23 @@ import {
 	IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES,
 	IMAGE_RESIZER_DEFAULT_OPTIONS,
 	IMAGE_RESIZER_WORKER_THRESHOLD_BYTES,
+	SVG_OPTIMIZER_DEFAULT_OPTIONS,
+	SVG_OPTIMIZER_WORKER_THRESHOLD_BYTES,
+	buildSvgOptimizerConfig,
 	computeScaledDimensions,
 	decodeBase64ToImage,
 	encodeImageToBase64,
 	getImageConversionExtension,
+	getSvgUtf8ByteSize,
+	looksLikeSvgDocument,
 	normalizeImageConversionOptions,
+	normalizeSvgOptimizeOptions,
 	shouldUseBase64ToImageWorker,
 	shouldUseImageConverterWorker,
 	shouldUseImageResizerWorker,
-	shouldUseImageToBase64Worker
+	shouldUseImageToBase64Worker,
+	shouldUseSvgOptimizerWorker,
+	summarizeSvg
 } from '../../../src/lib/engines/image/index.js';
 
 describe('image resizer worker threshold', () => {
@@ -142,5 +150,80 @@ describe('image base64 conversion', () => {
 		expect(shouldUseBase64ToImageWorker('a'.repeat(IMAGE_BASE64_WORKER_THRESHOLD_BYTES + 1))).toBe(
 			true
 		);
+	});
+});
+
+describe('svg optimizer worker threshold', () => {
+	it('uses worker only for SVG input above 500KB', () => {
+		expect(shouldUseSvgOptimizerWorker(SVG_OPTIMIZER_WORKER_THRESHOLD_BYTES)).toBe(false);
+		expect(shouldUseSvgOptimizerWorker(SVG_OPTIMIZER_WORKER_THRESHOLD_BYTES + 1)).toBe(true);
+	});
+});
+
+describe('svg optimizer options', () => {
+	it('has stable defaults for SVG optimization', () => {
+		expect(SVG_OPTIMIZER_DEFAULT_OPTIONS.multipass).toBe(true);
+		expect(SVG_OPTIMIZER_DEFAULT_OPTIONS.floatPrecision).toBe(3);
+		expect(SVG_OPTIMIZER_DEFAULT_OPTIONS.removeMetadata).toBe(true);
+		expect(SVG_OPTIMIZER_DEFAULT_OPTIONS.cleanupIds).toBe(false);
+		expect(SVG_OPTIMIZER_DEFAULT_OPTIONS.pretty).toBe(false);
+	});
+
+	it('clamps numeric SVG options', () => {
+		const options = normalizeSvgOptimizeOptions({
+			floatPrecision: 99,
+			indent: -5,
+			removeComments: false
+		});
+
+		expect(options.floatPrecision).toBe(6);
+		expect(options.indent).toBe(0);
+		expect(options.removeComments).toBe(false);
+	});
+
+	it('builds preset-default overrides from toggles', () => {
+		const config = buildSvgOptimizerConfig({
+			...SVG_OPTIMIZER_DEFAULT_OPTIONS,
+			removeMetadata: false,
+			collapseGroups: false,
+			removeDimensions: true,
+			pretty: true,
+			indent: 4
+		});
+
+		expect(config.plugins[0]).toEqual({
+			name: 'preset-default',
+			params: {
+				overrides: expect.objectContaining({
+					removeMetadata: false,
+					collapseGroups: false
+				})
+			}
+		});
+		expect(config.plugins).toContain('removeDimensions');
+		expect(config.js2svg.pretty).toBe(true);
+		expect(config.js2svg.indent).toBe(4);
+	});
+});
+
+describe('svg optimizer helpers', () => {
+	it('measures UTF-8 byte size correctly', () => {
+		expect(getSvgUtf8ByteSize('<svg />')).toBeGreaterThan(0);
+		expect(getSvgUtf8ByteSize('ç')).toBe(2);
+	});
+
+	it('detects SVG markup and summarizes geometry', () => {
+		const source =
+			'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g><path d="M0 0h24v24H0z"/></g></svg>';
+
+		expect(looksLikeSvgDocument(source)).toBe(true);
+		expect(looksLikeSvgDocument('<div></div>')).toBe(false);
+
+		const summary = summarizeSvg(source);
+		expect(summary.width).toBe('24');
+		expect(summary.height).toBe('24');
+		expect(summary.viewBox).toBe('0 0 24 24');
+		expect(summary.elementCount).toBe(3);
+		expect(summary.sizeBytes).toBe(getSvgUtf8ByteSize(source));
 	});
 });

@@ -4654,7 +4654,100 @@ const registryTr: Record<string, string> = {
 	'ui.image_resizer.jpeg': 'JPEG',
 	'ui.image_resizer.webp': 'WebP',
 	'ui.image_resizer.source_status': '{size} · {dimensions} · {format}',
-	'ui.image_resizer.output_status': '{size} · {dimensions} · {format}'
+	'ui.image_resizer.output_status': '{size} · {dimensions} · {format}',
+
+	'tool.image-svg-optimizer.display_name': 'SVG Optimize Edici',
+	'tool.image-svg-optimizer.tagline':
+		'SVGO ile SVG optimize et, canlı önizle ve tüm işlemleri tarayıcıda tut',
+	'tool.image-svg-optimizer.description':
+		'SVG dosyalarını SVGO ile doğrudan tarayıcıda optimize et. Metaveri ve yorumları kaldır, yol verisini sadeleştir, grupları daralt, öznitelikleri sırala, ölçüleri koru ya da kaldır ve temizlenmiş SVG çıktısını anında indir.',
+	'tool.image-svg-optimizer.primary_keyword': 'svg optimize edici',
+	'tool.image-svg-optimizer.meta_title':
+		'SVG Optimize Edici — SVG dosyalarını SVGO ile çevrimiçi optimize et | fmtly.dev',
+	'tool.image-svg-optimizer.meta_description':
+		'SVGO ile SVG optimize et. Metaveriyi kaldır, grupları daralt, yolları sadeleştir, öznitelikleri sırala ve tüm dosyaları tarayıcıda gizli tut.',
+	'tool.image-svg-optimizer.operation': 'SVG optimize et',
+	'tool.image-svg-optimizer.faq.0.question': 'SVG dosyam bir sunucuya yükleniyor mu?',
+	'tool.image-svg-optimizer.faq.0.answer':
+		'Hayır. Optimizasyon, dinamik yüklenen SVGO ile tamamen tarayıcıda çalışır. SVG dosyan cihazında kalır.',
+	'tool.image-svg-optimizer.faq.1.question': 'Hangi optimizasyonları kontrol edebilirim?',
+	'tool.image-svg-optimizer.faq.1.answer':
+		'Metaveri, yorum ve <desc> kaldırma; ID temizleme; grup daraltma; yol sadeleştirme; yol birleştirme; öznitelik sıralama; ölçü kaldırma; multipass ve biçimlendirilmiş çıktı ayarlarını tek tek yönetebilirsin.',
+	'tool.image-svg-optimizer.faq.2.question': 'Sonucu güvenli şekilde nasıl önizlerim?',
+	'tool.image-svg-optimizer.faq.2.answer':
+		'Araç, kaynak ve optimize edilmiş SVG önizlemelerini tarayıcı içinde yerel görseller olarak üretir; böylece indirmeden önce görsel sonucu karşılaştırabilirsin.',
+	'tool.image-svg-optimizer.faq.3.question': 'Büyük SVG dosyalarında ne olur?',
+	'tool.image-svg-optimizer.faq.3.answer':
+		'UTF-8 SVG girdisi 500KB’yi geçtiğinde optimizasyon Web Worker içinde çalışır ve düzenleyici akıcı kalır.',
+	'tool.image-svg-optimizer.use_case.0':
+		'Ürün paketlerine eklemeden önce satır içi SVG ikonları küçültme',
+	'tool.image-svg-optimizer.use_case.1':
+		'Figma, Illustrator veya tasarım sistemlerinden çıkan SVG’leri temizleme',
+	'tool.image-svg-optimizer.use_case.2':
+		'CMS yüklemeleri, e-posta şablonları ve bileşen kütüphaneleri için SVG varlıklarını standartlaştırma',
+	'tool.image-svg-optimizer.use_case.3':
+		'Vektör varlıklarını commit etmeden önce kaynak ve optimize edilmiş markup’ı karşılaştırma',
+	'ui.svg_optimizer.paste': 'SVG yapıştır',
+	'ui.svg_optimizer.paste_empty': 'Pano boş',
+	'ui.svg_optimizer.paste_success': 'SVG markup yapıştırıldı',
+	'ui.svg_optimizer.paste_error': 'Panodan yapıştırma başarısız oldu',
+	'ui.svg_optimizer.no_file': 'SVG seçilmedi',
+	'ui.svg_optimizer.worker_active':
+		'Büyük SVG algılandı (>{size}). Optimizasyon Web Worker içinde çalışır.',
+	'ui.svg_optimizer.worker_used': 'Arka iş parçacığında işlendi',
+	'ui.svg_optimizer.worker_failed':
+		'Worker optimizasyonu başarısız oldu. Ana iş parçacığına dönülüyor.',
+	'ui.svg_optimizer.optimize_failed': 'SVG optimizasyonu başarısız oldu',
+	'ui.svg_optimizer.file_read_error': 'SVG dosyası yüklenemedi',
+	'ui.svg_optimizer.file_loaded': '{name} yüklendi',
+	'ui.svg_optimizer.sample_loaded': 'Örnek SVG yüklendi',
+	'ui.svg_optimizer.input_cleared': 'SVG girdisi temizlendi',
+	'ui.svg_optimizer.copy_empty': 'Kopyalanacak bir şey yok',
+	'ui.svg_optimizer.copy_success': 'Optimize edilmiş SVG kopyalandı',
+	'ui.svg_optimizer.copy_error': 'Kopyalama başarısız',
+	'ui.svg_optimizer.download_empty': 'İndirilecek bir şey yok',
+	'ui.svg_optimizer.download_success': '{filename} indirildi',
+	'ui.svg_optimizer.download_error': 'İndirme başarısız',
+	'ui.svg_optimizer.source_status': '{size} · {elements} öğe',
+	'ui.svg_optimizer.output_status': '{size} · {elements} öğe',
+	'ui.svg_optimizer.input_label': 'Kaynak SVG',
+	'ui.svg_optimizer.drop_title': 'SVG dosyasını buraya bırak',
+	'ui.svg_optimizer.drop_hint': 'Ya da ham SVG markup yapıştır, dosya yükle veya örneği aç.',
+	'ui.svg_optimizer.input_placeholder': 'SVG markupını buraya yapıştır...',
+	'ui.svg_optimizer.option.remove_metadata': 'Metaveriyi kaldır',
+	'ui.svg_optimizer.option.remove_comments': 'Yorumları kaldır',
+	'ui.svg_optimizer.option.remove_desc': '<desc> öğesini kaldır',
+	'ui.svg_optimizer.option.cleanup_ids': 'ID değerlerini temizle',
+	'ui.svg_optimizer.option.collapse_groups': 'Grupları daralt',
+	'ui.svg_optimizer.option.convert_path_data': 'Yol verisini sadeleştir',
+	'ui.svg_optimizer.option.merge_paths': 'Yolları birleştir',
+	'ui.svg_optimizer.option.sort_attrs': 'Öznitelikleri sırala',
+	'ui.svg_optimizer.option.remove_dimensions': 'Genişlik/yüksekliği kaldır',
+	'ui.svg_optimizer.option.multipass': 'Multipass optimizasyonu çalıştır',
+	'ui.svg_optimizer.option.pretty': 'Çıktıyı biçimlendir',
+	'ui.svg_optimizer.float_precision': 'Ondalık hassasiyet',
+	'ui.svg_optimizer.indent': 'Biçimlendirilmiş çıktı girintisi',
+	'ui.svg_optimizer.privacy_note': 'Optimizasyon yereldir; SVG dosyaları tarayıcıdan çıkmaz.',
+	'ui.svg_optimizer.performance_note': 'Büyük SVG girdileri {size} üzerinde Web Worker kullanır.',
+	'ui.svg_optimizer.stat.original_size': 'Orijinal boyut',
+	'ui.svg_optimizer.stat.original_elements': 'Kaynak öğeler',
+	'ui.svg_optimizer.stat.optimized_size': 'Optimize boyut',
+	'ui.svg_optimizer.stat.optimized_elements': 'Optimize öğeler',
+	'ui.svg_optimizer.stat.size_delta': 'Boyut farkı',
+	'ui.svg_optimizer.stat.size_delta_helper': 'negatif = daha küçük',
+	'ui.svg_optimizer.stat.duration': 'Süre',
+	'ui.svg_optimizer.stat.runtime_helper': 'her optimizasyon çalışması için',
+	'ui.svg_optimizer.geometry_source': 'Kaynak geometri',
+	'ui.svg_optimizer.geometry_output': 'Optimize geometri',
+	'ui.svg_optimizer.preview_mode': 'Önizleme',
+	'ui.svg_optimizer.code_mode': 'Kod',
+	'ui.svg_optimizer.processing': 'Optimize ediliyor...',
+	'ui.svg_optimizer.source_preview_label': 'Kaynak önizleme',
+	'ui.svg_optimizer.source_preview_alt': 'Kaynak SVG önizlemesi',
+	'ui.svg_optimizer.source_preview_placeholder': 'Geçerli kaynak SVG önizlemesi burada görünür.',
+	'ui.svg_optimizer.output_preview_label': 'Optimize önizleme',
+	'ui.svg_optimizer.output_preview_alt': 'Optimize edilmiş SVG önizlemesi',
+	'ui.svg_optimizer.output_placeholder': 'Optimize edilmiş SVG çıktısı burada görünür.'
 };
 
 export default registryTr;
