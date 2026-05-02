@@ -5,6 +5,7 @@ export {
 	IMAGE_RESIZER_WORKER_THRESHOLD_BYTES,
 	computeScaledDimensions,
 	convertImageFormat,
+	createImageConverterWorkerRequest,
 	getImageConversionExtension,
 	normalizeImageConversionOptions,
 	normalizeImageResizeOptions,

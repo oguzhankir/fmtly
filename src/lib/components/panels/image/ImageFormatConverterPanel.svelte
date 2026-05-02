@@ -7,13 +7,13 @@
 		IMAGE_CONVERTER_DEFAULT_OPTIONS,
 		IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES,
 		convertImageFormat,
+		createImageConverterWorkerRequest,
 		readImageFileAsDataUrl,
 		shouldUseImageConverterWorker,
 		type ImageConversionInput,
 		type ImageConversionOptions,
 		type ImageConversionOutputFormat,
 		type ImageConversionResult,
-		type ImageConverterWorkerRequest,
 		type ImageConverterWorkerResponse
 	} from '$engines/image/index.js';
 	import type { ToolDefinition } from '$registry/types.js';
@@ -225,8 +225,7 @@
 		return new Promise<ImageConversionResult>((resolve, reject) => {
 			const id = ++workerRequestId;
 			pendingWorkerRequests.set(id, { resolve, reject });
-			const request: ImageConverterWorkerRequest = { id, input, options };
-			worker.postMessage(request);
+			worker.postMessage(createImageConverterWorkerRequest(id, input, options));
 		});
 	}
 

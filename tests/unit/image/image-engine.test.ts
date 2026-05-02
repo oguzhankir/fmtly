@@ -5,6 +5,7 @@ import {
 	IMAGE_RESIZER_DEFAULT_OPTIONS,
 	IMAGE_RESIZER_WORKER_THRESHOLD_BYTES,
 	computeScaledDimensions,
+	createImageConverterWorkerRequest,
 	getImageConversionExtension,
 	normalizeImageConversionOptions,
 	shouldUseImageConverterWorker,
@@ -85,5 +86,24 @@ describe('image format converter options', () => {
 		expect(getImageConversionExtension('image/webp')).toBe('webp');
 		expect(getImageConversionExtension('image/avif')).toBe('avif');
 		expect(getImageConversionExtension('image/gif')).toBe('gif');
+	});
+
+	it('creates a structured-clone-safe worker request', () => {
+		const request = createImageConverterWorkerRequest(
+			7,
+			{
+				dataUrl: 'data:image/png;base64,AAAA',
+				sourceName: 'large.png',
+				sourceType: 'image/png',
+				sourceSizeBytes: IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES + 1
+			},
+			{
+				outputFormat: 'image/webp',
+				quality: 0.8,
+				backgroundColor: 'white'
+			}
+		);
+
+		expect(structuredClone(request)).toEqual(request);
 	});
 });

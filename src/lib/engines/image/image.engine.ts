@@ -162,6 +162,27 @@ export function shouldUseImageConverterWorker(inputBytes: number): boolean {
 	return inputBytes > IMAGE_CONVERTER_WORKER_THRESHOLD_BYTES;
 }
 
+export function createImageConverterWorkerRequest(
+	id: number,
+	input: ImageConversionInput,
+	options: ImageConversionOptions
+): ImageConverterWorkerRequest {
+	return {
+		id,
+		input: {
+			dataUrl: input.dataUrl,
+			sourceName: input.sourceName,
+			sourceType: input.sourceType,
+			sourceSizeBytes: input.sourceSizeBytes
+		},
+		options: {
+			outputFormat: options.outputFormat,
+			quality: options.quality,
+			backgroundColor: options.backgroundColor
+		}
+	};
+}
+
 export async function resizeImage(
 	input: ImageResizeInput,
 	options: Partial<ImageResizeOptions> = {}
