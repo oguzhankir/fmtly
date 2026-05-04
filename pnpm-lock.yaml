@@ -63,8 +63,8 @@ importers:
         specifier: ^10.4.0
         version: 10.4.0
       jsonrepair:
-        specifier: ^3.13.3
-        version: 3.13.3
+        specifier: ^3.14.0
+        version: 3.14.0
       jsqr:
         specifier: ^1.4.0
         version: 1.4.0
@@ -2408,8 +2408,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  jsonrepair@3.13.3:
-    resolution: {integrity: sha512-BTznj0owIt2CBAH/LTo7+1I5pMvl1e1033LRl/HUowlZmJOIhzC0zbX5bxMngLkfT4WnzPP26QnW5wMr2g9tsQ==}
+  jsonrepair@3.14.0:
+    resolution: {integrity: sha512-tWPGKMZf/8UPim+fcW2EfcQ/d/7aKUrP6IECz9G3Tu6Q5dX0orSleqJ9z6sSw7qrQkjF8/Edo4DvsWBZ8H+HNg==}
     hasBin: true
 
   jsqr@1.4.0:
@@ -5641,7 +5641,7 @@ snapshots:
       '@jsep-plugin/regex': 1.0.4(jsep@1.4.0)
       jsep: 1.4.0
 
-  jsonrepair@3.13.3: {}
+  jsonrepair@3.14.0: {}
 
   jsqr@1.4.0: {}
 

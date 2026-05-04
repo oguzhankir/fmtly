@@ -63,7 +63,7 @@
 		"jsbarcode": "^3.12.3",
 		"json-source-map": "^0.6.1",
 		"jsonpath-plus": "^10.4.0",
-		"jsonrepair": "^3.13.3",
+		"jsonrepair": "^3.14.0",
 		"jsqr": "^1.4.0",
 		"lucide-svelte": "^0.577.0",
 		"lz-string": "^1.5.0",
