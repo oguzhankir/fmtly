@@ -79,7 +79,7 @@
 		"ulid": "^3.0.2",
 		"unicode-name": "^1.1.0",
 		"unicode-properties": "^1.4.1",
-		"uuid": "^13.0.0",
+		"uuid": "^14.0.0",
 		"xmlschema.js": "^0.1.3",
 		"zxcvbn": "^4.4.2"
 	}
