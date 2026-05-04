@@ -5,7 +5,8 @@ const imageRelated = [
 	{ category: 'image', slug: 'convert' },
 	{ category: 'image', slug: 'svg-optimizer' },
 	{ category: 'image', slug: 'to-base64' },
-	{ category: 'image', slug: 'from-base64' }
+	{ category: 'image', slug: 'from-base64' },
+	{ category: 'image', slug: 'favicon' }
 ] as const;
 
 export const imageTools: ToolDefinition[] = [
@@ -220,5 +221,48 @@ export const imageTools: ToolDefinition[] = [
 		],
 		sampleInput:
 			'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a5WQAAAAASUVORK5CYII='
+	},
+	{
+		id: 'image-favicon-generator',
+		category: 'image',
+		slug: 'favicon',
+		displayName: 'tool.image-favicon-generator.display_name',
+		tagline: 'tool.image-favicon-generator.tagline',
+		description: 'tool.image-favicon-generator.description',
+		primaryKeyword: 'tool.image-favicon-generator.primary_keyword',
+		metaTitle: 'tool.image-favicon-generator.meta_title',
+		metaDescription: 'tool.image-favicon-generator.meta_description',
+		engine: 'image',
+		operation: 'tool.image-favicon-generator.operation',
+		layoutVariant: 'single-panel',
+		inputLanguage: 'image',
+		outputLanguage: 'image',
+		hasTreeView: false,
+		relatedTools: [...imageRelated],
+		faqs: [
+			{
+				question: 'tool.image-favicon-generator.faq.0.question',
+				answer: 'tool.image-favicon-generator.faq.0.answer'
+			},
+			{
+				question: 'tool.image-favicon-generator.faq.1.question',
+				answer: 'tool.image-favicon-generator.faq.1.answer'
+			},
+			{
+				question: 'tool.image-favicon-generator.faq.2.question',
+				answer: 'tool.image-favicon-generator.faq.2.answer'
+			},
+			{
+				question: 'tool.image-favicon-generator.faq.3.question',
+				answer: 'tool.image-favicon-generator.faq.3.answer'
+			}
+		],
+		useCases: [
+			'tool.image-favicon-generator.use_case.0',
+			'tool.image-favicon-generator.use_case.1',
+			'tool.image-favicon-generator.use_case.2',
+			'tool.image-favicon-generator.use_case.3'
+		],
+		sampleInput: ''
 	}
 ];

@@ -221,7 +221,7 @@ Process images entirely in the browser.
 | 141 | Image → Base64 ✅ | `image/to-base64` | done — Convert PNG, JPEG, WebP, GIF, SVG, BMP, AVIF, and ICO images into raw Base64 or ready-to-paste data URI strings with local processing, copy/download actions, and Web Worker offload above 500KB. |
 | 142 | Base64 → Image ✅ | `image/from-base64` | done — Decode raw Base64 strings or full data URIs back into downloadable images with MIME detection, whitespace/padding normalization, live preview, fallback MIME controls, and Web Worker offload above 500KB. |
 | 143 | Image EXIF Viewer | `image/exif` | Read and display EXIF metadata — camera, GPS, date, orientation. Option to strip EXIF before download. |
-| 144 | Favicon Generator | `image/favicon` | Upload an image and generate a complete favicon set (ICO, PNG 16-512, Apple Touch, SVG). |
+| 144 | Favicon Generator | `image/favicon` | ✅ **done** — Upload an image and generate a complete favicon set (ICO, PNG 16-512, Apple Touch, SVG). |
 | 145 | Image Color Picker | `image/color-picker` | Upload an image and pick individual pixel colors. Extract dominant color palette. |
 
 ---

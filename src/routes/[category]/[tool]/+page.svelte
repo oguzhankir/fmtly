@@ -74,6 +74,7 @@
 	import AiTokenCounterPanel from "$components/panels/ai/AiTokenCounterPanel.svelte";
 	import PromptTokenOptimizerPanel from "$components/panels/ai/PromptTokenOptimizerPanel.svelte";
 	import SystemPromptBuilderPanel from "$components/panels/ai/SystemPromptBuilderPanel.svelte";
+	import FaviconGeneratorPanel from "$components/panels/image/FaviconGeneratorPanel.svelte";
 	import ImageFormatConverterPanel from "$components/panels/image/ImageFormatConverterPanel.svelte";
 	import ImageFromBase64Panel from "$components/panels/image/ImageFromBase64Panel.svelte";
 	import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
@@ -641,7 +642,7 @@
 	</div>
 {:else if data.tool.category === "text" && data.tool.slug === "diff"}
 	<TextDiffPanel toolSlug={data.tool.slug} workspaceTools={textWorkspaceTools} />
-{:else if data.tool.category === "image" && ["resize", "convert", "svg-optimizer", "to-base64", "from-base64"].includes(data.tool.slug)}
+{:else if data.tool.category === "image" && ["resize", "convert", "svg-optimizer", "to-base64", "from-base64", "favicon"].includes(data.tool.slug)}
 	<!-- Match ToolLayout height so h-full image panels do not consume the viewport and hide the SEO section below. -->
 	<div class="w-full min-h-0 overflow-hidden" style="height: calc(100vh - var(--header-height));">
 		{#if data.tool.slug === "resize"}
@@ -652,6 +653,8 @@
 			<ImageFormatConverterPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 		{:else if data.tool.slug === "to-base64"}
 			<ImageToBase64Panel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
+		{:else if data.tool.slug === "favicon"}
+			<FaviconGeneratorPanel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 		{:else}
 			<ImageFromBase64Panel toolSlug={data.tool.slug} workspaceTools={imageWorkspaceTools} />
 		{/if}
