@@ -4506,6 +4506,69 @@ const registryTr: Record<string, string> = {
 		'MIME bilgisi eksik Base64 payload’ları doğrulamak ve önizlemek',
 	'tool.image-from-base64.use_case.3':
 		'Bozuk boşluk/padding içeren Base64 girişlerini düzeltip indirmek',
+
+	'tool.image-favicon-generator.display_name': 'Favicon Oluşturucu',
+	'tool.image-favicon-generator.tagline':
+		'Herhangi bir görselden eksiksiz favicon seti oluşturun — ICO, PNG 16–512, Apple Touch, SVG ve Web Manifest',
+	'tool.image-favicon-generator.description':
+		"Herhangi bir PNG, JPEG, WebP veya SVG yükleyin ve anında üretime hazır favicon seti elde edin: ICO (16, 32, 48), tüm standart PNG boyutları (16'dan 512'ye), Apple Touch Icon (180×180), Android Chrome simgeleri (192×192, 512×512), vektör kaynaklar için SVG geçişi ve site.webmanifest. Tüm işlemler tarayıcınızda gerçekleşir — görseliniz cihazınızdan hiç çıkmaz.",
+	'tool.image-favicon-generator.primary_keyword': 'favicon oluşturucu',
+	'tool.image-favicon-generator.meta_title':
+		'Favicon Oluşturucu — ICO, PNG, Apple Touch ve Web Manifest | fmtly.dev',
+	'tool.image-favicon-generator.meta_description':
+		'Herhangi bir görselden eksiksiz favicon seti oluşturun. ICO, PNG 16–512, Apple Touch Icon, Android Chrome simgeleri ve site.webmanifest üretir — tümü tarayıcıda, hiçbir şey yüklenmez.',
+	'tool.image-favicon-generator.operation': 'Favicon seti oluştur',
+	'tool.image-favicon-generator.faq.0.question': 'Görselim bir sunucuya yükleniyor mu?',
+	'tool.image-favicon-generator.faq.0.answer':
+		'Hayır. Tüm işlemler Canvas API kullanılarak tarayıcınızda yerel olarak gerçekleşir. Görseliniz cihazınızdan hiç çıkmaz ve hiçbir sunucuya veri gönderilmez.',
+	'tool.image-favicon-generator.faq.1.question': 'Hangi çıktı dosyaları oluşturuluyor?',
+	'tool.image-favicon-generator.faq.1.answer':
+		'Araç 16, 32, 48, 96, 128, 180 (Apple Touch), 192, 256 ve 512 piksel boyutlarında PNG dosyaları ile çok çözünürlüklü favicon.ico (16, 32, 48) oluşturur. Kaynak SVG ise orijinal SVG de favicon.svg olarak dahil edilir. site.webmanifest de eklenir.',
+	'tool.image-favicon-generator.faq.2.question': 'Kaynak olarak SVG kullanabilir miyim?',
+	'tool.image-favicon-generator.faq.2.answer':
+		"Evet. SVG yükleyin; araç tarayıcı rendererını kullanarak tüm PNG ve ICO boyutlarına rasterize eder ve modern tarayıcılar için orijinal SVG'yi favicon.svg olarak ekler.",
+	'tool.image-favicon-generator.faq.3.question': "Favicon'ı web siteme nasıl yüklerim?",
+	'tool.image-favicon-generator.faq.3.answer':
+		'ZIP\'i site kök dizinine çıkarın ve HTML <head> bölümüne şu etiketleri ekleyin: <link rel="icon" href="/favicon.ico">, <link rel="apple-touch-icon" href="/apple-touch-icon.png"> ve <link rel="manifest" href="/site.webmanifest">.',
+	'tool.image-favicon-generator.use_case.0':
+		'Logo veya uygulama simgesinden saniyeler içinde eksiksiz favicon seti oluşturmak',
+	'tool.image-favicon-generator.use_case.1':
+		'iOS ana ekran yer imleri için Apple Touch Icon üretmek',
+	'tool.image-favicon-generator.use_case.2':
+		'Android Chrome PWA simgeleri ve kullanıma hazır site.webmanifest dışa aktarmak',
+	'tool.image-favicon-generator.use_case.3':
+		'Figma veya Photoshop olmadan yeni proje için tarayıcı sekme simgesi oluşturmak',
+
+	'ui.favicon_generator.upload': 'Görsel yükle',
+	'ui.favicon_generator.clear': 'Temizle',
+	'ui.favicon_generator.drop_title': 'Bir görsel buraya bırakın',
+	'ui.favicon_generator.drop_hint': 'PNG, JPEG, WebP, SVG — veya yükleme düğmesini kullanın',
+	'ui.favicon_generator.preview_alt': 'Kaynak görsel önizlemesi',
+	'ui.favicon_generator.svg_hint': 'Yalnızca SVG girişi',
+	'ui.favicon_generator.processing': "Favicon'lar oluşturuluyor…",
+	'ui.favicon_generator.output_placeholder':
+		'Oluşturulan dosyalar görsel yüklendikten sonra burada görünür',
+	'ui.favicon_generator.download_all': 'ZIP İndir',
+	'ui.favicon_generator.download': 'İndir',
+	'ui.favicon_generator.file_loaded': '{name} yüklendi',
+	'ui.favicon_generator.file_read_error': 'Görsel dosyası okunamadı',
+	'ui.favicon_generator.file_type_error': 'Lütfen geçerli bir görsel dosyası yükleyin',
+	'ui.favicon_generator.input_cleared': 'Giriş temizlendi',
+	'ui.favicon_generator.download_success': '{filename} indirildi',
+	'ui.favicon_generator.download_error': 'İndirme başarısız',
+	'ui.favicon_generator.zip_downloaded': 'favicons.zip indirildi',
+	'ui.favicon_generator.generate_failed': 'Favicon oluşturma başarısız',
+	'ui.favicon_generator.worker_failed': 'Worker başarısız, ana iş parçacığında işlendi',
+	'ui.favicon_generator.worker_active': "Büyük görsel (>{size}) — Web Worker'da işleniyor",
+	'ui.favicon_generator.worker_used': 'arka planda işlendi',
+	'ui.favicon_generator.stat_files': 'Dosya',
+	'ui.favicon_generator.stat_size': 'Toplam boyut',
+	'ui.favicon_generator.stat_time': 'Süre',
+	'ui.favicon_generator.source_dimensions': 'Kaynak: {dims}',
+	'ui.favicon_generator.section_png': 'PNG Boyutları',
+	'ui.favicon_generator.section_other': 'Diğer Formatlar',
+	'ui.favicon_generator.section_manifest': 'Web Manifest',
+
 	'ui.image_to_base64.upload': 'Görsel yükle',
 	'ui.image_to_base64.clear': 'Temizle',
 	'ui.image_to_base64.no_file': 'Görsel seçilmedi',

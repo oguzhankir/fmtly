@@ -4429,6 +4429,69 @@ const registryIt: Record<string, string> = {
 		'Scaricare rapidamente immagini inviate in JSON o log invece che come file',
 	'tool.image-from-base64.use_case.3':
 		'Riparare stringhe Base64 con ritorni a capo o padding mancante prima dell’esportazione',
+
+	'tool.image-favicon-generator.display_name': 'Generatore di Favicon',
+	'tool.image-favicon-generator.tagline':
+		'Genera un set completo di favicon da qualsiasi immagine — ICO, PNG 16–512, Apple Touch, SVG e Web Manifest',
+	'tool.image-favicon-generator.description':
+		'Carica un PNG, JPEG, WebP o SVG e ottieni istantaneamente un set di favicon pronto per la produzione: ICO (16, 32, 48), tutte le dimensioni PNG standard (da 16 a 512), Apple Touch Icon (180×180), icone Android Chrome (192×192, 512×512), passthrough SVG per sorgenti vettoriali e un site.webmanifest. Tutto il processing avviene nel browser — la tua immagine non lascia mai il dispositivo.',
+	'tool.image-favicon-generator.primary_keyword': 'generatore di favicon',
+	'tool.image-favicon-generator.meta_title':
+		'Generatore di Favicon — ICO, PNG, Apple Touch e Web Manifest | fmtly.dev',
+	'tool.image-favicon-generator.meta_description':
+		'Genera un set completo di favicon da qualsiasi immagine. Produce ICO, PNG 16–512, Apple Touch Icon, icone Android Chrome e site.webmanifest — tutto nel browser, niente viene caricato.',
+	'tool.image-favicon-generator.operation': 'Genera set di favicon',
+	'tool.image-favicon-generator.faq.0.question': 'La mia immagine viene caricata su un server?',
+	'tool.image-favicon-generator.faq.0.answer':
+		'No. Tutto il processing avviene localmente nel browser tramite la Canvas API. La tua immagine non lascia mai il dispositivo e nessun dato viene inviato a server.',
+	'tool.image-favicon-generator.faq.1.question': 'Quali file vengono generati in output?',
+	'tool.image-favicon-generator.faq.1.answer':
+		'Lo strumento genera PNG nelle dimensioni 16, 32, 48, 96, 128, 180 (Apple Touch), 192, 256 e 512 pixel, più un favicon.ico multi-risoluzione (16, 32, 48). Se la sorgente è un SVG, include anche il SVG originale come favicon.svg. È incluso un site.webmanifest.',
+	'tool.image-favicon-generator.faq.2.question': 'Posso usare un SVG come sorgente?',
+	'tool.image-favicon-generator.faq.2.answer':
+		'Sì. Carica un SVG e lo strumento lo rasterizzerà in tutte le dimensioni PNG e ICO usando il motore di rendering del browser, e includerà il SVG originale come favicon.svg per i browser moderni.',
+	'tool.image-favicon-generator.faq.3.question': 'Come installo il favicon sul mio sito web?',
+	'tool.image-favicon-generator.faq.3.answer':
+		'Estrai il ZIP nella root del sito e aggiungi questi tag nell’<head> HTML: <link rel="icon" href="/favicon.ico">, <link rel="apple-touch-icon" href="/apple-touch-icon.png"> e <link rel="manifest" href="/site.webmanifest">.',
+	'tool.image-favicon-generator.use_case.0':
+		'Generare un set completo di favicon da un logo o icona app in pochi secondi',
+	'tool.image-favicon-generator.use_case.1':
+		'Produrre Apple Touch Icon per i segnalibri sulla schermata home iOS',
+	'tool.image-favicon-generator.use_case.2':
+		'Esportare icone PWA Android Chrome e un site.webmanifest pronto all’uso',
+	'tool.image-favicon-generator.use_case.3':
+		'Creare icone per tab del browser per un nuovo progetto senza Figma o Photoshop',
+
+	'ui.favicon_generator.upload': 'Carica immagine',
+	'ui.favicon_generator.clear': 'Cancella',
+	'ui.favicon_generator.drop_title': 'Trascina un’immagine qui',
+	'ui.favicon_generator.drop_hint': 'PNG, JPEG, WebP, SVG — o usa il pulsante di caricamento',
+	'ui.favicon_generator.preview_alt': 'Anteprima immagine sorgente',
+	'ui.favicon_generator.svg_hint': 'Solo input SVG',
+	'ui.favicon_generator.processing': 'Generazione favicon in corso…',
+	'ui.favicon_generator.output_placeholder':
+		'I file generati appaiono qui dopo il caricamento dell’immagine',
+	'ui.favicon_generator.download_all': 'Scarica ZIP',
+	'ui.favicon_generator.download': 'Scarica',
+	'ui.favicon_generator.file_loaded': '{name} caricato',
+	'ui.favicon_generator.file_read_error': 'Impossibile leggere il file immagine',
+	'ui.favicon_generator.file_type_error': 'Carica un file immagine valido',
+	'ui.favicon_generator.input_cleared': 'Input cancellato',
+	'ui.favicon_generator.download_success': '{filename} scaricato',
+	'ui.favicon_generator.download_error': 'Download fallito',
+	'ui.favicon_generator.zip_downloaded': 'favicons.zip scaricato',
+	'ui.favicon_generator.generate_failed': 'Generazione favicon fallita',
+	'ui.favicon_generator.worker_failed': 'Worker fallito, elaborato sul thread principale',
+	'ui.favicon_generator.worker_active': 'Immagine grande (>{size}) — elaborazione nel Web Worker',
+	'ui.favicon_generator.worker_used': 'elaborato in background',
+	'ui.favicon_generator.stat_files': 'File',
+	'ui.favicon_generator.stat_size': 'Dimensione totale',
+	'ui.favicon_generator.stat_time': 'Tempo',
+	'ui.favicon_generator.source_dimensions': 'Sorgente: {dims}',
+	'ui.favicon_generator.section_png': 'Dimensioni PNG',
+	'ui.favicon_generator.section_other': 'Altri formati',
+	'ui.favicon_generator.section_manifest': 'Web Manifest',
+
 	'ui.image_to_base64.upload': 'Carica immagine',
 	'ui.image_to_base64.clear': 'Cancella',
 	'ui.image_to_base64.no_file': 'Nessuna immagine selezionata',

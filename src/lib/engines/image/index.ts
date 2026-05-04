@@ -69,3 +69,21 @@ export {
 	type SvgOptimizerWorkerRequest,
 	type SvgOptimizerWorkerResponse
 } from './svg-optimizer.engine.js';
+
+export {
+	FAVICON_GENERATOR_DEFAULT_OPTIONS,
+	FAVICON_GENERATOR_WORKER_THRESHOLD_BYTES,
+	FAVICON_PNG_SIZES,
+	buildFaviconZip,
+	generateFaviconSet,
+	readFaviconImageFile,
+	shouldUseFaviconGeneratorWorker,
+	type FaviconFile,
+	type FaviconGeneratorWorkerRequest,
+	type FaviconGeneratorWorkerResponse,
+	type FaviconInput,
+	type FaviconMetadata,
+	type FaviconOptions,
+	type FaviconResult,
+	type FaviconSize
+} from './favicon-generator.engine.js';
