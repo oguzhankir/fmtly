@@ -50,7 +50,7 @@
 		"@noble/hashes": "^2.0.1",
 		"@peculiar/x509": "^2.0.0",
 		"@tanstack/svelte-virtual": "^3.13.23",
-		"ajv": "^8.18.0",
+		"ajv": "^8.20.0",
 		"ajv-formats": "^3.0.1",
 		"bits-ui": "^2.18.0",
 		"diff-match-patch": "^1.0.5",
