@@ -16,7 +16,7 @@
 		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
-		"@axe-core/playwright": "^4.11.1",
+		"@axe-core/playwright": "^4.11.3",
 		"@biomejs/biome": "^1.9.4",
 		"@lhci/cli": "^0.15.1",
 		"@napi-rs/canvas": "^0.1.97",
