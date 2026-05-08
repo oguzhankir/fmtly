@@ -4844,7 +4844,80 @@ const registryEs: Record<string, string> = {
 	'ui.svg_optimizer.source_preview_placeholder': 'La vista previa del SVG válido aparecerá aquí.',
 	'ui.svg_optimizer.output_preview_label': 'Vista previa optimizada',
 	'ui.svg_optimizer.output_preview_alt': 'Vista previa del SVG optimizado',
-	'ui.svg_optimizer.output_placeholder': 'La salida SVG optimizada aparecerá aquí.'
+	'ui.svg_optimizer.output_placeholder': 'La salida SVG optimizada aparecerá aquí.',
+	// ── Categoría Web y Red ──────────────────────────────────────────────────
+	'category.web.display_name': 'Web y Red',
+	'category.web.description':
+		'Analiza, inspecciona y depura URL web, cabeceras y recursos de red. Todas las herramientas funcionan en tu navegador sin enviar datos a ningún servidor.',
+	'category.web.primary_keyword': 'herramientas web',
+	// ── Herramienta Analizador de URL ─────────────────────────────────────────
+	'tool.web-url-parser.display_name': 'Analizador de URL',
+	'tool.web-url-parser.tagline':
+		'Descompone cualquier URL en protocolo, host, puerto, ruta, parámetros de consulta y fragmento',
+	'tool.web-url-parser.description':
+		'Descompone instantáneamente cualquier URL en todos sus componentes — esquema, credenciales, host, puerto, ruta, parámetros de consulta y fragmento. Cada campo es copiable individualmente. Los resultados también se pueden exportar como un objeto JSON limpio. Funciona completamente en tu navegador; no se transmite ningún dato.',
+	'tool.web-url-parser.primary_keyword': 'analizador url online',
+	'tool.web-url-parser.meta_title': 'Analizador de URL — Descomponer URLs en línea | fmtly.dev',
+	'tool.web-url-parser.meta_description':
+		'Analiza instantáneamente cualquier URL en protocolo, host, puerto, ruta, parámetros de consulta y fragmento en tu navegador. Copia campos individuales o exporta todo como JSON.',
+	'tool.web-url-parser.operation': 'Analizar URL',
+	'tool.web-url-parser.faq.0.question': '¿Se envían mis datos de URL a un servidor?',
+	'tool.web-url-parser.faq.0.answer':
+		'No. El análisis de URL se realiza completamente en tu navegador usando la API URL integrada. Tu entrada nunca abandona tu dispositivo.',
+	'tool.web-url-parser.faq.1.question': '¿Qué esquemas de URL admite el analizador?',
+	'tool.web-url-parser.faq.1.answer':
+		'Cualquier esquema que acepte la API URL del navegador, incluyendo https, http, ftp, sftp, ws, wss, mailto, data y esquemas personalizados. La insignia Seguro aparece para https, wss, sftp y ftps.',
+	'tool.web-url-parser.faq.2.question':
+		'¿Cómo se gestionan las claves de parámetro de consulta repetidas?',
+	'tool.web-url-parser.faq.2.answer':
+		'Cada par clave-valor se lista por separado en la tabla con su propio índice, preservando el orden original y los duplicados exactamente como aparecen en la URL.',
+	'tool.web-url-parser.faq.3.question': '¿Qué produce «Copiar todo como JSON»?',
+	'tool.web-url-parser.faq.3.answer':
+		'Un objeto JSON con sangría que contiene todos los campos analizados. Los parámetros de consulta se representan como un objeto clave-valor. Los campos ausentes en la URL se establecen como null.',
+	'tool.web-url-parser.use_case.0':
+		'Depurar endpoints de API inspeccionando cada parámetro de consulta y su valor decodificado',
+	'tool.web-url-parser.use_case.1':
+		'Verificar URI de redirección OAuth comprobando los valores exactos de ruta, host y fragmento',
+	'tool.web-url-parser.use_case.2':
+		'Extraer componentes de URL individuales para pegarlos en documentación o código',
+	'tool.web-url-parser.use_case.3':
+		'Auditar rápidamente formularios de inicio de sesión en busca de credenciales accidentalmente incrustadas en URLs',
+	// Cadenas de interfaz
+	'ui.url_parser.input_placeholder': 'https://ejemplo.com/ruta?consulta=valor#fragmento',
+	'ui.url_parser.valid': 'URL válida',
+	'ui.url_parser.invalid': 'URL inválida',
+	'ui.url_parser.secure': 'Seguro',
+	'ui.url_parser.insecure': 'Sin cifrado',
+	'ui.url_parser.param_singular': 'parámetro',
+	'ui.url_parser.param_plural': 'parámetros',
+	'ui.url_parser.hint': 'Pega una URL arriba para descomponer sus componentes',
+	'ui.url_parser.section.full_url': 'URL completa',
+	'ui.url_parser.section.authority': 'Autoridad',
+	'ui.url_parser.section.credentials': 'Credenciales',
+	'ui.url_parser.section.path': 'Ruta',
+	'ui.url_parser.section.query': 'Consulta',
+	'ui.url_parser.section.fragment': 'Fragmento',
+	'ui.url_parser.field.href': 'href',
+	'ui.url_parser.field.origin': 'origin',
+	'ui.url_parser.field.protocol': 'protocolo',
+	'ui.url_parser.field.host': 'host',
+	'ui.url_parser.field.hostname': 'hostname',
+	'ui.url_parser.field.port': 'puerto',
+	'ui.url_parser.field.username': 'usuario',
+	'ui.url_parser.field.password': 'contraseña',
+	'ui.url_parser.field.pathname': 'ruta',
+	'ui.url_parser.field.search': 'búsqueda',
+	'ui.url_parser.field.hash': 'hash',
+	'ui.url_parser.field.fragment': 'fragmento',
+	'ui.url_parser.param.key': 'Clave',
+	'ui.url_parser.param.value': 'Valor',
+	'ui.url_parser.empty_value': '(vacío)',
+	'ui.url_parser.no_params': 'Sin parámetros de consulta',
+	'ui.url_parser.no_fragment': 'Sin fragmento',
+	'ui.url_parser.copy_as_json': 'Copiar todo como JSON',
+	'ui.url_parser.toast.copied_json': 'Copiado como JSON',
+	'ui.url_parser.parsed_in': 'Analizado en {ms} ms',
+	'ui.url_parser.error.invalid_url': 'URL inválida: {detail}'
 };
 
 export default registryEs;
