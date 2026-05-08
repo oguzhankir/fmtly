@@ -289,7 +289,7 @@ const registryEn: Record<string, string> = {
 		'Upload any PNG, JPEG, WebP, or SVG and instantly generate a production-ready favicon set: ICO (16, 32, 48), all standard PNG sizes (16 through 512), Apple Touch Icon (180×180), Android Chrome icons (192×192, 512×512), an optional SVG passthrough for vector sources, and a site.webmanifest. All processing runs in your browser — your image never leaves your device. Download everything as a single ZIP in one click.',
 	'tool.image-favicon-generator.primary_keyword': 'favicon generator',
 	'tool.image-favicon-generator.meta_title':
-		'Favicon Generator — ICO, PNG, Apple Touch & Web Manifest | fmtly.dev',
+		'Favicon Generator — ICO, PNG & Web Manifest | fmtly.dev',
 	'tool.image-favicon-generator.meta_description':
 		'Generate a complete favicon set from any image. Produces ICO, PNG 16–512, Apple Touch Icon, Android Chrome icons, and site.webmanifest — all in your browser, nothing uploaded.',
 	'tool.image-favicon-generator.operation': 'Generate favicon set',
