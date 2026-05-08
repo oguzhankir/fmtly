@@ -80,6 +80,7 @@
 	import ImageResizerPanel from "$components/panels/image/ImageResizerPanel.svelte";
 	import ImageToBase64Panel from "$components/panels/image/ImageToBase64Panel.svelte";
 	import SvgOptimizerPanel from "$components/panels/image/SvgOptimizerPanel.svelte";
+	import UrlParserPanel from "$components/panels/web/UrlParserPanel.svelte";
 	import TreePanel from "$components/panels/shared/TreePanel.svelte";
 	import ShareModal from "$components/modals/ShareModal.svelte";
 	import { getToolsByCategory } from "$registry";
@@ -200,6 +201,11 @@
 	let aiWorkspaceTools = $derived(
 		data.tool.category === "ai"
 			? localizeToolDefinitions(getToolsByCategory("ai"), $t)
+			: []
+	);
+	let webWorkspaceTools = $derived(
+		data.tool.category === "web"
+			? localizeToolDefinitions(getToolsByCategory("web"), $t)
 			: []
 	);
 	let isDiffTool = $derived(data.tool.engine === "diff");
@@ -908,6 +914,8 @@
 				<PdfExtractPagesPanel />
 			{:else if data.tool.category === "pdf" && data.tool.slug === "metadata"}
 				<PdfMetadataPanel />
+			{:else if data.tool.category === "web" && data.tool.slug === "url-parser"}
+				<UrlParserPanel toolSlug={data.tool.slug} workspaceTools={webWorkspaceTools} />
 			{:else}
 				<InputPanel
 					toolSlug={data.tool.slug}

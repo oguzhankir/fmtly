@@ -4877,7 +4877,80 @@ const registryFr: Record<string, string> = {
 	'ui.svg_optimizer.source_preview_placeholder': 'L’aperçu d’un SVG valide apparaîtra ici.',
 	'ui.svg_optimizer.output_preview_label': 'Aperçu optimisé',
 	'ui.svg_optimizer.output_preview_alt': 'Aperçu du SVG optimisé',
-	'ui.svg_optimizer.output_placeholder': 'La sortie SVG optimisée apparaîtra ici.'
+	'ui.svg_optimizer.output_placeholder': 'La sortie SVG optimisée apparaîtra ici.',
+	// ── Catégorie Web & Réseau ───────────────────────────────────────────────
+	'category.web.display_name': 'Web & Réseau',
+	'category.web.description':
+		'Analysez, inspectez et déboguez les URL web, les en-têtes et les ressources réseau. Tous les outils fonctionnent dans votre navigateur sans envoi de données à un serveur.',
+	'category.web.primary_keyword': 'outils web',
+	// ── Outil Analyseur d'URL ─────────────────────────────────────────────────
+	'tool.web-url-parser.display_name': "Analyseur d'URL",
+	'tool.web-url-parser.tagline':
+		"Décomposer n'importe quelle URL en protocole, hôte, port, chemin, paramètres de requête et fragment",
+	'tool.web-url-parser.description':
+		"Décomposez instantanément n'importe quelle URL en tous ses composants — schéma, identifiants, hôte, port, chemin, paramètres de requête et fragment. Chaque champ est copiable individuellement. Les résultats peuvent aussi être exportés sous forme d'objet JSON propre. Fonctionne entièrement dans votre navigateur ; aucune donnée n'est transmise.",
+	'tool.web-url-parser.primary_keyword': 'analyseur url en ligne',
+	'tool.web-url-parser.meta_title': "Analyseur d'URL — Décomposer les URL en ligne | fmtly.dev",
+	'tool.web-url-parser.meta_description':
+		"Analysez instantanément n'importe quelle URL en protocole, hôte, port, chemin, paramètres de requête et fragment dans votre navigateur. Copiez chaque champ ou exportez tout en JSON.",
+	'tool.web-url-parser.operation': "Analyser l'URL",
+	'tool.web-url-parser.faq.0.question': 'Mes données URL sont-elles envoyées à un serveur ?',
+	'tool.web-url-parser.faq.0.answer':
+		"Non. L'analyse d'URL est effectuée entièrement dans votre navigateur via l'API URL intégrée. Votre saisie ne quitte jamais votre appareil.",
+	'tool.web-url-parser.faq.1.question': "Quels schémas d'URL l'analyseur prend-il en charge ?",
+	'tool.web-url-parser.faq.1.answer':
+		"Tout schéma accepté par l'API URL du navigateur : https, http, ftp, sftp, ws, wss, mailto, data et les schémas personnalisés. Le badge Sécurisé apparaît pour https, wss, sftp et ftps.",
+	'tool.web-url-parser.faq.2.question':
+		'Comment les clés de paramètre de requête répétées sont-elles gérées ?',
+	'tool.web-url-parser.faq.2.answer':
+		"Chaque paire clé-valeur est listée séparément dans le tableau avec son propre index, en préservant l'ordre d'origine et les doublons exactement tels qu'ils apparaissent dans l'URL.",
+	'tool.web-url-parser.faq.3.question': 'Que produit « Tout copier en JSON » ?',
+	'tool.web-url-parser.faq.3.answer':
+		"Un objet JSON bien formaté contenant tous les champs analysés. Les paramètres de requête sont représentés comme un objet clé-valeur. Les champs absents dans l'URL sont définis à null.",
+	'tool.web-url-parser.use_case.0':
+		"Déboguer les points d'accès API en inspectant chaque paramètre de requête et sa valeur décodée",
+	'tool.web-url-parser.use_case.1':
+		"Vérifier les URI de redirection OAuth en contrôlant les valeurs exactes de chemin, d'hôte et de fragment",
+	'tool.web-url-parser.use_case.2':
+		"Extraire des composants d'URL individuels pour les coller dans la documentation ou le code",
+	'tool.web-url-parser.use_case.3':
+		'Auditer rapidement les formulaires de connexion pour détecter des identifiants accidentellement intégrés dans les URL',
+	// Chaînes d\'interface
+	'ui.url_parser.input_placeholder': 'https://exemple.com/chemin?requete=valeur#fragment',
+	'ui.url_parser.valid': 'URL valide',
+	'ui.url_parser.invalid': 'URL invalide',
+	'ui.url_parser.secure': 'Sécurisé',
+	'ui.url_parser.insecure': 'Non chiffré',
+	'ui.url_parser.param_singular': 'paramètre',
+	'ui.url_parser.param_plural': 'paramètres',
+	'ui.url_parser.hint': 'Collez une URL ci-dessus pour décomposer ses composants',
+	'ui.url_parser.section.full_url': 'URL complète',
+	'ui.url_parser.section.authority': 'Autorité',
+	'ui.url_parser.section.credentials': 'Identifiants',
+	'ui.url_parser.section.path': 'Chemin',
+	'ui.url_parser.section.query': 'Requête',
+	'ui.url_parser.section.fragment': 'Fragment',
+	'ui.url_parser.field.href': 'href',
+	'ui.url_parser.field.origin': 'origin',
+	'ui.url_parser.field.protocol': 'protocole',
+	'ui.url_parser.field.host': 'hôte',
+	'ui.url_parser.field.hostname': "nom d'hôte",
+	'ui.url_parser.field.port': 'port',
+	'ui.url_parser.field.username': "nom d'utilisateur",
+	'ui.url_parser.field.password': 'mot de passe',
+	'ui.url_parser.field.pathname': 'chemin',
+	'ui.url_parser.field.search': 'recherche',
+	'ui.url_parser.field.hash': 'hash',
+	'ui.url_parser.field.fragment': 'fragment',
+	'ui.url_parser.param.key': 'Clé',
+	'ui.url_parser.param.value': 'Valeur',
+	'ui.url_parser.empty_value': '(vide)',
+	'ui.url_parser.no_params': 'Aucun paramètre de requête',
+	'ui.url_parser.no_fragment': 'Aucun fragment',
+	'ui.url_parser.copy_as_json': 'Tout copier en JSON',
+	'ui.url_parser.toast.copied_json': 'Copié en JSON',
+	'ui.url_parser.parsed_in': 'Analysé en {ms} ms',
+	'ui.url_parser.error.invalid_url': 'URL invalide : {detail}'
 };
 
 export default registryFr;

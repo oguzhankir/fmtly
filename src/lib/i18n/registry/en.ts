@@ -4746,7 +4746,79 @@ const registryEn: Record<string, string> = {
 	'ui.svg_optimizer.source_preview_placeholder': 'Valid source SVG preview appears here.',
 	'ui.svg_optimizer.output_preview_label': 'Optimized preview',
 	'ui.svg_optimizer.output_preview_alt': 'Optimized SVG preview',
-	'ui.svg_optimizer.output_placeholder': 'Optimized SVG output appears here.'
+	'ui.svg_optimizer.output_placeholder': 'Optimized SVG output appears here.',
+	// ── Web & Network category ───────────────────────────────────────────────
+	'category.web.display_name': 'Web & Network',
+	'category.web.description':
+		'Parse, inspect, and debug web URLs, headers, and network resources. Every tool runs in your browser with zero data sent to a server.',
+	'category.web.primary_keyword': 'web tools',
+	// ── URL Parser tool ──────────────────────────────────────────────────────
+	'tool.web-url-parser.display_name': 'URL Parser',
+	'tool.web-url-parser.tagline':
+		'Decompose any URL into protocol, host, port, path, query params, and fragment',
+	'tool.web-url-parser.description':
+		'Instantly break down any URL into all its components — scheme, credentials, host, port, pathname, query parameters, and fragment. Each field is individually copyable. Results also export as a clean JSON object. Runs entirely in your browser; no data is ever transmitted.',
+	'tool.web-url-parser.primary_keyword': 'url parser online',
+	'tool.web-url-parser.meta_title': 'URL Parser — Decompose URLs Online | fmtly.dev',
+	'tool.web-url-parser.meta_description':
+		'Parse any URL into protocol, host, port, pathname, query parameters, and fragment instantly in your browser. Copy individual fields or export all as JSON.',
+	'tool.web-url-parser.operation': 'Parse URL',
+	'tool.web-url-parser.faq.0.question': 'Is my URL data sent to a server?',
+	'tool.web-url-parser.faq.0.answer':
+		'No. URL parsing is performed entirely within your browser using the built-in URL API. Your input never leaves your device.',
+	'tool.web-url-parser.faq.1.question': 'What URL schemes does the parser support?',
+	'tool.web-url-parser.faq.1.answer':
+		"Any scheme that the browser's URL API accepts, including https, http, ftp, sftp, ws, wss, mailto, data, and custom schemes. The Secure badge appears for https, wss, sftp, and ftps.",
+	'tool.web-url-parser.faq.2.question': 'How are repeated query parameter keys handled?',
+	'tool.web-url-parser.faq.2.answer':
+		'Each key-value pair is listed separately in the table with its own index, preserving the original order and duplicates exactly as they appear in the URL.',
+	'tool.web-url-parser.faq.3.question': 'What does "Copy all as JSON" produce?',
+	'tool.web-url-parser.faq.3.answer':
+		'A pretty-printed JSON object containing all parsed fields. Query parameters are represented as a key-value object. Fields that are absent in the URL are set to null.',
+	'tool.web-url-parser.use_case.0':
+		'Debug API endpoints by inspecting every query parameter and its decoded value',
+	'tool.web-url-parser.use_case.1':
+		'Verify OAuth redirect URIs by checking exact path, host, and fragment values',
+	'tool.web-url-parser.use_case.2':
+		'Extract individual URL components to paste into documentation or code',
+	'tool.web-url-parser.use_case.3':
+		'Quickly audit login forms for credentials accidentally embedded in URLs',
+	// UI strings
+	'ui.url_parser.input_placeholder': 'https://example.com/path?query=value#fragment',
+	'ui.url_parser.valid': 'Valid URL',
+	'ui.url_parser.invalid': 'Invalid URL',
+	'ui.url_parser.secure': 'Secure',
+	'ui.url_parser.insecure': 'Not encrypted',
+	'ui.url_parser.param_singular': 'param',
+	'ui.url_parser.param_plural': 'params',
+	'ui.url_parser.hint': 'Paste a URL above to decompose its components',
+	'ui.url_parser.section.full_url': 'Full URL',
+	'ui.url_parser.section.authority': 'Authority',
+	'ui.url_parser.section.credentials': 'Credentials',
+	'ui.url_parser.section.path': 'Path',
+	'ui.url_parser.section.query': 'Query',
+	'ui.url_parser.section.fragment': 'Fragment',
+	'ui.url_parser.field.href': 'href',
+	'ui.url_parser.field.origin': 'origin',
+	'ui.url_parser.field.protocol': 'protocol',
+	'ui.url_parser.field.host': 'host',
+	'ui.url_parser.field.hostname': 'hostname',
+	'ui.url_parser.field.port': 'port',
+	'ui.url_parser.field.username': 'username',
+	'ui.url_parser.field.password': 'password',
+	'ui.url_parser.field.pathname': 'pathname',
+	'ui.url_parser.field.search': 'search',
+	'ui.url_parser.field.hash': 'hash',
+	'ui.url_parser.field.fragment': 'fragment',
+	'ui.url_parser.param.key': 'Key',
+	'ui.url_parser.param.value': 'Value',
+	'ui.url_parser.empty_value': '(empty)',
+	'ui.url_parser.no_params': 'No query parameters',
+	'ui.url_parser.no_fragment': 'No fragment',
+	'ui.url_parser.copy_as_json': 'Copy all as JSON',
+	'ui.url_parser.toast.copied_json': 'Copied as JSON',
+	'ui.url_parser.parsed_in': 'Parsed in {ms} ms',
+	'ui.url_parser.error.invalid_url': 'Invalid URL: {detail}'
 };
 
 export default registryEn;

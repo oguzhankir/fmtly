@@ -9,6 +9,7 @@ import { pdfTools } from './tools/pdf.tools.js';
 import { qrTools } from './tools/qr.tools.js';
 import { textTools } from './tools/text.tools.js';
 import { tomlTools } from './tools/toml.tools.js';
+import { webTools } from './tools/web.tools.js';
 import { xmlTools } from './tools/xml.tools.js';
 import { yamlTools } from './tools/yaml.tools.js';
 import type { CategoryInfo, ToolDefinition } from './types.js';
@@ -26,7 +27,8 @@ const allTools: ToolDefinition[] = [
 	...aiTools,
 	...generateTools,
 	...imageTools,
-	...pdfTools
+	...pdfTools,
+	...webTools
 ];
 
 export function getAllTools(): ToolDefinition[] {

@@ -195,7 +195,7 @@ Inspect, parse, and debug web protocols and network resources.
 
 | 125 | Tool | Slug | Description |
 |---|------|------|-------------|
-| 126 | URL Parser | `web/url-parser` | Decompose URLs into protocol, host, port, path, query params, and fragment. |
+| 126 | URL Parser ✅ | `web/url-parser` | done — Decompose URLs into protocol, host, port, path, query params, and fragment. |
 | 127 | User-Agent Parser | `web/user-agent` | Decode User-Agent strings — identify browser, OS, device type, and bot classification. |
 | 128 | CORS Header Tester | `web/cors` | Test CORS preflight requests against any URL. Show allowed origins, methods, and headers. |
 | 129 | MIME Type Lookup | `web/mime-types` | Search file extensions ↔ MIME types bidirectionally. |

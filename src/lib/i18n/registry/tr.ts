@@ -4810,7 +4810,79 @@ const registryTr: Record<string, string> = {
 	'ui.svg_optimizer.source_preview_placeholder': 'Geçerli kaynak SVG önizlemesi burada görünür.',
 	'ui.svg_optimizer.output_preview_label': 'Optimize önizleme',
 	'ui.svg_optimizer.output_preview_alt': 'Optimize edilmiş SVG önizlemesi',
-	'ui.svg_optimizer.output_placeholder': 'Optimize edilmiş SVG çıktısı burada görünür.'
+	'ui.svg_optimizer.output_placeholder': 'Optimize edilmiş SVG çıktısı burada görünür.',
+	// ── Web ve Ağ kategorisi ─────────────────────────────────────────────────
+	'category.web.display_name': 'Web ve Ağ',
+	'category.web.description':
+		"Web URL'lerini, başlıklarını ve ağ kaynaklarını ayrıştır, incele ve hata ayıkla. Tüm araçlar tarayıcınızda çalışır; hiçbir veri sunucuya gönderilmez.",
+	'category.web.primary_keyword': 'web araçları',
+	// ── URL Ayrıştırıcı aracı ─────────────────────────────────────────────────
+	'tool.web-url-parser.display_name': 'URL Ayrıştırıcı',
+	'tool.web-url-parser.tagline':
+		"Herhangi bir URL'yi protokol, host, port, yol, sorgu parametreleri ve parçaya ayır",
+	'tool.web-url-parser.description':
+		"Herhangi bir URL'yi anında tüm bileşenlerine ayır — şema, kimlik bilgileri, host, port, yol, sorgu parametreleri ve parça. Her alan ayrı ayrı kopyalanabilir. Sonuçlar temiz bir JSON nesnesi olarak da dışa aktarılabilir. Tamamen tarayıcınızda çalışır; hiçbir veri iletilmez.",
+	'tool.web-url-parser.primary_keyword': 'url ayrıştırıcı çevrimiçi',
+	'tool.web-url-parser.meta_title': "URL Ayrıştırıcı — URL'leri Çevrimiçi Parçala | fmtly.dev",
+	'tool.web-url-parser.meta_description':
+		"Herhangi bir URL'yi protokol, host, port, yol, sorgu parametreleri ve parçaya tarayıcınızda anında ayırın. Ayrı alanları kopyalayın veya tümünü JSON olarak dışa aktarın.",
+	'tool.web-url-parser.operation': 'URL Ayrıştır',
+	'tool.web-url-parser.faq.0.question': 'URL verilerim bir sunucuya gönderiliyor mu?',
+	'tool.web-url-parser.faq.0.answer':
+		"Hayır. URL ayrıştırma, yerleşik URL API'si kullanılarak tamamen tarayıcınızda gerçekleştirilir. Girdiniz cihazınızı hiçbir zaman terk etmez.",
+	'tool.web-url-parser.faq.1.question': 'Ayrıştırıcı hangi URL şemalarını destekler?',
+	'tool.web-url-parser.faq.1.answer':
+		"Tarayıcının URL API'sinin kabul ettiği tüm şemalar: https, http, ftp, sftp, ws, wss, mailto, data ve özel şemalar. Güvenli rozet https, wss, sftp ve ftps için görünür.",
+	'tool.web-url-parser.faq.2.question': 'Tekrarlanan sorgu parametresi anahtarları nasıl işlenir?',
+	'tool.web-url-parser.faq.2.answer':
+		"Her anahtar-değer çifti, URL'de göründükleri sırayla ve kopyalar korunarak tabloda ayrı ayrı listelenir.",
+	'tool.web-url-parser.faq.3.question': '"Tümünü JSON olarak kopyala" ne üretir?',
+	'tool.web-url-parser.faq.3.answer':
+		"Tüm ayrıştırılmış alanları içeren düzenli bir JSON nesnesi. Sorgu parametreleri anahtar-değer nesnesi olarak temsil edilir. URL'de bulunmayan alanlar null olarak ayarlanır.",
+	'tool.web-url-parser.use_case.0':
+		'Her sorgu parametresini ve kodu çözülmüş değerini inceleyerek API uç noktalarını hata ayıkla',
+	'tool.web-url-parser.use_case.1':
+		"Tam yol, host ve parça değerlerini kontrol ederek OAuth yönlendirme URI'lerini doğrula",
+	'tool.web-url-parser.use_case.2':
+		'Belgelere veya koda yapıştırmak için ayrı URL bileşenlerini çıkar',
+	'tool.web-url-parser.use_case.3':
+		"URL'lere yanlışlıkla gömülmüş kimlik bilgileri için giriş formlarını hızla denetle",
+	// Arayüz dizeleri
+	'ui.url_parser.input_placeholder': 'https://ornek.com/yol?sorgu=deger#parcalanacak',
+	'ui.url_parser.valid': 'Geçerli URL',
+	'ui.url_parser.invalid': 'Geçersiz URL',
+	'ui.url_parser.secure': 'Güvenli',
+	'ui.url_parser.insecure': 'Şifresiz',
+	'ui.url_parser.param_singular': 'parametre',
+	'ui.url_parser.param_plural': 'parametre',
+	'ui.url_parser.hint': 'Bileşenlerine ayırmak için yukarıya bir URL yapıştırın',
+	'ui.url_parser.section.full_url': 'Tam URL',
+	'ui.url_parser.section.authority': 'Otorite',
+	'ui.url_parser.section.credentials': 'Kimlik Bilgileri',
+	'ui.url_parser.section.path': 'Yol',
+	'ui.url_parser.section.query': 'Sorgu',
+	'ui.url_parser.section.fragment': 'Parça',
+	'ui.url_parser.field.href': 'href',
+	'ui.url_parser.field.origin': 'origin',
+	'ui.url_parser.field.protocol': 'protokol',
+	'ui.url_parser.field.host': 'host',
+	'ui.url_parser.field.hostname': 'hostname',
+	'ui.url_parser.field.port': 'port',
+	'ui.url_parser.field.username': 'kullanıcı adı',
+	'ui.url_parser.field.password': 'şifre',
+	'ui.url_parser.field.pathname': 'yol adı',
+	'ui.url_parser.field.search': 'arama',
+	'ui.url_parser.field.hash': 'hash',
+	'ui.url_parser.field.fragment': 'parça',
+	'ui.url_parser.param.key': 'Anahtar',
+	'ui.url_parser.param.value': 'Değer',
+	'ui.url_parser.empty_value': '(boş)',
+	'ui.url_parser.no_params': 'Sorgu parametresi yok',
+	'ui.url_parser.no_fragment': 'Parça yok',
+	'ui.url_parser.copy_as_json': 'Tümünü JSON olarak kopyala',
+	'ui.url_parser.toast.copied_json': 'JSON olarak kopyalandı',
+	'ui.url_parser.parsed_in': "{ms} ms'de ayrıştırıldı",
+	'ui.url_parser.error.invalid_url': 'Geçersiz URL: {detail}'
 };
 
 export default registryTr;

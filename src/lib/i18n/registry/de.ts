@@ -4762,7 +4762,80 @@ const registryDe: Record<string, string> = {
 	'ui.svg_optimizer.source_preview_placeholder': 'Hier erscheint eine gültige Quell-SVG-Vorschau.',
 	'ui.svg_optimizer.output_preview_label': 'Optimierte Vorschau',
 	'ui.svg_optimizer.output_preview_alt': 'Vorschau der optimierten SVG',
-	'ui.svg_optimizer.output_placeholder': 'Die optimierte SVG-Ausgabe erscheint hier.'
+	'ui.svg_optimizer.output_placeholder': 'Die optimierte SVG-Ausgabe erscheint hier.',
+	// ── Web & Netzwerk Kategorie ─────────────────────────────────────────────
+	'category.web.display_name': 'Web & Netzwerk',
+	'category.web.description':
+		'Web-URLs, Header und Netzwerkressourcen analysieren, prüfen und debuggen. Alle Werkzeuge laufen im Browser – keine Daten werden an einen Server übertragen.',
+	'category.web.primary_keyword': 'web werkzeuge',
+	// ── URL-Parser Werkzeug ──────────────────────────────────────────────────
+	'tool.web-url-parser.display_name': 'URL-Parser',
+	'tool.web-url-parser.tagline':
+		'Jede URL in Protokoll, Host, Port, Pfad, Query-Parameter und Fragment zerlegen',
+	'tool.web-url-parser.description':
+		'Zerlegen Sie jede URL sofort in alle Bestandteile – Schema, Zugangsdaten, Host, Port, Pfadname, Query-Parameter und Fragment. Jedes Feld lässt sich einzeln kopieren. Ergebnisse können auch als sauberes JSON-Objekt exportiert werden. Läuft vollständig im Browser; es werden keine Daten übertragen.',
+	'tool.web-url-parser.primary_keyword': 'url parser online',
+	'tool.web-url-parser.meta_title': 'URL-Parser — URLs online zerlegen | fmtly.dev',
+	'tool.web-url-parser.meta_description':
+		'Jede URL sofort im Browser in Protokoll, Host, Port, Pfadname, Query-Parameter und Fragment zerlegen. Einzelne Felder kopieren oder alles als JSON exportieren.',
+	'tool.web-url-parser.operation': 'URL analysieren',
+	'tool.web-url-parser.faq.0.question': 'Werden meine URL-Daten an einen Server gesendet?',
+	'tool.web-url-parser.faq.0.answer':
+		'Nein. Die URL-Analyse erfolgt vollständig in Ihrem Browser über die integrierte URL-API. Ihre Eingabe verlässt Ihr Gerät nie.',
+	'tool.web-url-parser.faq.1.question': 'Welche URL-Schemas unterstützt der Parser?',
+	'tool.web-url-parser.faq.1.answer':
+		'Alle Schemas, die die URL-API des Browsers akzeptiert, einschließlich https, http, ftp, sftp, ws, wss, mailto, data und benutzerdefinierter Schemas. Das Sicher-Abzeichen erscheint für https, wss, sftp und ftps.',
+	'tool.web-url-parser.faq.2.question':
+		'Wie werden wiederholte Query-Parameter-Schlüssel behandelt?',
+	'tool.web-url-parser.faq.2.answer':
+		'Jedes Schlüssel-Wert-Paar wird in der Tabelle einzeln mit eigenem Index aufgeführt, wobei die ursprüngliche Reihenfolge und Duplikate exakt erhalten bleiben.',
+	'tool.web-url-parser.faq.3.question': 'Was erzeugt „Alles als JSON kopieren"?',
+	'tool.web-url-parser.faq.3.answer':
+		'Ein formatiertes JSON-Objekt mit allen geparsten Feldern. Query-Parameter werden als Schlüssel-Wert-Objekt dargestellt. Felder, die in der URL nicht vorhanden sind, werden auf null gesetzt.',
+	'tool.web-url-parser.use_case.0':
+		'API-Endpunkte debuggen, indem jeden Query-Parameter und seinen dekodierten Wert geprüft wird',
+	'tool.web-url-parser.use_case.1':
+		'OAuth-Redirect-URIs durch Prüfung von Pfad, Host und Fragment validieren',
+	'tool.web-url-parser.use_case.2':
+		'Einzelne URL-Bestandteile extrahieren und in Dokumentation oder Code einfügen',
+	'tool.web-url-parser.use_case.3':
+		'Anmeldeformulare schnell auf versehentlich in URLs eingebettete Zugangsdaten prüfen',
+	// UI-Texte
+	'ui.url_parser.input_placeholder': 'https://beispiel.de/pfad?abfrage=wert#fragment',
+	'ui.url_parser.valid': 'Gültige URL',
+	'ui.url_parser.invalid': 'Ungültige URL',
+	'ui.url_parser.secure': 'Sicher',
+	'ui.url_parser.insecure': 'Nicht verschlüsselt',
+	'ui.url_parser.param_singular': 'Parameter',
+	'ui.url_parser.param_plural': 'Parameter',
+	'ui.url_parser.hint': 'URL oben einfügen, um deren Bestandteile zu analysieren',
+	'ui.url_parser.section.full_url': 'Vollständige URL',
+	'ui.url_parser.section.authority': 'Autorität',
+	'ui.url_parser.section.credentials': 'Zugangsdaten',
+	'ui.url_parser.section.path': 'Pfad',
+	'ui.url_parser.section.query': 'Abfrage',
+	'ui.url_parser.section.fragment': 'Fragment',
+	'ui.url_parser.field.href': 'href',
+	'ui.url_parser.field.origin': 'origin',
+	'ui.url_parser.field.protocol': 'Protokoll',
+	'ui.url_parser.field.host': 'Host',
+	'ui.url_parser.field.hostname': 'Hostname',
+	'ui.url_parser.field.port': 'Port',
+	'ui.url_parser.field.username': 'Benutzername',
+	'ui.url_parser.field.password': 'Passwort',
+	'ui.url_parser.field.pathname': 'Pfadname',
+	'ui.url_parser.field.search': 'Suche',
+	'ui.url_parser.field.hash': 'Hash',
+	'ui.url_parser.field.fragment': 'Fragment',
+	'ui.url_parser.param.key': 'Schlüssel',
+	'ui.url_parser.param.value': 'Wert',
+	'ui.url_parser.empty_value': '(leer)',
+	'ui.url_parser.no_params': 'Keine Query-Parameter',
+	'ui.url_parser.no_fragment': 'Kein Fragment',
+	'ui.url_parser.copy_as_json': 'Alles als JSON kopieren',
+	'ui.url_parser.toast.copied_json': 'Als JSON kopiert',
+	'ui.url_parser.parsed_in': 'In {ms} ms analysiert',
+	'ui.url_parser.error.invalid_url': 'Ungültige URL: {detail}'
 };
 
 export default registryDe;

@@ -4776,7 +4776,80 @@ const registryIt: Record<string, string> = {
 	'ui.svg_optimizer.source_preview_placeholder': 'L’anteprima di un SVG valido apparirà qui.',
 	'ui.svg_optimizer.output_preview_label': 'Anteprima ottimizzata',
 	'ui.svg_optimizer.output_preview_alt': 'Anteprima SVG ottimizzato',
-	'ui.svg_optimizer.output_placeholder': 'L’output SVG ottimizzato apparirà qui.'
+	'ui.svg_optimizer.output_placeholder': 'L’output SVG ottimizzato apparirà qui.',
+	// ── Categoria Web e Rete ─────────────────────────────────────────────────
+	'category.web.display_name': 'Web e Rete',
+	'category.web.description':
+		'Analizza, ispeziona e debug URL web, intestazioni e risorse di rete. Tutti gli strumenti funzionano nel tuo browser senza inviare dati a un server.',
+	'category.web.primary_keyword': 'strumenti web',
+	// ── Strumento Analizzatore URL ───────────────────────────────────────────
+	'tool.web-url-parser.display_name': 'Analizzatore URL',
+	'tool.web-url-parser.tagline':
+		'Scomponi qualsiasi URL in protocollo, host, porta, percorso, parametri di query e frammento',
+	'tool.web-url-parser.description':
+		'Scomponi istantaneamente qualsiasi URL in tutti i suoi componenti — schema, credenziali, host, porta, percorso, parametri di query e frammento. Ogni campo è copiabile singolarmente. I risultati possono anche essere esportati come oggetto JSON pulito. Funziona interamente nel tuo browser; nessun dato viene trasmesso.',
+	'tool.web-url-parser.primary_keyword': 'analizzatore url online',
+	'tool.web-url-parser.meta_title': 'Analizzatore URL — Scomponi URL online | fmtly.dev',
+	'tool.web-url-parser.meta_description':
+		'Analizza istantaneamente qualsiasi URL in protocollo, host, porta, percorso, parametri di query e frammento nel tuo browser. Copia singoli campi o esporta tutto come JSON.',
+	'tool.web-url-parser.operation': 'Analizza URL',
+	'tool.web-url-parser.faq.0.question': 'I miei dati URL vengono inviati a un server?',
+	'tool.web-url-parser.faq.0.answer':
+		"No. L'analisi dell'URL viene eseguita interamente nel tuo browser tramite l'API URL integrata. Il tuo input non lascia mai il tuo dispositivo.",
+	'tool.web-url-parser.faq.1.question': 'Quali schemi URL supporta il parser?',
+	'tool.web-url-parser.faq.1.answer':
+		"Qualsiasi schema accettato dall'API URL del browser, inclusi https, http, ftp, sftp, ws, wss, mailto, data e schemi personalizzati. Il badge Sicuro appare per https, wss, sftp e ftps.",
+	'tool.web-url-parser.faq.2.question':
+		'Come vengono gestite le chiavi dei parametri di query ripetute?',
+	'tool.web-url-parser.faq.2.answer':
+		"Ogni coppia chiave-valore viene elencata separatamente nella tabella con il proprio indice, preservando l'ordine originale e i duplicati esattamente come appaiono nell'URL.",
+	'tool.web-url-parser.faq.3.question': 'Cosa produce «Copia tutto come JSON»?',
+	'tool.web-url-parser.faq.3.answer':
+		"Un oggetto JSON ben formattato contenente tutti i campi analizzati. I parametri di query sono rappresentati come oggetto chiave-valore. I campi assenti nell'URL sono impostati su null.",
+	'tool.web-url-parser.use_case.0':
+		'Debug degli endpoint API ispezionando ogni parametro di query e il suo valore decodificato',
+	'tool.web-url-parser.use_case.1':
+		'Verificare gli URI di reindirizzamento OAuth controllando i valori esatti di percorso, host e frammento',
+	'tool.web-url-parser.use_case.2':
+		'Estrarre singoli componenti URL da incollare nella documentazione o nel codice',
+	'tool.web-url-parser.use_case.3':
+		'Controllare rapidamente i moduli di accesso per le credenziali accidentalmente incorporate negli URL',
+	// Stringhe interfaccia
+	'ui.url_parser.input_placeholder': 'https://esempio.com/percorso?query=valore#frammento',
+	'ui.url_parser.valid': 'URL valido',
+	'ui.url_parser.invalid': 'URL non valido',
+	'ui.url_parser.secure': 'Sicuro',
+	'ui.url_parser.insecure': 'Non cifrato',
+	'ui.url_parser.param_singular': 'parametro',
+	'ui.url_parser.param_plural': 'parametri',
+	'ui.url_parser.hint': 'Incolla un URL sopra per scomporre i suoi componenti',
+	'ui.url_parser.section.full_url': 'URL completo',
+	'ui.url_parser.section.authority': 'Autorità',
+	'ui.url_parser.section.credentials': 'Credenziali',
+	'ui.url_parser.section.path': 'Percorso',
+	'ui.url_parser.section.query': 'Query',
+	'ui.url_parser.section.fragment': 'Frammento',
+	'ui.url_parser.field.href': 'href',
+	'ui.url_parser.field.origin': 'origin',
+	'ui.url_parser.field.protocol': 'protocollo',
+	'ui.url_parser.field.host': 'host',
+	'ui.url_parser.field.hostname': 'hostname',
+	'ui.url_parser.field.port': 'porta',
+	'ui.url_parser.field.username': 'nome utente',
+	'ui.url_parser.field.password': 'password',
+	'ui.url_parser.field.pathname': 'percorso',
+	'ui.url_parser.field.search': 'ricerca',
+	'ui.url_parser.field.hash': 'hash',
+	'ui.url_parser.field.fragment': 'frammento',
+	'ui.url_parser.param.key': 'Chiave',
+	'ui.url_parser.param.value': 'Valore',
+	'ui.url_parser.empty_value': '(vuoto)',
+	'ui.url_parser.no_params': 'Nessun parametro di query',
+	'ui.url_parser.no_fragment': 'Nessun frammento',
+	'ui.url_parser.copy_as_json': 'Copia tutto come JSON',
+	'ui.url_parser.toast.copied_json': 'Copiato come JSON',
+	'ui.url_parser.parsed_in': 'Analizzato in {ms} ms',
+	'ui.url_parser.error.invalid_url': 'URL non valido: {detail}'
 };
 
 export default registryIt;

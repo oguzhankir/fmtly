@@ -83,6 +83,12 @@ const categoryMetaList: CategoryMeta[] = [
 		displayName: 'category.image.display_name',
 		description: 'category.image.description',
 		primaryKeyword: 'category.image.primary_keyword'
+	},
+	{
+		slug: 'web',
+		displayName: 'category.web.display_name',
+		description: 'category.web.description',
+		primaryKeyword: 'category.web.primary_keyword'
 	}
 ];
 
