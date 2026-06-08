@@ -54,7 +54,7 @@
 		"ajv-formats": "^3.0.1",
 		"bits-ui": "^2.18.1",
 		"diff-match-patch": "^1.0.5",
-		"fast-xml-parser": "^5.7.3",
+		"fast-xml-parser": "^5.8.0",
 		"gifenc": "^1.0.3",
 		"gpt-tokenizer": "^3.4.0",
 		"highlight.js": "^11.11.1",
